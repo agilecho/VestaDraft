@@ -1,0 +1,6 @@
+# Local research evidence and build outputs
+/output/
+
+# Local editor and operating-system metadata
+/.idea/
+.DS_Store
