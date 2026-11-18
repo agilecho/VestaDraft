@@ -1,0 +1,969 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:vestacraft:external-workflow:3",
+  "title": "EX/3 source-closed four workflow successor, final revision3",
+  "description": "Closed exposed workflow parameters. Tool/native scientific dialect and typed candidate/source validation remain separate, version-pinned semantic requirements. No free options JSON or paths.",
+  "$defs": {
+    "Id": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{32}$"
+    },
+    "Digest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "U64": {
+      "type": "string",
+      "pattern": "^(0|[1-9][0-9]*)$",
+      "maxLength": 20
+    },
+    "ResourceRef": {
+      "type": "object",
+      "properties": {
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "byteLength": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)$",
+          "maxLength": 20
+        }
+      },
+      "required": [
+        "sha256",
+        "byteLength"
+      ],
+      "additionalProperties": false
+    },
+    "LossConsent": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "sourceDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "profileId": {
+              "type": "string"
+            },
+            "lossReportSha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "explicit": {
+              "const": true
+            }
+          },
+          "required": [
+            "sourceDigest",
+            "profileId",
+            "lossReportSha256",
+            "explicit"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "Request": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "schema": {
+              "const": "vestacraft.external-workflow/3"
+            },
+            "requestId": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{32}$"
+            },
+            "sessionId": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{32}$"
+            },
+            "documentId": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{32}$"
+            },
+            "epoch": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{32}$"
+            },
+            "expectedRevision": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$",
+              "maxLength": 20
+            },
+            "operation": {
+              "const": "tidy.standardize"
+            },
+            "params": {
+              "type": "object",
+              "properties": {
+                "phaseId": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{32}$"
+                }
+              },
+              "required": [
+                "phaseId"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "schema",
+            "requestId",
+            "sessionId",
+            "documentId",
+            "epoch",
+            "expectedRevision",
+            "operation",
+            "params"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "schema": {
+              "const": "vestacraft.external-workflow/3"
+            },
+            "requestId": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{32}$"
+            },
+            "sessionId": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{32}$"
+            },
+            "documentId": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{32}$"
+            },
+            "epoch": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{32}$"
+            },
+            "expectedRevision": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$",
+              "maxLength": 20
+            },
+            "operation": {
+              "const": "madel.calculate"
+            },
+            "params": {
+              "type": "object",
+              "properties": {
+                "phaseId": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{32}$"
+                },
+                "radiusA": {
+                  "type": "number",
+                  "exclusiveMinimum": 0
+                },
+                "regionInvA": {
+                  "type": "number",
+                  "exclusiveMinimum": 0
+                },
+                "lossConsent": {
+                  "$ref": "#/$defs/LossConsent"
+                }
+              },
+              "required": [
+                "phaseId",
+                "radiusA",
+                "regionInvA",
+                "lossConsent"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "schema",
+            "requestId",
+            "sessionId",
+            "documentId",
+            "epoch",
+            "expectedRevision",
+            "operation",
+            "params"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "schema": {
+              "const": "vestacraft.external-workflow/3"
+            },
+            "requestId": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{32}$"
+            },
+            "sessionId": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{32}$"
+            },
+            "documentId": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{32}$"
+            },
+            "epoch": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{32}$"
+            },
+            "expectedRevision": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$",
+              "maxLength": 20
+            },
+            "operation": {
+              "const": "rietan.calculate"
+            },
+            "params": {
+              "type": "object",
+              "properties": {
+                "phaseId": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{32}$"
+                },
+                "template": {
+                  "$ref": "#/$defs/ResourceRef"
+                },
+                "companions": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "role": {
+                        "enum": [
+                          "int",
+                          "bkg",
+                          "ffe",
+                          "fba"
+                        ]
+                      },
+                      "resource": {
+                        "$ref": "#/$defs/ResourceRef"
+                      }
+                    },
+                    "required": [
+                      "role",
+                      "resource"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "maxItems": 4
+                },
+                "lossConsent": {
+                  "$ref": "#/$defs/LossConsent"
+                }
+              },
+              "required": [
+                "phaseId",
+                "template",
+                "companions",
+                "lossConsent"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "schema",
+            "requestId",
+            "sessionId",
+            "documentId",
+            "epoch",
+            "expectedRevision",
+            "operation",
+            "params"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "schema": {
+              "const": "vestacraft.external-workflow/3"
+            },
+            "requestId": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{32}$"
+            },
+            "sessionId": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{32}$"
+            },
+            "documentId": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{32}$"
+            },
+            "epoch": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{32}$"
+            },
+            "expectedRevision": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$",
+              "maxLength": 20
+            },
+            "operation": {
+              "const": "orffe.attach-result"
+            },
+            "params": {
+              "type": "object",
+              "properties": {
+                "phaseId": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{32}$"
+                },
+                "resource": {
+                  "$ref": "#/$defs/ResourceRef"
+                }
+              },
+              "required": [
+                "phaseId",
+                "resource"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "schema",
+            "requestId",
+            "sessionId",
+            "documentId",
+            "epoch",
+            "expectedRevision",
+            "operation",
+            "params"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "MadelNumericInterpretation": {
+      "type": "object",
+      "properties": {
+        "producerParserDigest": {
+          "$ref": "#/$defs/Digest"
+        },
+        "inputDigest": {
+          "$ref": "#/$defs/Digest"
+        },
+        "potentialUnit": {
+          "const": "e/angstrom"
+        },
+        "energyUnit": {
+          "const": "e^2/angstrom"
+        },
+        "energyAsymmetricDecimal": {
+          "type": "string",
+          "pattern": "^[+-]?(?:[0-9]+(?:\\.[0-9]*)?|\\.[0-9]+)(?:[Ee][+-]?[0-9]+)?$"
+        },
+        "generalMultiplicity": {
+          "$ref": "#/$defs/U64"
+        },
+        "energyCellDecimal": {
+          "type": "string",
+          "pattern": "^[+-]?(?:[0-9]+(?:\\.[0-9]*)?|\\.[0-9]+)(?:[Ee][+-]?[0-9]+)?$"
+        },
+        "formulaUnitsPerCell": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/$defs/U64"
+            }
+          ]
+        },
+        "energyPerFormulaDecimal": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "string",
+              "pattern": "^[+-]?(?:[0-9]+(?:\\.[0-9]*)?|\\.[0-9]+)(?:[Ee][+-]?[0-9]+)?$"
+            }
+          ]
+        },
+        "sitePotentials": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "emittedRow": {
+                "$ref": "#/$defs/U64"
+              },
+              "sourceSiteMapDigest": {
+                "$ref": "#/$defs/Digest"
+              },
+              "potentialDecimal": {
+                "type": "string",
+                "pattern": "^[+-]?(?:[0-9]+(?:\\.[0-9]*)?|\\.[0-9]+)(?:[Ee][+-]?[0-9]+)?$"
+              }
+            },
+            "required": [
+              "emittedRow",
+              "sourceSiteMapDigest",
+              "potentialDecimal"
+            ],
+            "additionalProperties": false
+          },
+          "maxItems": 300,
+          "minItems": 1
+        },
+        "numericAcceptanceReceipt": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/$defs/ResourceRef"
+            }
+          ]
+        },
+        "energyEVAsymmetricDecimal": {
+          "type": "string",
+          "pattern": "^[+-]?(?:[0-9]+(?:\\.[0-9]*)?|\\.[0-9]+)(?:[Ee][+-]?[0-9]+)?$"
+        },
+        "energyMJmolAsymmetricDecimal": {
+          "type": "string",
+          "pattern": "^[+-]?(?:[0-9]+(?:\\.[0-9]*)?|\\.[0-9]+)(?:[Ee][+-]?[0-9]+)?$"
+        },
+        "reportProfileDigest": {
+          "$ref": "#/$defs/Digest"
+        }
+      },
+      "required": [
+        "producerParserDigest",
+        "inputDigest",
+        "potentialUnit",
+        "energyUnit",
+        "energyAsymmetricDecimal",
+        "generalMultiplicity",
+        "energyCellDecimal",
+        "formulaUnitsPerCell",
+        "energyPerFormulaDecimal",
+        "sitePotentials",
+        "numericAcceptanceReceipt",
+        "energyEVAsymmetricDecimal",
+        "energyMJmolAsymmetricDecimal",
+        "reportProfileDigest"
+      ],
+      "additionalProperties": false
+    },
+    "TemplateRevision": {
+      "type": "object",
+      "properties": {
+        "originalTemplate": {
+          "$ref": "#/$defs/ResourceRef"
+        },
+        "preparedInputIns": {
+          "$ref": "#/$defs/ResourceRef"
+        },
+        "returnedIns": {
+          "$ref": "#/$defs/ResourceRef"
+        },
+        "sourcePhaseDigest": {
+          "$ref": "#/$defs/Digest"
+        },
+        "preparedPhaseDigest": {
+          "$ref": "#/$defs/Digest"
+        },
+        "sourceMap": {
+          "$ref": "#/$defs/ResourceRef"
+        },
+        "patchLedger": {
+          "$ref": "#/$defs/ResourceRef"
+        },
+        "controlProfileDigest": {
+          "$ref": "#/$defs/Digest"
+        }
+      },
+      "required": [
+        "originalTemplate",
+        "preparedInputIns",
+        "returnedIns",
+        "sourcePhaseDigest",
+        "preparedPhaseDigest",
+        "sourceMap",
+        "patchLedger",
+        "controlProfileDigest"
+      ],
+      "additionalProperties": false
+    },
+    "WorkflowResult": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "operation": {
+              "const": "tidy.standardize"
+            },
+            "jobId": {
+              "$ref": "#/$defs/Id"
+            },
+            "sessionId": {
+              "$ref": "#/$defs/Id"
+            },
+            "documentId": {
+              "$ref": "#/$defs/Id"
+            },
+            "epoch": {
+              "$ref": "#/$defs/Id"
+            },
+            "baseRevision": {
+              "$ref": "#/$defs/U64"
+            },
+            "phaseId": {
+              "$ref": "#/$defs/Id"
+            },
+            "inputManifestDigest": {
+              "$ref": "#/$defs/Digest"
+            },
+            "workflowProfileDigest": {
+              "$ref": "#/$defs/Digest"
+            },
+            "kind": {
+              "const": "phase-candidate"
+            },
+            "report": {
+              "$ref": "#/$defs/ResourceRef"
+            },
+            "candidatePhase": {
+              "$ref": "#/$defs/ResourceRef"
+            },
+            "sourceToResultMap": {
+              "$ref": "#/$defs/ResourceRef"
+            },
+            "validationReceipt": {
+              "$ref": "#/$defs/ResourceRef"
+            }
+          },
+          "required": [
+            "operation",
+            "jobId",
+            "sessionId",
+            "documentId",
+            "epoch",
+            "baseRevision",
+            "phaseId",
+            "inputManifestDigest",
+            "workflowProfileDigest",
+            "kind",
+            "report",
+            "candidatePhase",
+            "sourceToResultMap",
+            "validationReceipt"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "operation": {
+              "const": "rietan.calculate"
+            },
+            "jobId": {
+              "$ref": "#/$defs/Id"
+            },
+            "sessionId": {
+              "$ref": "#/$defs/Id"
+            },
+            "documentId": {
+              "$ref": "#/$defs/Id"
+            },
+            "epoch": {
+              "$ref": "#/$defs/Id"
+            },
+            "baseRevision": {
+              "$ref": "#/$defs/U64"
+            },
+            "phaseId": {
+              "$ref": "#/$defs/Id"
+            },
+            "inputManifestDigest": {
+              "$ref": "#/$defs/Digest"
+            },
+            "workflowProfileDigest": {
+              "$ref": "#/$defs/Digest"
+            },
+            "kind": {
+              "const": "simulation-artifacts"
+            },
+            "report": {
+              "$ref": "#/$defs/ResourceRef"
+            },
+            "templateRevision": {
+              "$ref": "#/$defs/TemplateRevision"
+            },
+            "plotDialect": {
+              "enum": [
+                "gnuplot",
+                "igor-itx"
+              ]
+            },
+            "artifacts": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "role": {
+                    "enum": [
+                      "int",
+                      "bkg",
+                      "itx",
+                      "hkl",
+                      "xyz",
+                      "fos",
+                      "ffe",
+                      "fba",
+                      "ffi",
+                      "ffo",
+                      "vesta",
+                      "plt",
+                      "gpd",
+                      "alb",
+                      "prf",
+                      "inflip",
+                      "exp",
+                      "pdf"
+                    ]
+                  },
+                  "resource": {
+                    "$ref": "#/$defs/ResourceRef"
+                  }
+                },
+                "required": [
+                  "role",
+                  "resource"
+                ],
+                "additionalProperties": false
+              },
+              "maxItems": 18
+            },
+            "plotOutcome": {
+              "enum": [
+                "ready",
+                "failed",
+                "not-requested"
+              ]
+            },
+            "numericAcceptanceReceipt": {
+              "$ref": "#/$defs/ResourceRef"
+            }
+          },
+          "required": [
+            "operation",
+            "jobId",
+            "sessionId",
+            "documentId",
+            "epoch",
+            "baseRevision",
+            "phaseId",
+            "inputManifestDigest",
+            "workflowProfileDigest",
+            "kind",
+            "report",
+            "templateRevision",
+            "plotDialect",
+            "artifacts",
+            "plotOutcome",
+            "numericAcceptanceReceipt"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "operation": {
+              "const": "orffe.attach-result"
+            },
+            "jobId": {
+              "$ref": "#/$defs/Id"
+            },
+            "sessionId": {
+              "$ref": "#/$defs/Id"
+            },
+            "documentId": {
+              "$ref": "#/$defs/Id"
+            },
+            "epoch": {
+              "$ref": "#/$defs/Id"
+            },
+            "baseRevision": {
+              "$ref": "#/$defs/U64"
+            },
+            "phaseId": {
+              "$ref": "#/$defs/Id"
+            },
+            "inputManifestDigest": {
+              "$ref": "#/$defs/Digest"
+            },
+            "workflowProfileDigest": {
+              "$ref": "#/$defs/Digest"
+            },
+            "kind": {
+              "const": "resource-table-candidate"
+            },
+            "sourceResource": {
+              "$ref": "#/$defs/ResourceRef"
+            },
+            "sourceTable": {
+              "$ref": "#/$defs/ResourceRef"
+            },
+            "activeMapping": {
+              "$ref": "#/$defs/ResourceRef"
+            },
+            "validationReceipt": {
+              "$ref": "#/$defs/ResourceRef"
+            }
+          },
+          "required": [
+            "operation",
+            "jobId",
+            "sessionId",
+            "documentId",
+            "epoch",
+            "baseRevision",
+            "phaseId",
+            "inputManifestDigest",
+            "workflowProfileDigest",
+            "kind",
+            "sourceResource",
+            "sourceTable",
+            "activeMapping",
+            "validationReceipt"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "operation": {
+              "const": "madel.calculate"
+            },
+            "jobId": {
+              "$ref": "#/$defs/Id"
+            },
+            "sessionId": {
+              "$ref": "#/$defs/Id"
+            },
+            "documentId": {
+              "$ref": "#/$defs/Id"
+            },
+            "epoch": {
+              "$ref": "#/$defs/Id"
+            },
+            "baseRevision": {
+              "$ref": "#/$defs/U64"
+            },
+            "phaseId": {
+              "$ref": "#/$defs/Id"
+            },
+            "inputManifestDigest": {
+              "$ref": "#/$defs/Digest"
+            },
+            "workflowProfileDigest": {
+              "$ref": "#/$defs/Digest"
+            },
+            "kind": {
+              "const": "diagnostic-report"
+            },
+            "report": {
+              "$ref": "#/$defs/ResourceRef"
+            },
+            "diagnostics": {
+              "$ref": "#/$defs/ResourceRef"
+            },
+            "numericInterpretation": {
+              "type": "null"
+            },
+            "convergenceState": {
+              "enum": [
+                "unassessed"
+              ]
+            }
+          },
+          "required": [
+            "operation",
+            "jobId",
+            "sessionId",
+            "documentId",
+            "epoch",
+            "baseRevision",
+            "phaseId",
+            "inputManifestDigest",
+            "workflowProfileDigest",
+            "kind",
+            "report",
+            "diagnostics",
+            "numericInterpretation",
+            "convergenceState"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "operation": {
+              "const": "madel.calculate"
+            },
+            "jobId": {
+              "$ref": "#/$defs/Id"
+            },
+            "sessionId": {
+              "$ref": "#/$defs/Id"
+            },
+            "documentId": {
+              "$ref": "#/$defs/Id"
+            },
+            "epoch": {
+              "$ref": "#/$defs/Id"
+            },
+            "baseRevision": {
+              "$ref": "#/$defs/U64"
+            },
+            "phaseId": {
+              "$ref": "#/$defs/Id"
+            },
+            "inputManifestDigest": {
+              "$ref": "#/$defs/Digest"
+            },
+            "workflowProfileDigest": {
+              "$ref": "#/$defs/Digest"
+            },
+            "kind": {
+              "const": "finite-calculation"
+            },
+            "report": {
+              "$ref": "#/$defs/ResourceRef"
+            },
+            "diagnostics": {
+              "$ref": "#/$defs/ResourceRef"
+            },
+            "numericInterpretation": {
+              "$ref": "#/$defs/MadelNumericInterpretation"
+            },
+            "convergenceState": {
+              "enum": [
+                "unassessed",
+                "failed"
+              ]
+            }
+          },
+          "required": [
+            "operation",
+            "jobId",
+            "sessionId",
+            "documentId",
+            "epoch",
+            "baseRevision",
+            "phaseId",
+            "inputManifestDigest",
+            "workflowProfileDigest",
+            "kind",
+            "report",
+            "diagnostics",
+            "numericInterpretation",
+            "convergenceState"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "operation": {
+              "const": "madel.calculate"
+            },
+            "jobId": {
+              "$ref": "#/$defs/Id"
+            },
+            "sessionId": {
+              "$ref": "#/$defs/Id"
+            },
+            "documentId": {
+              "$ref": "#/$defs/Id"
+            },
+            "epoch": {
+              "$ref": "#/$defs/Id"
+            },
+            "baseRevision": {
+              "$ref": "#/$defs/U64"
+            },
+            "phaseId": {
+              "$ref": "#/$defs/Id"
+            },
+            "inputManifestDigest": {
+              "$ref": "#/$defs/Digest"
+            },
+            "workflowProfileDigest": {
+              "$ref": "#/$defs/Digest"
+            },
+            "kind": {
+              "const": "qualified-report"
+            },
+            "report": {
+              "$ref": "#/$defs/ResourceRef"
+            },
+            "diagnostics": {
+              "$ref": "#/$defs/ResourceRef"
+            },
+            "numericInterpretation": {
+              "allOf": [
+                {
+                  "$ref": "#/$defs/MadelNumericInterpretation"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "numericAcceptanceReceipt": {
+                      "$ref": "#/$defs/ResourceRef"
+                    }
+                  },
+                  "required": [
+                    "numericAcceptanceReceipt"
+                  ]
+                }
+              ]
+            },
+            "convergenceState": {
+              "enum": [
+                "accepted"
+              ]
+            }
+          },
+          "required": [
+            "operation",
+            "jobId",
+            "sessionId",
+            "documentId",
+            "epoch",
+            "baseRevision",
+            "phaseId",
+            "inputManifestDigest",
+            "workflowProfileDigest",
+            "kind",
+            "report",
+            "diagnostics",
+            "numericInterpretation",
+            "convergenceState"
+          ],
+          "additionalProperties": false
+        }
+      ],
+      "description": "Server-produced result descriptor, never a caller-supplied success declaration. Resource, identity, numeric and receipt semantic assertions are mandatory in addition to shape."
+    }
+  },
+  "$ref": "#/$defs/Request"
+}

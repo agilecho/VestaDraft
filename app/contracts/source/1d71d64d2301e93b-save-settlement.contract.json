@@ -1,0 +1,58 @@
+{
+  "schema": "FC-save-settlement-design/1",
+  "wire": "save-settlement.schema.json",
+  "integration": [
+    "resource-reopen.contract.json",
+    "save-artifact-binding.contract.json",
+    "resource-content-comparison.contract.json",
+    "typed-source-restore.contract.json"
+  ],
+  "binding": {
+    "operation": "One owned operationId binds the already registered source expectation, full preservation/consent binding, exact actual artifact set, approved actual target/base/lease context and frozen comparison rules. A different source, owner, revision, purpose, target or candidate needs its own operation/validation. TargetDigest comes from actual authorized host context, not a display filename.",
+    "receipts": "Candidate semantic validation, actual host commit and persisted semantic validation are separate internal completions. Each carries exactly the same operation/binding/artifact/target/rule identities and its own immutable verificationId. Only the authenticated internal job registry can vouch for completion; the client cannot register a passed flag, fabricated ID or arbitrary expectation.",
+    "source": "Actual complete source expectations are fixed before output exists. Output hashes and receipts never redefine expected objects; empty Field output against the real512-value source must fail before a semantic completion is issued.",
+    "host": "Host commit receipt states only the supported existing primitive/durability/writer boundary. It does not invent power-loss/network-directory durability, global Shell fencing or external-writer CAS. D2-13 check/use limits remain; original/no04 qualification is not silently upgraded.",
+    "targetRole": "Capture existing versus unbound-new binding role in the owned target context before planning; targetDigest binds exact purpose/role/target and contextual authority. Existing receipt wire stays unchanged. No mayRebind client grant."
+  },
+  "phases": {
+    "candidate-pending": "No public output. Fresh complete-source audit/consent/reference closure, owned resource leases and authenticated artifact-only candidate semantic completion required before publication.",
+    "publishing": "Dependencies-first/primary-last underway. Beginning visibility cannot be undone by a client cancel. Any ambiguous completion enters commit-unknown.",
+    "commit-unknown": "Preserve draft/dirty/old and new potentially reachable resources. No blind re-encode/retry, cleanup/rollback, rebinding, close or Saved. Query this owned host operation and actual persisted bytes; a positive byte comparison alone cannot invent a missing host operation receipt.",
+    "not-published": "An authenticated host outcome proves primary not published; retain prior authoritative draft/resources, cleanup only owned unreferenced private artifacts after readers finish.",
+    "committed-unverified": "Authenticated host commit binds exact candidate bytes but semantic restoration remains unconfirmed. Missing field/ref/unit/table or invalid source metadata keeps this state with diagnostics; no Saved/close/rebind/automatic rollback over possible outside edits.",
+    "complete-for-captured-snapshot": "Actual persisted bytes/reference resolution/typed source and semantic object coverage match the captured source expectation under authenticated verifier completion. Reuse prepublish semantic evidence only if every artifact/context/rule input is proven equal. Readback from live old Engine/CWD/caches is disallowed.",
+    "cancelled-before-publication": "No later stale candidate may publish. Only owned private cleanup after in-flight readers finish; original draft/resources remain."
+  },
+  "lifetime": {
+    "inflightEdits": "Consent and pre-EncodeApproved submission validate the captured live identity. Once an approved job owns an immutable source snapshot and an exact save ticket, later edits do not mutate that input: completion can settle the captured revision only. Candidate not yet approved for publication must not be silently applied to a newer current snapshot; follow current coordinator/ticket validation. No stale result may mark the newer draft clean.",
+    "Saved": "A completed save/saveAs acknowledges the exact captured document/epoch/revision only. R7 ack cannot clear/close R8. Different document/epoch settles old ticket/history and cannot mutate currentWorkRef or resources.",
+    "saveAs": "Successful same-document/epoch operation may bind the actually acknowledged authorized target while dirty is recomputed against its captured revision. A changed revision remains dirty; different-lifetime completion never rebinds.",
+    "export": "Even complete export only confirms that export operation. No projectSaved, currentWorkRef rebinding, dirty clearing or project close.",
+    "close": "The close controller quiesces editing and resolves all in-flight/unknown operations, captures latest revision, then accepts only exact current lifetime/revision completion. Without quiescence an ack is not close authorization. Failure restores editing, retains draft/dirty. Hard close/crash does not promise unsaved RAM recovery.",
+    "idempotence": "Apply each owned operation completion once. Duplicate/late deliveries are checked against current lifetime and coordinator ticket; a previously consumed completion cannot grant a new close/rebind action.",
+    "firstSave": "An unbound new project gains the acknowledged actual WorkRef only after complete same-document/epoch first Save; different current revision stays dirty. Existing Save retains its original WorkRef. SaveAs rebinds only on its own exact acknowledged target; export never rebinds. See selectedSaveTargetPolicy and actual controlled-writer race boundary."
+  },
+  "queryAndCancel": {
+    "query": "After lost ack/cancel during publication, resolve actual owned operation outcome. If committed, verify actual persisted primary/dependencies/reference graph/full semantics. If not published, prove that outcome. Conflicting/missing validator/source expectation/rules/host evidence stays unknown or explicit readonly recovery. Query does not call EncodeApproved or perform a write.",
+    "cancel": "Before publication cancel prevents later begin_publish. During publication stop new work safely and resolve the possible commit, no promised rollback. After verified commit, retain resources reachable from committed output; a cancel cannot erase confirmed data."
+  },
+  "proofBoundary": {
+    "finiteModel": "save-settlement-model.py models authenticated completion as a conditional immutable registry; no real host, IPC authentication, persistence, active Engine or filesystem race implementation.",
+    "actualPayloadWitness": "typed-source-restore-witness.py compares all512 held source words in an authored selected full-root DTO and missing-Field negatives. It is not actual native/product restoration.",
+    "originalFailure": "The actual original saved3515-byte project still failed fresh volumetric reopen. These contracts do not convert it into a native pass."
+  },
+  "qualification": {
+    "designSpecified": true,
+    "actualHostImplemented": false,
+    "actualEngineImplemented": false,
+    "actualAuthenticationImplemented": false,
+    "newTargetExecuted": false,
+    "whole03Complete": false,
+    "independentlyReviewed": false
+  },
+  "selectedSaveTargetPolicy": {
+    "path": "save-target-policy.contract.json",
+    "sha256": "93ecc223741109edfcad15b5f1575945d439273601da23e0f5d407030db785a1",
+    "scope": "D4-31 target selection and exact first-Save binding; selected source authority snapshot, no04 implementation"
+  }
+}

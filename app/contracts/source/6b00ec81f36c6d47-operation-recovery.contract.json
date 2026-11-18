@@ -1,0 +1,85 @@
+{
+  "schema": "HS/3-recovery",
+  "predecessor": {
+    "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261117-224424-p1-04-host-save-application/attempts/20261117-232931-design-completion/contracts/host-recovery.contract.json",
+    "sha256": "99c9aa0c9bf580a9bae92797f3ae625fda2cc6497429418965d8c78dbe479276"
+  },
+  "completion": "HS-02 own design now specified. Actual private store/volume qualification shared with HS-01; no assertion store implemented or trusted now.",
+  "trustBoundary": {
+    "location": "server-derived DSH_HOME/software/vesta/operations, private path separate from public software/<id>.json",
+    "subjects": "authenticated host adapter only writes; workspaceFiles/picker/HTTP paths remain space-guarded; Vesta CLI/shell sandbox must not grant this metadata path",
+    "basis": "Existing platform space guards and sandbox health denyDSH probe demonstrate an available design route; not current Vesta deployment qualification. Same uid,0700 or hash alone are never sufficient.",
+    "threat": "Browser/Agent/project-controlled bytes cannot fabricate original outcome; privileged host administrator compromise outside this adapter guarantee. Missing/failed isolation -> expired-unresolved/new-lifecycle only, never upgrade JSON to authority.",
+    "noNewService": true,
+    "noSecretOrSigningServiceRequired": true
+  },
+  "record": {
+    "schema": "HS/3",
+    "registryGeneration": "128bithex persisted by host",
+    "principalRef": "server-derived",
+    "operationId": "host128bithex",
+    "profileDigest": "sha256",
+    "identity": "exact document/epoch/revision/target/bindingIntent/sourceExpectation/artifactBinding/claim",
+    "recordSequence": "monotonic u64",
+    "previousDigest": "sha256|null; corruption detection only",
+    "phase": "prepared|publication-intent|committed-unverified|complete|not-published|unknown",
+    "actualFiles": "owned space refs+roles+sha+length; no work bytes here",
+    "verification": "03 verifier/context/source/persisted semantic evidence refs",
+    "cleanup": "owned candidate retain set and reachability/reader leases",
+    "expiresAt": "null unless explicitly retired; no invented duration",
+    "requestBinding": "server-issued captureGeneration/sequence + client requestId + commandDigest; not an arbitrary reusable request grant"
+  },
+  "storeOrder": [
+    "create exclusive generation temp under anchored private directory",
+    "serialize closed record; file sync; exact readback",
+    "atomic rename to immutable next generation; parent sync including newly created directory edges",
+    "update in-memory registry only after durable record succeeds; failed write keeps prior generation and uncertain may-publish state"
+  ],
+  "crashOutcomes": [
+    [
+      "before intent durable",
+      "not permitted to publish; do not infer not-published from mere missing record after restart"
+    ],
+    [
+      "intent exists, primary may have changed",
+      "commit-unknown until exact actual comparison"
+    ],
+    [
+      "primary renamed, parent sync missing",
+      "commit-unknown, retain all possibly reachable artifacts"
+    ],
+    [
+      "primary durable, complete record lost",
+      "committed-unverified/unknown; only matching protected registry and actual semantic evidence may prove original outcome"
+    ],
+    [
+      "complete record trusted, actual target differs",
+      "historical completion only/current target conflict"
+    ],
+    [
+      "journal caller-writable/corrupt/missing or no original source",
+      "expired-unresolved; self-consistent actual files may open only explicit new lifecycle"
+    ]
+  ],
+  "query": {
+    "request": "operationId+targetDigest only; authenticated principal from request context; no client path or trusted flag",
+    "lookup": "protected registry exact operation/profile/sequence; reject principal/target mismatch before work",
+    "read": "reauthorize current actual space path, enumerate resource graph and compare full current materialized objects under03; stored passed/hash not enough",
+    "reply": "closed status/proofScope/evidenceRef from HS/2 RecoveryReply; complete only exact captured snapshot. Query never writes primary, retries publication, rebinds current WorkRef, clears newer dirty, or closes draft",
+    "restart": "registry generation belongs to historical op, current service/claim is fresh; old page token never revives. Fresh UI may read historical outcome but cannot install old epoch as current"
+  },
+  "retention": {
+    "unresolved": "no eviction while may publish/reachable or source needed; quota pressure rejects new operation and preserves draft",
+    "terminal": "no wall-clock TTL required. Retire only after durable terminal+consumer acknowledgement+no reader/reachable references; query retired ID returns expired-unresolved; no operation ID reuse",
+    "sourceAndCandidates": "all work bytes in authorized personal space under existing quota; settings contain refs only",
+    "metadata": "existing DSH technical quota; atomic metadata admission before operation. No invented256MiB/TTL/Vesta numeric defaults or separate quota service"
+  },
+  "cleanup": "No cleanup from journal existence alone. Host terminal proof, owned exact candidate and no reachability/readers all required; uncertain retain sets survive until explicit verified resolution.",
+  "qualification": {
+    "designAuthored": true,
+    "hostImplemented": false,
+    "runtimeValidated": false,
+    "independentlyReviewed": false
+  },
+  "requestRetirement": "After restart old capture generation cannot admit mutation. Retired/missing operation IDs only query expired-unresolved; replay never creates a new operation. Fresh publish requires explicit new capture with a host-issued generation/sequence. Keep unresolved records and compact retired contiguous sequence intervals in same private metadata budget; do not need one permanent work-copy/tombstone per terminal record."
+}

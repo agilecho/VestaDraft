@@ -1,0 +1,145 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "urn:draft:fc:native-fractional-grid-current:1",
+  "type": "object",
+  "properties": {
+    "schemaVersion": {
+      "const": "FC-native-fractional-grid-current-1"
+    },
+    "captureRole": {
+      "const": "actual-current-native-fractional-state"
+    },
+    "owner": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "const": "EntityRef"
+        },
+        "objectKind": {
+          "const": "source-entity"
+        },
+        "objectId": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "kind",
+        "objectKind",
+        "objectId"
+      ],
+      "additionalProperties": false
+    },
+    "dataResource": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "const": "BytesRef"
+        },
+        "resourceId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "byteLength": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)$"
+        }
+      },
+      "required": [
+        "kind",
+        "resourceId",
+        "sha256",
+        "byteLength"
+      ],
+      "additionalProperties": false
+    },
+    "dataEncoding": {
+      "const": "ieee754-little-endian-f32"
+    },
+    "pointShape": {
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "minimum": 2,
+        "maximum": 2147483647
+      },
+      "minItems": 3,
+      "maxItems": 3
+    },
+    "axisOrder": {
+      "const": "x-fastest"
+    },
+    "coordinateRole": {
+      "const": "native-numerical-display-only"
+    },
+    "coordinatePhysicalUnit": {
+      "const": "source-unresolved"
+    },
+    "scalarRole": {
+      "const": "uninterpreted-stored-scalar"
+    },
+    "scalarPhysicalUnit": {
+      "const": "source-unresolved"
+    },
+    "domainTreatment": {
+      "const": "finite-including-every-stored-point"
+    },
+    "label": {
+      "type": "string"
+    },
+    "ruleId": {
+      "const": "draft.native-fractional-current-grid"
+    },
+    "ruleVersion": {
+      "const": "1"
+    },
+    "gridDivisions": {
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "minimum": 1,
+        "maximum": 2147483647
+      },
+      "minItems": 3,
+      "maxItems": 3
+    },
+    "gridToDisplayRowsF64Bits": {
+      "type": "array",
+      "items": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{16}$"
+        },
+        "minItems": 4,
+        "maxItems": 4
+      },
+      "minItems": 3,
+      "maxItems": 3
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "captureRole",
+    "owner",
+    "dataResource",
+    "dataEncoding",
+    "pointShape",
+    "axisOrder",
+    "coordinateRole",
+    "coordinatePhysicalUnit",
+    "scalarRole",
+    "scalarPhysicalUnit",
+    "domainTreatment",
+    "label",
+    "ruleId",
+    "ruleVersion",
+    "gridDivisions",
+    "gridToDisplayRowsF64Bits"
+  ],
+  "additionalProperties": false
+}

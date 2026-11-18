@@ -1,0 +1,577 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:vestacraft:preference-composition:1",
+  "title": "P1-06 complete twelve-field transport composition proposal, design only; nativequalification unchanged",
+  "$defs": {
+    "Id": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{32}$"
+    },
+    "Digest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "U64": {
+      "type": "string",
+      "pattern": "^(0|[1-9][0-9]*)$",
+      "maxLength": 20
+    },
+    "ArtifactChoice": {
+      "type": "object",
+      "properties": {
+        "artifactId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "manifestDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "required": [
+        "artifactId",
+        "manifestDigest"
+      ],
+      "additionalProperties": false
+    },
+    "FontChoice": {
+      "type": "object",
+      "properties": {
+        "fontResourceDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "faceIndex": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4294967295
+        },
+        "sizePt": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "fontCapabilityDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "required": [
+        "fontResourceDigest",
+        "faceIndex",
+        "sizePt",
+        "fontCapabilityDigest"
+      ],
+      "additionalProperties": false
+    },
+    "NumericDraft": {
+      "type": "object",
+      "properties": {
+        "rawText": {
+          "type": "string",
+          "maxLength": 4096
+        },
+        "domainProfileDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "parseProfileDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "required": [
+        "rawText",
+        "domainProfileDigest",
+        "parseProfileDigest"
+      ],
+      "additionalProperties": false
+    },
+    "PreferenceChange": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "field": {
+              "const": "rietanArtifact"
+            },
+            "value": {
+              "oneOf": [
+                {
+                  "$ref": "#/$defs/ArtifactChoice"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "field",
+            "value"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "field": {
+              "const": "viewerArtifact"
+            },
+            "value": {
+              "oneOf": [
+                {
+                  "$ref": "#/$defs/ArtifactChoice"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "field",
+            "value"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "field": {
+              "const": "templateArtifact"
+            },
+            "value": {
+              "oneOf": [
+                {
+                  "$ref": "#/$defs/ArtifactChoice"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "field",
+            "value"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "field": {
+              "const": "textFont"
+            },
+            "value": {
+              "$ref": "#/$defs/FontChoice"
+            }
+          },
+          "required": [
+            "field",
+            "value"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "field": {
+              "const": "openTarget"
+            },
+            "value": {
+              "enum": [
+                "newTab",
+                "currentTab"
+              ]
+            }
+          },
+          "required": [
+            "field",
+            "value"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "field": {
+              "const": "animationStepDeg"
+            },
+            "value": {
+              "$ref": "#/$defs/NumericDraft"
+            }
+          },
+          "required": [
+            "field",
+            "value"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "field": {
+              "const": "animationIntervalMs"
+            },
+            "value": {
+              "$ref": "#/$defs/NumericDraft"
+            }
+          },
+          "required": [
+            "field",
+            "value"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "field": {
+              "const": "startupBondSearch"
+            },
+            "value": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "field",
+            "value"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "field": {
+              "const": "hardwareAntialias"
+            },
+            "value": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "field",
+            "value"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "field": {
+              "const": "rasterTessellationFactor"
+            },
+            "value": {
+              "$ref": "#/$defs/NumericDraft"
+            }
+          },
+          "required": [
+            "field",
+            "value"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "field": {
+              "const": "isosurfaceN"
+            },
+            "value": {
+              "$ref": "#/$defs/NumericDraft"
+            }
+          },
+          "required": [
+            "field",
+            "value"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "field": {
+              "const": "historyLimit"
+            },
+            "value": {
+              "$ref": "#/$defs/NumericDraft"
+            }
+          },
+          "required": [
+            "field",
+            "value"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "ValidateRequest": {
+      "type": "object",
+      "properties": {
+        "schema": {
+          "const": "vestacraft.preference-composition/1"
+        },
+        "requestId": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{32}$"
+        },
+        "basePreferenceVersion": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)$",
+          "maxLength": 20
+        },
+        "baseEffectiveDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "ownerProfileDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "op": {
+          "const": "validate"
+        },
+        "changes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/PreferenceChange"
+          },
+          "minItems": 1,
+          "maxItems": 12
+        }
+      },
+      "required": [
+        "schema",
+        "requestId",
+        "basePreferenceVersion",
+        "baseEffectiveDigest",
+        "ownerProfileDigest",
+        "op",
+        "changes"
+      ],
+      "additionalProperties": false
+    },
+    "ApplyRequest": {
+      "type": "object",
+      "properties": {
+        "schema": {
+          "const": "vestacraft.preference-composition/1"
+        },
+        "requestId": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{32}$"
+        },
+        "basePreferenceVersion": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)$",
+          "maxLength": 20
+        },
+        "baseEffectiveDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "ownerProfileDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "op": {
+          "const": "apply"
+        },
+        "validatedPlanDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "trimConsent": {
+          "oneOf": [
+            {
+              "type": "object",
+              "properties": {
+                "lostSnapshotIds": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "pattern": "^[0-9a-f]{32}$"
+                  },
+                  "minItems": 1
+                },
+                "planDigest": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{64}$"
+                },
+                "explicit": {
+                  "const": true
+                }
+              },
+              "required": [
+                "lostSnapshotIds",
+                "planDigest",
+                "explicit"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "schema",
+        "requestId",
+        "basePreferenceVersion",
+        "baseEffectiveDigest",
+        "ownerProfileDigest",
+        "op",
+        "validatedPlanDigest",
+        "trimConsent"
+      ],
+      "additionalProperties": false
+    },
+    "QueryRequest": {
+      "type": "object",
+      "properties": {
+        "schema": {
+          "const": "vestacraft.preference-composition/1"
+        },
+        "requestId": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{32}$"
+        },
+        "op": {
+          "const": "query-same-apply"
+        }
+      },
+      "required": [
+        "schema",
+        "requestId",
+        "op"
+      ],
+      "additionalProperties": false
+    },
+    "Request": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/ValidateRequest"
+        },
+        {
+          "$ref": "#/$defs/ApplyRequest"
+        },
+        {
+          "$ref": "#/$defs/QueryRequest"
+        }
+      ]
+    },
+    "AppliedReply": {
+      "type": "object",
+      "properties": {
+        "schema": {
+          "const": "vestacraft.preference-composition/1"
+        },
+        "requestId": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{32}$"
+        },
+        "outcome": {
+          "const": "applied"
+        },
+        "effectivePreferenceVersion": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)$",
+          "maxLength": 20
+        },
+        "actualGenerationDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "installedEffectiveDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "changedFields": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "rietanArtifact",
+              "viewerArtifact",
+              "templateArtifact",
+              "textFont",
+              "openTarget",
+              "animationStepDeg",
+              "animationIntervalMs",
+              "startupBondSearch",
+              "hardwareAntialias",
+              "rasterTessellationFactor",
+              "isosurfaceN",
+              "historyLimit"
+            ]
+          },
+          "minItems": 1,
+          "maxItems": 12
+        },
+        "currentDocumentMutated": {
+          "const": false
+        }
+      },
+      "required": [
+        "schema",
+        "requestId",
+        "outcome",
+        "effectivePreferenceVersion",
+        "actualGenerationDigest",
+        "installedEffectiveDigest",
+        "changedFields",
+        "currentDocumentMutated"
+      ],
+      "additionalProperties": false
+    },
+    "UnknownReply": {
+      "type": "object",
+      "properties": {
+        "schema": {
+          "const": "vestacraft.preference-composition/1"
+        },
+        "requestId": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{32}$"
+        },
+        "outcome": {
+          "const": "committed-unverified-preferences"
+        },
+        "attemptedGenerationDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "effectivePreferenceVersionBefore": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)$",
+          "maxLength": 20
+        },
+        "retryAction": {
+          "const": "query-same-apply"
+        }
+      },
+      "required": [
+        "schema",
+        "requestId",
+        "outcome",
+        "attemptedGenerationDigest",
+        "effectivePreferenceVersionBefore",
+        "retryAction"
+      ],
+      "additionalProperties": false
+    },
+    "Reply": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/AppliedReply"
+        },
+        {
+          "$ref": "#/$defs/UnknownReply"
+        }
+      ]
+    }
+  },
+  "$ref": "#/$defs/Request"
+}

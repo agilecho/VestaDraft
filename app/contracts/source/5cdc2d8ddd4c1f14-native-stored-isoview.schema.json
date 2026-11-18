@@ -1,0 +1,74 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "urn:draft:fc:native-stored-isoview:1",
+  "type": "object",
+  "properties": {
+    "schemaVersion": {
+      "const": "FC-native-stored-isoview-1"
+    },
+    "target": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "const": "EntityRef"
+        },
+        "objectKind": {
+          "const": "source-entity"
+        },
+        "objectId": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "kind",
+        "objectKind",
+        "objectId"
+      ],
+      "additionalProperties": false
+    },
+    "levels": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "properties": {
+          "storedValueF32Bits": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{8}$"
+          },
+          "signMode": {
+            "enum": [
+              "positive",
+              "negative",
+              "both"
+            ]
+          }
+        },
+        "required": [
+          "storedValueF32Bits",
+          "signMode"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "levelMeaning": {
+      "const": "stored-scalar-only"
+    },
+    "ruleId": {
+      "const": "draft.native-stored-scalar-isoview"
+    },
+    "ruleVersion": {
+      "const": "1"
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "target",
+    "levels",
+    "levelMeaning",
+    "ruleId",
+    "ruleVersion"
+  ],
+  "additionalProperties": false
+}

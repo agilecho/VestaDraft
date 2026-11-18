@@ -1,0 +1,182 @@
+{
+  "type": "object",
+  "properties": {
+    "schemaVersion": {
+      "const": "FC-native-scalar-grid-current-1"
+    },
+    "captureRole": {
+      "const": "actual-current-native-numerical-state"
+    },
+    "owner": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "const": "EntityRef"
+        },
+        "objectKind": {
+          "const": "source-entity"
+        },
+        "objectId": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "kind",
+        "objectKind",
+        "objectId"
+      ],
+      "additionalProperties": false
+    },
+    "dataResource": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "const": "BytesRef"
+        },
+        "resourceId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "byteLength": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)$"
+        }
+      },
+      "required": [
+        "kind",
+        "resourceId",
+        "sha256",
+        "byteLength"
+      ],
+      "additionalProperties": false
+    },
+    "maskResource": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "BytesRef"
+            },
+            "resourceId": {
+              "type": "string",
+              "minLength": 1
+            },
+            "sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "byteLength": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$"
+            }
+          },
+          "required": [
+            "kind",
+            "resourceId",
+            "sha256",
+            "byteLength"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "dataEncoding": {
+      "enum": [
+        "ieee754-little-endian-f32",
+        "ieee754-little-endian-f64"
+      ]
+    },
+    "pointShape": {
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "minimum": 2,
+        "maximum": 2147483647
+      },
+      "minItems": 3,
+      "maxItems": 3
+    },
+    "axisOrder": {
+      "const": "x-fastest"
+    },
+    "originF64Bits": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[0-9a-f]{16}$"
+      },
+      "minItems": 3,
+      "maxItems": 3
+    },
+    "stepColumnsF64Bits": {
+      "type": "array",
+      "items": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{16}$"
+        },
+        "minItems": 3,
+        "maxItems": 3
+      },
+      "minItems": 3,
+      "maxItems": 3
+    },
+    "coordinateRole": {
+      "const": "native-numerical-display-only"
+    },
+    "coordinatePhysicalUnit": {
+      "const": "source-unresolved"
+    },
+    "scalarRole": {
+      "const": "uninterpreted-stored-scalar"
+    },
+    "scalarPhysicalUnit": {
+      "const": "source-unresolved"
+    },
+    "domainTreatment": {
+      "const": "finite-including-every-stored-point"
+    },
+    "label": {
+      "type": "string"
+    },
+    "ruleId": {
+      "const": "draft.native-current-numerical-grid"
+    },
+    "ruleVersion": {
+      "const": "1"
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "captureRole",
+    "owner",
+    "dataResource",
+    "maskResource",
+    "dataEncoding",
+    "pointShape",
+    "axisOrder",
+    "originF64Bits",
+    "stepColumnsF64Bits",
+    "coordinateRole",
+    "coordinatePhysicalUnit",
+    "scalarRole",
+    "scalarPhysicalUnit",
+    "domainTreatment",
+    "label",
+    "ruleId",
+    "ruleVersion"
+  ],
+  "additionalProperties": false,
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "urn:draft:fc:native-scalar-grid-current:1"
+}

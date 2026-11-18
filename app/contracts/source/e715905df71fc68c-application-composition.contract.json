@@ -1,0 +1,104 @@
+{
+  "schema": "p1-06-application-composition-design/1",
+  "status": "author-proposal only, not product API or independent review",
+  "namespace": "vestacraft.preference-composition/1",
+  "fullFieldSet": [
+    "rietanArtifact",
+    "viewerArtifact",
+    "templateArtifact",
+    "textFont",
+    "openTarget",
+    "animationStepDeg",
+    "animationIntervalMs",
+    "startupBondSearch",
+    "hardwareAntialias",
+    "rasterTessellationFactor",
+    "isosurfaceN",
+    "historyLimit"
+  ],
+  "numericFields": [
+    "animationStepDeg",
+    "animationIntervalMs",
+    "historyLimit",
+    "rasterTessellationFactor",
+    "isosurfaceN"
+  ],
+  "unifiedTransportComplete": true,
+  "nativeFullPreferenceQualification": false,
+  "nativeAnimationGroupingQualified": false,
+  "schemaRef": {
+    "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/application/preferences-composition.schema.json",
+    "sha256": "1d2cbe659e7fc33bf5635d68c0152ab7b6343b39b1fd0441ae7a038152f36f23"
+  },
+  "imports": [
+    {
+      "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261117-224424-p1-04-host-save-application/attempts/20261118-054254-rev57-review-registration/preference-field-matrix.json",
+      "sha256": "c9758ecc6636bc1d53711c78ac57323aa20cd47737ff1d7e69a18e727cd63da6"
+    },
+    {
+      "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261117-224424-p1-04-host-save-application/attempts/20261118-054254-rev57-review-registration/contracts/preferences-input.contract.json",
+      "sha256": "9f2443a793e149dc02c33ec8d88a5e3ceed14a461a0def2ff6c139c32b945e7d"
+    },
+    {
+      "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261117-224424-p1-04-host-save-application/attempts/20261118-054254-rev57-review-registration/contracts/preferences-input.schema.json",
+      "sha256": "dfd873b7c95eada3c2797fcba9f78c484c869eb3fd4d23b1a378902cfcec34ed"
+    },
+    {
+      "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261117-224424-p1-04-host-save-application/attempts/20261118-054254-rev57-review-registration/contracts/numeric-conversion-profile.json",
+      "sha256": "97e547950db9c1a412b88e465245885c86b5f9381daec28a5c9812bac230af5b"
+    },
+    {
+      "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261117-224424-p1-04-host-save-application/attempts/20261118-054254-rev57-review-registration/contracts/history-evidence.contract.json",
+      "sha256": "5ab84b5544c18ba73e1f813000788d1c8ebefe1eee129382e91d1a12cac8ad78"
+    },
+    {
+      "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261117-224424-p1-04-host-save-application/attempts/20261118-004924-four-design-gaps/contracts/preferences.contract.json",
+      "sha256": "963a7bb43e2a3386de2ad6f295b84c65d163a8b28e8f17671c37064901d2f67d"
+    },
+    {
+      "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261117-224424-p1-04-host-save-application/attempts/20261118-004924-four-design-gaps/contracts/history-animation.contract.json",
+      "sha256": "bf3a4901f4100cb55cedfbf0bca6293dc9ba6893e975e2588f3d35d9add771d3"
+    },
+    {
+      "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261114-205326-p1-05-assets-build-external/remaining-issues.json",
+      "sha256": "5866e2ba052d8bf7027e56abd3879e3190449404342598df5a53ea03474996a3"
+    }
+  ],
+  "requestSemantics": [
+    "requestId is deduplicated within existing authenticated preference owner/account+software namespace. Same canonical request replays actual original result; changed samekey refuses idempotency conflict. No user-selected role/passed/nativeQualified.",
+    "validate requires current basePreferenceVersion/baseEffectiveDigest and exact authenticated ownerProfileDigest; every supplied field appears exactly once in the1..12 changes patch; the server merges it onto the exact complete12field base generation before whole-generation validation, all U64 fit 0..18446744073709551615, finite numeric values only. The server resolves field profiles; a client digest selects no privilege.",
+    "ArtifactChoice is an opaque server-owned approved artifactId plus exact manifest identity; server checks kind/tool/template relation, current account authority, digest and intended effect. FontChoice selects actual retained bytes/face and host supported positive size; no native universal size bounds inferred.",
+    "five numeric Draft values retain AL4 actual scalar/binary/kept-previous semantics and candidate/store/format separation. Unknown lexical/locale/representation/field profile returns E_PREF_DOMAIN_UNQUALIFIED and keeps draft/current configuration. It does not silently use a decimal-only grammar or reset/clamp.",
+    "validate computes a full next preference generation and concrete effect/trim plan from current owner state; its returned planDigest binds requestId, baseversion/digest, exact changed fields, lowered typed bytes, target config digest, actual capabilities, complete lostSnapshotIds and all effects. No supplied digest is itself permission.",
+    "apply may only consume the previously computed exact plan for this owner/request/base. Stop admitting animation samples; resolve in-flight sample and draft barriers; preflight exact lost snapshots and require a separately authorized explicit confirmation bound to that plan. A consent from an earlier revision or a subset/superset list does not authorize trim.",
+    "private existing preference owner serializes one whole generation. Durable write -> exact byte readback -> one effective install/version -> notify consumers. Unknown write must query same apply/generation; no new apply, close-as-success or current-document Saved. Failure before durable write leaves prior effective config; later failure never invents rollback.",
+    "OK closes after actual effective installation only; Cancel drops remaining unapplied RAM draft while preserving previous successful Apply. Preferences, including history capacity trim, do not change current document revision/content/workref, and never store work bytes in browser storage.",
+    "timer consumers capture a preferenceVersion per admitted sample; applying preferences never changes an in-flight sample halfway. Existing unrelated scientific jobs may retain old nonsecurity preferences; revocation still follows current authority policy immediately.",
+    "u64/field cardinality and a closed schema prove transport membership only; native semantic labels, source conversion, runtime FPCR or actual publication remain separately qualified."
+  ],
+  "migration": [
+    "Current AL3/AL4 and original177/bounded3 remain byte-identical. Before implementing this explicit namespace, generate Rust/UI/server validators from this schema, bind complete field profiles, and synchronize private existing preference owner plus consumers in one reviewed version.",
+    "Existing AL4 numeric input used per field, seven other AL3 destinations receive exact typed transport only; a complete12 schema is not12 nativequalified fields.",
+    "No new auth/settings service, product code, runtime or new original reads in this subtask."
+  ],
+  "effectMap": {
+    "rietanArtifact": "new external jobs",
+    "viewerArtifact": "new external jobs",
+    "templateArtifact": "new RIETAN candidates",
+    "textFont": "text panels",
+    "openTarget": "future opens",
+    "animationStepDeg": "new ticks after atomic preference apply",
+    "animationIntervalMs": "future ticks",
+    "startupBondSearch": "future import/new",
+    "hardwareAntialias": "next renderer reconfiguration",
+    "rasterTessellationFactor": "future raster output",
+    "isosurfaceN": "future qualified isosurface generation",
+    "historyLimit": "apply trims only after explicit confirmation of resulting history loss"
+  },
+  "patchVsGeneration": {
+    "wire": "changes patch has1..12 distinct field names, never duplicate last-wins",
+    "server": "authenticated server loads exact current complete12field generation, verifies base version/digest, applies all supplied typed changes privately and validates resulting full12 field/effect plan as one unit",
+    "conflict": "missing base, duplicate field, stale base, changed profile/capability/manifest, malformed or unqualified supplied field -> refuse entire patch; retain prior effective generation and draft diagnostics",
+    "result": "successful durable/readback/install publishes one complete generation. Unmentioned fields retain exact current typed values. An equal complete generation returns unchanged, retains its version/effective digest and produces zero consumer/trim effects; recording the idempotent request outcome does not advance preferenceVersion."
+  }
+}

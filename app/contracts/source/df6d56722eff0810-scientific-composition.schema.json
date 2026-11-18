@@ -1,0 +1,1614 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:vestacraft:I33:scientific-composition:2",
+  "$defs": {
+    "Id": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{32}$"
+    },
+    "Digest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "U64": {
+      "type": "string",
+      "pattern": "^(0|[1-9][0-9]*)$",
+      "maxLength": 20
+    },
+    "OperationRequest2": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "operation": {
+              "const": "sg2.ResolveNativePlacements"
+            },
+            "input": {
+              "$ref": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/sg/sg2.schema.json#/$defs/ResolveNativePlacementsRequest"
+            }
+          },
+          "required": [
+            "operation",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "operation": {
+              "const": "sg2.NativeGroup"
+            },
+            "input": {
+              "$ref": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/sg/sg2.schema.json#/$defs/NativeGroupRequest"
+            }
+          },
+          "required": [
+            "operation",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "operation": {
+              "const": "sg2.NativeWyckoff"
+            },
+            "input": {
+              "$ref": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/sg/sg2.schema.json#/$defs/NativeWyckoffRequest"
+            }
+          },
+          "required": [
+            "operation",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "operation": {
+              "const": "sg2.NativeDimensionD"
+            },
+            "input": {
+              "$ref": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/sg/sg2.schema.json#/$defs/NativeDimensionDRequest"
+            }
+          },
+          "required": [
+            "operation",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "operation": {
+              "const": "sg2.ApplyNativeDomainParameters"
+            },
+            "input": {
+              "$ref": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/sg/sg2.schema.json#/$defs/ApplyNativeDomainParametersRequest"
+            }
+          },
+          "required": [
+            "operation",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "operation": {
+              "const": "sg2.NativeADPAndUncertainty"
+            },
+            "input": {
+              "$ref": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/sg/sg2.schema.json#/$defs/NativeADPAndUncertaintyRequest"
+            }
+          },
+          "required": [
+            "operation",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "operation": {
+              "const": "sg2.NativeMerge"
+            },
+            "input": {
+              "$ref": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/sg/sg2.schema.json#/$defs/NativeMergeRequest"
+            }
+          },
+          "required": [
+            "operation",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "operation": {
+              "const": "sg2.NativeBondValence"
+            },
+            "input": {
+              "$ref": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/sg/sg2.schema.json#/$defs/NativeBVRequest"
+            }
+          },
+          "required": [
+            "operation",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "operation": {
+              "const": "sg2.NativePlane"
+            },
+            "input": {
+              "$ref": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/sg/sg2.schema.json#/$defs/NativePlaneRequest"
+            }
+          },
+          "required": [
+            "operation",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "operation": {
+              "const": "sg2.NativeShape"
+            },
+            "input": {
+              "$ref": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/sg/sg2.schema.json#/$defs/NativeShapeRequest"
+            }
+          },
+          "required": [
+            "operation",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "operation": {
+              "const": "sg2.NativeCamera"
+            },
+            "input": {
+              "$ref": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/sg/sg2.schema.json#/$defs/NativeCameraRequest"
+            }
+          },
+          "required": [
+            "operation",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "operation": {
+              "const": "fs2.PrepareNativeFourierUi"
+            },
+            "input": {
+              "$ref": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/NativeFourierUiInput"
+            }
+          },
+          "required": [
+            "operation",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "operation": {
+              "const": "fs2.CalcNativeGridNo"
+            },
+            "input": {
+              "$ref": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/NativeGridNoInput"
+            }
+          },
+          "required": [
+            "operation",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "operation": {
+              "const": "fs2.CalcNativeTchWidth"
+            },
+            "input": {
+              "$ref": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/NativeTchWidthInput"
+            }
+          },
+          "required": [
+            "operation",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "operation": {
+              "const": "fs2.AccumulateNativePowderPattern"
+            },
+            "input": {
+              "$ref": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/NativePowderAccumulateInput"
+            }
+          },
+          "required": [
+            "operation",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "operation": {
+              "const": "fs2.MaterializeOrderedScalarExpression"
+            },
+            "input": {
+              "$ref": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/OrderedExpressionInput"
+            }
+          },
+          "required": [
+            "operation",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "operation": {
+              "const": "fs2.ResampleAffineTrilinear"
+            },
+            "input": {
+              "$ref": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/Math_FSResampleAffineInput"
+            }
+          },
+          "required": [
+            "operation",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "operation": {
+              "const": "fs2.LinearCombineFields"
+            },
+            "input": {
+              "$ref": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/Math_FSLinearCombineFieldsInput"
+            }
+          },
+          "required": [
+            "operation",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "operation": {
+              "const": "fs2.SampleCartesianLine"
+            },
+            "input": {
+              "$ref": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/Math_FSCartesianLineInput"
+            }
+          },
+          "required": [
+            "operation",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "operation": {
+              "const": "fs2.LinearCombineCurves"
+            },
+            "input": {
+              "$ref": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/Math_FSLinearCombineCurvesInput"
+            }
+          },
+          "required": [
+            "operation",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "operation": {
+              "const": "fs2.EvaluateNativeDispersion"
+            },
+            "input": {
+              "$ref": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/NativeDispersionInput"
+            }
+          },
+          "required": [
+            "operation",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "operation": {
+              "const": "fs2.CalculateNativeStructureFactors"
+            },
+            "input": {
+              "$ref": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/NativeScatteringInput"
+            }
+          },
+          "required": [
+            "operation",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "operation": {
+              "const": "fs2.SynthesizeNativeFourierField"
+            },
+            "input": {
+              "$ref": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/NativeFourierFieldInput"
+            }
+          },
+          "required": [
+            "operation",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "operation": {
+              "const": "fs2.GenerateNativeModelField"
+            },
+            "input": {
+              "$ref": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/NativeModelFieldInput"
+            }
+          },
+          "required": [
+            "operation",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "operation": {
+              "const": "fs2.TransformNativeVolume"
+            },
+            "input": {
+              "$ref": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/NativeVolumeTransformInput"
+            }
+          },
+          "required": [
+            "operation",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "operation": {
+              "const": "fs2.SearchNativePeaksAndIntegrate"
+            },
+            "input": {
+              "$ref": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/NativePeakSearchInput"
+            }
+          },
+          "required": [
+            "operation",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "operation": {
+              "const": "fs2.IntegrateNativeVoronoi"
+            },
+            "input": {
+              "$ref": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/NativeVoronoiInput"
+            }
+          },
+          "required": [
+            "operation",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "operation": {
+              "const": "fs2.BuildNativeIsosurfaceMesh"
+            },
+            "input": {
+              "$ref": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/NativeMeshInput"
+            }
+          },
+          "required": [
+            "operation",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "operation": {
+              "const": "fs2.ConvertNativeElectronicEnergy"
+            },
+            "input": {
+              "$ref": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/NativeConversionInput"
+            }
+          },
+          "required": [
+            "operation",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "operation": {
+              "const": "fs2.SynthesizeNativePowderPattern"
+            },
+            "input": {
+              "$ref": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/NativePowderFullInput"
+            }
+          },
+          "required": [
+            "operation",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "operation": {
+              "const": "fs2.ResolveNativeDefaultIsovalue"
+            },
+            "input": {
+              "$ref": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/NativeDefaultIsoInput"
+            }
+          },
+          "required": [
+            "operation",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "operation": {
+              "const": "fs2.ReadNativeReflectionSource"
+            },
+            "input": {
+              "$ref": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/NativeReflectionReadInput"
+            }
+          },
+          "required": [
+            "operation",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "operation": {
+              "const": "fs2.SampleNativeFractionalPoint"
+            },
+            "input": {
+              "$ref": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/Sampling_NativePointSampleInput"
+            }
+          },
+          "required": [
+            "operation",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "operation": {
+              "const": "fs2.ExportNativeLineProfile"
+            },
+            "input": {
+              "$ref": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/Sampling_NativeLineProfileInput"
+            }
+          },
+          "required": [
+            "operation",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "operation": {
+              "const": "fs2.GenerateNativeContourLevels"
+            },
+            "input": {
+              "$ref": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/Sampling_NativeContourLevelsInput"
+            }
+          },
+          "required": [
+            "operation",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "operation": {
+              "const": "fs2.BuildNativeContourSegments"
+            },
+            "input": {
+              "$ref": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/Sampling_NativeContourSegmentsInput"
+            }
+          },
+          "required": [
+            "operation",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "operation": {
+              "const": "fs2.ExecuteNativePolyIntegralMenu"
+            },
+            "input": {
+              "$ref": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/Sampling_NativePolyIntegralInput"
+            }
+          },
+          "required": [
+            "operation",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "operation": {
+              "const": "fs2.BuildNativeObliqueSlice"
+            },
+            "input": {
+              "$ref": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/Slice_NativeObliqueSliceInput"
+            }
+          },
+          "required": [
+            "operation",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "operation": {
+              "const": "fs2.BuildNativePeriodicSlice"
+            },
+            "input": {
+              "$ref": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/Slice_NativePeriodicSliceInput"
+            }
+          },
+          "required": [
+            "operation",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "operation": {
+              "const": "surface.RenderNativeIsosurfacePacket"
+            },
+            "input": {
+              "$ref": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/render-consumption/render-packet.schema.json#/$defs/RenderNativeIsosurfacePacketRequest"
+            }
+          },
+          "required": [
+            "operation",
+            "input"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "OperationResult2": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "operation": {
+              "const": "sg2.ResolveNativePlacements"
+            },
+            "output": {
+              "$ref": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/sg/sg2.schema.json#/$defs/ResolveNativePlacementsResponse"
+            }
+          },
+          "required": [
+            "operation",
+            "output"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "operation": {
+              "const": "sg2.NativeGroup"
+            },
+            "output": {
+              "$ref": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/sg/sg2.schema.json#/$defs/NativeGroupResponse"
+            }
+          },
+          "required": [
+            "operation",
+            "output"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "operation": {
+              "const": "sg2.NativeWyckoff"
+            },
+            "output": {
+              "$ref": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/sg/sg2.schema.json#/$defs/NativeWyckoffResponse"
+            }
+          },
+          "required": [
+            "operation",
+            "output"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "operation": {
+              "const": "sg2.NativeDimensionD"
+            },
+            "output": {
+              "$ref": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/sg/sg2.schema.json#/$defs/NativeDimensionDResponse"
+            }
+          },
+          "required": [
+            "operation",
+            "output"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "operation": {
+              "const": "sg2.ApplyNativeDomainParameters"
+            },
+            "output": {
+              "$ref": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/sg/sg2.schema.json#/$defs/ApplyNativeDomainParametersResponse"
+            }
+          },
+          "required": [
+            "operation",
+            "output"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "operation": {
+              "const": "sg2.NativeADPAndUncertainty"
+            },
+            "output": {
+              "$ref": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/sg/sg2.schema.json#/$defs/NativeADPAndUncertaintyResponse"
+            }
+          },
+          "required": [
+            "operation",
+            "output"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "operation": {
+              "const": "sg2.NativeMerge"
+            },
+            "output": {
+              "$ref": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/sg/sg2.schema.json#/$defs/NativeMergeResponse"
+            }
+          },
+          "required": [
+            "operation",
+            "output"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "operation": {
+              "const": "sg2.NativeBondValence"
+            },
+            "output": {
+              "$ref": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/sg/sg2.schema.json#/$defs/NativeBVResponse"
+            }
+          },
+          "required": [
+            "operation",
+            "output"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "operation": {
+              "const": "sg2.NativePlane"
+            },
+            "output": {
+              "$ref": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/sg/sg2.schema.json#/$defs/NativePlaneResponse"
+            }
+          },
+          "required": [
+            "operation",
+            "output"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "operation": {
+              "const": "sg2.NativeShape"
+            },
+            "output": {
+              "$ref": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/sg/sg2.schema.json#/$defs/NativeShapeResponse"
+            }
+          },
+          "required": [
+            "operation",
+            "output"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "operation": {
+              "const": "sg2.NativeCamera"
+            },
+            "output": {
+              "$ref": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/sg/sg2.schema.json#/$defs/NativeCameraResponse"
+            }
+          },
+          "required": [
+            "operation",
+            "output"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "operation": {
+              "const": "fs2.PrepareNativeFourierUi"
+            },
+            "output": {
+              "$ref": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/NativePreparedFourierOutput"
+            }
+          },
+          "required": [
+            "operation",
+            "output"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "operation": {
+              "const": "fs2.CalcNativeGridNo"
+            },
+            "output": {
+              "$ref": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/NativeGridNoOutput"
+            }
+          },
+          "required": [
+            "operation",
+            "output"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "operation": {
+              "const": "fs2.CalcNativeTchWidth"
+            },
+            "output": {
+              "$ref": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/NativeTchWidthOutput"
+            }
+          },
+          "required": [
+            "operation",
+            "output"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "operation": {
+              "const": "fs2.AccumulateNativePowderPattern"
+            },
+            "output": {
+              "$ref": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/NativePowderAccumulateOutput"
+            }
+          },
+          "required": [
+            "operation",
+            "output"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "operation": {
+              "const": "fs2.MaterializeOrderedScalarExpression"
+            },
+            "output": {
+              "$ref": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/OrderedExpressionOutput"
+            }
+          },
+          "required": [
+            "operation",
+            "output"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "operation": {
+              "const": "fs2.ResampleAffineTrilinear"
+            },
+            "output": {
+              "$ref": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/FS1_FSFieldOutput"
+            }
+          },
+          "required": [
+            "operation",
+            "output"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "operation": {
+              "const": "fs2.LinearCombineFields"
+            },
+            "output": {
+              "$ref": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/FS1_FSFieldOutput"
+            }
+          },
+          "required": [
+            "operation",
+            "output"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "operation": {
+              "const": "fs2.SampleCartesianLine"
+            },
+            "output": {
+              "$ref": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/Math_FSCartesianLineOutput"
+            }
+          },
+          "required": [
+            "operation",
+            "output"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "operation": {
+              "const": "fs2.LinearCombineCurves"
+            },
+            "output": {
+              "$ref": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/Math_FSLinearCombineCurvesOutput"
+            }
+          },
+          "required": [
+            "operation",
+            "output"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "operation": {
+              "const": "fs2.EvaluateNativeDispersion"
+            },
+            "output": {
+              "$ref": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/NativeDispersionOutputOrFailure"
+            }
+          },
+          "required": [
+            "operation",
+            "output"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "operation": {
+              "const": "fs2.CalculateNativeStructureFactors"
+            },
+            "output": {
+              "$ref": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/NativeScatteringOutputOrFailure"
+            }
+          },
+          "required": [
+            "operation",
+            "output"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "operation": {
+              "const": "fs2.SynthesizeNativeFourierField"
+            },
+            "output": {
+              "$ref": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/NativeFullFieldOutputOrFailure"
+            }
+          },
+          "required": [
+            "operation",
+            "output"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "operation": {
+              "const": "fs2.GenerateNativeModelField"
+            },
+            "output": {
+              "$ref": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/NativeModelFieldOutputOrFailure"
+            }
+          },
+          "required": [
+            "operation",
+            "output"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "operation": {
+              "const": "fs2.TransformNativeVolume"
+            },
+            "output": {
+              "$ref": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/NativeVolumeTransformOutputOrFailure"
+            }
+          },
+          "required": [
+            "operation",
+            "output"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "operation": {
+              "const": "fs2.SearchNativePeaksAndIntegrate"
+            },
+            "output": {
+              "$ref": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/NativePeakVoronoiOutputOrFailure"
+            }
+          },
+          "required": [
+            "operation",
+            "output"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "operation": {
+              "const": "fs2.IntegrateNativeVoronoi"
+            },
+            "output": {
+              "$ref": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/NativePeakVoronoiOutputOrFailure"
+            }
+          },
+          "required": [
+            "operation",
+            "output"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "operation": {
+              "const": "fs2.BuildNativeIsosurfaceMesh"
+            },
+            "output": {
+              "$ref": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/NativeMeshOutputOrFailure"
+            }
+          },
+          "required": [
+            "operation",
+            "output"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "operation": {
+              "const": "fs2.ConvertNativeElectronicEnergy"
+            },
+            "output": {
+              "$ref": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/NativeConversionOutputOrFailure"
+            }
+          },
+          "required": [
+            "operation",
+            "output"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "operation": {
+              "const": "fs2.SynthesizeNativePowderPattern"
+            },
+            "output": {
+              "$ref": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/NativePowderFullOutputOrFailure"
+            }
+          },
+          "required": [
+            "operation",
+            "output"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "operation": {
+              "const": "fs2.ResolveNativeDefaultIsovalue"
+            },
+            "output": {
+              "$ref": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/NativeDefaultIsoOutputOrFailure"
+            }
+          },
+          "required": [
+            "operation",
+            "output"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "operation": {
+              "const": "fs2.ReadNativeReflectionSource"
+            },
+            "output": {
+              "$ref": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/NativeReflectionReadOutputOrFailure"
+            }
+          },
+          "required": [
+            "operation",
+            "output"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "operation": {
+              "const": "fs2.SampleNativeFractionalPoint"
+            },
+            "output": {
+              "$ref": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/Sampling_NativePointSampleOutputOrFailure"
+            }
+          },
+          "required": [
+            "operation",
+            "output"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "operation": {
+              "const": "fs2.ExportNativeLineProfile"
+            },
+            "output": {
+              "$ref": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/Sampling_NativeLineProfileOutputOrFailure"
+            }
+          },
+          "required": [
+            "operation",
+            "output"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "operation": {
+              "const": "fs2.GenerateNativeContourLevels"
+            },
+            "output": {
+              "$ref": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/Sampling_NativeContourLevelsOutputOrFailure"
+            }
+          },
+          "required": [
+            "operation",
+            "output"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "operation": {
+              "const": "fs2.BuildNativeContourSegments"
+            },
+            "output": {
+              "$ref": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/Sampling_NativeContourSegmentsOutputOrFailure"
+            }
+          },
+          "required": [
+            "operation",
+            "output"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "operation": {
+              "const": "fs2.ExecuteNativePolyIntegralMenu"
+            },
+            "output": {
+              "$ref": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/Sampling_NativePolyIntegralOutputOrFailure"
+            }
+          },
+          "required": [
+            "operation",
+            "output"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "operation": {
+              "const": "fs2.BuildNativeObliqueSlice"
+            },
+            "output": {
+              "$ref": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/Slice_NativeObliqueSliceOutputOrFailure"
+            }
+          },
+          "required": [
+            "operation",
+            "output"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "operation": {
+              "const": "fs2.BuildNativePeriodicSlice"
+            },
+            "output": {
+              "$ref": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/Slice_NativePeriodicSliceOutputOrFailure"
+            }
+          },
+          "required": [
+            "operation",
+            "output"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "operation": {
+              "const": "surface.RenderNativeIsosurfacePacket"
+            },
+            "output": {
+              "$ref": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/render-consumption/render-packet.schema.json#/$defs/RenderNativeIsosurfacePacketResponse"
+            }
+          },
+          "required": [
+            "operation",
+            "output"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "HistoryAwareCommitSummaryWire2": {
+      "$ref": "history-effects-wire.schema.json#/$defs/HistoryAwareCommitSummary"
+    },
+    "TypedJsonResource2": {
+      "type": "object",
+      "properties": {
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "byteLength": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)$",
+          "maxLength": 20
+        },
+        "mediaType": {
+          "const": "application/json"
+        }
+      },
+      "required": [
+        "sha256",
+        "byteLength",
+        "mediaType"
+      ],
+      "additionalProperties": false
+    },
+    "ScientificStateEdit2": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "component": {
+              "const": "phase-placements"
+            },
+            "targetDocumentId": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{32}$"
+            },
+            "state": {
+              "$ref": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/sg/sg2.schema.json#/$defs/PhasePlacementSet"
+            }
+          },
+          "required": [
+            "component",
+            "targetDocumentId",
+            "state"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "component": {
+              "const": "native-phase-state"
+            },
+            "targetPhaseId": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{32}$"
+            },
+            "state": {
+              "$ref": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/sg/sg2.schema.json#/$defs/NativeDimensionDState"
+            }
+          },
+          "required": [
+            "component",
+            "targetPhaseId",
+            "state"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "component": {
+              "const": "group-setting"
+            },
+            "targetPhaseId": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{32}$"
+            },
+            "state": {
+              "$ref": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/sg/sg2.schema.json#/$defs/GroupSettingState"
+            }
+          },
+          "required": [
+            "component",
+            "targetPhaseId",
+            "state"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "component": {
+              "const": "native-camera"
+            },
+            "targetSceneId": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{32}$"
+            },
+            "state": {
+              "$ref": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/sg/sg2.schema.json#/$defs/NativeCamera"
+            }
+          },
+          "required": [
+            "component",
+            "targetSceneId",
+            "state"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "component": {
+              "const": "occupation-domain-parameters"
+            },
+            "targetPhaseId": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{32}$"
+            },
+            "state": {
+              "$ref": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/sg/sg2.schema.json#/$defs/ApplyNativeDomainParametersRequest"
+            }
+          },
+          "required": [
+            "component",
+            "targetPhaseId",
+            "state"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "component": {
+              "const": "shape"
+            },
+            "targetPhaseId": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{32}$"
+            },
+            "state": {
+              "$ref": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/sg/sg2.schema.json#/$defs/NativeShapeRequest"
+            }
+          },
+          "required": [
+            "component",
+            "targetPhaseId",
+            "state"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "component": {
+              "const": "plane"
+            },
+            "targetPhaseId": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{32}$"
+            },
+            "state": {
+              "$ref": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/sg/sg2.schema.json#/$defs/NativePlaneRequest"
+            }
+          },
+          "required": [
+            "component",
+            "targetPhaseId",
+            "state"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "PrepareDomainResult2": {
+      "type": "object",
+      "properties": {
+        "operation": {
+          "enum": [
+            "sg2.ResolveNativePlacements",
+            "sg2.NativeGroup",
+            "sg2.NativeWyckoff",
+            "sg2.NativeDimensionD",
+            "sg2.ApplyNativeDomainParameters",
+            "sg2.NativeADPAndUncertainty",
+            "sg2.NativeMerge",
+            "sg2.NativeBondValence",
+            "sg2.NativePlane",
+            "sg2.NativeShape",
+            "sg2.NativeCamera",
+            "fs2.PrepareNativeFourierUi",
+            "fs2.CalcNativeGridNo",
+            "fs2.CalcNativeTchWidth",
+            "fs2.AccumulateNativePowderPattern",
+            "fs2.MaterializeOrderedScalarExpression",
+            "fs2.ResampleAffineTrilinear",
+            "fs2.LinearCombineFields",
+            "fs2.SampleCartesianLine",
+            "fs2.LinearCombineCurves",
+            "fs2.EvaluateNativeDispersion",
+            "fs2.CalculateNativeStructureFactors",
+            "fs2.SynthesizeNativeFourierField",
+            "fs2.GenerateNativeModelField",
+            "fs2.TransformNativeVolume",
+            "fs2.SearchNativePeaksAndIntegrate",
+            "fs2.IntegrateNativeVoronoi",
+            "fs2.BuildNativeIsosurfaceMesh",
+            "fs2.ConvertNativeElectronicEnergy",
+            "fs2.SynthesizeNativePowderPattern",
+            "fs2.ResolveNativeDefaultIsovalue",
+            "fs2.ReadNativeReflectionSource",
+            "fs2.SampleNativeFractionalPoint",
+            "fs2.ExportNativeLineProfile",
+            "fs2.GenerateNativeContourLevels",
+            "fs2.BuildNativeContourSegments",
+            "fs2.ExecuteNativePolyIntegralMenu",
+            "fs2.BuildNativeObliqueSlice",
+            "fs2.BuildNativePeriodicSlice",
+            "surface.RenderNativeIsosurfacePacket"
+          ]
+        },
+        "output": {
+          "$ref": "#/$defs/TypedJsonResource2"
+        },
+        "candidateId": {
+          "oneOf": [
+            {
+              "type": "string",
+              "pattern": "^[0-9a-f]{32}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "candidateDigest": {
+          "oneOf": [
+            {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "complete": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "operation",
+        "output",
+        "candidateId",
+        "candidateDigest",
+        "complete"
+      ],
+      "additionalProperties": false
+    },
+    "PrepareStateResult2": {
+      "type": "object",
+      "properties": {
+        "candidateId": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{32}$"
+        },
+        "candidateDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "validatedState": {
+          "$ref": "#/$defs/TypedJsonResource2"
+        }
+      },
+      "required": [
+        "candidateId",
+        "candidateDigest",
+        "validatedState"
+      ],
+      "additionalProperties": false
+    },
+    "AppliedDomainResult2": {
+      "type": "object",
+      "properties": {
+        "candidateId": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{32}$"
+        },
+        "candidateDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "applied": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "candidateId",
+        "candidateDigest",
+        "applied"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "title": "Explicit closed I32 scientific operation/resource/state composition; never arbitrary options JSON"
+}

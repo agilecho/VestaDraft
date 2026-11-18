@@ -1,0 +1,634 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:vestacraft:design:slice-geometry:2",
+  "title": "D=3 original oblique slice and thickness projection design",
+  "description": "Closed scientific-boundary inputs/results; imported FS leaf definitions only, not a recursive top-level Request. All decoded FP bit patterns must be finite and pass explicit source semantic assertions. H is derived by Set_Base_Matrix, never accepted as caller free matrix.",
+  "oneOf": [
+    {
+      "$ref": "#/$defs/NativeObliqueSliceInput"
+    },
+    {
+      "$ref": "#/$defs/NativePeriodicSliceInput"
+    }
+  ],
+  "$defs": {
+    "ScalarSource": {
+      "$ref": "../fs/fs2-scientific-successor.schema.json#/$defs/ScalarSource"
+    },
+    "F32Bits": {
+      "$ref": "../fs/fs2-scientific-successor.schema.json#/$defs/F32Bits"
+    },
+    "F64Bits": {
+      "$ref": "../fs/fs2-scientific-successor.schema.json#/$defs/F64Bits"
+    },
+    "Vec3F32Bits": {
+      "$ref": "../fs/fs2-scientific-successor.schema.json#/$defs/Vec3F32Bits"
+    },
+    "Vec3F64Bits": {
+      "$ref": "../fs/fs2-scientific-successor.schema.json#/$defs/Vec3F64Bits"
+    },
+    "Mat4ColumnsF64Bits": {
+      "$ref": "../fs/fs2-scientific-successor.schema.json#/$defs/Mat4ColumnsF64Bits"
+    },
+    "Digest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "U32": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 4294967295
+    },
+    "Mat3RowsF64Bits": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Vec3F64Bits"
+      },
+      "minItems": 3,
+      "maxItems": 3
+    },
+    "NativeSliceFrame": {
+      "type": "object",
+      "properties": {
+        "dimensionD": {
+          "const": 3
+        },
+        "crystallographicToOrthoRowsF64Bits": {
+          "$ref": "#/$defs/Mat3RowsF64Bits"
+        },
+        "orthoToCrystallographicRowsF64Bits": {
+          "$ref": "#/$defs/Mat3RowsF64Bits"
+        },
+        "currentC2XYZColumnsF64Bits": {
+          "$ref": "#/$defs/Mat4ColumnsF64Bits"
+        },
+        "sourceStateDigest": {
+          "$ref": "#/$defs/Digest"
+        }
+      },
+      "required": [
+        "dimensionD",
+        "crystallographicToOrthoRowsF64Bits",
+        "orthoToCrystallographicRowsF64Bits",
+        "currentC2XYZColumnsF64Bits",
+        "sourceStateDigest"
+      ],
+      "additionalProperties": false
+    },
+    "NativeOrthoCutoffPlaneGeometry": {
+      "type": "object",
+      "properties": {
+        "normalOrthoF64Bits": {
+          "$ref": "#/$defs/Vec3F64Bits"
+        },
+        "distanceAF64Bits": {
+          "$ref": "#/$defs/F64Bits"
+        }
+      },
+      "required": [
+        "normalOrthoF64Bits",
+        "distanceAF64Bits"
+      ],
+      "additionalProperties": false
+    },
+    "NativeOrthoCutoffPlane": {
+      "type": "object",
+      "properties": {
+        "sourcePlaneDigest": {
+          "$ref": "#/$defs/Digest"
+        },
+        "geometry": {
+          "$ref": "#/$defs/NativeOrthoCutoffPlaneGeometry"
+        }
+      },
+      "required": [
+        "sourcePlaneDigest",
+        "geometry"
+      ],
+      "additionalProperties": false
+    },
+    "NativeFractionalBox": {
+      "type": "object",
+      "properties": {
+        "xMinMaxF32Bits": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/F32Bits"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "yMinMaxF32Bits": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/F32Bits"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "zMinMaxF32Bits": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/F32Bits"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        }
+      },
+      "required": [
+        "xMinMaxF32Bits",
+        "yMinMaxF32Bits",
+        "zMinMaxF32Bits"
+      ],
+      "additionalProperties": false
+    },
+    "NativeScalarWindow": {
+      "type": "object",
+      "properties": {
+        "lowerF32Bits": {
+          "$ref": "#/$defs/F32Bits"
+        },
+        "upperF32Bits": {
+          "$ref": "#/$defs/F32Bits"
+        }
+      },
+      "required": [
+        "lowerF32Bits",
+        "upperF32Bits"
+      ],
+      "additionalProperties": false
+    },
+    "NativeContourSettings": {
+      "oneOf": [
+        {
+          "$ref": "../../science-supplement/native-sampling.schema.json#/$defs/ContourSettingsLinear"
+        },
+        {
+          "$ref": "../../science-supplement/native-sampling.schema.json#/$defs/ContourSettingsGeometric"
+        }
+      ]
+    },
+    "NativeObliqueSliceInput": {
+      "type": "object",
+      "properties": {
+        "source": {
+          "$ref": "#/$defs/ScalarSource"
+        },
+        "frame": {
+          "$ref": "#/$defs/NativeSliceFrame"
+        },
+        "gridIntervalsXYZ": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2147483646
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "sourceNormalF64Bits": {
+          "$ref": "#/$defs/Vec3F64Bits"
+        },
+        "sourceStateDigest": {
+          "$ref": "#/$defs/Digest"
+        },
+        "kind": {
+          "const": "native-bounding-box-oblique-slice"
+        },
+        "distanceAF64Bits": {
+          "$ref": "#/$defs/F64Bits"
+        },
+        "fractionalBox": {
+          "$ref": "#/$defs/NativeFractionalBox"
+        },
+        "scalarWindow": {
+          "$ref": "#/$defs/NativeScalarWindow"
+        },
+        "sourceDataRangeF32Bits": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/F32Bits"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "contourSettings": {
+          "$ref": "#/$defs/NativeContourSettings"
+        }
+      },
+      "required": [
+        "source",
+        "frame",
+        "gridIntervalsXYZ",
+        "sourceNormalF64Bits",
+        "sourceStateDigest",
+        "kind",
+        "distanceAF64Bits",
+        "fractionalBox",
+        "scalarWindow",
+        "sourceDataRangeF32Bits",
+        "contourSettings"
+      ],
+      "additionalProperties": false
+    },
+    "NativeSlicePlaneRecipe": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "mode": {
+              "const": "two-vector-reciprocal-plane"
+            },
+            "sourceStyleByte": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 255
+            }
+          },
+          "required": [
+            "mode",
+            "sourceStyleByte"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "mode": {
+              "const": "project-along-direct-hkl"
+            },
+            "sourceStyleByte": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 255
+            },
+            "upperDistanceAF64Bits": {
+              "$ref": "#/$defs/F64Bits"
+            }
+          },
+          "required": [
+            "mode",
+            "sourceStyleByte",
+            "upperDistanceAF64Bits"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "NativePeriodicSliceInput": {
+      "type": "object",
+      "properties": {
+        "source": {
+          "$ref": "#/$defs/ScalarSource"
+        },
+        "frame": {
+          "$ref": "#/$defs/NativeSliceFrame"
+        },
+        "gridIntervalsXYZ": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2147483646
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "sourceNormalF64Bits": {
+          "$ref": "#/$defs/Vec3F64Bits"
+        },
+        "sourceStateDigest": {
+          "$ref": "#/$defs/Digest"
+        },
+        "centerFractionalF64Bits": {
+          "$ref": "#/$defs/Vec3F64Bits"
+        },
+        "span1FractionalF32Bits": {
+          "$ref": "#/$defs/Vec3F32Bits"
+        },
+        "span2FractionalF32Bits": {
+          "$ref": "#/$defs/Vec3F32Bits"
+        },
+        "lowerDistanceAF64Bits": {
+          "$ref": "#/$defs/F64Bits"
+        },
+        "sourceDataRangeF32Bits": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/F32Bits"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "contourSettings": {
+          "$ref": "#/$defs/NativeContourSettings"
+        },
+        "kind": {
+          "const": "native-periodic-plane-or-thickness-projection"
+        },
+        "planeRecipe": {
+          "$ref": "#/$defs/NativeSlicePlaneRecipe"
+        }
+      },
+      "required": [
+        "source",
+        "frame",
+        "gridIntervalsXYZ",
+        "sourceNormalF64Bits",
+        "sourceStateDigest",
+        "centerFractionalF64Bits",
+        "span1FractionalF32Bits",
+        "span2FractionalF32Bits",
+        "lowerDistanceAF64Bits",
+        "sourceDataRangeF32Bits",
+        "contourSettings",
+        "kind",
+        "planeRecipe"
+      ],
+      "additionalProperties": false
+    },
+    "NativePlanePolygon": {
+      "type": "object",
+      "properties": {
+        "verticesCurrentXYZF64Bits": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Vec3F64Bits"
+          },
+          "minItems": 3
+        },
+        "orderedClosedCycle": {
+          "const": true
+        }
+      },
+      "required": [
+        "verticesCurrentXYZF64Bits",
+        "orderedClosedCycle"
+      ],
+      "additionalProperties": false
+    },
+    "NativeSliceMesh": {
+      "type": "object",
+      "properties": {
+        "verticesPlaneF32Bits": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Vec3F32Bits"
+          },
+          "minItems": 3
+        },
+        "valuesF32Bits": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/F32Bits"
+          },
+          "minItems": 3
+        },
+        "triangles": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/U32"
+            },
+            "minItems": 3,
+            "maxItems": 3
+          },
+          "minItems": 1
+        }
+      },
+      "required": [
+        "verticesPlaneF32Bits",
+        "valuesF32Bits",
+        "triangles"
+      ],
+      "additionalProperties": false
+    },
+    "NativeObliqueSliceComplete": {
+      "type": "object",
+      "properties": {
+        "sourceStateDigest": {
+          "$ref": "#/$defs/Digest"
+        },
+        "sourceRuleDigest": {
+          "$ref": "#/$defs/Digest"
+        },
+        "planeHColumnsF64Bits": {
+          "$ref": "#/$defs/Mat4ColumnsF64Bits"
+        },
+        "kind": {
+          "const": "complete-oblique-slice"
+        },
+        "planeConstantF64Bits": {
+          "$ref": "#/$defs/F64Bits"
+        },
+        "normalOrthoUnnormalizedF64Bits": {
+          "$ref": "#/$defs/Vec3F64Bits"
+        },
+        "roundedIndexBoundsXYZ": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "minimum": -2147483648,
+              "maximum": 2147483647
+            },
+            "minItems": 2,
+            "maxItems": 2
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "fullBoundary": {
+          "$ref": "#/$defs/NativePlanePolygon"
+        },
+        "meshAfterScalarWindow": {
+          "$ref": "#/$defs/NativeSliceMesh"
+        },
+        "contourConsumer": {
+          "const": "native-contour-levels-then-segments/2"
+        }
+      },
+      "required": [
+        "sourceStateDigest",
+        "sourceRuleDigest",
+        "planeHColumnsF64Bits",
+        "kind",
+        "planeConstantF64Bits",
+        "normalOrthoUnnormalizedF64Bits",
+        "roundedIndexBoundsXYZ",
+        "fullBoundary",
+        "meshAfterScalarWindow",
+        "contourConsumer"
+      ],
+      "additionalProperties": false
+    },
+    "NativeObliqueSliceEmpty": {
+      "type": "object",
+      "properties": {
+        "sourceStateDigest": {
+          "$ref": "#/$defs/Digest"
+        },
+        "sourceRuleDigest": {
+          "$ref": "#/$defs/Digest"
+        },
+        "planeHColumnsF64Bits": {
+          "$ref": "#/$defs/Mat4ColumnsF64Bits"
+        },
+        "kind": {
+          "const": "empty-oblique-slice"
+        },
+        "reason": {
+          "enum": [
+            "outside-box",
+            "degenerate-intersection",
+            "scalar-window-empty"
+          ]
+        }
+      },
+      "required": [
+        "sourceStateDigest",
+        "sourceRuleDigest",
+        "planeHColumnsF64Bits",
+        "kind",
+        "reason"
+      ],
+      "additionalProperties": false
+    },
+    "NativeObliqueSliceOutput": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/NativeObliqueSliceComplete"
+        },
+        {
+          "$ref": "#/$defs/NativeObliqueSliceEmpty"
+        }
+      ]
+    },
+    "NativePeriodicSliceOutput": {
+      "type": "object",
+      "properties": {
+        "sourceStateDigest": {
+          "$ref": "#/$defs/Digest"
+        },
+        "sourceRuleDigest": {
+          "$ref": "#/$defs/Digest"
+        },
+        "planeHColumnsF64Bits": {
+          "$ref": "#/$defs/Mat4ColumnsF64Bits"
+        },
+        "kind": {
+          "const": "complete-periodic-slice-array"
+        },
+        "intervalsUV": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/U32"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "normalIntervalsU32": {
+          "$ref": "#/$defs/U32"
+        },
+        "continuousLayerDeltaF64Bits": {
+          "$ref": "#/$defs/F64Bits"
+        },
+        "additionalLayerCountU32": {
+          "$ref": "#/$defs/U32"
+        },
+        "thicknessWeightF32Bits": {
+          "$ref": "#/$defs/F32Bits"
+        },
+        "lowerPlaneConstantF64Bits": {
+          "$ref": "#/$defs/F64Bits"
+        },
+        "upperPlaneConstantF64Bits": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/$defs/F64Bits"
+            }
+          ]
+        },
+        "sampleFractionalPointsF32Bits": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Vec3F32Bits"
+          },
+          "minItems": 1
+        },
+        "sampleValuesPerLayerF32Bits": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/F32Bits"
+            },
+            "minItems": 1
+          },
+          "minItems": 1
+        },
+        "renderPositionsPlaneF32Bits": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Vec3F32Bits"
+          },
+          "minItems": 1
+        },
+        "completeValuesF32Bits": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/F32Bits"
+          },
+          "minItems": 1
+        },
+        "contourQuads": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/U32"
+            },
+            "minItems": 4,
+            "maxItems": 4
+          }
+        },
+        "valueQuantity": {
+          "enum": [
+            "source-quantity",
+            "source-quantity-times-angstrom"
+          ]
+        },
+        "contourConsumer": {
+          "const": "native-contour-levels-then-segments/2"
+        }
+      },
+      "required": [
+        "sourceStateDigest",
+        "sourceRuleDigest",
+        "planeHColumnsF64Bits",
+        "kind",
+        "intervalsUV",
+        "normalIntervalsU32",
+        "continuousLayerDeltaF64Bits",
+        "additionalLayerCountU32",
+        "thicknessWeightF32Bits",
+        "lowerPlaneConstantF64Bits",
+        "upperPlaneConstantF64Bits",
+        "sampleFractionalPointsF32Bits",
+        "sampleValuesPerLayerF32Bits",
+        "renderPositionsPlaneF32Bits",
+        "completeValuesF32Bits",
+        "contourQuads",
+        "valueQuantity",
+        "contourConsumer"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

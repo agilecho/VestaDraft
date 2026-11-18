@@ -1,6 +1,10 @@
 # Local research evidence and build outputs
 /output/
 
+# Source project dependencies and compilation output
+**/node_modules/
+**/target/
+
 # Local editor and operating-system metadata
 /.idea/
 .DS_Store

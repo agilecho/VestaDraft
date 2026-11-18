@@ -1,0 +1,1875 @@
+{
+  "schema": "vestacraft.asset-input-design/2",
+  "revision": "AB/2",
+  "predecessor": {
+    "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261114-214811-p1-05-dsh-registration-notes/contracts/asset-inputs.json",
+    "bytes": 82077,
+    "sha256": "781edf7d1d2795a302f94e26caaf4a42dfc3df5c3e52fe549db2f8da01883be9"
+  },
+  "scope": "functional design successor; original source/license identities preserved",
+  "assets": [
+    {
+      "id": "A01",
+      "name": "spgra.dat",
+      "version": "no internal edition; bound to local 3.90.9a package",
+      "source": "V01 original local Resources; not independently equal to any ITC/Bilbao release",
+      "files": [
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/spgra.dat",
+          "bytes": 52233,
+          "sha256": "6e3156a11025bb261e8feff5620e699fa4e5a50b56562600dbeb4280ab449396"
+        }
+      ],
+      "licenseEvidence": [
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/LICENSE",
+          "bytes": 1223,
+          "sha256": "c6690795ed2edf9f2c45d6a075d1964e242d5ef7ba1333891ece1da73b2bf1c1"
+        }
+      ],
+      "licenseStatus": "restricted-original-distribution-no-written-permission",
+      "redistribution": "blocked",
+      "fieldsAndUnits": {
+        "rawHeader": "verbatim bytes + source span",
+        "settingAndOrigin": "header positions NOT semantically qualified",
+        "operators": "fractional dimensionless; magnetic trailing timeSign ±1 only where explicit",
+        "canonicalFields": "SGGroupSetting3 settingName/originChoice/changeOfBasis/originFractional require semantic mapping before freeze"
+      },
+      "producer": "original VESTA distribution",
+      "consumers": [
+        "01 SG-02 SGGroupSetting3.table/operators",
+        "02 symmetry expansion",
+        "03 native/CIF group identity"
+      ],
+      "qualification": "current06 author design successor, pending independent review; future source/parser/render/runtime assertions required",
+      "lifecycle": "read-only source → reviewed immutable asset manifest → acquired/qualified copy in future build → hash-verified ResourcePort → calculation/frame snapshot retain → release; never mutate shared source",
+      "productionReady": false,
+      "tableIdentity": {
+        "resource": "6e3156a11025bb261e8feff5620e699fa4e5a50b56562600dbeb4280ab449396",
+        "sourceId": "V01:spgra.dat",
+        "sourceVersion": "VESTA-3.90.9a-local-2026-08-08",
+        "edition": "unmarked-table-edition; package-bound-only",
+        "licenseResource": "c6690795ed2edf9f2c45d6a075d1964e242d5ef7ba1333891ece1da73b2bf1c1",
+        "tableKey": "raw-header:1:1:1:0:1",
+        "tableContentDigest": "22e41406df3274ea3fbffc937b78f70e4cb0a40f700a0b2ac3106664d38cb30c"
+      },
+      "scope": "research-byte identity; no numerical/whole-feature qualification",
+      "inventory": {
+        "records": 365,
+        "distinctOrdinaryGroupNumbers": 230,
+        "allKeys": "raw-table-index.json#/spgra.dat",
+        "keySemantics": "raw-header tokens or explicit BNS, scoped by full file SHA; research locator only, never a qualified setting selection"
+      },
+      "predecessorMissing": [
+        "independent table edition and permission",
+        "all setting/origin/change-of-basis semantics and Wyckoff tolerance; no default origin0/identity basis inferred"
+      ],
+      "currentDesignConsumer": "SG/2 GroupSettingState",
+      "currentDesignRule": "spgra365 native setting order, 230 group registry; 4th rawheader flag inversion, 5th operator count; source origin encoded in actual affine operators. No invented independent ITC edition/origin selector.",
+      "designStatus": "source-identified and typed-consumer-bound; runtime qualification separate",
+      "licensingDisposition": "deferred-by-DEC-P1-05; existing license text/digest retained; grant not asserted",
+      "productImplemented": false
+    },
+    {
+      "id": "A02",
+      "name": "spgro.dat",
+      "version": "no internal edition; bound to local 3.90.9a package",
+      "source": "V01 original local Resources; not independently equal to any ITC/Bilbao release",
+      "files": [
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/spgro.dat",
+          "bytes": 2957,
+          "sha256": "cd6c96022e5b45804a017c3ca29fd1ff0ebdd34e4a94a0cbff12626397f9caf6"
+        }
+      ],
+      "licenseEvidence": [
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/LICENSE",
+          "bytes": 1223,
+          "sha256": "c6690795ed2edf9f2c45d6a075d1964e242d5ef7ba1333891ece1da73b2bf1c1"
+        }
+      ],
+      "licenseStatus": "restricted-original-distribution-no-written-permission",
+      "redistribution": "blocked",
+      "fieldsAndUnits": {
+        "rawHeader": "verbatim bytes + source span",
+        "settingAndOrigin": "header positions NOT semantically qualified",
+        "operators": "fractional dimensionless; magnetic trailing timeSign ±1 only where explicit",
+        "canonicalFields": "SGGroupSetting3 settingName/originChoice/changeOfBasis/originFractional require semantic mapping before freeze"
+      },
+      "producer": "original VESTA distribution",
+      "consumers": [
+        "01 orthorhombic setting names",
+        "03 group label preservation"
+      ],
+      "qualification": "current06 author design successor, pending independent review; future source/parser/render/runtime assertions required",
+      "lifecycle": "read-only source → reviewed immutable asset manifest → acquired/qualified copy in future build → hash-verified ResourcePort → calculation/frame snapshot retain → release; never mutate shared source",
+      "productionReady": false,
+      "tableIdentity": {
+        "resource": "cd6c96022e5b45804a017c3ca29fd1ff0ebdd34e4a94a0cbff12626397f9caf6",
+        "sourceId": "V01:spgro.dat",
+        "sourceVersion": "VESTA-3.90.9a-local-2026-08-08",
+        "edition": "unmarked-table-edition; package-bound-only",
+        "licenseResource": "c6690795ed2edf9f2c45d6a075d1964e242d5ef7ba1333891ece1da73b2bf1c1",
+        "tableKey": "row:16",
+        "tableContentDigest": "c256ba5ee62d86a1a53d9f3664ea124310956263497af6295a921612a292dfdd"
+      },
+      "scope": "research-byte identity; no numerical/whole-feature qualification",
+      "inventory": {
+        "records": 59,
+        "distinctOrdinaryGroupNumbers": null,
+        "allKeys": "raw-table-index.json#/spgro.dat",
+        "keySemantics": "raw-header tokens or explicit BNS, scoped by full file SHA; research locator only, never a qualified setting selection"
+      },
+      "predecessorMissing": [
+        "independent table edition and permission",
+        "all setting/origin/change-of-basis semantics and Wyckoff tolerance; no default origin0/identity basis inferred"
+      ],
+      "currentDesignConsumer": "SG/2 GroupSettingState",
+      "currentDesignRule": "spgro exact native old-name mapping consumed by export/standardization; preserve source key and source byte digest.",
+      "designStatus": "source-identified and typed-consumer-bound; runtime qualification separate",
+      "licensingDisposition": "deferred-by-DEC-P1-05; existing license text/digest retained; grant not asserted",
+      "productImplemented": false
+    },
+    {
+      "id": "A03",
+      "name": "mspgr.dat",
+      "version": "no internal edition; bound to local 3.90.9a package",
+      "source": "V01 original local Resources; not independently equal to any ITC/Bilbao release",
+      "files": [
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/mspgr.dat",
+          "bytes": 719538,
+          "sha256": "eec5b87f405ca37b420e7724d792f25c1eeeb6c00a6ee5ffe9b0a562cd4ae968"
+        }
+      ],
+      "licenseEvidence": [
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/LICENSE",
+          "bytes": 1223,
+          "sha256": "c6690795ed2edf9f2c45d6a075d1964e242d5ef7ba1333891ece1da73b2bf1c1"
+        }
+      ],
+      "licenseStatus": "restricted-original-distribution-no-written-permission",
+      "redistribution": "blocked",
+      "fieldsAndUnits": {
+        "rawHeader": "verbatim bytes + source span",
+        "settingAndOrigin": "header positions NOT semantically qualified",
+        "operators": "fractional dimensionless; magnetic trailing timeSign ±1 only where explicit",
+        "canonicalFields": "SGGroupSetting3 settingName/originChoice/changeOfBasis/originFractional require semantic mapping before freeze"
+      },
+      "producer": "original VESTA distribution",
+      "consumers": [
+        "01 SG-02 magnetic timeSign/BNS/OG",
+        "02 magnetic/scattering selectors",
+        "03 mCIF"
+      ],
+      "qualification": "current06 author design successor, pending independent review; future source/parser/render/runtime assertions required",
+      "lifecycle": "read-only source → reviewed immutable asset manifest → acquired/qualified copy in future build → hash-verified ResourcePort → calculation/frame snapshot retain → release; never mutate shared source",
+      "productionReady": false,
+      "tableIdentity": {
+        "resource": "eec5b87f405ca37b420e7724d792f25c1eeeb6c00a6ee5ffe9b0a562cd4ae968",
+        "sourceId": "V01:mspgr.dat",
+        "sourceVersion": "VESTA-3.90.9a-local-2026-08-08",
+        "edition": "unmarked-table-edition; package-bound-only",
+        "licenseResource": "c6690795ed2edf9f2c45d6a075d1964e242d5ef7ba1333891ece1da73b2bf1c1",
+        "tableKey": "BNS:1.1",
+        "tableContentDigest": "6d008d065d3eed30e80cc0339388c5735b2f08dd0095b4a0591275de8a4e88de"
+      },
+      "scope": "research-byte identity; no numerical/whole-feature qualification",
+      "inventory": {
+        "records": 1651,
+        "distinctOrdinaryGroupNumbers": null,
+        "allKeys": "raw-table-index.json#/mspgr.dat",
+        "keySemantics": "raw-header tokens or explicit BNS, scoped by full file SHA; research locator only, never a qualified setting selection"
+      },
+      "predecessorMissing": [
+        "independent table edition and permission",
+        "all setting/origin/change-of-basis semantics and Wyckoff tolerance; no default origin0/identity basis inferred"
+      ],
+      "currentDesignConsumer": "SG/2 magnetic/high-dimensional state",
+      "currentDesignRule": "1651 exact native magnetic group records; explicit time sign and actual operation coordinate basis, no ordinary-group substitute.",
+      "designStatus": "source-identified and typed-consumer-bound; runtime qualification separate",
+      "licensingDisposition": "deferred-by-DEC-P1-05; existing license text/digest retained; grant not asserted",
+      "productImplemented": false
+    },
+    {
+      "id": "A04",
+      "name": "wyckoff.dat",
+      "version": "no internal edition; bound to local 3.90.9a package",
+      "source": "V01 original local Resources; not independently equal to any ITC/Bilbao release",
+      "files": [
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/wyckoff.dat",
+          "bytes": 297879,
+          "sha256": "c837ad58c9e514d71ca7d55ff3c1616fe00a586eca42e13c690a2ef21c98bd72"
+        }
+      ],
+      "licenseEvidence": [
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/LICENSE",
+          "bytes": 1223,
+          "sha256": "c6690795ed2edf9f2c45d6a075d1964e242d5ef7ba1333891ece1da73b2bf1c1"
+        }
+      ],
+      "licenseStatus": "restricted-original-distribution-no-written-permission",
+      "redistribution": "blocked",
+      "fieldsAndUnits": {
+        "rawHeader": "verbatim bytes + source span",
+        "settingAndOrigin": "header positions NOT semantically qualified",
+        "operators": "fractional dimensionless; magnetic trailing timeSign ±1 only where explicit",
+        "canonicalFields": "SGGroupSetting3 settingName/originChoice/changeOfBasis/originFractional require semantic mapping before freeze"
+      },
+      "producer": "original VESTA distribution",
+      "consumers": [
+        "01 SG-02 special positions",
+        "03 multiplicity/letter preservation"
+      ],
+      "qualification": "current06 author design successor, pending independent review; future source/parser/render/runtime assertions required",
+      "lifecycle": "read-only source → reviewed immutable asset manifest → acquired/qualified copy in future build → hash-verified ResourcePort → calculation/frame snapshot retain → release; never mutate shared source",
+      "productionReady": false,
+      "tableIdentity": {
+        "resource": "c837ad58c9e514d71ca7d55ff3c1616fe00a586eca42e13c690a2ef21c98bd72",
+        "sourceId": "V01:wyckoff.dat",
+        "sourceVersion": "VESTA-3.90.9a-local-2026-08-08",
+        "edition": "unmarked-table-edition; package-bound-only",
+        "licenseResource": "c6690795ed2edf9f2c45d6a075d1964e242d5ef7ba1333891ece1da73b2bf1c1",
+        "tableKey": "raw-header:1:1:1:0:1",
+        "tableContentDigest": "a766e3fec940944f32beae16395fba070e6ad6700fa9473e283500cfbae075fd"
+      },
+      "scope": "research-byte identity; no numerical/whole-feature qualification",
+      "inventory": {
+        "records": 685,
+        "distinctOrdinaryGroupNumbers": 230,
+        "allKeys": "raw-table-index.json#/wyckoff.dat",
+        "keySemantics": "raw-header tokens or explicit BNS, scoped by full file SHA; research locator only, never a qualified setting selection"
+      },
+      "predecessorMissing": [
+        "independent table edition and permission",
+        "all setting/origin/change-of-basis semantics and Wyckoff tolerance; no default origin0/identity basis inferred"
+      ],
+      "currentDesignConsumer": "SG/2 Wyckoff selection",
+      "currentDesignRule": "685 source records; exact Wyckoff affine/source key and current conjugated operator list separate; per-axis siteSU minimum0.0002.",
+      "designStatus": "source-identified and typed-consumer-bound; runtime qualification separate",
+      "licensingDisposition": "deferred-by-DEC-P1-05; existing license text/digest retained; grant not asserted",
+      "productImplemented": false
+    },
+    {
+      "id": "A05",
+      "name": "bond valence",
+      "version": "data_BOND_VALENCE_PARAMETERS_2020-11-25; cif_core.dic2.2",
+      "source": "EXT-BV2020; embedded Brown copyright and IUCr provenance as read in SOURCE_SCIENCE_PARAMETERS",
+      "files": [
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/bvparm2020.cif",
+          "bytes": 94225,
+          "sha256": "fb92f3dbebe7b1a36d7daca3b32734b23ce9023b72c9985198a400093129e7a6"
+        }
+      ],
+      "licenseEvidence": [
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/bvparm2020.cif",
+          "bytes": 94225,
+          "sha256": "fb92f3dbebe7b1a36d7daca3b32734b23ce9023b72c9985198a400093129e7a6",
+          "scope": "embedded COPYRIGHT NOTICE lines11-22; specific table conditions"
+        },
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/LICENSE",
+          "bytes": 1223,
+          "sha256": "c6690795ed2edf9f2c45d6a075d1964e242d5ef7ba1333891ece1da73b2bf1c1"
+        }
+      ],
+      "licenseStatus": "conditional-nonprofit-no-fee-table-terms-plus-original-package-boundary",
+      "redistribution": "blocked",
+      "fieldsAndUnits": {
+        "columns": [
+          "_valence_param_atom_1",
+          "_valence_param_atom_1_valence",
+          "_valence_param_atom_2",
+          "_valence_param_atom_2_valence",
+          "_valence_param_Ro",
+          "_valence_param_B",
+          "_valence_param_ref_id",
+          "_valence_param_details"
+        ],
+        "Ro/B/R": "Å",
+        "result": "vu",
+        "oxidation9": "unspecified source oxidation; not +9",
+        "NH": "ammonium token"
+      },
+      "producer": "I. David Brown accumulated literature table",
+      "consumers": [
+        "01 SG-04 bond valence",
+        "02 chemistry calculations",
+        "03 source/parameter provenance"
+      ],
+      "qualification": "current06 author design successor, pending independent review; future source/parser/render/runtime assertions required",
+      "lifecycle": "read-only source → reviewed immutable asset manifest → acquired/qualified copy in future build → hash-verified ResourcePort → calculation/frame snapshot retain → release; never mutate shared source",
+      "productionReady": false,
+      "tableIdentity": {
+        "resource": "fb92f3dbebe7b1a36d7daca3b32734b23ce9023b72c9985198a400093129e7a6",
+        "sourceId": "EXT-BV2020",
+        "sourceVersion": "2020-11-25",
+        "edition": "cif_core.dic2.2 / local Brown accumulated table",
+        "licenseResource": "fb92f3dbebe7b1a36d7daca3b32734b23ce9023b72c9985198a400093129e7a6",
+        "tableKey": "parameter-loop:8fields",
+        "tableContentDigest": "4edba91329af564e5e17d80c68fc0e3afc82e5fcce7549ca9fb23b008999f775"
+      },
+      "scope": "research-byte identity; no numerical/whole-feature qualification",
+      "selectionContract": {
+        "required": [
+          "tableDigest",
+          "rowByteSpanDigest",
+          "atom1",
+          "oxidation1",
+          "atom2",
+          "oxidation2",
+          "referenceId",
+          "RoA",
+          "BA",
+          "details",
+          "distanceCutoffA",
+          "selectionPolicyId"
+        ],
+        "policy": "Explicit matched row with paired Ro/B only; duplicate candidates require declared reviewed policy. No default B=.37, no implicit first-row compatibility claim, no automatic oxidation9 wildcard/unchecked admission.",
+        "defaultLegacySelection": "unfrozen",
+        "sourceOrder": "retain for audit, not proof of native selection"
+      },
+      "tableSpan": {
+        "offset": 7609,
+        "bytes": 86616,
+        "selection": "raw8-field loop header through EOF; contains footer if any; no semantic claim beyond bounded inventory"
+      },
+      "predecessorMissing": [
+        "intended distribution/use permission outside embedded non-profit/no-fee conditions",
+        "native parameter-selection policy, cutoff, per-source validity and duplicate order not proven"
+      ],
+      "currentDesignConsumer": "SG/2 bond-valence and BondSpec",
+      "currentDesignRule": "R0,b paired in angstrom; source oxidation9 retained; native ReadBVParm cutoff max over matching pair plus0.2A. Actual BVS selection/exp rule in SG successor; do not import author-first-row recommendation as native.",
+      "designStatus": "source-identified and typed-consumer-bound; runtime qualification separate",
+      "licensingDisposition": "deferred-by-DEC-P1-05; existing license text/digest retained; grant not asserted",
+      "productImplemented": false
+    },
+    {
+      "id": "A06",
+      "name": "radii and element colours",
+      "version": "no internal version; package-bound",
+      "source": "V01 elements.ini; R127 radius-mode evidence in source audit",
+      "files": [
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/elements.ini",
+          "bytes": 5820,
+          "sha256": "e77dd5dafe975347cf587d553bd26067961f9b954efd08e6bc33745b39104d99"
+        }
+      ],
+      "licenseEvidence": [
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/LICENSE",
+          "bytes": 1223,
+          "sha256": "c6690795ed2edf9f2c45d6a075d1964e242d5ef7ba1333891ece1da73b2bf1c1"
+        }
+      ],
+      "licenseStatus": "restricted-original-distribution-no-written-permission",
+      "redistribution": "blocked",
+      "fieldsAndUnits": {
+        "row": "Z token radius1 radius2 radius3 R G B (8 tokens)",
+        "radii": "Å; exact type/coordination/oxidation selection mapping still requires source profile",
+        "RGB": "observed numeric 0..1 values; colour-space/material effects not determined"
+      },
+      "producer": "original VESTA data",
+      "consumers": [
+        "01 SG-04 thresholds / SG-06 radiusTable",
+        "02 geometry consumers",
+        "03 ATOMT/style",
+        "06 asset gate"
+      ],
+      "qualification": "current06 author design successor, pending independent review; future source/parser/render/runtime assertions required",
+      "lifecycle": "read-only source → reviewed immutable asset manifest → acquired/qualified copy in future build → hash-verified ResourcePort → calculation/frame snapshot retain → release; never mutate shared source",
+      "productionReady": false,
+      "tableIdentity": {
+        "resource": "e77dd5dafe975347cf587d553bd26067961f9b954efd08e6bc33745b39104d99",
+        "sourceId": "V01:elements.ini",
+        "sourceVersion": "VESTA-3.90.9a-local-2026-08-08",
+        "edition": "unmarked; local package-bound",
+        "licenseResource": "c6690795ed2edf9f2c45d6a075d1964e242d5ef7ba1333891ece1da73b2bf1c1",
+        "tableKey": "raw-element-line:Si:15",
+        "tableContentDigest": "b3f473670b22fbae2d435d618641b2b687a31a828b133ae0cb8fe233bcfe2af8"
+      },
+      "scope": "research-byte identity; no numerical/whole-feature qualification",
+      "tableSpan": {
+        "offset": 840,
+        "bytes": 60,
+        "line": 15,
+        "rawTokens": [
+          "14",
+          "Si",
+          "1.18",
+          "2.10",
+          "0.260",
+          "0.10596",
+          "0.23226",
+          "0.98096"
+        ]
+      },
+      "predecessorMissing": [
+        "primary radius dataset edition/permission and complete species/coordination rule",
+        "qualified SGTableIdentity per selected radius row; colour space/render policy"
+      ],
+      "currentDesignConsumer": "AB/2 ElementDefaults",
+      "currentDesignRule": "elements-complete-inventory.json all97 rows; selector0->offset16 first radius(Atomic),1->offset24 third(Ionic),2->offset20 second(VDW). Representative source radius per element, not a new arbitrary oxidation/coordination database. RGB actual f32*255, towardzero, byte store.",
+      "designStatus": "source-identified and typed-consumer-bound; runtime qualification separate",
+      "licensingDisposition": "deferred-by-DEC-P1-05; existing license text/digest retained; grant not asserted",
+      "productImplemented": false
+    },
+    {
+      "id": "A07",
+      "name": "X-ray form factors and neutron constants / masses",
+      "version": "unmarked local table; package-bound",
+      "source": "V01 asfdc; selected DABAX/NCNR controls remain independent sources",
+      "files": [
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/asfdc",
+          "bytes": 64107,
+          "sha256": "44429d36b017bc3eb6999cf1b9304de75167202eface81f06206cdd88a8984f5"
+        }
+      ],
+      "licenseEvidence": [
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/LICENSE",
+          "bytes": 1223,
+          "sha256": "c6690795ed2edf9f2c45d6a075d1964e242d5ef7ba1333891ece1da73b2bf1c1"
+        }
+      ],
+      "licenseStatus": "restricted-original-distribution-no-written-permission",
+      "redistribution": "blocked",
+      "fieldsAndUnits": {
+        "species": "exact raw token incl ions/D; Z separate from mass",
+        "f0": "source-specific coefficient blocks; five-Gaussian comparison uses k=sin(theta)/lambda Å^-1 and f0 electrons",
+        "neutron_bc": "fm, signed; no clipping of negative H",
+        "mass": "local printed mass values in u are not mass numbers and not qualified exact isotope masses",
+        "coefficients": "block layouts/order/validity for all species remain unqualified"
+      },
+      "producer": "original bundled parameter file",
+      "consumers": [
+        "02 sf/density/Patterson",
+        "01 species lookup",
+        "03 species fidelity"
+      ],
+      "qualification": "current06 author design successor, pending independent review; future source/parser/render/runtime assertions required",
+      "lifecycle": "read-only source → reviewed immutable asset manifest → acquired/qualified copy in future build → hash-verified ResourcePort → calculation/frame snapshot retain → release; never mutate shared source",
+      "productionReady": false,
+      "tableIdentity": null,
+      "scope": "research-byte identity; no numerical/whole-feature qualification",
+      "predecessorMissing": [
+        "full coefficient schema, all-species fit range and primary table edition/permission",
+        "isotope/natural-mixture discriminator, resonance and magnetic/ion form-factor sources"
+      ],
+      "currentDesignConsumer": "FS/2 native scattering",
+      "currentDesignRule": "asfdc-complete-inventory.json all217 four-line records and native SetFormFactor candidate/override/exact-stop sequence. Fifth-Gaussian coefficient slots/thermal/scattering math consumed by FS/2. Retain actual fallback selected row chain and mass token.",
+      "designStatus": "source-identified and typed-consumer-bound; runtime qualification separate",
+      "licensingDisposition": "deferred-by-DEC-P1-05; existing license text/digest retained; grant not asserted",
+      "productImplemented": false
+    },
+    {
+      "id": "A08",
+      "name": "anomalous dispersion / attenuation tables",
+      "version": "no version marker; header/table bound to package",
+      "source": "V01 elements/*.txt; SOURCE_NOTES FFAST/Chantler historical entries do not prove local equality",
+      "files": [
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/elements/01.txt",
+          "bytes": 16350,
+          "sha256": "fd2d66bc8c184c5ea72cdf24b0b3d5d75f64f92a965d7041739e974d1f8d9bb2"
+        },
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/elements/02.txt",
+          "bytes": 16351,
+          "sha256": "a762863d3d603f1fc6c942d1c3bef3b97610923a8ee15a05e4429536e69b026e"
+        },
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/elements/03.txt",
+          "bytes": 16865,
+          "sha256": "390e5d976dc21d122658af6f22317f1c4d84c97d55dfa128316a7f65924b2ab7"
+        },
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/elements/04.txt",
+          "bytes": 16765,
+          "sha256": "ded1e5a6f516c4ef13123ad33ad3e91ceeff7effb552f997367beac1f5d7123c"
+        },
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/elements/05.txt",
+          "bytes": 17360,
+          "sha256": "15812d90ce0f441d2c811cf7c6b0d272410670c8efcb63ca4647a2477593c50a"
+        },
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/elements/06.txt",
+          "bytes": 17360,
+          "sha256": "69d34fda002811f1c0e43b2045f5cad61e20941c6d4bb375e250bbf9e30af84d"
+        },
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/elements/07.txt",
+          "bytes": 17384,
+          "sha256": "4f3db0686d05eb714a61bb6926328534074bd27ad89b2119d702c80a384c8f75"
+        },
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/elements/08.txt",
+          "bytes": 17384,
+          "sha256": "6198d70cf81eee409de24c60a0dc236902c431865ff313acc6b40eb85da8f1a4"
+        },
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/elements/09.txt",
+          "bytes": 17380,
+          "sha256": "33212075f88627c94c9441a1d9aa5b515a63b3b820ac2de6b9d04f9eb15de4aa"
+        },
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/elements/10.txt",
+          "bytes": 17386,
+          "sha256": "ca09a8abf6e609ea188e1df6af840cd027942960bb3046263ac03a78ba8e8e9e"
+        },
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/elements/11.txt",
+          "bytes": 17194,
+          "sha256": "3f63d6e94be0cd1ec90d0284175972e221bef302b3d1f3a6f79a728ecefd9524"
+        },
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/elements/12.txt",
+          "bytes": 17286,
+          "sha256": "c1058da11bbab7565c3ef46550cd4267e374bab9c2766e84ca839b425f272847"
+        },
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/elements/13.txt",
+          "bytes": 17888,
+          "sha256": "c2bf8368056287e1edeb33c1de28b518c5d52fc3879fff23e535276e590d6436"
+        },
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/elements/14.txt",
+          "bytes": 18388,
+          "sha256": "969879c5a2b9fd8b39a416b53f00c3b229477b2e22495731e8ce8a59d77269b3"
+        },
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/elements/15.txt",
+          "bytes": 18695,
+          "sha256": "ee4fb796d120bc2290a0ddc67ad2d25d415598401728ff730b77a8982a145458"
+        },
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/elements/16.txt",
+          "bytes": 18791,
+          "sha256": "84b0c6c390d418411a3f0a009ae2f3a6c1085af0d9250a365e5090ca160748fc"
+        },
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/elements/17.txt",
+          "bytes": 18888,
+          "sha256": "efa1889974d126bc8b18ea11be9b90d571da9a632cebdf68c86ff637f11e0cb3"
+        },
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/elements/18.txt",
+          "bytes": 18796,
+          "sha256": "1f66415a6b26606977ff7cd1c346c91a4c8476563352d446a9861686905abc4d"
+        },
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/elements/19.txt",
+          "bytes": 18795,
+          "sha256": "a801bf2d8a217367cfe0caadd278d8e25862b710400f1649dfd2aeff66675b5d"
+        },
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/elements/20.txt",
+          "bytes": 18792,
+          "sha256": "22a12bb0be100ab87a3ebb7f63dd024ea7f5b306a3e0351f9ae4bbc19a79ee01"
+        },
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/elements/21.txt",
+          "bytes": 18888,
+          "sha256": "fb747b942bee7bdcad236fe8b2eeb90efda7f19ffe57dd1d3afeaddcdd0917cf"
+        },
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/elements/22.txt",
+          "bytes": 18888,
+          "sha256": "3efbc1560b26ef6bc1f1e54f69ac80eb654f226990753380d7e75b9bd78c0e8f"
+        },
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/elements/23.txt",
+          "bytes": 18811,
+          "sha256": "048d6097dde9698aa3544a13a9567d1a958fa814c62749b921c655cad6d83e06"
+        },
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/elements/24.txt",
+          "bytes": 18838,
+          "sha256": "c73539075b15a97edd688f300c809be7c241234a42baa00ebe9d47e229bce1dc"
+        },
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/elements/25.txt",
+          "bytes": 19798,
+          "sha256": "d93d0c7577105a956ff7fd85de295670e37b7bb425917bcca3efd37fca292788"
+        },
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/elements/26.txt",
+          "bytes": 18934,
+          "sha256": "d759710934c9b5dae442f9eb12fd3a33d958109b2f9348281f142d030ba99135"
+        },
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/elements/27.txt",
+          "bytes": 18934,
+          "sha256": "6d3d5b2677607806d75e5a694639f8be4053f718e07808cd07d7868bfb52cdce"
+        },
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/elements/28.txt",
+          "bytes": 18838,
+          "sha256": "832c2c1aee4749be1ebc3f61e9480307ed372a677f84a19f4700c4a36760816f"
+        },
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/elements/29.txt",
+          "bytes": 18646,
+          "sha256": "248421c9a512db3e1f757b870fb1078104c5affeb595d137044ca11864774689"
+        },
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/elements/30.txt",
+          "bytes": 53980,
+          "sha256": "c64aeb04d3db3822262563ebe21643fcd900237c0e732c4ac98e14576ce39860"
+        },
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/elements/31.txt",
+          "bytes": 54364,
+          "sha256": "1b0ba41365dcaacc7a63aaf12e277f50845baf2c1abcbfd0330f047c1e43ce47"
+        },
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/elements/32.txt",
+          "bytes": 54540,
+          "sha256": "5b37ebf2aeb85049a099ac56827be7da74b125cecec8eac6e6c4b43597b53f0a"
+        },
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/elements/33.txt",
+          "bytes": 54554,
+          "sha256": "f75a2cf925a9a1ed28c643d13d29b2812a22b7694ba4bab0f329b4f51041bb60"
+        },
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/elements/34.txt",
+          "bytes": 54262,
+          "sha256": "92dc1f95b2b2499a8770634837630eb8bbe00858f0c2ef9466001550da3ccf76"
+        },
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/elements/35.txt",
+          "bytes": 54838,
+          "sha256": "e41198b68bae261c60ff5aee52ae452a7362472c76e6fa90006cdaae60675211"
+        },
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/elements/36.txt",
+          "bytes": 54362,
+          "sha256": "33ddb65fa6b058d02ed30c6eec3273f09c081af549f4031b9da920e5a2961f60"
+        },
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/elements/37.txt",
+          "bytes": 20374,
+          "sha256": "4bbdedd3f96d4700922cd36b22994a8d362c7ce87c3936458dffc9a263eea21f"
+        },
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/elements/38.txt",
+          "bytes": 21299,
+          "sha256": "62bbc7513d335d2b5c8ac10f9208a8ebc6547cee8d18a3f2c2b74a1fdc58aec3"
+        },
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/elements/39.txt",
+          "bytes": 21394,
+          "sha256": "8f011c4b6f287ae6d570b9bf8221fb09f753b11ee41bcbc547cde7fe7e5be9de"
+        },
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/elements/40.txt",
+          "bytes": 21325,
+          "sha256": "ef12cff4f37020ae6f3c80640c82821f63ca67678db8b44390ad9457be8c4d8e"
+        },
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/elements/41.txt",
+          "bytes": 21325,
+          "sha256": "dd9848f58f3dc606d94d3101a06d861f0aa530537ab1aca7ec3ae5cccfaa81eb"
+        },
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/elements/42.txt",
+          "bytes": 20965,
+          "sha256": "ea6a033fd5360ea785371e3a3c811c3aff8350661571eb2d0f703d406ac9ddbf"
+        },
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/elements/43.txt",
+          "bytes": 22309,
+          "sha256": "b9945c3a6edc7920589478688f3e4d4c3ef0742dd8f95ac7976207c42c8e4327"
+        },
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/elements/44.txt",
+          "bytes": 21349,
+          "sha256": "d36d5be541464dbedc6baef293d7c4d06362a1902ec42ff895369541d048a121"
+        },
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/elements/45.txt",
+          "bytes": 21253,
+          "sha256": "c8c332f3b9a50aae3e5b6dddf4abf46a36c28cce8b3d0e1a10bfc98515d8d344"
+        },
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/elements/46.txt",
+          "bytes": 22117,
+          "sha256": "2af20c78d1897ed6d04d28580168f28ab03a8928115fa3e43c8ea22c0b0ea7c4"
+        },
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/elements/47.txt",
+          "bytes": 21925,
+          "sha256": "60166b682841c7ab7339803619809eca604d78193e44526df622394d084a5e0f"
+        },
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/elements/48.txt",
+          "bytes": 21921,
+          "sha256": "ebf7c5ff4185b385517bd759fb76b9d924d44a9c1f4a609e2ccec8a8ac2e32cc"
+        },
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/elements/49.txt",
+          "bytes": 21921,
+          "sha256": "0b14a798a6f251d6ab88c0cdeff918eb0e2f63bfe9c4dbed99d9ef4cef281e44"
+        },
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/elements/50.txt",
+          "bytes": 21825,
+          "sha256": "ba7ca83f03ab6b1c48feaa96bb08b182109e4b529880d3c20b222a00ef29b28f"
+        },
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/elements/51.txt",
+          "bytes": 21825,
+          "sha256": "7b14625994639756606b04a3b0047490886d101e4dbac78d3c0d063dba7b4296"
+        },
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/elements/52.txt",
+          "bytes": 21729,
+          "sha256": "6842586e88699f60844f512d27dc9e796fdcf7e202335a270d5b727a56639555"
+        },
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/elements/53.txt",
+          "bytes": 21440,
+          "sha256": "6a977a2d832a6977b0969749f94acbbedcf772ae5aef20ae4e3e58addc9e2b94"
+        },
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/elements/54.txt",
+          "bytes": 21637,
+          "sha256": "349335cf0410dff854aab4c0024ea463ff913feeb714ecc9b02d8d70799e3214"
+        },
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/elements/55.txt",
+          "bytes": 24291,
+          "sha256": "2da6d8e6b0ba08930b82a55fec123995fda30e45cbd6508e4400c1004ceff40d"
+        },
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/elements/56.txt",
+          "bytes": 24003,
+          "sha256": "741b860bbb0104f84de5969758078c80446fd8310636635cb7e63c884649516f"
+        },
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/elements/57.txt",
+          "bytes": 23331,
+          "sha256": "696ba4d56a1e8cd1c78f3d329850279a91fe1a3c79860dadd288cfcbbd55e1af"
+        },
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/elements/58.txt",
+          "bytes": 23940,
+          "sha256": "e66cd96848d649f0224260142678d8a5d2c94e5e977009da6e1c9cf139d05c07"
+        },
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/elements/59.txt",
+          "bytes": 23351,
+          "sha256": "c5463338cb65b359d86a9e139dd62d7c9807981143baa3e442899807844d5666"
+        },
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/elements/60.txt",
+          "bytes": 86635,
+          "sha256": "c991e3514584e8c7893edf43c77987b06555d0de9fc3e872e65a9dc23a22d9b4"
+        },
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/elements/61.txt",
+          "bytes": 86535,
+          "sha256": "5d0e39639063995c62a1b0ff464b3583de17505a1e34d67545f084344536eaa6"
+        },
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/elements/62.txt",
+          "bytes": 87015,
+          "sha256": "88e665b3977ddb8a9929e111bd6696e6461a3ee248d0f1f157a9081740125f2f"
+        },
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/elements/63.txt",
+          "bytes": 86629,
+          "sha256": "b5c898d037000a8d135d5d794e3a7b075786f5d21ad28e19d6f1bf5c40e7bc91"
+        },
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/elements/64.txt",
+          "bytes": 87509,
+          "sha256": "9777075db6722177b5b2b2902ffe6162d8cbd568c1432c3ae5a658f2a08e0efa"
+        },
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/elements/65.txt",
+          "bytes": 87605,
+          "sha256": "96a529ca1770d903051d715327efbb1e9823ca1bf54edd716f44ae3709f6d757"
+        },
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/elements/66.txt",
+          "bytes": 87119,
+          "sha256": "0167ad2cf0a759a4001c11f400ef4a863beb5de46435c26665de512a91a074e7"
+        },
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/elements/67.txt",
+          "bytes": 86641,
+          "sha256": "3abf2c0795f9257572590388bb9c6a0928ee3c395fdb6e1797a0aec2c4ec6d12"
+        },
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/elements/68.txt",
+          "bytes": 87215,
+          "sha256": "a285012430f825733c8ff2c962b15ae639777f534f53ca3e5cb56e3c28f1a9cb"
+        },
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/elements/69.txt",
+          "bytes": 87215,
+          "sha256": "01ff40d28fc6a4bde0be6def93b9892fcd80b9659b3ec1306483d9ef284eb391"
+        },
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/elements/70.txt",
+          "bytes": 87215,
+          "sha256": "76c1a9980bf687fbd669996adcddab43a7e4a40f05e5164af81e6438cd5537bb"
+        },
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/elements/71.txt",
+          "bytes": 87311,
+          "sha256": "ca1f228016a514da593a13f742e69608004bd168398678ef6fea185bc6d6b263"
+        },
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/elements/72.txt",
+          "bytes": 88295,
+          "sha256": "4cd3dccc5ed13fbbdf75556633c4a584d11c3599ec26ae03df1028c46ea09aab"
+        },
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/elements/73.txt",
+          "bytes": 88195,
+          "sha256": "40b758a2dccd6c8b20b9ef9976e7e33bfbb3dd3dc0fdf91b80e079f61d2def84"
+        },
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/elements/74.txt",
+          "bytes": 88674,
+          "sha256": "9ddcc33fe5dbebf3285c3bee41f996a4c8b83cfd1c9f2ef8488f8714735d1b84"
+        },
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/elements/75.txt",
+          "bytes": 74493,
+          "sha256": "25139565f54f9257b2e6453bd5876bdf738b5e2192763cf81dd6b096d90b2b30"
+        },
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/elements/76.txt",
+          "bytes": 74397,
+          "sha256": "9a2d903b7180d83c977c4189556d86e5c2f0f00096e72e5bb26cbfeef6d59eb7"
+        },
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/elements/77.txt",
+          "bytes": 74781,
+          "sha256": "75cf7a827e06fb1fe5dc98b51107f4676625303deadef97cb5746b88cf47ca9e"
+        },
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/elements/78.txt",
+          "bytes": 74589,
+          "sha256": "d1f8d203bf7d8119220b069a755d2ba0ba8da75d3ab630312256d131f7e4b9ba"
+        },
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/elements/79.txt",
+          "bytes": 74685,
+          "sha256": "91455fd18783bc30eb25cbc62c229e19ff7882c0c516a1f619e6d11012a3ec45"
+        },
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/elements/80.txt",
+          "bytes": 74609,
+          "sha256": "7df352b7774c68b41438d06dbd8d9607f634d9ad83b18a8a159419131ec75478"
+        },
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/elements/81.txt",
+          "bytes": 74993,
+          "sha256": "a6fa72e4877abc158f972c064bbac49e4a321331f3463057be7ebd831c644743"
+        },
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/elements/82.txt",
+          "bytes": 75685,
+          "sha256": "f39781f6fe2db3b06ab88c652084ba1c224bcb4d25bdc9f0260c9b2cb09336c1"
+        },
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/elements/83.txt",
+          "bytes": 75393,
+          "sha256": "294cd544d4292aad831c35452ab2ad2db60ce91728025229e65c95ed81251954"
+        },
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/elements/84.txt",
+          "bytes": 75311,
+          "sha256": "b6b9ff4f6e04bd67420108157eec089325d6a23603f2a26d72ac14efcb87ce50"
+        },
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/elements/85.txt",
+          "bytes": 75701,
+          "sha256": "35e03b3d81b7f48e4f1e97ec665c22d12a58f5ce5fc0a0ff0e9e850301eb3ea3"
+        },
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/elements/86.txt",
+          "bytes": 75225,
+          "sha256": "c902cfeca52f6476e11c414625afa1cd2965e1d1406c43b71c4c0a155909646f"
+        },
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/elements/87.txt",
+          "bytes": 75413,
+          "sha256": "1f488a6420e5928eed3ef69287ad5841b18f92feeb3332683a6373283a0ca668"
+        },
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/elements/88.txt",
+          "bytes": 74069,
+          "sha256": "ac6d64636f6171524daabc0eb18b0168f43af7430f6cb117288f98e346c81b4f"
+        },
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/elements/89.txt",
+          "bytes": 75609,
+          "sha256": "5abb31a10d89a848650843d58375d581d623107e65190ad9e0ce83fee3659b49"
+        },
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/elements/90.txt",
+          "bytes": 27897,
+          "sha256": "3e845ad8ce7e7b7fd25e064c97cbbb47d074a8ef853f5f1d113e4057e012408c"
+        },
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/elements/91.txt",
+          "bytes": 27609,
+          "sha256": "7e62b5f437c4ab8e0850e0ae6ce6387c056f316032c93efdd488621767a92154"
+        },
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/elements/92.txt",
+          "bytes": 27608,
+          "sha256": "46a7344cb030d2a3ec506a3cee588c827f6ccd34534303aac7c8bd72033b8d15"
+        }
+      ],
+      "licenseEvidence": [
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/LICENSE",
+          "bytes": 1223,
+          "sha256": "c6690795ed2edf9f2c45d6a075d1964e242d5ef7ba1333891ece1da73b2bf1c1"
+        }
+      ],
+      "licenseStatus": "restricted-original-distribution-no-written-permission",
+      "redistribution": "blocked",
+      "fieldsAndUnits": {
+        "columns": "E keV, f1/f2 e/atom, attenuation per printed header, lambda nm",
+        "edgeEnergy": "keV",
+        "relativistic/nuclearThomson": "e/atom; header estimates separate from f1",
+        "consumer": "anomalous-switch/energy source-specific interpolation; do not mix f0/f1/fprime"
+      },
+      "producer": "original per-element tabulation",
+      "consumers": [
+        "02 anomalous structure factors/powder",
+        "03 source provenance"
+      ],
+      "qualification": "current06 author design successor, pending independent review; future source/parser/render/runtime assertions required",
+      "lifecycle": "read-only source → reviewed immutable asset manifest → acquired/qualified copy in future build → hash-verified ResourcePort → calculation/frame snapshot retain → release; never mutate shared source",
+      "productionReady": false,
+      "tableIdentity": null,
+      "scope": "research-byte identity; no numerical/whole-feature qualification",
+      "predecessorMissing": [
+        "exact FFAST edition/errata and redistribution basis",
+        "edge sidedness/interpolation/extrapolation and independent full-value controls"
+      ],
+      "currentDesignConsumer": "FS/2 native anomalous dispersion",
+      "currentDesignRule": "ffast-complete-inventory.json all92 element tables40179 rows; wavelength nm input; energy/correction/interpolation native operation pinned in FS/2. Full8 columns preserved; native uses0/1/2/5 for interpolation. No physical-edition guess.",
+      "designStatus": "source-identified and typed-consumer-bound; runtime qualification separate",
+      "licensingDisposition": "deferred-by-DEC-P1-05; existing license text/digest retained; grant not asserted",
+      "productImplemented": false
+    },
+    {
+      "id": "A09",
+      "name": "precise isotopic masses and isotope-specific neutron parameters",
+      "version": "missing",
+      "source": "no qualified complete isotope data asset in the bounded Resources inventory; asfdc D printed value is not a complete precise mass source",
+      "files": [],
+      "licenseEvidence": [
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/LICENSE",
+          "bytes": 1223,
+          "sha256": "c6690795ed2edf9f2c45d6a075d1964e242d5ef7ba1333891ece1da73b2bf1c1"
+        }
+      ],
+      "licenseStatus": "restricted-original-distribution-no-written-permission",
+      "redistribution": "blocked",
+      "fieldsAndUnits": {
+        "key": "element Z + isotope mass number A (u16 dimensionless) + state if relevant",
+        "mass": "atomic mass u plus uncertainty, edition, isotopic composition/natural-vs-isotope policy",
+        "neutron": "bc fm, absorption barns with wavelength/energy convention"
+      },
+      "producer": "not acquired",
+      "consumers": [
+        "01 species exact masses",
+        "02 isotope density/neutron calculations",
+        "03 isotope roundtrip"
+      ],
+      "qualification": "current06 author design successor, pending independent review; future source/parser/render/runtime assertions required",
+      "lifecycle": "read-only source → reviewed immutable asset manifest → acquired/qualified copy in future build → hash-verified ResourcePort → calculation/frame snapshot retain → release; never mutate shared source",
+      "productionReady": false,
+      "tableIdentity": null,
+      "scope": "research-byte identity; no numerical/whole-feature qualification",
+      "predecessorMissing": [
+        "authoritative edition/file/SHA/license/coverage/uncertainty and exact species mapping"
+      ],
+      "currentDesignConsumer": "AB/2 source species identity",
+      "currentDesignRule": "Source-supported isotope rawtokens D/Li7/B11 and actual printed mass; natural/ion/provisional candidate chain as actual source. Earlier proposal of independent comprehensive precise isotope mass database is not an existing user requirement and does not block original native functional design; any future corrected database is separately versioned explicit choice.",
+      "designStatus": "source-identified and typed-consumer-bound; runtime qualification separate",
+      "licensingDisposition": "deferred-by-DEC-P1-05; existing license text/digest retained; grant not asserted",
+      "productImplemented": false
+    },
+    {
+      "id": "A10",
+      "name": "ADP probability scale",
+      "version": "no separate table identified",
+      "source": "01/R128-R132 probability1..99 evidence; encoded probability is not a geometry oracle",
+      "files": [],
+      "licenseEvidence": [
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/LICENSE",
+          "bytes": 1223,
+          "sha256": "c6690795ed2edf9f2c45d6a075d1964e242d5ef7ba1333891ece1da73b2bf1c1"
+        }
+      ],
+      "licenseStatus": "restricted-original-distribution-no-written-permission",
+      "redistribution": "blocked",
+      "fieldsAndUnits": {
+        "probability": "percent in native interface; canonical fraction separate",
+        "scale": "sqrt(chi-square quantile df3) only if qualified source/profile explicitly chooses it",
+        "geometry": "tensor basis/PSD/zero/negative conventions remain01 SG-03"
+      },
+      "producer": "future qualified mathematical implementation or versioned table",
+      "consumers": [
+        "01 ellipsoid geometry",
+        "02 ADP scattering",
+        "06 numerical validation"
+      ],
+      "qualification": "current06 author design successor, pending independent review; future source/parser/render/runtime assertions required",
+      "lifecycle": "read-only source → reviewed immutable asset manifest → acquired/qualified copy in future build → hash-verified ResourcePort → calculation/frame snapshot retain → release; never mutate shared source",
+      "productionReady": false,
+      "tableIdentity": null,
+      "scope": "research-byte identity; no numerical/whole-feature qualification",
+      "predecessorMissing": [
+        "source-defined inverse-CDF/quantile method, tolerance and native geometry comparisons; no synthetic lookup passed as observed"
+      ],
+      "currentDesignConsumer": "SG/2 native ADP + MP/1 explicit math profile",
+      "currentDesignRule": "pinned-probability-table.json exact99 original f32bits default; distinct math-probability-profile.json explicit highprecision chi3 radius. Do not silently replace original lookup by nearest-f32 mathematical table.",
+      "designStatus": "source-identified and typed-consumer-bound; runtime qualification separate",
+      "licensingDisposition": "deferred-by-DEC-P1-05; existing license text/digest retained; grant not asserted",
+      "productImplemented": false
+    },
+    {
+      "id": "A11",
+      "name": "Noto Sans CJK SC",
+      "version": "Version 2.004;hotconv 1.0.118;makeotfexe 2.5.65603",
+      "source": {
+        "manifest": {
+          "path": "/Volumes/T9/Development/Sources/Artcraft/craft-fonts/fonts/manifest.txt",
+          "bytes": 6521,
+          "sha256": "49e53aea7c18b3d674fd2a89f0adfcf990cb8621e8aa071752a9ac7bc45a556e"
+        },
+        "localRepository": "c1db6d1a8ed772191241c3d185e2104be84d8691",
+        "upstream": "https://github.com/notofonts/noto-cjk/tree/f8d157532fbfaeda587e826d4cd5b21a49186f7c/Sans/OTF/SimplifiedChinese",
+        "upstreamCommit": "f8d157532fbfaeda587e826d4cd5b21a49186f7c"
+      },
+      "files": [
+        {
+          "path": "/Volumes/T9/Development/Sources/Artcraft/craft-fonts/fonts/noto-sans-cjk-sc/NotoSansCJKsc-Regular.otf",
+          "bytes": 16437364,
+          "sha256": "2c76254f6fc379fddfce0a7e84fb5385bb135d3e399294f6eeb6680d0365b74b"
+        }
+      ],
+      "licenseEvidence": [
+        {
+          "path": "/Volumes/T9/Development/Sources/Artcraft/craft-fonts/fonts/noto-sans-cjk-sc/OFL.txt",
+          "bytes": 4301,
+          "sha256": "6a73f9541c2de74158c0e7cf6b0a58ef774f5a780bf191f2d7ec9cc53efe2bf2"
+        }
+      ],
+      "licenseStatus": "OFL-1.1-text-and-font-metadata-bound",
+      "redistribution": "conditional-OFL-preserve-copyright-license-no-standalone-sale-no-RFN-modified-name",
+      "fieldsAndUnits": {
+        "file": "original OTF/TTF; not subset or WOFF converted",
+        "nameTable": "font-inventory.json sfntNames includes copyright/license/version",
+        "glyphCoverage": "font-inventory.json selected Unicode cmap; no shaping guarantee",
+        "sizePx": "CSS px, DPR explicit at render/export"
+      },
+      "producer": "Noto Project / authors recorded in font metadata",
+      "consumers": [
+        "01 SGRenderLabel.font / SG-06",
+        "02 plot labels",
+        "03 export embedding policy",
+        "06 font-readiness/IME tests"
+      ],
+      "qualification": "current06 author design successor, pending independent review; future source/parser/render/runtime assertions required",
+      "lifecycle": "read-only source → reviewed immutable asset manifest → acquired/qualified copy in future build → hash-verified ResourcePort → calculation/frame snapshot retain → release; never mutate shared source",
+      "productionReady": false,
+      "tableIdentity": {
+        "resource": "2c76254f6fc379fddfce0a7e84fb5385bb135d3e399294f6eeb6680d0365b74b",
+        "sourceId": "craft-fonts:Noto Sans CJK SC",
+        "sourceVersion": "Version 2.004;hotconv 1.0.118;makeotfexe 2.5.65603",
+        "edition": "unmodified Regular from f8d157532fbfaeda587e826d4cd5b21a49186f7c",
+        "licenseResource": "6a73f9541c2de74158c0e7cf6b0a58ef774f5a780bf191f2d7ec9cc53efe2bf2",
+        "tableKey": "font-face:Noto Sans CJK SC:Regular",
+        "tableContentDigest": "2c76254f6fc379fddfce0a7e84fb5385bb135d3e399294f6eeb6680d0365b74b"
+      },
+      "scope": "research-byte identity; no numerical/whole-feature qualification",
+      "assetIdentityUsable": true,
+      "requiredNotices": {
+        "copyrightFromName0": [
+          "© 2014-2021 Adobe (http://www.adobe.com/)."
+        ],
+        "licenseFile": {
+          "path": "/Volumes/T9/Development/Sources/Artcraft/craft-fonts/fonts/noto-sans-cjk-sc/OFL.txt",
+          "bytes": 4301,
+          "sha256": "6a73f9541c2de74158c0e7cf6b0a58ef774f5a780bf191f2d7ec9cc53efe2bf2"
+        },
+        "attribution": {
+          "path": "/Volumes/T9/Development/Sources/Artcraft/craft-fonts/ATTRIBUTION.md",
+          "bytes": 24215,
+          "sha256": "7d7649200cf5fa8e6311972e580675c30634c8173fff346c233cfe391a8fd182"
+        }
+      },
+      "selectedCmap": {
+        " ": {
+          "codepoint": "U+0020",
+          "glyphId": 1
+        },
+        "0": {
+          "codepoint": "U+0030",
+          "glyphId": 17
+        },
+        "1": {
+          "codepoint": "U+0031",
+          "glyphId": 18
+        },
+        "2": {
+          "codepoint": "U+0032",
+          "glyphId": 19
+        },
+        "3": {
+          "codepoint": "U+0033",
+          "glyphId": 20
+        },
+        "X": {
+          "codepoint": "U+0058",
+          "glyphId": 57
+        },
+        "Y": {
+          "codepoint": "U+0059",
+          "glyphId": 58
+        },
+        "Z": {
+          "codepoint": "U+005A",
+          "glyphId": 59
+        },
+        "a": {
+          "codepoint": "U+0061",
+          "glyphId": 66
+        },
+        "b": {
+          "codepoint": "U+0062",
+          "glyphId": 67
+        },
+        "c": {
+          "codepoint": "U+0063",
+          "glyphId": 68
+        },
+        "°": {
+          "codepoint": "U+00B0",
+          "glyphId": 110
+        },
+        "²": {
+          "codepoint": "U+00B2",
+          "glyphId": 112
+        },
+        "³": {
+          "codepoint": "U+00B3",
+          "glyphId": 113
+        },
+        "½": {
+          "codepoint": "U+00BD",
+          "glyphId": 123
+        },
+        "Å": {
+          "codepoint": "U+00C5",
+          "glyphId": 131
+        },
+        "α": {
+          "codepoint": "U+03B1",
+          "glyphId": 281
+        },
+        "μ": {
+          "codepoint": "U+03BC",
+          "glyphId": 292
+        },
+        "ρ": {
+          "codepoint": "U+03C1",
+          "glyphId": 297
+        },
+        "−": {
+          "codepoint": "U+2212",
+          "glyphId": 831
+        },
+        "∥": {
+          "codepoint": "U+2225",
+          "glyphId": 839
+        },
+        "⊥": {
+          "codepoint": "U+22A5",
+          "glyphId": 888
+        },
+        "、": {
+          "codepoint": "U+3001",
+          "glyphId": 1397
+        },
+        "位": {
+          "codepoint": "U+4F4D",
+          "glyphId": 9956
+        },
+        "占": {
+          "codepoint": "U+5360",
+          "glyphId": 11693
+        },
+        "晶": {
+          "codepoint": "U+6676",
+          "glyphId": 20440
+        },
+        "胞": {
+          "codepoint": "U+80DE",
+          "glyphId": 62682
+        }
+      },
+      "fontProbeReady": true,
+      "predecessorMissing": [
+        "future static-font delivery/metrics/shaping/Web load/export qualification; no automatic full-manifest embed"
+      ],
+      "currentDesignConsumer": "AB/2 Unicode fallback face1",
+      "currentDesignRule": "Exact Noto original file and cmap/source/identity from predecessor; immutable byte delivery to target CSS FontFace, await loading and glyph/layout completion before export; failure explicit, no synthetic-success fallback.",
+      "designStatus": "source-identified and typed-consumer-bound; runtime qualification separate",
+      "licensingDisposition": "deferred-by-DEC-P1-05; existing license text/digest retained; grant not asserted",
+      "productImplemented": false
+    },
+    {
+      "id": "A12",
+      "name": "Noto Sans Symbols",
+      "version": "Version 2.003",
+      "source": {
+        "manifest": {
+          "path": "/Volumes/T9/Development/Sources/Artcraft/craft-fonts/fonts/manifest.txt",
+          "bytes": 6521,
+          "sha256": "49e53aea7c18b3d674fd2a89f0adfcf990cb8621e8aa071752a9ac7bc45a556e"
+        },
+        "localRepository": "c1db6d1a8ed772191241c3d185e2104be84d8691",
+        "upstream": "https://github.com/google/fonts/tree/47d54ca1ebb14fd864695f1d39dc734f39017c33/ofl/notosanssymbols",
+        "upstreamCommit": "47d54ca1ebb14fd864695f1d39dc734f39017c33"
+      },
+      "files": [
+        {
+          "path": "/Volumes/T9/Development/Sources/Artcraft/craft-fonts/fonts/noto-sans-symbols/NotoSansSymbols.ttf",
+          "bytes": 372684,
+          "sha256": "f7e7e04b4a24b6c78893d50cbfd2b2f6cae49617ab047bfef668d252adb128f7"
+        }
+      ],
+      "licenseEvidence": [
+        {
+          "path": "/Volumes/T9/Development/Sources/Artcraft/craft-fonts/fonts/noto-sans-symbols/OFL.txt",
+          "bytes": 4383,
+          "sha256": "b118dd41337806a5d4797052c77caf3bd096aed783e5eb21b4d11154351e1ac0"
+        }
+      ],
+      "licenseStatus": "OFL-1.1-text-and-font-metadata-bound",
+      "redistribution": "conditional-OFL-preserve-copyright-license-no-standalone-sale-no-RFN-modified-name",
+      "fieldsAndUnits": {
+        "file": "original OTF/TTF; not subset or WOFF converted",
+        "nameTable": "font-inventory.json sfntNames includes copyright/license/version",
+        "glyphCoverage": "font-inventory.json selected Unicode cmap; no shaping guarantee",
+        "sizePx": "CSS px, DPR explicit at render/export"
+      },
+      "producer": "Noto Project / authors recorded in font metadata",
+      "consumers": [
+        "01 SGRenderLabel.font / SG-06",
+        "02 plot labels",
+        "03 export embedding policy",
+        "06 font-readiness/IME tests"
+      ],
+      "qualification": "current06 author design successor, pending independent review; future source/parser/render/runtime assertions required",
+      "lifecycle": "read-only source → reviewed immutable asset manifest → acquired/qualified copy in future build → hash-verified ResourcePort → calculation/frame snapshot retain → release; never mutate shared source",
+      "productionReady": false,
+      "tableIdentity": {
+        "resource": "f7e7e04b4a24b6c78893d50cbfd2b2f6cae49617ab047bfef668d252adb128f7",
+        "sourceId": "craft-fonts:Noto Sans Symbols",
+        "sourceVersion": "Version 2.003",
+        "edition": "unmodified Regular from 47d54ca1ebb14fd864695f1d39dc734f39017c33",
+        "licenseResource": "b118dd41337806a5d4797052c77caf3bd096aed783e5eb21b4d11154351e1ac0",
+        "tableKey": "font-face:Noto Sans Symbols:Regular",
+        "tableContentDigest": "f7e7e04b4a24b6c78893d50cbfd2b2f6cae49617ab047bfef668d252adb128f7"
+      },
+      "scope": "research-byte identity; no numerical/whole-feature qualification",
+      "assetIdentityUsable": true,
+      "requiredNotices": {
+        "copyrightFromName0": [
+          "Copyright 2022 The Noto Project Authors (https://github.com/notofonts/symbols)"
+        ],
+        "licenseFile": {
+          "path": "/Volumes/T9/Development/Sources/Artcraft/craft-fonts/fonts/noto-sans-symbols/OFL.txt",
+          "bytes": 4383,
+          "sha256": "b118dd41337806a5d4797052c77caf3bd096aed783e5eb21b4d11154351e1ac0"
+        },
+        "attribution": {
+          "path": "/Volumes/T9/Development/Sources/Artcraft/craft-fonts/ATTRIBUTION.md",
+          "bytes": 24215,
+          "sha256": "7d7649200cf5fa8e6311972e580675c30634c8173fff346c233cfe391a8fd182"
+        }
+      },
+      "selectedCmap": {
+        " ": {
+          "codepoint": "U+0020",
+          "glyphId": 681
+        },
+        "0": {
+          "codepoint": "U+0030",
+          "glyphId": 839
+        },
+        "1": {
+          "codepoint": "U+0031",
+          "glyphId": 505
+        },
+        "2": {
+          "codepoint": "U+0032",
+          "glyphId": 731
+        },
+        "3": {
+          "codepoint": "U+0033",
+          "glyphId": 710
+        },
+        "X": {
+          "codepoint": "U+0058",
+          "glyphId": 168
+        },
+        "Y": {
+          "codepoint": "U+0059",
+          "glyphId": 174
+        },
+        "Z": {
+          "codepoint": "U+005A",
+          "glyphId": 180
+        },
+        "a": {
+          "codepoint": "U+0061",
+          "glyphId": 186
+        },
+        "b": {
+          "codepoint": "U+0062",
+          "glyphId": 219
+        },
+        "c": {
+          "codepoint": "U+0063",
+          "glyphId": 243
+        },
+        "°": {
+          "codepoint": "U+00B0",
+          "glyphId": 977
+        },
+        "²": {
+          "codepoint": "U+00B2",
+          "glyphId": 0
+        },
+        "³": {
+          "codepoint": "U+00B3",
+          "glyphId": 0
+        },
+        "½": {
+          "codepoint": "U+00BD",
+          "glyphId": 0
+        },
+        "Å": {
+          "codepoint": "U+00C5",
+          "glyphId": 854
+        },
+        "α": {
+          "codepoint": "U+03B1",
+          "glyphId": 0
+        },
+        "μ": {
+          "codepoint": "U+03BC",
+          "glyphId": 0
+        },
+        "ρ": {
+          "codepoint": "U+03C1",
+          "glyphId": 0
+        },
+        "−": {
+          "codepoint": "U+2212",
+          "glyphId": 1032
+        },
+        "∥": {
+          "codepoint": "U+2225",
+          "glyphId": 0
+        },
+        "⊥": {
+          "codepoint": "U+22A5",
+          "glyphId": 0
+        },
+        "、": {
+          "codepoint": "U+3001",
+          "glyphId": 0
+        },
+        "位": {
+          "codepoint": "U+4F4D",
+          "glyphId": 0
+        },
+        "占": {
+          "codepoint": "U+5360",
+          "glyphId": 0
+        },
+        "晶": {
+          "codepoint": "U+6676",
+          "glyphId": 0
+        },
+        "胞": {
+          "codepoint": "U+80DE",
+          "glyphId": 0
+        }
+      },
+      "fontProbeReady": false,
+      "predecessorMissing": [
+        "future static-font delivery/metrics/shaping/Web load/export qualification; no automatic full-manifest embed"
+      ],
+      "currentDesignConsumer": "AB/2 Unicode fallback face2",
+      "currentDesignRule": "Exact Noto Sans Symbols source face and selected cmap; fallback order A11->A12->A13, missing glyph reported and export not claimed text-complete.",
+      "designStatus": "source-identified and typed-consumer-bound; runtime qualification separate",
+      "licensingDisposition": "deferred-by-DEC-P1-05; existing license text/digest retained; grant not asserted",
+      "productImplemented": false
+    },
+    {
+      "id": "A13",
+      "name": "Noto Sans Symbols 2",
+      "version": "Version 2.008; ttfautohint (v1.8.4.7-5d5b)",
+      "source": {
+        "manifest": {
+          "path": "/Volumes/T9/Development/Sources/Artcraft/craft-fonts/fonts/manifest.txt",
+          "bytes": 6521,
+          "sha256": "49e53aea7c18b3d674fd2a89f0adfcf990cb8621e8aa071752a9ac7bc45a556e"
+        },
+        "localRepository": "c1db6d1a8ed772191241c3d185e2104be84d8691",
+        "upstream": "https://github.com/google/fonts/tree/47d54ca1ebb14fd864695f1d39dc734f39017c33/ofl/notosanssymbols2",
+        "upstreamCommit": "47d54ca1ebb14fd864695f1d39dc734f39017c33"
+      },
+      "files": [
+        {
+          "path": "/Volumes/T9/Development/Sources/Artcraft/craft-fonts/fonts/noto-sans-symbols-2/NotoSansSymbols2-Regular.ttf",
+          "bytes": 1233128,
+          "sha256": "7d5fb73b7ca67a6798101741f5d280a3d016a56a197afcd4199dbb57b4b82a21"
+        }
+      ],
+      "licenseEvidence": [
+        {
+          "path": "/Volumes/T9/Development/Sources/Artcraft/craft-fonts/fonts/noto-sans-symbols-2/OFL.txt",
+          "bytes": 4383,
+          "sha256": "b118dd41337806a5d4797052c77caf3bd096aed783e5eb21b4d11154351e1ac0"
+        }
+      ],
+      "licenseStatus": "OFL-1.1-text-and-font-metadata-bound",
+      "redistribution": "conditional-OFL-preserve-copyright-license-no-standalone-sale-no-RFN-modified-name",
+      "fieldsAndUnits": {
+        "file": "original OTF/TTF; not subset or WOFF converted",
+        "nameTable": "font-inventory.json sfntNames includes copyright/license/version",
+        "glyphCoverage": "font-inventory.json selected Unicode cmap; no shaping guarantee",
+        "sizePx": "CSS px, DPR explicit at render/export"
+      },
+      "producer": "Noto Project / authors recorded in font metadata",
+      "consumers": [
+        "01 SGRenderLabel.font / SG-06",
+        "02 plot labels",
+        "03 export embedding policy",
+        "06 font-readiness/IME tests"
+      ],
+      "qualification": "current06 author design successor, pending independent review; future source/parser/render/runtime assertions required",
+      "lifecycle": "read-only source → reviewed immutable asset manifest → acquired/qualified copy in future build → hash-verified ResourcePort → calculation/frame snapshot retain → release; never mutate shared source",
+      "productionReady": false,
+      "tableIdentity": {
+        "resource": "7d5fb73b7ca67a6798101741f5d280a3d016a56a197afcd4199dbb57b4b82a21",
+        "sourceId": "craft-fonts:Noto Sans Symbols 2",
+        "sourceVersion": "Version 2.008; ttfautohint (v1.8.4.7-5d5b)",
+        "edition": "unmodified Regular from 47d54ca1ebb14fd864695f1d39dc734f39017c33",
+        "licenseResource": "b118dd41337806a5d4797052c77caf3bd096aed783e5eb21b4d11154351e1ac0",
+        "tableKey": "font-face:Noto Sans Symbols 2:Regular",
+        "tableContentDigest": "7d5fb73b7ca67a6798101741f5d280a3d016a56a197afcd4199dbb57b4b82a21"
+      },
+      "scope": "research-byte identity; no numerical/whole-feature qualification",
+      "assetIdentityUsable": true,
+      "requiredNotices": {
+        "copyrightFromName0": [
+          "Copyright 2022 The Noto Project Authors (https://github.com/notofonts/symbols)"
+        ],
+        "licenseFile": {
+          "path": "/Volumes/T9/Development/Sources/Artcraft/craft-fonts/fonts/noto-sans-symbols-2/OFL.txt",
+          "bytes": 4383,
+          "sha256": "b118dd41337806a5d4797052c77caf3bd096aed783e5eb21b4d11154351e1ac0"
+        },
+        "attribution": {
+          "path": "/Volumes/T9/Development/Sources/Artcraft/craft-fonts/ATTRIBUTION.md",
+          "bytes": 24215,
+          "sha256": "7d7649200cf5fa8e6311972e580675c30634c8173fff346c233cfe391a8fd182"
+        }
+      },
+      "selectedCmap": {
+        " ": {
+          "codepoint": "U+0020",
+          "glyphId": 3
+        },
+        "0": {
+          "codepoint": "U+0030",
+          "glyphId": 70
+        },
+        "1": {
+          "codepoint": "U+0031",
+          "glyphId": 71
+        },
+        "2": {
+          "codepoint": "U+0032",
+          "glyphId": 72
+        },
+        "3": {
+          "codepoint": "U+0033",
+          "glyphId": 73
+        },
+        "X": {
+          "codepoint": "U+0058",
+          "glyphId": 2762
+        },
+        "Y": {
+          "codepoint": "U+0059",
+          "glyphId": 2763
+        },
+        "Z": {
+          "codepoint": "U+005A",
+          "glyphId": 2768
+        },
+        "a": {
+          "codepoint": "U+0061",
+          "glyphId": 2772
+        },
+        "b": {
+          "codepoint": "U+0062",
+          "glyphId": 2789
+        },
+        "c": {
+          "codepoint": "U+0063",
+          "glyphId": 2798
+        },
+        "°": {
+          "codepoint": "U+00B0",
+          "glyphId": 2818
+        },
+        "²": {
+          "codepoint": "U+00B2",
+          "glyphId": 0
+        },
+        "³": {
+          "codepoint": "U+00B3",
+          "glyphId": 0
+        },
+        "½": {
+          "codepoint": "U+00BD",
+          "glyphId": 0
+        },
+        "Å": {
+          "codepoint": "U+00C5",
+          "glyphId": 2669
+        },
+        "α": {
+          "codepoint": "U+03B1",
+          "glyphId": 0
+        },
+        "μ": {
+          "codepoint": "U+03BC",
+          "glyphId": 0
+        },
+        "ρ": {
+          "codepoint": "U+03C1",
+          "glyphId": 0
+        },
+        "−": {
+          "codepoint": "U+2212",
+          "glyphId": 2881
+        },
+        "∥": {
+          "codepoint": "U+2225",
+          "glyphId": 0
+        },
+        "⊥": {
+          "codepoint": "U+22A5",
+          "glyphId": 0
+        },
+        "、": {
+          "codepoint": "U+3001",
+          "glyphId": 0
+        },
+        "位": {
+          "codepoint": "U+4F4D",
+          "glyphId": 0
+        },
+        "占": {
+          "codepoint": "U+5360",
+          "glyphId": 0
+        },
+        "晶": {
+          "codepoint": "U+6676",
+          "glyphId": 0
+        },
+        "胞": {
+          "codepoint": "U+80DE",
+          "glyphId": 0
+        }
+      },
+      "fontProbeReady": false,
+      "predecessorMissing": [
+        "future static-font delivery/metrics/shaping/Web load/export qualification; no automatic full-manifest embed"
+      ],
+      "currentDesignConsumer": "AB/2 Unicode fallback face3",
+      "currentDesignRule": "Exact Noto Sans Symbols2 source face; do not embed entire craft-fonts manifest. Pin filebytes before current frame, actual target-font shape/export qualification future.",
+      "designStatus": "source-identified and typed-consumer-bound; runtime qualification separate",
+      "licensingDisposition": "deferred-by-DEC-P1-05; existing license text/digest retained; grant not asserted",
+      "productImplemented": false
+    },
+    {
+      "id": "A14",
+      "name": "original bitmap glyph/display assets",
+      "version": "style3.5.0 / preferences3.1.8; fonts.raw unmarked",
+      "source": "V01 original resources; Courier preference string is not font bytes",
+      "files": [
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/img/fonts.raw",
+          "bytes": 1048576,
+          "sha256": "f4db697679cf89fdd81f622b34278803fa473cdf7524f05b4bf3388e0cce38d7"
+        },
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/style.ini",
+          "bytes": 50681,
+          "sha256": "2524d498aea0a6c4afc6c2bb8ea0ccee059f4664f272d91f56545a670a41e755"
+        },
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/VESTA_def.ini",
+          "bytes": 494,
+          "sha256": "379347a685a0fdfca0924ed82be1aea98e2132e654d66987d9e915cc2589d59b"
+        },
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/VESTA.icns",
+          "bytes": 1238111,
+          "sha256": "d72bbe6364ff01e74d801579b7531acc2d9820eadacc40a70eeb496ff842e0a5"
+        },
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/VESTA-file.icns",
+          "bytes": 38114,
+          "sha256": "b236b2dc62a0383f383615fbe9cca0664e3e36db6269c419032374bfd943eaa1"
+        }
+      ],
+      "licenseEvidence": [
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/LICENSE",
+          "bytes": 1223,
+          "sha256": "c6690795ed2edf9f2c45d6a075d1964e242d5ef7ba1333891ece1da73b2bf1c1"
+        }
+      ],
+      "licenseStatus": "restricted-original-distribution-no-written-permission",
+      "redistribution": "blocked",
+      "fieldsAndUnits": {
+        "fonts.raw": "opaque bitmap resource, not an OpenType face; layout/encoding unqualified",
+        "style": "preserve raw settings; no implicit licensed defaults",
+        "icons": "original artwork; no reuse permission"
+      },
+      "producer": "original VESTA distribution",
+      "consumers": [
+        "01 SG-06 reference rendering only",
+        "03 style lexical preservation",
+        "06 original asset exclusion"
+      ],
+      "qualification": "current06 author design successor, pending independent review; future source/parser/render/runtime assertions required",
+      "lifecycle": "read-only source → reviewed immutable asset manifest → acquired/qualified copy in future build → hash-verified ResourcePort → calculation/frame snapshot retain → release; never mutate shared source",
+      "productionReady": false,
+      "tableIdentity": null,
+      "scope": "research-byte identity; no numerical/whole-feature qualification",
+      "predecessorMissing": [
+        "raw glyph layout/encoding/coverage and independent artwork permission; original font appearance equivalence not established"
+      ],
+      "currentDesignConsumer": "AB/2 native bitmap appearance",
+      "currentDesignRule": "bitmap-font-source-witnesses.json exact1024x1024 GL_ALPHA byteatlas,256 tile hashes and pitch entries, actual SetGLFont callback/source. Native bitmap and explicit Unicode fallback remain distinguishable profiles; no silent substitute for native labels.",
+      "designStatus": "source-identified and typed-consumer-bound; runtime qualification separate",
+      "licensingDisposition": "deferred-by-DEC-P1-05; existing license text/digest retained; grant not asserted",
+      "productImplemented": false
+    },
+    {
+      "id": "A15",
+      "name": "templates and external databases",
+      "version": "template header/local bytes; TIDY data unversioned",
+      "source": "V01 and S07 script snapshots",
+      "files": [
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/template.ins",
+          "bytes": 41823,
+          "sha256": "28321d84ff8aa210575e5db9455a8b36a25d17c48a90659c272cb06732b2a8c2"
+        },
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/STRUCTURE_TIDY/Spgr.daf",
+          "bytes": 21682,
+          "sha256": "c380ee8f6d1a7dd25a029f040dd0eda06399148a3909991c90e60aaecea9ab28"
+        },
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/STRUCTURE_TIDY/Sets.daf",
+          "bytes": 49220,
+          "sha256": "da2605e810d1b6c35192b78d4f757204ec805dc3fde41dcb42c68871039824df"
+        }
+      ],
+      "licenseEvidence": [
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/LICENSE",
+          "bytes": 1223,
+          "sha256": "c6690795ed2edf9f2c45d6a075d1964e242d5ef7ba1333891ece1da73b2bf1c1"
+        }
+      ],
+      "licenseStatus": "restricted-original-distribution-no-written-permission",
+      "redistribution": "blocked",
+      "fieldsAndUnits": {
+        "template": "RIETAN .ins source fields plus opaque preserved remaining settings; must match exact producer version",
+        "Spgr/Sets": "TIDY cwd database dependency; no generic group-table substitution"
+      },
+      "producer": "original template/database files",
+      "consumers": [
+        "03 RIETAN export profile",
+        "01 tidy selection",
+        "02 external refinement",
+        "06 tool setup"
+      ],
+      "qualification": "current06 author design successor, pending independent review; future source/parser/render/runtime assertions required",
+      "lifecycle": "read-only source → reviewed immutable asset manifest → acquired/qualified copy in future build → hash-verified ResourcePort → calculation/frame snapshot retain → release; never mutate shared source",
+      "productionReady": false,
+      "tableIdentity": null,
+      "scope": "research-byte identity; no numerical/whole-feature qualification",
+      "predecessorMissing": [
+        "matching external runtime edition/ABI and written redistribution permission"
+      ],
+      "currentDesignConsumer": "EX/3 exact template/databases",
+      "currentDesignRule": "Exact original template.ins, RIETAN shell argv, TIDY Spgr.daf/Sets.daf and specific runtime identity; model-return grammar/report files bound in EX/3.",
+      "designStatus": "source-identified and typed-consumer-bound; runtime qualification separate",
+      "licensingDisposition": "deferred-by-DEC-P1-05; existing license text/digest retained; grant not asserted",
+      "productImplemented": false
+    },
+    {
+      "id": "A16",
+      "name": "study samples",
+      "version": "104 stable sample records; not a redistributed fixture bundle",
+      "source": "functions.json studyHandoff + existing sample registry / independent controls",
+      "files": [],
+      "licenseEvidence": [
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/LICENSE",
+          "bytes": 1223,
+          "sha256": "c6690795ed2edf9f2c45d6a075d1964e242d5ef7ba1333891ece1da73b2bf1c1"
+        }
+      ],
+      "licenseStatus": "restricted-original-distribution-no-written-permission",
+      "redistribution": "blocked",
+      "fieldsAndUnits": {
+        "input": "each chosen fixture has original path/bytes/SHA and independent expected output separate",
+        "rights": "per fixture author/permission, not inherited from registry presence"
+      },
+      "producer": "mixed original, researcher-generated and third-party samples",
+      "consumers": [
+        "01/02/03 design controls",
+        "06 test fixtures"
+      ],
+      "qualification": "current06 author design successor, pending independent review; future source/parser/render/runtime assertions required",
+      "lifecycle": "read-only source → reviewed immutable asset manifest → acquired/qualified copy in future build → hash-verified ResourcePort → calculation/frame snapshot retain → release; never mutate shared source",
+      "productionReady": false,
+      "tableIdentity": null,
+      "scope": "research-byte identity; no numerical/whole-feature qualification",
+      "predecessorMissing": [
+        "per-sample redistribution/adaptation attribution for release tests; complete registry does not mean all samples qualified"
+      ],
+      "currentDesignConsumer": "06 future fixture qualification",
+      "currentDesignRule": "Every actually consumed sample is referenced by original path+SHA+independent expected scope; registry presence alone grants no result acceptance. Rights are deferred by user, not scientific output validation.",
+      "designStatus": "source-identified and typed-consumer-bound; runtime qualification separate",
+      "licensingDisposition": "deferred-by-DEC-P1-05; existing license text/digest retained; grant not asserted",
+      "productImplemented": false
+    },
+    {
+      "id": "A17",
+      "name": "other scientific constants and wavelength presets",
+      "version": "selected controls only; complete asset missing",
+      "source": "S06_ORACLES and source-derived controls; no global latest constants chosen",
+      "files": [],
+      "licenseEvidence": [
+        {
+          "path": "/Users/agilecho/Documents/VESTA/VESTA.app/Contents/Resources/LICENSE",
+          "bytes": 1223,
+          "sha256": "c6690795ed2edf9f2c45d6a075d1964e242d5ef7ba1333891ece1da73b2bf1c1"
+        }
+      ],
+      "licenseStatus": "restricted-original-distribution-no-written-permission",
+      "redistribution": "blocked",
+      "fieldsAndUnits": {
+        "wavelength": "Å; CuKa1 selected observed1.5405929 is source behavior, not universal standard",
+        "charges": "e; energy/phi conversion constants tied to specific method/edition",
+        "powder": "profile coefficients/thermal/anomalous choices explicit"
+      },
+      "producer": "future scientific implementation using individually qualified sources",
+      "consumers": [
+        "02 powder/madel/density",
+        "03 native presets",
+        "06 scientific expected values"
+      ],
+      "qualification": "current06 author design successor, pending independent review; future source/parser/render/runtime assertions required",
+      "lifecycle": "read-only source → reviewed immutable asset manifest → acquired/qualified copy in future build → hash-verified ResourcePort → calculation/frame snapshot retain → release; never mutate shared source",
+      "productionReady": false,
+      "tableIdentity": null,
+      "scope": "research-byte identity; no numerical/whole-feature qualification",
+      "predecessorMissing": [
+        "complete requested constants with edition, precision, units, copyright and allowed use; consumer must name source rule"
+      ],
+      "currentDesignConsumer": "FS/2/EX/3 constants",
+      "currentDesignRule": "Exact named source constants/bits/units at each algorithm: no universal replacement constants. Wavelength preset source1.5405929A, nm internal anomalous conversion, 2pi and B/U path precision remain explicit and independently checked.",
+      "designStatus": "source-identified and typed-consumer-bound; runtime qualification separate",
+      "licensingDisposition": "deferred-by-DEC-P1-05; existing license text/digest retained; grant not asserted",
+      "productImplemented": false
+    }
+  ],
+  "sourceInventories": [
+    {
+      "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/assets/asfdc-complete-inventory.json",
+      "bytes": 309276,
+      "sha256": "fdbd23a2f5b0bcd8b0ccdc80b3b14fea24a195ff9e8faafc8e8de04ce226f168"
+    },
+    {
+      "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/assets/ffast-complete-inventory.json",
+      "bytes": 19890617,
+      "sha256": "c13eba99153a6a5abc2c91e5b4da0efd493e8d4c686980233f23ecd1d51931b6"
+    },
+    {
+      "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/assets/elements-complete-inventory.json",
+      "bytes": 45616,
+      "sha256": "3e1f1ad6b95e2b73a2fd23a878202a93720636a05d0c1d4ede23fb937eb8e460"
+    },
+    {
+      "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/assets/radius-selector-table.json",
+      "bytes": 957,
+      "sha256": "24d03fc9cfd47e4fa26b5d7701eef143887a17738349e2bf232b2c12de1182c9"
+    },
+    {
+      "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/assets/bitmap-font-source-witnesses.json",
+      "bytes": 53490,
+      "sha256": "a66a9ef1c96c999a027c3cd4c306e3e556e4e66632b3584d75b18f96f7f55b7d"
+    }
+  ],
+  "sourceOwnership": "read-only pinned source -> immutable asset catalog -> ResourcePort hash/size verification -> candidate/job/frame retain -> release. Client cannot assert scientific qualification/license grant/profile identity.",
+  "rowIdentity": "full source SHA + native record ordinal/rawSpecies/header + exact consumer profile revision; derived selection preserves full candidate chain",
+  "resourceAdmission": "unknown SHA/size/role/profile or missing bytes -> reject affected operation; no ambient path lookup/default fresh table, no silent download during command",
+  "licenseBlocksCurrentDesign": false,
+  "licenseGranted": false,
+  "buildArtifactsNotPrerequisiteOfDesign": "Cargo/npm full locks and target install/build receipts are U00/U14 planned outputs, not a requirement to create product files during design-only06.",
+  "futureQualification": [
+    "actual native/profile edited interoperability",
+    "parser source-row/negative fixture checks",
+    "actual font pixels/shaping/export",
+    "actual target platform static delivery",
+    "build graph+toolchain+runtime ABI receipt"
+  ],
+  "productImplemented": false,
+  "nativeRuntimeValidated": false,
+  "independentlyReviewed": false
+}

@@ -1,0 +1,4627 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:vestacraft:I33:native-session:2",
+  "title": "NS/2 I33 explicit typed resource decoding and profile derivation successor",
+  "description": "Request/Response and resource descriptors are separate named roots. All semantic/lifecycle/host trust rules mandatory; schema alone insufficient. Existing scientific177definitions/protocol3 untouched.",
+  "$defs": {
+    "Id": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{32}$"
+    },
+    "Digest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "U64": {
+      "type": "string",
+      "pattern": "^(0|[1-9][0-9]*)$",
+      "maxLength": 20
+    },
+    "Cell3": {
+      "type": "object",
+      "properties": {
+        "lengthA": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "anglesDeg": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 3,
+          "maxItems": 3
+        }
+      },
+      "required": [
+        "lengthA",
+        "anglesDeg"
+      ],
+      "additionalProperties": false
+    },
+    "WorkRef": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string"
+        },
+        "primarySha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "required": [
+        "path",
+        "primarySha256"
+      ],
+      "additionalProperties": false
+    },
+    "DocumentAt": {
+      "type": "object",
+      "properties": {
+        "documentId": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{32}$"
+        },
+        "epoch": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{32}$"
+        },
+        "revision": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)$",
+          "maxLength": 20
+        }
+      },
+      "required": [
+        "documentId",
+        "epoch",
+        "revision"
+      ],
+      "additionalProperties": false
+    },
+    "ByteRef": {
+      "type": "object",
+      "properties": {
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "byteLength": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)$",
+          "maxLength": 20
+        },
+        "mediaType": {
+          "enum": [
+            "application/octet-stream",
+            "application/json",
+            "application/vnd.vestacraft.native-open+json",
+            "application/vnd.vestacraft.native-inspection+json",
+            "application/vnd.vestacraft.save-bundle+json",
+            "application/vnd.vestacraft.host-ack+json",
+            "application/vnd.vestacraft.host-nack+json",
+            "application/vnd.vestacraft.command-outcome+json",
+            "application/vnd.vestacraft.engine-failure+json"
+          ]
+        }
+      },
+      "required": [
+        "sha256",
+        "byteLength",
+        "mediaType"
+      ],
+      "additionalProperties": false
+    },
+    "Budget": {
+      "type": "object",
+      "properties": {
+        "maxInputBytes": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)$",
+          "maxLength": 20
+        },
+        "maxResidentBytes": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)$",
+          "maxLength": 20
+        },
+        "maxFieldValues": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)$",
+          "maxLength": 20
+        },
+        "maxMeshVertices": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)$",
+          "maxLength": 20
+        },
+        "maxOutputBytes": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)$",
+          "maxLength": 20
+        }
+      },
+      "required": [
+        "maxInputBytes",
+        "maxResidentBytes",
+        "maxFieldValues",
+        "maxMeshVertices",
+        "maxOutputBytes"
+      ],
+      "additionalProperties": false
+    },
+    "Policy": {
+      "type": "object",
+      "properties": {
+        "budget": {
+          "$ref": "#/$defs/Budget"
+        },
+        "maxResponseCacheBytes": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)$",
+          "maxLength": 20
+        },
+        "maxPendingUploads": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1024
+        },
+        "maxPendingSnapshots": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1024
+        },
+        "advanceWorkUnits": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 4294967295
+        },
+        "cancelGraceMs": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 4294967295
+        },
+        "hostCapabilitiesDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "maxPendingDomainCandidates": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1024
+        },
+        "maxDomainResultBytes": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)$",
+          "maxLength": 20
+        },
+        "domainCandidateRetentionMs": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)$",
+          "maxLength": 20
+        }
+      },
+      "required": [
+        "budget",
+        "maxResponseCacheBytes",
+        "maxPendingUploads",
+        "maxPendingSnapshots",
+        "advanceWorkUnits",
+        "cancelGraceMs",
+        "hostCapabilitiesDigest",
+        "maxPendingDomainCandidates",
+        "maxDomainResultBytes",
+        "domainCandidateRetentionMs"
+      ],
+      "additionalProperties": false
+    },
+    "Context": {
+      "type": "object",
+      "properties": {
+        "documentId": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{32}$"
+        },
+        "epoch": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{32}$"
+        },
+        "revision": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)$",
+          "maxLength": 20
+        },
+        "stateDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "dirty": {
+          "type": "boolean"
+        },
+        "workRef": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/WorkRef"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "documentId",
+        "epoch",
+        "revision",
+        "stateDigest",
+        "dirty",
+        "workRef"
+      ],
+      "additionalProperties": false
+    },
+    "OpenBundle": {
+      "type": "object",
+      "properties": {
+        "sourcePurpose": {
+          "enum": [
+            "current-work",
+            "import"
+          ]
+        },
+        "primary": {
+          "$ref": "#/$defs/ByteRef"
+        },
+        "format": {
+          "enum": [
+            "vesta",
+            "cif"
+          ]
+        },
+        "dependencies": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "logicalPath": {
+                "type": "string"
+              },
+              "resource": {
+                "$ref": "#/$defs/ByteRef"
+              }
+            },
+            "required": [
+              "logicalPath",
+              "resource"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 0
+        },
+        "workRef": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/WorkRef"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "allowDiagnosticImport": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "sourcePurpose",
+        "primary",
+        "format",
+        "dependencies",
+        "workRef",
+        "allowDiagnosticImport"
+      ],
+      "additionalProperties": false
+    },
+    "PhaseRow": {
+      "type": "object",
+      "properties": {
+        "phaseId": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{32}$"
+        },
+        "label": {
+          "type": "string"
+        },
+        "structurePresent": {
+          "type": "boolean"
+        },
+        "cell": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/Cell3"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "volumeA3": {
+          "oneOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "cellEditable": {
+          "type": "boolean"
+        },
+        "siteCount": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)$",
+          "maxLength": 20
+        }
+      },
+      "required": [
+        "phaseId",
+        "label",
+        "structurePresent",
+        "cell",
+        "volumeA3",
+        "cellEditable",
+        "siteCount"
+      ],
+      "additionalProperties": false
+    },
+    "SiteRow": {
+      "type": "object",
+      "properties": {
+        "phaseId": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{32}$"
+        },
+        "siteId": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{32}$"
+        },
+        "label": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "phaseId",
+        "siteId",
+        "label"
+      ],
+      "additionalProperties": false
+    },
+    "InspectionPage": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "query": {
+              "const": "phases"
+            },
+            "document": {
+              "$ref": "#/$defs/DocumentAt"
+            },
+            "contextVersion": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$",
+              "maxLength": 20
+            },
+            "records": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/PhaseRow"
+              },
+              "minItems": 0
+            }
+          },
+          "required": [
+            "query",
+            "document",
+            "contextVersion",
+            "records"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "query": {
+              "const": "sites"
+            },
+            "document": {
+              "$ref": "#/$defs/DocumentAt"
+            },
+            "contextVersion": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$",
+              "maxLength": 20
+            },
+            "records": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/SiteRow"
+              },
+              "minItems": 0
+            }
+          },
+          "required": [
+            "query",
+            "document",
+            "contextVersion",
+            "records"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "Query": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "phases"
+            },
+            "limit": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 1000
+            },
+            "cursor": {
+              "oneOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "kind",
+            "limit",
+            "cursor"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "sites"
+            },
+            "phaseId": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{32}$"
+            },
+            "limit": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 1000
+            },
+            "cursor": {
+              "oneOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "kind",
+            "phaseId",
+            "limit",
+            "cursor"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "CoreInvocation": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "command": {
+              "const": "cell.set"
+            },
+            "params": {
+              "type": "object",
+              "properties": {
+                "phaseId": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{32}$"
+                },
+                "cell": {
+                  "$ref": "#/$defs/Cell3"
+                }
+              },
+              "required": [
+                "phaseId",
+                "cell"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "command",
+            "params"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "command": {
+              "const": "site.add"
+            },
+            "params": {
+              "type": "object",
+              "properties": {
+                "phaseId": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{32}$"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "species": {
+                  "type": "object",
+                  "properties": {
+                    "element": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "element"
+                  ],
+                  "additionalProperties": false
+                },
+                "frac": {
+                  "type": "array",
+                  "items": {
+                    "type": "number"
+                  },
+                  "minItems": 3,
+                  "maxItems": 3
+                },
+                "occupancy": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                },
+                "uIsoA2": {
+                  "type": "number",
+                  "minimum": 0
+                }
+              },
+              "required": [
+                "phaseId",
+                "label",
+                "species",
+                "frac",
+                "occupancy",
+                "uIsoA2"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "command",
+            "params"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "command": {
+              "const": "site.setFractional"
+            },
+            "params": {
+              "type": "object",
+              "properties": {
+                "phaseId": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{32}$"
+                },
+                "siteId": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{32}$"
+                },
+                "frac": {
+                  "type": "array",
+                  "items": {
+                    "type": "number"
+                  },
+                  "minItems": 3,
+                  "maxItems": 3
+                }
+              },
+              "required": [
+                "phaseId",
+                "siteId",
+                "frac"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "command",
+            "params"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "command": {
+              "const": "history.undo"
+            },
+            "params": {
+              "type": "object",
+              "properties": {},
+              "required": [],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "command",
+            "params"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "command": {
+              "const": "history.redo"
+            },
+            "params": {
+              "type": "object",
+              "properties": {},
+              "required": [],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "command",
+            "params"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "command": {
+              "const": "display.setHidden"
+            },
+            "params": {
+              "type": "object",
+              "properties": {
+                "images": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "phase": {
+                        "type": "string",
+                        "pattern": "^[0-9a-f]{32}$"
+                      },
+                      "site": {
+                        "type": "string",
+                        "pattern": "^[0-9a-f]{32}$"
+                      },
+                      "op": {
+                        "type": "string",
+                        "pattern": "^[0-9a-f]{32}$"
+                      },
+                      "shift": {
+                        "type": "array",
+                        "items": {
+                          "type": "integer",
+                          "minimum": -2147483648,
+                          "maximum": 2147483647
+                        },
+                        "minItems": 3,
+                        "maxItems": 3
+                      }
+                    },
+                    "required": [
+                      "phase",
+                      "site",
+                      "op",
+                      "shift"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "minItems": 0
+                },
+                "hidden": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "images",
+                "hidden"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "command",
+            "params"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "command": {
+              "const": "boundary.set"
+            },
+            "params": {
+              "type": "object",
+              "properties": {
+                "phaseId": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{32}$"
+                },
+                "min": {
+                  "type": "array",
+                  "items": {
+                    "type": "number"
+                  },
+                  "minItems": 3,
+                  "maxItems": 3
+                },
+                "max": {
+                  "type": "array",
+                  "items": {
+                    "type": "number"
+                  },
+                  "minItems": 3,
+                  "maxItems": 3
+                }
+              },
+              "required": [
+                "phaseId",
+                "min",
+                "max"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "command",
+            "params"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "command": {
+              "const": "view.setCamera"
+            },
+            "params": {
+              "type": "object",
+              "properties": {
+                "rotation": {
+                  "type": "array",
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "type": "number"
+                    },
+                    "minItems": 3,
+                    "maxItems": 3
+                  },
+                  "minItems": 3,
+                  "maxItems": 3
+                },
+                "projection": {
+                  "enum": [
+                    "parallel",
+                    "perspective"
+                  ]
+                },
+                "zoom": {
+                  "type": "number",
+                  "minimum": 0
+                }
+              },
+              "required": [
+                "rotation",
+                "projection",
+                "zoom"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "command",
+            "params"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "command": {
+              "const": "domain.prepare"
+            },
+            "params": {
+              "type": "object",
+              "properties": {
+                "request": {
+                  "$ref": "scientific-composition.schema.json#/$defs/TypedJsonResource2"
+                },
+                "resultMode": {
+                  "enum": [
+                    "query",
+                    "candidate"
+                  ]
+                }
+              },
+              "required": [
+                "request",
+                "resultMode"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "command",
+            "params"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "command": {
+              "const": "domain.state.prepare"
+            },
+            "params": {
+              "type": "object",
+              "properties": {
+                "edit": {
+                  "$ref": "scientific-composition.schema.json#/$defs/TypedJsonResource2"
+                }
+              },
+              "required": [
+                "edit"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "command",
+            "params"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "command": {
+              "const": "domain.apply"
+            },
+            "params": {
+              "type": "object",
+              "properties": {
+                "candidateId": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{32}$"
+                },
+                "candidateDigest": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{64}$"
+                }
+              },
+              "required": [
+                "candidateId",
+                "candidateDigest"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "command",
+            "params"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "SnapshotOptions": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "purpose": {
+              "const": "save"
+            },
+            "format": {
+              "const": "vesta"
+            },
+            "targetToken": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "purpose",
+            "format",
+            "targetToken"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "purpose": {
+              "const": "saveAs"
+            },
+            "format": {
+              "const": "vesta"
+            },
+            "targetToken": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "purpose",
+            "format",
+            "targetToken"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "purpose": {
+              "const": "export"
+            },
+            "format": {
+              "const": "cif"
+            },
+            "targetToken": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "purpose",
+            "format",
+            "targetToken"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "OperationRef": {
+      "type": "object",
+      "properties": {
+        "registryGeneration": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{32}$"
+        },
+        "operationId": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{32}$"
+        },
+        "recordSequence": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)$",
+          "maxLength": 20
+        },
+        "publicationSequence": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)$",
+          "maxLength": 20
+        },
+        "targetDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "capabilityDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "semanticEvidenceDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "required": [
+        "registryGeneration",
+        "operationId",
+        "recordSequence",
+        "publicationSequence",
+        "targetDigest",
+        "capabilityDigest",
+        "semanticEvidenceDigest"
+      ],
+      "additionalProperties": false
+    },
+    "HostAck": {
+      "type": "object",
+      "properties": {
+        "snapshotId": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{32}$"
+        },
+        "documentId": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{32}$"
+        },
+        "epoch": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{32}$"
+        },
+        "revision": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)$",
+          "maxLength": 20
+        },
+        "stateDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "purpose": {
+          "enum": [
+            "save",
+            "saveAs",
+            "export"
+          ]
+        },
+        "targetToken": {
+          "type": "string"
+        },
+        "actualPrimarySha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "verifiedFiles": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "path": {
+                "type": "string"
+              },
+              "sha256": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{64}$"
+              },
+              "byteLength": {
+                "type": "string",
+                "pattern": "^(0|[1-9][0-9]*)$",
+                "maxLength": 20
+              }
+            },
+            "required": [
+              "path",
+              "sha256",
+              "byteLength"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 1
+        },
+        "output": {
+          "$ref": "#/$defs/WorkRef"
+        },
+        "currentWorkRef": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/WorkRef"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "operation": {
+          "$ref": "#/$defs/OperationRef"
+        }
+      },
+      "required": [
+        "snapshotId",
+        "documentId",
+        "epoch",
+        "revision",
+        "stateDigest",
+        "purpose",
+        "targetToken",
+        "actualPrimarySha256",
+        "verifiedFiles",
+        "output",
+        "currentWorkRef",
+        "operation"
+      ],
+      "additionalProperties": false
+    },
+    "HostNack": {
+      "type": "object",
+      "properties": {
+        "snapshotId": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{32}$"
+        },
+        "documentId": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{32}$"
+        },
+        "epoch": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{32}$"
+        },
+        "revision": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)$",
+          "maxLength": 20
+        },
+        "purpose": {
+          "enum": [
+            "save",
+            "saveAs",
+            "export"
+          ]
+        },
+        "code": {
+          "enum": [
+            "E_EXTERNAL_CHANGE",
+            "E_READ_ONLY",
+            "E_QUOTA",
+            "E_IO",
+            "E_TIMEOUT",
+            "E_TARGET_TOKEN_EXPIRED",
+            "E_TARGET_TOKEN_INVALID",
+            "E_CANCELLED"
+          ]
+        },
+        "settlement": {
+          "enum": [
+            "not-published",
+            "committed-unverified",
+            "unknown"
+          ]
+        },
+        "operation": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/OperationRef"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "snapshotId",
+        "documentId",
+        "epoch",
+        "revision",
+        "purpose",
+        "code",
+        "settlement",
+        "operation"
+      ],
+      "additionalProperties": false
+    },
+    "CloseProof": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "loaded-baseline"
+            }
+          },
+          "required": [
+            "kind"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "confirmed-snapshot"
+            },
+            "snapshotId": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{32}$"
+            }
+          },
+          "required": [
+            "kind",
+            "snapshotId"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "Request": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.native-session/2"
+            },
+            "op": {
+              "const": "hello"
+            },
+            "policy": {
+              "$ref": "#/$defs/Policy"
+            },
+            "expectedProfiles": {
+              "type": "object",
+              "properties": {
+                "nativeSchemaDigest": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{64}$"
+                },
+                "coreRegistryDigest": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{64}$"
+                },
+                "saveBundleProfileDigest": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{64}$"
+                },
+                "hostCapabilitiesDigest": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{64}$"
+                },
+                "scientificCatalogDigest": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{64}$"
+                },
+                "assetCatalogDigest": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{64}$"
+                },
+                "historyPolicyDigest": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{64}$"
+                },
+                "preferencesSchemaDigest": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{64}$"
+                },
+                "externalWorkflowSchemaDigest": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{64}$"
+                }
+              },
+              "required": [
+                "nativeSchemaDigest",
+                "coreRegistryDigest",
+                "saveBundleProfileDigest",
+                "hostCapabilitiesDigest",
+                "scientificCatalogDigest",
+                "assetCatalogDigest",
+                "historyPolicyDigest",
+                "preferencesSchemaDigest",
+                "externalWorkflowSchemaDigest"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "protocol",
+            "op",
+            "policy",
+            "expectedProfiles"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.native-session/2"
+            },
+            "sessionId": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{32}$"
+            },
+            "op": {
+              "const": "status"
+            },
+            "targetSeq": {
+              "oneOf": [
+                {
+                  "type": "string",
+                  "pattern": "^(0|[1-9][0-9]*)$",
+                  "maxLength": 20
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "protocol",
+            "sessionId",
+            "op",
+            "targetSeq"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.native-session/2"
+            },
+            "sessionId": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{32}$"
+            },
+            "op": {
+              "const": "cancel"
+            },
+            "targetSeq": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$",
+              "maxLength": 20
+            }
+          },
+          "required": [
+            "protocol",
+            "sessionId",
+            "op",
+            "targetSeq"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.native-session/2"
+            },
+            "sessionId": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{32}$"
+            },
+            "seq": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$",
+              "maxLength": 20
+            },
+            "contextVersion": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$",
+              "maxLength": 20
+            },
+            "op": {
+              "const": "resource.begin"
+            },
+            "body": {
+              "type": "object",
+              "properties": {
+                "expected": {
+                  "$ref": "#/$defs/ByteRef"
+                }
+              },
+              "required": [
+                "expected"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "protocol",
+            "sessionId",
+            "seq",
+            "contextVersion",
+            "op",
+            "body"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.native-session/2"
+            },
+            "sessionId": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{32}$"
+            },
+            "seq": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$",
+              "maxLength": 20
+            },
+            "contextVersion": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$",
+              "maxLength": 20
+            },
+            "op": {
+              "const": "resource.chunk"
+            },
+            "body": {
+              "type": "object",
+              "properties": {
+                "uploadSeq": {
+                  "type": "string",
+                  "pattern": "^(0|[1-9][0-9]*)$",
+                  "maxLength": 20
+                },
+                "offset": {
+                  "type": "string",
+                  "pattern": "^(0|[1-9][0-9]*)$",
+                  "maxLength": 20
+                },
+                "bytesB64": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "uploadSeq",
+                "offset",
+                "bytesB64"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "protocol",
+            "sessionId",
+            "seq",
+            "contextVersion",
+            "op",
+            "body"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.native-session/2"
+            },
+            "sessionId": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{32}$"
+            },
+            "seq": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$",
+              "maxLength": 20
+            },
+            "contextVersion": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$",
+              "maxLength": 20
+            },
+            "op": {
+              "const": "resource.commit"
+            },
+            "body": {
+              "type": "object",
+              "properties": {
+                "uploadSeq": {
+                  "type": "string",
+                  "pattern": "^(0|[1-9][0-9]*)$",
+                  "maxLength": 20
+                }
+              },
+              "required": [
+                "uploadSeq"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "protocol",
+            "sessionId",
+            "seq",
+            "contextVersion",
+            "op",
+            "body"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.native-session/2"
+            },
+            "sessionId": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{32}$"
+            },
+            "seq": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$",
+              "maxLength": 20
+            },
+            "contextVersion": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$",
+              "maxLength": 20
+            },
+            "op": {
+              "const": "resource.read"
+            },
+            "body": {
+              "type": "object",
+              "properties": {
+                "resource": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{64}$"
+                },
+                "offset": {
+                  "type": "string",
+                  "pattern": "^(0|[1-9][0-9]*)$",
+                  "maxLength": 20
+                },
+                "maxBytes": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 65536
+                }
+              },
+              "required": [
+                "resource",
+                "offset",
+                "maxBytes"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "protocol",
+            "sessionId",
+            "seq",
+            "contextVersion",
+            "op",
+            "body"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.native-session/2"
+            },
+            "sessionId": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{32}$"
+            },
+            "seq": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$",
+              "maxLength": 20
+            },
+            "contextVersion": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$",
+              "maxLength": 20
+            },
+            "op": {
+              "const": "resource.release"
+            },
+            "body": {
+              "type": "object",
+              "properties": {
+                "resource": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{64}$"
+                }
+              },
+              "required": [
+                "resource"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "protocol",
+            "sessionId",
+            "seq",
+            "contextVersion",
+            "op",
+            "body"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.native-session/2"
+            },
+            "sessionId": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{32}$"
+            },
+            "seq": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$",
+              "maxLength": 20
+            },
+            "contextVersion": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$",
+              "maxLength": 20
+            },
+            "op": {
+              "const": "open"
+            },
+            "body": {
+              "type": "object",
+              "properties": {
+                "bundle": {
+                  "$ref": "#/$defs/OpenBundleResourceRef2"
+                }
+              },
+              "required": [
+                "bundle"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "protocol",
+            "sessionId",
+            "seq",
+            "contextVersion",
+            "op",
+            "body"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.native-session/2"
+            },
+            "sessionId": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{32}$"
+            },
+            "seq": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$",
+              "maxLength": 20
+            },
+            "contextVersion": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$",
+              "maxLength": 20
+            },
+            "op": {
+              "const": "new"
+            },
+            "body": {
+              "type": "object",
+              "properties": {
+                "cell": {
+                  "$ref": "#/$defs/Cell3"
+                },
+                "label": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "cell",
+                "label"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "protocol",
+            "sessionId",
+            "seq",
+            "contextVersion",
+            "op",
+            "body"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.native-session/2"
+            },
+            "sessionId": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{32}$"
+            },
+            "seq": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$",
+              "maxLength": 20
+            },
+            "contextVersion": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$",
+              "maxLength": 20
+            },
+            "op": {
+              "const": "inspect"
+            },
+            "body": {
+              "type": "object",
+              "properties": {
+                "document": {
+                  "$ref": "#/$defs/DocumentAt"
+                },
+                "query": {
+                  "$ref": "#/$defs/Query"
+                }
+              },
+              "required": [
+                "document",
+                "query"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "protocol",
+            "sessionId",
+            "seq",
+            "contextVersion",
+            "op",
+            "body"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.native-session/2"
+            },
+            "sessionId": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{32}$"
+            },
+            "seq": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$",
+              "maxLength": 20
+            },
+            "contextVersion": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$",
+              "maxLength": 20
+            },
+            "op": {
+              "const": "execute"
+            },
+            "body": {
+              "type": "object",
+              "properties": {
+                "document": {
+                  "$ref": "#/$defs/DocumentAt"
+                },
+                "invocation": {
+                  "$ref": "#/$defs/CoreInvocation"
+                }
+              },
+              "required": [
+                "document",
+                "invocation"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "protocol",
+            "sessionId",
+            "seq",
+            "contextVersion",
+            "op",
+            "body"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.native-session/2"
+            },
+            "sessionId": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{32}$"
+            },
+            "seq": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$",
+              "maxLength": 20
+            },
+            "contextVersion": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$",
+              "maxLength": 20
+            },
+            "op": {
+              "const": "snapshot"
+            },
+            "body": {
+              "type": "object",
+              "properties": {
+                "document": {
+                  "$ref": "#/$defs/DocumentAt"
+                },
+                "options": {
+                  "$ref": "#/$defs/SnapshotOptions"
+                }
+              },
+              "required": [
+                "document",
+                "options"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "protocol",
+            "sessionId",
+            "seq",
+            "contextVersion",
+            "op",
+            "body"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.native-session/2"
+            },
+            "sessionId": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{32}$"
+            },
+            "seq": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$",
+              "maxLength": 20
+            },
+            "contextVersion": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$",
+              "maxLength": 20
+            },
+            "op": {
+              "const": "save.confirm"
+            },
+            "body": {
+              "type": "object",
+              "properties": {
+                "ack": {
+                  "$ref": "#/$defs/HostAckResourceRef2"
+                }
+              },
+              "required": [
+                "ack"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "protocol",
+            "sessionId",
+            "seq",
+            "contextVersion",
+            "op",
+            "body"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.native-session/2"
+            },
+            "sessionId": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{32}$"
+            },
+            "seq": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$",
+              "maxLength": 20
+            },
+            "contextVersion": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$",
+              "maxLength": 20
+            },
+            "op": {
+              "const": "save.reject"
+            },
+            "body": {
+              "type": "object",
+              "properties": {
+                "nack": {
+                  "$ref": "#/$defs/HostNackResourceRef2"
+                }
+              },
+              "required": [
+                "nack"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "protocol",
+            "sessionId",
+            "seq",
+            "contextVersion",
+            "op",
+            "body"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.native-session/2"
+            },
+            "sessionId": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{32}$"
+            },
+            "seq": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$",
+              "maxLength": 20
+            },
+            "contextVersion": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$",
+              "maxLength": 20
+            },
+            "op": {
+              "const": "close"
+            },
+            "body": {
+              "oneOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "document": {
+                      "$ref": "#/$defs/DocumentAt"
+                    },
+                    "disposition": {
+                      "const": "require-saved"
+                    },
+                    "proof": {
+                      "$ref": "#/$defs/CloseProof"
+                    }
+                  },
+                  "required": [
+                    "document",
+                    "disposition",
+                    "proof"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "document": {
+                      "$ref": "#/$defs/DocumentAt"
+                    },
+                    "disposition": {
+                      "const": "discard"
+                    }
+                  },
+                  "required": [
+                    "document",
+                    "disposition"
+                  ],
+                  "additionalProperties": false
+                }
+              ]
+            }
+          },
+          "required": [
+            "protocol",
+            "sessionId",
+            "seq",
+            "contextVersion",
+            "op",
+            "body"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.native-session/2"
+            },
+            "sessionId": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{32}$"
+            },
+            "seq": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$",
+              "maxLength": 20
+            },
+            "contextVersion": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$",
+              "maxLength": 20
+            },
+            "op": {
+              "const": "shutdown"
+            },
+            "body": {
+              "type": "object",
+              "properties": {},
+              "required": [],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "protocol",
+            "sessionId",
+            "seq",
+            "contextVersion",
+            "op",
+            "body"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "Response": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.native-session/2"
+            },
+            "sessionId": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{32}$"
+            },
+            "contextVersion": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$",
+              "maxLength": 20
+            },
+            "seq": {
+              "type": "null"
+            },
+            "kind": {
+              "const": "ok"
+            },
+            "op": {
+              "const": "hello"
+            },
+            "result": {
+              "type": "object",
+              "properties": {
+                "policyDigest": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{64}$"
+                },
+                "profiles": {
+                  "type": "object",
+                  "properties": {
+                    "nativeSchemaDigest": {
+                      "type": "string",
+                      "pattern": "^[0-9a-f]{64}$"
+                    },
+                    "coreRegistryDigest": {
+                      "type": "string",
+                      "pattern": "^[0-9a-f]{64}$"
+                    },
+                    "saveBundleProfileDigest": {
+                      "type": "string",
+                      "pattern": "^[0-9a-f]{64}$"
+                    },
+                    "hostCapabilitiesDigest": {
+                      "type": "string",
+                      "pattern": "^[0-9a-f]{64}$"
+                    },
+                    "scientificCatalogDigest": {
+                      "type": "string",
+                      "pattern": "^[0-9a-f]{64}$"
+                    },
+                    "assetCatalogDigest": {
+                      "type": "string",
+                      "pattern": "^[0-9a-f]{64}$"
+                    },
+                    "historyPolicyDigest": {
+                      "type": "string",
+                      "pattern": "^[0-9a-f]{64}$"
+                    },
+                    "preferencesSchemaDigest": {
+                      "type": "string",
+                      "pattern": "^[0-9a-f]{64}$"
+                    },
+                    "externalWorkflowSchemaDigest": {
+                      "type": "string",
+                      "pattern": "^[0-9a-f]{64}$"
+                    }
+                  },
+                  "required": [
+                    "nativeSchemaDigest",
+                    "coreRegistryDigest",
+                    "saveBundleProfileDigest",
+                    "hostCapabilitiesDigest",
+                    "scientificCatalogDigest",
+                    "assetCatalogDigest",
+                    "historyPolicyDigest",
+                    "preferencesSchemaDigest",
+                    "externalWorkflowSchemaDigest"
+                  ],
+                  "additionalProperties": false
+                },
+                "maxFrameBytes": {
+                  "const": 1048576
+                },
+                "maxRawChunkBytes": {
+                  "const": 65536
+                },
+                "coreCommands": {
+                  "type": "array",
+                  "items": {
+                    "enum": [
+                      "cell.set",
+                      "site.add",
+                      "site.setFractional",
+                      "history.undo",
+                      "history.redo",
+                      "display.setHidden",
+                      "boundary.set",
+                      "view.setCamera",
+                      "domain.prepare",
+                      "domain.state.prepare",
+                      "domain.apply"
+                    ]
+                  },
+                  "minItems": 0
+                },
+                "methods": {
+                  "type": "array",
+                  "items": {
+                    "enum": [
+                      "hello",
+                      "status",
+                      "cancel",
+                      "resource.begin",
+                      "resource.chunk",
+                      "resource.commit",
+                      "resource.read",
+                      "resource.release",
+                      "open",
+                      "new",
+                      "inspect",
+                      "execute",
+                      "snapshot",
+                      "save.confirm",
+                      "save.reject",
+                      "close",
+                      "shutdown"
+                    ]
+                  },
+                  "minItems": 0
+                }
+              },
+              "required": [
+                "policyDigest",
+                "profiles",
+                "maxFrameBytes",
+                "maxRawChunkBytes",
+                "coreCommands",
+                "methods"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "protocol",
+            "sessionId",
+            "contextVersion",
+            "seq",
+            "kind",
+            "op",
+            "result"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.native-session/2"
+            },
+            "sessionId": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{32}$"
+            },
+            "contextVersion": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$",
+              "maxLength": 20
+            },
+            "seq": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$",
+              "maxLength": 20
+            },
+            "kind": {
+              "const": "ok"
+            },
+            "op": {
+              "const": "resource.begin"
+            },
+            "result": {
+              "type": "object",
+              "properties": {
+                "uploadSeq": {
+                  "type": "string",
+                  "pattern": "^(0|[1-9][0-9]*)$",
+                  "maxLength": 20
+                },
+                "receivedBytes": {
+                  "type": "string",
+                  "pattern": "^(0|[1-9][0-9]*)$",
+                  "maxLength": 20
+                }
+              },
+              "required": [
+                "uploadSeq",
+                "receivedBytes"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "protocol",
+            "sessionId",
+            "contextVersion",
+            "seq",
+            "kind",
+            "op",
+            "result"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.native-session/2"
+            },
+            "sessionId": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{32}$"
+            },
+            "contextVersion": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$",
+              "maxLength": 20
+            },
+            "seq": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$",
+              "maxLength": 20
+            },
+            "kind": {
+              "const": "ok"
+            },
+            "op": {
+              "const": "resource.chunk"
+            },
+            "result": {
+              "type": "object",
+              "properties": {
+                "uploadSeq": {
+                  "type": "string",
+                  "pattern": "^(0|[1-9][0-9]*)$",
+                  "maxLength": 20
+                },
+                "receivedBytes": {
+                  "type": "string",
+                  "pattern": "^(0|[1-9][0-9]*)$",
+                  "maxLength": 20
+                }
+              },
+              "required": [
+                "uploadSeq",
+                "receivedBytes"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "protocol",
+            "sessionId",
+            "contextVersion",
+            "seq",
+            "kind",
+            "op",
+            "result"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.native-session/2"
+            },
+            "sessionId": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{32}$"
+            },
+            "contextVersion": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$",
+              "maxLength": 20
+            },
+            "seq": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$",
+              "maxLength": 20
+            },
+            "kind": {
+              "const": "ok"
+            },
+            "op": {
+              "const": "resource.commit"
+            },
+            "result": {
+              "type": "object",
+              "properties": {
+                "resource": {
+                  "$ref": "#/$defs/ByteRef"
+                }
+              },
+              "required": [
+                "resource"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "protocol",
+            "sessionId",
+            "contextVersion",
+            "seq",
+            "kind",
+            "op",
+            "result"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.native-session/2"
+            },
+            "sessionId": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{32}$"
+            },
+            "contextVersion": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$",
+              "maxLength": 20
+            },
+            "seq": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$",
+              "maxLength": 20
+            },
+            "kind": {
+              "const": "ok"
+            },
+            "op": {
+              "const": "resource.read"
+            },
+            "result": {
+              "type": "object",
+              "properties": {
+                "resource": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{64}$"
+                },
+                "offset": {
+                  "type": "string",
+                  "pattern": "^(0|[1-9][0-9]*)$",
+                  "maxLength": 20
+                },
+                "bytesB64": {
+                  "type": "string"
+                },
+                "eof": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "resource",
+                "offset",
+                "bytesB64",
+                "eof"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "protocol",
+            "sessionId",
+            "contextVersion",
+            "seq",
+            "kind",
+            "op",
+            "result"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.native-session/2"
+            },
+            "sessionId": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{32}$"
+            },
+            "contextVersion": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$",
+              "maxLength": 20
+            },
+            "seq": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$",
+              "maxLength": 20
+            },
+            "kind": {
+              "const": "ok"
+            },
+            "op": {
+              "const": "resource.release"
+            },
+            "result": {
+              "type": "object",
+              "properties": {
+                "resource": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{64}$"
+                },
+                "transportLeaseReleased": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "resource",
+                "transportLeaseReleased"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "protocol",
+            "sessionId",
+            "contextVersion",
+            "seq",
+            "kind",
+            "op",
+            "result"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.native-session/2"
+            },
+            "sessionId": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{32}$"
+            },
+            "contextVersion": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$",
+              "maxLength": 20
+            },
+            "seq": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$",
+              "maxLength": 20
+            },
+            "kind": {
+              "const": "ok"
+            },
+            "op": {
+              "const": "open"
+            },
+            "result": {
+              "type": "object",
+              "properties": {
+                "context": {
+                  "$ref": "#/$defs/Context"
+                },
+                "nextContextVersion": {
+                  "type": "string",
+                  "pattern": "^(0|[1-9][0-9]*)$",
+                  "maxLength": 20
+                },
+                "editable": {
+                  "type": "boolean"
+                },
+                "diagnostics": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/$defs/FailureNoticeResourceRef2"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "context",
+                "nextContextVersion",
+                "editable",
+                "diagnostics"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "protocol",
+            "sessionId",
+            "contextVersion",
+            "seq",
+            "kind",
+            "op",
+            "result"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.native-session/2"
+            },
+            "sessionId": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{32}$"
+            },
+            "contextVersion": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$",
+              "maxLength": 20
+            },
+            "seq": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$",
+              "maxLength": 20
+            },
+            "kind": {
+              "const": "ok"
+            },
+            "op": {
+              "const": "new"
+            },
+            "result": {
+              "type": "object",
+              "properties": {
+                "context": {
+                  "$ref": "#/$defs/Context"
+                },
+                "nextContextVersion": {
+                  "type": "string",
+                  "pattern": "^(0|[1-9][0-9]*)$",
+                  "maxLength": 20
+                },
+                "phaseId": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{32}$"
+                }
+              },
+              "required": [
+                "context",
+                "nextContextVersion",
+                "phaseId"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "protocol",
+            "sessionId",
+            "contextVersion",
+            "seq",
+            "kind",
+            "op",
+            "result"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.native-session/2"
+            },
+            "sessionId": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{32}$"
+            },
+            "contextVersion": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$",
+              "maxLength": 20
+            },
+            "seq": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$",
+              "maxLength": 20
+            },
+            "kind": {
+              "const": "ok"
+            },
+            "op": {
+              "const": "inspect"
+            },
+            "result": {
+              "type": "object",
+              "properties": {
+                "document": {
+                  "$ref": "#/$defs/DocumentAt"
+                },
+                "queryKind": {
+                  "enum": [
+                    "phases",
+                    "sites"
+                  ]
+                },
+                "page": {
+                  "$ref": "#/$defs/InspectionPageResourceRef2"
+                },
+                "nextCursor": {
+                  "oneOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "document",
+                "queryKind",
+                "page",
+                "nextCursor"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "protocol",
+            "sessionId",
+            "contextVersion",
+            "seq",
+            "kind",
+            "op",
+            "result"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.native-session/2"
+            },
+            "sessionId": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{32}$"
+            },
+            "contextVersion": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$",
+              "maxLength": 20
+            },
+            "seq": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$",
+              "maxLength": 20
+            },
+            "kind": {
+              "const": "ok"
+            },
+            "op": {
+              "const": "execute"
+            },
+            "result": {
+              "type": "object",
+              "properties": {
+                "context": {
+                  "$ref": "#/$defs/Context"
+                },
+                "engineRequestId": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{32}$"
+                },
+                "outcome": {
+                  "$ref": "#/$defs/CommandCompletionResourceRef2"
+                }
+              },
+              "required": [
+                "context",
+                "engineRequestId",
+                "outcome"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "protocol",
+            "sessionId",
+            "contextVersion",
+            "seq",
+            "kind",
+            "op",
+            "result"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.native-session/2"
+            },
+            "sessionId": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{32}$"
+            },
+            "contextVersion": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$",
+              "maxLength": 20
+            },
+            "seq": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$",
+              "maxLength": 20
+            },
+            "kind": {
+              "const": "ok"
+            },
+            "op": {
+              "const": "snapshot"
+            },
+            "result": {
+              "type": "object",
+              "properties": {
+                "snapshotId": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{32}$"
+                },
+                "captured": {
+                  "$ref": "#/$defs/Context"
+                },
+                "purpose": {
+                  "enum": [
+                    "save",
+                    "saveAs",
+                    "export"
+                  ]
+                },
+                "targetTokenDigest": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{64}$"
+                },
+                "bundle": {
+                  "$ref": "#/$defs/ByteRef"
+                },
+                "sourceExpectationDigest": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{64}$"
+                }
+              },
+              "required": [
+                "snapshotId",
+                "captured",
+                "purpose",
+                "targetTokenDigest",
+                "bundle",
+                "sourceExpectationDigest"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "protocol",
+            "sessionId",
+            "contextVersion",
+            "seq",
+            "kind",
+            "op",
+            "result"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.native-session/2"
+            },
+            "sessionId": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{32}$"
+            },
+            "contextVersion": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$",
+              "maxLength": 20
+            },
+            "seq": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$",
+              "maxLength": 20
+            },
+            "kind": {
+              "const": "ok"
+            },
+            "op": {
+              "const": "save.confirm"
+            },
+            "result": {
+              "type": "object",
+              "properties": {
+                "snapshotId": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{32}$"
+                },
+                "savedDocument": {
+                  "$ref": "#/$defs/DocumentAt"
+                },
+                "output": {
+                  "$ref": "#/$defs/WorkRef"
+                },
+                "current": {
+                  "$ref": "#/$defs/Context"
+                },
+                "publicationSequence": {
+                  "type": "string",
+                  "pattern": "^(0|[1-9][0-9]*)$",
+                  "maxLength": 20
+                }
+              },
+              "required": [
+                "snapshotId",
+                "savedDocument",
+                "output",
+                "current",
+                "publicationSequence"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "protocol",
+            "sessionId",
+            "contextVersion",
+            "seq",
+            "kind",
+            "op",
+            "result"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.native-session/2"
+            },
+            "sessionId": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{32}$"
+            },
+            "contextVersion": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$",
+              "maxLength": 20
+            },
+            "seq": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$",
+              "maxLength": 20
+            },
+            "kind": {
+              "const": "ok"
+            },
+            "op": {
+              "const": "save.reject"
+            },
+            "result": {
+              "type": "object",
+              "properties": {
+                "snapshotId": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{32}$"
+                },
+                "settlement": {
+                  "enum": [
+                    "not-published",
+                    "committed-unverified",
+                    "unknown"
+                  ]
+                },
+                "requiresResolution": {
+                  "type": "boolean"
+                },
+                "current": {
+                  "$ref": "#/$defs/Context"
+                }
+              },
+              "required": [
+                "snapshotId",
+                "settlement",
+                "requiresResolution",
+                "current"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "protocol",
+            "sessionId",
+            "contextVersion",
+            "seq",
+            "kind",
+            "op",
+            "result"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.native-session/2"
+            },
+            "sessionId": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{32}$"
+            },
+            "contextVersion": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$",
+              "maxLength": 20
+            },
+            "seq": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$",
+              "maxLength": 20
+            },
+            "kind": {
+              "const": "ok"
+            },
+            "op": {
+              "const": "close"
+            },
+            "result": {
+              "type": "object",
+              "properties": {
+                "closedDocumentId": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{32}$"
+                },
+                "closedEpoch": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{32}$"
+                },
+                "nextContextVersion": {
+                  "type": "string",
+                  "pattern": "^(0|[1-9][0-9]*)$",
+                  "maxLength": 20
+                }
+              },
+              "required": [
+                "closedDocumentId",
+                "closedEpoch",
+                "nextContextVersion"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "protocol",
+            "sessionId",
+            "contextVersion",
+            "seq",
+            "kind",
+            "op",
+            "result"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.native-session/2"
+            },
+            "sessionId": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{32}$"
+            },
+            "contextVersion": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$",
+              "maxLength": 20
+            },
+            "seq": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$",
+              "maxLength": 20
+            },
+            "kind": {
+              "const": "ok"
+            },
+            "op": {
+              "const": "shutdown"
+            },
+            "result": {
+              "type": "object",
+              "properties": {
+                "exitCode": {
+                  "const": 0
+                }
+              },
+              "required": [
+                "exitCode"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "protocol",
+            "sessionId",
+            "contextVersion",
+            "seq",
+            "kind",
+            "op",
+            "result"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.native-session/2"
+            },
+            "sessionId": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{32}$"
+            },
+            "contextVersion": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$",
+              "maxLength": 20
+            },
+            "seq": {
+              "type": "null"
+            },
+            "kind": {
+              "const": "ok"
+            },
+            "op": {
+              "const": "status"
+            },
+            "result": {
+              "type": "object",
+              "properties": {
+                "highestAdmittedSeq": {
+                  "type": "string",
+                  "pattern": "^(0|[1-9][0-9]*)$",
+                  "maxLength": 20
+                },
+                "contextVersion": {
+                  "type": "string",
+                  "pattern": "^(0|[1-9][0-9]*)$",
+                  "maxLength": 20
+                },
+                "context": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/$defs/Context"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "targetState": {
+                  "enum": [
+                    "session",
+                    "not-admitted",
+                    "active",
+                    "finished",
+                    "expired"
+                  ]
+                },
+                "stage": {
+                  "oneOf": [
+                    {
+                      "enum": [
+                        "upload",
+                        "queued",
+                        "running",
+                        "committed",
+                        "snapshot-ready",
+                        "saved",
+                        "failed",
+                        "cancelled"
+                      ]
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "result": {
+                  "oneOf": [
+                    {
+                      "oneOf": [
+                        {
+                          "$ref": "#/$defs/CommandCompletionResourceRef2"
+                        },
+                        {
+                          "allOf": [
+                            {
+                              "$ref": "#/$defs/ByteRef"
+                            },
+                            {
+                              "properties": {
+                                "mediaType": {
+                                  "const": "application/vnd.vestacraft.save-bundle+json"
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "receivedBytes": {
+                  "oneOf": [
+                    {
+                      "type": "string",
+                      "pattern": "^(0|[1-9][0-9]*)$",
+                      "maxLength": 20
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "committedRevision": {
+                  "oneOf": [
+                    {
+                      "type": "string",
+                      "pattern": "^(0|[1-9][0-9]*)$",
+                      "maxLength": 20
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "pendingSnapshots": {
+                  "type": "string",
+                  "pattern": "^(0|[1-9][0-9]*)$",
+                  "maxLength": 20
+                }
+              },
+              "required": [
+                "highestAdmittedSeq",
+                "contextVersion",
+                "context",
+                "targetState",
+                "stage",
+                "result",
+                "receivedBytes",
+                "committedRevision",
+                "pendingSnapshots"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "protocol",
+            "sessionId",
+            "contextVersion",
+            "seq",
+            "kind",
+            "op",
+            "result"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.native-session/2"
+            },
+            "sessionId": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{32}$"
+            },
+            "contextVersion": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$",
+              "maxLength": 20
+            },
+            "seq": {
+              "type": "null"
+            },
+            "kind": {
+              "const": "ok"
+            },
+            "op": {
+              "const": "cancel"
+            },
+            "targetSeq": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$",
+              "maxLength": 20
+            },
+            "result": {
+              "type": "object",
+              "properties": {
+                "outcome": {
+                  "enum": [
+                    "cancelled-before-commit",
+                    "too-late",
+                    "already-finished",
+                    "not-admitted",
+                    "expired"
+                  ]
+                },
+                "committedRevision": {
+                  "oneOf": [
+                    {
+                      "type": "string",
+                      "pattern": "^(0|[1-9][0-9]*)$",
+                      "maxLength": 20
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "outcome",
+                "committedRevision"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "protocol",
+            "sessionId",
+            "contextVersion",
+            "seq",
+            "kind",
+            "op",
+            "targetSeq",
+            "result"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.native-session/2"
+            },
+            "sessionId": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{32}$"
+            },
+            "contextVersion": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$",
+              "maxLength": 20
+            },
+            "seq": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$",
+              "maxLength": 20
+            },
+            "kind": {
+              "const": "accepted"
+            },
+            "op": {
+              "enum": [
+                "execute",
+                "snapshot"
+              ]
+            },
+            "jobId": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{32}$"
+            }
+          },
+          "required": [
+            "protocol",
+            "sessionId",
+            "contextVersion",
+            "seq",
+            "kind",
+            "op",
+            "jobId"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.native-session/2"
+            },
+            "kind": {
+              "const": "error"
+            },
+            "sessionId": {
+              "oneOf": [
+                {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{32}$"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "contextVersion": {
+              "oneOf": [
+                {
+                  "type": "string",
+                  "pattern": "^(0|[1-9][0-9]*)$",
+                  "maxLength": 20
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "seq": {
+              "oneOf": [
+                {
+                  "type": "string",
+                  "pattern": "^(0|[1-9][0-9]*)$",
+                  "maxLength": 20
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "code": {
+              "enum": [
+                "N_FRAME",
+                "N_UTF8",
+                "N_PROTOCOL",
+                "N_SCHEMA",
+                "N_POLICY",
+                "N_UNINITIALIZED",
+                "N_ALREADY_INITIALIZED",
+                "N_STALE_SESSION",
+                "N_SEQUENCE_GAP",
+                "N_REQUEST_EXPIRED",
+                "N_REPLAY_MISMATCH",
+                "N_CONTEXT_CONFLICT",
+                "N_BUSY",
+                "N_SCOPE_UNSUPPORTED",
+                "N_PROFILE_UNAVAILABLE",
+                "N_RESOURCE_LIMIT",
+                "N_RESOURCE_MISSING",
+                "N_DIGEST",
+                "N_UPLOAD_OFFSET",
+                "N_UPLOAD_STATE",
+                "N_CLOSE_REQUIRED",
+                "N_SNAPSHOT_UNKNOWN",
+                "N_HOST_ONLY",
+                "N_INCOMPLETE_WORK",
+                "N_INTERNAL",
+                "N_SNAPSHOT_CONFLICT"
+              ]
+            },
+            "admitted": {
+              "type": "boolean"
+            },
+            "fatal": {
+              "type": "boolean"
+            },
+            "highestAdmittedSeq": {
+              "oneOf": [
+                {
+                  "type": "string",
+                  "pattern": "^(0|[1-9][0-9]*)$",
+                  "maxLength": 20
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "message": {
+              "type": "string",
+              "maxLength": 1024
+            }
+          },
+          "required": [
+            "protocol",
+            "kind",
+            "sessionId",
+            "contextVersion",
+            "seq",
+            "code",
+            "admitted",
+            "fatal",
+            "highestAdmittedSeq",
+            "message"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.native-session/2"
+            },
+            "sessionId": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{32}$"
+            },
+            "contextVersion": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$",
+              "maxLength": 20
+            },
+            "seq": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$",
+              "maxLength": 20
+            },
+            "kind": {
+              "const": "failed"
+            },
+            "op": {
+              "enum": [
+                "execute",
+                "snapshot"
+              ]
+            },
+            "code": {
+              "enum": [
+                "E_SCHEMA",
+                "E_DOCUMENT_NOT_FOUND",
+                "E_STALE_EPOCH",
+                "E_OBJECT_NOT_FOUND",
+                "E_REVISION_CONFLICT",
+                "E_STALE_CURSOR",
+                "E_IDEMPOTENCY_CONFLICT",
+                "E_REQUEST_EXPIRED",
+                "E_NO_HISTORY",
+                "E_DOMAIN",
+                "E_RESOURCE_MISSING",
+                "E_RESOURCE_LIMIT",
+                "E_FORMAT_UNSUPPORTED",
+                "E_FORMAT_LOSS",
+                "E_RULE_UNFROZEN",
+                "E_NOT_IMPLEMENTED",
+                "E_NONATOMIC_EFFECT",
+                "E_CANCELLED",
+                "E_RENDER_FAILED",
+                "E_EXTERNAL_CHANGE",
+                "E_READ_ONLY",
+                "E_QUOTA",
+                "E_IO",
+                "E_TIMEOUT",
+                "E_REFERENCE_FAILURE",
+                "E_TARGET_TOKEN_EXPIRED",
+                "E_TARGET_TOKEN_INVALID"
+              ]
+            },
+            "committedRevision": {
+              "oneOf": [
+                {
+                  "type": "string",
+                  "pattern": "^(0|[1-9][0-9]*)$",
+                  "maxLength": 20
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "engineFailure": {
+              "$ref": "#/$defs/FailureNoticeResourceRef2"
+            }
+          },
+          "required": [
+            "protocol",
+            "sessionId",
+            "contextVersion",
+            "seq",
+            "kind",
+            "op",
+            "code",
+            "committedRevision",
+            "engineFailure"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "Warning": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "const": "W_REFERENCE_DEFECT"
+        },
+        "featureId": {
+          "type": "string",
+          "pattern": "^VF-[0-9]{4}$"
+        },
+        "referenceVersion": {
+          "type": "string"
+        },
+        "evidenceRef": {
+          "type": "string"
+        },
+        "ruleId": {
+          "type": "string"
+        },
+        "impact": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "code",
+        "featureId",
+        "referenceVersion",
+        "evidenceRef",
+        "ruleId",
+        "impact"
+      ],
+      "additionalProperties": false
+    },
+    "ChangeSet": {
+      "type": "object",
+      "properties": {
+        "before": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)$",
+          "maxLength": 20
+        },
+        "after": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)$",
+          "maxLength": 20
+        },
+        "digest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "changedObjects": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{32}$"
+          },
+          "minItems": 0
+        },
+        "invalidated": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "domain",
+              "scene",
+              "field",
+              "render"
+            ]
+          },
+          "minItems": 0
+        }
+      },
+      "required": [
+        "before",
+        "after",
+        "digest",
+        "changedObjects",
+        "invalidated"
+      ],
+      "additionalProperties": false
+    },
+    "CommandCompletion": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "command": {
+              "const": "cell.set"
+            },
+            "requestId": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{32}$"
+            },
+            "documentId": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{32}$"
+            },
+            "epoch": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{32}$"
+            },
+            "revision": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$",
+              "maxLength": 20
+            },
+            "stateDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "changeSet": {
+              "$ref": "#/$defs/ChangeSet"
+            },
+            "result": {
+              "type": "null"
+            },
+            "warnings": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/Warning"
+              },
+              "minItems": 0
+            },
+            "history": {
+              "$ref": "#/$defs/HistorySummary2"
+            }
+          },
+          "required": [
+            "command",
+            "requestId",
+            "documentId",
+            "epoch",
+            "revision",
+            "stateDigest",
+            "changeSet",
+            "result",
+            "warnings",
+            "history"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "command": {
+              "const": "site.add"
+            },
+            "requestId": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{32}$"
+            },
+            "documentId": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{32}$"
+            },
+            "epoch": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{32}$"
+            },
+            "revision": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$",
+              "maxLength": 20
+            },
+            "stateDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "changeSet": {
+              "$ref": "#/$defs/ChangeSet"
+            },
+            "result": {
+              "type": "object",
+              "properties": {
+                "siteId": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{32}$"
+                }
+              },
+              "required": [
+                "siteId"
+              ],
+              "additionalProperties": false
+            },
+            "warnings": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/Warning"
+              },
+              "minItems": 0
+            },
+            "history": {
+              "$ref": "#/$defs/HistorySummary2"
+            }
+          },
+          "required": [
+            "command",
+            "requestId",
+            "documentId",
+            "epoch",
+            "revision",
+            "stateDigest",
+            "changeSet",
+            "result",
+            "warnings",
+            "history"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "command": {
+              "const": "site.setFractional"
+            },
+            "requestId": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{32}$"
+            },
+            "documentId": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{32}$"
+            },
+            "epoch": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{32}$"
+            },
+            "revision": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$",
+              "maxLength": 20
+            },
+            "stateDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "changeSet": {
+              "$ref": "#/$defs/ChangeSet"
+            },
+            "result": {
+              "type": "null"
+            },
+            "warnings": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/Warning"
+              },
+              "minItems": 0
+            },
+            "history": {
+              "$ref": "#/$defs/HistorySummary2"
+            }
+          },
+          "required": [
+            "command",
+            "requestId",
+            "documentId",
+            "epoch",
+            "revision",
+            "stateDigest",
+            "changeSet",
+            "result",
+            "warnings",
+            "history"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "command": {
+              "const": "history.undo"
+            },
+            "requestId": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{32}$"
+            },
+            "documentId": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{32}$"
+            },
+            "epoch": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{32}$"
+            },
+            "revision": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$",
+              "maxLength": 20
+            },
+            "stateDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "changeSet": {
+              "$ref": "#/$defs/ChangeSet"
+            },
+            "result": {
+              "type": "null"
+            },
+            "warnings": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/Warning"
+              },
+              "minItems": 0
+            },
+            "history": {
+              "$ref": "#/$defs/HistorySummary2"
+            }
+          },
+          "required": [
+            "command",
+            "requestId",
+            "documentId",
+            "epoch",
+            "revision",
+            "stateDigest",
+            "changeSet",
+            "result",
+            "warnings",
+            "history"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "command": {
+              "const": "history.redo"
+            },
+            "requestId": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{32}$"
+            },
+            "documentId": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{32}$"
+            },
+            "epoch": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{32}$"
+            },
+            "revision": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$",
+              "maxLength": 20
+            },
+            "stateDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "changeSet": {
+              "$ref": "#/$defs/ChangeSet"
+            },
+            "result": {
+              "type": "null"
+            },
+            "warnings": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/Warning"
+              },
+              "minItems": 0
+            },
+            "history": {
+              "$ref": "#/$defs/HistorySummary2"
+            }
+          },
+          "required": [
+            "command",
+            "requestId",
+            "documentId",
+            "epoch",
+            "revision",
+            "stateDigest",
+            "changeSet",
+            "result",
+            "warnings",
+            "history"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "command": {
+              "const": "display.setHidden"
+            },
+            "requestId": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{32}$"
+            },
+            "documentId": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{32}$"
+            },
+            "epoch": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{32}$"
+            },
+            "revision": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$",
+              "maxLength": 20
+            },
+            "stateDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "changeSet": {
+              "$ref": "#/$defs/ChangeSet"
+            },
+            "result": {
+              "type": "null"
+            },
+            "warnings": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/Warning"
+              },
+              "minItems": 0
+            },
+            "history": {
+              "$ref": "#/$defs/HistorySummary2"
+            }
+          },
+          "required": [
+            "command",
+            "requestId",
+            "documentId",
+            "epoch",
+            "revision",
+            "stateDigest",
+            "changeSet",
+            "result",
+            "warnings",
+            "history"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "command": {
+              "const": "boundary.set"
+            },
+            "requestId": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{32}$"
+            },
+            "documentId": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{32}$"
+            },
+            "epoch": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{32}$"
+            },
+            "revision": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$",
+              "maxLength": 20
+            },
+            "stateDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "changeSet": {
+              "$ref": "#/$defs/ChangeSet"
+            },
+            "result": {
+              "type": "null"
+            },
+            "warnings": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/Warning"
+              },
+              "minItems": 0
+            },
+            "history": {
+              "$ref": "#/$defs/HistorySummary2"
+            }
+          },
+          "required": [
+            "command",
+            "requestId",
+            "documentId",
+            "epoch",
+            "revision",
+            "stateDigest",
+            "changeSet",
+            "result",
+            "warnings",
+            "history"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "command": {
+              "const": "view.setCamera"
+            },
+            "requestId": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{32}$"
+            },
+            "documentId": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{32}$"
+            },
+            "epoch": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{32}$"
+            },
+            "revision": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$",
+              "maxLength": 20
+            },
+            "stateDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "changeSet": {
+              "$ref": "#/$defs/ChangeSet"
+            },
+            "result": {
+              "type": "null"
+            },
+            "warnings": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/Warning"
+              },
+              "minItems": 0
+            },
+            "history": {
+              "$ref": "#/$defs/HistorySummary2"
+            }
+          },
+          "required": [
+            "command",
+            "requestId",
+            "documentId",
+            "epoch",
+            "revision",
+            "stateDigest",
+            "changeSet",
+            "result",
+            "warnings",
+            "history"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "command": {
+              "const": "domain.prepare"
+            },
+            "requestId": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{32}$"
+            },
+            "documentId": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{32}$"
+            },
+            "epoch": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{32}$"
+            },
+            "revision": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$",
+              "maxLength": 20
+            },
+            "stateDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "changeSet": {
+              "$ref": "#/$defs/ChangeSet"
+            },
+            "result": {
+              "$ref": "scientific-composition.schema.json#/$defs/PrepareDomainResult2"
+            },
+            "warnings": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/Warning"
+              },
+              "minItems": 0
+            },
+            "history": {
+              "$ref": "#/$defs/HistorySummary2"
+            }
+          },
+          "required": [
+            "command",
+            "requestId",
+            "documentId",
+            "epoch",
+            "revision",
+            "stateDigest",
+            "changeSet",
+            "result",
+            "warnings",
+            "history"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "command": {
+              "const": "domain.state.prepare"
+            },
+            "requestId": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{32}$"
+            },
+            "documentId": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{32}$"
+            },
+            "epoch": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{32}$"
+            },
+            "revision": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$",
+              "maxLength": 20
+            },
+            "stateDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "changeSet": {
+              "$ref": "#/$defs/ChangeSet"
+            },
+            "result": {
+              "$ref": "scientific-composition.schema.json#/$defs/PrepareStateResult2"
+            },
+            "warnings": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/Warning"
+              },
+              "minItems": 0
+            },
+            "history": {
+              "$ref": "#/$defs/HistorySummary2"
+            }
+          },
+          "required": [
+            "command",
+            "requestId",
+            "documentId",
+            "epoch",
+            "revision",
+            "stateDigest",
+            "changeSet",
+            "result",
+            "warnings",
+            "history"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "command": {
+              "const": "domain.apply"
+            },
+            "requestId": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{32}$"
+            },
+            "documentId": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{32}$"
+            },
+            "epoch": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{32}$"
+            },
+            "revision": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$",
+              "maxLength": 20
+            },
+            "stateDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "changeSet": {
+              "$ref": "#/$defs/ChangeSet"
+            },
+            "result": {
+              "$ref": "scientific-composition.schema.json#/$defs/AppliedDomainResult2"
+            },
+            "warnings": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/Warning"
+              },
+              "minItems": 0
+            },
+            "history": {
+              "$ref": "#/$defs/HistorySummary2"
+            }
+          },
+          "required": [
+            "command",
+            "requestId",
+            "documentId",
+            "epoch",
+            "revision",
+            "stateDigest",
+            "changeSet",
+            "result",
+            "warnings",
+            "history"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "FailureNotice": {
+      "type": "object",
+      "properties": {
+        "requestId": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{32}$"
+        },
+        "code": {
+          "enum": [
+            "E_SCHEMA",
+            "E_DOCUMENT_NOT_FOUND",
+            "E_STALE_EPOCH",
+            "E_OBJECT_NOT_FOUND",
+            "E_REVISION_CONFLICT",
+            "E_STALE_CURSOR",
+            "E_IDEMPOTENCY_CONFLICT",
+            "E_REQUEST_EXPIRED",
+            "E_NO_HISTORY",
+            "E_DOMAIN",
+            "E_RESOURCE_MISSING",
+            "E_RESOURCE_LIMIT",
+            "E_FORMAT_UNSUPPORTED",
+            "E_FORMAT_LOSS",
+            "E_RULE_UNFROZEN",
+            "E_NOT_IMPLEMENTED",
+            "E_NONATOMIC_EFFECT",
+            "E_CANCELLED",
+            "E_RENDER_FAILED",
+            "E_EXTERNAL_CHANGE",
+            "E_READ_ONLY",
+            "E_QUOTA",
+            "E_IO",
+            "E_TIMEOUT",
+            "E_REFERENCE_FAILURE",
+            "E_TARGET_TOKEN_EXPIRED",
+            "E_TARGET_TOKEN_INVALID"
+          ]
+        },
+        "stage": {
+          "enum": [
+            "schema",
+            "identity",
+            "capability",
+            "prepare",
+            "execute",
+            "commit",
+            "encode"
+          ]
+        },
+        "message": {
+          "type": "string",
+          "maxLength": 1024
+        },
+        "retryable": {
+          "type": "boolean"
+        },
+        "committedRevision": {
+          "oneOf": [
+            {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$",
+              "maxLength": 20
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "recovery": {
+          "enum": [
+            "refresh-context",
+            "inspect-committed",
+            "query-same-operation",
+            "explicit-new-request",
+            "none"
+          ]
+        }
+      },
+      "required": [
+        "requestId",
+        "code",
+        "stage",
+        "message",
+        "retryable",
+        "committedRevision",
+        "recovery"
+      ],
+      "additionalProperties": false
+    },
+    "HistorySummary2": {
+      "$ref": "history-effects-wire.schema.json#/$defs/HistoryAwareCommitSummary"
+    },
+    "OpenBundleResourceRef2": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/ByteRef"
+        },
+        {
+          "properties": {
+            "mediaType": {
+              "const": "application/vnd.vestacraft.native-open+json"
+            }
+          }
+        }
+      ],
+      "x-resourcePayloadSchema": {
+        "$ref": "#/$defs/OpenBundle"
+      }
+    },
+    "InspectionPageResourceRef2": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/ByteRef"
+        },
+        {
+          "properties": {
+            "mediaType": {
+              "const": "application/vnd.vestacraft.native-inspection+json"
+            }
+          }
+        }
+      ],
+      "x-resourcePayloadSchema": {
+        "$ref": "#/$defs/InspectionPage"
+      }
+    },
+    "HostAckResourceRef2": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/ByteRef"
+        },
+        {
+          "properties": {
+            "mediaType": {
+              "const": "application/vnd.vestacraft.host-ack+json"
+            }
+          }
+        }
+      ],
+      "x-resourcePayloadSchema": {
+        "$ref": "#/$defs/HostAck"
+      }
+    },
+    "HostNackResourceRef2": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/ByteRef"
+        },
+        {
+          "properties": {
+            "mediaType": {
+              "const": "application/vnd.vestacraft.host-nack+json"
+            }
+          }
+        }
+      ],
+      "x-resourcePayloadSchema": {
+        "$ref": "#/$defs/HostNack"
+      }
+    },
+    "CommandCompletionResourceRef2": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/ByteRef"
+        },
+        {
+          "properties": {
+            "mediaType": {
+              "const": "application/vnd.vestacraft.command-outcome+json"
+            }
+          }
+        }
+      ],
+      "x-resourcePayloadSchema": {
+        "$ref": "#/$defs/CommandCompletion"
+      }
+    },
+    "FailureNoticeResourceRef2": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/ByteRef"
+        },
+        {
+          "properties": {
+            "mediaType": {
+              "const": "application/vnd.vestacraft.engine-failure+json"
+            }
+          }
+        }
+      ],
+      "x-resourcePayloadSchema": {
+        "$ref": "#/$defs/FailureNotice"
+      }
+    }
+  },
+  "$ref": "#/$defs/Request",
+  "x-predecessor": {
+    "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-071145-native-session/contracts/native-session.schema.json",
+    "sha256": "bfcae2e333ce537a0be47cef7008558de78909a7e50627c492abf11003c3198f"
+  },
+  "x-designOnly": true,
+  "x-requiredSemanticChecks": [
+    "all u64 canonical strings parsed exactly and<=2^64-1",
+    "typed JSON resource original bytes/hash/size, strict duplicate-key/nonfinite/unknown-field rejection before exact OperationRequest2 or ScientificStateEdit2 decode",
+    "resource staging hash is not current-source authority or host privilege",
+    "same seq originalbytes retries, same process/session/actualdocument/epoch/context semantics inheritedNS1",
+    "every completion history document/epoch/revision/liveContentDigest equal actual command outcome; nochange preserves history",
+    "candidate IDs/digests bind exact immutable typed result+sourcecontext+operation/profile+budgetpolicy; no unpairednulls; partial/sourcefailure never apply",
+    "maxPendingDomainCandidates/maxDomainResultBytes/retentionMs are mandatory positive actualhost policy limits; counts/bytes also within Budget, expiry releases candidate/job retains but cachedterminal never reexecutes",
+    "domain.apply accepts only actual owned complete unexpired candidate at capturedrevision; materialized field/mesh/state publication full validation then one atomiccommit",
+    "domain.prepare/query never marks saved or invokes shell/external-process/preferences owner; privileged EX3/AL5 routes use authenticated existing host separately",
+    "resource role derived from envelope pointer and admitted operation, never inferred from caller media alone; resolve same-session owned resource, limits, length/hash, strict UTF8 and JSON then exact role schema before Engine/SaveTracker; x-resourcePayloadSchema is mandatory generator/decoder input, not automatic JSONSchema evaluation of external bytes",
+    "CommandCompletion command must equal admitted invocation; history exact command outcome and wire u64/current-owner invariants; all11 variants verified; HostAck/Nack require captured pending snapshot/privatehost/HS receipts after shape validation; resource decode failure never settles Saved",
+    "resource.begin/commit/raw primary/dependency descriptors do not decode arbitrary bytes as JSON. Snapshot SaveBundle keeps pinned FC/I31 external producer contract; status chooses the admitted original operation. No inline large-payload fallback; max frame/chunk and resource leases unchanged"
+  ],
+  "x-resourceBindings": [
+    {
+      "role": "OpenBundle",
+      "descriptor": {
+        "$ref": "#/$defs/OpenBundleResourceRef2"
+      },
+      "payload": {
+        "$ref": "#/$defs/OpenBundle"
+      }
+    },
+    {
+      "role": "InspectionPage",
+      "descriptor": {
+        "$ref": "#/$defs/InspectionPageResourceRef2"
+      },
+      "payload": {
+        "$ref": "#/$defs/InspectionPage"
+      }
+    },
+    {
+      "role": "HostAck",
+      "descriptor": {
+        "$ref": "#/$defs/HostAckResourceRef2"
+      },
+      "payload": {
+        "$ref": "#/$defs/HostAck"
+      }
+    },
+    {
+      "role": "HostNack",
+      "descriptor": {
+        "$ref": "#/$defs/HostNackResourceRef2"
+      },
+      "payload": {
+        "$ref": "#/$defs/HostNack"
+      }
+    },
+    {
+      "role": "CommandCompletion",
+      "descriptor": {
+        "$ref": "#/$defs/CommandCompletionResourceRef2"
+      },
+      "payload": {
+        "$ref": "#/$defs/CommandCompletion"
+      }
+    },
+    {
+      "role": "FailureNotice",
+      "descriptor": {
+        "$ref": "#/$defs/FailureNoticeResourceRef2"
+      },
+      "payload": {
+        "$ref": "#/$defs/FailureNotice"
+      }
+    }
+  ],
+  "x-profileDerivationContract": "profile-derivation.contract.json",
+  "x-contractGeneration": "I33"
+}

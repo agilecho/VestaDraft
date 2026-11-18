@@ -1,0 +1,26 @@
+{
+  "schemaVersion": "NS2-host-digest-input/1",
+  "bindingGeneration": "HS4-I33",
+  "ownerScopeDigest": "1111111111111111111111111111111111111111111111111111111111111111",
+  "writerSet": [
+    "synthetic-owned-writer"
+  ],
+  "storagePolicy": "unsupported",
+  "capabilities": {
+    "ownedRead": false,
+    "stagedResources": false,
+    "independentSemanticReadback": false,
+    "operationQuery": false,
+    "durablePublication": false,
+    "externalWritersExcluded": false
+  },
+  "limits": {
+    "maxFrameBytes": "1024",
+    "maxResourceBytes": "1024",
+    "maxResidentBytes": "1024",
+    "maxPendingOperations": "1024"
+  },
+  "evidenceDigests": [
+    "2222222222222222222222222222222222222222222222222222222222222222"
+  ]
+}

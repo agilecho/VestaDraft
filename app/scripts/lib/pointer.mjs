@@ -1,0 +1,1 @@
+export function pointer(v,p){if(p==='')return v;if(!p.startsWith('/'))throw Error('JSON pointer');for(const token of p.slice(1).split('/')){const k=token.replace(/~1/g,'/').replace(/~0/g,'~');if(v===null||!Object.hasOwn(v,k))throw Error('missing pointer '+p);v=v[k];}return v;}

@@ -1,0 +1,7 @@
+{
+  "schemaVersion": "NS2-save-profile-input/1",
+  "formatProfileId": "vesta.profile.encode.obs_o01.v1",
+  "sourceModelGeneration": "I33-CurrentSource7",
+  "resourcePolicy": "native-vesta-plus-resources",
+  "settlementPolicy": "HS4-independent-full-readback-before-saved"
+}

@@ -1,0 +1,5111 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:draft:scientific:structure-geometry:2",
+  "title": "SG/2 author-design successor components",
+  "description": "Design-only independent namespace; does not mutate SG1-r2,bounded/3 or registered177 operations. Every object closed. No generic rawJSON/harmonicplaceholder. Scalar/frame semantic invariants are normative alongside JSONshape.",
+  "oneOf": [
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "namespace": {
+          "const": "vestacraft.scientific.structure-geometry/2"
+        },
+        "component": {
+          "const": "phase-placement"
+        },
+        "ownerId": {
+          "$ref": "#/$defs/Id"
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "payload": {
+          "$ref": "#/$defs/PhasePlacementSet"
+        }
+      },
+      "required": [
+        "namespace",
+        "component",
+        "ownerId",
+        "revision",
+        "payload"
+      ]
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "namespace": {
+          "const": "vestacraft.scientific.structure-geometry/2"
+        },
+        "component": {
+          "const": "group-setting"
+        },
+        "ownerId": {
+          "$ref": "#/$defs/Id"
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "payload": {
+          "$ref": "#/$defs/GroupSettingState"
+        }
+      },
+      "required": [
+        "namespace",
+        "component",
+        "ownerId",
+        "revision",
+        "payload"
+      ]
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "namespace": {
+          "const": "vestacraft.scientific.structure-geometry/2"
+        },
+        "component": {
+          "const": "adp-render-plan"
+        },
+        "ownerId": {
+          "$ref": "#/$defs/Id"
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "payload": {
+          "$ref": "#/$defs/AdpRenderPlan"
+        }
+      },
+      "required": [
+        "namespace",
+        "component",
+        "ownerId",
+        "revision",
+        "payload"
+      ]
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "namespace": {
+          "const": "vestacraft.scientific.structure-geometry/2"
+        },
+        "component": {
+          "const": "merge-and-bond-plan"
+        },
+        "ownerId": {
+          "$ref": "#/$defs/Id"
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "payload": {
+          "$ref": "#/$defs/MergePlan"
+        }
+      },
+      "required": [
+        "namespace",
+        "component",
+        "ownerId",
+        "revision",
+        "payload"
+      ]
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "namespace": {
+          "const": "vestacraft.scientific.structure-geometry/2"
+        },
+        "component": {
+          "const": "plane-fit"
+        },
+        "ownerId": {
+          "$ref": "#/$defs/Id"
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "payload": {
+          "$ref": "#/$defs/PlaneFit"
+        }
+      },
+      "required": [
+        "namespace",
+        "component",
+        "ownerId",
+        "revision",
+        "payload"
+      ]
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "namespace": {
+          "const": "vestacraft.scientific.structure-geometry/2"
+        },
+        "component": {
+          "const": "native-camera"
+        },
+        "ownerId": {
+          "$ref": "#/$defs/Id"
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "payload": {
+          "$ref": "#/$defs/NativeCamera"
+        }
+      },
+      "required": [
+        "namespace",
+        "component",
+        "ownerId",
+        "revision",
+        "payload"
+      ]
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "namespace": {
+          "const": "vestacraft.scientific.structure-geometry/2"
+        },
+        "component": {
+          "const": "native-dimension-D"
+        },
+        "ownerId": {
+          "$ref": "#/$defs/Id"
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "payload": {
+          "$ref": "#/$defs/NativeDimensionDState"
+        }
+      },
+      "required": [
+        "namespace",
+        "component",
+        "ownerId",
+        "revision",
+        "payload"
+      ]
+    }
+  ],
+  "$defs": {
+    "Id": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{32}$"
+    },
+    "SHA256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "Float32Word": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{8}$",
+      "description": "little-endian4 source bytes,not display endian"
+    },
+    "Vec3": {
+      "type": "array",
+      "items": {
+        "type": "number",
+        "minimum": -1.7976931348623157e+308,
+        "maximum": 1.7976931348623157e+308,
+        "x-unit": "dimensionless"
+      },
+      "minItems": 3,
+      "maxItems": 3
+    },
+    "Vec3A": {
+      "type": "array",
+      "items": {
+        "type": "number",
+        "minimum": -1.7976931348623157e+308,
+        "maximum": 1.7976931348623157e+308,
+        "x-unit": "angstrom"
+      },
+      "minItems": 3,
+      "maxItems": 3
+    },
+    "Vec6A2": {
+      "type": "array",
+      "items": {
+        "type": "number",
+        "minimum": -1.7976931348623157e+308,
+        "maximum": 1.7976931348623157e+308,
+        "x-unit": "angstrom^2"
+      },
+      "minItems": 6,
+      "maxItems": 6
+    },
+    "Matrix3Rows": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Vec3"
+      },
+      "minItems": 3,
+      "maxItems": 3
+    },
+    "Vec4": {
+      "type": "array",
+      "items": {
+        "type": "number",
+        "minimum": -1.7976931348623157e+308,
+        "maximum": 1.7976931348623157e+308,
+        "x-unit": "dimensionless"
+      },
+      "minItems": 4,
+      "maxItems": 4
+    },
+    "Matrix4Rows": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Vec4"
+      },
+      "minItems": 4,
+      "maxItems": 4
+    },
+    "Rational": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "numerator": {
+          "type": "string",
+          "pattern": "^(0|-?[1-9][0-9]*)$"
+        },
+        "denominator": {
+          "type": "string",
+          "pattern": "^[1-9][0-9]*$"
+        }
+      },
+      "required": [
+        "numerator",
+        "denominator"
+      ],
+      "x-invariants": [
+        "gcd(abs(numerator),denominator)=1",
+        "canonicalzero=0/1"
+      ]
+    },
+    "Rational3": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Rational"
+      },
+      "minItems": 3,
+      "maxItems": 3
+    },
+    "RationalMatrix3": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Rational3"
+      },
+      "minItems": 3,
+      "maxItems": 3
+    },
+    "SourceSpan": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "resourceSHA256": {
+          "$ref": "#/$defs/SHA256"
+        },
+        "byteOffset": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "byteLength": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "spanSHA256": {
+          "$ref": "#/$defs/SHA256"
+        }
+      },
+      "required": [
+        "resourceSHA256",
+        "byteOffset",
+        "byteLength",
+        "spanSHA256"
+      ]
+    },
+    "Frame": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "kind": {
+              "const": "periodic-fractional"
+            },
+            "basisId": {
+              "$ref": "#/$defs/Id"
+            },
+            "basisColumnsInCartesianA": {
+              "$ref": "#/$defs/Matrix3Rows"
+            }
+          },
+          "required": [
+            "kind",
+            "basisId",
+            "basisColumnsInCartesianA"
+          ],
+          "x-invariants": [
+            "H columns are lattice vectors;det(H)>0 andnonsingular;notation rows contains mathematicalmatrix rows"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "kind": {
+              "const": "molecular-cartesian-A"
+            },
+            "basisId": {
+              "$ref": "#/$defs/Id"
+            }
+          },
+          "required": [
+            "kind",
+            "basisId"
+          ]
+        }
+      ]
+    },
+    "WorldPose": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "rotationRows": {
+          "$ref": "#/$defs/Matrix3Rows"
+        },
+        "translationA": {
+          "$ref": "#/$defs/Vec3A"
+        }
+      },
+      "required": [
+        "rotationRows",
+        "translationA"
+      ],
+      "x-invariants": [
+        "R^T R=I anddetR=+1 within separatelydeclaredrotationbudget; no implicit orthogonalization",
+        "rWorld=R*rLocalCartesianA+tA"
+      ]
+    },
+    "Reference": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "kind": {
+              "const": "internal-cartesian"
+            }
+          },
+          "required": [
+            "kind"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "kind": {
+              "const": "phase"
+            },
+            "phaseId": {
+              "$ref": "#/$defs/Id"
+            }
+          },
+          "required": [
+            "kind",
+            "phaseId"
+          ]
+        }
+      ]
+    },
+    "Anchor": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "enum": [
+            "fractional",
+            "cartesian-A"
+          ]
+        },
+        "value": {
+          "$ref": "#/$defs/Vec3"
+        }
+      },
+      "required": [
+        "kind",
+        "value"
+      ],
+      "x-invariants": [
+        "fractional allowed only periodicframe;source anchorunit retained;Cartesian A explicit"
+      ]
+    },
+    "AxisPair": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "firstKind": {
+          "enum": [
+            "direct",
+            "reciprocal"
+          ]
+        },
+        "first": {
+          "$ref": "#/$defs/Vec3"
+        },
+        "second": {
+          "$ref": "#/$defs/Vec3"
+        }
+      },
+      "required": [
+        "firstKind",
+        "first",
+        "second"
+      ],
+      "x-invariants": [
+        "secondKind is oppositefirstKind;direct→H*v,reciprocal→inverse(H)^T*h, no2pi",
+        "bothnonzero;transformedpair perpendicular within declaredprofile;nativelegacyexceptions distinct"
+      ]
+    },
+    "OrientationConstraint": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "kind": {
+              "const": "resolved-world"
+            },
+            "rotationRows": {
+              "$ref": "#/$defs/Matrix3Rows"
+            }
+          },
+          "required": [
+            "kind",
+            "rotationRows"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "kind": {
+              "const": "parallel-axis-pair"
+            },
+            "reference": {
+              "$ref": "#/$defs/Reference"
+            },
+            "currentAxes": {
+              "$ref": "#/$defs/AxisPair"
+            },
+            "referenceAxes": {
+              "$ref": "#/$defs/AxisPair"
+            }
+          },
+          "required": [
+            "kind",
+            "reference",
+            "currentAxes",
+            "referenceAxes"
+          ]
+        }
+      ]
+    },
+    "PositionConstraint": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "kind": {
+              "const": "resolved-world"
+            },
+            "translationA": {
+              "$ref": "#/$defs/Vec3A"
+            }
+          },
+          "required": [
+            "kind",
+            "translationA"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "kind": {
+              "const": "anchor-coincidence"
+            },
+            "reference": {
+              "$ref": "#/$defs/Reference"
+            },
+            "currentAnchor": {
+              "$ref": "#/$defs/Anchor"
+            },
+            "referenceAnchor": {
+              "$ref": "#/$defs/Anchor"
+            }
+          },
+          "required": [
+            "kind",
+            "reference",
+            "currentAnchor",
+            "referenceAnchor"
+          ]
+        }
+      ]
+    },
+    "NativeLayerCurrent": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ltranslSelectorI32": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "lorientSelectorI32": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "lorientRawFlagsU32": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4294967295
+        },
+        "currentPositionAnchor6": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "minimum": -1.7976931348623157e+308,
+            "maximum": 1.7976931348623157e+308,
+            "x-unit": "dimensionless"
+          },
+          "minItems": 6,
+          "maxItems": 6
+        },
+        "firstOrientationVectors6": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "minimum": -1.7976931348623157e+308,
+            "maximum": 1.7976931348623157e+308,
+            "x-unit": "dimensionless"
+          },
+          "minItems": 6,
+          "maxItems": 6
+        },
+        "secondOrientationVectors6": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "minimum": -1.7976931348623157e+308,
+            "maximum": 1.7976931348623157e+308,
+            "x-unit": "dimensionless"
+          },
+          "minItems": 6,
+          "maxItems": 6
+        },
+        "lmatrixLogicalRows": {
+          "$ref": "#/$defs/Matrix4Rows"
+        },
+        "separateTranslationF32A": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "minimum": -3.4028234663852886e+38,
+            "maximum": 3.4028234663852886e+38,
+            "x-unit": "angstrom",
+            "x-invariant": "exact finite binary32 value promoted to JSONnumber; rawWord must match wherever supplied"
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "source": {
+          "$ref": "#/$defs/SourceSpan"
+        }
+      },
+      "required": [
+        "ltranslSelectorI32",
+        "lorientSelectorI32",
+        "lorientRawFlagsU32",
+        "currentPositionAnchor6",
+        "firstOrientationVectors6",
+        "secondOrientationVectors6",
+        "lmatrixLogicalRows",
+        "separateTranslationF32A",
+        "source"
+      ],
+      "x-producer-consumer": "03native currentlayerstate -> SG/2explicitconstraints/worldpose bridge;two selectors independent;originalalias/history separate",
+      "x-invariants": [
+        "retain full16f64 andrawflags evenwhen no properrotationprojection; do not collapse two references intooneparent"
+      ]
+    },
+    "PhasePlacement": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "phaseId": {
+          "$ref": "#/$defs/Id"
+        },
+        "frame": {
+          "$ref": "#/$defs/Frame"
+        },
+        "orientation": {
+          "$ref": "#/$defs/OrientationConstraint"
+        },
+        "position": {
+          "$ref": "#/$defs/PositionConstraint"
+        },
+        "worldPose": {
+          "$ref": "#/$defs/WorldPose"
+        },
+        "nativeCurrent": {
+          "$ref": "#/$defs/NativeLayerCurrent"
+        },
+        "nativeSourceObservation": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "record": {
+              "$ref": "#/$defs/NativeLayerSourceObservation"
+            },
+            "source": {
+              "$ref": "#/$defs/SourceSpan"
+            }
+          },
+          "required": [
+            "record",
+            "source"
+          ]
+        }
+      },
+      "required": [
+        "phaseId",
+        "frame",
+        "orientation",
+        "position",
+        "worldPose"
+      ],
+      "x-invariants": [
+        "sourceobservation immutableinputaliases/4rawflags separatefromnativeCurrent actualselectors/word andcorrectedconstraints/worldPose",
+        "a changedcurrentreference cannotrewriteoriginalsourceobservation;source/current identities/content revisions independentlybound"
+      ]
+    },
+    "PhasePlacementSet": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "evaluationProfile": {
+          "enum": [
+            "corrected-two-pass-axis-pair",
+            "native-ascending-source-order"
+          ]
+        },
+        "phases": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/PhasePlacement"
+          },
+          "minItems": 1
+        },
+        "nativeSourceOrder": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Id"
+          },
+          "minItems": 0
+        }
+      },
+      "required": [
+        "evaluationProfile",
+        "phases",
+        "nativeSourceOrder"
+      ],
+      "x-invariants": [
+        "uniquephaseId;allreferencesresolvewithinowner/revision",
+        "corrected:orientationDAG first,positionDAG second;unionmaycycle",
+        "corrected C=[e1,e2,e1xe2],R_i=R_ref*C_ref*C_i^T;t_i=R_pos*H_pos*q+t_pos−R_i*H_i*p",
+        "nativeprofileusespinnedframealgorithm/1e-5/identityfallback;self/forward/outofrangebranches reported separately; do not assert corrected graph equivalence"
+      ]
+    },
+    "SymmetryOp3": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "operatorId": {
+          "$ref": "#/$defs/Id"
+        },
+        "fractionalRotationRows": {
+          "$ref": "#/$defs/RationalMatrix3"
+        },
+        "fractionalTranslation": {
+          "$ref": "#/$defs/Rational3"
+        },
+        "timeSign": {
+          "enum": [
+            -1,
+            1
+          ]
+        },
+        "basisId": {
+          "$ref": "#/$defs/Id"
+        }
+      },
+      "required": [
+        "operatorId",
+        "fractionalRotationRows",
+        "fractionalTranslation",
+        "timeSign",
+        "basisId"
+      ],
+      "x-invariants": [
+        "fractional affinefPrime=R*f+t",
+        "Dcart=H*R*inverse(H);polarvector Dcart*v;axialmagnetic timeSign*det(Dcart)*Dcart*m",
+        "exactoperator/group closure andmetriccompatibility separatelyvalidated, no float rational guess"
+      ]
+    },
+    "OrdinarySettingKey": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "native-ordinary-setting"
+        },
+        "assetSHA256": {
+          "$ref": "#/$defs/SHA256"
+        },
+        "groupNumber": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 230
+        },
+        "settingOrdinal1": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "rawHeaderKey": {
+          "type": "string",
+          "pattern": "^raw-header:[0-9]+:[0-9]+:[0-9]+:[0-9]+:[0-9]+$"
+        },
+        "rawHeaderFiveI32": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": -2147483648,
+            "maximum": 2147483647
+          },
+          "minItems": 5,
+          "maxItems": 5
+        },
+        "nativeName": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source": {
+          "$ref": "#/$defs/SourceSpan"
+        }
+      },
+      "required": [
+        "kind",
+        "assetSHA256",
+        "groupNumber",
+        "settingOrdinal1",
+        "rawHeaderKey",
+        "rawHeaderFiveI32",
+        "nativeName",
+        "source"
+      ],
+      "x-invariants": [
+        "header[0]=groupNumber,header[1]=settingOrdinal1 forpinned365rows",
+        "setting identityincludesassetSHA andordinal;labelalone notidentity; header[2] kept raw,not inventedorigin"
+      ]
+    },
+    "MagneticSettingKey": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "native-BNS-setting"
+        },
+        "assetSHA256": {
+          "$ref": "#/$defs/SHA256"
+        },
+        "bnsMajor": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 230
+        },
+        "bnsMinor": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1651
+        },
+        "bnsText": {
+          "type": "string",
+          "pattern": "^[0-9]+[.][0-9]+$"
+        },
+        "nativeName": {
+          "type": "string",
+          "minLength": 1
+        },
+        "rawHeader": {
+          "type": "string",
+          "minLength": 1
+        },
+        "ogToBnsRawExpression": {
+          "type": "string",
+          "minLength": 0
+        },
+        "source": {
+          "$ref": "#/$defs/SourceSpan"
+        }
+      },
+      "required": [
+        "kind",
+        "assetSHA256",
+        "bnsMajor",
+        "bnsMinor",
+        "bnsText",
+        "nativeName",
+        "rawHeader",
+        "ogToBnsRawExpression",
+        "source"
+      ],
+      "x-invariants": [
+        "bnsText must matchmajor/minor;sourceBNS magneticunitcellbasis retained",
+        "emptyogToBnsExpression meansactual absentrow,not implicitidentityproof"
+      ]
+    },
+    "GroupSettingState": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "selectedSetting": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/OrdinarySettingKey"
+            },
+            {
+              "$ref": "#/$defs/MagneticSettingKey"
+            }
+          ]
+        },
+        "basisId": {
+          "$ref": "#/$defs/Id"
+        },
+        "listedSourceOperatorExpressions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1
+        },
+        "qualifiedAffineOps": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SymmetryOp3"
+          },
+          "minItems": 1
+        },
+        "nativeCurrentCellTransformLogicalRows": {
+          "$ref": "#/$defs/Matrix4Rows"
+        },
+        "nativeCurrentOperatorMatrices": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Matrix4Rows"
+          },
+          "minItems": 0
+        },
+        "wyckoffPolicy": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "kind": {
+              "const": "native-per-component-SU"
+            },
+            "baseFractionalTolerance": {
+              "const": 0.0002
+            },
+            "comparison": {
+              "const": "wrapped-residual<=max(base,coordinate-SU)"
+            }
+          },
+          "required": [
+            "kind",
+            "baseFractionalTolerance",
+            "comparison"
+          ]
+        }
+      },
+      "required": [
+        "selectedSetting",
+        "basisId",
+        "listedSourceOperatorExpressions",
+        "qualifiedAffineOps",
+        "nativeCurrentCellTransformLogicalRows",
+        "nativeCurrentOperatorMatrices",
+        "wyckoffPolicy"
+      ],
+      "x-invariants": [
+        "sourceoperators authoritative inlistedfractionalframe;origin encodedintranslations,do not inventITCoriginChoice",
+        "nativecurrentop matrices maycarry magnetic/timelegacyrepresentation;conversiontoaffine3requires explicitverifiedparsermapping",
+        "current3Dops are qualifiedderived state,not whole sourcehistory;no 3Dflatten ofsuperspace"
+      ]
+    },
+    "NativeProbability99": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "native-f32-table-99"
+        },
+        "tableSHA256": {
+          "const": "ffe88f1f33846feb44e35909f224dcaab4c3ad8cdc5d62df8386fd3b74187701"
+        },
+        "percent": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 99
+        },
+        "sourceWordLE": {
+          "$ref": "#/$defs/Float32Word"
+        },
+        "radiusScaleF32": {
+          "type": "number",
+          "minimum": -3.4028234663852886e+38,
+          "maximum": 3.4028234663852886e+38,
+          "x-unit": "dimensionless",
+          "x-invariant": "exact finite binary32 value promoted to JSONnumber; rawWord must match wherever supplied"
+        }
+      },
+      "required": [
+        "kind",
+        "tableSHA256",
+        "percent",
+        "sourceWordLE",
+        "radiusScaleF32"
+      ],
+      "x-invariants": [
+        "word/value must equalpinnedtable[percent−1]; defaultlegacyselector",
+        "do not substitutechi3formulaoruniformdecimalrounding; exactsource99words"
+      ]
+    },
+    "MathProbabilityChi3": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "explicit-chi3-math-profile"
+        },
+        "profileId": {
+          "const": "MP/1"
+        },
+        "probability": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "exclusiveMaximum": 1
+        },
+        "radiusScale": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 1.7976931348623157e+308
+        },
+        "absoluteErrorBound": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 1
+        }
+      },
+      "required": [
+        "kind",
+        "profileId",
+        "probability",
+        "radiusScale",
+        "absoluteErrorBound"
+      ]
+    },
+    "AdpGeometry": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "kind": {
+              "const": "regular-radius-sphere"
+            },
+            "radiusA": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1.7976931348623157e+308
+            }
+          },
+          "required": [
+            "kind",
+            "radiusA"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "kind": {
+              "const": "positive-ellipsoid"
+            },
+            "axisDirectionsColumns": {
+              "$ref": "#/$defs/Matrix3Rows"
+            },
+            "semiAxesA": {
+              "$ref": "#/$defs/Vec3A"
+            }
+          },
+          "required": [
+            "kind",
+            "axisDirectionsColumns",
+            "semiAxesA"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "kind": {
+              "const": "non-positive-cuboid"
+            },
+            "axisDirectionsColumns": {
+              "$ref": "#/$defs/Matrix3Rows"
+            },
+            "halfAxesA": {
+              "$ref": "#/$defs/Vec3A"
+            },
+            "nonPositiveEigenAxes": {
+              "type": "array",
+              "items": {
+                "type": "boolean"
+              },
+              "minItems": 3,
+              "maxItems": 3
+            },
+            "unitVertices": {
+              "const": [
+                [
+                  -1,
+                  -1,
+                  -1
+                ],
+                [
+                  -1,
+                  -1,
+                  1
+                ],
+                [
+                  -1,
+                  1,
+                  1
+                ],
+                [
+                  -1,
+                  1,
+                  -1
+                ],
+                [
+                  1,
+                  -1,
+                  -1
+                ],
+                [
+                  1,
+                  -1,
+                  1
+                ],
+                [
+                  1,
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  1,
+                  -1
+                ]
+              ]
+            }
+          },
+          "required": [
+            "kind",
+            "axisDirectionsColumns",
+            "halfAxesA",
+            "nonPositiveEigenAxes",
+            "unitVertices"
+          ]
+        }
+      ]
+    },
+    "AdpRenderPlan": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "siteId": {
+          "$ref": "#/$defs/Id"
+        },
+        "currentNativeScalar": {
+          "type": "number",
+          "minimum": -1.7976931348623157e+308,
+          "maximum": 1.7976931348623157e+308,
+          "x-unit": "sourceUorBangstrom^2"
+        },
+        "nativeScalarKind": {
+          "enum": [
+            "U",
+            "B"
+          ]
+        },
+        "currentNativeTensor6": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "minimum": -1.7976931348623157e+308,
+            "maximum": 1.7976931348623157e+308,
+            "x-unit": "dimensionless"
+          },
+          "minItems": 6,
+          "maxItems": 6
+        },
+        "nativeTensorKind": {
+          "enum": [
+            "Uij",
+            "beta"
+          ]
+        },
+        "canonicalCartesianU6A2": {
+          "$ref": "#/$defs/Vec6A2"
+        },
+        "probability": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/NativeProbability99"
+            },
+            {
+              "$ref": "#/$defs/MathProbabilityChi3"
+            }
+          ]
+        },
+        "nativeZero6Policy": {
+          "enum": [
+            "regular-radius",
+            "sqrt-scalar-U-or-B"
+          ]
+        },
+        "sourceExactSixZero": {
+          "type": "boolean"
+        },
+        "eigenvaluesA2": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "minimum": -1.7976931348623157e+308,
+            "maximum": 1.7976931348623157e+308,
+            "x-unit": "angstrom^2"
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "nativeMarkerColumn3": {
+          "type": "array",
+          "items": {
+            "enum": [
+              -1,
+              0
+            ]
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "nativeThermalMatrixLogicalRows": {
+          "$ref": "#/$defs/Matrix4Rows"
+        },
+        "geometry": {
+          "$ref": "#/$defs/AdpGeometry"
+        },
+        "nativeSiteFlagsU16": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 65535
+        }
+      },
+      "required": [
+        "siteId",
+        "currentNativeScalar",
+        "nativeScalarKind",
+        "currentNativeTensor6",
+        "nativeTensorKind",
+        "canonicalCartesianU6A2",
+        "probability",
+        "nativeZero6Policy",
+        "sourceExactSixZero",
+        "eigenvaluesA2",
+        "nativeMarkerColumn3",
+        "nativeThermalMatrixLogicalRows",
+        "geometry",
+        "nativeSiteFlagsU16"
+      ],
+      "x-invariants": [
+        "sixorder11,22,33,12,13,23; scalarandtensor currentvalues independentpersistent",
+        "nonzero tensor axisradius=probabilityScale*sqrt(abs(lambda));lambda<=0 marker−1,positive marker0;anynonpositive→cuboidunit8vertices",
+        "all6exactzero takesnativebit25branch beforeeigensolver;never equatezero6fallbackwithzeroprincipalaxis",
+        "nativef32/f64constants andoperation order usepinnedFCthermalprofile,not ideal8pi2 replacingroundednativeconstant",
+        "geometryaxesfinite nonnegative; axisdirectionseigenframe,not rows accidentallytransposed; scientificscatteringPSDpolicy independentfromlegacydisplay"
+      ]
+    },
+    "MergeSiteInput": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "siteId": {
+          "$ref": "#/$defs/Id"
+        },
+        "nativeSpeciesToken": {
+          "type": "string",
+          "pattern": "^[!-~]{1,2}$"
+        },
+        "coordinate": {
+          "$ref": "#/$defs/Vec3"
+        },
+        "coordinateSU": {
+          "$ref": "#/$defs/Vec3"
+        },
+        "sourceMetadataEntityId": {
+          "$ref": "#/$defs/Id"
+        }
+      },
+      "required": [
+        "siteId",
+        "nativeSpeciesToken",
+        "coordinate",
+        "coordinateSU",
+        "sourceMetadataEntityId"
+      ],
+      "x-invariants": [
+        "SU finite>=0 for qualifiedscience; source invalidraw preservedoutsidecomputation",
+        "coordinateunits determined bydeclaredphaseframe;nativeperiodicusesfractional,molecularCartesianA"
+      ]
+    },
+    "MergeGroupResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "representativeSiteId": {
+          "$ref": "#/$defs/Id"
+        },
+        "matchedSiteIds": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Id"
+          },
+          "minItems": 1
+        },
+        "matchedImageCount": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "meanCoordinate": {
+          "$ref": "#/$defs/Vec3"
+        },
+        "legacyArithmeticMeanCoordinateSU": {
+          "$ref": "#/$defs/Vec3"
+        },
+        "retainedMetadataFromSiteId": {
+          "$ref": "#/$defs/Id"
+        }
+      },
+      "required": [
+        "representativeSiteId",
+        "matchedSiteIds",
+        "matchedImageCount",
+        "meanCoordinate",
+        "legacyArithmeticMeanCoordinateSU",
+        "retainedMetadataFromSiteId"
+      ],
+      "x-invariants": [
+        "nativegreedy representative isfirstremaininginput;retainedmetadataowner=representative",
+        "matchedImageCount countsallmatchedsymmetryimages,not justdistinctsourceIds",
+        "SU arithmeticmean islegacyoperation,not statisticalerrorpropagation; occupancy/ADP clonedfromfirst,notsummed",
+        "mean maylieoutside[0,1);nativefunctiondoesnotfinalwrap"
+      ]
+    },
+    "PublicBondRule": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ruleId": {
+          "$ref": "#/$defs/Id"
+        },
+        "searchMode": {
+          "enum": [
+            "specified-pair",
+            "any-neighbor-of-first",
+            "all-pairs"
+          ]
+        },
+        "selectorKind": {
+          "enum": [
+            "native-species-token",
+            "source-site-label"
+          ]
+        },
+        "selectorA": {
+          "type": "string",
+          "minLength": 1
+        },
+        "selectorB": {
+          "type": "string",
+          "minLength": 1
+        },
+        "minimumA": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 3.4028234663852886e+38
+        },
+        "maximumA": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 3.4028234663852886e+38
+        },
+        "boundaryMode": {
+          "enum": [
+            "none",
+            "first-inside-extension",
+            "recursive-either-visible"
+          ]
+        },
+        "showPolyhedra": {
+          "type": "boolean"
+        },
+        "nativeRuleSourceId": {
+          "$ref": "#/$defs/Id"
+        }
+      },
+      "required": [
+        "ruleId",
+        "searchMode",
+        "selectorKind",
+        "selectorA",
+        "selectorB",
+        "minimumA",
+        "maximumA",
+        "boundaryMode",
+        "showPolyhedra",
+        "nativeRuleSourceId"
+      ],
+      "x-invariants": [
+        "minimum<=maximum;legacythresholdsconverted/squaredf32thenpromotedasFCselectedproof",
+        "effectiveA/B:pairusesboth,any-neighborusesA,all-pairsusesnone;preserveunusedsourcevaluesindependently",
+        "all-pairs cannotbeencodedasXXelement orassumedN^2pairlowering;explicittypedmode",
+        "nativeallmodes computationalparity qualification distinctfromcompletecurrentSBOND15sourcecapture"
+      ]
+    },
+    "MergePlan": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "phaseId": {
+          "$ref": "#/$defs/Id"
+        },
+        "frame": {
+          "$ref": "#/$defs/Frame"
+        },
+        "profile": {
+          "enum": [
+            "native-greedy-source-order",
+            "detect-connected-components",
+            "corrected-metric-greedy"
+          ]
+        },
+        "thresholdA": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 3.4028234663852886e+38
+        },
+        "sourceOrder": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Id"
+          },
+          "minItems": 1
+        },
+        "sites": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/MergeSiteInput"
+          },
+          "minItems": 1
+        },
+        "symmetryOps": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SymmetryOp3"
+          },
+          "minItems": 1
+        },
+        "groups": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/MergeGroupResult"
+          },
+          "minItems": 0
+        },
+        "bondRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/PublicBondRule"
+          },
+          "minItems": 0
+        }
+      },
+      "required": [
+        "phaseId",
+        "frame",
+        "profile",
+        "thresholdA",
+        "sourceOrder",
+        "sites",
+        "symmetryOps",
+        "groups",
+        "bondRules"
+      ],
+      "x-invariants": [
+        "nativeprofile strictdistance<threshold;sourceorderfixed;speciesstrcmp",
+        "nativeperiodic image roundingcomponentwise floor(delta+.5),notmetricclosestimage;correctedmetricprofileexplicitseparate",
+        "nativegreedy fixedfirstanchorstar grouping;no transitiveclosure;detectprofilecannotmutate merge",
+        "allidsunique/resolvedowner;exact f32 thresholdprojection plusdeclarednumericalprofile",
+        "threshold<=0/emptyzero-match/nonfinite returntypedfailure incommandadapter,notdivide0success"
+      ]
+    },
+    "PlaneFitInput": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "profile": {
+          "enum": [
+            "native-homogeneous-TLS",
+            "corrected-centered-orthogonal-LS"
+          ]
+        },
+        "pointsCartesianA": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Vec3A"
+          },
+          "minItems": 0
+        },
+        "inputNormalForNativeSmallN": {
+          "$ref": "#/$defs/Vec3"
+        },
+        "sourceSelectionIds": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Id"
+          },
+          "minItems": 0
+        }
+      },
+      "required": [
+        "profile",
+        "pointsCartesianA",
+        "inputNormalForNativeSmallN",
+        "sourceSelectionIds"
+      ],
+      "x-invariants": [
+        "samecountpoints/selectionIds;sourceorderpreserved",
+        "nativeN1preservesinputnormal;N2usesauxiliarysourcebranch;N>=3SVDrows[x,y,z,−1]",
+        "corrected requiresnoncollinearpointsetforuniqueplane;centered3DSVD,unitnormal,firstnonzeroCartesiancomponentpositive"
+      ]
+    },
+    "PlaneFitResolved": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "const": "resolved"
+        },
+        "sourceReturnCode": {
+          "type": "integer"
+        },
+        "pointCount": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "sourceHomogeneous4": {
+          "$ref": "#/$defs/Vec4"
+        },
+        "unitNormalCartesian": {
+          "$ref": "#/$defs/Vec3"
+        },
+        "offsetA": {
+          "type": "number",
+          "minimum": -1.7976931348623157e+308,
+          "maximum": 1.7976931348623157e+308,
+          "x-unit": "angstrom"
+        },
+        "signPolicy": {
+          "enum": [
+            "source-SVD-sign-not-canonical",
+            "first-nonzero-component-positive"
+          ]
+        }
+      },
+      "required": [
+        "status",
+        "sourceReturnCode",
+        "pointCount",
+        "sourceHomogeneous4",
+        "unitNormalCartesian",
+        "offsetA",
+        "signPolicy"
+      ],
+      "x-invariants": [
+        "plane nUnit dot rA=offsetA;source4=[nx,ny,nz,d]not arbitraryhomogeneoussignassumption",
+        "nativeTLS normalizes4numericcoefficients;physicalnormalconversiondividesby||n||"
+      ]
+    },
+    "PlaneFitUnderdetermined": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "enum": [
+            "empty-selection",
+            "underdetermined"
+          ]
+        },
+        "sourceReturnCode": {
+          "type": "integer"
+        },
+        "pointCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "affineRank": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 2
+        },
+        "reason": {
+          "enum": [
+            "no-points",
+            "coincident-points",
+            "collinear-points",
+            "zero-input-normal",
+            "native-third-singular-below-1e-6"
+          ]
+        }
+      },
+      "required": [
+        "status",
+        "sourceReturnCode",
+        "pointCount",
+        "affineRank",
+        "reason"
+      ]
+    },
+    "PlaneFit": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "input": {
+          "$ref": "#/$defs/PlaneFitInput"
+        },
+        "result": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/PlaneFitResolved"
+            },
+            {
+              "$ref": "#/$defs/PlaneFitUnderdetermined"
+            }
+          ]
+        }
+      },
+      "required": [
+        "input",
+        "result"
+      ],
+      "x-invariants": [
+        "nativeabs(thirdsingularvalue)<1e−6 withN>=3returns2; thresholdisnativeprofileonly",
+        "futureactualSVDnumericqualificationisnot a missingpayloadfield"
+      ]
+    },
+    "NativeCamera": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "sceneMatrixLogicalRows": {
+          "$ref": "#/$defs/Matrix4Rows"
+        },
+        "shiftViewX": {
+          "type": "number",
+          "minimum": -3.4028234663852886e+38,
+          "maximum": 3.4028234663852886e+38,
+          "x-unit": "view-coordinate",
+          "x-invariant": "exact finite binary32 value promoted to JSONnumber; rawWord must match wherever supplied"
+        },
+        "shiftViewY": {
+          "type": "number",
+          "minimum": -3.4028234663852886e+38,
+          "maximum": 3.4028234663852886e+38,
+          "x-unit": "view-coordinate",
+          "x-invariant": "exact finite binary32 value promoted to JSONnumber; rawWord must match wherever supplied"
+        },
+        "thirdSceneStoredF32": {
+          "type": "number",
+          "minimum": -3.4028234663852886e+38,
+          "maximum": 3.4028234663852886e+38,
+          "x-unit": "source-unassigned-preserved",
+          "x-invariant": "exact finite binary32 value promoted to JSONnumber; rawWord must match wherever supplied"
+        },
+        "zoomF32": {
+          "type": "number",
+          "minimum": -3.4028234663852886e+38,
+          "maximum": 3.4028234663852886e+38,
+          "x-unit": "dimensionless",
+          "x-invariant": "exact finite binary32 value promoted to JSONnumber; rawWord must match wherever supplied"
+        },
+        "projectionSelectorBit21": {
+          "enum": [
+            0,
+            1
+          ]
+        },
+        "projectionZScaleF32": {
+          "type": "number",
+          "minimum": -3.4028234663852886e+38,
+          "maximum": 3.4028234663852886e+38,
+          "x-unit": "dimensionless",
+          "x-invariant": "exact finite binary32 value promoted to JSONnumber; rawWord must match wherever supplied"
+        },
+        "localTranslationA": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "minimum": -3.4028234663852886e+38,
+            "maximum": 3.4028234663852886e+38,
+            "x-unit": "angstrom",
+            "x-invariant": "exact finite binary32 value promoted to JSONnumber; rawWord must match wherever supplied"
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "normalizationF64": {
+          "type": "number",
+          "minimum": -1.7976931348623157e+308,
+          "maximum": 1.7976931348623157e+308,
+          "x-unit": "1/angstrom"
+        },
+        "viewportLogicalWidth": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "viewportLogicalHeight": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "deviceScaleF64": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 1.7976931348623157e+308
+        },
+        "aspectF32": {
+          "type": "number",
+          "minimum": -3.4028234663852886e+38,
+          "maximum": 3.4028234663852886e+38,
+          "x-unit": "dimensionless",
+          "x-invariant": "exact finite binary32 value promoted to JSONnumber; rawWord must match wherever supplied"
+        },
+        "aspectScaleF32": {
+          "type": "number",
+          "minimum": -3.4028234663852886e+38,
+          "maximum": 3.4028234663852886e+38,
+          "x-unit": "dimensionless",
+          "x-invariant": "exact finite binary32 value promoted to JSONnumber; rawWord must match wherever supplied"
+        },
+        "projectionContext": {
+          "enum": [
+            "capture-restored-normal",
+            "tiled-capture",
+            "explicit-canonical-camera"
+          ]
+        },
+        "nearView": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 1.7976931348623157e+308
+        },
+        "farView": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 1.7976931348623157e+308
+        }
+      },
+      "required": [
+        "sceneMatrixLogicalRows",
+        "shiftViewX",
+        "shiftViewY",
+        "thirdSceneStoredF32",
+        "zoomF32",
+        "projectionSelectorBit21",
+        "projectionZScaleF32",
+        "localTranslationA",
+        "normalizationF64",
+        "viewportLogicalWidth",
+        "viewportLogicalHeight",
+        "deviceScaleF64",
+        "aspectF32",
+        "aspectScaleF32",
+        "projectionContext",
+        "nearView",
+        "farView"
+      ],
+      "x-invariants": [
+        "source Mview=T(0,0,-5)*T(shiftX,shiftY,0)*Sxy,z*[Sz(PROJTscalar)ifbit21]*SceneM*Tlocal",
+        "sxy=f32(f64(zoom)*normalization*f64(aspectScale));sz=normalization*f64(f32(min(zoom,4)*aspectScale))",
+        "aspect=f32(width/height);aspectScale=1 ifwidth<=height elsef32(height/width); physicalviewporttrunc(logical*deviceScale)",
+        "full16f64affine source preserved;not forcedintoquaternion;shiftView notpanWorldA",
+        "PROJTscalar ismodelviewzscale,notFOV;near<far;context-specificsourceprojection separatelyqualified",
+        "capturesourcebit0 ortho±1,y±1/aspect;bit1 frustum±.2,y±.2/aspect,near1far10 atrestore;tile contexts source-specific",
+        "bounds-derivedlocaltranslation/normalizationinputs tiedsamegeometryrevision,not stale sourcecamera history"
+      ]
+    },
+    "FC1_Entry": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "enum": [
+            "phase",
+            "molecule",
+            "source-entity"
+          ]
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "kind",
+        "id"
+      ],
+      "additionalProperties": false
+    },
+    "FC1_SourceScalar": {
+      "type": "object",
+      "properties": {
+        "literal": {
+          "type": "string",
+          "minLength": 1
+        },
+        "nativeF64Bits": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{16}$"
+        }
+      },
+      "required": [
+        "literal",
+        "nativeF64Bits"
+      ],
+      "additionalProperties": false
+    },
+    "FC1_Reference": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "internal-cartesian"
+            }
+          },
+          "required": [
+            "kind"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "entry"
+            },
+            "entry": {
+              "$ref": "#/$defs/FC1_Entry"
+            }
+          },
+          "required": [
+            "kind",
+            "entry"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "unresolved"
+            },
+            "rawSelector": {
+              "type": "integer",
+              "minimum": -2147483648,
+              "maximum": 2147483647
+            }
+          },
+          "required": [
+            "kind",
+            "rawSelector"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "NativeLayerSourceObservation": {
+      "type": "object",
+      "properties": {
+        "schemaVersion": {
+          "const": "NativeLayerSource-proposal-1"
+        },
+        "owner": {
+          "$ref": "#/$defs/FC1_Entry"
+        },
+        "position": {
+          "type": "object",
+          "properties": {
+            "rawSelector": {
+              "type": "integer",
+              "minimum": -2147483648,
+              "maximum": 2147483647
+            },
+            "reference": {
+              "$ref": "#/$defs/FC1_Reference"
+            },
+            "currentAnchor": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/FC1_SourceScalar"
+              },
+              "minItems": 3,
+              "maxItems": 3
+            },
+            "referenceAnchor": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/FC1_SourceScalar"
+              },
+              "minItems": 3,
+              "maxItems": 3
+            }
+          },
+          "required": [
+            "rawSelector",
+            "reference",
+            "currentAnchor",
+            "referenceAnchor"
+          ],
+          "additionalProperties": false
+        },
+        "orientation": {
+          "type": "object",
+          "properties": {
+            "rawSelector": {
+              "type": "integer",
+              "minimum": -2147483648,
+              "maximum": 2147483647
+            },
+            "reference": {
+              "$ref": "#/$defs/FC1_Reference"
+            },
+            "currentFirst": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/FC1_SourceScalar"
+              },
+              "minItems": 3,
+              "maxItems": 3
+            },
+            "referenceFirst": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/FC1_SourceScalar"
+              },
+              "minItems": 3,
+              "maxItems": 3
+            },
+            "currentSecond": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/FC1_SourceScalar"
+              },
+              "minItems": 3,
+              "maxItems": 3
+            },
+            "referenceSecond": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/FC1_SourceScalar"
+              },
+              "minItems": 3,
+              "maxItems": 3
+            },
+            "rawFlags": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "minimum": -2147483648,
+                "maximum": 2147483647
+              },
+              "minItems": 4,
+              "maxItems": 4
+            }
+          },
+          "required": [
+            "rawSelector",
+            "reference",
+            "currentFirst",
+            "referenceFirst",
+            "currentSecond",
+            "referenceSecond",
+            "rawFlags"
+          ],
+          "additionalProperties": false
+        },
+        "sourceProjection": {
+          "const": "not-established-by-record-alone"
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "owner",
+        "position",
+        "orientation",
+        "sourceProjection"
+      ],
+      "additionalProperties": false,
+      "title": "Typed source metadata before closed AuditNode encoding; not an SG/protocol admission",
+      "x-sealed-source": {
+        "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261115-092025-p1-03-completion/native-layer-source.schema.json",
+        "sha256": "db4cf31ca3efe9c39f80ab973e23875b97e04e603c15afeec154702ad051d41e",
+        "importMode": "exactshapeinline,localrefsrenamedFC1_"
+      }
+    },
+    "Vec6": {
+      "type": "array",
+      "items": {
+        "type": "number",
+        "minimum": -1.7976931348623157e+308,
+        "maximum": 1.7976931348623157e+308,
+        "x-unit": "dimensionless"
+      },
+      "minItems": 6,
+      "maxItems": 6
+    },
+    "NativeOccupationDomainDefinition": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "domainId": {
+          "$ref": "#/$defs/Id"
+        },
+        "sourceShapeOrdinal": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "nativeCoordinateWidth": {
+          "const": 6
+        },
+        "verticesNative6": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Vec6"
+          },
+          "minItems": 0
+        },
+        "nativeNthIndices0based": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "minItems": 0
+        },
+        "nativeVertexCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "nativeNthCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "externalComponentNames": {
+          "const": [
+            "xe1",
+            "xe2",
+            "xe3"
+          ]
+        },
+        "externalDisplacementLengthsA": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "minimum": -1.7976931348623157e+308,
+            "maximum": 1.7976931348623157e+308,
+            "x-unit": "angstrom"
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "externalDirectionRowsNative6": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Vec6"
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "internalShiftDirectionNative6": {
+          "$ref": "#/$defs/Vec6"
+        },
+        "internalShiftScale": {
+          "type": "number",
+          "minimum": -1.7976931348623157e+308,
+          "maximum": 1.7976931348623157e+308,
+          "x-unit": "native-internal-scale"
+        },
+        "currentDerivedTranslationNative6": {
+          "$ref": "#/$defs/Vec6"
+        },
+        "externalComponentSU": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "minimum": -1.7976931348623157e+308,
+            "maximum": 1.7976931348623157e+308,
+            "x-unit": "angstrom"
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "externalComponentStep": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "minimum": -1.7976931348623157e+308,
+            "maximum": 1.7976931348623157e+308,
+            "x-unit": "angstrom"
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "nativeParameterFlagsI32": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "source": {
+          "$ref": "#/$defs/SourceSpan"
+        },
+        "nativeSymmetryOperatorOrdinal0based": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "nativeDomainScale": {
+          "type": "number",
+          "minimum": -1.7976931348623157e+308,
+          "maximum": 1.7976931348623157e+308,
+          "x-unit": "native-source-domain-scalar"
+        },
+        "currentMaximumInternalRadiusSquared": {
+          "type": "number",
+          "minimum": -1.7976931348623157e+308,
+          "maximum": 1.7976931348623157e+308,
+          "x-unit": "native-derived-domain-scalar"
+        }
+      },
+      "required": [
+        "domainId",
+        "sourceShapeOrdinal",
+        "nativeCoordinateWidth",
+        "verticesNative6",
+        "nativeNthIndices0based",
+        "nativeVertexCount",
+        "nativeNthCount",
+        "externalComponentNames",
+        "externalDisplacementLengthsA",
+        "externalDirectionRowsNative6",
+        "internalShiftDirectionNative6",
+        "internalShiftScale",
+        "nativeDomainScale",
+        "currentMaximumInternalRadiusSquared",
+        "currentDerivedTranslationNative6",
+        "externalComponentSU",
+        "externalComponentStep",
+        "nativeParameterFlagsI32",
+        "source",
+        "nativeSymmetryOperatorOrdinal0based"
+      ],
+      "x-producer-consumer": "readdata40/41 XQcODfrac @9b754..9bf2c -> site+138 -> BuildQuasiCrystal @18bc8..191xx -> DrawODsImpl; actualnativephaseoffsets and per-domain typedgeometry",
+      "x-invariants": [
+        "nativeVertexCount=len(verticesNative6),nativeNthCount=len(nativeNthIndices0based)",
+        "fixed6 is sourceXQcODcoordinatewidth,not invented6harmonicaxes;D5read-path performs explicit6to5 conversion andretains sourceoriginalindependently",
+        "for each xe_j>1e-6: v=C2O*direction_j;normalizefirst3Cartesiancomponents tolengthxe_j;clearremainingD-3;O2C*v addsderiveddomaintranslation",
+        "commonshift: C2O*(internalShiftScale*direction);clearfirst3physicalcomponents;O2C mapsremainingbacktocurrentDcoordinates",
+        "source+18vertices6,+70nthI32,+50ordinal,+a0/a4counts,+b0values,+c8rows,+158direction,+188scale,+190derived,+1c8SU,+1e0step,+1f8flags;no genericJSON",
+        "basecontainers+38/+58/+88 derivefromsourcevertices/nth via nativebuild profile;rebuild caches,donotinventmissingoriginalvalues",
+        "nativeSymmetryOperatorOrdinal0based=+54,sourceShapeOrdinal=+50:BuildQuasiCrystal191d0..191e4 selects UnitCell+70 operator andCrystal+1f8 template separately",
+        "nativeDomainScale=+a8:192c4 alpha*C2O;19334 alpha=1/nativeDomainScale*O2C;source zero causes native divisioninvalid;correctedplan diagnostics E_DEGENERATE_GEOMETRY instead ofinventing scale",
+        "currentMaximumInternalRadiusSquared=+1c0: max overdomainvertices of sum(physical-transformedinternalcomponents[3:D]^2),afterzeroingphysical3;exactnativecache notADP",
+        "nth D5 pairs index2internalvertices andmeasure|det2|/2 @19434..19474;D6 triples measure|det3| @1949c..19504 (native no/6);not rounded operationindices",
+        "per-site verticesNative6 andtemplatevertices separateactualstate: R_selected*template,then nativeDomainScale*C2O,physicalfirst3zero,then1/nativeDomainScale*O2C rebuildcurrentdomaininternals",
+        "actualsourcepolygon/tetrahedron ordering retained;sourcefunction profile fixesdrawtriangulation,not unorderedpointcloud"
+      ]
+    },
+    "VectorD3": {
+      "type": "array",
+      "items": {
+        "type": "number",
+        "minimum": -1.7976931348623157e+308,
+        "maximum": 1.7976931348623157e+308,
+        "x-unit": "dimensionless"
+      },
+      "minItems": 3,
+      "maxItems": 3
+    },
+    "MatrixD3Rows": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/VectorD3"
+      },
+      "minItems": 3,
+      "maxItems": 3
+    },
+    "MatrixD4HomogeneousRows": {
+      "type": "array",
+      "items": {
+        "type": "array",
+        "items": {
+          "type": "number",
+          "minimum": -1.7976931348623157e+308,
+          "maximum": 1.7976931348623157e+308,
+          "x-unit": "dimensionless"
+        },
+        "minItems": 4,
+        "maxItems": 4
+      },
+      "minItems": 4,
+      "maxItems": 4
+    },
+    "NativeSiteD3": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "siteId": {
+          "$ref": "#/$defs/Id"
+        },
+        "nativeSpeciesToken": {
+          "type": "string",
+          "pattern": "^[!-~]{1,2}$"
+        },
+        "nativeElementIndexI16": {
+          "type": "integer",
+          "minimum": -32768,
+          "maximum": 32767
+        },
+        "fractionalCoordinatesD": {
+          "$ref": "#/$defs/VectorD3"
+        },
+        "occupancySlotD": {
+          "type": "number",
+          "minimum": -1.7976931348623157e+308,
+          "maximum": 1.7976931348623157e+308,
+          "x-unit": "dimensionless"
+        },
+        "nativeScalarSlotD1": {
+          "type": "number",
+          "minimum": -1.7976931348623157e+308,
+          "maximum": 1.7976931348623157e+308,
+          "x-unit": "sourceUorBangstrom^2"
+        },
+        "thermal6SlotsD2ToD7": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "minimum": -1.7976931348623157e+308,
+            "maximum": 1.7976931348623157e+308,
+            "x-unit": "dimensionless"
+          },
+          "minItems": 6,
+          "maxItems": 6
+        },
+        "coordinateSUD": {
+          "$ref": "#/$defs/VectorD3"
+        },
+        "nativeSiteArrayBlocks3ByDPlus8": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "number",
+              "minimum": -1.7976931348623157e+308,
+              "maximum": 1.7976931348623157e+308,
+              "x-unit": "dimensionless"
+            },
+            "minItems": 11,
+            "maxItems": 11
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "nativeFlagsU16": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 65535
+        },
+        "occupationDomainId": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/Id"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "nativeOrbitNumeratorI16": {
+          "type": "integer",
+          "minimum": -32768,
+          "maximum": 32767
+        }
+      },
+      "required": [
+        "siteId",
+        "nativeSpeciesToken",
+        "nativeElementIndexI16",
+        "fractionalCoordinatesD",
+        "occupancySlotD",
+        "nativeScalarSlotD1",
+        "thermal6SlotsD2ToD7",
+        "coordinateSUD",
+        "nativeSiteArrayBlocks3ByDPlus8",
+        "nativeFlagsU16",
+        "occupationDomainId",
+        "nativeOrbitNumeratorI16"
+      ],
+      "x-invariants": [
+        "XSite+18=3;allocated3*(3+8)f64 @c6f50..c6f80",
+        "explicitcoordinates/scalar/tensor/SU mustequalactualblockprojections;block0[:D]=coordinates,block0[D]=occupancy,block0[D+1]=scalar,block0[D+2:D+8]=thermal6,block1[:D]=coordinateSU",
+        "nativeFlagsU16 isactualXSite+da,bit3 usedbyactualscatter path;not replaced byglobal THERT/THERI/table flags",
+        "block2 andunconsumedblockfields exacttypedcurrentdata,not imaginaryharmoniccoefficients; originalsourceobservationindependent",
+        "nativeOrbitNumeratorI16 is signedXSite+d8 used byactualSF/densityweight;do notdecodeunsigned merelybecause storage16bits"
+      ]
+    },
+    "NativeSymmetryOpD3": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "operatorId": {
+          "$ref": "#/$defs/Id"
+        },
+        "currentNativeMatrixRows": {
+          "$ref": "#/$defs/MatrixD4HomogeneousRows"
+        },
+        "timeSign": {
+          "enum": [
+            -1,
+            1
+          ]
+        }
+      },
+      "required": [
+        "operatorId",
+        "currentNativeMatrixRows",
+        "timeSign"
+      ],
+      "x-invariants": [
+        "positionaffine usesfirstDrows/cols pluscolDtranslation;nativebottomrowandtime representation keptactual,not rewrittenasordinaryhomogeneous1",
+        "currentUnitCell+70 fullDoplist,not3Dtruncate ofgenerator/sourcehistory"
+      ]
+    },
+    "NativeDimensionD3State": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "modelId": {
+          "$ref": "#/$defs/Id"
+        },
+        "dimensionD": {
+          "const": 3
+        },
+        "nativeMatrixDimensionWord": {
+          "const": 4
+        },
+        "nativeModelKind": {
+          "enum": [
+            "crystal",
+            "molecule",
+            "quasicrystal",
+            "magnetic-quasicrystal"
+          ]
+        },
+        "sourceGroupNumberI32": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "sourceSettingOrdinalI32": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "crystallographicToOrthoRowsD": {
+          "$ref": "#/$defs/MatrixD3Rows"
+        },
+        "orthoToCrystallographicRowsD": {
+          "$ref": "#/$defs/MatrixD3Rows"
+        },
+        "phasonRowsD": {
+          "$ref": "#/$defs/MatrixD3Rows"
+        },
+        "layerWorldMatrix4Rows": {
+          "$ref": "#/$defs/Matrix4Rows"
+        },
+        "currentC2XYZRowsDp1": {
+          "$ref": "#/$defs/MatrixD4HomogeneousRows"
+        },
+        "currentXYZ2CRowsDp1": {
+          "$ref": "#/$defs/MatrixD4HomogeneousRows"
+        },
+        "nativeAuxInverse1A0RowsDp1": {
+          "$ref": "#/$defs/MatrixD4HomogeneousRows"
+        },
+        "qcorigNative6": {
+          "$ref": "#/$defs/Vec6"
+        },
+        "nativeCIFWaveVectorRows3": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Vec3"
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "drawingBoundsMinMaxD": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "number",
+              "minimum": -3.4028234663852886e+38,
+              "maximum": 3.4028234663852886e+38,
+              "x-unit": "native-fractional-bound",
+              "x-invariant": "exact finite binary32 value promoted to JSONnumber; rawWord must match wherever supplied"
+            },
+            "minItems": 2,
+            "maxItems": 2
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "symmetryOpsD": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/NativeSymmetryOpD3"
+          },
+          "minItems": 1
+        },
+        "sites": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/NativeSiteD3"
+          },
+          "minItems": 0
+        },
+        "occupationDomains": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/NativeOccupationDomainDefinition"
+          },
+          "minItems": 0
+        },
+        "nativeSourceOrder": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Id"
+          },
+          "minItems": 0
+        },
+        "source": {
+          "$ref": "#/$defs/SourceSpan"
+        },
+        "occupationDomainTemplates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/NativeOccupationDomainTemplate"
+          },
+          "minItems": 0
+        }
+      },
+      "required": [
+        "modelId",
+        "dimensionD",
+        "nativeMatrixDimensionWord",
+        "nativeModelKind",
+        "sourceGroupNumberI32",
+        "sourceSettingOrdinalI32",
+        "crystallographicToOrthoRowsD",
+        "orthoToCrystallographicRowsD",
+        "phasonRowsD",
+        "layerWorldMatrix4Rows",
+        "currentC2XYZRowsDp1",
+        "currentXYZ2CRowsDp1",
+        "nativeAuxInverse1A0RowsDp1",
+        "qcorigNative6",
+        "nativeCIFWaveVectorRows3",
+        "drawingBoundsMinMaxD",
+        "symmetryOpsD",
+        "sites",
+        "occupationDomains",
+        "nativeSourceOrder",
+        "source",
+        "occupationDomainTemplates"
+      ],
+      "x-producer-consumer": "03native-source/document actualcurrentD capture -> Scene::BuildOrientMatrix -> BuildCrystal2(D3)/BuildCluster(D4)/BuildQuasiCrystal(D5/6) -> physical display/scatter/currenttypedarchive",
+      "x-invariants": [
+        "dimensionD isactualmathematicalD;Crystal+168 storesD+1,notD;nativeQUASICRYSTAL DIM=constructor receivesD",
+        "C2O/O2C fromGetMatrixC2O/+510 andGetMatrixO2C/+538;fullDmatrix retained;PHASON at+588;QCORIG at+78..a0 sixsourcef64",
+        "GetMatrixC2XYZ+150/GetMatrixXYZ2C+178 returnfull(D+1)^2;notonly16values forD>3",
+        "BuildOrientMatrix: temp=PHASON*C2O;Initialize copiesmin dimensions intoexistingC2XYZ withoutresize;GeMM(M4,temp)updatesM=min(D+1,4),N=D,K=min(4,D),otherrows/edgevaluesretainactualpreviousstate;translationcolD first3 updatedbyindependentpositionreference rule",
+        "InitializeI buildsXYZ2C inverse;nativeAux1A0 copiesinverse andnegateslastcolumnfirst3;fullsourceedgewords retained,not implicitzero padding",
+        "higherD positions usecurrentDops andcompleteDcoordinates;projectphysicalfirst3onlyafterD-affine evaluation;internalD-3 componentsremainmodel/identity",
+        "nativeCIFwaveq rows storedordered3;do notassignunprovedharmonicfunctionmeaning;actualhigherDstructurefactors useDdotproduct perFS evidence",
+        "allsite/domain/opids resolvewithinsameowner/revision;actualDcoordinates survivetypedarchive/change/restore; no source-onlydowngrade",
+        "nativefileprojection/save usesactualqualifiedgrammar/full loss report;internalenginearchivepersists alltypedDfields andsource independently;never stripsinternalaxes",
+        "scene builddispatchnativeword4→D3BuildCrystal2,word5→D4BuildCluster,elseD5/6BuildQuasiCrystal;runtimequalificationnot virtual exclusion",
+        "templateOrdinal resolves Crystal+1f8 sourcegeometry independentlyof per-sitecopy;siteOD currentvertices mayalreadytransformed;never usemutatedcurrentcopy assource template"
+      ]
+    },
+    "VectorD4": {
+      "type": "array",
+      "items": {
+        "type": "number",
+        "minimum": -1.7976931348623157e+308,
+        "maximum": 1.7976931348623157e+308,
+        "x-unit": "dimensionless"
+      },
+      "minItems": 4,
+      "maxItems": 4
+    },
+    "MatrixD4Rows": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/VectorD4"
+      },
+      "minItems": 4,
+      "maxItems": 4
+    },
+    "MatrixD5HomogeneousRows": {
+      "type": "array",
+      "items": {
+        "type": "array",
+        "items": {
+          "type": "number",
+          "minimum": -1.7976931348623157e+308,
+          "maximum": 1.7976931348623157e+308,
+          "x-unit": "dimensionless"
+        },
+        "minItems": 5,
+        "maxItems": 5
+      },
+      "minItems": 5,
+      "maxItems": 5
+    },
+    "NativeSiteD4": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "siteId": {
+          "$ref": "#/$defs/Id"
+        },
+        "nativeSpeciesToken": {
+          "type": "string",
+          "pattern": "^[!-~]{1,2}$"
+        },
+        "nativeElementIndexI16": {
+          "type": "integer",
+          "minimum": -32768,
+          "maximum": 32767
+        },
+        "fractionalCoordinatesD": {
+          "$ref": "#/$defs/VectorD4"
+        },
+        "occupancySlotD": {
+          "type": "number",
+          "minimum": -1.7976931348623157e+308,
+          "maximum": 1.7976931348623157e+308,
+          "x-unit": "dimensionless"
+        },
+        "nativeScalarSlotD1": {
+          "type": "number",
+          "minimum": -1.7976931348623157e+308,
+          "maximum": 1.7976931348623157e+308,
+          "x-unit": "sourceUorBangstrom^2"
+        },
+        "thermal6SlotsD2ToD7": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "minimum": -1.7976931348623157e+308,
+            "maximum": 1.7976931348623157e+308,
+            "x-unit": "dimensionless"
+          },
+          "minItems": 6,
+          "maxItems": 6
+        },
+        "coordinateSUD": {
+          "$ref": "#/$defs/VectorD4"
+        },
+        "nativeSiteArrayBlocks3ByDPlus8": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "number",
+              "minimum": -1.7976931348623157e+308,
+              "maximum": 1.7976931348623157e+308,
+              "x-unit": "dimensionless"
+            },
+            "minItems": 12,
+            "maxItems": 12
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "nativeFlagsU16": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 65535
+        },
+        "occupationDomainId": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/Id"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "nativeOrbitNumeratorI16": {
+          "type": "integer",
+          "minimum": -32768,
+          "maximum": 32767
+        }
+      },
+      "required": [
+        "siteId",
+        "nativeSpeciesToken",
+        "nativeElementIndexI16",
+        "fractionalCoordinatesD",
+        "occupancySlotD",
+        "nativeScalarSlotD1",
+        "thermal6SlotsD2ToD7",
+        "coordinateSUD",
+        "nativeSiteArrayBlocks3ByDPlus8",
+        "nativeFlagsU16",
+        "occupationDomainId",
+        "nativeOrbitNumeratorI16"
+      ],
+      "x-invariants": [
+        "XSite+18=4;allocated3*(4+8)f64 @c6f50..c6f80",
+        "explicitcoordinates/scalar/tensor/SU mustequalactualblockprojections;block0[:D]=coordinates,block0[D]=occupancy,block0[D+1]=scalar,block0[D+2:D+8]=thermal6,block1[:D]=coordinateSU",
+        "nativeFlagsU16 isactualXSite+da,bit3 usedbyactualscatter path;not replaced byglobal THERT/THERI/table flags",
+        "block2 andunconsumedblockfields exacttypedcurrentdata,not imaginaryharmoniccoefficients; originalsourceobservationindependent",
+        "nativeOrbitNumeratorI16 is signedXSite+d8 used byactualSF/densityweight;do notdecodeunsigned merelybecause storage16bits"
+      ]
+    },
+    "NativeSymmetryOpD4": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "operatorId": {
+          "$ref": "#/$defs/Id"
+        },
+        "currentNativeMatrixRows": {
+          "$ref": "#/$defs/MatrixD5HomogeneousRows"
+        },
+        "timeSign": {
+          "enum": [
+            -1,
+            1
+          ]
+        }
+      },
+      "required": [
+        "operatorId",
+        "currentNativeMatrixRows",
+        "timeSign"
+      ],
+      "x-invariants": [
+        "positionaffine usesfirstDrows/cols pluscolDtranslation;nativebottomrowandtime representation keptactual,not rewrittenasordinaryhomogeneous1",
+        "currentUnitCell+70 fullDoplist,not3Dtruncate ofgenerator/sourcehistory"
+      ]
+    },
+    "NativeDimensionD4State": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "modelId": {
+          "$ref": "#/$defs/Id"
+        },
+        "dimensionD": {
+          "const": 4
+        },
+        "nativeMatrixDimensionWord": {
+          "const": 5
+        },
+        "nativeModelKind": {
+          "enum": [
+            "crystal",
+            "molecule",
+            "quasicrystal",
+            "magnetic-quasicrystal"
+          ]
+        },
+        "sourceGroupNumberI32": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "sourceSettingOrdinalI32": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "crystallographicToOrthoRowsD": {
+          "$ref": "#/$defs/MatrixD4Rows"
+        },
+        "orthoToCrystallographicRowsD": {
+          "$ref": "#/$defs/MatrixD4Rows"
+        },
+        "phasonRowsD": {
+          "$ref": "#/$defs/MatrixD4Rows"
+        },
+        "layerWorldMatrix4Rows": {
+          "$ref": "#/$defs/Matrix4Rows"
+        },
+        "currentC2XYZRowsDp1": {
+          "$ref": "#/$defs/MatrixD5HomogeneousRows"
+        },
+        "currentXYZ2CRowsDp1": {
+          "$ref": "#/$defs/MatrixD5HomogeneousRows"
+        },
+        "nativeAuxInverse1A0RowsDp1": {
+          "$ref": "#/$defs/MatrixD5HomogeneousRows"
+        },
+        "qcorigNative6": {
+          "$ref": "#/$defs/Vec6"
+        },
+        "nativeCIFWaveVectorRows3": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Vec3"
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "drawingBoundsMinMaxD": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "number",
+              "minimum": -3.4028234663852886e+38,
+              "maximum": 3.4028234663852886e+38,
+              "x-unit": "native-fractional-bound",
+              "x-invariant": "exact finite binary32 value promoted to JSONnumber; rawWord must match wherever supplied"
+            },
+            "minItems": 2,
+            "maxItems": 2
+          },
+          "minItems": 4,
+          "maxItems": 4
+        },
+        "symmetryOpsD": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/NativeSymmetryOpD4"
+          },
+          "minItems": 1
+        },
+        "sites": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/NativeSiteD4"
+          },
+          "minItems": 0
+        },
+        "occupationDomains": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/NativeOccupationDomainDefinition"
+          },
+          "minItems": 0
+        },
+        "nativeSourceOrder": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Id"
+          },
+          "minItems": 0
+        },
+        "source": {
+          "$ref": "#/$defs/SourceSpan"
+        },
+        "occupationDomainTemplates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/NativeOccupationDomainTemplate"
+          },
+          "minItems": 0
+        }
+      },
+      "required": [
+        "modelId",
+        "dimensionD",
+        "nativeMatrixDimensionWord",
+        "nativeModelKind",
+        "sourceGroupNumberI32",
+        "sourceSettingOrdinalI32",
+        "crystallographicToOrthoRowsD",
+        "orthoToCrystallographicRowsD",
+        "phasonRowsD",
+        "layerWorldMatrix4Rows",
+        "currentC2XYZRowsDp1",
+        "currentXYZ2CRowsDp1",
+        "nativeAuxInverse1A0RowsDp1",
+        "qcorigNative6",
+        "nativeCIFWaveVectorRows3",
+        "drawingBoundsMinMaxD",
+        "symmetryOpsD",
+        "sites",
+        "occupationDomains",
+        "nativeSourceOrder",
+        "source",
+        "occupationDomainTemplates"
+      ],
+      "x-producer-consumer": "03native-source/document actualcurrentD capture -> Scene::BuildOrientMatrix -> BuildCrystal2(D3)/BuildCluster(D4)/BuildQuasiCrystal(D5/6) -> physical display/scatter/currenttypedarchive",
+      "x-invariants": [
+        "dimensionD isactualmathematicalD;Crystal+168 storesD+1,notD;nativeQUASICRYSTAL DIM=constructor receivesD",
+        "C2O/O2C fromGetMatrixC2O/+510 andGetMatrixO2C/+538;fullDmatrix retained;PHASON at+588;QCORIG at+78..a0 sixsourcef64",
+        "GetMatrixC2XYZ+150/GetMatrixXYZ2C+178 returnfull(D+1)^2;notonly16values forD>3",
+        "BuildOrientMatrix: temp=PHASON*C2O;Initialize copiesmin dimensions intoexistingC2XYZ withoutresize;GeMM(M4,temp)updatesM=min(D+1,4),N=D,K=min(4,D),otherrows/edgevaluesretainactualpreviousstate;translationcolD first3 updatedbyindependentpositionreference rule",
+        "InitializeI buildsXYZ2C inverse;nativeAux1A0 copiesinverse andnegateslastcolumnfirst3;fullsourceedgewords retained,not implicitzero padding",
+        "higherD positions usecurrentDops andcompleteDcoordinates;projectphysicalfirst3onlyafterD-affine evaluation;internalD-3 componentsremainmodel/identity",
+        "nativeCIFwaveq rows storedordered3;do notassignunprovedharmonicfunctionmeaning;actualhigherDstructurefactors useDdotproduct perFS evidence",
+        "allsite/domain/opids resolvewithinsameowner/revision;actualDcoordinates survivetypedarchive/change/restore; no source-onlydowngrade",
+        "nativefileprojection/save usesactualqualifiedgrammar/full loss report;internalenginearchivepersists alltypedDfields andsource independently;never stripsinternalaxes",
+        "scene builddispatchnativeword4→D3BuildCrystal2,word5→D4BuildCluster,elseD5/6BuildQuasiCrystal;runtimequalificationnot virtual exclusion",
+        "templateOrdinal resolves Crystal+1f8 sourcegeometry independentlyof per-sitecopy;siteOD currentvertices mayalreadytransformed;never usemutatedcurrentcopy assource template"
+      ]
+    },
+    "VectorD5": {
+      "type": "array",
+      "items": {
+        "type": "number",
+        "minimum": -1.7976931348623157e+308,
+        "maximum": 1.7976931348623157e+308,
+        "x-unit": "dimensionless"
+      },
+      "minItems": 5,
+      "maxItems": 5
+    },
+    "MatrixD5Rows": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/VectorD5"
+      },
+      "minItems": 5,
+      "maxItems": 5
+    },
+    "MatrixD6HomogeneousRows": {
+      "type": "array",
+      "items": {
+        "type": "array",
+        "items": {
+          "type": "number",
+          "minimum": -1.7976931348623157e+308,
+          "maximum": 1.7976931348623157e+308,
+          "x-unit": "dimensionless"
+        },
+        "minItems": 6,
+        "maxItems": 6
+      },
+      "minItems": 6,
+      "maxItems": 6
+    },
+    "NativeSiteD5": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "siteId": {
+          "$ref": "#/$defs/Id"
+        },
+        "nativeSpeciesToken": {
+          "type": "string",
+          "pattern": "^[!-~]{1,2}$"
+        },
+        "nativeElementIndexI16": {
+          "type": "integer",
+          "minimum": -32768,
+          "maximum": 32767
+        },
+        "fractionalCoordinatesD": {
+          "$ref": "#/$defs/VectorD5"
+        },
+        "occupancySlotD": {
+          "type": "number",
+          "minimum": -1.7976931348623157e+308,
+          "maximum": 1.7976931348623157e+308,
+          "x-unit": "dimensionless"
+        },
+        "nativeScalarSlotD1": {
+          "type": "number",
+          "minimum": -1.7976931348623157e+308,
+          "maximum": 1.7976931348623157e+308,
+          "x-unit": "sourceUorBangstrom^2"
+        },
+        "thermal6SlotsD2ToD7": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "minimum": -1.7976931348623157e+308,
+            "maximum": 1.7976931348623157e+308,
+            "x-unit": "dimensionless"
+          },
+          "minItems": 6,
+          "maxItems": 6
+        },
+        "coordinateSUD": {
+          "$ref": "#/$defs/VectorD5"
+        },
+        "nativeSiteArrayBlocks3ByDPlus8": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "number",
+              "minimum": -1.7976931348623157e+308,
+              "maximum": 1.7976931348623157e+308,
+              "x-unit": "dimensionless"
+            },
+            "minItems": 13,
+            "maxItems": 13
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "nativeFlagsU16": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 65535
+        },
+        "occupationDomainId": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/Id"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "nativeOrbitNumeratorI16": {
+          "type": "integer",
+          "minimum": -32768,
+          "maximum": 32767
+        }
+      },
+      "required": [
+        "siteId",
+        "nativeSpeciesToken",
+        "nativeElementIndexI16",
+        "fractionalCoordinatesD",
+        "occupancySlotD",
+        "nativeScalarSlotD1",
+        "thermal6SlotsD2ToD7",
+        "coordinateSUD",
+        "nativeSiteArrayBlocks3ByDPlus8",
+        "nativeFlagsU16",
+        "occupationDomainId",
+        "nativeOrbitNumeratorI16"
+      ],
+      "x-invariants": [
+        "XSite+18=5;allocated3*(5+8)f64 @c6f50..c6f80",
+        "explicitcoordinates/scalar/tensor/SU mustequalactualblockprojections;block0[:D]=coordinates,block0[D]=occupancy,block0[D+1]=scalar,block0[D+2:D+8]=thermal6,block1[:D]=coordinateSU",
+        "nativeFlagsU16 isactualXSite+da,bit3 usedbyactualscatter path;not replaced byglobal THERT/THERI/table flags",
+        "block2 andunconsumedblockfields exacttypedcurrentdata,not imaginaryharmoniccoefficients; originalsourceobservationindependent",
+        "nativeOrbitNumeratorI16 is signedXSite+d8 used byactualSF/densityweight;do notdecodeunsigned merelybecause storage16bits"
+      ]
+    },
+    "NativeSymmetryOpD5": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "operatorId": {
+          "$ref": "#/$defs/Id"
+        },
+        "currentNativeMatrixRows": {
+          "$ref": "#/$defs/MatrixD6HomogeneousRows"
+        },
+        "timeSign": {
+          "enum": [
+            -1,
+            1
+          ]
+        }
+      },
+      "required": [
+        "operatorId",
+        "currentNativeMatrixRows",
+        "timeSign"
+      ],
+      "x-invariants": [
+        "positionaffine usesfirstDrows/cols pluscolDtranslation;nativebottomrowandtime representation keptactual,not rewrittenasordinaryhomogeneous1",
+        "currentUnitCell+70 fullDoplist,not3Dtruncate ofgenerator/sourcehistory"
+      ]
+    },
+    "NativeDimensionD5State": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "modelId": {
+          "$ref": "#/$defs/Id"
+        },
+        "dimensionD": {
+          "const": 5
+        },
+        "nativeMatrixDimensionWord": {
+          "const": 6
+        },
+        "nativeModelKind": {
+          "enum": [
+            "crystal",
+            "molecule",
+            "quasicrystal",
+            "magnetic-quasicrystal"
+          ]
+        },
+        "sourceGroupNumberI32": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "sourceSettingOrdinalI32": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "crystallographicToOrthoRowsD": {
+          "$ref": "#/$defs/MatrixD5Rows"
+        },
+        "orthoToCrystallographicRowsD": {
+          "$ref": "#/$defs/MatrixD5Rows"
+        },
+        "phasonRowsD": {
+          "$ref": "#/$defs/MatrixD5Rows"
+        },
+        "layerWorldMatrix4Rows": {
+          "$ref": "#/$defs/Matrix4Rows"
+        },
+        "currentC2XYZRowsDp1": {
+          "$ref": "#/$defs/MatrixD6HomogeneousRows"
+        },
+        "currentXYZ2CRowsDp1": {
+          "$ref": "#/$defs/MatrixD6HomogeneousRows"
+        },
+        "nativeAuxInverse1A0RowsDp1": {
+          "$ref": "#/$defs/MatrixD6HomogeneousRows"
+        },
+        "qcorigNative6": {
+          "$ref": "#/$defs/Vec6"
+        },
+        "nativeCIFWaveVectorRows3": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Vec3"
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "drawingBoundsMinMaxD": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "number",
+              "minimum": -3.4028234663852886e+38,
+              "maximum": 3.4028234663852886e+38,
+              "x-unit": "native-fractional-bound",
+              "x-invariant": "exact finite binary32 value promoted to JSONnumber; rawWord must match wherever supplied"
+            },
+            "minItems": 2,
+            "maxItems": 2
+          },
+          "minItems": 5,
+          "maxItems": 5
+        },
+        "symmetryOpsD": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/NativeSymmetryOpD5"
+          },
+          "minItems": 1
+        },
+        "sites": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/NativeSiteD5"
+          },
+          "minItems": 0
+        },
+        "occupationDomains": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/NativeOccupationDomainDefinition"
+          },
+          "minItems": 0
+        },
+        "nativeSourceOrder": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Id"
+          },
+          "minItems": 0
+        },
+        "source": {
+          "$ref": "#/$defs/SourceSpan"
+        },
+        "occupationDomainTemplates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/NativeOccupationDomainTemplate"
+          },
+          "minItems": 0
+        }
+      },
+      "required": [
+        "modelId",
+        "dimensionD",
+        "nativeMatrixDimensionWord",
+        "nativeModelKind",
+        "sourceGroupNumberI32",
+        "sourceSettingOrdinalI32",
+        "crystallographicToOrthoRowsD",
+        "orthoToCrystallographicRowsD",
+        "phasonRowsD",
+        "layerWorldMatrix4Rows",
+        "currentC2XYZRowsDp1",
+        "currentXYZ2CRowsDp1",
+        "nativeAuxInverse1A0RowsDp1",
+        "qcorigNative6",
+        "nativeCIFWaveVectorRows3",
+        "drawingBoundsMinMaxD",
+        "symmetryOpsD",
+        "sites",
+        "occupationDomains",
+        "nativeSourceOrder",
+        "source",
+        "occupationDomainTemplates"
+      ],
+      "x-producer-consumer": "03native-source/document actualcurrentD capture -> Scene::BuildOrientMatrix -> BuildCrystal2(D3)/BuildCluster(D4)/BuildQuasiCrystal(D5/6) -> physical display/scatter/currenttypedarchive",
+      "x-invariants": [
+        "dimensionD isactualmathematicalD;Crystal+168 storesD+1,notD;nativeQUASICRYSTAL DIM=constructor receivesD",
+        "C2O/O2C fromGetMatrixC2O/+510 andGetMatrixO2C/+538;fullDmatrix retained;PHASON at+588;QCORIG at+78..a0 sixsourcef64",
+        "GetMatrixC2XYZ+150/GetMatrixXYZ2C+178 returnfull(D+1)^2;notonly16values forD>3",
+        "BuildOrientMatrix: temp=PHASON*C2O;Initialize copiesmin dimensions intoexistingC2XYZ withoutresize;GeMM(M4,temp)updatesM=min(D+1,4),N=D,K=min(4,D),otherrows/edgevaluesretainactualpreviousstate;translationcolD first3 updatedbyindependentpositionreference rule",
+        "InitializeI buildsXYZ2C inverse;nativeAux1A0 copiesinverse andnegateslastcolumnfirst3;fullsourceedgewords retained,not implicitzero padding",
+        "higherD positions usecurrentDops andcompleteDcoordinates;projectphysicalfirst3onlyafterD-affine evaluation;internalD-3 componentsremainmodel/identity",
+        "nativeCIFwaveq rows storedordered3;do notassignunprovedharmonicfunctionmeaning;actualhigherDstructurefactors useDdotproduct perFS evidence",
+        "allsite/domain/opids resolvewithinsameowner/revision;actualDcoordinates survivetypedarchive/change/restore; no source-onlydowngrade",
+        "nativefileprojection/save usesactualqualifiedgrammar/full loss report;internalenginearchivepersists alltypedDfields andsource independently;never stripsinternalaxes",
+        "scene builddispatchnativeword4→D3BuildCrystal2,word5→D4BuildCluster,elseD5/6BuildQuasiCrystal;runtimequalificationnot virtual exclusion",
+        "templateOrdinal resolves Crystal+1f8 sourcegeometry independentlyof per-sitecopy;siteOD currentvertices mayalreadytransformed;never usemutatedcurrentcopy assource template"
+      ]
+    },
+    "VectorD6": {
+      "type": "array",
+      "items": {
+        "type": "number",
+        "minimum": -1.7976931348623157e+308,
+        "maximum": 1.7976931348623157e+308,
+        "x-unit": "dimensionless"
+      },
+      "minItems": 6,
+      "maxItems": 6
+    },
+    "MatrixD6Rows": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/VectorD6"
+      },
+      "minItems": 6,
+      "maxItems": 6
+    },
+    "MatrixD7HomogeneousRows": {
+      "type": "array",
+      "items": {
+        "type": "array",
+        "items": {
+          "type": "number",
+          "minimum": -1.7976931348623157e+308,
+          "maximum": 1.7976931348623157e+308,
+          "x-unit": "dimensionless"
+        },
+        "minItems": 7,
+        "maxItems": 7
+      },
+      "minItems": 7,
+      "maxItems": 7
+    },
+    "NativeSiteD6": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "siteId": {
+          "$ref": "#/$defs/Id"
+        },
+        "nativeSpeciesToken": {
+          "type": "string",
+          "pattern": "^[!-~]{1,2}$"
+        },
+        "nativeElementIndexI16": {
+          "type": "integer",
+          "minimum": -32768,
+          "maximum": 32767
+        },
+        "fractionalCoordinatesD": {
+          "$ref": "#/$defs/VectorD6"
+        },
+        "occupancySlotD": {
+          "type": "number",
+          "minimum": -1.7976931348623157e+308,
+          "maximum": 1.7976931348623157e+308,
+          "x-unit": "dimensionless"
+        },
+        "nativeScalarSlotD1": {
+          "type": "number",
+          "minimum": -1.7976931348623157e+308,
+          "maximum": 1.7976931348623157e+308,
+          "x-unit": "sourceUorBangstrom^2"
+        },
+        "thermal6SlotsD2ToD7": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "minimum": -1.7976931348623157e+308,
+            "maximum": 1.7976931348623157e+308,
+            "x-unit": "dimensionless"
+          },
+          "minItems": 6,
+          "maxItems": 6
+        },
+        "coordinateSUD": {
+          "$ref": "#/$defs/VectorD6"
+        },
+        "nativeSiteArrayBlocks3ByDPlus8": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "number",
+              "minimum": -1.7976931348623157e+308,
+              "maximum": 1.7976931348623157e+308,
+              "x-unit": "dimensionless"
+            },
+            "minItems": 14,
+            "maxItems": 14
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "nativeFlagsU16": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 65535
+        },
+        "occupationDomainId": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/Id"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "nativeOrbitNumeratorI16": {
+          "type": "integer",
+          "minimum": -32768,
+          "maximum": 32767
+        }
+      },
+      "required": [
+        "siteId",
+        "nativeSpeciesToken",
+        "nativeElementIndexI16",
+        "fractionalCoordinatesD",
+        "occupancySlotD",
+        "nativeScalarSlotD1",
+        "thermal6SlotsD2ToD7",
+        "coordinateSUD",
+        "nativeSiteArrayBlocks3ByDPlus8",
+        "nativeFlagsU16",
+        "occupationDomainId",
+        "nativeOrbitNumeratorI16"
+      ],
+      "x-invariants": [
+        "XSite+18=6;allocated3*(6+8)f64 @c6f50..c6f80",
+        "explicitcoordinates/scalar/tensor/SU mustequalactualblockprojections;block0[:D]=coordinates,block0[D]=occupancy,block0[D+1]=scalar,block0[D+2:D+8]=thermal6,block1[:D]=coordinateSU",
+        "nativeFlagsU16 isactualXSite+da,bit3 usedbyactualscatter path;not replaced byglobal THERT/THERI/table flags",
+        "block2 andunconsumedblockfields exacttypedcurrentdata,not imaginaryharmoniccoefficients; originalsourceobservationindependent",
+        "nativeOrbitNumeratorI16 is signedXSite+d8 used byactualSF/densityweight;do notdecodeunsigned merelybecause storage16bits"
+      ]
+    },
+    "NativeSymmetryOpD6": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "operatorId": {
+          "$ref": "#/$defs/Id"
+        },
+        "currentNativeMatrixRows": {
+          "$ref": "#/$defs/MatrixD7HomogeneousRows"
+        },
+        "timeSign": {
+          "enum": [
+            -1,
+            1
+          ]
+        }
+      },
+      "required": [
+        "operatorId",
+        "currentNativeMatrixRows",
+        "timeSign"
+      ],
+      "x-invariants": [
+        "positionaffine usesfirstDrows/cols pluscolDtranslation;nativebottomrowandtime representation keptactual,not rewrittenasordinaryhomogeneous1",
+        "currentUnitCell+70 fullDoplist,not3Dtruncate ofgenerator/sourcehistory"
+      ]
+    },
+    "NativeDimensionD6State": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "modelId": {
+          "$ref": "#/$defs/Id"
+        },
+        "dimensionD": {
+          "const": 6
+        },
+        "nativeMatrixDimensionWord": {
+          "const": 7
+        },
+        "nativeModelKind": {
+          "enum": [
+            "crystal",
+            "molecule",
+            "quasicrystal",
+            "magnetic-quasicrystal"
+          ]
+        },
+        "sourceGroupNumberI32": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "sourceSettingOrdinalI32": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "crystallographicToOrthoRowsD": {
+          "$ref": "#/$defs/MatrixD6Rows"
+        },
+        "orthoToCrystallographicRowsD": {
+          "$ref": "#/$defs/MatrixD6Rows"
+        },
+        "phasonRowsD": {
+          "$ref": "#/$defs/MatrixD6Rows"
+        },
+        "layerWorldMatrix4Rows": {
+          "$ref": "#/$defs/Matrix4Rows"
+        },
+        "currentC2XYZRowsDp1": {
+          "$ref": "#/$defs/MatrixD7HomogeneousRows"
+        },
+        "currentXYZ2CRowsDp1": {
+          "$ref": "#/$defs/MatrixD7HomogeneousRows"
+        },
+        "nativeAuxInverse1A0RowsDp1": {
+          "$ref": "#/$defs/MatrixD7HomogeneousRows"
+        },
+        "qcorigNative6": {
+          "$ref": "#/$defs/Vec6"
+        },
+        "nativeCIFWaveVectorRows3": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Vec3"
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "drawingBoundsMinMaxD": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "number",
+              "minimum": -3.4028234663852886e+38,
+              "maximum": 3.4028234663852886e+38,
+              "x-unit": "native-fractional-bound",
+              "x-invariant": "exact finite binary32 value promoted to JSONnumber; rawWord must match wherever supplied"
+            },
+            "minItems": 2,
+            "maxItems": 2
+          },
+          "minItems": 6,
+          "maxItems": 6
+        },
+        "symmetryOpsD": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/NativeSymmetryOpD6"
+          },
+          "minItems": 1
+        },
+        "sites": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/NativeSiteD6"
+          },
+          "minItems": 0
+        },
+        "occupationDomains": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/NativeOccupationDomainDefinition"
+          },
+          "minItems": 0
+        },
+        "nativeSourceOrder": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Id"
+          },
+          "minItems": 0
+        },
+        "source": {
+          "$ref": "#/$defs/SourceSpan"
+        },
+        "occupationDomainTemplates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/NativeOccupationDomainTemplate"
+          },
+          "minItems": 0
+        }
+      },
+      "required": [
+        "modelId",
+        "dimensionD",
+        "nativeMatrixDimensionWord",
+        "nativeModelKind",
+        "sourceGroupNumberI32",
+        "sourceSettingOrdinalI32",
+        "crystallographicToOrthoRowsD",
+        "orthoToCrystallographicRowsD",
+        "phasonRowsD",
+        "layerWorldMatrix4Rows",
+        "currentC2XYZRowsDp1",
+        "currentXYZ2CRowsDp1",
+        "nativeAuxInverse1A0RowsDp1",
+        "qcorigNative6",
+        "nativeCIFWaveVectorRows3",
+        "drawingBoundsMinMaxD",
+        "symmetryOpsD",
+        "sites",
+        "occupationDomains",
+        "nativeSourceOrder",
+        "source",
+        "occupationDomainTemplates"
+      ],
+      "x-producer-consumer": "03native-source/document actualcurrentD capture -> Scene::BuildOrientMatrix -> BuildCrystal2(D3)/BuildCluster(D4)/BuildQuasiCrystal(D5/6) -> physical display/scatter/currenttypedarchive",
+      "x-invariants": [
+        "dimensionD isactualmathematicalD;Crystal+168 storesD+1,notD;nativeQUASICRYSTAL DIM=constructor receivesD",
+        "C2O/O2C fromGetMatrixC2O/+510 andGetMatrixO2C/+538;fullDmatrix retained;PHASON at+588;QCORIG at+78..a0 sixsourcef64",
+        "GetMatrixC2XYZ+150/GetMatrixXYZ2C+178 returnfull(D+1)^2;notonly16values forD>3",
+        "BuildOrientMatrix: temp=PHASON*C2O;Initialize copiesmin dimensions intoexistingC2XYZ withoutresize;GeMM(M4,temp)updatesM=min(D+1,4),N=D,K=min(4,D),otherrows/edgevaluesretainactualpreviousstate;translationcolD first3 updatedbyindependentpositionreference rule",
+        "InitializeI buildsXYZ2C inverse;nativeAux1A0 copiesinverse andnegateslastcolumnfirst3;fullsourceedgewords retained,not implicitzero padding",
+        "higherD positions usecurrentDops andcompleteDcoordinates;projectphysicalfirst3onlyafterD-affine evaluation;internalD-3 componentsremainmodel/identity",
+        "nativeCIFwaveq rows storedordered3;do notassignunprovedharmonicfunctionmeaning;actualhigherDstructurefactors useDdotproduct perFS evidence",
+        "allsite/domain/opids resolvewithinsameowner/revision;actualDcoordinates survivetypedarchive/change/restore; no source-onlydowngrade",
+        "nativefileprojection/save usesactualqualifiedgrammar/full loss report;internalenginearchivepersists alltypedDfields andsource independently;never stripsinternalaxes",
+        "scene builddispatchnativeword4→D3BuildCrystal2,word5→D4BuildCluster,elseD5/6BuildQuasiCrystal;runtimequalificationnot virtual exclusion",
+        "templateOrdinal resolves Crystal+1f8 sourcegeometry independentlyof per-sitecopy;siteOD currentvertices mayalreadytransformed;never usemutatedcurrentcopy assource template"
+      ]
+    },
+    "NativeDimensionDState": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/NativeDimensionD3State"
+        },
+        {
+          "$ref": "#/$defs/NativeDimensionD4State"
+        },
+        {
+          "$ref": "#/$defs/NativeDimensionD5State"
+        },
+        {
+          "$ref": "#/$defs/NativeDimensionD6State"
+        }
+      ]
+    },
+    "ProjectedDImage": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "siteId": {
+          "$ref": "#/$defs/Id"
+        },
+        "operatorId": {
+          "$ref": "#/$defs/Id"
+        },
+        "translationIntegerD": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          },
+          "minItems": 3
+        },
+        "fractionalImageD": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "minimum": -1.7976931348623157e+308,
+            "maximum": 1.7976931348623157e+308,
+            "x-unit": "dimensionless"
+          },
+          "minItems": 3
+        },
+        "nativeXYZImageD": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "minimum": -1.7976931348623157e+308,
+            "maximum": 1.7976931348623157e+308,
+            "x-unit": "native-coordinate"
+          },
+          "minItems": 3
+        },
+        "physicalCartesianA": {
+          "$ref": "#/$defs/Vec3A"
+        },
+        "insideDrawingBoundary": {
+          "type": "boolean"
+        },
+        "occupationDomainId": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/Id"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "siteId",
+        "operatorId",
+        "translationIntegerD",
+        "fractionalImageD",
+        "nativeXYZImageD",
+        "physicalCartesianA",
+        "insideDrawingBoundary",
+        "occupationDomainId"
+      ],
+      "x-invariants": [
+        "allDarrays length=state.dimensionD;no generic3Dcoercion",
+        "R_D*f_D+t_D followedbycurrentC2XYZfullDaffine;physicalCartesianA equalsfirst3 nativeCartesiancomponents afteractualfullDtransform",
+        "tuple(siteId,operatorId,translationIntegerD) canonicalimage identity;specialpositionaliases representedexplicitly notmergingbylabel"
+      ]
+    },
+    "DomainDisplayMesh": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "domainId": {
+          "$ref": "#/$defs/Id"
+        },
+        "siteId": {
+          "$ref": "#/$defs/Id"
+        },
+        "operatorId": {
+          "$ref": "#/$defs/Id"
+        },
+        "verticesCartesianA": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Vec3A"
+          },
+          "minItems": 0
+        },
+        "facesVertexIndices": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "minItems": 3
+          },
+          "minItems": 0
+        },
+        "sourceVertexOrbits": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "minItems": 0
+        }
+      },
+      "required": [
+        "domainId",
+        "siteId",
+        "operatorId",
+        "verticesCartesianA",
+        "facesVertexIndices",
+        "sourceVertexOrbits"
+      ],
+      "x-invariants": [
+        "allfaceindices inrange;drawnODphysicalmesh isderivedfromfullnativeDdefinition/currenttransform,notpersisted source3Dreplacement",
+        "nativeDrawODsImpl algorithmprofile/sourceSHA determinesdomainplanes/clip/order;explicitmeshdoesnotproveunrunnativepixels"
+      ]
+    },
+    "NativeDimensionDRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "state": {
+          "$ref": "#/$defs/NativeDimensionDState"
+        },
+        "action": {
+          "enum": [
+            "project-current-sites",
+            "build-native-display",
+            "capture-for-restore"
+          ]
+        },
+        "maximumImages": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "maximumDomainVertices": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "required": [
+        "state",
+        "action",
+        "maximumImages",
+        "maximumDomainVertices"
+      ]
+    },
+    "NativeDimensionDResponse": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "currentState": {
+          "$ref": "#/$defs/NativeDimensionDState"
+        },
+        "images": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ProjectedDImage"
+          },
+          "minItems": 0
+        },
+        "domainMeshes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/DomainDisplayMesh"
+          },
+          "minItems": 0
+        },
+        "completion": {
+          "enum": [
+            "complete",
+            "bounded-partial"
+          ]
+        },
+        "remainingFrontierCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "diagnostics": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "source-reference-missing",
+              "singular-native-transform",
+              "nonfinite-scientific-input",
+              "image-budget-reached",
+              "mesh-budget-reached",
+              "native-invalid-domain"
+            ]
+          },
+          "minItems": 0
+        }
+      },
+      "required": [
+        "currentState",
+        "images",
+        "domainMeshes",
+        "completion",
+        "remainingFrontierCount",
+        "diagnostics"
+      ],
+      "x-invariants": [
+        "completioncomplete iff noadmittedunexpandedimages/domainvertices;boundsbudgetpartialneverclaimscomplete",
+        "capture-for-restore restoresactualDtypedstate,allsite/ODrelations,flags,currentqcorig/matrices/sourceidentity before projection"
+      ]
+    },
+    "Diagnostic": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "code": {
+          "enum": [
+            "E_SOURCE_REFERENCE",
+            "E_DIMENSION",
+            "E_SINGULAR_TRANSFORM",
+            "E_NONFINITE",
+            "E_UNDERSPECIFIED",
+            "E_INVALID_COVARIANCE",
+            "E_NATIVE_SOURCE_MISMATCH",
+            "E_RESOURCE_LIMIT",
+            "E_DEGENERATE_GEOMETRY",
+            "E_AMBIGUOUS_BV_ROW",
+            "E_RESOURCE_UNAVAILABLE"
+          ]
+        },
+        "entityId": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/Id"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "detail": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "code",
+        "entityId",
+        "detail"
+      ]
+    },
+    "ResolveNativePlacementsRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "state": {
+          "$ref": "#/$defs/PhasePlacementSet"
+        }
+      },
+      "required": [
+        "state"
+      ]
+    },
+    "ResolveNativePlacementsResponse": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "resolved": {
+          "$ref": "#/$defs/PhasePlacementSet"
+        },
+        "diagnostics": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Diagnostic"
+          },
+          "minItems": 0
+        }
+      },
+      "required": [
+        "resolved",
+        "diagnostics"
+      ]
+    },
+    "NativeGroupRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "state": {
+          "$ref": "#/$defs/GroupSettingState"
+        },
+        "sitesFractional3": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "siteId": {
+                "$ref": "#/$defs/Id"
+              },
+              "position": {
+                "$ref": "#/$defs/Vec3"
+              }
+            },
+            "required": [
+              "siteId",
+              "position"
+            ]
+          },
+          "minItems": 0
+        }
+      },
+      "required": [
+        "state",
+        "sitesFractional3"
+      ]
+    },
+    "NativeGroupResponse": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "state": {
+          "$ref": "#/$defs/GroupSettingState"
+        },
+        "expanded": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "siteId": {
+                "$ref": "#/$defs/Id"
+              },
+              "operatorId": {
+                "$ref": "#/$defs/Id"
+              },
+              "fractionalImageModulo1": {
+                "$ref": "#/$defs/Vec3"
+              }
+            },
+            "required": [
+              "siteId",
+              "operatorId",
+              "fractionalImageModulo1"
+            ]
+          },
+          "minItems": 0
+        },
+        "diagnostics": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Diagnostic"
+          },
+          "minItems": 0
+        }
+      },
+      "required": [
+        "state",
+        "expanded",
+        "diagnostics"
+      ]
+    },
+    "NativeWyckoffRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "state": {
+          "$ref": "#/$defs/GroupSettingState"
+        },
+        "siteId": {
+          "$ref": "#/$defs/Id"
+        },
+        "positionFractional": {
+          "$ref": "#/$defs/Vec3"
+        },
+        "coordinateSUFractional": {
+          "$ref": "#/$defs/Vec3"
+        }
+      },
+      "required": [
+        "state",
+        "siteId",
+        "positionFractional",
+        "coordinateSUFractional"
+      ]
+    },
+    "NativeWyckoffResponse": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "siteId": {
+          "$ref": "#/$defs/Id"
+        },
+        "assignment": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "kind": {
+                  "const": "assigned"
+                },
+                "multiplicity": {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                "letter": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z]$"
+                },
+                "sourceRow": {
+                  "$ref": "#/$defs/SourceSpan"
+                },
+                "effectiveToleranceFractional": {
+                  "$ref": "#/$defs/Vec3"
+                }
+              },
+              "required": [
+                "kind",
+                "multiplicity",
+                "letter",
+                "sourceRow",
+                "effectiveToleranceFractional"
+              ]
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "kind": {
+                  "const": "unassigned"
+                },
+                "reason": {
+                  "enum": [
+                    "missing-source-row",
+                    "no-compatible-position",
+                    "invalid-source-setting"
+                  ]
+                }
+              },
+              "required": [
+                "kind",
+                "reason"
+              ]
+            }
+          ]
+        },
+        "diagnostics": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Diagnostic"
+          },
+          "minItems": 0
+        }
+      },
+      "required": [
+        "siteId",
+        "assignment",
+        "diagnostics"
+      ]
+    },
+    "CovarianceParameter": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "parameterId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "unit": {
+          "enum": [
+            "fractional",
+            "angstrom",
+            "degree",
+            "angstrom^2",
+            "dimensionless"
+          ]
+        },
+        "centralValue": {
+          "type": "number",
+          "minimum": -1.7976931348623157e+308,
+          "maximum": 1.7976931348623157e+308,
+          "x-unit": "dimensionless"
+        }
+      },
+      "required": [
+        "parameterId",
+        "unit",
+        "centralValue"
+      ]
+    },
+    "UncertaintyModel": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "authority": {
+          "enum": [
+            "native-diagonal-approximation",
+            "supplied-full-covariance"
+          ]
+        },
+        "parametersInOrder": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/CovarianceParameter"
+          },
+          "minItems": 1
+        },
+        "covarianceRows": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "number",
+              "minimum": -1.7976931348623157e+308,
+              "maximum": 1.7976931348623157e+308,
+              "x-unit": "dimensionless"
+            },
+            "minItems": 1
+          },
+          "minItems": 1
+        },
+        "independentParameterIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 0
+        },
+        "fullParameterByIndependentJacobianRows": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "number",
+              "minimum": -1.7976931348623157e+308,
+              "maximum": 1.7976931348623157e+308,
+              "x-unit": "dimensionless"
+            },
+            "minItems": 0
+          },
+          "minItems": 0
+        },
+        "source": {
+          "$ref": "#/$defs/SourceSpan"
+        }
+      },
+      "required": [
+        "authority",
+        "parametersInOrder",
+        "covarianceRows",
+        "independentParameterIds",
+        "fullParameterByIndependentJacobianRows",
+        "source"
+      ],
+      "x-invariants": [
+        "covariancedimensionN matchesparameterorder;matrixsymmetricPSD;eachentryunitsproductofcorrespondingparameterunits",
+        "nativediagonalapproximationexplicitlyignorescrosscorrelations;absent isnot measuredzero",
+        "constraintfull=T*independent;J_ind=J_full*T,C_full=T*C_ind*T^T;sourceconstraintrevision/parameterorderingchecked"
+      ]
+    },
+    "NativeMeasurement": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "enum": [
+            "distance",
+            "angle",
+            "torsion",
+            "plane-angle"
+          ]
+        },
+        "selectedCartesianPointsA": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Vec3A"
+          },
+          "minItems": 0
+        },
+        "selectedImageIds": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Id"
+          },
+          "minItems": 0
+        },
+        "parameterToSelectedCartesianJacobianRows": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "number",
+              "minimum": -1.7976931348623157e+308,
+              "maximum": 1.7976931348623157e+308,
+              "x-unit": "dimensionless"
+            },
+            "minItems": 0
+          },
+          "minItems": 0
+        }
+      },
+      "required": [
+        "kind",
+        "selectedCartesianPointsA",
+        "selectedImageIds",
+        "parameterToSelectedCartesianJacobianRows"
+      ],
+      "x-invariants": [
+        "distance2points,angle3,torsion4;plane-angle explicittwo3pointplanes;imageids matchpoints",
+        "Jacobian rows3*pointCount byN parameters,alreadyincludesactualH/symmetry/phase/constraint transforms;cellangledegree derivatives includeπ/180",
+        "no uncertaintyzero default atzero-distance/collinearity;typedundefined withcentral geometrydiagnostic"
+      ]
+    },
+    "NativeADPAndUncertaintyRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "adpPlan": {
+          "$ref": "#/$defs/AdpRenderPlan"
+        },
+        "measurement": {
+          "$ref": "#/$defs/NativeMeasurement"
+        },
+        "uncertainty": {
+          "$ref": "#/$defs/UncertaintyModel"
+        }
+      },
+      "required": [
+        "adpPlan",
+        "measurement",
+        "uncertainty"
+      ]
+    },
+    "NativeADPAndUncertaintyResponse": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "adpPlan": {
+          "$ref": "#/$defs/AdpRenderPlan"
+        },
+        "measurementValue": {
+          "oneOf": [
+            {
+              "type": "number",
+              "minimum": -1.7976931348623157e+308,
+              "maximum": 1.7976931348623157e+308,
+              "x-unit": "dimensionless"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "measurementUnit": {
+          "enum": [
+            "angstrom",
+            "degree"
+          ]
+        },
+        "uncertaintyResult": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "kind": {
+                  "const": "defined"
+                },
+                "jacobianInParameterOrder": {
+                  "type": "array",
+                  "items": {
+                    "type": "number",
+                    "minimum": -1.7976931348623157e+308,
+                    "maximum": 1.7976931348623157e+308,
+                    "x-unit": "dimensionless"
+                  },
+                  "minItems": 1
+                },
+                "variance": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1.7976931348623157e+308
+                },
+                "standardUncertainty": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1.7976931348623157e+308
+                }
+              },
+              "required": [
+                "kind",
+                "jacobianInParameterOrder",
+                "variance",
+                "standardUncertainty"
+              ]
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "kind": {
+                  "const": "undefined"
+                },
+                "reason": {
+                  "enum": [
+                    "zero-distance-gradient",
+                    "collinear-angle",
+                    "underdetermined-plane",
+                    "invalid-covariance"
+                  ]
+                }
+              },
+              "required": [
+                "kind",
+                "reason"
+              ]
+            }
+          ]
+        },
+        "diagnostics": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Diagnostic"
+          },
+          "minItems": 0
+        }
+      },
+      "required": [
+        "adpPlan",
+        "measurementValue",
+        "measurementUnit",
+        "uncertaintyResult",
+        "diagnostics"
+      ],
+      "x-invariants": [
+        "measurementValue null exactlywhencentralgeometryitselfisundefined(e.gcollineartorsion);value0forzero-distance remainsvalidcentralvaluebutitsSUgradientundefined",
+        "centralvalueandSUdefinedness areindependent;neverfabricatefinite0 forundefinedcentralangle/torsion;typedundefinedSUreason+Diagnostic identifiesgeometry"
+      ]
+    },
+    "NativeMergeRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "phaseId": {
+          "$ref": "#/$defs/Id"
+        },
+        "frame": {
+          "$ref": "#/$defs/Frame"
+        },
+        "profile": {
+          "enum": [
+            "native-greedy-source-order",
+            "detect-connected-components",
+            "corrected-metric-greedy"
+          ]
+        },
+        "thresholdA": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 3.4028234663852886e+38
+        },
+        "sourceOrder": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Id"
+          },
+          "minItems": 1
+        },
+        "sites": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/MergeSiteInput"
+          },
+          "minItems": 1
+        },
+        "symmetryOps": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SymmetryOp3"
+          },
+          "minItems": 1
+        },
+        "bondRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/PublicBondRule"
+          },
+          "minItems": 0
+        }
+      },
+      "required": [
+        "phaseId",
+        "frame",
+        "profile",
+        "thresholdA",
+        "sourceOrder",
+        "sites",
+        "symmetryOps",
+        "bondRules"
+      ]
+    },
+    "NativeMergeResponse": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "groups": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/MergeGroupResult"
+          },
+          "minItems": 0
+        },
+        "mutatesSites": {
+          "type": "boolean"
+        },
+        "diagnostics": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Diagnostic"
+          },
+          "minItems": 0
+        }
+      },
+      "required": [
+        "groups",
+        "mutatesSites",
+        "diagnostics"
+      ],
+      "x-invariants": [
+        "detect-only profilemutatesSites=false;nativegreedy/sourceSUmetadata rules fromMergePlan;engineapply/preview owns actualtransaction"
+      ]
+    },
+    "BondValenceRow": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "rowKey": {
+          "type": "string",
+          "minLength": 1
+        },
+        "assetSHA256": {
+          "$ref": "#/$defs/SHA256"
+        },
+        "speciesA": {
+          "type": "string",
+          "minLength": 1
+        },
+        "speciesB": {
+          "type": "string",
+          "minLength": 1
+        },
+        "oxidationA": {
+          "type": "integer"
+        },
+        "oxidationB": {
+          "type": "integer"
+        },
+        "r0A": {
+          "type": "number",
+          "minimum": -1.7976931348623157e+308,
+          "maximum": 1.7976931348623157e+308,
+          "x-unit": "angstrom"
+        },
+        "bA": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 1.7976931348623157e+308
+        },
+        "source": {
+          "$ref": "#/$defs/SourceSpan"
+        }
+      },
+      "required": [
+        "rowKey",
+        "assetSHA256",
+        "speciesA",
+        "speciesB",
+        "oxidationA",
+        "oxidationB",
+        "r0A",
+        "bA",
+        "source"
+      ]
+    },
+    "NativePlaneRequest": {
+      "$ref": "#/$defs/PlaneFitInput"
+    },
+    "NativePlaneResponse": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "result": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/PlaneFitResolved"
+            },
+            {
+              "$ref": "#/$defs/PlaneFitUnderdetermined"
+            }
+          ]
+        },
+        "diagnostics": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Diagnostic"
+          },
+          "minItems": 0
+        }
+      },
+      "required": [
+        "result",
+        "diagnostics"
+      ]
+    },
+    "Halfspace3": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "halfspaceId": {
+          "$ref": "#/$defs/Id"
+        },
+        "normalInverseA": {
+          "$ref": "#/$defs/Vec3"
+        },
+        "offsetDimensionless": {
+          "type": "number",
+          "minimum": -1.7976931348623157e+308,
+          "maximum": 1.7976931348623157e+308,
+          "x-unit": "dimensionless"
+        }
+      },
+      "required": [
+        "halfspaceId",
+        "normalInverseA",
+        "offsetDimensionless"
+      ],
+      "x-invariants": [
+        "n dot rCartesianA<=offset;zero-normal separatelyclassifiable,orinputdiagnostic perprofile",
+        "allfinitef64 convertedexactbinaryrational forcorrectedclassification;noepsilon topologychanges"
+      ]
+    },
+    "ExplicitMesh3": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "verticesCartesianA": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Vec3A"
+          },
+          "minItems": 0
+        },
+        "facesVertexIndices": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "minItems": 3
+          },
+          "minItems": 0
+        }
+      },
+      "required": [
+        "verticesCartesianA",
+        "facesVertexIndices"
+      ],
+      "x-invariants": [
+        "indicesinrange,consistentwinding,closedorientedmanifold andselfintersectionvalidated beforevolume/inside",
+        "nonconvexexplicitfaces meaningful;unorderedpointsalone donotdefineunique nonconvexsolid"
+      ]
+    },
+    "NativeShapeRequest": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "profile": {
+              "const": "corrected-exact-halfspaces"
+            },
+            "halfspaces": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/Halfspace3"
+              },
+              "minItems": 0
+            }
+          },
+          "required": [
+            "profile",
+            "halfspaces"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "profile": {
+              "const": "explicit-nonconvex-mesh"
+            },
+            "mesh": {
+              "$ref": "#/$defs/ExplicitMesh3"
+            }
+          },
+          "required": [
+            "profile",
+            "mesh"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "profile": {
+              "const": "native-convex-neighbor-hull"
+            },
+            "neighborImageIds": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/Id"
+              },
+              "minItems": 0
+            },
+            "neighborCartesianA": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/Vec3A"
+              },
+              "minItems": 0
+            }
+          },
+          "required": [
+            "profile",
+            "neighborImageIds",
+            "neighborCartesianA"
+          ]
+        }
+      ]
+    },
+    "NativeShapeResponse": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "classification": {
+          "enum": [
+            "empty",
+            "point",
+            "segment",
+            "polygon",
+            "solid",
+            "unbounded",
+            "invalid-mesh"
+          ]
+        },
+        "affineDimension": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 3
+        },
+        "verticesCartesianA": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Vec3A"
+          },
+          "minItems": 0
+        },
+        "exactVerticesA": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Rational3"
+          },
+          "minItems": 0
+        },
+        "facesVertexIndices": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "minItems": 3
+          },
+          "minItems": 0
+        },
+        "farkasMultipliers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Rational"
+          },
+          "minItems": 0
+        },
+        "feasiblePointA": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/Rational3"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "recessionDirections": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Rational3"
+          },
+          "minItems": 0
+        },
+        "diagnostics": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Diagnostic"
+          },
+          "minItems": 0
+        }
+      },
+      "required": [
+        "classification",
+        "affineDimension",
+        "verticesCartesianA",
+        "exactVerticesA",
+        "facesVertexIndices",
+        "farkasMultipliers",
+        "feasiblePointA",
+        "recessionDirections",
+        "diagnostics"
+      ],
+      "x-invariants": [
+        "empty requiresnonnegativey withA^T*y=0,b^T*y<0;unboundedrequiresnonzerorecessionrayA*r<=0",
+        "affinerank exact;boundedvertices allactiveintersectionscheckedallinequalities;nozero-volume==empty shortcut",
+        "nativehull preservesactualarea0.002/coplanar0.009999999776482582 andSVD/order profile;machineparity futurequalification",
+        "allcertificatearraysdiagnosticallyspecific;emptyarraysonlywherecertificateclassdoesnotneedthem"
+      ]
+    },
+    "NativeCameraRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "state": {
+          "$ref": "#/$defs/NativeCamera"
+        },
+        "pointsCartesianA": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Vec3A"
+          },
+          "minItems": 0
+        }
+      },
+      "required": [
+        "state",
+        "pointsCartesianA"
+      ]
+    },
+    "NativeCameraResponse": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "state": {
+          "$ref": "#/$defs/NativeCamera"
+        },
+        "modelviewRows": {
+          "$ref": "#/$defs/Matrix4Rows"
+        },
+        "projectedNDC": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Vec3"
+          },
+          "minItems": 0
+        },
+        "physicalViewportPixels": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "diagnostics": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Diagnostic"
+          },
+          "minItems": 0
+        }
+      },
+      "required": [
+        "state",
+        "modelviewRows",
+        "projectedNDC",
+        "physicalViewportPixels",
+        "diagnostics"
+      ],
+      "x-invariants": [
+        "perspective homogeneousdivide onlynonzerow,clip statusdiagnosed;sourceZscale not fov",
+        "samegeometryrevision/viewport/deviceScale;GL/pixelqualification notasserted bymatrixresult"
+      ]
+    },
+    "ApplyNativeDomainParametersRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "state": {
+          "$ref": "#/$defs/NativeDimensionDState"
+        },
+        "domainId": {
+          "$ref": "#/$defs/Id"
+        },
+        "xeA": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "minimum": -1.7976931348623157e+308,
+            "maximum": 1.7976931348623157e+308,
+            "x-unit": "angstrom"
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "parameterFlagsI32": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        }
+      },
+      "required": [
+        "state",
+        "domainId",
+        "xeA",
+        "parameterFlagsI32"
+      ]
+    },
+    "ApplyNativeDomainParametersResponse": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "state": {
+          "$ref": "#/$defs/NativeDimensionDState"
+        },
+        "domainId": {
+          "$ref": "#/$defs/Id"
+        },
+        "derivedDomainTranslationNative6": {
+          "$ref": "#/$defs/Vec6"
+        },
+        "diagnostics": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Diagnostic"
+          },
+          "minItems": 0
+        }
+      },
+      "required": [
+        "state",
+        "domainId",
+        "derivedDomainTranslationNative6",
+        "diagnostics"
+      ]
+    },
+    "NativeOccupationDomainTemplate": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "templateOrdinal0based": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "coordinateWidth": {
+          "const": 6
+        },
+        "verticesNative6": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Vec6"
+          },
+          "minItems": 0
+        },
+        "nativeNthVertexIndices0based": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "minItems": 0
+        },
+        "source": {
+          "$ref": "#/$defs/SourceSpan"
+        }
+      },
+      "required": [
+        "templateOrdinal0based",
+        "coordinateWidth",
+        "verticesNative6",
+        "nativeNthVertexIndices0based",
+        "source"
+      ],
+      "x-producer-consumer": "readdata shape registryCrystal+1f8 -> BuildQuasiCrystal191d0/19248:copytemplatevertices ->currentODgeometry;sourceimmutable andtypedcurrentindependent",
+      "x-invariants": [
+        "nthpairsgroup2 forD5 ortriplesgroup3 forD6 indexvertices,not symmetryoperations",
+        "sourceoriginal6vectors remainsource;actualD5read converts6to5 beforecurrentmodelscientificevaluation"
+      ]
+    },
+    "NativeTableBVRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "profile": {
+          "enum": [
+            "explicit-bond-valence-sum",
+            "native-auto-cutoff"
+          ]
+        },
+        "candidateRows": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/BondValenceRow"
+          },
+          "minItems": 1
+        },
+        "selectedRowKeys": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 0
+        },
+        "distanceA": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1.7976931348623157e+308
+        },
+        "nativeCutoffDenominator": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "denominatorSource": {
+          "$ref": "#/$defs/SourceSpan"
+        }
+      },
+      "required": [
+        "profile",
+        "candidateRows",
+        "selectedRowKeys",
+        "distanceA",
+        "nativeCutoffDenominator",
+        "denominatorSource"
+      ],
+      "x-invariants": [
+        "explicitBVS rowchoice mustbefullyresolved;oxidation/species/resource identitycannotbeguessed",
+        "native-auto-cutoff: rowcut=R0−b*log(abs(oxidationA)/nativeDenominator);pairmaximum then+nativef640.2 andf32 rounding;not selectedBVS row",
+        "no implicitfirstrow/mixededition;source denominator table selector mustbequalifiedexactasactualnativegroupordinal",
+        "SelectedReadBVParm literal namesbvparm2013.cif. PackagedA05bvparm2020.cif is distinctasset;absence of2013doesnotprovewholeappdefaultfailure orreachability. Functionmissingresource/cachedparameters trackedexplicitly;never silentresourceeditionfallback."
+      ]
+    },
+    "NativePolyhedronBVSRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "profile": {
+          "const": "native-polyhedron-output"
+        },
+        "centerSiteId": {
+          "$ref": "#/$defs/Id"
+        },
+        "centerOccupancyF64": {
+          "type": "number",
+          "minimum": -1.7976931348623157e+308,
+          "maximum": 1.7976931348623157e+308,
+          "x-unit": "dimensionless"
+        },
+        "userR0F32": {
+          "type": "number",
+          "minimum": -3.4028234663852886e+38,
+          "maximum": 3.4028234663852886e+38,
+          "x-unit": "angstrom",
+          "x-invariant": "exact finite binary32 value promoted to JSONnumber; rawWord must match wherever supplied"
+        },
+        "sourceOutputFlagsU32": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4294967295
+        },
+        "neighborsInSourceOrder": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "imageId": {
+                "$ref": "#/$defs/Id"
+              },
+              "neighborSiteId": {
+                "$ref": "#/$defs/Id"
+              },
+              "distanceA": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1.7976931348623157e+308
+              }
+            },
+            "required": [
+              "imageId",
+              "neighborSiteId",
+              "distanceA"
+            ]
+          },
+          "minItems": 0
+        },
+        "source": {
+          "$ref": "#/$defs/SourceSpan"
+        }
+      },
+      "required": [
+        "profile",
+        "centerSiteId",
+        "centerOccupancyF64",
+        "userR0F32",
+        "sourceOutputFlagsU32",
+        "neighborsInSourceOrder",
+        "source"
+      ],
+      "x-invariants": [
+        "sourceOutputFlagsU32 bit1 requests thisnativeBVSreport;engine typedoperationdoesnotpromptcallbacks",
+        "actualnativeprompt parsesR0 with%f ->binary32;explicitcurrentvalue retained,promotedf64forarithmetic",
+        "nativeb exactf64 bits3fd7ae147ae147ae(0.37);neighborlist fixedactualpolyhedron+78 sourcelist andcorrespondingdistancearray,notallbondslabelmatch",
+        "term_j=exp((promoteF32(R0)-distanceF64_j)/bF64);printedNeighborTerm_j=-term_j;accum_j=fma(term_j,centerOccupancyF64,accum_j-1),initial0;useCENTERoccupancy not neighbor occupancy",
+        "noassetrow lookup inthisactualbranch;nativeReadBVParm2013 auto-cutoff helper andexplicit2020BVS areseparateprofiles"
+      ]
+    },
+    "NativeBVRequest": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/NativeTableBVRequest"
+        },
+        {
+          "$ref": "#/$defs/NativePolyhedronBVSRequest"
+        }
+      ]
+    },
+    "NativeTableBVResponse": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "selectedRows": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/BondValenceRow"
+          },
+          "minItems": 0
+        },
+        "terms": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "minimum": -1.7976931348623157e+308,
+            "maximum": 1.7976931348623157e+308,
+            "x-unit": "dimensionless"
+          },
+          "minItems": 0
+        },
+        "sum": {
+          "type": "number",
+          "minimum": -1.7976931348623157e+308,
+          "maximum": 1.7976931348623157e+308,
+          "x-unit": "dimensionless"
+        },
+        "nativeAutoCutoffA": {
+          "oneOf": [
+            {
+              "type": "number",
+              "minimum": -3.4028234663852886e+38,
+              "maximum": 3.4028234663852886e+38,
+              "x-unit": "angstrom",
+              "x-invariant": "exact finite binary32 value promoted to JSONnumber; rawWord must match wherever supplied"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "diagnostics": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Diagnostic"
+          },
+          "minItems": 0
+        }
+      },
+      "required": [
+        "selectedRows",
+        "terms",
+        "sum",
+        "nativeAutoCutoffA",
+        "diagnostics"
+      ],
+      "x-invariants": [
+        "BVSterm=exp((R0−distance)/b);nativecutofffieldnullforBVSprofile;realambiguousselection returnsdiagnostic,notguess"
+      ]
+    },
+    "NativePolyhedronBVSResponse": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "profile": {
+          "const": "native-polyhedron-output"
+        },
+        "centerSiteId": {
+          "$ref": "#/$defs/Id"
+        },
+        "bF64": {
+          "const": 0.37
+        },
+        "neighborsInSourceOrder": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "imageId": {
+                "$ref": "#/$defs/Id"
+              },
+              "neighborSiteId": {
+                "$ref": "#/$defs/Id"
+              },
+              "distanceA": {
+                "type": "number",
+                "minimum": -1.7976931348623157e+308,
+                "maximum": 1.7976931348623157e+308,
+                "x-unit": "angstrom"
+              },
+              "positiveTerm": {
+                "type": "number",
+                "minimum": -1.7976931348623157e+308,
+                "maximum": 1.7976931348623157e+308,
+                "x-unit": "dimensionless"
+              },
+              "printedNegativeTerm": {
+                "type": "number",
+                "minimum": -1.7976931348623157e+308,
+                "maximum": 1.7976931348623157e+308,
+                "x-unit": "dimensionless"
+              }
+            },
+            "required": [
+              "imageId",
+              "neighborSiteId",
+              "distanceA",
+              "positiveTerm",
+              "printedNegativeTerm"
+            ]
+          },
+          "minItems": 0
+        },
+        "centerOccupancyWeightedSum": {
+          "type": "number",
+          "minimum": -1.7976931348623157e+308,
+          "maximum": 1.7976931348623157e+308,
+          "x-unit": "dimensionless"
+        },
+        "diagnostics": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Diagnostic"
+          },
+          "minItems": 0
+        }
+      },
+      "required": [
+        "profile",
+        "centerSiteId",
+        "bF64",
+        "neighborsInSourceOrder",
+        "centerOccupancyWeightedSum",
+        "diagnostics"
+      ],
+      "x-invariants": [
+        "reportedperneighborprintedvalue hasnegative sign;finalprintedBVSsum ispositivecenteroccupancyweightedaccumulation",
+        "sourceoperationorder/fmaqualification separatefrommathematicalfunctionality;displayformat%gterms/%6.3fsum doesnotreplacefullf64currentresult"
+      ]
+    },
+    "NativeBVResponse": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/NativeTableBVResponse"
+        },
+        {
+          "$ref": "#/$defs/NativePolyhedronBVSResponse"
+        }
+      ]
+    }
+  },
+  "x-wire-registration": false,
+  "x-existing-acceptance-mutated": false,
+  "x-producer-consumer-contract": "sg2-producer-consumer.json",
+  "x-operation-signatures": "sg2-operations.json"
+}

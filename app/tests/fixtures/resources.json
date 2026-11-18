@@ -1,0 +1,172 @@
+[
+  {
+    "role": "OpenBundle",
+    "payload": {
+      "sourcePurpose": "current-work",
+      "primary": {
+        "sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+        "byteLength": "0",
+        "mediaType": "application/octet-stream"
+      },
+      "format": "vesta",
+      "dependencies": [],
+      "workRef": {
+        "path": "fixture",
+        "primarySha256": "2222222222222222222222222222222222222222222222222222222222222222"
+      },
+      "allowDiagnosticImport": false
+    },
+    "descriptor": {
+      "byteLength": "353",
+      "sha256": "c7b37f4ba10947a9047ee7fbeee6a38194bea88e418fdc9b42800850cf58b84a",
+      "mediaType": "application/vnd.vestacraft.native-open+json"
+    },
+    "utf8": "{\"sourcePurpose\":\"current-work\",\"primary\":{\"sha256\":\"2222222222222222222222222222222222222222222222222222222222222222\",\"byteLength\":\"0\",\"mediaType\":\"application/octet-stream\"},\"format\":\"vesta\",\"dependencies\":[],\"workRef\":{\"path\":\"fixture\",\"primarySha256\":\"2222222222222222222222222222222222222222222222222222222222222222\"},\"allowDiagnosticImport\":false}"
+  },
+  {
+    "role": "InspectionPage",
+    "payload": {
+      "query": "phases",
+      "document": {
+        "documentId": "11111111111111111111111111111111",
+        "epoch": "11111111111111111111111111111111",
+        "revision": "0"
+      },
+      "contextVersion": "0",
+      "records": []
+    },
+    "descriptor": {
+      "byteLength": "171",
+      "sha256": "66e119cc197083ab5b29b93fd3c7708725cbb43fc8bb6a93fa457c6edc8272a8",
+      "mediaType": "application/vnd.vestacraft.native-inspection+json"
+    },
+    "utf8": "{\"query\":\"phases\",\"document\":{\"documentId\":\"11111111111111111111111111111111\",\"epoch\":\"11111111111111111111111111111111\",\"revision\":\"0\"},\"contextVersion\":\"0\",\"records\":[]}"
+  },
+  {
+    "role": "HostAck",
+    "payload": {
+      "snapshotId": "11111111111111111111111111111111",
+      "documentId": "11111111111111111111111111111111",
+      "epoch": "11111111111111111111111111111111",
+      "revision": "0",
+      "stateDigest": "2222222222222222222222222222222222222222222222222222222222222222",
+      "purpose": "save",
+      "targetToken": "fixture",
+      "actualPrimarySha256": "2222222222222222222222222222222222222222222222222222222222222222",
+      "verifiedFiles": [
+        {
+          "path": "fixture",
+          "sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+          "byteLength": "0"
+        }
+      ],
+      "output": {
+        "path": "fixture",
+        "primarySha256": "2222222222222222222222222222222222222222222222222222222222222222"
+      },
+      "currentWorkRef": {
+        "path": "fixture",
+        "primarySha256": "2222222222222222222222222222222222222222222222222222222222222222"
+      },
+      "operation": {
+        "registryGeneration": "11111111111111111111111111111111",
+        "operationId": "11111111111111111111111111111111",
+        "recordSequence": "0",
+        "publicationSequence": "0",
+        "targetDigest": "2222222222222222222222222222222222222222222222222222222222222222",
+        "capabilityDigest": "2222222222222222222222222222222222222222222222222222222222222222",
+        "semanticEvidenceDigest": "2222222222222222222222222222222222222222222222222222222222222222"
+      }
+    },
+    "descriptor": {
+      "byteLength": "1152",
+      "sha256": "8e307cff0bb0d50f2c052c4a0dc2f153c071d27378650215e98501015185fe98",
+      "mediaType": "application/vnd.vestacraft.host-ack+json"
+    },
+    "utf8": "{\"snapshotId\":\"11111111111111111111111111111111\",\"documentId\":\"11111111111111111111111111111111\",\"epoch\":\"11111111111111111111111111111111\",\"revision\":\"0\",\"stateDigest\":\"2222222222222222222222222222222222222222222222222222222222222222\",\"purpose\":\"save\",\"targetToken\":\"fixture\",\"actualPrimarySha256\":\"2222222222222222222222222222222222222222222222222222222222222222\",\"verifiedFiles\":[{\"path\":\"fixture\",\"sha256\":\"2222222222222222222222222222222222222222222222222222222222222222\",\"byteLength\":\"0\"}],\"output\":{\"path\":\"fixture\",\"primarySha256\":\"2222222222222222222222222222222222222222222222222222222222222222\"},\"currentWorkRef\":{\"path\":\"fixture\",\"primarySha256\":\"2222222222222222222222222222222222222222222222222222222222222222\"},\"operation\":{\"registryGeneration\":\"11111111111111111111111111111111\",\"operationId\":\"11111111111111111111111111111111\",\"recordSequence\":\"0\",\"publicationSequence\":\"0\",\"targetDigest\":\"2222222222222222222222222222222222222222222222222222222222222222\",\"capabilityDigest\":\"2222222222222222222222222222222222222222222222222222222222222222\",\"semanticEvidenceDigest\":\"2222222222222222222222222222222222222222222222222222222222222222\"}}"
+  },
+  {
+    "role": "HostNack",
+    "payload": {
+      "snapshotId": "11111111111111111111111111111111",
+      "documentId": "11111111111111111111111111111111",
+      "epoch": "11111111111111111111111111111111",
+      "revision": "0",
+      "purpose": "save",
+      "code": "E_EXTERNAL_CHANGE",
+      "settlement": "not-published",
+      "operation": {
+        "registryGeneration": "11111111111111111111111111111111",
+        "operationId": "11111111111111111111111111111111",
+        "recordSequence": "0",
+        "publicationSequence": "0",
+        "targetDigest": "2222222222222222222222222222222222222222222222222222222222222222",
+        "capabilityDigest": "2222222222222222222222222222222222222222222222222222222222222222",
+        "semanticEvidenceDigest": "2222222222222222222222222222222222222222222222222222222222222222"
+      }
+    },
+    "descriptor": {
+      "byteLength": "654",
+      "sha256": "456d1db7dd026395d20df4f65c0d71b107d39dd436726ff358524789558796bd",
+      "mediaType": "application/vnd.vestacraft.host-nack+json"
+    },
+    "utf8": "{\"snapshotId\":\"11111111111111111111111111111111\",\"documentId\":\"11111111111111111111111111111111\",\"epoch\":\"11111111111111111111111111111111\",\"revision\":\"0\",\"purpose\":\"save\",\"code\":\"E_EXTERNAL_CHANGE\",\"settlement\":\"not-published\",\"operation\":{\"registryGeneration\":\"11111111111111111111111111111111\",\"operationId\":\"11111111111111111111111111111111\",\"recordSequence\":\"0\",\"publicationSequence\":\"0\",\"targetDigest\":\"2222222222222222222222222222222222222222222222222222222222222222\",\"capabilityDigest\":\"2222222222222222222222222222222222222222222222222222222222222222\",\"semanticEvidenceDigest\":\"2222222222222222222222222222222222222222222222222222222222222222\"}}"
+  },
+  {
+    "role": "CommandCompletion",
+    "payload": {
+      "command": "cell.set",
+      "requestId": "11111111111111111111111111111111",
+      "documentId": "11111111111111111111111111111111",
+      "epoch": "11111111111111111111111111111111",
+      "revision": "0",
+      "stateDigest": "2222222222222222222222222222222222222222222222222222222222222222",
+      "changeSet": {
+        "before": "0",
+        "after": "0",
+        "digest": "2222222222222222222222222222222222222222222222222222222222222222",
+        "changedObjects": [],
+        "invalidated": []
+      },
+      "result": null,
+      "warnings": [],
+      "history": {
+        "documentId": "11111111111111111111111111111111",
+        "epoch": "11111111111111111111111111111111",
+        "revision": "0",
+        "liveContentDigest": "2222222222222222222222222222222222222222222222222222222222222222",
+        "historyGeneration": "0",
+        "historyCount": "0",
+        "historyCursor": "0",
+        "cursorSnapshotDigest": "2222222222222222222222222222222222222222222222222222222222222222",
+        "historyEffect": "record",
+        "undoAvailable": false,
+        "redoAvailable": false
+      }
+    },
+    "descriptor": {
+      "byteLength": "863",
+      "sha256": "8585894ed7ec20044bd446da99a69832c96ba7dc5d6cafcdbf3d8b03dd488974",
+      "mediaType": "application/vnd.vestacraft.command-outcome+json"
+    },
+    "utf8": "{\"command\":\"cell.set\",\"requestId\":\"11111111111111111111111111111111\",\"documentId\":\"11111111111111111111111111111111\",\"epoch\":\"11111111111111111111111111111111\",\"revision\":\"0\",\"stateDigest\":\"2222222222222222222222222222222222222222222222222222222222222222\",\"changeSet\":{\"before\":\"0\",\"after\":\"0\",\"digest\":\"2222222222222222222222222222222222222222222222222222222222222222\",\"changedObjects\":[],\"invalidated\":[]},\"result\":null,\"warnings\":[],\"history\":{\"documentId\":\"11111111111111111111111111111111\",\"epoch\":\"11111111111111111111111111111111\",\"revision\":\"0\",\"liveContentDigest\":\"2222222222222222222222222222222222222222222222222222222222222222\",\"historyGeneration\":\"0\",\"historyCount\":\"0\",\"historyCursor\":\"0\",\"cursorSnapshotDigest\":\"2222222222222222222222222222222222222222222222222222222222222222\",\"historyEffect\":\"record\",\"undoAvailable\":false,\"redoAvailable\":false}}"
+  },
+  {
+    "role": "FailureNotice",
+    "payload": {
+      "requestId": "11111111111111111111111111111111",
+      "code": "E_SCHEMA",
+      "stage": "schema",
+      "message": "fixture",
+      "retryable": false,
+      "committedRevision": "0",
+      "recovery": "refresh-context"
+    },
+    "descriptor": {
+      "byteLength": "174",
+      "sha256": "b60d972e5d07369a4b78d80d5c7658eefda27f2fd950d12aff27be8ee0249d34",
+      "mediaType": "application/vnd.vestacraft.engine-failure+json"
+    },
+    "utf8": "{\"requestId\":\"11111111111111111111111111111111\",\"code\":\"E_SCHEMA\",\"stage\":\"schema\",\"message\":\"fixture\",\"retryable\":false,\"committedRevision\":\"0\",\"recovery\":\"refresh-context\"}"
+  }
+]

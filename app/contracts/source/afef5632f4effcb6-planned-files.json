@@ -1,0 +1,80 @@
+{
+  "schema": "P106-canonical-planned-files/1",
+  "files": [
+    {
+      "id": "native-current-codec",
+      "path": "kernel/crates/codecs/src/formats/native_vesta_v2.rs",
+      "owner": "U02",
+      "purpose": "sole I33 current-state capture/write/restore codec; rev64 native_vesta.rs references are predecessor plans, no duplicate current writer"
+    },
+    {
+      "id": "native-dimension-model",
+      "path": "kernel/crates/model/src/native_dimension.rs",
+      "owner": "U01",
+      "purpose": "D3..6/OD actual persistent model; U03 consumes same module"
+    },
+    {
+      "id": "engine-v2",
+      "path": "kernel/crates/commands/src/engine_v2.rs",
+      "owner": "U01",
+      "purpose": "current typed dispatcher and complete outcome/history effects"
+    },
+    {
+      "id": "registry-v2",
+      "path": "kernel/crates/commands/src/registry_v2.rs",
+      "owner": "U01",
+      "purpose": "current11commands/40operations trusted registry"
+    },
+    {
+      "id": "native-session-v2",
+      "path": "kernel/crates/cli/src/session_v2.rs",
+      "owner": "U14",
+      "purpose": "NS2 same-lifecycle transport and typed resources"
+    },
+    {
+      "id": "worker-protocol-v2",
+      "path": "web/src/worker/protocol-v2.ts",
+      "owner": "U01",
+      "purpose": "same current schema/profile/resource generation"
+    },
+    {
+      "id": "contract-generator",
+      "path": "scripts/generate-contracts.mjs",
+      "owner": "U00",
+      "purpose": "one explicit profile/resource/schema generation, not a product implementation in this card"
+    },
+    {
+      "id": "profile-contract-test",
+      "path": "tests/contracts/profile-digests.test.mjs",
+      "owner": "U00",
+      "purpose": "CPJ/ninefixedvectors and actual input drift refusal"
+    },
+    {
+      "id": "resource-contract-test",
+      "path": "tests/contracts/native-resource-types-v2.test.mjs",
+      "owner": "U14",
+      "purpose": "all11commandcompletions plusack/nack/failure role/bytes/shape/authority"
+    },
+    {
+      "id": "NS2-contract-test",
+      "path": "tests/contracts/native-session-v2.test.mjs",
+      "owner": "U14",
+      "purpose": "NS2 nineprofiles/domain.prepare/state.prepare/apply/retry/close"
+    },
+    {
+      "id": "full-domain-test",
+      "path": "tests/contracts/full-domain-results-v2.test.mjs",
+      "owner": "U03-U13",
+      "purpose": "all31 current result/oracle binding recipes, fullactual arrays and namedsource failures"
+    },
+    {
+      "id": "native-lifecycle-browser-test",
+      "path": "tests/browser/native-lifecycle.spec.ts",
+      "owner": "U02",
+      "purpose": "real write/read/destroy/CLI/newWeb continuededit; not equivalent to mock/source pass"
+    }
+  ],
+  "productRoot": "/Users/agilecho/code/VestaCraft/app",
+  "allPlannedNotCreated": true,
+  "referenceRule": "these explicit files override predecessor filename strings; other unit brace/glob directories remain planned containers, not alternate names"
+}

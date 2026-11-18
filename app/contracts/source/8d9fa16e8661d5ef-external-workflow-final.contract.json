@@ -1,0 +1,222 @@
+{
+  "schema": "p1-06-external-workflow-design/3-final",
+  "revision": "EX/3",
+  "predecessors": [
+    {
+      "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/external-workflow.contract.json",
+      "sha256": "d7a5772378552a272a9df08dc25dbfc3aa5ba7535bef0d83463b4712bcb7d9b6"
+    },
+    {
+      "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/external-workflow.schema.json",
+      "sha256": "17428fc3f04f4b3652d61336761b8480503e8c8ec6de11b02d5d4f9f2070bcbf"
+    },
+    {
+      "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/external/external-workflow.contract.json",
+      "sha256": "c860e401ffc852d8ace738a99c5ec5787862daad716fb73962be00fd5354ccaf"
+    },
+    {
+      "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/external/external-workflow-r2.contract.json",
+      "sha256": "2b0314854c3e0d365cd80b84c6b03b4cbb5d48700155a35a77e4e40e9cb7933a"
+    }
+  ],
+  "requestSchema": {
+    "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/external/external-workflow-final.schema.json",
+    "sha256": "e933cace8217c73d539c15867e4bcfed42f33cc46dbf4e966d03c4815a4f0ea7"
+  },
+  "grammar": {
+    "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/external/four-workflow-grammar-final.json",
+    "sha256": "2c35135e812d63dda4e73b2e9a780836fc5a9fa260aa9eb572e2a33866121106"
+  },
+  "numericAcceptance": {
+    "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/external/numeric-acceptance-r2.json",
+    "sha256": "99a34bf1638788ad57f7e6b5d06e262fae75a80687bd2695ba2c3cbbf8e525f3"
+  },
+  "imports": [
+    {
+      "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261115-092025-p1-03-completion/madel-classic-source-contract.json",
+      "sha256": "3b09d9fd3039cead52b77031160d6f9ceebafbfbf575cc530986c86bf25f01b7"
+    },
+    {
+      "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261115-092025-p1-03-completion/madel-classic-source-bindings.json",
+      "sha256": "20bda2616471538628086ca82caf855a35c46e2d7a307c1f48ef56062a4b394a"
+    },
+    {
+      "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261115-092025-p1-03-completion/pme-format-contract.json",
+      "sha256": "ee6030dac4625dfde4aa2d6c6c1cb35303064ba1f47e3225e3d5d0c24dae0e6c"
+    },
+    {
+      "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261115-092025-p1-03-completion/stin-format-contract.json",
+      "sha256": "f6c899ad90b5a32ac15e505887840a9182873c5533055184288081528e2c98a4"
+    },
+    {
+      "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261115-092025-p1-03-completion/stin-option-consumption.contract.json",
+      "sha256": "40044fb7d7ce95a33d21f0f26838760feeea7ceeabc31d918d323deb0770d3d8"
+    },
+    {
+      "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261115-092025-p1-03-completion/sto-format-contract.json",
+      "sha256": "0962a754bdd34db51c00bd3095ddae823c6d61e905c219bda34941aa0c30a9d2"
+    },
+    {
+      "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261115-092025-p1-03-completion/rietan-format-contract.json",
+      "sha256": "f8ecb9f118f1aa349892252ab9cb887eb035e768271bf66f48ae8cefd96a3c2f"
+    },
+    {
+      "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261115-092025-p1-03-completion/rietan-export-thermal.contract.json",
+      "sha256": "f7e08555a7cb679fa8f1ba94fdbdb5aea35bea3c4bb9b33ae75f2c51be2548d3"
+    },
+    {
+      "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261115-092025-p1-03-completion/rietan-template-source-binding.json",
+      "sha256": "e64102c106fe32b7e54c69e96596152434beac3fe68dc21c2f40e125ab1c9329"
+    },
+    {
+      "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261115-092025-p1-03-completion/orffe-resource.contract.json",
+      "sha256": "b193c79e9f0dbf3a4135758f467a90f3f82160d8c35ff641b2f4fef46ff44d07"
+    },
+    {
+      "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261115-092025-p1-03-completion/orffe-resource.schema.json",
+      "sha256": "5d19b373d47fc20bf3856e958383ad48945917b881aa54d2fe9c07353875a383"
+    },
+    {
+      "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261115-092025-p1-03-completion/orffe-resource-source-bindings.json",
+      "sha256": "f983977b57758cd29e0db1e16975ec68c0be7ebed194a3105215632435ba6c40"
+    }
+  ],
+  "workflowEffects": {
+    "tidy.standardize": "phasecandidate → qualifiedsource/fullmapping validation → sameEngine atomicrecord commit",
+    "madel.calculate": "diagnostic-report publication isnotcalculationcomplete; parsedcompletefinite-calculation withsource/units validation andunassessed/failedconvergence or independentlyqualified-report accepted. Noimplicitphase/historymutation.",
+    "rietan.calculate": "owned simulation report/plot/after-ins artifactpublication; noimplicitrefinementmodel/covariance import",
+    "orffe.attach-result": "noexternalprocess; parsedwhole resource/table/source-imagecandidate → existing Engineatomicresourcebinding recordcommit"
+  },
+  "completionStates": "qualified/captured/queued/running/exited/parsed/validated/resultpublished/candidate/committed aredistinct. Reportpublication countsoriginaluser result but notscientificnumericqualification, modelcommit orSaved. ORFFEreader skips queued/running/exited entirely; nevermanufacturechildreceipts. MADEL diagnostic-report, finite-calculation andqualified-report areclosedresultbranches: nullinterpretationcannotbecompletefinitecalculation; convergenceStateacceptedrequiresserver-ownedactualacceptancereceipt.",
+  "sourceCapture": [
+    "same sessionId/documentId/epoch/expectedRevision/phaseId immutable source, currentprofile/asset/executable/preference digests andfullresourcegraph materialized beforeplan",
+    "eachcandidate/job opIddeduplicated against server-owned capturedmanifest; callerdoesnotassert tool identity/nativeMode/parser/trust/budget/qualification",
+    "fullsnapshotoriginalmetadata andactualsourcebytes retainedbeforeSTIN/PME/INSloss/projection. Per-owner omissions/conversions/reportingbias prospectivelyboundedandconsented; noimplicitflatten/firstphase",
+    "result bytes bind ownedfreshjobroot, exactchild receipt andcapturedmanifest; no same-stem userfile discovery/deletion oraccepting staleartifacts"
+  ],
+  "hostAndRecovery": [
+    "reuseEX1ownedProcessRunner, absoluteapprovedartifactargv, noglobalshell/PATH/basename expansion, readonlyversioneddbresources, boundedwall/rss/process/output/disk/egress andTERM/grace/KILL/wait/reap",
+    "usernames/Unicode/spaces remainmetadata; ownedstemjob makeslegacyfilenames private, originaldestructivermscript is not reused",
+    "timeout/cancel/loader/signals/parsefail/unknown nevercompletes scientificoperation. Unknown querysamejob/lease, noautospawn/reimport/restart/replay. Lateoutputsquarantined cannotcommit aftercancel.",
+    "exactsamebase requiredforphase/tablecommit; stale source retainsdiagnosticresult andrequires explicitnewcapture/recompute. Reportviewer/resultinspection mayreadcapturedreport withoutoverwritingnewdraft.",
+    "actual Saved stillrequires existinghostwrite/ack/readback/currentcontent safeguards; externalreport/graphsuccess doesnot satisfySaved/close."
+  ],
+  "oldDefectsSuperseded": [
+    "EX1 nullpublicOptions nowclosedfourworkflow requests",
+    "PME anonymousrecord/control replacedbyclassicNS/NA/IZ andactualZ/W",
+    "Tidyline2 genericunknown replacedbysourcecentrosymmetrybyte; utilitymode1star versusfileexportmode0 distinguished",
+    "RIETANcalculate incorrectlytreatedasdataexportpreservecontrols replacedbynativesimulationmarkerprofile andactual18directions",
+    "ORFFEnonzeroimage table unknown replacedbyexact125TLC+signedq/r+sourceaffineops",
+    "completeMADEL/.lsttypedparser incorrectlytreatedasmandatorynativephaseimport replacedbyactualnativeuserreport/artifactresult, without claimingnumbersqualified",
+    "MADEL actualv1.31Englishformat/realcontrolflow/threeunitconstants nowdirectlybound; reportcollectionnevernumericcompletion orconvergence"
+  ],
+  "remainingDimensions": {
+    "currentWorkflowDesignInputs": [],
+    "futureSourceBuildAdmission": [
+      "RIETANexactruntimeartifact/ABI+resourceversionandmatchingTink/template profile acquisition, not invented executableidentity",
+      "actualproductvalidators/queue/parser/PlotPort/Engine/resourcegraph andexplicitEX3migration",
+      "complete scientificsolver/domain extension profiles forcharged/partialoccupancy/Fourierfullresults/refinementcovariance remain requirements; this contract doesnotdelete them"
+    ],
+    "futureRuntimeQualification": [
+      "exactMADELloader/libraryenvironment,actualv1.31formatter/parser readback andfixedneutralNaClR.90 REGION4/6/8 source/numeric/convergence receipts; format/controlflow source nowclosed, no oldGerman-parseravailabilityblock",
+      "TIDYactualownedexecution/completeparse/currentrevisionmodelcommit/freshsave-reopen beyondoldselectedobservations",
+      "RIETANactualmode1outputs/graph/text/sourceparameterrevision andapplicableindependentnumericchecks",
+      "ORFFEactualread/validreplace/failurepreservation/full125mapping/freshinstance resource readback; real covarianceproducer separatelyauthorized"
+    ],
+    "scopeOfEmptyCurrentDesignInputs": "No unresolved field/rule for the four named workflows and their explicit result/qualification states. This does not mean all tool science/source/runtime profiles are proven; the precise retained domain qualifications are in semantic-assertions.json.",
+    "retainedScientificSourceAndProfileQualifications": [
+      {
+        "scope": "MADEL physical domains",
+        "unknown": "FC/FOURR/SLTP bodies were not inspected in this bounded authorization. General charged-boundary and partial-occupancy physical accuracy is not proved by MAIN formats or fixed neutral fixture.",
+        "consequence": "Legacy finite source-valued output may be represented with unassessed physics; qualified-report for those domains requires an explicit scientific profile and independent receipt. No broad science-complete claim."
+      },
+      {
+        "scope": "RIETAN full scientific backend",
+        "unknown": "Future exact executable/ABI and version-matched control/template/resource artifact plus full intensity/anomalous/isotope/ADP/refinement-covariance qualification are not delivered by these static source and author grammar artifacts.",
+        "consequence": "Closed workflow admission can freeze now; actual source/build/runtime qualification remains mandatory before execution. Position-only Bragg receipt cannot authorize untested scientific claims."
+      },
+      {
+        "scope": "ORFFE covariance production",
+        "unknown": "Native viewer path is a result reader; no covariance-producing executable process was established or run.",
+        "consequence": "Attach-result functionality is fully specified. A genuine new covariance producer requires its own approved profile; do not manufacture it as part of this workflow."
+      }
+    ]
+  },
+  "licensing": "DEC-P1-05 deferslicensingfromcurrentfunctionaldesign gate, notredistributionpermission; provenance/rights retainedforlaterrelease",
+  "migration": "explicitEX/3 successor namespace andI32/registry/result-kind/consumer migration required. OriginalEX1/EX2evidence,NS1firstchain/scientific177/bounded3byteidentities unchanged; no productionEligible toggled andno product/source process invoked.",
+  "productImplemented": false,
+  "runtimeValidated": false,
+  "independentlyReviewed": false,
+  "madelReportProfile": {
+    "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/external/madel-report-profile.json",
+    "sha256": "0c1e2ea380bf647beb6f80482559dffd8efaa384532e21292f5d64eaff723a6a"
+  },
+  "madelDensityOracle": {
+    "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/external/madel-density-oracle.json",
+    "sha256": "8f017616b0a40bd677faa4ed2bf4dcd7fcf17b8b4a527ad28b43a701cd29fa3b"
+  },
+  "staticInspectionAccounting": {
+    "current06IndependentFileStaticFunctionSpans": 1,
+    "functionVA": "0x1000022ec",
+    "functionMachineCodeBytes": 9223,
+    "functionCap": 9224,
+    "declaredConstantDataBytes": 1440,
+    "constantCap": 4096,
+    "sourceSha256": "7ea860c45d9176399221dd2b2448f8e4fd2b4505228aed23627bf5114e9ab83b",
+    "analysisToolProcesses": 1,
+    "analysisToolAttempts": 1,
+    "originalProcesses": 0,
+    "debuggerTargets": 0,
+    "old04CountersReset": false
+  },
+  "semanticAssertions": {
+    "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/external/semantic-assertions.json",
+    "sha256": "cd9efbe7c7e9fee9339f4cc0ccf397742e39badc4f38a5c59fa4b37ff51a1bdf"
+  },
+  "sourcePrecision": "All u64 on EX/3 wire are canonical decimal strings with exact<=2^64-1 semantic checks; finite numeric values and decimal report values are checked separately. Shape alone does not authorize receipt or resource ownership.",
+  "platformBoundary": {
+    "currentProof": "MADEL source artifact is macOS x86_64 Mach-O, SHA7ea860c45d9176399221dd2b2448f8e4fd2b4505228aed23627bf5114e9ab83b. VESTA main/library native producer evidence is macOS Mach-O. These identities are design/source provenance, not evidence of Linux executability or Linux ABI compatibility.",
+    "requiredTarget": "Future approved Linux x86 target uses its own exact ELF architecture/class/ABI and runtime dependency tuple; x86 versus x86_64 must be matched to actual host profile, never inferred from a macOS build.",
+    "namedFutureOutputs": [
+      {
+        "id": "EX3-LINUX-MADEL-ARTIFACT",
+        "deliverable": "actual obtained Linux MADEL file/resource identity, ELF machine/class/ABI, producer version, build/provenance/source profile and complete dynamic-loader/dependency manifest; no reused Mach-O SHA as Linux tool identity"
+      },
+      {
+        "id": "EX3-LINUX-TIDY-ARTIFACT",
+        "deliverable": "actual obtained Linux STRUCTURE TIDY artifact identity, ELF machine/class/ABI, version/source profile and loader/dependency manifest"
+      },
+      {
+        "id": "EX3-LINUX-RIETAN-ARTIFACT",
+        "deliverable": "actual obtained Linux RIETAN artifact identity, ELF machine/class/ABI, producer version, matching Tink/template/database resource manifest and loader/dependency manifest"
+      },
+      {
+        "id": "EX3-LINUX-OWNED-RUNTIME-RECEIPTS",
+        "deliverable": "actual owned execution/loader/formatter/parser/fresh-output/independent-numeric/cancel-and-recovery receipts for each exact Linux tool/profile, bound to host-owned registry and budget. ORFFE attach-result has no external executable requirement."
+      }
+    ],
+    "admission": "No acquired Linux executable or accepted Linux runtime receipt is claimed in this design. Unresolved/mismatched host tuple, artifact, ABI, dependency or profile refuses enqueue. No caller qualified:true/runtimeQualified/passed may override this lookup."
+  },
+  "readInspectionAccounting": {
+    "kind": "separate current06 pure-file source inspection, not old04 budget reset",
+    "analysisToolInvocations": 1,
+    "sourceFunctionSpans": 1,
+    "codeBytes": 9223,
+    "codeCapBytes": 9224,
+    "literalDataBytes": 1440,
+    "literalCapBytes": 4096,
+    "metadataSemanticBytes": 1720,
+    "wholeFileReadsForHashPinning": "helper loads full artifact for SHA before and after; only declared metadata/literal windows and known MAIN body interpreted. llvm-objdump independently reads artifact; no claim of OS-level byte I/O restriction.",
+    "originalOrProductProcesses": 0,
+    "debuggerTargets": 0,
+    "old04CountersReset": false,
+    "source": {
+      "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/external/madel-MAIN.run.json",
+      "sha256": "21fdca986783171ba2feb0723bada24996bfb40f599264fe92896148943acdfd"
+    },
+    "literalMetadata": {
+      "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/external/madel-static-data.json",
+      "sha256": "b5641af85754676845836e0d0f4ab396e575a56aa3765af5a9c8783e4de6486c"
+    }
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "schema": "vestacraft.toolchain-inputs/1",
+  "node": "22.23.2",
+  "npm": "12.0.2",
+  "rust": "1.99.1",
+  "typescript": "7.0.2",
+  "tools": [
+    {
+      "role": "node",
+      "sha256": "18e387c90ab8a8400183e8bdd396376e1e875b91b4c874b894dcade7b35bf572",
+      "bytes": 112937728
+    },
+    {
+      "role": "package.json",
+      "sha256": "f9759fe0a10ad3c8388ff19fade9d87ffdf0b16466a84d16cf2add09e69bbcd1",
+      "bytes": 6860
+    },
+    {
+      "role": "rustc",
+      "sha256": "1ba7bb8e273bd64125f4048d2ecce530e0a6470e565ab1b3aecf0b82b532f7b1",
+      "bytes": 413480
+    },
+    {
+      "role": "cargo",
+      "sha256": "6d576d8058f8ca643e8fce55b64ee3c614ba64c9da2e536bae843e6a2e1f3951",
+      "bytes": 32182376
+    },
+    {
+      "role": "multirust-channel-manifest.toml",
+      "sha256": "48419307eb32e389a25ac360b6bccd4d196f3c4f35ce9d67a223319eff017c6c",
+      "bytes": 1086673
+    }
+  ],
+  "qualification": "Node source archive matches official HTTPS SHASUMS; installed byte match. npm coverage and Rust manifest limits recorded in toolchain.sources.json; no target/browser/whole SDK qualification implied."
+}

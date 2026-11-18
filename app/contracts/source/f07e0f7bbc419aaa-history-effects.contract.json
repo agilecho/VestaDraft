@@ -1,0 +1,104 @@
+{
+  "schema": "p1-06-I32-history-effects-design/1",
+  "status": "current06 adjacent design successor for I32 migration; not implemented or independently reviewed",
+  "authority": "DEC-P1-01 default native compatibility, parent instruction this turn; actual static source in main-callback-analysis-r5.json",
+  "sources": [
+    {
+      "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/application/main-callback-analysis-r5.json",
+      "sha256": "5a9efa1d40e8bd7f5867ce8f93c9b872149097d4533b1b3799db6e4aad62fc0c"
+    },
+    {
+      "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/application/cached-native-successor-r2.json",
+      "sha256": "1e00482fcce3131e6ee2a8220862be33f4235011fb04468cd7118c4ba9cc3670"
+    }
+  ],
+  "schemaRef": {
+    "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/application/history-effects.schema.json",
+    "sha256": "f0283291fb4303ca4c629edc5424599e05487c981407011e58c1e77e288a16ca"
+  },
+  "defaultHistoryProfile": "native-compatible-camera-animation/1",
+  "oldAL3PerSample": "retained only as explicitly named corrected-animation-record/1 optional alternative; never implicit/native/default. No existingold document/schema is rewritten by this artifact.",
+  "producerRegistry": [
+    {
+      "registeredInvocation": "qualified AL animation session camera sample (Drag/Click/Push/Random qualified view-only path)",
+      "trustedProducerProfile": "native-compatible-camera-animation/1",
+      "effect": "preserve-history-cursor",
+      "allowedMutation": "camera rotation state only under captured qualified transform profile; no atom/site/bond/field/property/selection/resource mutation may piggyback",
+      "registration": "I32 new metadata on existing same Engine dispatcher and private animation-session owner; sample op derives producer from server-owned session and exact registered command route, not a caller string or privilege flag"
+    },
+    {
+      "registeredInvocation": "all other changed domain/model commands including existing177 scientific commands and qualified explicit selection reset/pick",
+      "trustedProducerProfile": "registered-domain-record/1",
+      "effect": "record",
+      "allowedMutation": "exact command registered mutation mask and existing scientifically qualified profile; noop/error still produce no history"
+    },
+    {
+      "registeredInvocation": "model Undo and Redo",
+      "trustedProducerProfile": "registered-history-navigation/1",
+      "effect": "navigate-history",
+      "allowedMutation": "navigate1 stored cursor entry; no appending snapshot and no timer-count inference"
+    },
+    {
+      "registeredInvocation": "query/save/render/layout/focus/preferences-only operations",
+      "trustedProducerProfile": "existing non-domain effect classifications",
+      "effect": "no domain-history action",
+      "allowedMutation": "existing contract only; a Save completion must not add model history or mark new content saved without actual writer/readback"
+    }
+  ],
+  "authorityChecks": [
+    "registry command ID + rowDigest + internal invocation class + current server-owned producer/session/profile determine effect. Public UI/Agent/CLI/MCP cannot assert producer authority by submitting profileDigest, skipHistory, historyEffect or a role string.",
+    "same command dispatch/queue, stable documentId/epoch/expectedRevision/opId and existing authority apply before any mutation; animation sample requires its original server-owned session/tick identity and exact pref generation.",
+    "Engine validates actual candidate change mask against registered producer mask. A supposedly view-only candidate containing selection/scientific/model/resource changes refuses E_HISTORY_EFFECT_PROFILE_MISMATCH before install; no silent fallback or privileged history suppression.",
+    "internal schema is not a new public command endpoint. Adding a caller flag to an old177 request is a schema violation, not a migration shortcut."
+  ],
+  "stateDistinction": {
+    "live": "immutable active model/content + resource leases at current monotonic revision",
+    "history": "ordered stored immutable snapshots and cursor; includes cursor entry but after preserve-history-cursor live content may differ from history[cursor]",
+    "capacity": "limits stored history records including cursor entry. Active live snapshot leases are separate and are not discarded to meet capacity. No double counting a transient active view snapshot as a stored record.",
+    "saved": "last actual durable byte readback/work-reference bound saved content digest and uncertainty state; history cursor/native dirty byte cannot substitute"
+  },
+  "changedCommitRules": {
+    "record": [
+      "derive candidate from actual current live state, not stale history[cursor]",
+      "on actual changed successful atomic install: truncate redo suffix, append candidate snapshot, move cursor, apply capacity policy/resource leases; historyGeneration +=1; revision +=1",
+      "a later domain edit captures current camera state alongside its qualified changes; no implicit intermediate view-only history records"
+    ],
+    "preserve-history-cursor": [
+      "on changed successful atomic install: replace active live immutable snapshot and only its owned leases; revision +=1",
+      "history IDs, cursor, count, historyGeneration and history-owned leases remain byte-identical; preserve any existing redo suffix",
+      "do not overwrite cursor stored snapshot with live camera state; it is needed for exact later Undo/Redo source semantics",
+      "recompute actual dirty/content digest independently; preserving history is not a claim of unchanged content or saved data"
+    ],
+    "navigate-history": [
+      "stop/resolve animation and focus drafts first; move cursor minus/plus1 if inrange, clone stored target through qualified field mask and install; revision +=1; historyGeneration +=1 because cursor moved, no appended snapshot",
+      "when cursor=0 undo is boundary even if live camera differs from history[0]; no invented extra transient entry or discard-only Undo; when cursor=count-1 redo is boundary",
+      "navigation can replace transient camera changes with the stored target camera. Actual dirty compares restored live content to actual saved content."
+    ],
+    "noopFailureUnknown": [
+      "equal candidate: unchanged revision/history/digest, preserve redo and return unchanged",
+      "failure before install/cancel/stale: no committed state/history change; do not replay sample",
+      "unknown after delivery: query original operation in same lifecycle; no second mutation, no dependent navigation/save/close success, no auto retry or restart/reopen/reimport"
+    ]
+  },
+  "dirtyAndClose": [
+    "compare canonical actual save-relevant content (including persisted camera when codec saves it) and captured saved content, with exact format/profile/resource identity; native Scene dirtyfalse/unchangedhistory cannot close unsaved work",
+    "if equality or prior write completion is unknown, keep pending/unsaved and route existing explicit save/discard/cancel barrier; do not invent saved/clean",
+    "Save barrier stops admitting ticks, resolves original in-flight result and drafts, captures real current revision+content/resources, writes under existing host contract and reads back exact output; only then can Saved update that captured save claim",
+    "after Save, active revision/content may differ only if a later authorized mutation occurred; older save receipt never marks later content saved; close rechecks actual current content and unknown operations",
+    "preferences trim preserves both active live model/leases and cursor stored entry; explicit loss plan binds live revision/content, historyGeneration, exact lostSnapshotIds/resources and preference base generation. No model revision increment merely for trim."
+  ],
+  "consumerMigration": [
+    "I32 technical interface revision and command registry metadata must explicitly add historyEffect classification and Live-vs-history distinction. All host/UI/Agent/CLI/MCP/observer consumers receive the same revised HistoryAwareCommitSummary.",
+    "new summary historyGeneration changes on stored history/cursor mutation; preserve-history-cursor changes revision/live digest but not historyGeneration. Undo/Redo availability derives cursor/count, not revision or dirty.",
+    "future validators reject unknown kind/skipHistory; update permission, idempotency, expected revision and resource-accounting consumers together in a reviewed isolated implementation card.",
+    "old NS1 first-chain and original177 scientific request/response schema bytes remain retained; do not claim oldschema retroactively supports new effect metadata. Use explicit I32 successor namespace/negotiated adapter before runtime acceptance.",
+    "this subtask writes only application sub-evidence; parent owns I32 authoritative text/current state/receipt and eventual manual dsh handoff."
+  ],
+  "nativeVsSafetyBoundary": "static native view-camera history request rules are frozen. Actual native timer cadence, counts, runtime vptr, platform renderer, active locale/FPCR and DataView synchronous/asynchronous notification behavior remain future qualifications. Retain stricter already-approved save/close/unknown-dirty safety contracts, not native dirty byte as authority.",
+  "requiredSemanticValidation": [
+    "historyCount>=1 and0<=historyCursor<historyCount; summary undoAvailable=(cursor>0), redoAvailable=(cursor+1<count)",
+    "all u64 increments checked; exhausted revision/historyGeneration refuses before mutation, never wraps",
+    "opaque registry/producer/animation/session/profile identities are server-resolved and capability-checked; digest text alone conveys no authority",
+    "complete candidate save-relevant content/resource graph compared independently of history cursor/native dirty flag"
+  ]
+}

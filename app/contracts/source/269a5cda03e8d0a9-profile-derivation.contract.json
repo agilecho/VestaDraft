@@ -1,0 +1,485 @@
+{
+  "schema": "NS2-I33-nine-profile-derivation/1",
+  "canonicalEncoding": {
+    "id": "CPJ/1",
+    "domain": "JSON values, exact decimal token parser; not binary64 serialization/JCS",
+    "tags": [
+      "null",
+      "bool",
+      "number",
+      "string",
+      "array",
+      "object"
+    ],
+    "numbers": "parse exact decimal lexemes; finite only, normalize -0 to0 and remove fractional trailingzeros, plain decimal no exponent; at most4096 digits and abs decimal adjusted exponent<=4096; no JS Number coercion",
+    "encoding": "tagged tree: null->[null]; bool->[bool,b]; number->[number,canonicalDecimalString]; string->[string,s]; array->[array,[encoded children]]; object->[object,[[key,encoded value]...sorted by Unicode scalar codepoint]]",
+    "strings": "reject lone surrogates; no Unicode normalization; UTF8 literal nonASCII, escape quote/backslash, U+0000..001f as JSON short escapes for 08/09/0a/0c/0d and lowercase u00xx otherwise; slash not escaped; no BOM/whitespace/final newline",
+    "strictInput": "reject duplicate keys, invalid UTF8/nonfinite and out-of-budget depth/size; frozen input bytes verified before projection",
+    "paths": "replace only the declared logical-root prefixes, longest listed first, in strings; exact listed logicalFile+pointer+projection are identity. All other content remains. Different source archival locations mapped to same logical roots produce same digest",
+    "schemaProjection": "recursively omit only $schema/$id/$comment/title/description/default/examples and x-* annotations; validation keywords/defs/ref values retained. Resource binding table is separately selected so mandatory decode semantics not lost"
+  },
+  "logicalRootBindings": [
+    {
+      "localRoot": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-134209-two-residuals",
+      "logicalRoot": "vesta-material:rev65"
+    },
+    {
+      "localRoot": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure",
+      "logicalRoot": "vesta-material:rev64"
+    },
+    {
+      "localRoot": "/Users/agilecho/code/Draft",
+      "logicalRoot": "vesta-material:root"
+    },
+    {
+      "localRoot": "/Users/agilecho/code/BranchDraft",
+      "logicalRoot": "craft-host:root"
+    },
+    {
+      "localRoot": "/Users/agilecho/Documents/VESTA",
+      "logicalRoot": "vesta-reference:3909a"
+    }
+  ],
+  "rows": [
+    {
+      "field": "nativeSchemaDigest",
+      "inputs": [
+        {
+          "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-134209-two-residuals/contracts/native-session-v2.schema.json",
+          "sha256": "9e2e5b14de2ddccbd4e7f724f98b2951824ed50300d35764fc909818b51337e9",
+          "pointer": "",
+          "logicalFile": "vesta-material:rev65/contracts/native-session-v2.schema.json",
+          "projection": "schema-validation-keywords-only"
+        },
+        {
+          "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-134209-two-residuals/contracts/scientific-composition.schema.json",
+          "sha256": "df6d56722eff081017222437dc204febd5409e21de4a45abe83a16b369d61d40",
+          "pointer": "",
+          "logicalFile": "vesta-material:rev65/contracts/scientific-composition.schema.json",
+          "projection": "schema-validation-keywords-only"
+        },
+        {
+          "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-134209-two-residuals/contracts/history-effects-wire.schema.json",
+          "sha256": "ca89dd2d3c993611f9f65bd94f8c835a3583e2da7e4d7d55b38dcfd06aba89a7",
+          "pointer": "",
+          "logicalFile": "vesta-material:rev65/contracts/history-effects-wire.schema.json",
+          "projection": "schema-validation-keywords-only"
+        },
+        {
+          "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/sg/sg2.schema.json",
+          "sha256": "5d24de755b9e937a6d0e18f02ad967889e8a8cf7221cad8c41b326c97647f688",
+          "pointer": "",
+          "logicalFile": "vesta-material:rev64/subtasks/sg/sg2.schema.json",
+          "projection": "schema-validation-keywords-only"
+        },
+        {
+          "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json",
+          "sha256": "06e893095ff26d40a8cc379730591e7f4cdb7c86d09a7d78f1f32eee1617e63a",
+          "pointer": "",
+          "logicalFile": "vesta-material:rev64/subtasks/fs/fs2-scientific-successor.schema.json",
+          "projection": "schema-validation-keywords-only"
+        },
+        {
+          "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/render-consumption/render-packet.schema.json",
+          "sha256": "5a7037b1497caa9db5d7ca520cb20e20b67c76c2e6973cad5c647c98312adde8",
+          "pointer": "",
+          "logicalFile": "vesta-material:rev64/subtasks/render-consumption/render-packet.schema.json",
+          "projection": "schema-validation-keywords-only"
+        },
+        {
+          "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-134209-two-residuals/contracts/resource-bindings.contract.json",
+          "sha256": "2406d2b076413296ee940bb16501c4f203c5c688f6630f13c57c7e31e3749bb4",
+          "pointer": "/bindings",
+          "logicalFile": "vesta-material:rev65/contracts/resource-bindings.contract.json",
+          "projection": "complete-selected-JSON-value"
+        }
+      ],
+      "ordering": "inputs in listed order; arrays unchanged; object keys scalar-codepoint sort",
+      "runtimeInput": "build-pinned static source projection",
+      "canonicalRule": "CPJ/1",
+      "digestRule": "SHA256(ASCII vestacraft.profile-digest/1 || 00 || ASCII field || 00 || CPJ1(payload))",
+      "selfReference": "computed hash/output files/this derivation contract are not selected inputs"
+    },
+    {
+      "field": "coreRegistryDigest",
+      "inputs": [
+        {
+          "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-134209-two-residuals/contracts/native-session-v2.schema.json",
+          "sha256": "9e2e5b14de2ddccbd4e7f724f98b2951824ed50300d35764fc909818b51337e9",
+          "pointer": "/$defs/CoreInvocation",
+          "logicalFile": "vesta-material:rev65/contracts/native-session-v2.schema.json",
+          "projection": "schema-validation-keywords-only"
+        },
+        {
+          "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-134209-two-residuals/contracts/native-session-v2.schema.json",
+          "sha256": "9e2e5b14de2ddccbd4e7f724f98b2951824ed50300d35764fc909818b51337e9",
+          "pointer": "/$defs/CommandCompletion",
+          "logicalFile": "vesta-material:rev65/contracts/native-session-v2.schema.json",
+          "projection": "schema-validation-keywords-only"
+        },
+        {
+          "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-134209-two-residuals/contracts/resource-bindings.contract.json",
+          "sha256": "2406d2b076413296ee940bb16501c4f203c5c688f6630f13c57c7e31e3749bb4",
+          "pointer": "/processingOrder",
+          "logicalFile": "vesta-material:rev65/contracts/resource-bindings.contract.json",
+          "projection": "complete-selected-JSON-value"
+        },
+        {
+          "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-134209-two-residuals/contracts/scientific-composition.schema.json",
+          "sha256": "df6d56722eff081017222437dc204febd5409e21de4a45abe83a16b369d61d40",
+          "pointer": "",
+          "logicalFile": "vesta-material:rev65/contracts/scientific-composition.schema.json",
+          "projection": "schema-validation-keywords-only"
+        },
+        {
+          "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-134209-two-residuals/contracts/history-effects-wire.schema.json",
+          "sha256": "ca89dd2d3c993611f9f65bd94f8c835a3583e2da7e4d7d55b38dcfd06aba89a7",
+          "pointer": "",
+          "logicalFile": "vesta-material:rev65/contracts/history-effects-wire.schema.json",
+          "projection": "schema-validation-keywords-only"
+        },
+        {
+          "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/sg/sg2.schema.json",
+          "sha256": "5d24de755b9e937a6d0e18f02ad967889e8a8cf7221cad8c41b326c97647f688",
+          "pointer": "",
+          "logicalFile": "vesta-material:rev64/subtasks/sg/sg2.schema.json",
+          "projection": "schema-validation-keywords-only"
+        },
+        {
+          "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json",
+          "sha256": "06e893095ff26d40a8cc379730591e7f4cdb7c86d09a7d78f1f32eee1617e63a",
+          "pointer": "",
+          "logicalFile": "vesta-material:rev64/subtasks/fs/fs2-scientific-successor.schema.json",
+          "projection": "schema-validation-keywords-only"
+        },
+        {
+          "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/render-consumption/render-packet.schema.json",
+          "sha256": "5a7037b1497caa9db5d7ca520cb20e20b67c76c2e6973cad5c647c98312adde8",
+          "pointer": "",
+          "logicalFile": "vesta-material:rev64/subtasks/render-consumption/render-packet.schema.json",
+          "projection": "schema-validation-keywords-only"
+        }
+      ],
+      "ordering": "inputs in listed order; arrays unchanged; object keys scalar-codepoint sort",
+      "runtimeInput": "build-pinned static source projection",
+      "canonicalRule": "CPJ/1",
+      "digestRule": "SHA256(ASCII vestacraft.profile-digest/1 || 00 || ASCII field || 00 || CPJ1(payload))",
+      "selfReference": "computed hash/output files/this derivation contract are not selected inputs"
+    },
+    {
+      "field": "saveBundleProfileDigest",
+      "inputs": [
+        {
+          "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-134209-two-residuals/profile-vectors/save-input.json",
+          "sha256": "bc7f07085f0a64de2682a65c6158184de19d5007619314be1b1f029cfede0800",
+          "pointer": "",
+          "logicalFile": "vesta-material:rev65/profile-vectors/save-input.json",
+          "projection": "complete-selected-JSON-value"
+        },
+        {
+          "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-134209-two-residuals/format-implementation-bindings.json",
+          "sha256": "25035436bdc9818261310c819aaefb1feea6adf54f9e73fe358af107d8cf8f91",
+          "pointer": "",
+          "logicalFile": "vesta-material:rev65/format-implementation-bindings.json",
+          "projection": "complete-selected-JSON-value"
+        },
+        {
+          "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261115-092025-p1-03-completion/save-artifact-binding.contract.json",
+          "sha256": "60b05f89b7efd6652ee9ad6bdd46574e3b2bbda704f826b8af8c7d08c6070e4d",
+          "pointer": "",
+          "logicalFile": "vesta-material:root/output/vesta-study/20261108-113622/reviews/20261115-092025-p1-03-completion/save-artifact-binding.contract.json",
+          "projection": "complete-selected-JSON-value"
+        },
+        {
+          "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261115-092025-p1-03-completion/resource-reopen.contract.json",
+          "sha256": "feaf93f26dd7929719401ff0779ab81973b17ec25d19f5386bb334e928f173c6",
+          "pointer": "",
+          "logicalFile": "vesta-material:root/output/vesta-study/20261108-113622/reviews/20261115-092025-p1-03-completion/resource-reopen.contract.json",
+          "projection": "complete-selected-JSON-value"
+        },
+        {
+          "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261115-092025-p1-03-completion/save-settlement.contract.json",
+          "sha256": "1d71d64d2301e93b1f6b311b16f4b55d76b2c81ff6a5aa71c3dbde26e874ac12",
+          "pointer": "",
+          "logicalFile": "vesta-material:root/output/vesta-study/20261108-113622/reviews/20261115-092025-p1-03-completion/save-settlement.contract.json",
+          "projection": "complete-selected-JSON-value"
+        }
+      ],
+      "ordering": "inputs in listed order; arrays unchanged; object keys scalar-codepoint sort",
+      "runtimeInput": "actual admitted save profile selection replaces ONLY profile-vectors/save-input.json",
+      "canonicalRule": "CPJ/1",
+      "digestRule": "SHA256(ASCII vestacraft.profile-digest/1 || 00 || ASCII field || 00 || CPJ1(payload))",
+      "selfReference": "computed hash/output files/this derivation contract are not selected inputs"
+    },
+    {
+      "field": "hostCapabilitiesDigest",
+      "inputs": [
+        {
+          "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-134209-two-residuals/profile-vectors/host-input.json",
+          "sha256": "19507469ee560611008a943944d0ba0de9299b9722ded2044eac7e58e580e699",
+          "pointer": "",
+          "logicalFile": "vesta-material:rev65/profile-vectors/host-input.json",
+          "projection": "complete-selected-JSON-value"
+        },
+        {
+          "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261117-224424-p1-04-host-save-application/attempts/20261118-011705-source-history-resolution/contracts/host-binding.contract.json",
+          "sha256": "39c92abc46a53347a4472c4e97b7f9a5337995960ad21ecdd9cc518ca41b458e",
+          "pointer": "",
+          "logicalFile": "vesta-material:root/output/vesta-study/20261108-113622/reviews/20261117-224424-p1-04-host-save-application/attempts/20261118-011705-source-history-resolution/contracts/host-binding.contract.json",
+          "projection": "complete-selected-JSON-value"
+        },
+        {
+          "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261117-224424-p1-04-host-save-application/attempts/20261118-004924-four-design-gaps/contracts/operation-recovery.contract.json",
+          "sha256": "6b00ec81f36c6d47d96b6578c59dff40893ae07383add8bd1cd790a330ec14c2",
+          "pointer": "",
+          "logicalFile": "vesta-material:root/output/vesta-study/20261108-113622/reviews/20261117-224424-p1-04-host-save-application/attempts/20261118-004924-four-design-gaps/contracts/operation-recovery.contract.json",
+          "projection": "complete-selected-JSON-value"
+        }
+      ],
+      "ordering": "inputs in listed order; arrays unchanged; object keys scalar-codepoint sort",
+      "runtimeInput": "actual existing host snapshot replaces ONLY profile-vectors/host-input.json",
+      "canonicalRule": "CPJ/1",
+      "digestRule": "SHA256(ASCII vestacraft.profile-digest/1 || 00 || ASCII field || 00 || CPJ1(payload))",
+      "selfReference": "computed hash/output files/this derivation contract are not selected inputs"
+    },
+    {
+      "field": "scientificCatalogDigest",
+      "inputs": [
+        {
+          "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-134209-two-residuals/scientific-operation-catalog.json",
+          "sha256": "dbc08af138a1247f5b381e38639fde19773fa20b44f9625d7acce97fee9a39a6",
+          "pointer": "/operations",
+          "logicalFile": "vesta-material:rev65/scientific-operation-catalog.json",
+          "projection": "complete-selected-JSON-value"
+        },
+        {
+          "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-134209-two-residuals/contracts/scientific-composition.schema.json",
+          "sha256": "df6d56722eff081017222437dc204febd5409e21de4a45abe83a16b369d61d40",
+          "pointer": "",
+          "logicalFile": "vesta-material:rev65/contracts/scientific-composition.schema.json",
+          "projection": "schema-validation-keywords-only"
+        },
+        {
+          "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-134209-two-residuals/contracts/history-effects-wire.schema.json",
+          "sha256": "ca89dd2d3c993611f9f65bd94f8c835a3583e2da7e4d7d55b38dcfd06aba89a7",
+          "pointer": "",
+          "logicalFile": "vesta-material:rev65/contracts/history-effects-wire.schema.json",
+          "projection": "schema-validation-keywords-only"
+        },
+        {
+          "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/sg/sg2.schema.json",
+          "sha256": "5d24de755b9e937a6d0e18f02ad967889e8a8cf7221cad8c41b326c97647f688",
+          "pointer": "",
+          "logicalFile": "vesta-material:rev64/subtasks/sg/sg2.schema.json",
+          "projection": "schema-validation-keywords-only"
+        },
+        {
+          "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json",
+          "sha256": "06e893095ff26d40a8cc379730591e7f4cdb7c86d09a7d78f1f32eee1617e63a",
+          "pointer": "",
+          "logicalFile": "vesta-material:rev64/subtasks/fs/fs2-scientific-successor.schema.json",
+          "projection": "schema-validation-keywords-only"
+        },
+        {
+          "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/render-consumption/render-packet.schema.json",
+          "sha256": "5a7037b1497caa9db5d7ca520cb20e20b67c76c2e6973cad5c647c98312adde8",
+          "pointer": "",
+          "logicalFile": "vesta-material:rev64/subtasks/render-consumption/render-packet.schema.json",
+          "projection": "schema-validation-keywords-only"
+        }
+      ],
+      "ordering": "inputs in listed order; arrays unchanged; object keys scalar-codepoint sort",
+      "runtimeInput": "build-pinned static source projection",
+      "canonicalRule": "CPJ/1",
+      "digestRule": "SHA256(ASCII vestacraft.profile-digest/1 || 00 || ASCII field || 00 || CPJ1(payload))",
+      "selfReference": "computed hash/output files/this derivation contract are not selected inputs"
+    },
+    {
+      "field": "assetCatalogDigest",
+      "inputs": [
+        {
+          "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/assets/asset-inputs.contract.json",
+          "sha256": "482018fb4a602a64cb2e3b77bcf3f1d19bb29ffa8d436510701123d48a5e5cae",
+          "pointer": "",
+          "logicalFile": "vesta-material:rev64/assets/asset-inputs.contract.json",
+          "projection": "complete-selected-JSON-value"
+        }
+      ],
+      "ordering": "inputs in listed order; arrays unchanged; object keys scalar-codepoint sort",
+      "runtimeInput": "build-pinned static source projection",
+      "canonicalRule": "CPJ/1",
+      "digestRule": "SHA256(ASCII vestacraft.profile-digest/1 || 00 || ASCII field || 00 || CPJ1(payload))",
+      "selfReference": "computed hash/output files/this derivation contract are not selected inputs"
+    },
+    {
+      "field": "historyPolicyDigest",
+      "inputs": [
+        {
+          "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/application/history-effects.contract.json",
+          "sha256": "f07e0f7bbc419aaabe008b8674e6d3e368dcde01b02cdda436d4f516c1a6a927",
+          "pointer": "",
+          "logicalFile": "vesta-material:rev64/subtasks/application/history-effects.contract.json",
+          "projection": "complete-selected-JSON-value"
+        },
+        {
+          "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-134209-two-residuals/contracts/history-effects-wire.schema.json",
+          "sha256": "ca89dd2d3c993611f9f65bd94f8c835a3583e2da7e4d7d55b38dcfd06aba89a7",
+          "pointer": "",
+          "logicalFile": "vesta-material:rev65/contracts/history-effects-wire.schema.json",
+          "projection": "schema-validation-keywords-only"
+        }
+      ],
+      "ordering": "inputs in listed order; arrays unchanged; object keys scalar-codepoint sort",
+      "runtimeInput": "build-pinned static source projection",
+      "canonicalRule": "CPJ/1",
+      "digestRule": "SHA256(ASCII vestacraft.profile-digest/1 || 00 || ASCII field || 00 || CPJ1(payload))",
+      "selfReference": "computed hash/output files/this derivation contract are not selected inputs"
+    },
+    {
+      "field": "preferencesSchemaDigest",
+      "inputs": [
+        {
+          "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/application/preferences-composition.schema.json",
+          "sha256": "1d2cbe659e7fc33bf5635d68c0152ab7b6343b39b1fd0441ae7a038152f36f23",
+          "pointer": "",
+          "logicalFile": "vesta-material:rev64/subtasks/application/preferences-composition.schema.json",
+          "projection": "schema-validation-keywords-only"
+        },
+        {
+          "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/application/application-composition.contract.json",
+          "sha256": "e715905df71fc68cc3578ff79ec84b2265c41588112e4ae5ae3e1491cd139227",
+          "pointer": "/requestSemantics",
+          "logicalFile": "vesta-material:rev64/subtasks/application/application-composition.contract.json",
+          "projection": "complete-selected-JSON-value"
+        }
+      ],
+      "ordering": "inputs in listed order; arrays unchanged; object keys scalar-codepoint sort",
+      "runtimeInput": "build-pinned static source projection",
+      "canonicalRule": "CPJ/1",
+      "digestRule": "SHA256(ASCII vestacraft.profile-digest/1 || 00 || ASCII field || 00 || CPJ1(payload))",
+      "selfReference": "computed hash/output files/this derivation contract are not selected inputs"
+    },
+    {
+      "field": "externalWorkflowSchemaDigest",
+      "inputs": [
+        {
+          "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/external/external-workflow-final.schema.json",
+          "sha256": "e933cace8217c73d539c15867e4bcfed42f33cc46dbf4e966d03c4815a4f0ea7",
+          "pointer": "",
+          "logicalFile": "vesta-material:rev64/subtasks/external/external-workflow-final.schema.json",
+          "projection": "schema-validation-keywords-only"
+        },
+        {
+          "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/external/external-workflow-final.contract.json",
+          "sha256": "8d9fa16e8661d5ef730afdff0f3fec3897c9b44bb735d5bb6d9d5aec10ddf4e7",
+          "pointer": "",
+          "logicalFile": "vesta-material:rev64/subtasks/external/external-workflow-final.contract.json",
+          "projection": "complete-selected-JSON-value"
+        }
+      ],
+      "ordering": "inputs in listed order; arrays unchanged; object keys scalar-codepoint sort",
+      "runtimeInput": "build-pinned static source projection",
+      "canonicalRule": "CPJ/1",
+      "digestRule": "SHA256(ASCII vestacraft.profile-digest/1 || 00 || ASCII field || 00 || CPJ1(payload))",
+      "selfReference": "computed hash/output files/this derivation contract are not selected inputs"
+    }
+  ],
+  "generator": {
+    "owner": "U00.scaffold",
+    "plannedFile": "scripts/generate-contracts.mjs",
+    "outputs": [
+      "contracts/generated/profile-input-manifest.json",
+      "kernel/crates/bindings/src/profile_digests.rs",
+      "web/src/kernel/profile-digests.generated.ts",
+      "private host generated profile table"
+    ],
+    "consumerRule": "same selected canonical input bytes/CPJ/digest recipe in Rust/TS/host JS; frozen literals may be emitted but receiver independently compares actual build/host generation before installing session; producer and independent validator MUST read payloadEnvelope and interfaceGeneration; absent/contradictory declaration refuses, never use a hardcoded generation or infer envelope from vectors",
+    "dynamicHost": "producer is existing authenticated host adapter reading actual limits/owned writer set/receipt generation. Schema/hash/caller expectedProfiles never grants authority. Missing/inconsistent receipts refuse claimed capability; hash is recomputed after actual snapshot changes; actual scope failures remain HS4 outcomes",
+    "saveSelection": "selected encode native bundle contract/current source model/resource/settlement policy fixed before handshake; changing selection requires fresh negotiation, never reuse an installed session under another profile",
+    "noCycle": "native schema annotations only refer by filename; projections never include computed digest vectors/contracts that pin their own digest"
+  },
+  "fixedVectors": {
+    "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-134209-two-residuals/profile-digest-vectors.json",
+    "sha256": "e4f7d5a0c510d5a1dd9feeb2c38f3d70e0420e820b17feb055d7338f056ed82b"
+  },
+  "productImplemented": false,
+  "runtimeValidated": false,
+  "interfaceGeneration": "I33",
+  "documentRevision": "I33-r1",
+  "payloadEnvelope": {
+    "id": "NS2-profile-envelope/1",
+    "payloadSchema": {
+      "type": "object",
+      "properties": {
+        "derivation": {
+          "const": "NS2-profile-input/1"
+        },
+        "generation": {
+          "type": "string",
+          "pattern": "^I[0-9]+$"
+        },
+        "inputs": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "properties": {
+              "logicalFile": {
+                "type": "string",
+                "minLength": 1
+              },
+              "pointer": {
+                "type": "string"
+              },
+              "projection": {
+                "enum": [
+                  "schema-validation-keywords-only",
+                  "complete-selected-JSON-value"
+                ]
+              },
+              "value": true
+            },
+            "required": [
+              "logicalFile",
+              "pointer",
+              "projection",
+              "value"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "derivation",
+        "generation",
+        "inputs"
+      ],
+      "additionalProperties": false
+    },
+    "generationSource": {
+      "contractPointer": "/interfaceGeneration",
+      "mustEqualInterfaceField": "interface-composition.json#/profileGenerationId",
+      "noFallback": true,
+      "documentRevisionIsNotGeneration": true
+    },
+    "derivationSource": "/payloadEnvelope/payloadSchema/properties/derivation/const",
+    "inputRecords": {
+      "order": "selected rows[field].inputs order exactly; no sorting of input records",
+      "fields": [
+        "logicalFile",
+        "pointer",
+        "projection",
+        "value"
+      ],
+      "logicalFile": "copy rows[field].inputs[n].logicalFile exactly",
+      "pointer": "copy rows[field].inputs[n].pointer exactly",
+      "projection": "copy rows[field].inputs[n].projection exactly",
+      "value": "strict parse rows[field].inputs[n].path; select JSON pointer; apply named projection; then logicalRootBindings replacement; retain complete resulting JSON value",
+      "extraOrMissingFields": "reject"
+    },
+    "construction": "construct exactly the three payloadSchema required outer fields; derivation from derivationSource, generation from generationSource.contractPointer, inputs from ordered inputRecords; do not add field name/digest/sourceSHA to the payload",
+    "migration": "generation is the sole explicit wire-profile literal from this contract, checked against interface profileGenerationId before generation. A change to the wire generation changes all9 digests and requires complete negotiation; documentation-only I33-r1 keeps I33. No generation is inferred from archive paths, CPJ bytes, filenames or document revision.",
+    "selfReference": "envelope metadata is a recipe, not an additional selected input; no computed digest or this contract enters payload inputs"
+  },
+  "logicalIdentityPolicy": "logical IDs vesta-material:rev65 are stable I33 manifest IDs, not the current baseline number. Current source bytes and digests carry content identity. Moving a file alone does not rename its logical ID."
+}

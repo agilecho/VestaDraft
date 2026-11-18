@@ -1,0 +1,287 @@
+{
+  "schema": "vestacraft.profile-inputs/1",
+  "generation": "I33",
+  "profiles": {
+    "nativeSchemaDigest": "5f61fb91397f092d68e4c4096fd9dbe5cc1684252bdabe1030101049b40275d8",
+    "coreRegistryDigest": "3db9cce3ffa64d6c865671ea992bec6c8dd2748c38b13adff7ec04cc45020dd7",
+    "saveBundleProfileDigest": "312d422420873bd7a07ecac3560114ef36db250b68675c44a22f7b194fb32cd1",
+    "hostCapabilitiesDigest": "60bc9c446bf0fcae3698168f395dd6413fda30a51a0416c38d43a5fc0488b0de",
+    "scientificCatalogDigest": "37ca452cf39130926f03c80b277c8617d4924910bffec0f65ec9d250b380d2d9",
+    "assetCatalogDigest": "d0687860c059e0bf69584cf2ca39c93d38e6e654d5a0364ac62830eae9e48b34",
+    "historyPolicyDigest": "284d327b50af94594d331c4ddaa36e2e4c3814fe140a0b10bdadc30d052c92d8",
+    "preferencesSchemaDigest": "56132e02ae28a6075b0b46785d14e26c3a6485b7e1c81fbabdfc3fff475fe15f",
+    "externalWorkflowSchemaDigest": "2e9163cd903d51f22b7b3bf7c9f78c942bc05d5a6e5882b41ddcabd42c7658e7"
+  },
+  "inputs": {
+    "nativeSchemaDigest": [
+      {
+        "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-134209-two-residuals/contracts/native-session-v2.schema.json",
+        "sha256": "9e2e5b14de2ddccbd4e7f724f98b2951824ed50300d35764fc909818b51337e9",
+        "pointer": "",
+        "logicalFile": "vesta-material:rev65/contracts/native-session-v2.schema.json",
+        "projection": "schema-validation-keywords-only"
+      },
+      {
+        "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-134209-two-residuals/contracts/scientific-composition.schema.json",
+        "sha256": "df6d56722eff081017222437dc204febd5409e21de4a45abe83a16b369d61d40",
+        "pointer": "",
+        "logicalFile": "vesta-material:rev65/contracts/scientific-composition.schema.json",
+        "projection": "schema-validation-keywords-only"
+      },
+      {
+        "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-134209-two-residuals/contracts/history-effects-wire.schema.json",
+        "sha256": "ca89dd2d3c993611f9f65bd94f8c835a3583e2da7e4d7d55b38dcfd06aba89a7",
+        "pointer": "",
+        "logicalFile": "vesta-material:rev65/contracts/history-effects-wire.schema.json",
+        "projection": "schema-validation-keywords-only"
+      },
+      {
+        "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/sg/sg2.schema.json",
+        "sha256": "5d24de755b9e937a6d0e18f02ad967889e8a8cf7221cad8c41b326c97647f688",
+        "pointer": "",
+        "logicalFile": "vesta-material:rev64/subtasks/sg/sg2.schema.json",
+        "projection": "schema-validation-keywords-only"
+      },
+      {
+        "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json",
+        "sha256": "06e893095ff26d40a8cc379730591e7f4cdb7c86d09a7d78f1f32eee1617e63a",
+        "pointer": "",
+        "logicalFile": "vesta-material:rev64/subtasks/fs/fs2-scientific-successor.schema.json",
+        "projection": "schema-validation-keywords-only"
+      },
+      {
+        "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/render-consumption/render-packet.schema.json",
+        "sha256": "5a7037b1497caa9db5d7ca520cb20e20b67c76c2e6973cad5c647c98312adde8",
+        "pointer": "",
+        "logicalFile": "vesta-material:rev64/subtasks/render-consumption/render-packet.schema.json",
+        "projection": "schema-validation-keywords-only"
+      },
+      {
+        "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-134209-two-residuals/contracts/resource-bindings.contract.json",
+        "sha256": "2406d2b076413296ee940bb16501c4f203c5c688f6630f13c57c7e31e3749bb4",
+        "pointer": "/bindings",
+        "logicalFile": "vesta-material:rev65/contracts/resource-bindings.contract.json",
+        "projection": "complete-selected-JSON-value"
+      }
+    ],
+    "coreRegistryDigest": [
+      {
+        "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-134209-two-residuals/contracts/native-session-v2.schema.json",
+        "sha256": "9e2e5b14de2ddccbd4e7f724f98b2951824ed50300d35764fc909818b51337e9",
+        "pointer": "/$defs/CoreInvocation",
+        "logicalFile": "vesta-material:rev65/contracts/native-session-v2.schema.json",
+        "projection": "schema-validation-keywords-only"
+      },
+      {
+        "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-134209-two-residuals/contracts/native-session-v2.schema.json",
+        "sha256": "9e2e5b14de2ddccbd4e7f724f98b2951824ed50300d35764fc909818b51337e9",
+        "pointer": "/$defs/CommandCompletion",
+        "logicalFile": "vesta-material:rev65/contracts/native-session-v2.schema.json",
+        "projection": "schema-validation-keywords-only"
+      },
+      {
+        "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-134209-two-residuals/contracts/resource-bindings.contract.json",
+        "sha256": "2406d2b076413296ee940bb16501c4f203c5c688f6630f13c57c7e31e3749bb4",
+        "pointer": "/processingOrder",
+        "logicalFile": "vesta-material:rev65/contracts/resource-bindings.contract.json",
+        "projection": "complete-selected-JSON-value"
+      },
+      {
+        "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-134209-two-residuals/contracts/scientific-composition.schema.json",
+        "sha256": "df6d56722eff081017222437dc204febd5409e21de4a45abe83a16b369d61d40",
+        "pointer": "",
+        "logicalFile": "vesta-material:rev65/contracts/scientific-composition.schema.json",
+        "projection": "schema-validation-keywords-only"
+      },
+      {
+        "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-134209-two-residuals/contracts/history-effects-wire.schema.json",
+        "sha256": "ca89dd2d3c993611f9f65bd94f8c835a3583e2da7e4d7d55b38dcfd06aba89a7",
+        "pointer": "",
+        "logicalFile": "vesta-material:rev65/contracts/history-effects-wire.schema.json",
+        "projection": "schema-validation-keywords-only"
+      },
+      {
+        "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/sg/sg2.schema.json",
+        "sha256": "5d24de755b9e937a6d0e18f02ad967889e8a8cf7221cad8c41b326c97647f688",
+        "pointer": "",
+        "logicalFile": "vesta-material:rev64/subtasks/sg/sg2.schema.json",
+        "projection": "schema-validation-keywords-only"
+      },
+      {
+        "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json",
+        "sha256": "06e893095ff26d40a8cc379730591e7f4cdb7c86d09a7d78f1f32eee1617e63a",
+        "pointer": "",
+        "logicalFile": "vesta-material:rev64/subtasks/fs/fs2-scientific-successor.schema.json",
+        "projection": "schema-validation-keywords-only"
+      },
+      {
+        "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/render-consumption/render-packet.schema.json",
+        "sha256": "5a7037b1497caa9db5d7ca520cb20e20b67c76c2e6973cad5c647c98312adde8",
+        "pointer": "",
+        "logicalFile": "vesta-material:rev64/subtasks/render-consumption/render-packet.schema.json",
+        "projection": "schema-validation-keywords-only"
+      }
+    ],
+    "saveBundleProfileDigest": [
+      {
+        "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-134209-two-residuals/profile-vectors/save-input.json",
+        "sha256": "bc7f07085f0a64de2682a65c6158184de19d5007619314be1b1f029cfede0800",
+        "pointer": "",
+        "logicalFile": "vesta-material:rev65/profile-vectors/save-input.json",
+        "projection": "complete-selected-JSON-value"
+      },
+      {
+        "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-134209-two-residuals/format-implementation-bindings.json",
+        "sha256": "25035436bdc9818261310c819aaefb1feea6adf54f9e73fe358af107d8cf8f91",
+        "pointer": "",
+        "logicalFile": "vesta-material:rev65/format-implementation-bindings.json",
+        "projection": "complete-selected-JSON-value"
+      },
+      {
+        "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261115-092025-p1-03-completion/save-artifact-binding.contract.json",
+        "sha256": "60b05f89b7efd6652ee9ad6bdd46574e3b2bbda704f826b8af8c7d08c6070e4d",
+        "pointer": "",
+        "logicalFile": "vesta-material:root/output/vesta-study/20261108-113622/reviews/20261115-092025-p1-03-completion/save-artifact-binding.contract.json",
+        "projection": "complete-selected-JSON-value"
+      },
+      {
+        "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261115-092025-p1-03-completion/resource-reopen.contract.json",
+        "sha256": "feaf93f26dd7929719401ff0779ab81973b17ec25d19f5386bb334e928f173c6",
+        "pointer": "",
+        "logicalFile": "vesta-material:root/output/vesta-study/20261108-113622/reviews/20261115-092025-p1-03-completion/resource-reopen.contract.json",
+        "projection": "complete-selected-JSON-value"
+      },
+      {
+        "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261115-092025-p1-03-completion/save-settlement.contract.json",
+        "sha256": "1d71d64d2301e93b1f6b311b16f4b55d76b2c81ff6a5aa71c3dbde26e874ac12",
+        "pointer": "",
+        "logicalFile": "vesta-material:root/output/vesta-study/20261108-113622/reviews/20261115-092025-p1-03-completion/save-settlement.contract.json",
+        "projection": "complete-selected-JSON-value"
+      }
+    ],
+    "hostCapabilitiesDigest": [
+      {
+        "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-134209-two-residuals/profile-vectors/host-input.json",
+        "sha256": "19507469ee560611008a943944d0ba0de9299b9722ded2044eac7e58e580e699",
+        "pointer": "",
+        "logicalFile": "vesta-material:rev65/profile-vectors/host-input.json",
+        "projection": "complete-selected-JSON-value"
+      },
+      {
+        "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261117-224424-p1-04-host-save-application/attempts/20261118-011705-source-history-resolution/contracts/host-binding.contract.json",
+        "sha256": "39c92abc46a53347a4472c4e97b7f9a5337995960ad21ecdd9cc518ca41b458e",
+        "pointer": "",
+        "logicalFile": "vesta-material:root/output/vesta-study/20261108-113622/reviews/20261117-224424-p1-04-host-save-application/attempts/20261118-011705-source-history-resolution/contracts/host-binding.contract.json",
+        "projection": "complete-selected-JSON-value"
+      },
+      {
+        "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261117-224424-p1-04-host-save-application/attempts/20261118-004924-four-design-gaps/contracts/operation-recovery.contract.json",
+        "sha256": "6b00ec81f36c6d47d96b6578c59dff40893ae07383add8bd1cd790a330ec14c2",
+        "pointer": "",
+        "logicalFile": "vesta-material:root/output/vesta-study/20261108-113622/reviews/20261117-224424-p1-04-host-save-application/attempts/20261118-004924-four-design-gaps/contracts/operation-recovery.contract.json",
+        "projection": "complete-selected-JSON-value"
+      }
+    ],
+    "scientificCatalogDigest": [
+      {
+        "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-134209-two-residuals/scientific-operation-catalog.json",
+        "sha256": "dbc08af138a1247f5b381e38639fde19773fa20b44f9625d7acce97fee9a39a6",
+        "pointer": "/operations",
+        "logicalFile": "vesta-material:rev65/scientific-operation-catalog.json",
+        "projection": "complete-selected-JSON-value"
+      },
+      {
+        "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-134209-two-residuals/contracts/scientific-composition.schema.json",
+        "sha256": "df6d56722eff081017222437dc204febd5409e21de4a45abe83a16b369d61d40",
+        "pointer": "",
+        "logicalFile": "vesta-material:rev65/contracts/scientific-composition.schema.json",
+        "projection": "schema-validation-keywords-only"
+      },
+      {
+        "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-134209-two-residuals/contracts/history-effects-wire.schema.json",
+        "sha256": "ca89dd2d3c993611f9f65bd94f8c835a3583e2da7e4d7d55b38dcfd06aba89a7",
+        "pointer": "",
+        "logicalFile": "vesta-material:rev65/contracts/history-effects-wire.schema.json",
+        "projection": "schema-validation-keywords-only"
+      },
+      {
+        "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/sg/sg2.schema.json",
+        "sha256": "5d24de755b9e937a6d0e18f02ad967889e8a8cf7221cad8c41b326c97647f688",
+        "pointer": "",
+        "logicalFile": "vesta-material:rev64/subtasks/sg/sg2.schema.json",
+        "projection": "schema-validation-keywords-only"
+      },
+      {
+        "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json",
+        "sha256": "06e893095ff26d40a8cc379730591e7f4cdb7c86d09a7d78f1f32eee1617e63a",
+        "pointer": "",
+        "logicalFile": "vesta-material:rev64/subtasks/fs/fs2-scientific-successor.schema.json",
+        "projection": "schema-validation-keywords-only"
+      },
+      {
+        "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/render-consumption/render-packet.schema.json",
+        "sha256": "5a7037b1497caa9db5d7ca520cb20e20b67c76c2e6973cad5c647c98312adde8",
+        "pointer": "",
+        "logicalFile": "vesta-material:rev64/subtasks/render-consumption/render-packet.schema.json",
+        "projection": "schema-validation-keywords-only"
+      }
+    ],
+    "assetCatalogDigest": [
+      {
+        "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/assets/asset-inputs.contract.json",
+        "sha256": "482018fb4a602a64cb2e3b77bcf3f1d19bb29ffa8d436510701123d48a5e5cae",
+        "pointer": "",
+        "logicalFile": "vesta-material:rev64/assets/asset-inputs.contract.json",
+        "projection": "complete-selected-JSON-value"
+      }
+    ],
+    "historyPolicyDigest": [
+      {
+        "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/application/history-effects.contract.json",
+        "sha256": "f07e0f7bbc419aaabe008b8674e6d3e368dcde01b02cdda436d4f516c1a6a927",
+        "pointer": "",
+        "logicalFile": "vesta-material:rev64/subtasks/application/history-effects.contract.json",
+        "projection": "complete-selected-JSON-value"
+      },
+      {
+        "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-134209-two-residuals/contracts/history-effects-wire.schema.json",
+        "sha256": "ca89dd2d3c993611f9f65bd94f8c835a3583e2da7e4d7d55b38dcfd06aba89a7",
+        "pointer": "",
+        "logicalFile": "vesta-material:rev65/contracts/history-effects-wire.schema.json",
+        "projection": "schema-validation-keywords-only"
+      }
+    ],
+    "preferencesSchemaDigest": [
+      {
+        "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/application/preferences-composition.schema.json",
+        "sha256": "1d2cbe659e7fc33bf5635d68c0152ab7b6343b39b1fd0441ae7a038152f36f23",
+        "pointer": "",
+        "logicalFile": "vesta-material:rev64/subtasks/application/preferences-composition.schema.json",
+        "projection": "schema-validation-keywords-only"
+      },
+      {
+        "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/application/application-composition.contract.json",
+        "sha256": "e715905df71fc68cc3578ff79ec84b2265c41588112e4ae5ae3e1491cd139227",
+        "pointer": "/requestSemantics",
+        "logicalFile": "vesta-material:rev64/subtasks/application/application-composition.contract.json",
+        "projection": "complete-selected-JSON-value"
+      }
+    ],
+    "externalWorkflowSchemaDigest": [
+      {
+        "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/external/external-workflow-final.schema.json",
+        "sha256": "e933cace8217c73d539c15867e4bcfed42f33cc46dbf4e966d03c4815a4f0ea7",
+        "pointer": "",
+        "logicalFile": "vesta-material:rev64/subtasks/external/external-workflow-final.schema.json",
+        "projection": "schema-validation-keywords-only"
+      },
+      {
+        "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/external/external-workflow-final.contract.json",
+        "sha256": "8d9fa16e8661d5ef730afdff0f3fec3897c9b44bb735d5bb6d9d5aec10ddf4e7",
+        "pointer": "",
+        "logicalFile": "vesta-material:rev64/subtasks/external/external-workflow-final.contract.json",
+        "projection": "complete-selected-JSON-value"
+      }
+    ]
+  }
+}

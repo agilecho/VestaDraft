@@ -1,0 +1,193 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:vestacraft:design:I32-history-effects-wire:2",
+  "title": "I32 wire projection; u64 are canonical decimal strings",
+  "$defs": {
+    "InternalHistoryEffectDecision": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "record"
+            },
+            "registryRowDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "producerProfileDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "kind",
+            "registryRowDigest",
+            "producerProfileDigest"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "preserve-history-cursor"
+            },
+            "registryRowDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "producerProfileDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "animationSessionId": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{32}$"
+            },
+            "tickSequence": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$",
+              "x-semantic-range": "u64, value<=18446744073709551615; parse without JavaScript Number"
+            },
+            "mutationMaskDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "kind",
+            "registryRowDigest",
+            "producerProfileDigest",
+            "animationSessionId",
+            "tickSequence",
+            "mutationMaskDigest"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "navigate-history"
+            },
+            "registryRowDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "producerProfileDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "direction": {
+              "enum": [
+                "undo",
+                "redo"
+              ]
+            },
+            "steps": {
+              "const": 1
+            }
+          },
+          "required": [
+            "kind",
+            "registryRowDigest",
+            "producerProfileDigest",
+            "direction",
+            "steps"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "HistoryAwareCommitSummary": {
+      "type": "object",
+      "properties": {
+        "documentId": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{32}$"
+        },
+        "epoch": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{32}$"
+        },
+        "revision": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)$",
+          "x-semantic-range": "u64, value<=18446744073709551615; parse without JavaScript Number"
+        },
+        "liveContentDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "historyGeneration": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)$",
+          "x-semantic-range": "u64, value<=18446744073709551615; parse without JavaScript Number"
+        },
+        "historyCount": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)$",
+          "x-semantic-range": "u64, value<=18446744073709551615; parse without JavaScript Number"
+        },
+        "historyCursor": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)$",
+          "x-semantic-range": "u64, value<=18446744073709551615; parse without JavaScript Number"
+        },
+        "cursorSnapshotDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "historyEffect": {
+          "enum": [
+            "record",
+            "preserve-history-cursor",
+            "navigate-history",
+            "unchanged"
+          ]
+        },
+        "undoAvailable": {
+          "type": "boolean"
+        },
+        "redoAvailable": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "documentId",
+        "epoch",
+        "revision",
+        "liveContentDigest",
+        "historyGeneration",
+        "historyCount",
+        "historyCursor",
+        "cursorSnapshotDigest",
+        "historyEffect",
+        "undoAvailable",
+        "redoAvailable"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "x-predecessor": {
+    "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/application/history-effects.schema.json",
+    "sha256": "f0283291fb4303ca4c629edc5424599e05487c981407011e58c1e77e288a16ca",
+    "role": "sealed internal logical integer schema, not a change to NS1 wire"
+  },
+  "x-convertedU64Fields": [
+    "/InternalHistoryEffectDecision/oneOf/1/properties/tickSequence",
+    "/HistoryAwareCommitSummary/properties/revision",
+    "/HistoryAwareCommitSummary/properties/historyGeneration",
+    "/HistoryAwareCommitSummary/properties/historyCount",
+    "/HistoryAwareCommitSummary/properties/historyCursor"
+  ],
+  "x-requiredSemanticChecks": [
+    "historyCount>=1 for loaded document;0<=cursor<count",
+    "undoAvailable iff cursor>0; redoAvailable iff cursor+1<count",
+    "revision strictly increases on true content commit, nochange keeps revision",
+    "preserve-history-cursor does not change historyGeneration/count/cursor/cursorSnapshotDigest/redo, but live digest may change",
+    "empty/new-no-document has no commit summary; no fake snapshot digest for cursorless state",
+    "internal producer sequence/effect is never accepted as caller authorization"
+  ]
+}

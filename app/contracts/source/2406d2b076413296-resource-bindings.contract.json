@@ -1,0 +1,135 @@
+{
+  "schema": "NS2-I33-resource-decoding-contract/1",
+  "bindings": [
+    {
+      "role": "OpenBundle",
+      "descriptorDefinition": "OpenBundleResourceRef2",
+      "mediaType": "application/vnd.vestacraft.native-open+json",
+      "payloadSchema": {
+        "$ref": "native-session-v2.schema.json#/$defs/OpenBundle"
+      },
+      "encoding": "strict-UTF8-JSON",
+      "schemaGeneration": "I33",
+      "permission": "descriptor/hash/type success never grants host/current-source authority",
+      "envelopePointers": [
+        "/$defs/Request/oneOf/8/properties/body/properties/bundle"
+      ]
+    },
+    {
+      "role": "InspectionPage",
+      "descriptorDefinition": "InspectionPageResourceRef2",
+      "mediaType": "application/vnd.vestacraft.native-inspection+json",
+      "payloadSchema": {
+        "$ref": "native-session-v2.schema.json#/$defs/InspectionPage"
+      },
+      "encoding": "strict-UTF8-JSON",
+      "schemaGeneration": "I33",
+      "permission": "descriptor/hash/type success never grants host/current-source authority",
+      "envelopePointers": [
+        "/$defs/Response/oneOf/8/properties/result/properties/page"
+      ]
+    },
+    {
+      "role": "HostAck",
+      "descriptorDefinition": "HostAckResourceRef2",
+      "mediaType": "application/vnd.vestacraft.host-ack+json",
+      "payloadSchema": {
+        "$ref": "native-session-v2.schema.json#/$defs/HostAck"
+      },
+      "encoding": "strict-UTF8-JSON",
+      "schemaGeneration": "I33",
+      "permission": "descriptor/hash/type success never grants host/current-source authority",
+      "envelopePointers": [
+        "/$defs/Request/oneOf/13/properties/body/properties/ack"
+      ]
+    },
+    {
+      "role": "HostNack",
+      "descriptorDefinition": "HostNackResourceRef2",
+      "mediaType": "application/vnd.vestacraft.host-nack+json",
+      "payloadSchema": {
+        "$ref": "native-session-v2.schema.json#/$defs/HostNack"
+      },
+      "encoding": "strict-UTF8-JSON",
+      "schemaGeneration": "I33",
+      "permission": "descriptor/hash/type success never grants host/current-source authority",
+      "envelopePointers": [
+        "/$defs/Request/oneOf/14/properties/body/properties/nack"
+      ]
+    },
+    {
+      "role": "CommandCompletion",
+      "descriptorDefinition": "CommandCompletionResourceRef2",
+      "mediaType": "application/vnd.vestacraft.command-outcome+json",
+      "payloadSchema": {
+        "$ref": "native-session-v2.schema.json#/$defs/CommandCompletion"
+      },
+      "encoding": "strict-UTF8-JSON",
+      "schemaGeneration": "I33",
+      "permission": "descriptor/hash/type success never grants host/current-source authority",
+      "envelopePointers": [
+        "/$defs/Response/oneOf/9/properties/result/properties/outcome"
+      ]
+    },
+    {
+      "role": "FailureNotice",
+      "descriptorDefinition": "FailureNoticeResourceRef2",
+      "mediaType": "application/vnd.vestacraft.engine-failure+json",
+      "payloadSchema": {
+        "$ref": "native-session-v2.schema.json#/$defs/FailureNotice"
+      },
+      "encoding": "strict-UTF8-JSON",
+      "schemaGeneration": "I33",
+      "permission": "descriptor/hash/type success never grants host/current-source authority",
+      "envelopePointers": [
+        "/$defs/Response/oneOf/6/properties/result/properties/diagnostics/oneOf/0",
+        "/$defs/Response/oneOf/19/properties/engineFailure"
+      ]
+    }
+  ],
+  "processingOrder": [
+    "resolve role from fixed envelopePointer/admitted op",
+    "verify authenticated private-host boundary where required; reject public Agent forwarding before staging action",
+    "verify same session resource ownership and canonical u64 limits, actual byteLength and SHA256",
+    "strict UTF8: no BOM, lone surrogate, duplicate object key or NaN/Infinity; depth/size budget",
+    "decode payload with exact payloadSchema and reject unknown fields",
+    "cross-check command/doc/epoch/revision/candidate/history or captured snapshot/HS operation receipts",
+    "only then execute/install/settle; failed validation releases own temporary lease, leaves actualcurrent/saved state unchanged"
+  ],
+  "generator": {
+    "plannedFile": "scripts/generate-contracts.mjs",
+    "requiredOutputs": [
+      "Rust ResourceRole2 and role-specific payload codecs",
+      "TS typed ResourceRef<Role> and typed async readResource<Role>",
+      "private host JS role encoder/decoder from identical table"
+    ],
+    "requiredTraversal": "consume bindings and every payloadSchema recursively even if not reachable from Request ordinary validation keywords; annotations alone do not implement byte validation"
+  },
+  "unchanged": {
+    "protocol": "vestacraft.native-session/2",
+    "outerOperations": 17,
+    "sequencedOperations": 14,
+    "outOfBand": 3,
+    "coreCommands": 11,
+    "maxFrameAndChunk": "inheritNS1",
+    "largePayload": "resource only"
+  },
+  "existingExternalPayloads": [
+    {
+      "role": "SaveBundle",
+      "mediaType": "application/vnd.vestacraft.save-bundle+json",
+      "contract": {
+        "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-071145-native-session/contracts/native-session.contract.json",
+        "sha256": "0e143635173148a8fa3e67a73f5139825df750adcee969cd8840dddfc31ef796"
+      },
+      "normativePointer": "/resources/descriptors",
+      "additionalContracts": "FC/Source7/SaveArtifactBinding/ResourceReopen pinned in current contract register; not replaced by an arbitrary JSON schema"
+    },
+    {
+      "role": "raw primary/dependency/upload",
+      "decode": "actual selected codec/data format, never generic JSON; existing FC grammar/source policies unchanged"
+    }
+  ],
+  "productImplemented": false,
+  "originalExecuted": false
+}

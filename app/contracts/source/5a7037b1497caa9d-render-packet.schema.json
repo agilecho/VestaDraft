@@ -1,0 +1,1991 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:draft:render:native-isosurface:1",
+  "$defs": {
+    "FS_NativeMeshOutput": {
+      "type": "object",
+      "properties": {
+        "verticesCartesianF32Bits": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/FS_Vec3F32Bits"
+          },
+          "minItems": 0
+        },
+        "triangles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/FS_NativeMeshTriangle"
+          },
+          "minItems": 0
+        },
+        "faceNormalsF32Bits": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/FS_Vec3F32Bits"
+          },
+          "minItems": 0
+        },
+        "vertexNormalsF32Bits": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/FS_Vec3F32Bits"
+          },
+          "minItems": 0
+        },
+        "levelBindings": {
+          "$ref": "#/$defs/FS_FC_NativeStoredScalarIsoview1"
+        },
+        "layerBindings": {
+          "$ref": "#/$defs/FS_FC_NativeLayerCurrent1"
+        },
+        "sourceDescriptorDigest": {
+          "$ref": "#/$defs/FS_FS1_Digest"
+        },
+        "nativeNonfiniteTriangleOrdinals": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 9007199254740991
+          },
+          "minItems": 0
+        },
+        "parameterDigest": {
+          "$ref": "#/$defs/FS_FS1_Digest"
+        },
+        "vertexColorScalarsF32Bits": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/FS_F32Bits"
+          },
+          "minItems": 0
+        },
+        "vertexTextureCoordinatesF32Bits": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/FS_F32Bits"
+          },
+          "minItems": 0
+        },
+        "completeClippedPolygonVertexIndices": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            },
+            "minItems": 3
+          },
+          "minItems": 0
+        },
+        "sourcePhaseByTriangle": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/FS_FS1_Id"
+          },
+          "minItems": 0
+        },
+        "stage": {
+          "const": "native-pre-camera-sort-geometry-normals-scalar-texture"
+        },
+        "levelBranchRanges": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/FS_NativeMeshBranchRange"
+          },
+          "minItems": 0
+        },
+        "nativeNonfiniteUsedVertexOrdinals": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 9007199254740991
+          },
+          "minItems": 0
+        },
+        "nativeNonfiniteUnusedVertexOrdinals": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 9007199254740991
+          },
+          "minItems": 0
+        }
+      },
+      "required": [
+        "verticesCartesianF32Bits",
+        "triangles",
+        "faceNormalsF32Bits",
+        "vertexNormalsF32Bits",
+        "levelBindings",
+        "layerBindings",
+        "sourceDescriptorDigest",
+        "nativeNonfiniteTriangleOrdinals",
+        "parameterDigest",
+        "vertexColorScalarsF32Bits",
+        "vertexTextureCoordinatesF32Bits",
+        "completeClippedPolygonVertexIndices",
+        "sourcePhaseByTriangle",
+        "stage",
+        "levelBranchRanges",
+        "nativeNonfiniteUsedVertexOrdinals",
+        "nativeNonfiniteUnusedVertexOrdinals"
+      ],
+      "additionalProperties": false
+    },
+    "FS_NativeMeshBranchRange": {
+      "type": "object",
+      "properties": {
+        "levelOrdinal": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "sign": {
+          "enum": [
+            -1,
+            1
+          ]
+        },
+        "firstVertexIndex": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "endVertexIndexExclusive": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "firstTriangleOrdinal": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "endTriangleOrdinalExclusive": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        }
+      },
+      "required": [
+        "levelOrdinal",
+        "sign",
+        "firstVertexIndex",
+        "endVertexIndexExclusive",
+        "firstTriangleOrdinal",
+        "endTriangleOrdinalExclusive"
+      ],
+      "additionalProperties": false
+    },
+    "FS_FS1_Id": {
+      "$ref": "#/$defs/IM2_1_Id"
+    },
+    "IM2_1_Id": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{32}$",
+      "title": "Id"
+    },
+    "FS_F32Bits": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{8}$"
+    },
+    "FS_FS1_Digest": {
+      "$ref": "#/$defs/IM2_1_Digest"
+    },
+    "IM2_1_Digest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Digest"
+    },
+    "FS_FC_NativeLayerCurrent1": {
+      "$ref": "#/$defs/IM7_2_ROOT"
+    },
+    "IM7_2_ROOT": {
+      "type": "object",
+      "properties": {
+        "schemaVersion": {
+          "const": "FC-native-layer-current-1"
+        },
+        "captureRole": {
+          "const": "actual-current-native-3D-layer-population"
+        },
+        "document": {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "EntityRef"
+            },
+            "objectKind": {
+              "const": "document"
+            },
+            "objectId": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "kind",
+            "objectKind",
+            "objectId"
+          ],
+          "additionalProperties": false
+        },
+        "orderedEntries": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "owner": {
+                "oneOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "kind": {
+                        "const": "EntityRef"
+                      },
+                      "objectKind": {
+                        "const": "phase"
+                      },
+                      "objectId": {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    },
+                    "required": [
+                      "kind",
+                      "objectKind",
+                      "objectId"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "kind": {
+                        "const": "EntityRef"
+                      },
+                      "objectKind": {
+                        "const": "frame"
+                      },
+                      "objectId": {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    },
+                    "required": [
+                      "kind",
+                      "objectKind",
+                      "objectId"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "kind": {
+                        "const": "EntityRef"
+                      },
+                      "objectKind": {
+                        "const": "source-entity"
+                      },
+                      "objectId": {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    },
+                    "required": [
+                      "kind",
+                      "objectKind",
+                      "objectId"
+                    ],
+                    "additionalProperties": false
+                  }
+                ]
+              },
+              "position": {
+                "type": "object",
+                "properties": {
+                  "selector": {
+                    "type": "object",
+                    "properties": {
+                      "capturedSelector": {
+                        "type": "integer",
+                        "minimum": -2147483648,
+                        "maximum": 2147483647
+                      },
+                      "reference": {
+                        "oneOf": [
+                          {
+                            "type": "object",
+                            "properties": {
+                              "kind": {
+                                "const": "internal-cartesian"
+                              }
+                            },
+                            "required": [
+                              "kind"
+                            ],
+                            "additionalProperties": false
+                          },
+                          {
+                            "type": "object",
+                            "properties": {
+                              "kind": {
+                                "const": "entry"
+                              },
+                              "target": {
+                                "oneOf": [
+                                  {
+                                    "type": "object",
+                                    "properties": {
+                                      "kind": {
+                                        "const": "EntityRef"
+                                      },
+                                      "objectKind": {
+                                        "const": "phase"
+                                      },
+                                      "objectId": {
+                                        "type": "string",
+                                        "minLength": 1
+                                      }
+                                    },
+                                    "required": [
+                                      "kind",
+                                      "objectKind",
+                                      "objectId"
+                                    ],
+                                    "additionalProperties": false
+                                  },
+                                  {
+                                    "type": "object",
+                                    "properties": {
+                                      "kind": {
+                                        "const": "EntityRef"
+                                      },
+                                      "objectKind": {
+                                        "const": "frame"
+                                      },
+                                      "objectId": {
+                                        "type": "string",
+                                        "minLength": 1
+                                      }
+                                    },
+                                    "required": [
+                                      "kind",
+                                      "objectKind",
+                                      "objectId"
+                                    ],
+                                    "additionalProperties": false
+                                  },
+                                  {
+                                    "type": "object",
+                                    "properties": {
+                                      "kind": {
+                                        "const": "EntityRef"
+                                      },
+                                      "objectKind": {
+                                        "const": "source-entity"
+                                      },
+                                      "objectId": {
+                                        "type": "string",
+                                        "minLength": 1
+                                      }
+                                    },
+                                    "required": [
+                                      "kind",
+                                      "objectKind",
+                                      "objectId"
+                                    ],
+                                    "additionalProperties": false
+                                  }
+                                ]
+                              }
+                            },
+                            "required": [
+                              "kind",
+                              "target"
+                            ],
+                            "additionalProperties": false
+                          },
+                          {
+                            "type": "object",
+                            "properties": {
+                              "kind": {
+                                "const": "unresolved"
+                              },
+                              "reason": {
+                                "enum": [
+                                  "out-of-population",
+                                  "ambiguous-native-instance",
+                                  "unqualified-source-index"
+                                ]
+                              }
+                            },
+                            "required": [
+                              "kind",
+                              "reason"
+                            ],
+                            "additionalProperties": false
+                          }
+                        ]
+                      }
+                    },
+                    "required": [
+                      "capturedSelector",
+                      "reference"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "currentAnchor": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "kind": {
+                          "const": "F64Bits"
+                        },
+                        "ieeeHexBE": {
+                          "type": "string",
+                          "pattern": "^[0-9a-f]{16}$"
+                        }
+                      },
+                      "required": [
+                        "kind",
+                        "ieeeHexBE"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "minItems": 3,
+                    "maxItems": 3
+                  },
+                  "referenceAnchor": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "kind": {
+                          "const": "F64Bits"
+                        },
+                        "ieeeHexBE": {
+                          "type": "string",
+                          "pattern": "^[0-9a-f]{16}$"
+                        }
+                      },
+                      "required": [
+                        "kind",
+                        "ieeeHexBE"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "minItems": 3,
+                    "maxItems": 3
+                  }
+                },
+                "required": [
+                  "selector",
+                  "currentAnchor",
+                  "referenceAnchor"
+                ],
+                "additionalProperties": false
+              },
+              "orientation": {
+                "type": "object",
+                "properties": {
+                  "selector": {
+                    "type": "object",
+                    "properties": {
+                      "capturedSelector": {
+                        "type": "integer",
+                        "minimum": -2147483648,
+                        "maximum": 2147483647
+                      },
+                      "reference": {
+                        "oneOf": [
+                          {
+                            "type": "object",
+                            "properties": {
+                              "kind": {
+                                "const": "internal-cartesian"
+                              }
+                            },
+                            "required": [
+                              "kind"
+                            ],
+                            "additionalProperties": false
+                          },
+                          {
+                            "type": "object",
+                            "properties": {
+                              "kind": {
+                                "const": "entry"
+                              },
+                              "target": {
+                                "oneOf": [
+                                  {
+                                    "type": "object",
+                                    "properties": {
+                                      "kind": {
+                                        "const": "EntityRef"
+                                      },
+                                      "objectKind": {
+                                        "const": "phase"
+                                      },
+                                      "objectId": {
+                                        "type": "string",
+                                        "minLength": 1
+                                      }
+                                    },
+                                    "required": [
+                                      "kind",
+                                      "objectKind",
+                                      "objectId"
+                                    ],
+                                    "additionalProperties": false
+                                  },
+                                  {
+                                    "type": "object",
+                                    "properties": {
+                                      "kind": {
+                                        "const": "EntityRef"
+                                      },
+                                      "objectKind": {
+                                        "const": "frame"
+                                      },
+                                      "objectId": {
+                                        "type": "string",
+                                        "minLength": 1
+                                      }
+                                    },
+                                    "required": [
+                                      "kind",
+                                      "objectKind",
+                                      "objectId"
+                                    ],
+                                    "additionalProperties": false
+                                  },
+                                  {
+                                    "type": "object",
+                                    "properties": {
+                                      "kind": {
+                                        "const": "EntityRef"
+                                      },
+                                      "objectKind": {
+                                        "const": "source-entity"
+                                      },
+                                      "objectId": {
+                                        "type": "string",
+                                        "minLength": 1
+                                      }
+                                    },
+                                    "required": [
+                                      "kind",
+                                      "objectKind",
+                                      "objectId"
+                                    ],
+                                    "additionalProperties": false
+                                  }
+                                ]
+                              }
+                            },
+                            "required": [
+                              "kind",
+                              "target"
+                            ],
+                            "additionalProperties": false
+                          },
+                          {
+                            "type": "object",
+                            "properties": {
+                              "kind": {
+                                "const": "unresolved"
+                              },
+                              "reason": {
+                                "enum": [
+                                  "out-of-population",
+                                  "ambiguous-native-instance",
+                                  "unqualified-source-index"
+                                ]
+                              }
+                            },
+                            "required": [
+                              "kind",
+                              "reason"
+                            ],
+                            "additionalProperties": false
+                          }
+                        ]
+                      }
+                    },
+                    "required": [
+                      "capturedSelector",
+                      "reference"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "storedFlagBits": {
+                    "type": "string",
+                    "pattern": "^[0-9a-f]{8}$"
+                  },
+                  "currentFirst": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "kind": {
+                          "const": "F64Bits"
+                        },
+                        "ieeeHexBE": {
+                          "type": "string",
+                          "pattern": "^[0-9a-f]{16}$"
+                        }
+                      },
+                      "required": [
+                        "kind",
+                        "ieeeHexBE"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "minItems": 3,
+                    "maxItems": 3
+                  },
+                  "referenceFirst": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "kind": {
+                          "const": "F64Bits"
+                        },
+                        "ieeeHexBE": {
+                          "type": "string",
+                          "pattern": "^[0-9a-f]{16}$"
+                        }
+                      },
+                      "required": [
+                        "kind",
+                        "ieeeHexBE"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "minItems": 3,
+                    "maxItems": 3
+                  },
+                  "currentSecond": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "kind": {
+                          "const": "F64Bits"
+                        },
+                        "ieeeHexBE": {
+                          "type": "string",
+                          "pattern": "^[0-9a-f]{16}$"
+                        }
+                      },
+                      "required": [
+                        "kind",
+                        "ieeeHexBE"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "minItems": 3,
+                    "maxItems": 3
+                  },
+                  "referenceSecond": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "kind": {
+                          "const": "F64Bits"
+                        },
+                        "ieeeHexBE": {
+                          "type": "string",
+                          "pattern": "^[0-9a-f]{16}$"
+                        }
+                      },
+                      "required": [
+                        "kind",
+                        "ieeeHexBE"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "minItems": 3,
+                    "maxItems": 3
+                  }
+                },
+                "required": [
+                  "selector",
+                  "storedFlagBits",
+                  "currentFirst",
+                  "referenceFirst",
+                  "currentSecond",
+                  "referenceSecond"
+                ],
+                "additionalProperties": false
+              },
+              "effectiveNativeMatrix4": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "kind": {
+                      "const": "F64Bits"
+                    },
+                    "ieeeHexBE": {
+                      "type": "string",
+                      "pattern": "^[0-9a-f]{16}$"
+                    }
+                  },
+                  "required": [
+                    "kind",
+                    "ieeeHexBE"
+                  ],
+                  "additionalProperties": false
+                },
+                "minItems": 16,
+                "maxItems": 16
+              },
+              "effectiveNativeTranslation": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "kind": {
+                      "const": "F32Bits"
+                    },
+                    "ieeeHexBE": {
+                      "type": "string",
+                      "pattern": "^[0-9a-f]{8}$"
+                    }
+                  },
+                  "required": [
+                    "kind",
+                    "ieeeHexBE"
+                  ],
+                  "additionalProperties": false
+                },
+                "minItems": 3,
+                "maxItems": 3
+              }
+            },
+            "required": [
+              "owner",
+              "position",
+              "orientation",
+              "effectiveNativeMatrix4",
+              "effectiveNativeTranslation"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "captureRole",
+        "document",
+        "orderedEntries"
+      ],
+      "additionalProperties": false,
+      "title": "Complete actual current selected3D native layer population; immutable source observations separate"
+    },
+    "FS_FC_NativeStoredScalarIsoview1": {
+      "$ref": "#/$defs/IM9_3_ROOT"
+    },
+    "IM9_3_ROOT": {
+      "type": "object",
+      "properties": {
+        "schemaVersion": {
+          "const": "FC-native-stored-isoview-1"
+        },
+        "target": {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "EntityRef"
+            },
+            "objectKind": {
+              "const": "source-entity"
+            },
+            "objectId": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "kind",
+            "objectKind",
+            "objectId"
+          ],
+          "additionalProperties": false
+        },
+        "levels": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "properties": {
+              "storedValueF32Bits": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{8}$"
+              },
+              "signMode": {
+                "enum": [
+                  "positive",
+                  "negative",
+                  "both"
+                ]
+              }
+            },
+            "required": [
+              "storedValueF32Bits",
+              "signMode"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "levelMeaning": {
+          "const": "stored-scalar-only"
+        },
+        "ruleId": {
+          "const": "draft.native-stored-scalar-isoview"
+        },
+        "ruleVersion": {
+          "const": "1"
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "target",
+        "levels",
+        "levelMeaning",
+        "ruleId",
+        "ruleVersion"
+      ],
+      "additionalProperties": false
+    },
+    "FS_Vec3F32Bits": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/FS_F32Bits"
+      },
+      "minItems": 3,
+      "maxItems": 3
+    },
+    "FS_NativeMeshTriangle": {
+      "type": "object",
+      "properties": {
+        "levelOrdinal": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "sign": {
+          "enum": [
+            -1,
+            1
+          ]
+        },
+        "coreCellIndex": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "nativeCaseId": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 255
+        },
+        "sourceRowTriangleOrdinal": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4
+        },
+        "edgeIds": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 11
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "vertexIndices": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 9007199254740991
+          },
+          "minItems": 3,
+          "maxItems": 3
+        }
+      },
+      "required": [
+        "levelOrdinal",
+        "sign",
+        "coreCellIndex",
+        "nativeCaseId",
+        "sourceRowTriangleOrdinal",
+        "edgeIds",
+        "vertexIndices"
+      ],
+      "additionalProperties": false
+    },
+    "SG_NativeCamera": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "sceneMatrixLogicalRows": {
+          "$ref": "#/$defs/SG_Matrix4Rows"
+        },
+        "shiftViewX": {
+          "type": "number",
+          "minimum": -3.4028234663852886e+38,
+          "maximum": 3.4028234663852886e+38,
+          "x-unit": "view-coordinate",
+          "x-invariant": "exact finite binary32 value promoted to JSONnumber; rawWord must match wherever supplied"
+        },
+        "shiftViewY": {
+          "type": "number",
+          "minimum": -3.4028234663852886e+38,
+          "maximum": 3.4028234663852886e+38,
+          "x-unit": "view-coordinate",
+          "x-invariant": "exact finite binary32 value promoted to JSONnumber; rawWord must match wherever supplied"
+        },
+        "thirdSceneStoredF32": {
+          "type": "number",
+          "minimum": -3.4028234663852886e+38,
+          "maximum": 3.4028234663852886e+38,
+          "x-unit": "source-unassigned-preserved",
+          "x-invariant": "exact finite binary32 value promoted to JSONnumber; rawWord must match wherever supplied"
+        },
+        "zoomF32": {
+          "type": "number",
+          "minimum": -3.4028234663852886e+38,
+          "maximum": 3.4028234663852886e+38,
+          "x-unit": "dimensionless",
+          "x-invariant": "exact finite binary32 value promoted to JSONnumber; rawWord must match wherever supplied"
+        },
+        "projectionSelectorBit21": {
+          "enum": [
+            0,
+            1
+          ]
+        },
+        "projectionZScaleF32": {
+          "type": "number",
+          "minimum": -3.4028234663852886e+38,
+          "maximum": 3.4028234663852886e+38,
+          "x-unit": "dimensionless",
+          "x-invariant": "exact finite binary32 value promoted to JSONnumber; rawWord must match wherever supplied"
+        },
+        "localTranslationA": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "minimum": -3.4028234663852886e+38,
+            "maximum": 3.4028234663852886e+38,
+            "x-unit": "angstrom",
+            "x-invariant": "exact finite binary32 value promoted to JSONnumber; rawWord must match wherever supplied"
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "normalizationF64": {
+          "type": "number",
+          "minimum": -1.7976931348623157e+308,
+          "maximum": 1.7976931348623157e+308,
+          "x-unit": "1/angstrom"
+        },
+        "viewportLogicalWidth": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "viewportLogicalHeight": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "deviceScaleF64": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 1.7976931348623157e+308
+        },
+        "aspectF32": {
+          "type": "number",
+          "minimum": -3.4028234663852886e+38,
+          "maximum": 3.4028234663852886e+38,
+          "x-unit": "dimensionless",
+          "x-invariant": "exact finite binary32 value promoted to JSONnumber; rawWord must match wherever supplied"
+        },
+        "aspectScaleF32": {
+          "type": "number",
+          "minimum": -3.4028234663852886e+38,
+          "maximum": 3.4028234663852886e+38,
+          "x-unit": "dimensionless",
+          "x-invariant": "exact finite binary32 value promoted to JSONnumber; rawWord must match wherever supplied"
+        },
+        "projectionContext": {
+          "enum": [
+            "capture-restored-normal",
+            "tiled-capture",
+            "explicit-canonical-camera"
+          ]
+        },
+        "nearView": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 1.7976931348623157e+308
+        },
+        "farView": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 1.7976931348623157e+308
+        }
+      },
+      "required": [
+        "sceneMatrixLogicalRows",
+        "shiftViewX",
+        "shiftViewY",
+        "thirdSceneStoredF32",
+        "zoomF32",
+        "projectionSelectorBit21",
+        "projectionZScaleF32",
+        "localTranslationA",
+        "normalizationF64",
+        "viewportLogicalWidth",
+        "viewportLogicalHeight",
+        "deviceScaleF64",
+        "aspectF32",
+        "aspectScaleF32",
+        "projectionContext",
+        "nearView",
+        "farView"
+      ],
+      "x-invariants": [
+        "source Mview=T(0,0,-5)*T(shiftX,shiftY,0)*Sxy,z*[Sz(PROJTscalar)ifbit21]*SceneM*Tlocal",
+        "sxy=f32(f64(zoom)*normalization*f64(aspectScale));sz=normalization*f64(f32(min(zoom,4)*aspectScale))",
+        "aspect=f32(width/height);aspectScale=1 ifwidth<=height elsef32(height/width); physicalviewporttrunc(logical*deviceScale)",
+        "full16f64affine source preserved;not forcedintoquaternion;shiftView notpanWorldA",
+        "PROJTscalar ismodelviewzscale,notFOV;near<far;context-specificsourceprojection separatelyqualified",
+        "capturesourcebit0 ortho±1,y±1/aspect;bit1 frustum±.2,y±.2/aspect,near1far10 atrestore;tile contexts source-specific",
+        "bounds-derivedlocaltranslation/normalizationinputs tiedsamegeometryrevision,not stale sourcecamera history"
+      ]
+    },
+    "SG_Matrix4Rows": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/SG_Vec4"
+      },
+      "minItems": 4,
+      "maxItems": 4
+    },
+    "SG_Vec4": {
+      "type": "array",
+      "items": {
+        "type": "number",
+        "minimum": -1.7976931348623157e+308,
+        "maximum": 1.7976931348623157e+308,
+        "x-unit": "dimensionless"
+      },
+      "minItems": 4,
+      "maxItems": 4
+    },
+    "Digest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "F32Bits": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{8}$"
+    },
+    "F64Bits": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{16}$"
+    },
+    "Vec3F32Bits": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/F32Bits"
+      },
+      "minItems": 3,
+      "maxItems": 3
+    },
+    "Vec3F64Bits": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/F64Bits"
+      },
+      "minItems": 3,
+      "maxItems": 3
+    },
+    "RGBAU8": {
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 255
+      },
+      "minItems": 4,
+      "maxItems": 4
+    },
+    "RGBU8": {
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 255
+      },
+      "minItems": 3,
+      "maxItems": 3
+    },
+    "Triangle": {
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 9007199254740991
+      },
+      "minItems": 3,
+      "maxItems": 3
+    },
+    "NativeLevelAppearance": {
+      "type": "object",
+      "properties": {
+        "levelOrdinal": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "rgbSourceU8": {
+          "$ref": "#/$defs/RGBU8"
+        },
+        "alphaFacingU8": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 255
+        },
+        "alphaGrazingU8": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 255
+        }
+      },
+      "required": [
+        "levelOrdinal",
+        "rgbSourceU8",
+        "alphaFacingU8",
+        "alphaGrazingU8"
+      ],
+      "additionalProperties": false
+    },
+    "NativeSurfaceDisplay": {
+      "type": "object",
+      "properties": {
+        "scene130U8": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 255
+        },
+        "scene5B0U32": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4294967295
+        },
+        "scene354U16": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 65535
+        },
+        "scene356U16": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 65535
+        },
+        "scene2F2SelectorI8": {
+          "type": "integer",
+          "minimum": -128,
+          "maximum": 127
+        },
+        "surfaceSpecularRGBAU8": {
+          "$ref": "#/$defs/RGBAU8"
+        },
+        "surfaceShininessF32Bits": {
+          "$ref": "#/$defs/F32Bits"
+        },
+        "exportSpecularRGB3DCU8": {
+          "$ref": "#/$defs/RGBU8"
+        },
+        "exportShininess3E0F32Bits": {
+          "$ref": "#/$defs/F32Bits"
+        }
+      },
+      "required": [
+        "scene130U8",
+        "scene5B0U32",
+        "scene354U16",
+        "scene356U16",
+        "scene2F2SelectorI8",
+        "surfaceSpecularRGBAU8",
+        "surfaceShininessF32Bits",
+        "exportSpecularRGB3DCU8",
+        "exportShininess3E0F32Bits"
+      ],
+      "additionalProperties": false
+    },
+    "OwnedPalette": {
+      "type": "object",
+      "properties": {
+        "profile": {
+          "enum": [
+            "native-qualified-actual-binding",
+            "corrected-owned-source-LUT"
+          ]
+        },
+        "kind": {
+          "enum": [
+            "builtin-source-LUT",
+            "explicit-custom-RGB1024",
+            "explicit-constant-RGB"
+          ]
+        },
+        "sourceSlot": {
+          "oneOf": [
+            {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 6
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "format": {
+          "enum": [
+            "RGB-u8",
+            "LUMINANCE-u8"
+          ]
+        },
+        "width": {
+          "enum": [
+            1,
+            256,
+            1024
+          ]
+        },
+        "bytesHex": {
+          "type": "string",
+          "pattern": "^[0-9a-f]+$"
+        },
+        "contentDigest": {
+          "$ref": "#/$defs/Digest"
+        },
+        "sourceRuleDigest": {
+          "$ref": "#/$defs/Digest"
+        },
+        "samplerWrapS": {
+          "enum": [
+            "repeat",
+            "clamp-to-edge",
+            "clamp"
+          ]
+        },
+        "minFilter": {
+          "const": "nearest"
+        },
+        "magFilter": {
+          "const": "nearest"
+        },
+        "nativeBindingQualificationDigest": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/Digest"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "profile",
+        "kind",
+        "sourceSlot",
+        "format",
+        "width",
+        "bytesHex",
+        "contentDigest",
+        "sourceRuleDigest",
+        "samplerWrapS",
+        "minFilter",
+        "magFilter",
+        "nativeBindingQualificationDigest"
+      ],
+      "additionalProperties": false
+    },
+    "NativeBoundaryDisplayMesh": {
+      "type": "object",
+      "properties": {
+        "meshId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "phaseId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sliceId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "kind": {
+          "enum": [
+            "bbox-face",
+            "cutoff-plane",
+            "section"
+          ]
+        },
+        "sourceNormalF64Bits": {
+          "$ref": "#/$defs/Vec3F64Bits"
+        },
+        "verticesCartesianF32Bits": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Vec3F32Bits"
+          }
+        },
+        "triangles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Triangle"
+          }
+        },
+        "textureCoordinatesF32Bits": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/F32Bits"
+          }
+        },
+        "rgbaSourceU8": {
+          "$ref": "#/$defs/RGBAU8"
+        },
+        "sourceRuleDigest": {
+          "$ref": "#/$defs/Digest"
+        }
+      },
+      "required": [
+        "meshId",
+        "phaseId",
+        "sliceId",
+        "kind",
+        "sourceNormalF64Bits",
+        "verticesCartesianF32Bits",
+        "triangles",
+        "textureCoordinatesF32Bits",
+        "rgbaSourceU8",
+        "sourceRuleDigest"
+      ],
+      "additionalProperties": false
+    },
+    "DepthState": {
+      "type": "object",
+      "properties": {
+        "testEnabled": {
+          "type": "boolean"
+        },
+        "writeEnabled": {
+          "type": "boolean"
+        },
+        "comparison": {
+          "enum": [
+            "never",
+            "less",
+            "equal",
+            "less-equal",
+            "greater",
+            "not-equal",
+            "greater-equal",
+            "always"
+          ]
+        },
+        "sourceRuleDigest": {
+          "$ref": "#/$defs/Digest"
+        }
+      },
+      "required": [
+        "testEnabled",
+        "writeEnabled",
+        "comparison",
+        "sourceRuleDigest"
+      ],
+      "additionalProperties": false
+    },
+    "RenderNativeIsosurfacePacketRequest": {
+      "type": "object",
+      "properties": {
+        "namespace": {
+          "const": "vestacraft.render.native-isosurface/1"
+        },
+        "profile": {
+          "const": "vesta3909a-source-final-surface-consumption"
+        },
+        "preCameraMesh": {
+          "$ref": "#/$defs/FS_NativeMeshOutput"
+        },
+        "camera": {
+          "$ref": "#/$defs/SG_NativeCamera"
+        },
+        "depthState": {
+          "$ref": "#/$defs/DepthState"
+        },
+        "inheritedPolygonMode": {
+          "enum": [
+            "fill",
+            "line",
+            "point"
+          ]
+        },
+        "levelAppearanceInSourceOrder": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/NativeLevelAppearance"
+          }
+        },
+        "display": {
+          "$ref": "#/$defs/NativeSurfaceDisplay"
+        },
+        "palette": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/OwnedPalette"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "boundaryDisplayMeshes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/NativeBoundaryDisplayMesh"
+          }
+        },
+        "ownerId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "sourceRuleDigest": {
+          "$ref": "#/$defs/Digest"
+        },
+        "maximumPacketBytes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        }
+      },
+      "required": [
+        "namespace",
+        "profile",
+        "preCameraMesh",
+        "camera",
+        "depthState",
+        "inheritedPolygonMode",
+        "levelAppearanceInSourceOrder",
+        "display",
+        "palette",
+        "boundaryDisplayMeshes",
+        "ownerId",
+        "revision",
+        "sourceRuleDigest",
+        "maximumPacketBytes"
+      ],
+      "additionalProperties": false,
+      "x-invariants": [
+        "FS-pre-camera meshstage/rule/owner/revisionmatchesexactactualpopulation;SourceCurrenthistorynotreplayed",
+        "levelappearancecount==storedlevels.count,levelOrdinal==sourceorder;levelBranchRangescaptureactualcompletevertexranges,neverinferunusedvertexownershipfromtriangles",
+        "palettebytes length=width*(formatRGB?3:1),contentDigest=SHA256(actualbytes);builtinmatchespinnedsourceLUTordinal;nativeprofilealsoqualifiedactualbindingdigest",
+        "boundarymeshtriangleindicesinrange,texcoordscount==verticescount;filledmeshfromactualCreate_Slicesproducer,notartificialfanofclippedisosurfaceedges",
+        "usedvertexnonfinitegeometry/normals/colorarithmetic ->failure. Unusednonfinite words remainpremesh;nullablederivedRGBAonlyforunusedvertex withUNUSED_VERTEX_NONFINITEdiagnostic;renderpacketdoesnotpretendallcachedRGBAbytesareknown",
+        "sourceScene3e4/3e8usedGLsurface,3dc/3e0keptdistinctVRMLprofile;noUIlabelmaterialcollapse",
+        "maximumpacketbytes>0;doesnotmutatedocument/render/nativeGLstate,plansonly"
+      ]
+    },
+    "BoundaryPass": {
+      "type": "object",
+      "properties": {
+        "passValue": {
+          "enum": [
+            -1,
+            0,
+            1
+          ]
+        },
+        "position": {
+          "enum": [
+            "before-isosurface",
+            "after-isosurface"
+          ]
+        },
+        "admittedMeshIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "rejectedMeshIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "normalZeroInBothPasses": {
+          "const": true
+        },
+        "lighting": {
+          "const": "disabled"
+        },
+        "textureEnvironment": {
+          "const": "modulate"
+        }
+      },
+      "required": [
+        "passValue",
+        "position",
+        "admittedMeshIds",
+        "rejectedMeshIds",
+        "normalZeroInBothPasses",
+        "lighting",
+        "textureEnvironment"
+      ],
+      "additionalProperties": false
+    },
+    "SurfaceMaterialPlan": {
+      "type": "object",
+      "properties": {
+        "specularNormalizedRGBAF32Bits": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/F32Bits"
+          },
+          "minItems": 4,
+          "maxItems": 4
+        },
+        "shininessF32Bits": {
+          "$ref": "#/$defs/F32Bits"
+        },
+        "faces": {
+          "const": "front-and-back"
+        },
+        "polygonMode": {
+          "enum": [
+            "fill",
+            "line",
+            "point"
+          ]
+        },
+        "lineWidthF32Bits": {
+          "$ref": "#/$defs/F32Bits"
+        },
+        "pointSizeF32Bits": {
+          "$ref": "#/$defs/F32Bits"
+        },
+        "blendSrc": {
+          "const": "source-alpha"
+        },
+        "blendDst": {
+          "const": "one-minus-source-alpha"
+        },
+        "depthState": {
+          "$ref": "#/$defs/DepthState"
+        }
+      },
+      "required": [
+        "specularNormalizedRGBAF32Bits",
+        "shininessF32Bits",
+        "faces",
+        "polygonMode",
+        "lineWidthF32Bits",
+        "pointSizeF32Bits",
+        "blendSrc",
+        "blendDst",
+        "depthState"
+      ],
+      "additionalProperties": false
+    },
+    "PacketDiagnostic": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "enum": [
+            "E_REFERENCE_FAILURE",
+            "E_SOURCE_REFERENCE",
+            "E_NONFINITE",
+            "E_PACKET_BUDGET",
+            "UNUSED_VERTEX_NONFINITE"
+          ]
+        },
+        "fieldPath": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sourceIndices": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 9007199254740991
+          }
+        },
+        "detail": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "code",
+        "fieldPath",
+        "sourceIndices",
+        "detail"
+      ],
+      "additionalProperties": false
+    },
+    "RenderNativeIsosurfacePacketSuccess": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "const": "success"
+        },
+        "namespace": {
+          "const": "vestacraft.render.native-isosurface/1"
+        },
+        "stage": {
+          "const": "native-post-camera-sort-surface-packet"
+        },
+        "sourceMeshParameterDigest": {
+          "$ref": "#/$defs/Digest"
+        },
+        "ownerId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "surfaceVisible": {
+          "type": "boolean"
+        },
+        "vertexNormalViewZF32Bits": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "#/$defs/F32Bits"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "vertexRGBAU8": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "#/$defs/RGBAU8"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "sourceTriangleOrdinalsInDrawOrder": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 9007199254740991
+          }
+        },
+        "triangleIndicesInDrawOrder": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Triangle"
+          }
+        },
+        "palette": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/OwnedPalette"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "material": {
+          "$ref": "#/$defs/SurfaceMaterialPlan"
+        },
+        "filledBoundaryPasses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/BoundaryPass"
+          }
+        },
+        "diagnostics": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/PacketDiagnostic"
+          }
+        },
+        "parameterDigest": {
+          "$ref": "#/$defs/Digest"
+        }
+      },
+      "required": [
+        "kind",
+        "namespace",
+        "stage",
+        "sourceMeshParameterDigest",
+        "ownerId",
+        "revision",
+        "surfaceVisible",
+        "vertexNormalViewZF32Bits",
+        "vertexRGBAU8",
+        "sourceTriangleOrdinalsInDrawOrder",
+        "triangleIndicesInDrawOrder",
+        "palette",
+        "material",
+        "filledBoundaryPasses",
+        "diagnostics",
+        "parameterDigest"
+      ],
+      "additionalProperties": false,
+      "x-invariants": [
+        "draworderisstableperactualf32depthsum/sourcecomparators,notrandom triangleorder",
+        "rgbaByVertexlength==premeshvertices;onlyunusedentriesmaynull,allusedindicesRGBAfiniteexactU8",
+        "normalViewZF32derivedfromSceneMthirdrowf32;alphausesnormalfacingnotvertexdepth",
+        "filledboundaryplansfollowactualsourcepasses;contoursseparateboundproducer/framepacket;nofakewholevisualcompleteclaimfromsurfacepacketalone",
+        "nativeVRMLexportflattening/6decimalgeometryandSTLsourcewinding/caplossrules inrender-consumption.contract.json;notgenericpacketroundtrip"
+      ]
+    },
+    "RenderNativeIsosurfacePacketFailure": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "const": "failure"
+        },
+        "namespace": {
+          "const": "vestacraft.render.native-isosurface/1"
+        },
+        "diagnostics": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/PacketDiagnostic"
+          }
+        },
+        "sourceMeshParameterDigest": {
+          "$ref": "#/$defs/Digest"
+        },
+        "ownerId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        }
+      },
+      "required": [
+        "kind",
+        "namespace",
+        "diagnostics",
+        "sourceMeshParameterDigest",
+        "ownerId",
+        "revision"
+      ],
+      "additionalProperties": false
+    },
+    "RenderNativeIsosurfacePacketResponse": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/RenderNativeIsosurfacePacketSuccess"
+        },
+        {
+          "$ref": "#/$defs/RenderNativeIsosurfacePacketFailure"
+        }
+      ]
+    }
+  },
+  "oneOf": [
+    {
+      "$ref": "#/$defs/RenderNativeIsosurfacePacketRequest"
+    },
+    {
+      "$ref": "#/$defs/RenderNativeIsosurfacePacketResponse"
+    }
+  ],
+  "x-design-only": true,
+  "x-imports": [
+    {
+      "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json",
+      "sha256": "06e893095ff26d40a8cc379730591e7f4cdb7c86d09a7d78f1f32eee1617e63a",
+      "pointer": "#/$defs/NativeMeshOutput",
+      "inlineRoot": "#/$defs/FS_NativeMeshOutput",
+      "definitions": [
+        "FS_F32Bits",
+        "FS_FC_NativeLayerCurrent1",
+        "FS_FC_NativeStoredScalarIsoview1",
+        "FS_FS1_Digest",
+        "FS_FS1_Id",
+        "FS_NativeMeshBranchRange",
+        "FS_NativeMeshOutput",
+        "FS_NativeMeshTriangle",
+        "FS_Vec3F32Bits"
+      ],
+      "definitionMapping": [
+        {
+          "sourcePointer": "#/$defs/NativeMeshOutput",
+          "inlinedPointer": "#/$defs/FS_NativeMeshOutput"
+        },
+        {
+          "sourcePointer": "#/$defs/NativeMeshBranchRange",
+          "inlinedPointer": "#/$defs/FS_NativeMeshBranchRange"
+        },
+        {
+          "sourcePointer": "#/$defs/FS1_Id",
+          "inlinedPointer": "#/$defs/FS_FS1_Id"
+        },
+        {
+          "sourcePointer": "#/$defs/F32Bits",
+          "inlinedPointer": "#/$defs/FS_F32Bits"
+        },
+        {
+          "sourcePointer": "#/$defs/FS1_Digest",
+          "inlinedPointer": "#/$defs/FS_FS1_Digest"
+        },
+        {
+          "sourcePointer": "#/$defs/FC_NativeLayerCurrent1",
+          "inlinedPointer": "#/$defs/FS_FC_NativeLayerCurrent1"
+        },
+        {
+          "sourcePointer": "#/$defs/FC_NativeStoredScalarIsoview1",
+          "inlinedPointer": "#/$defs/FS_FC_NativeStoredScalarIsoview1"
+        },
+        {
+          "sourcePointer": "#/$defs/Vec3F32Bits",
+          "inlinedPointer": "#/$defs/FS_Vec3F32Bits"
+        },
+        {
+          "sourcePointer": "#/$defs/NativeMeshTriangle",
+          "inlinedPointer": "#/$defs/FS_NativeMeshTriangle"
+        }
+      ],
+      "method": "exactshapeinline,onlyrefsresolvedandprefixrenamed"
+    },
+    {
+      "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261115-062917-p1-02-o1-o4-corrections/contracts/field-science.contract.json",
+      "sha256": "adf539aac53ddd41b46651886b00e9d5394a96c36b83f74aeb6e35984898000a",
+      "pointer": "exactreachabledefs",
+      "inlineRoot": "exactreachabledefs",
+      "definitions": [
+        "IM2_1_Digest",
+        "IM2_1_Id"
+      ],
+      "definitionMapping": [
+        {
+          "sourcePointer": "#/$defs/Id",
+          "inlinedPointer": "#/$defs/IM2_1_Id"
+        },
+        {
+          "sourcePointer": "#/$defs/Digest",
+          "inlinedPointer": "#/$defs/IM2_1_Digest"
+        }
+      ],
+      "method": "exactshapeinline,onlyrefsresolvedandprefixrenamed"
+    },
+    {
+      "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261115-092025-p1-03-completion/native-layer-current.schema.json",
+      "sha256": "31e8aa75b924339c9168994f7a8615b4540a52c3294c07a694613a66874a42de",
+      "pointer": "exactreachabledefs",
+      "inlineRoot": "exactreachabledefs",
+      "definitions": [
+        "IM7_2_ROOT"
+      ],
+      "definitionMapping": [
+        {
+          "sourcePointer": "#",
+          "inlinedPointer": "#/$defs/IM7_2_ROOT"
+        }
+      ],
+      "method": "exactshapeinline,onlyrefsresolvedandprefixrenamed"
+    },
+    {
+      "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261115-092025-p1-03-completion/native-stored-isoview.schema.json",
+      "sha256": "5cdc2d8ddd4c1f146c984b61bc2a4f869d96d5411f870e788aa61cd4dc6387db",
+      "pointer": "exactreachabledefs",
+      "inlineRoot": "exactreachabledefs",
+      "definitions": [
+        "IM9_3_ROOT"
+      ],
+      "definitionMapping": [
+        {
+          "sourcePointer": "#",
+          "inlinedPointer": "#/$defs/IM9_3_ROOT"
+        }
+      ],
+      "method": "exactshapeinline,onlyrefsresolvedandprefixrenamed"
+    },
+    {
+      "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/sg/sg2.schema.json",
+      "sha256": "5d24de755b9e937a6d0e18f02ad967889e8a8cf7221cad8c41b326c97647f688",
+      "pointer": "#/$defs/NativeCamera",
+      "inlineRoot": "#/$defs/SG_NativeCamera",
+      "definitions": [
+        "SG_Matrix4Rows",
+        "SG_NativeCamera",
+        "SG_Vec4"
+      ],
+      "definitionMapping": [
+        {
+          "sourcePointer": "#/$defs/NativeCamera",
+          "inlinedPointer": "#/$defs/SG_NativeCamera"
+        },
+        {
+          "sourcePointer": "#/$defs/Matrix4Rows",
+          "inlinedPointer": "#/$defs/SG_Matrix4Rows"
+        },
+        {
+          "sourcePointer": "#/$defs/Vec4",
+          "inlinedPointer": "#/$defs/SG_Vec4"
+        }
+      ],
+      "method": "exactshapeinline,onlyrefsresolvedandprefixrenamed"
+    }
+  ],
+  "x-rules": {
+    "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/render-consumption/render-consumption.contract.json",
+    "sha256": "7fc4cbf807b4ef2ed2ad429b957b9ceaa399a40e2f798c5ee041d73a86daed7c"
+  },
+  "x-old-registered177-changed": false
+}

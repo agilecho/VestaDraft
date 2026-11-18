@@ -1,0 +1,54 @@
+{
+  "schema": "P106-I33-generation-plan/1",
+  "unit": "U00",
+  "sourceNode": "U00.scaffold",
+  "plannedGenerator": "scripts/generate-contracts.mjs",
+  "inputs": [
+    {
+      "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-134209-two-residuals/contracts/profile-derivation.contract.json",
+      "sha256": "269a5cda03e8d0a979cc3479af6f127e578700cc69188bd6871021c57eeff98d"
+    },
+    {
+      "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-134209-two-residuals/contracts/resource-bindings.contract.json",
+      "sha256": "2406d2b076413296ee940bb16501c4f203c5c688f6630f13c57c7e31e3749bb4"
+    },
+    {
+      "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-134209-two-residuals/contracts/native-session-v2.schema.json",
+      "sha256": "9e2e5b14de2ddccbd4e7f724f98b2951824ed50300d35764fc909818b51337e9"
+    },
+    {
+      "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-134209-two-residuals/contracts/scientific-composition.schema.json",
+      "sha256": "df6d56722eff081017222437dc204febd5409e21de4a45abe83a16b369d61d40"
+    },
+    {
+      "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-134209-two-residuals/planned-files.json",
+      "sha256": "afef5632f4effcb6c438539290bcb93a34e8d226678a2da96a7017589f90857f"
+    }
+  ],
+  "outputs": [
+    "contracts/generated/schema-catalog.json",
+    "contracts/generated/profile-input-manifest.json",
+    "kernel/crates/bindings/src/{generated,profile_digests,resource_roles}.rs",
+    "web/src/kernel/{generated,profile-digests.generated,resource-roles.generated}.ts",
+    "host generated private adapter tables"
+  ],
+  "requiredNpmScripts": {
+    "generate:contracts": "node scripts/generate-contracts.mjs",
+    "test:delivery:ns2": "node --test tests/contracts/profile-digests.test.mjs tests/contracts/native-resource-types-v2.test.mjs tests/contracts/native-session-v2.test.mjs",
+    "test:delivery": "existing target delivery matrix MUST await test:delivery:ns2 in its CLI branch; nonzero status propagates, never a constant success"
+  },
+  "fixedTestSources": [
+    {
+      "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-134209-two-residuals/profile-digest-vectors.json",
+      "sha256": "e4f7d5a0c510d5a1dd9feeb2c38f3d70e0420e820b17feb055d7338f056ed82b"
+    }
+  ],
+  "admission": "planned generation and tests only after separate product scope/build inputs; actual target runtime is later step output, not design-acceptance condition",
+  "sourceChecks": [
+    "schema imports and CPJ vectors deterministic across Rust/TS/private host",
+    "resource decoder table traversed evenfor annotation payload refs",
+    "generation fingerprints reject oldI32/bounded3 before installing state",
+    "full-domain testcase uses current-oracle-bindings, never source-injected final outputs"
+  ],
+  "productExecuted": false
+}

@@ -1,0 +1,183 @@
+{
+  "schema": "FC-resource-reopen-contract/3",
+  "wire": "resource-reopen.schema.json",
+  "scope": "Complete normative resource preservation and semantic reopen design requirements, not an implementation/qualification claim. Existing source capture/host gaps remain explicit.",
+  "authority": [
+    "D01 full-function/source preservation",
+    "D02 4.1 reuse and5 save/export/reopen",
+    "PRD SW6/SW7 andD4-31 actualdefaultdirectory",
+    "P1 interfaces5/8.2/10 ResourceReader/SaveBundle",
+    "DEC-P1-01/02/04"
+  ],
+  "evidence": {
+    "actualFailure": "resource-roundtrip-proposal/observations.json",
+    "actualArtifacts": "resource-roundtrip-proposal/completed-artifact-manifest.json",
+    "primarySha256": "91f8f06038827c4c98a32cb33e57f44bb06188c5cfe2829eabe810851ca29f6c",
+    "resourceSha256": "e59640b2ff92e330d123b74ce1001a221a128a46c0bc9ec1c949195f706b6eb2",
+    "fact": "Direct8cubedgrid load andactual3515byte nativeSavepositive. Nativefreshproject hasnoField/Dimensions, disabledvolumecontrols. Actual512readbackcomparison notexecuted; exit0/fileexists/resolvablepath notsuccess.",
+    "cause": "Aliasing call path is static evidence/possible mechanism; this attempt hasno filesystem-open trace. Do notlabel exactopenedpath orrootcause asobserved."
+  },
+  "referenceCapture": {
+    "contextResources": "This CapturedInput schema coversprimaryfile dependencyreferences. Full decode/save capture also independently enumerates existing typed SourceDescriptor/request frame,dictionary,producercontext and Engine resources; it doesnot replace those schemas. Their boundSourceDescriptorDigest and per-owner ResourceRef identities enter the complete source/resource graph andSaveExpectation.",
+    "discovery": "Read primary bytes without mutating the current Engine. Independently partition all primary blocks into qualified known records or opaque source spans. Eachknown reference-bearing record supplies exact reference/owner/operation spans; implicitGAMESS.same-stem edges haveversioned derivation fromtheir seed. Opaque blocks without a trusted reference-free rule leave closureunresolved; no complete capture/wholeSave claim. Incoming manifests/reference lists are not the independent enumeration.",
+    "identity": "Each explicitreference identity bindsprimarySHA, pathbyteoffset/length/SHA, sourceownerlocator, edgekind and frozenrule/version. An implicit edge instead binds its seedreference (orprimaryname), original derivednamebytes and frozenrule digest; never fabricate a primarybytespan for a filename absentfromthefile. Preserve operations/pathbytes/sourceorder independently. Duplicate identities, overlaps withconflictingmeaning, missingdiscoverededges orunqualifiedderivededge => diagnostic/source-only, no completed load or preservingSave.",
+    "legacyParentPaths": "A raw original ../../inputs/source.pgrid is sourceprovenance, not a ResourceReader key or permission. Existing authenticated host resolves relative to the captured source primary directory under the actual authorized user root. Parentsegments withinthatroot maybecaptured; rootescape/absolute/unqualifiedencoding/missing authorization fail. Follow actual host realpath policy and its D2-13check/use race limitation; no newglobalfencing claim.",
+    "normalizedKeys": "CapturedInput usescanonical safeASCII keys such as source/<referenceId>. Bind raw primary span to thatkey without rewritingoriginalprimarybytes. Immutable NameMap containsownedbytes/hash/length bykey. No codec filesystem/CWD/home/appdir/cache fallback. Input keys andsource IDs are local capture identities, not portable filesystem paths.",
+    "implicitPairs": "SourceReference is aclosed explicit/implicit union. Implicit edges bindtheirseedandtheexact native same-stem .inp/.mmp spelling underfrozenrule/version, not arbitrary independentblobnames. Capture BOTH actualbytes/digests andkeep association/framequalification separatefromfilename discovery. Missing, wrongstem, ambiguousseed oroutofroot derivation isnot joined successfulload.",
+    "interfaces": "Proposed decodeCaptured(primary,profile,CapturedInputContext{reader,bindingSet}) wrapper forfullreference domains; bindingSet validatedagainst independently parsedsource before the existing ResourceReader.resolve(canonicalKey)/read handle is called. Existing decode(bytes,format,reader) andprotocol3 areunchanged/admissionnotexpanded. An unversioned oldclient cannot sendnewbindingfields to gainpermission.",
+    "materialization": "Capture allrequired immutablebytes with source/semanticownership before model replacement. Missing/changed/truncated/unsupportedreferences leave currentactiveproject unchanged. Explicit readonly recovery retains sourceprimary, availableresources, unresolved requests and diagnostics; no completeLoaded, editedSave or zero/defaultField. Resource lease/transfer/budget failure neverdownshifts to emptydocument.",
+    "nonperiodicEmpty": "Zeroatoms isvalidforfield-onlysource anddoesnotmean zeroFields. Real emptydocument isacceptedonlyif independently discovered references/effects andfullsourceaudit areempty/consistent. Resource-count/header mode isnot inferredfieldcount.",
+    "transitiveAndOptional": "resource-graph.contract.json /resource-graph.schema.json: per-file primary contexts, recursive decoder cycle detection, optional same-stem FFE presence/absence and no ambient reopen fallback. referenceGraphDigest includes all nested edges and optional outcomes, not merely a main-file list."
+  },
+  "saveExpectation": {
+    "purposeScope": "NativewholeSave requirescompletepersistentproject content. Data/image/mesh/table/text exports verify onlytheirdeclared selectedoutput scope andresourceclosure, notwhole-project preservation; exportneverrebinds orclearsprojectdirty. Import-onlyroutes usea separate eligibleOBS-O01 savebranch, neveraninventedinputformatencoder.",
+    "origin": "Engine fullimmutable captured source independentlyenumerates everypersistentunit/resourceedge. A frozen route rule maps them to the exact expectedpersistent readback objects andemittedownerlocators plus explicitloss/precision policies. Expecteddescriptor/data/sourceledger digests come fromsource/prospective conversionrules, neverfromtheencodedcandidate orcurrentdisplay.",
+    "planBinding": "Register an immutable SaveExpectation digest with the existing Engine-issued planId, complete source ledger, lossReport/Consent identity, profile, materializedoptions, comparisonrule anddestinationgrant. Changing objects/resources/layout/precision/rules requiresnewplanId andfreshconsent. The caller cannot replace expectedobjects and recomputeitsownhash. Keep this typedvalidationmetadata internal or version its transport; no silent protocol3/closedproposal2 extension.",
+    "objects": "ExpectedObject sourceObjectKey is trustedsourceidentity; emittedLocator/ownerLocator are qualifiedwireownerpositions. Freshdecode gets newdocument/epoch/runtimeObjectIds; compare a bijection onemitted semanticlocators/owner/topology/content, not previous runtimeUUID equality. Twoowners sharingbytes remain twoobjects. Opaque/source-onlyobjects requirefullpreservedsource content; theirpresence doesnotbecome scientificcapability.",
+    "fieldMeaning": "EveryexpectedField requiresgrid/endpoint/dimension/component/order/cell-or-axis-frame/quantity/unit/sourcequalification descriptor, fullcomponentdata includingmissingmask/nonfinite disposition, per-reference association andpreservedsourceledger. For selected2200bytegrid compareall512f32 bits andactualheader, butsourceunknownquantityremainsunknown. New fieldcreation fromresourceoperations usesqualified source-effect rules; unknownmode/power/component semantics forbids claimed complete projection.",
+    "comparison": "Exactstorage usescanonicalcomponentbits/order andexact descriptor. Nonexact encoding usesa frozenprospective interval/conversionbudget and independentcomparison, not SHA inequality as automatic scientificfailure nor residual-fitted tolerance. SourceSU isnoterrorbudget; losses/changedsemantics needtheexisting completeaudit/consent. No field may disappearunder an allowednumericbudget.",
+    "references": "Newportableoutputs keep validatedrelativecomponents withinoutputroot, noabsolute/.. orsymlink/casealiases. Retain declared implicitpairs andsourcegroup order; never independentlyhashrename pairednames. Source parentpathcapture doesnotadmit thosepaths asportableoutputs. Hash-layoutnativeinteroperability remainsseparatelyunqualified.",
+    "unknownPreservation": "FullnativeSave mustactually preserve everyrequiredsourceproperty/opaque dependency through a qualifiedencoding/unchangedraw mapping. If the targetcannotexpress source-preservation metadata or a requiredresource association, E_UNSAFE_SOURCE_REWRITE; a side manifest listinghashes cannot repairprimary semantics orinvent scientificownership.",
+    "planningAndActualByteIdentity": "save-artifact-binding.contract.json: independently pre-register SourceExpectation semantics/objects/roles/budgets before encode; capture exact actual candidate key/SHA/length afterwards in CandidateArtifactBinding tied to that immutable source expectation. The exact finite known-artifact example doesnot imply planning can predict nondeterministic compressed bytes.",
+    "proposedFullSourcePreservation": "native-source-envelope.contract.json: explicit versioned SavedSourceDocument plus sourceSHA primary stamp/manifest2 proposal within existing native+resources layout. No original native/protocol3 admission; full typed restoration plus semantic object coverage required, not hashes/archive alone.",
+    "resourceEffects": "density-resource-effect.contract.json: preserve complete current materialized Field data plus independent ordered original resources/operations/owner/descriptor. Default full source reopening restores the materialized snapshot; no implicit replay of source expressions, external recomputation or applying operations twice. All original SHA correct is insufficient when the derived field is missing or wrong."
+  },
+  "semanticReadback": {
+    "prepublish": "After actualcandidate bytes exist, independently parseallprimary explicit/implicitreferences, comparethe registeredreferencegraph, createan artifact-only immutableReader and a disposable freshdecodecontext with no liveEngine/resource caches/originalpathfallback. Expected andactualobjectsets must bebijective; compareeveryrequiredsemantic/opaque property under theboundrules. Bytevalidation alone isnotCandidateValidated.",
+    "authority": "ReadbackProof isonly a typed internal result, not a client grant. An authenticated internal verifier job registers contextId + actualartifactSetDigest + expectationDigest + frozenverifierRuleDigest; completion/proof mustmatch thatrecord. IDs and selfasserted passed flags do not confertrust. Producerencoder cannot certifyitself by fillingexpectedobjects fromitsoutput. This design doesnotprove actual verifier/Enginecapture implementation.",
+    "postpublish": "Host reads actualpersistedprimary anddependencies underexistingpath/lease/writer rules, verifiesfile set, independentlyresolvesreferences and reruns artifact-onlysemantic readback onthosebytes. It can reuse prepublish semantic resultonly when everyboundbyte/rule/contextinput isprovenidentical andverifiedindependentjobresult remainsvalid. Missingcoverage evenwithallSHAscorrect => E_REOPEN_COVERAGE, noSaved.",
+    "ordinaryReopen": "A laterfresh user/CLI/Webload hasnewruntimeIDs andno oldRAMsnapshot requirement. Rebuild expectedload effects fromqualifiedprimaryrecords + capturedresourceheaders/declaredsemantics, and anyvalidversionedpreserved metadata, independentlyofloadedobjects. Compare againstfreshactualobjects; missingrequiredfield isreadonlyrecovery/failure, notcompleteLoaded. NeverrequireoldsessionResourceId handles or reconstructmissinginputfromcache.",
+    "qualification": "Disposable in-process decoding isnot spawningVESTA/worker perSave. RealnewOSinstance/independentreader qualification remainsrequiredforclaimedprofile acceptance later. No originalprocess ornewexternalcalculation run isauthorized bythiscontract; native3.90.9a observedfailure staysfailed.",
+    "exactAndBoundedComparison": "resource-content-comparison.contract.json: exact existing proof remains exact; nonexact data needs separately registered complete per-leaf prospective budget comparison, authenticated internal receipt and actual content digest. Numeric error cannot authorize topology/missing-object/source-preservation loss.",
+    "typedSourceRestoration": "typed-source-restore.contract.json",
+    "sectionSource": "SourceDTO proposal7 sections root and independent section identity/center/mode/field-reference restoration are mandatory when captured source has sections. resource-reopen proposal3 explicitly includes section andtheotherknownsourceobjectkinds to expected/observed object kinds; old schema1 is held in runs and old seals. No actual product/upstream protocol3 upgrade.",
+    "vectorSource": "native-vector-format-contract.json: enumerate vectors independently from source before checking returned objects, with exact owner/identity/parity/all associations/styles and qualified numeric frame budget. Source-only vector state is not active SG science. Legacy sticky parity/style upper-bit overwrite and old lost second-site moment are failed preserving behavior, not accepted projection.",
+    "storedFieldCoverage": "Follow pinned FS storage: storedShape=coreShape+closure and IEEE754 little-endian. Check actual full byte count, finite active values, closure-implies-periodic and every face/edge/corner copy before source planning and independently after reopen. All matching file SHA with a wrong periodic corner still fails; core count alone cannot validate a closed payload. Independent scientific comparisons enumerate the qualified comparable core mapping and validate all storage/seam data separately; full source/raw retention remains exact.",
+    "referenceAssemblyContract": "native-resource-path-assembly.contract.json",
+    "resolvedReferenceGraphMeaning": "ReadbackProof.resolvedReferenceGraphDigest is the canonical actual-consumed graph emitted by the authenticated fresh reader from real ResourceReader callbacks and completed object/resource association, not an echo of SaveExpectation or a successful path preflight. Bind explicit/implicit/optional edge identity, source operation/owner/descriptor and exact actual files. Any graph/content mismatch refuses Saved."
+  },
+  "stateMachine": {
+    "captured": "Noauthoritativewrites; plan/consentfailures retaincurrentproject/resources.",
+    "candidateValidated": "Require completeSourceAudit, freshconsent, allownedbytes/leases, exactregisteredexpectedset, independentreferencevalidation andartifact-onlysemanticreadback beforehostpublish.",
+    "dependenciesVerified": "Onlynewimmutable names; readbackhash/length,retainoldreachablebytes. Anyfailurebeforeprimary leavesoldprimary authoritative; cleanonlyownedunreachablecandidates.",
+    "primaryPublished": "Primary-last publication isonly a possiblevisibility point. Durablecommitreceipt mustbindactual supportedhostprimitive/directory durability/writerboundary. Afterpossiblepublication, errors/cancel/disconnect arecommitted-unverified/unknown untilqueried, no blindrewriteor promisedrollback.",
+    "semanticVerified": "Allactualpersistedbytes andsource/content checksverifiedforcapturedbinding. Ifsemanticfailureafterpublish keepinmemorydraft/dirty, originalsandnewfiles + diagnostic, disableclose/Saved/rebind; noautomaticrollbackoverpossibleexternaledits. Offerrepair/reload/SaveAs onlyasnewexplicit operations afterresolve.",
+    "saved": "Existinghost authenticated confirmation requiresdurablebytecommit ANDsemanticreadback ANDexactcapturedsnapshot identity. SavedR7cannotcleardirtyR8; oldepoch settlesonlyoldticket/history. saveAs rebindsonlymatchingcurrentdocument/epochsuccess; exportneverrebinds/clearsdraft/closesproject.",
+    "controlledClose": "Quiesceedits, resolveinflight/unknownoutcomes, capturelatestrevision, waititsmatchingSavedincludingsemanticproof, thenrelease/handoff. Failure restoreseditingandkeepsdirty; hardclose/crash cannotpromiseunsavedRAM recovery.",
+    "query": "Onlostack/restart/timeout queryactualprimary+allreferencedbytes andfrozencomparisonrules. SHAmatchalone isinsufficient; do notrerunEncodeApproved oroverwriteasquery. Ifvalidator/rule/source expectationunavailable keepunknown/recovery, notSaved. ExportsuccesscannotsetcurrentWorkRef.",
+    "cancellation": "Before approved publication, cancel stops the job and releases only owned private candidates after in-flight reads finish. Once publication may have begun, query the same owned operation and verify actual persisted semantics; no guaranteed rollback. Approved immutable snapshot completion settles captured ticket only, newer edits stay dirty. Exact composed identities/lifetime/close rules: save-settlement.contract.json.",
+    "composedIdentitySettlement": "save-settlement.contract.json"
+  },
+  "errors": {
+    "E_SOURCE_PATH": "source access outside actual authorizedroot/encoding/pathpolicy",
+    "E_REFERENCE_COVERAGE": "independent source/discovered dependency orload-effect closure notcovered",
+    "E_RESOURCE_KEY": "unsafe/noncanonicalNameMap key",
+    "E_RESOURCE_MISSING": "missingrequiredimmutablebytes",
+    "E_REFERENCE_SPAN": "path/operation span doesnotmatch actualboundprimary",
+    "E_PLAN_EXPECTATION": "registeredimmutableexpectation/binding mismatch",
+    "E_REOPEN_CONTEXT": "nonisolated/unregistered/stalebytes verifiercontext",
+    "E_REOPEN_ARTIFACT": "actualfiles/membership/hash/length mismatch",
+    "E_REOPEN_REFERENCE": "explicit/implicitreferencegraph mismatch",
+    "E_REOPEN_COVERAGE": "missing/extra/duplicate required semanticobjects",
+    "E_REOPEN_OWNER": "loadedcontent attached towrongowner",
+    "E_REOPEN_CONTENT": "descriptor/component/order/precision/preservedsubtree mismatch",
+    "E_REOPEN_SOURCE": "fullpreservedsourceledger mismatch"
+  },
+  "existingReuse": {
+    "shared": "shared-host-source-reference.json +shared-host-source-bindings.json H1-H4; Vestaadapter remains04",
+    "wordcraft": "wordcraft-resource-reference.json; currentHEAD differsfromoldreference, sourcesretainownclosure/durability/deliverylimits",
+    "noNewHostService": true,
+    "noNewQuotaOrGlobalFence": true
+  },
+  "bindingSchemaSource": {
+    "path": "codec-loss-next.schema.json",
+    "sha256": "64d3f275a4ee5e34d943e02a7b9d863f483861ca93beb54d4fca04de130b2726",
+    "definitions": [
+      "Binding",
+      "Snapshot"
+    ],
+    "currentProtocol3Unchanged": true
+  },
+  "qualification": {
+    "designSpecified": true,
+    "nativeRepairExecuted": false,
+    "actualProductDecoderImplemented": false,
+    "hostImplemented": false,
+    "whole03Complete": false,
+    "independentlyReviewed": false
+  },
+  "sgPersistentRootConservation": "sg-persistent-source.contract.json",
+  "nativeBondSourceVariant": "codec-source-document.schema.json proposal7 +native-bond-format-contract.json: capture/restore all original native recipe identities/full records and separately every qualified SG projection; compare mode1/2/XX/source flags and styles independently. Source recipe presence is not scientific algorithm qualification.",
+  "nativePersistentObjectFlags": "native-flag-state.contract.json NVIS2: capture all five current sets separately from immutable source observations; qualified stable current targets, actual output population/remapping and real restored effects. Never derive current flags from old source records, ordinal reuse, global style or archive SHA. SourceDTO7 roots unchanged; old NVIS1 is source-only predecessor evidence.",
+  "nativeSectionDialectPolicy": "native-legacy-section.contract.json: Source7 typed modern18x80/legacy15x69 union; preserve current complete section state separately from immutable original, exact owner/field/basis/style/matrix/dialect and source qualifiers. Never pad or parse legacy rows as modern; require actual fresh restored expected section coverage, not source metadata presence.",
+  "crystalmakerSelectedSourceConvention": "crystalmaker11-selected-model.contract.json: capture actual current qualified symmetry/ADP and original source records/convention/diagnostics separately; request mode/source convention exact pair. Restore current phase operations once, never apply archived OSHF a second time or replace a current ADP with historical input. Every owned value/loss/precision retains its actual source rule; no blanket modern/legacy producer qualification.",
+  "fdatConnectionObservation": "fdat-connection.contract.json +FCON1 observation schema: preserve original absence/uninterpreted/complete parsed integer records and resource provenance independently of actual current graph/rules. Absence is not observed zero bonds; raw source indices are not current object IDs. Capture current topology separately, require complete expected active objects on fresh reopen, and never replay archived table into changed current model.",
+  "fdatSymmetrySourceAndCurrent": "fdat-symmetry.contract.json: immutable original source ops/CENT/codes/label and actual current qualified phase state are distinct. Complete expected operator sets/frame/image addresses must survive fresh readback; same count/closure/group number, name relookup or replay of original source over edited current state is insufficient. Compact registered rule definitions may be preserved, reference executables are construction evidence only.",
+  "selectedNativeStampGrammar": {
+    "contract": "native-stamp-static.contract.json",
+    "sha256": "d7a55610cf5e3fab4c5dc838d86582d329d0e109efcbcf6d7e109219eaecb8f0",
+    "scope": "Canonical V1 second-line marker no-match on exact selected3.5.4header/lockedreader; exhaustive64hex/39-cstring static proof. Native runtime/resource interoperability remains unqualified."
+  },
+  "producerInlineIncludePolicy": "feff10-source.contract.json +resource-graph.schema.json proposal2: exact producer-job base/name map and original include/load occurrence order, recursive capture/cycle/work bounds, all referenced immutable bytes and source current-state separation. Preserve into full source envelope, artifact-only reopen without ambient CWD or replay over edited state. This internal successor changes no productprotocol3/host admission.",
+  "boundDescriptorContexts": {
+    "path": "bound-descriptor-context.contract.json",
+    "sha256": "972df77f2885256d3b460c440aba6804befe02c947bc79460207678598e6cf40",
+    "scope": "Exact immutable descriptor bytes plus owner/use-scoped typed fresh reference contexts; complete native-path and typed-resource closure are separate domains, no raw-alias fallback or science admission."
+  },
+  "currentNativeThermalState": {
+    "path": "native-thermal-state.contract.json",
+    "sha256": "b57ff381e7e61c1140341cadd8b437595ded2f95e813781c24e29f5aa8d6d7da",
+    "scope": "Actual current native-compatible selectors/scalar+six-slot state proposal, distinct from original history and canonical-only source; no actual Engine/live restore qualification"
+  },
+  "currentNativeNumericalGrid": {
+    "path": "native-scalar-grid-current.contract.json",
+    "sha256": "3908fb5acb5a8e4f06ef211345c70d9fe7fc015b8c5435d21b5990e0ca251237",
+    "scope": "Registered Source7 actual current numerical SourceEntity/data/mask/geometry distinct from immutable NativeScalarGridSource1 history and active FS/physical Fields. No existing Engine type retagging, import geometry certificate or actual capture implementation."
+  },
+  "selectedNativeNumericalConsumption": {
+    "path": "native-numerical-consumption.contract.json",
+    "sha256": "8b4624433b87f4719a1b5774bad9c5079ea7527d6249729e95073d0846fb3ce3",
+    "scope": "Closed current fractional-native numerical grid, actual effective affine and explicit stored-scalar isoview consumption. Source7 registered types/typed refs/full current state; no active physical reciprocal type, native mesh proof or renderer implementation."
+  },
+  "selectedOriginalGSASSpinChart": {
+    "path": "gsas-original-spin-chart.contract.json",
+    "sha256": "49da20c7bcf6f881aff76e5ded75706278e17370a7312d83335b37f7d4b7d280",
+    "scope": "Original APS revision1253 source-bound SPNFLP generator-mask/centering/timeSign versus axial-factor rule; closed trusted-chart/current-projection roles. No all-historical chart or actual factory/science qualification."
+  },
+  "selectedHistoricalNativeConsumption": {
+    "path": "historical-native-record-consumption.contract.json",
+    "sha256": "d0ef52918c4780870014a6767e91dbb7efda07a908abb6323a97b6ce7d66dcf7",
+    "scope": "Complete selected locked numeric-record dispatch and nativeICS six-value TF paired-line consumption. Source/current native slots separate; no historical1991/1986 or correctedSMAT certificate."
+  },
+  "selectedSaveTargetPolicy": {
+    "path": "save-target-policy.contract.json",
+    "sha256": "93ecc223741109edfcad15b5f1575945d439273601da23e0f5d407030db785a1",
+    "scope": "D4-31 target selection and exact first-Save binding; selected source authority snapshot, no04 implementation"
+  },
+  "currentNativeLayerState": {
+    "path": "native-layer-current.contract.json",
+    "sha256": "2520459d4234be0c44d1302adda079386205b655c84c2d2a8c4e96bf8992f52b",
+    "scope": "Complete selected3D actual current layer population, native flags/anchors/effective matrix+translation and typed two-reference roles; immutable Source1 history independent. No actual capture/physics/runtime qualification."
+  },
+  "currentNativeLegacyDisplayState": {
+    "path": "vics-legacy-display.contract.json",
+    "sha256": "c8484e37771dbd3094f37e97fab73e2ace7916b26e80f02216d622a9eb3216d7",
+    "pointer": "/currentStateBinding",
+    "currentSchema": {
+      "path": "vics-legacy-display-current.schema.json",
+      "sha256": "2cd6c594c8fb79b8898dd5f1cf6dd8342751c842d5b8362d9ba2ceba6efb32cf"
+    },
+    "registeredTags": {
+      "NativeLegacyDisplayCurrent1": "Scene.render Map member nativeLegacyDisplayCurrent",
+      "NativeLegacyViewCurrent1": "Scene.cameraRaw Map member nativeLegacyViewCurrent"
+    },
+    "scope": "Complete actual current populations and all schema-declared EntityRef roles/global typed bijection; known original31keywords/history separate. Every native-width bit/unused slot persists. No replay from source or capture from encoded projection. Actual Engine derive visitor/restorer is future; schema mismatch refuses complete save."
+  },
+  "selectedMXDStatisticalObservations": {
+    "path": "mxd-statistic-consumption.contract.json",
+    "sha256": "98fbf4a704e4e71e0b68372d6e287fd653b2b422dcd8f6190e35b2146695ba0b",
+    "pointer": "/observationTree",
+    "registeredTag": "MXDReportBlockObservations1",
+    "roles": "Only actual owner and targetSite EntityRef and actual BytesRef leaves participate in fresh typed mapping; source labels/ordinals/tokens are literals. Full all-block/all-row/all-axis observation/source/control conservation, not current coordinate replay or ADP/SU qualification."
+  }
+}

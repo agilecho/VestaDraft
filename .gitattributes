@@ -1,0 +1,5 @@
+* text=auto eol=lf
+
+# The imported app source manifest pins original bytes, including licence line endings.
+# Preserve those bytes in Git so a fresh checkout can verify the same source identity.
+/app/** -text

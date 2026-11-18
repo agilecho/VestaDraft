@@ -1,0 +1,592 @@
+{
+  "type": "object",
+  "properties": {
+    "schemaVersion": {
+      "const": "FC-native-layer-current-1"
+    },
+    "captureRole": {
+      "const": "actual-current-native-3D-layer-population"
+    },
+    "document": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "const": "EntityRef"
+        },
+        "objectKind": {
+          "const": "document"
+        },
+        "objectId": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "kind",
+        "objectKind",
+        "objectId"
+      ],
+      "additionalProperties": false
+    },
+    "orderedEntries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "owner": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "kind": {
+                    "const": "EntityRef"
+                  },
+                  "objectKind": {
+                    "const": "phase"
+                  },
+                  "objectId": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "required": [
+                  "kind",
+                  "objectKind",
+                  "objectId"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "kind": {
+                    "const": "EntityRef"
+                  },
+                  "objectKind": {
+                    "const": "frame"
+                  },
+                  "objectId": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "required": [
+                  "kind",
+                  "objectKind",
+                  "objectId"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "kind": {
+                    "const": "EntityRef"
+                  },
+                  "objectKind": {
+                    "const": "source-entity"
+                  },
+                  "objectId": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "required": [
+                  "kind",
+                  "objectKind",
+                  "objectId"
+                ],
+                "additionalProperties": false
+              }
+            ]
+          },
+          "position": {
+            "type": "object",
+            "properties": {
+              "selector": {
+                "type": "object",
+                "properties": {
+                  "capturedSelector": {
+                    "type": "integer",
+                    "minimum": -2147483648,
+                    "maximum": 2147483647
+                  },
+                  "reference": {
+                    "oneOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "kind": {
+                            "const": "internal-cartesian"
+                          }
+                        },
+                        "required": [
+                          "kind"
+                        ],
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "object",
+                        "properties": {
+                          "kind": {
+                            "const": "entry"
+                          },
+                          "target": {
+                            "oneOf": [
+                              {
+                                "type": "object",
+                                "properties": {
+                                  "kind": {
+                                    "const": "EntityRef"
+                                  },
+                                  "objectKind": {
+                                    "const": "phase"
+                                  },
+                                  "objectId": {
+                                    "type": "string",
+                                    "minLength": 1
+                                  }
+                                },
+                                "required": [
+                                  "kind",
+                                  "objectKind",
+                                  "objectId"
+                                ],
+                                "additionalProperties": false
+                              },
+                              {
+                                "type": "object",
+                                "properties": {
+                                  "kind": {
+                                    "const": "EntityRef"
+                                  },
+                                  "objectKind": {
+                                    "const": "frame"
+                                  },
+                                  "objectId": {
+                                    "type": "string",
+                                    "minLength": 1
+                                  }
+                                },
+                                "required": [
+                                  "kind",
+                                  "objectKind",
+                                  "objectId"
+                                ],
+                                "additionalProperties": false
+                              },
+                              {
+                                "type": "object",
+                                "properties": {
+                                  "kind": {
+                                    "const": "EntityRef"
+                                  },
+                                  "objectKind": {
+                                    "const": "source-entity"
+                                  },
+                                  "objectId": {
+                                    "type": "string",
+                                    "minLength": 1
+                                  }
+                                },
+                                "required": [
+                                  "kind",
+                                  "objectKind",
+                                  "objectId"
+                                ],
+                                "additionalProperties": false
+                              }
+                            ]
+                          }
+                        },
+                        "required": [
+                          "kind",
+                          "target"
+                        ],
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "object",
+                        "properties": {
+                          "kind": {
+                            "const": "unresolved"
+                          },
+                          "reason": {
+                            "enum": [
+                              "out-of-population",
+                              "ambiguous-native-instance",
+                              "unqualified-source-index"
+                            ]
+                          }
+                        },
+                        "required": [
+                          "kind",
+                          "reason"
+                        ],
+                        "additionalProperties": false
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "capturedSelector",
+                  "reference"
+                ],
+                "additionalProperties": false
+              },
+              "currentAnchor": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "kind": {
+                      "const": "F64Bits"
+                    },
+                    "ieeeHexBE": {
+                      "type": "string",
+                      "pattern": "^[0-9a-f]{16}$"
+                    }
+                  },
+                  "required": [
+                    "kind",
+                    "ieeeHexBE"
+                  ],
+                  "additionalProperties": false
+                },
+                "minItems": 3,
+                "maxItems": 3
+              },
+              "referenceAnchor": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "kind": {
+                      "const": "F64Bits"
+                    },
+                    "ieeeHexBE": {
+                      "type": "string",
+                      "pattern": "^[0-9a-f]{16}$"
+                    }
+                  },
+                  "required": [
+                    "kind",
+                    "ieeeHexBE"
+                  ],
+                  "additionalProperties": false
+                },
+                "minItems": 3,
+                "maxItems": 3
+              }
+            },
+            "required": [
+              "selector",
+              "currentAnchor",
+              "referenceAnchor"
+            ],
+            "additionalProperties": false
+          },
+          "orientation": {
+            "type": "object",
+            "properties": {
+              "selector": {
+                "type": "object",
+                "properties": {
+                  "capturedSelector": {
+                    "type": "integer",
+                    "minimum": -2147483648,
+                    "maximum": 2147483647
+                  },
+                  "reference": {
+                    "oneOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "kind": {
+                            "const": "internal-cartesian"
+                          }
+                        },
+                        "required": [
+                          "kind"
+                        ],
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "object",
+                        "properties": {
+                          "kind": {
+                            "const": "entry"
+                          },
+                          "target": {
+                            "oneOf": [
+                              {
+                                "type": "object",
+                                "properties": {
+                                  "kind": {
+                                    "const": "EntityRef"
+                                  },
+                                  "objectKind": {
+                                    "const": "phase"
+                                  },
+                                  "objectId": {
+                                    "type": "string",
+                                    "minLength": 1
+                                  }
+                                },
+                                "required": [
+                                  "kind",
+                                  "objectKind",
+                                  "objectId"
+                                ],
+                                "additionalProperties": false
+                              },
+                              {
+                                "type": "object",
+                                "properties": {
+                                  "kind": {
+                                    "const": "EntityRef"
+                                  },
+                                  "objectKind": {
+                                    "const": "frame"
+                                  },
+                                  "objectId": {
+                                    "type": "string",
+                                    "minLength": 1
+                                  }
+                                },
+                                "required": [
+                                  "kind",
+                                  "objectKind",
+                                  "objectId"
+                                ],
+                                "additionalProperties": false
+                              },
+                              {
+                                "type": "object",
+                                "properties": {
+                                  "kind": {
+                                    "const": "EntityRef"
+                                  },
+                                  "objectKind": {
+                                    "const": "source-entity"
+                                  },
+                                  "objectId": {
+                                    "type": "string",
+                                    "minLength": 1
+                                  }
+                                },
+                                "required": [
+                                  "kind",
+                                  "objectKind",
+                                  "objectId"
+                                ],
+                                "additionalProperties": false
+                              }
+                            ]
+                          }
+                        },
+                        "required": [
+                          "kind",
+                          "target"
+                        ],
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "object",
+                        "properties": {
+                          "kind": {
+                            "const": "unresolved"
+                          },
+                          "reason": {
+                            "enum": [
+                              "out-of-population",
+                              "ambiguous-native-instance",
+                              "unqualified-source-index"
+                            ]
+                          }
+                        },
+                        "required": [
+                          "kind",
+                          "reason"
+                        ],
+                        "additionalProperties": false
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "capturedSelector",
+                  "reference"
+                ],
+                "additionalProperties": false
+              },
+              "storedFlagBits": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{8}$"
+              },
+              "currentFirst": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "kind": {
+                      "const": "F64Bits"
+                    },
+                    "ieeeHexBE": {
+                      "type": "string",
+                      "pattern": "^[0-9a-f]{16}$"
+                    }
+                  },
+                  "required": [
+                    "kind",
+                    "ieeeHexBE"
+                  ],
+                  "additionalProperties": false
+                },
+                "minItems": 3,
+                "maxItems": 3
+              },
+              "referenceFirst": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "kind": {
+                      "const": "F64Bits"
+                    },
+                    "ieeeHexBE": {
+                      "type": "string",
+                      "pattern": "^[0-9a-f]{16}$"
+                    }
+                  },
+                  "required": [
+                    "kind",
+                    "ieeeHexBE"
+                  ],
+                  "additionalProperties": false
+                },
+                "minItems": 3,
+                "maxItems": 3
+              },
+              "currentSecond": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "kind": {
+                      "const": "F64Bits"
+                    },
+                    "ieeeHexBE": {
+                      "type": "string",
+                      "pattern": "^[0-9a-f]{16}$"
+                    }
+                  },
+                  "required": [
+                    "kind",
+                    "ieeeHexBE"
+                  ],
+                  "additionalProperties": false
+                },
+                "minItems": 3,
+                "maxItems": 3
+              },
+              "referenceSecond": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "kind": {
+                      "const": "F64Bits"
+                    },
+                    "ieeeHexBE": {
+                      "type": "string",
+                      "pattern": "^[0-9a-f]{16}$"
+                    }
+                  },
+                  "required": [
+                    "kind",
+                    "ieeeHexBE"
+                  ],
+                  "additionalProperties": false
+                },
+                "minItems": 3,
+                "maxItems": 3
+              }
+            },
+            "required": [
+              "selector",
+              "storedFlagBits",
+              "currentFirst",
+              "referenceFirst",
+              "currentSecond",
+              "referenceSecond"
+            ],
+            "additionalProperties": false
+          },
+          "effectiveNativeMatrix4": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "kind": {
+                  "const": "F64Bits"
+                },
+                "ieeeHexBE": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{16}$"
+                }
+              },
+              "required": [
+                "kind",
+                "ieeeHexBE"
+              ],
+              "additionalProperties": false
+            },
+            "minItems": 16,
+            "maxItems": 16
+          },
+          "effectiveNativeTranslation": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "kind": {
+                  "const": "F32Bits"
+                },
+                "ieeeHexBE": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{8}$"
+                }
+              },
+              "required": [
+                "kind",
+                "ieeeHexBE"
+              ],
+              "additionalProperties": false
+            },
+            "minItems": 3,
+            "maxItems": 3
+          }
+        },
+        "required": [
+          "owner",
+          "position",
+          "orientation",
+          "effectiveNativeMatrix4",
+          "effectiveNativeTranslation"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "captureRole",
+    "document",
+    "orderedEntries"
+  ],
+  "additionalProperties": false,
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "urn:draft:fc:native-layer-current:1",
+  "title": "Complete actual current selected3D native layer population; immutable source observations separate"
+}

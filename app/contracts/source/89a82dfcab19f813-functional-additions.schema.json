@@ -1,0 +1,355 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "p1-06-fs-functional-additions.schema.json",
+  "title": "P1-06 explicit mathematical functional additions, design only",
+  "$defs": {
+    "FSResampleAffineInput": {
+      "type": "object",
+      "properties": {
+        "field": {
+          "$ref": "../../../../../20261115-062917-p1-02-o1-o4-corrections/contracts/field-science.contract.json#/$defs/FSFieldBinding"
+        },
+        "targetCoreShape": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 4294967295
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "targetOriginA": {
+          "$ref": "../../../../../20261115-062917-p1-02-o1-o4-corrections/contracts/field-science.contract.json#/$defs/Vec3"
+        },
+        "targetStepBasisColumnsA": {
+          "$ref": "../../../../../20261115-062917-p1-02-o1-o4-corrections/contracts/field-science.contract.json#/$defs/Mat3"
+        },
+        "targetAxisOrder": {
+          "enum": [
+            "x-fastest",
+            "z-fastest"
+          ]
+        },
+        "targetClosure": {
+          "type": "array",
+          "items": {
+            "type": "boolean"
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "boundaryPolicy": {
+          "const": "wrap-source-periodic-reject-otherwise"
+        },
+        "dtype": {
+          "const": "f64"
+        },
+        "maxResidentBytes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "maxOutputBytes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        }
+      },
+      "required": [
+        "field",
+        "targetCoreShape",
+        "targetOriginA",
+        "targetStepBasisColumnsA",
+        "targetAxisOrder",
+        "targetClosure",
+        "boundaryPolicy",
+        "dtype",
+        "maxResidentBytes",
+        "maxOutputBytes"
+      ],
+      "additionalProperties": false
+    },
+    "FSFieldLinearTerm": {
+      "type": "object",
+      "properties": {
+        "field": {
+          "$ref": "../../../../../20261115-062917-p1-02-o1-o4-corrections/contracts/field-science.contract.json#/$defs/FSFieldBinding"
+        },
+        "coefficientDimensionless": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "field",
+        "coefficientDimensionless"
+      ],
+      "additionalProperties": false
+    },
+    "FSLinearCombineFieldsInput": {
+      "type": "object",
+      "properties": {
+        "terms": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/FSFieldLinearTerm"
+          },
+          "minItems": 1
+        },
+        "targetAxisOrder": {
+          "enum": [
+            "x-fastest",
+            "z-fastest"
+          ]
+        },
+        "targetClosure": {
+          "type": "array",
+          "items": {
+            "type": "boolean"
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "dtype": {
+          "const": "f64"
+        },
+        "maxResidentBytes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "maxOutputBytes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        }
+      },
+      "required": [
+        "terms",
+        "targetAxisOrder",
+        "targetClosure",
+        "dtype",
+        "maxResidentBytes",
+        "maxOutputBytes"
+      ],
+      "additionalProperties": false
+    },
+    "FSCartesianLineInput": {
+      "type": "object",
+      "properties": {
+        "field": {
+          "$ref": "../../../../../20261115-062917-p1-02-o1-o4-corrections/contracts/field-science.contract.json#/$defs/FSFieldBinding"
+        },
+        "startA": {
+          "$ref": "../../../../../20261115-062917-p1-02-o1-o4-corrections/contracts/field-science.contract.json#/$defs/Vec3"
+        },
+        "endA": {
+          "$ref": "../../../../../20261115-062917-p1-02-o1-o4-corrections/contracts/field-science.contract.json#/$defs/Vec3"
+        },
+        "count": {
+          "type": "integer",
+          "minimum": 2,
+          "maximum": 4294967295
+        },
+        "boundaryPolicy": {
+          "const": "wrap-source-periodic-reject-otherwise"
+        },
+        "maxResidentBytes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "maxOutputBytes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        }
+      },
+      "required": [
+        "field",
+        "startA",
+        "endA",
+        "count",
+        "boundaryPolicy",
+        "maxResidentBytes",
+        "maxOutputBytes"
+      ],
+      "additionalProperties": false
+    },
+    "FSCartesianLineOutput": {
+      "type": "object",
+      "properties": {
+        "provenance": {
+          "$ref": "../../../../../20261115-062917-p1-02-o1-o4-corrections/contracts/field-science.contract.json#/$defs/FSProvenance"
+        },
+        "startA": {
+          "$ref": "../../../../../20261115-062917-p1-02-o1-o4-corrections/contracts/field-science.contract.json#/$defs/Vec3"
+        },
+        "endA": {
+          "$ref": "../../../../../20261115-062917-p1-02-o1-o4-corrections/contracts/field-science.contract.json#/$defs/Vec3"
+        },
+        "count": {
+          "type": "integer",
+          "minimum": 2,
+          "maximum": 4294967295
+        },
+        "distanceA": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 2
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 2
+        },
+        "valueUnit": {
+          "type": "string",
+          "minLength": 1
+        },
+        "endpointPolicy": {
+          "const": "include-both"
+        },
+        "interpolation": {
+          "const": "cartesian-affine-trilinear"
+        }
+      },
+      "required": [
+        "provenance",
+        "startA",
+        "endA",
+        "count",
+        "distanceA",
+        "values",
+        "valueUnit",
+        "endpointPolicy",
+        "interpolation"
+      ],
+      "additionalProperties": false
+    },
+    "FSCurveLinearTerm": {
+      "type": "object",
+      "properties": {
+        "curve": {
+          "$ref": "../../../../../20261115-062917-p1-02-o1-o4-corrections/contracts/field-science.contract.json#/$defs/Curve"
+        },
+        "coefficientDimensionless": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "curve",
+        "coefficientDimensionless"
+      ],
+      "additionalProperties": false
+    },
+    "FSLinearCombineCurvesInput": {
+      "type": "object",
+      "properties": {
+        "terms": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/FSCurveLinearTerm"
+          },
+          "minItems": 1
+        },
+        "background": {
+          "$ref": "../../../../../20261115-062917-p1-02-o1-o4-corrections/contracts/field-science.contract.json#/$defs/Curve"
+        }
+      },
+      "required": [
+        "terms",
+        "background"
+      ],
+      "additionalProperties": false
+    },
+    "FSLinearCombineCurvesOutput": {
+      "type": "object",
+      "properties": {
+        "scaledTermCurves": {
+          "type": "array",
+          "items": {
+            "$ref": "../../../../../20261115-062917-p1-02-o1-o4-corrections/contracts/field-science.contract.json#/$defs/Curve"
+          },
+          "minItems": 1
+        },
+        "background": {
+          "$ref": "../../../../../20261115-062917-p1-02-o1-o4-corrections/contracts/field-science.contract.json#/$defs/Curve"
+        },
+        "total": {
+          "$ref": "../../../../../20261115-062917-p1-02-o1-o4-corrections/contracts/field-science.contract.json#/$defs/Curve"
+        }
+      },
+      "required": [
+        "scaledTermCurves",
+        "background",
+        "total"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "x-import": {
+    "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261115-062917-p1-02-o1-o4-corrections/contracts/field-science.contract.json",
+    "relativePath": "../../../../../20261115-062917-p1-02-o1-o4-corrections/contracts/field-science.contract.json",
+    "sha256": "adf539aac53ddd41b46651886b00e9d5394a96c36b83f74aeb6e35984898000a"
+  },
+  "x-operations": [
+    {
+      "operation": "ResampleAffineTrilinear",
+      "input": "#/$defs/FSResampleAffineInput",
+      "output": "../../../../../20261115-062917-p1-02-o1-o4-corrections/contracts/field-science.contract.json#/$defs/FSFieldOutput",
+      "semantics": [
+        "Every target core point is explicit Cartesian affine geometry; solve source step inverse then eight-corner trilinear interpolation.",
+        "Wrap source periodic axes only; reject an outside nonperiodic point. Do not clamp/zero-fill or grant target periodicity.",
+        "Target dtypef64; preserve qualified source physical kind/unit; exact source context/resource identity and operation provenance.",
+        "Checked output/core/closure/scratch arithmetic before allocation; singular/nonfinite geometry, nonfinite values and invalid closure/periodicity fail atomically."
+      ],
+      "oracle": "functional-oracles.json#/resample"
+    },
+    {
+      "operation": "LinearCombineFields",
+      "input": "#/$defs/FSLinearCombineFieldsInput",
+      "output": "../../../../../20261115-062917-p1-02-o1-o4-corrections/contracts/field-science.contract.json#/$defs/FSFieldOutput",
+      "semantics": [
+        "Require exact current-context match and compatible physical quantity/unit/origin/step/core shape/periodicity across all terms. Normalize explicit storage order/closure before calculation.",
+        "In declared term order multiply each promoted f64 value by its f64 coefficient, then addf64; no reassociation/FMA is implied. Outputf64. Nativef32 source-expression grammar remains separate.",
+        "Return complete new field/resource descriptor and all term provenance; preserve inputs. Reject nonfinite and invalid closure atomically."
+      ],
+      "oracle": "functional-oracles.json#/arithmetic"
+    },
+    {
+      "operation": "SampleCartesianLine",
+      "input": "#/$defs/FSCartesianLineInput",
+      "output": "#/$defs/FSCartesianLineOutput",
+      "semantics": [
+        "New Cartesian endpoint input, not a reinterpretation of existing SampleLine.startFractional/endFractional.",
+        "t=j/(count-1), point=startA+t*(endA-startA), value via explicit affine interpolation; distanceA=t*norm(endA-startA). Include both endpoints and exactlycount rows.",
+        "values.length=distanceA.length=count; source physical units retained; count/bytes/scratch preflight and finite validation before candidate output."
+      ],
+      "oracle": "functional-oracles.json#/line"
+    },
+    {
+      "operation": "LinearCombineCurves",
+      "input": "#/$defs/FSLinearCombineCurvesInput",
+      "output": "#/$defs/FSLinearCombineCurvesOutput",
+      "semantics": [
+        "All curves require identical monotone x arrays and xUnit/yUnit, finite coefficients/values and equal x/y lengths. Coefficients dimensionless.",
+        "Return every scaled phase-term curve, exact supplied background and ordered sum plus background. Do not normalize by max intensity or silently resample.",
+        "Explicit decomposition of supplied curves only. Radiation/species/reflection generation and absolute native/RIETAN phase normalization remain separate requests."
+      ],
+      "oracle": "powder-explicit-full-curve-oracle.json#/compositionProposal"
+    }
+  ],
+  "x-common-rules": [
+    "All JSON numbers and decoded fields must be finite where a finite mathematical operation is requested; JSONSchema alone is not a finite-number runtime proof.",
+    "FieldBinding complete context/resource/digest/byte-order/owner validation, candidate ownership and existing job cancel/error cleanup remain mandatory.",
+    "Every output array and resource is compared in full; no DC/integral-only acceptance.",
+    "These strict input/output definitions are proposed in this06 artifact only. They do not mutate prior cards/protocol3, implement an API, or certify native full-domain equivalence."
+  ],
+  "x-designOnly": true,
+  "x-productImplemented": false
+}

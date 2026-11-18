@@ -1,0 +1,532 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:vestacraft:design:native-sampling:2",
+  "$defs": {
+    "F32Bits": {
+      "$ref": "../subtasks/fs/fs2-scientific-successor.schema.json#/$defs/F32Bits"
+    },
+    "F64Bits": {
+      "$ref": "../subtasks/fs/fs2-scientific-successor.schema.json#/$defs/F64Bits"
+    },
+    "ScalarSource": {
+      "$ref": "../subtasks/fs/fs2-scientific-successor.schema.json#/$defs/ScalarSource"
+    },
+    "Vec3F32Bits": {
+      "$ref": "../subtasks/fs/fs2-scientific-successor.schema.json#/$defs/Vec3F32Bits"
+    },
+    "Vec3F64Bits": {
+      "$ref": "../subtasks/fs/fs2-scientific-successor.schema.json#/$defs/Vec3F64Bits"
+    },
+    "SHA256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "NativeSamplerContext": {
+      "type": "object",
+      "properties": {
+        "source": {
+          "$ref": "#/$defs/ScalarSource"
+        },
+        "ownerPhaseId": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{32}$"
+        },
+        "coreDivisions": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2147483646
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "expandedScalarF32Resource": {
+          "$ref": "#/$defs/SHA256"
+        },
+        "sourceCartesianColumnsA": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Vec3F64Bits"
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "inputChart": {
+          "const": "native-fractional-periodic3"
+        },
+        "producerRuleDigest": {
+          "$ref": "#/$defs/SHA256"
+        }
+      },
+      "required": [
+        "source",
+        "ownerPhaseId",
+        "coreDivisions",
+        "expandedScalarF32Resource",
+        "sourceCartesianColumnsA",
+        "inputChart",
+        "producerRuleDigest"
+      ],
+      "additionalProperties": false,
+      "x-authority": "Captured by Engine from exact current source/phase; client numbers/resource refs do not certify current identity, chart, layout, unit or owner. Revalidate full source binding before execution.",
+      "x-invariants": [
+        "exact (Nx+1)*(Ny+1)*(Nz+1)*4 bytes, x-fastest, all axis closure planes match",
+        "native f32 fractional chart and captured actual C2O linear3x3; generic/affine field cannot be relabeled merely to fit this type",
+        "index counts/products/f32point*N/floor andi32 operations admitted only if checked safe; original OOB/overflow maps source-failure without mutation"
+      ]
+    },
+    "NativePointSampleInput": {
+      "type": "object",
+      "properties": {
+        "context": {
+          "$ref": "#/$defs/NativeSamplerContext"
+        },
+        "fractionalF32": {
+          "$ref": "#/$defs/Vec3F32Bits"
+        }
+      },
+      "required": [
+        "context",
+        "fractionalF32"
+      ],
+      "additionalProperties": false
+    },
+    "NativePointSampleOutput": {
+      "type": "object",
+      "properties": {
+        "valueF32Bits": {
+          "$ref": "#/$defs/F32Bits"
+        }
+      },
+      "required": [
+        "valueF32Bits"
+      ],
+      "additionalProperties": false
+    },
+    "NativeLineProfileInput": {
+      "type": "object",
+      "properties": {
+        "context": {
+          "$ref": "#/$defs/NativeSamplerContext"
+        },
+        "point1FractionalF32": {
+          "$ref": "#/$defs/Vec3F32Bits"
+        },
+        "point2FractionalF32": {
+          "$ref": "#/$defs/Vec3F32Bits"
+        },
+        "nativeCountI32": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "titleUtf8": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "context",
+        "point1FractionalF32",
+        "point2FractionalF32",
+        "nativeCountI32",
+        "titleUtf8"
+      ],
+      "additionalProperties": false
+    },
+    "NativeLineSample": {
+      "type": "object",
+      "properties": {
+        "fractionalF32": {
+          "$ref": "#/$defs/Vec3F32Bits"
+        },
+        "distanceAF32Bits": {
+          "$ref": "#/$defs/F32Bits"
+        },
+        "valueF32Bits": {
+          "$ref": "#/$defs/F32Bits"
+        }
+      },
+      "required": [
+        "fractionalF32",
+        "distanceAF32Bits",
+        "valueF32Bits"
+      ],
+      "additionalProperties": false
+    },
+    "NativeLineComplete": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "const": "complete-line-profile"
+        },
+        "samples": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/NativeLineSample"
+          }
+        },
+        "textUtf8": {
+          "type": "string"
+        },
+        "encoding": {
+          "const": "UTF-8; numeric C-locale"
+        }
+      },
+      "required": [
+        "kind",
+        "samples",
+        "textUtf8",
+        "encoding"
+      ],
+      "additionalProperties": false
+    },
+    "NativeLineEmpty": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "const": "reference-header-only"
+        },
+        "nativePrintedCountI32": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "samples": {
+          "type": "array",
+          "maxItems": 0
+        },
+        "textUtf8": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "nativePrintedCountI32",
+        "samples",
+        "textUtf8"
+      ],
+      "additionalProperties": false
+    },
+    "NativeReferenceFailure": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "const": "reference-failure"
+        },
+        "code": {
+          "enum": [
+            "E_NATIVE_COUNT_ONE_NONFINITE",
+            "E_NATIVE_INDEX_ARITHMETIC",
+            "E_NATIVE_NONFINITE_SAMPLE",
+            "E_NATIVE_CONTOUR_DOMAIN"
+          ]
+        },
+        "oldModelPreserved": {
+          "const": true
+        },
+        "noCandidatePublished": {
+          "const": true
+        }
+      },
+      "required": [
+        "kind",
+        "code",
+        "oldModelPreserved",
+        "noCandidatePublished"
+      ],
+      "additionalProperties": false
+    },
+    "NativeLineProfileOutput": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/NativeLineComplete"
+        },
+        {
+          "$ref": "#/$defs/NativeLineEmpty"
+        },
+        {
+          "$ref": "#/$defs/NativeReferenceFailure"
+        }
+      ]
+    },
+    "ContourLevelMetadata6": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/F32Bits"
+      },
+      "minItems": 6,
+      "maxItems": 6
+    },
+    "ContourSettingsLinear": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "const": "native-linear"
+        },
+        "enabled": {
+          "type": "boolean"
+        },
+        "minimumF32Bits": {
+          "$ref": "#/$defs/F32Bits"
+        },
+        "maximumF32Bits": {
+          "$ref": "#/$defs/F32Bits"
+        },
+        "stepF32Bits": {
+          "$ref": "#/$defs/F32Bits"
+        },
+        "majorIntervalI32": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        }
+      },
+      "required": [
+        "kind",
+        "enabled",
+        "minimumF32Bits",
+        "maximumF32Bits",
+        "stepF32Bits",
+        "majorIntervalI32"
+      ],
+      "additionalProperties": false
+    },
+    "ContourSettingsGeometric": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "const": "native-geometric"
+        },
+        "enabled": {
+          "type": "boolean"
+        },
+        "minimumExponentI32": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "maximumExponentI32": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "subdivisionsI32": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "baseF32Bits": {
+          "$ref": "#/$defs/F32Bits"
+        },
+        "coefficientF32Bits": {
+          "$ref": "#/$defs/F32Bits"
+        }
+      },
+      "required": [
+        "kind",
+        "enabled",
+        "minimumExponentI32",
+        "maximumExponentI32",
+        "subdivisionsI32",
+        "baseF32Bits",
+        "coefficientF32Bits"
+      ],
+      "additionalProperties": false
+    },
+    "NativeContourLevelsInput": {
+      "type": "object",
+      "properties": {
+        "dataMinimumF32Bits": {
+          "$ref": "#/$defs/F32Bits"
+        },
+        "dataMaximumF32Bits": {
+          "$ref": "#/$defs/F32Bits"
+        },
+        "settings": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/ContourSettingsLinear"
+            },
+            {
+              "$ref": "#/$defs/ContourSettingsGeometric"
+            }
+          ]
+        }
+      },
+      "required": [
+        "dataMinimumF32Bits",
+        "dataMaximumF32Bits",
+        "settings"
+      ],
+      "additionalProperties": false
+    },
+    "NativeContourLevelsOutput": {
+      "type": "object",
+      "properties": {
+        "metadata": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ContourLevelMetadata6"
+          }
+        }
+      },
+      "required": [
+        "metadata"
+      ],
+      "additionalProperties": false
+    },
+    "NativeContourSegmentsInput": {
+      "type": "object",
+      "properties": {
+        "vertices": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Vec3F32Bits"
+          }
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/F32Bits"
+          }
+        },
+        "polygonIndices": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": -2147483648,
+            "maximum": 2147483647
+          }
+        },
+        "levelMetadata": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ContourLevelMetadata6"
+          }
+        }
+      },
+      "required": [
+        "vertices",
+        "values",
+        "polygonIndices",
+        "levelMetadata"
+      ],
+      "additionalProperties": false
+    },
+    "NativeContourSegment": {
+      "type": "object",
+      "properties": {
+        "levelOrdinal0": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "endpoints": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Vec3F32Bits"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        }
+      },
+      "required": [
+        "levelOrdinal0",
+        "endpoints"
+      ],
+      "additionalProperties": false
+    },
+    "NativeContourSegmentsOutput": {
+      "type": "object",
+      "properties": {
+        "segments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/NativeContourSegment"
+          }
+        },
+        "unpairedFinalIntersections": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "levelOrdinal0": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "point": {
+                "$ref": "#/$defs/Vec3F32Bits"
+              }
+            },
+            "required": [
+              "levelOrdinal0",
+              "point"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "segments",
+        "unpairedFinalIntersections"
+      ],
+      "additionalProperties": false
+    },
+    "NativePolyIntegralInput": {
+      "type": "object",
+      "properties": {
+        "profile": {
+          "const": "VESTA-3.90.9a-macos-arm64-menu185"
+        },
+        "documentId": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{32}$"
+        },
+        "epoch": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{32}$"
+        },
+        "expectedRevision": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)$"
+        }
+      },
+      "required": [
+        "profile",
+        "documentId",
+        "epoch",
+        "expectedRevision"
+      ],
+      "additionalProperties": false
+    },
+    "NativePolyIntegralOutput": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "const": "reference-no-op"
+        },
+        "numericIntegrationPerformed": {
+          "const": false
+        },
+        "modelChanged": {
+          "const": false
+        },
+        "outputAppendUtf8": {
+          "const": ""
+        },
+        "warningCode": {
+          "const": "W_REFERENCE_NOOP"
+        }
+      },
+      "required": [
+        "kind",
+        "numericIntegrationPerformed",
+        "modelChanged",
+        "outputAppendUtf8",
+        "warningCode"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "title": "06 typed native line, contour and selected no-op successor; no product implementation"
+}

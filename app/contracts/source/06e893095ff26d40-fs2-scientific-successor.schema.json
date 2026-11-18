@@ -1,0 +1,6013 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "draft.fs2-scientific-successor.schema.json",
+  "title": "FS/2 closed source-consumer and explicit mathematical design payloads",
+  "$ref": "#/$defs/BoundaryRequest",
+  "$defs": {
+    "FS1_Id": {
+      "$ref": "../../../../../20261115-062917-p1-02-o1-o4-corrections/contracts/field-science.contract.json#/$defs/Id"
+    },
+    "FS1_Digest": {
+      "$ref": "../../../../../20261115-062917-p1-02-o1-o4-corrections/contracts/field-science.contract.json#/$defs/Digest"
+    },
+    "FS1_FSContext": {
+      "$ref": "../../../../../20261115-062917-p1-02-o1-o4-corrections/contracts/field-science.contract.json#/$defs/FSContext"
+    },
+    "FS1_FSByteSpan": {
+      "$ref": "../../../../../20261115-062917-p1-02-o1-o4-corrections/contracts/field-science.contract.json#/$defs/FSByteSpan"
+    },
+    "FS1_FSFieldBinding": {
+      "$ref": "../../../../../20261115-062917-p1-02-o1-o4-corrections/contracts/field-science.contract.json#/$defs/FSFieldBinding"
+    },
+    "FS1_FSFieldOutput": {
+      "$ref": "../../../../../20261115-062917-p1-02-o1-o4-corrections/contracts/field-science.contract.json#/$defs/FSFieldOutput"
+    },
+    "FS1_FSSpectrumInput": {
+      "$ref": "../../../../../20261115-062917-p1-02-o1-o4-corrections/contracts/field-science.contract.json#/$defs/FSSpectrumInput"
+    },
+    "FS1_FSSpectrumResult": {
+      "$ref": "../../../../../20261115-062917-p1-02-o1-o4-corrections/contracts/field-science.contract.json#/$defs/FSSpectrumResult"
+    },
+    "FS1_FSProjectionInput": {
+      "$ref": "../../../../../20261115-062917-p1-02-o1-o4-corrections/contracts/field-science.contract.json#/$defs/FSProjectionInput"
+    },
+    "FS1_FSProjectionResult": {
+      "$ref": "../../../../../20261115-062917-p1-02-o1-o4-corrections/contracts/field-science.contract.json#/$defs/FSProjectionResult"
+    },
+    "FS1_FSSliceResult": {
+      "$ref": "../../../../../20261115-062917-p1-02-o1-o4-corrections/contracts/field-science.contract.json#/$defs/FSSliceResult"
+    },
+    "FS1_FSProvenance": {
+      "$ref": "../../../../../20261115-062917-p1-02-o1-o4-corrections/contracts/field-science.contract.json#/$defs/FSProvenance"
+    },
+    "FS1_FSTableUse": {
+      "$ref": "../../../../../20261115-062917-p1-02-o1-o4-corrections/contracts/field-science.contract.json#/$defs/FSTableUse"
+    },
+    "FS1_Species": {
+      "$ref": "../../../../../20261115-062917-p1-02-o1-o4-corrections/contracts/field-science.contract.json#/$defs/Species"
+    },
+    "FS1_SGTableIdentity": {
+      "$ref": "../../../../../20261115-062917-p1-02-o1-o4-corrections/contracts/field-science.contract.json#/$defs/SGTableIdentity"
+    },
+    "FS1_Cell": {
+      "$ref": "../../../../../20261115-062917-p1-02-o1-o4-corrections/contracts/field-science.contract.json#/$defs/Cell"
+    },
+    "FS1_Int3": {
+      "$ref": "../../../../../20261115-062917-p1-02-o1-o4-corrections/contracts/field-science.contract.json#/$defs/Int3"
+    },
+    "FS1_Vec3": {
+      "$ref": "../../../../../20261115-062917-p1-02-o1-o4-corrections/contracts/field-science.contract.json#/$defs/Vec3"
+    },
+    "FS1_Mat3": {
+      "$ref": "../../../../../20261115-062917-p1-02-o1-o4-corrections/contracts/field-science.contract.json#/$defs/Mat3"
+    },
+    "FS1_Curve": {
+      "$ref": "../../../../../20261115-062917-p1-02-o1-o4-corrections/contracts/field-science.contract.json#/$defs/Curve"
+    },
+    "FS1_Diagnostic": {
+      "$ref": "../../../../../20261115-062917-p1-02-o1-o4-corrections/contracts/field-science.contract.json#/$defs/Diagnostic"
+    },
+    "FC_NativeFractionalGridCurrent1": {
+      "$ref": "../../../../../20261115-092025-p1-03-completion/native-fractional-grid-current.schema.json"
+    },
+    "FC_NativeScalarGridCurrent1": {
+      "$ref": "../../../../../20261115-092025-p1-03-completion/native-scalar-grid-current.schema.json"
+    },
+    "FC_NativeStoredScalarIsoview1": {
+      "$ref": "../../../../../20261115-092025-p1-03-completion/native-stored-isoview.schema.json"
+    },
+    "Math_FSResampleAffineInput": {
+      "$ref": "functional-additions.schema.json#/$defs/FSResampleAffineInput"
+    },
+    "Math_FSLinearCombineFieldsInput": {
+      "$ref": "functional-additions.schema.json#/$defs/FSLinearCombineFieldsInput"
+    },
+    "Math_FSCartesianLineInput": {
+      "$ref": "functional-additions.schema.json#/$defs/FSCartesianLineInput"
+    },
+    "Math_FSCartesianLineOutput": {
+      "$ref": "functional-additions.schema.json#/$defs/FSCartesianLineOutput"
+    },
+    "Math_FSLinearCombineCurvesInput": {
+      "$ref": "functional-additions.schema.json#/$defs/FSLinearCombineCurvesInput"
+    },
+    "Math_FSLinearCombineCurvesOutput": {
+      "$ref": "functional-additions.schema.json#/$defs/FSLinearCombineCurvesOutput"
+    },
+    "F32Bits": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{8}$"
+    },
+    "F64Bits": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{16}$"
+    },
+    "ComplexF64Bits": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/F64Bits"
+      },
+      "minItems": 2,
+      "maxItems": 2
+    },
+    "Vec3F32Bits": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/F32Bits"
+      },
+      "minItems": 3,
+      "maxItems": 3
+    },
+    "Vec3F64Bits": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/F64Bits"
+      },
+      "minItems": 3,
+      "maxItems": 3
+    },
+    "Mat4ColumnsF64Bits": {
+      "type": "array",
+      "items": {
+        "type": "array",
+        "items": {
+          "$ref": "#/$defs/F64Bits"
+        },
+        "minItems": 4,
+        "maxItems": 4
+      },
+      "minItems": 4,
+      "maxItems": 4
+    },
+    "TableSourceIdentity": {
+      "type": "object",
+      "properties": {
+        "resourceDigest": {
+          "$ref": "#/$defs/FS1_Digest"
+        },
+        "sourceId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sourceVersion": {
+          "type": "string",
+          "minLength": 1
+        },
+        "edition": {
+          "type": "string",
+          "minLength": 1
+        },
+        "tableKey": {
+          "type": "string",
+          "minLength": 1
+        },
+        "tableContentDigest": {
+          "$ref": "#/$defs/FS1_Digest"
+        },
+        "producerKind": {
+          "enum": [
+            "shipped-original",
+            "author-primary-document",
+            "caller-explicit-data",
+            "authored-mathematical-prior"
+          ]
+        },
+        "producerName": {
+          "type": "string",
+          "minLength": 1
+        },
+        "consumerRole": {
+          "enum": [
+            "native-group-setting",
+            "native-gridno",
+            "native-scattering",
+            "native-powder",
+            "native-isoview",
+            "explicit-math"
+          ]
+        },
+        "licenseDisposition": {
+          "enum": [
+            "deferred-current-user-decision",
+            "not-applicable-own-input"
+          ]
+        },
+        "licenseTextDigest": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/FS1_Digest"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "writtenPermissionEvidenceDigest": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/FS1_Digest"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "grantsRedistribution": {
+          "const": false
+        }
+      },
+      "required": [
+        "resourceDigest",
+        "sourceId",
+        "sourceVersion",
+        "edition",
+        "tableKey",
+        "tableContentDigest",
+        "producerKind",
+        "producerName",
+        "consumerRole",
+        "licenseDisposition",
+        "licenseTextDigest",
+        "writtenPermissionEvidenceDigest",
+        "grantsRedistribution"
+      ],
+      "additionalProperties": false
+    },
+    "ScientificTableUse": {
+      "type": "object",
+      "properties": {
+        "identity": {
+          "$ref": "#/$defs/TableSourceIdentity"
+        },
+        "species": {
+          "$ref": "#/$defs/FS1_Species"
+        },
+        "purpose": {
+          "enum": [
+            "xray-f0",
+            "anomalous",
+            "neutron-bc",
+            "isotope-mass",
+            "constant",
+            "group-setting",
+            "wyckoff"
+          ]
+        },
+        "rowSource": {
+          "$ref": "#/$defs/FS1_FSByteSpan"
+        },
+        "scientificQualificationRecordDigest": {
+          "$ref": "#/$defs/FS1_Digest"
+        }
+      },
+      "required": [
+        "identity",
+        "species",
+        "purpose",
+        "rowSource",
+        "scientificQualificationRecordDigest"
+      ],
+      "additionalProperties": false
+    },
+    "NativeSettingBinding": {
+      "type": "object",
+      "properties": {
+        "groupNumberOneBased": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 2147483647
+        },
+        "settingNumberOneBased": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 2147483647
+        },
+        "registryTable": {
+          "$ref": "#/$defs/TableSourceIdentity"
+        },
+        "registryRecord": {
+          "$ref": "#/$defs/FS1_FSByteSpan"
+        },
+        "completeWyckoffPopulationDigest": {
+          "$ref": "#/$defs/FS1_Digest"
+        },
+        "completeCurrentSymmetryPopulationDigest": {
+          "$ref": "#/$defs/FS1_Digest"
+        },
+        "qualificationRecordDigest": {
+          "$ref": "#/$defs/FS1_Digest"
+        }
+      },
+      "required": [
+        "groupNumberOneBased",
+        "settingNumberOneBased",
+        "registryTable",
+        "registryRecord",
+        "completeWyckoffPopulationDigest",
+        "completeCurrentSymmetryPopulationDigest",
+        "qualificationRecordDigest"
+      ],
+      "additionalProperties": false
+    },
+    "WyckoffAffine": {
+      "type": "object",
+      "properties": {
+        "sourceOrdinalOneBased": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 2147483647
+        },
+        "affineColumnsF64Bits": {
+          "$ref": "#/$defs/Mat4ColumnsF64Bits"
+        },
+        "source": {
+          "$ref": "#/$defs/FS1_FSByteSpan"
+        }
+      },
+      "required": [
+        "sourceOrdinalOneBased",
+        "affineColumnsF64Bits",
+        "source"
+      ],
+      "additionalProperties": false
+    },
+    "CurrentSymmetryMatrix": {
+      "type": "object",
+      "properties": {
+        "sourceOrdinalZeroBased": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "affineColumnsF64Bits": {
+          "$ref": "#/$defs/Mat4ColumnsF64Bits"
+        },
+        "qualificationRecordDigest": {
+          "$ref": "#/$defs/FS1_Digest"
+        }
+      },
+      "required": [
+        "sourceOrdinalZeroBased",
+        "affineColumnsF64Bits",
+        "qualificationRecordDigest"
+      ],
+      "additionalProperties": false
+    },
+    "NativeGridNoInput": {
+      "type": "object",
+      "properties": {
+        "base": {
+          "$ref": "#/$defs/FS1_FSContext"
+        },
+        "phaseId": {
+          "$ref": "#/$defs/FS1_Id"
+        },
+        "profile": {
+          "const": "vesta3909a-native-gridno"
+        },
+        "dimension": {
+          "const": 3
+        },
+        "axisLengthsF32Bits": {
+          "$ref": "#/$defs/Vec3F32Bits"
+        },
+        "resolutionF32Bits": {
+          "$ref": "#/$defs/F32Bits"
+        },
+        "setting": {
+          "$ref": "#/$defs/NativeSettingBinding"
+        },
+        "currentBasisColumnsF64Bits": {
+          "$ref": "#/$defs/Mat4ColumnsF64Bits"
+        },
+        "wyckoffPopulation": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/WyckoffAffine"
+          },
+          "minItems": 0
+        },
+        "currentSymmetryPopulation": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/CurrentSymmetryMatrix"
+          },
+          "minItems": 0
+        },
+        "maxOutputBytes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "maxResidentBytes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        }
+      },
+      "required": [
+        "base",
+        "phaseId",
+        "profile",
+        "dimension",
+        "axisLengthsF32Bits",
+        "resolutionF32Bits",
+        "setting",
+        "currentBasisColumnsF64Bits",
+        "wyckoffPopulation",
+        "currentSymmetryPopulation",
+        "maxOutputBytes",
+        "maxResidentBytes"
+      ],
+      "additionalProperties": false
+    },
+    "NativeGridNoOutput": {
+      "type": "object",
+      "properties": {
+        "base": {
+          "$ref": "#/$defs/FS1_FSContext"
+        },
+        "phaseId": {
+          "$ref": "#/$defs/FS1_Id"
+        },
+        "profile": {
+          "const": "vesta3909a-native-gridno"
+        },
+        "requiredAxisMultiples": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2147483647
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "divisionsBeforeFallback": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2147483647
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "coreDivisions": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2147483647
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "reflectionAxisBounds": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": -2147483648,
+            "maximum": 2147483647
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "parameterDigest": {
+          "$ref": "#/$defs/FS1_Digest"
+        },
+        "sourceSetting": {
+          "$ref": "#/$defs/NativeSettingBinding"
+        }
+      },
+      "required": [
+        "base",
+        "phaseId",
+        "profile",
+        "requiredAxisMultiples",
+        "divisionsBeforeFallback",
+        "coreDivisions",
+        "reflectionAxisBounds",
+        "parameterDigest",
+        "sourceSetting"
+      ],
+      "additionalProperties": false
+    },
+    "AmplitudeUnitBinding": {
+      "type": "object",
+      "properties": {
+        "unit": {
+          "enum": [
+            "electron",
+            "fm"
+          ]
+        },
+        "physicalQualificationDigest": {
+          "$ref": "#/$defs/FS1_Digest"
+        },
+        "tableUses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ScientificTableUse"
+          },
+          "minItems": 0
+        }
+      },
+      "required": [
+        "unit",
+        "physicalQualificationDigest",
+        "tableUses"
+      ],
+      "additionalProperties": false
+    },
+    "EquivalentReflection": {
+      "type": "object",
+      "properties": {
+        "hkl": {
+          "$ref": "#/$defs/FS1_Int3"
+        },
+        "phasePairF64Bits": {
+          "$ref": "#/$defs/ComplexF64Bits"
+        },
+        "sourceOrdinalZeroBased": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        }
+      },
+      "required": [
+        "hkl",
+        "phasePairF64Bits",
+        "sourceOrdinalZeroBased"
+      ],
+      "additionalProperties": false
+    },
+    "MaterializedReflection": {
+      "type": "object",
+      "properties": {
+        "representativeHkl": {
+          "$ref": "#/$defs/FS1_Int3"
+        },
+        "physicalReciprocalMagnitudePerAF64Bits": {
+          "$ref": "#/$defs/F64Bits"
+        },
+        "coefficientF64Bits": {
+          "$ref": "#/$defs/ComplexF64Bits"
+        },
+        "equivalents": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/EquivalentReflection"
+          },
+          "minItems": 1
+        },
+        "sourceOrdinalZeroBased": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        }
+      },
+      "required": [
+        "representativeHkl",
+        "physicalReciprocalMagnitudePerAF64Bits",
+        "coefficientF64Bits",
+        "equivalents",
+        "sourceOrdinalZeroBased"
+      ],
+      "additionalProperties": false
+    },
+    "ReflectionSource": {
+      "type": "object",
+      "properties": {
+        "base": {
+          "$ref": "#/$defs/FS1_FSContext"
+        },
+        "phaseId": {
+          "$ref": "#/$defs/FS1_Id"
+        },
+        "source": {
+          "$ref": "#/$defs/FS1_FSByteSpan"
+        },
+        "sourceFormat": {
+          "enum": [
+            "native-fcf",
+            "native-cif",
+            "native-mem",
+            "native-fos",
+            "native-hkl",
+            "native-out",
+            "native-free-format",
+            "authored-explicit-complex"
+          ]
+        },
+        "readerSelection": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 3
+        },
+        "materializedRows": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/MaterializedReflection"
+          },
+          "minItems": 0
+        },
+        "actualF000AfterReadF64Bits": {
+          "$ref": "#/$defs/F64Bits"
+        },
+        "amplitude": {
+          "$ref": "#/$defs/AmplitudeUnitBinding"
+        },
+        "readerRuleDigest": {
+          "$ref": "#/$defs/FS1_Digest"
+        },
+        "materializedCurrentDigest": {
+          "$ref": "#/$defs/FS1_Digest"
+        }
+      },
+      "required": [
+        "base",
+        "phaseId",
+        "source",
+        "sourceFormat",
+        "readerSelection",
+        "materializedRows",
+        "actualF000AfterReadF64Bits",
+        "amplitude",
+        "readerRuleDigest",
+        "materializedCurrentDigest"
+      ],
+      "additionalProperties": false
+    },
+    "FourierUi0Input": {
+      "type": "object",
+      "properties": {
+        "base": {
+          "$ref": "#/$defs/FS1_FSContext"
+        },
+        "phaseId": {
+          "$ref": "#/$defs/FS1_Id"
+        },
+        "profile": {
+          "const": "vesta3909a-native-fourier-ui"
+        },
+        "dimension": {
+          "const": 3
+        },
+        "uiSelection": {
+          "const": 0
+        },
+        "uiLabel": {
+          "const": "Fo - Fc"
+        },
+        "firstSource": {
+          "$ref": "#/$defs/ReflectionSource"
+        },
+        "actualCurrentF000F64Bits": {
+          "$ref": "#/$defs/F64Bits"
+        },
+        "f000Policy": {
+          "const": "use-actual-current-scalar-separate-from-difference"
+        },
+        "grid": {
+          "$ref": "#/$defs/NativeGridNoInput"
+        }
+      },
+      "required": [
+        "base",
+        "phaseId",
+        "profile",
+        "dimension",
+        "uiSelection",
+        "uiLabel",
+        "firstSource",
+        "actualCurrentF000F64Bits",
+        "f000Policy",
+        "grid"
+      ],
+      "additionalProperties": false
+    },
+    "FourierUi1Input": {
+      "type": "object",
+      "properties": {
+        "base": {
+          "$ref": "#/$defs/FS1_FSContext"
+        },
+        "phaseId": {
+          "$ref": "#/$defs/FS1_Id"
+        },
+        "profile": {
+          "const": "vesta3909a-native-fourier-ui"
+        },
+        "dimension": {
+          "const": 3
+        },
+        "uiSelection": {
+          "const": 1
+        },
+        "uiLabel": {
+          "const": "Fo"
+        },
+        "firstSource": {
+          "$ref": "#/$defs/ReflectionSource"
+        },
+        "actualCurrentF000F64Bits": {
+          "$ref": "#/$defs/F64Bits"
+        },
+        "f000Policy": {
+          "const": "use-actual-current-scalar-separate-from-difference"
+        },
+        "grid": {
+          "$ref": "#/$defs/NativeGridNoInput"
+        }
+      },
+      "required": [
+        "base",
+        "phaseId",
+        "profile",
+        "dimension",
+        "uiSelection",
+        "uiLabel",
+        "firstSource",
+        "actualCurrentF000F64Bits",
+        "f000Policy",
+        "grid"
+      ],
+      "additionalProperties": false
+    },
+    "FourierUi2Input": {
+      "type": "object",
+      "properties": {
+        "base": {
+          "$ref": "#/$defs/FS1_FSContext"
+        },
+        "phaseId": {
+          "$ref": "#/$defs/FS1_Id"
+        },
+        "profile": {
+          "const": "vesta3909a-native-fourier-ui"
+        },
+        "dimension": {
+          "const": 3
+        },
+        "uiSelection": {
+          "const": 2
+        },
+        "uiLabel": {
+          "const": "Fc"
+        },
+        "firstSource": {
+          "$ref": "#/$defs/ReflectionSource"
+        },
+        "actualCurrentF000F64Bits": {
+          "$ref": "#/$defs/F64Bits"
+        },
+        "f000Policy": {
+          "const": "use-actual-current-scalar-separate-from-difference"
+        },
+        "grid": {
+          "$ref": "#/$defs/NativeGridNoInput"
+        }
+      },
+      "required": [
+        "base",
+        "phaseId",
+        "profile",
+        "dimension",
+        "uiSelection",
+        "uiLabel",
+        "firstSource",
+        "actualCurrentF000F64Bits",
+        "f000Policy",
+        "grid"
+      ],
+      "additionalProperties": false
+    },
+    "FourierUi3Input": {
+      "type": "object",
+      "properties": {
+        "base": {
+          "$ref": "#/$defs/FS1_FSContext"
+        },
+        "phaseId": {
+          "$ref": "#/$defs/FS1_Id"
+        },
+        "profile": {
+          "const": "vesta3909a-native-fourier-ui"
+        },
+        "dimension": {
+          "const": 3
+        },
+        "uiSelection": {
+          "const": 3
+        },
+        "uiLabel": {
+          "const": "Fo - Fo(another data)"
+        },
+        "firstSource": {
+          "$ref": "#/$defs/ReflectionSource"
+        },
+        "actualCurrentF000F64Bits": {
+          "$ref": "#/$defs/F64Bits"
+        },
+        "f000Policy": {
+          "const": "use-actual-current-scalar-separate-from-difference"
+        },
+        "grid": {
+          "$ref": "#/$defs/NativeGridNoInput"
+        },
+        "secondSource": {
+          "$ref": "#/$defs/ReflectionSource"
+        },
+        "secondScaleF64Bits": {
+          "$ref": "#/$defs/F64Bits"
+        },
+        "differencePolicy": {
+          "const": "native-spacing-window-phase-aligned-asymmetric-missing-rule"
+        }
+      },
+      "required": [
+        "base",
+        "phaseId",
+        "profile",
+        "dimension",
+        "uiSelection",
+        "uiLabel",
+        "firstSource",
+        "actualCurrentF000F64Bits",
+        "f000Policy",
+        "grid",
+        "secondSource",
+        "secondScaleF64Bits",
+        "differencePolicy"
+      ],
+      "additionalProperties": false
+    },
+    "NativeFourierUiInput": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/FourierUi0Input"
+        },
+        {
+          "$ref": "#/$defs/FourierUi1Input"
+        },
+        {
+          "$ref": "#/$defs/FourierUi2Input"
+        },
+        {
+          "$ref": "#/$defs/FourierUi3Input"
+        }
+      ]
+    },
+    "FourierSourceDiagnostic": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "enum": [
+            "extinction-reset-zero",
+            "unmatched-retained",
+            "unmatched-removed",
+            "duplicate-removed",
+            "native-nonfinite",
+            "parse-error"
+          ]
+        },
+        "sourceOrdinalZeroBased": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "hkl": {
+          "$ref": "#/$defs/FS1_Int3"
+        },
+        "source": {
+          "$ref": "#/$defs/FS1_FSByteSpan"
+        }
+      },
+      "required": [
+        "code",
+        "sourceOrdinalZeroBased",
+        "hkl",
+        "source"
+      ],
+      "additionalProperties": false
+    },
+    "NativePreparedFourierOutput": {
+      "type": "object",
+      "properties": {
+        "base": {
+          "$ref": "#/$defs/FS1_FSContext"
+        },
+        "phaseId": {
+          "$ref": "#/$defs/FS1_Id"
+        },
+        "uiSelection": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 3
+        },
+        "rawBackendMode": {
+          "const": 0
+        },
+        "actualCurrentF000F64Bits": {
+          "$ref": "#/$defs/F64Bits"
+        },
+        "rows": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/MaterializedReflection"
+          },
+          "minItems": 0
+        },
+        "sourceBindings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ReflectionSource"
+          },
+          "minItems": 1,
+          "maxItems": 2
+        },
+        "secondScaleF64Bits": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/F64Bits"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "grid": {
+          "$ref": "#/$defs/NativeGridNoOutput"
+        },
+        "diagnostics": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/FourierSourceDiagnostic"
+          },
+          "minItems": 0
+        },
+        "parameterDigest": {
+          "$ref": "#/$defs/FS1_Digest"
+        }
+      },
+      "required": [
+        "base",
+        "phaseId",
+        "uiSelection",
+        "rawBackendMode",
+        "actualCurrentF000F64Bits",
+        "rows",
+        "sourceBindings",
+        "secondScaleF64Bits",
+        "grid",
+        "diagnostics",
+        "parameterDigest"
+      ],
+      "additionalProperties": false
+    },
+    "PowderTch13Parameters": {
+      "type": "object",
+      "properties": {
+        "nameCount": {
+          "const": 13
+        },
+        "fitParameterCount": {
+          "const": 10
+        },
+        "parameterNames": {
+          "type": "array",
+          "prefixItems": [
+            {
+              "const": "U"
+            },
+            {
+              "const": "V"
+            },
+            {
+              "const": "W"
+            },
+            {
+              "const": "P"
+            },
+            {
+              "const": "X"
+            },
+            {
+              "const": "Xe"
+            },
+            {
+              "const": "Y"
+            },
+            {
+              "const": "Ye"
+            },
+            {
+              "const": "rs"
+            },
+            {
+              "const": "rd"
+            },
+            {
+              "const": "h"
+            },
+            {
+              "const": "k"
+            },
+            {
+              "const": "l"
+            }
+          ],
+          "items": false,
+          "minItems": 13,
+          "maxItems": 13
+        },
+        "U": {
+          "type": "object",
+          "properties": {
+            "valueF64Bits": {
+              "$ref": "#/$defs/F64Bits"
+            },
+            "unit": {
+              "const": "twoThetaDegreeSquared"
+            }
+          },
+          "required": [
+            "valueF64Bits",
+            "unit"
+          ],
+          "additionalProperties": false,
+          "x-nativeOffset": "0x20"
+        },
+        "V": {
+          "type": "object",
+          "properties": {
+            "valueF64Bits": {
+              "$ref": "#/$defs/F64Bits"
+            },
+            "unit": {
+              "const": "twoThetaDegreeSquared"
+            }
+          },
+          "required": [
+            "valueF64Bits",
+            "unit"
+          ],
+          "additionalProperties": false,
+          "x-nativeOffset": "0x28"
+        },
+        "W": {
+          "type": "object",
+          "properties": {
+            "valueF64Bits": {
+              "$ref": "#/$defs/F64Bits"
+            },
+            "unit": {
+              "const": "twoThetaDegreeSquared"
+            }
+          },
+          "required": [
+            "valueF64Bits",
+            "unit"
+          ],
+          "additionalProperties": false,
+          "x-nativeOffset": "0x30"
+        },
+        "P": {
+          "type": "object",
+          "properties": {
+            "valueF64Bits": {
+              "$ref": "#/$defs/F64Bits"
+            },
+            "unit": {
+              "const": "twoThetaDegreeSquared"
+            }
+          },
+          "required": [
+            "valueF64Bits",
+            "unit"
+          ],
+          "additionalProperties": false,
+          "x-nativeOffset": "0x38"
+        },
+        "X": {
+          "type": "object",
+          "properties": {
+            "valueF64Bits": {
+              "$ref": "#/$defs/F64Bits"
+            },
+            "unit": {
+              "const": "twoThetaDegree"
+            }
+          },
+          "required": [
+            "valueF64Bits",
+            "unit"
+          ],
+          "additionalProperties": false,
+          "x-nativeOffset": "0x40"
+        },
+        "Xe": {
+          "type": "object",
+          "properties": {
+            "valueF64Bits": {
+              "$ref": "#/$defs/F64Bits"
+            },
+            "unit": {
+              "const": "twoThetaDegree"
+            }
+          },
+          "required": [
+            "valueF64Bits",
+            "unit"
+          ],
+          "additionalProperties": false,
+          "x-nativeOffset": "0x48"
+        },
+        "Y": {
+          "type": "object",
+          "properties": {
+            "valueF64Bits": {
+              "$ref": "#/$defs/F64Bits"
+            },
+            "unit": {
+              "const": "twoThetaDegree"
+            }
+          },
+          "required": [
+            "valueF64Bits",
+            "unit"
+          ],
+          "additionalProperties": false,
+          "x-nativeOffset": "0x50"
+        },
+        "Ye": {
+          "type": "object",
+          "properties": {
+            "valueF64Bits": {
+              "$ref": "#/$defs/F64Bits"
+            },
+            "unit": {
+              "const": "twoThetaDegree"
+            }
+          },
+          "required": [
+            "valueF64Bits",
+            "unit"
+          ],
+          "additionalProperties": false,
+          "x-nativeOffset": "0x58"
+        },
+        "rs": {
+          "type": "object",
+          "properties": {
+            "valueF64Bits": {
+              "$ref": "#/$defs/F64Bits"
+            },
+            "unit": {
+              "const": "dimensionlessNativeProfile"
+            }
+          },
+          "required": [
+            "valueF64Bits",
+            "unit"
+          ],
+          "additionalProperties": false,
+          "x-nativeOffset": "0x60"
+        },
+        "rd": {
+          "type": "object",
+          "properties": {
+            "valueF64Bits": {
+              "$ref": "#/$defs/F64Bits"
+            },
+            "unit": {
+              "const": "dimensionlessNativeProfile"
+            }
+          },
+          "required": [
+            "valueF64Bits",
+            "unit"
+          ],
+          "additionalProperties": false,
+          "x-nativeOffset": "0x68"
+        },
+        "h": {
+          "type": "object",
+          "properties": {
+            "valueF64Bits": {
+              "$ref": "#/$defs/F64Bits"
+            },
+            "unit": {
+              "const": "dimensionlessNativeProfile"
+            }
+          },
+          "required": [
+            "valueF64Bits",
+            "unit"
+          ],
+          "additionalProperties": false,
+          "x-nativeOffset": "0x70"
+        },
+        "k": {
+          "type": "object",
+          "properties": {
+            "valueF64Bits": {
+              "$ref": "#/$defs/F64Bits"
+            },
+            "unit": {
+              "const": "dimensionlessNativeProfile"
+            }
+          },
+          "required": [
+            "valueF64Bits",
+            "unit"
+          ],
+          "additionalProperties": false,
+          "x-nativeOffset": "0x78"
+        },
+        "l": {
+          "type": "object",
+          "properties": {
+            "valueF64Bits": {
+              "$ref": "#/$defs/F64Bits"
+            },
+            "unit": {
+              "const": "dimensionlessNativeProfile"
+            }
+          },
+          "required": [
+            "valueF64Bits",
+            "unit"
+          ],
+          "additionalProperties": false,
+          "x-nativeOffset": "0x80"
+        },
+        "parameterTableSource": {
+          "$ref": "#/$defs/FS1_FSByteSpan"
+        },
+        "parameterRuleDigest": {
+          "$ref": "#/$defs/FS1_Digest"
+        }
+      },
+      "required": [
+        "nameCount",
+        "fitParameterCount",
+        "parameterNames",
+        "U",
+        "V",
+        "W",
+        "P",
+        "X",
+        "Xe",
+        "Y",
+        "Ye",
+        "rs",
+        "rd",
+        "h",
+        "k",
+        "l",
+        "parameterTableSource",
+        "parameterRuleDigest"
+      ],
+      "additionalProperties": false
+    },
+    "NativeTchWidthInput": {
+      "type": "object",
+      "properties": {
+        "base": {
+          "$ref": "#/$defs/FS1_FSContext"
+        },
+        "phaseId": {
+          "$ref": "#/$defs/FS1_Id"
+        },
+        "profile": {
+          "const": "vesta3909a-native-tch-width"
+        },
+        "parameters": {
+          "$ref": "#/$defs/PowderTch13Parameters"
+        },
+        "twoThetaDegreeF64Bits": {
+          "$ref": "#/$defs/F64Bits"
+        },
+        "reflectionRawAxisScalarF64Bits": {
+          "$ref": "#/$defs/F64Bits"
+        },
+        "rawAxisScalarRule": {
+          "const": "CalcCosPhi-then-native-cos-of-raw-times-pi-over360"
+        },
+        "currentReciprocalMatrixColumnsF64Bits": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Vec3F64Bits"
+          },
+          "minItems": 3,
+          "maxItems": 3
+        }
+      },
+      "required": [
+        "base",
+        "phaseId",
+        "profile",
+        "parameters",
+        "twoThetaDegreeF64Bits",
+        "reflectionRawAxisScalarF64Bits",
+        "rawAxisScalarRule",
+        "currentReciprocalMatrixColumnsF64Bits"
+      ],
+      "additionalProperties": false
+    },
+    "NativeTchWidthOutput": {
+      "type": "object",
+      "properties": {
+        "profile": {
+          "const": "vesta3909a-native-tch-width"
+        },
+        "gaussianWidthDegreeF64Bits": {
+          "$ref": "#/$defs/F64Bits"
+        },
+        "lorentzWidthDegreeF64Bits": {
+          "$ref": "#/$defs/F64Bits"
+        },
+        "combinedWidthDegreeF64Bits": {
+          "$ref": "#/$defs/F64Bits"
+        },
+        "mixingF64Bits": {
+          "$ref": "#/$defs/F64Bits"
+        },
+        "parameterDigest": {
+          "$ref": "#/$defs/FS1_Digest"
+        }
+      },
+      "required": [
+        "profile",
+        "gaussianWidthDegreeF64Bits",
+        "lorentzWidthDegreeF64Bits",
+        "combinedWidthDegreeF64Bits",
+        "mixingF64Bits",
+        "parameterDigest"
+      ],
+      "additionalProperties": false
+    },
+    "NativePowderReflectionInput": {
+      "type": "object",
+      "properties": {
+        "coefficientF64Bits": {
+          "$ref": "#/$defs/ComplexF64Bits"
+        },
+        "coefficientUnit": {
+          "enum": [
+            "electron",
+            "fm",
+            "native-source-amplitude-unqualified"
+          ]
+        },
+        "multiplicity": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 2147483647
+        },
+        "wavelengthAF64Bits": {
+          "$ref": "#/$defs/F64Bits"
+        },
+        "beamWeightF64Bits": {
+          "$ref": "#/$defs/F64Bits"
+        },
+        "reflectionCorrectionF64Bits": {
+          "$ref": "#/$defs/F64Bits"
+        },
+        "perObservationFactorsF64Bits": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/F64Bits"
+          },
+          "minItems": 0
+        },
+        "materializedProfileF64Bits": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/F64Bits"
+          },
+          "minItems": 0
+        },
+        "profileUnit": {
+          "const": "nativeProfilePerTwoThetaDegree"
+        },
+        "profileProducer": {
+          "enum": [
+            "vesta3909a-TCH",
+            "vesta3909a-TCH-Ida",
+            "authored-explicit-control"
+          ]
+        },
+        "profileRuleDigest": {
+          "$ref": "#/$defs/FS1_Digest"
+        },
+        "source": {
+          "$ref": "#/$defs/FS1_FSByteSpan"
+        },
+        "materializedProfileStage": {
+          "const": "unweighted-line-shape-before-observation-beam-phase"
+        }
+      },
+      "required": [
+        "coefficientF64Bits",
+        "coefficientUnit",
+        "multiplicity",
+        "wavelengthAF64Bits",
+        "beamWeightF64Bits",
+        "reflectionCorrectionF64Bits",
+        "perObservationFactorsF64Bits",
+        "materializedProfileF64Bits",
+        "profileUnit",
+        "profileProducer",
+        "profileRuleDigest",
+        "source",
+        "materializedProfileStage"
+      ],
+      "additionalProperties": false
+    },
+    "NativePowderPhaseInput": {
+      "type": "object",
+      "properties": {
+        "phaseId": {
+          "$ref": "#/$defs/FS1_Id"
+        },
+        "phaseScaleF64Bits": {
+          "$ref": "#/$defs/F64Bits"
+        },
+        "reflections": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/NativePowderReflectionInput"
+          },
+          "minItems": 0
+        },
+        "scientificTableUses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ScientificTableUse"
+          },
+          "minItems": 0
+        }
+      },
+      "required": [
+        "phaseId",
+        "phaseScaleF64Bits",
+        "reflections",
+        "scientificTableUses"
+      ],
+      "additionalProperties": false
+    },
+    "NativePowderNormalization": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "no-observed-pattern"
+            },
+            "target": {
+              "const": 100
+            }
+          },
+          "required": [
+            "kind",
+            "target"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "actual-observed-pattern"
+            },
+            "observed": {
+              "$ref": "#/$defs/FS1_Curve"
+            },
+            "actualStoredObservedMaxF64Bits": {
+              "$ref": "#/$defs/F64Bits"
+            }
+          },
+          "required": [
+            "kind",
+            "observed",
+            "actualStoredObservedMaxF64Bits"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "NativePowderAccumulateInput": {
+      "type": "object",
+      "properties": {
+        "base": {
+          "$ref": "#/$defs/FS1_FSContext"
+        },
+        "profile": {
+          "const": "vesta3909a-native-pattern-accumulation"
+        },
+        "sampleTwoThetaDegreeF64Bits": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/F64Bits"
+          },
+          "minItems": 0
+        },
+        "phases": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/NativePowderPhaseInput"
+          },
+          "minItems": 0
+        },
+        "backgroundF64Bits": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/F64Bits"
+          },
+          "minItems": 0
+        },
+        "normalization": {
+          "$ref": "#/$defs/NativePowderNormalization"
+        },
+        "policy": {
+          "const": "sum-all-phases-normalize-shared-maximum-then-add-background"
+        },
+        "maxOutputBytes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "maxResidentBytes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        }
+      },
+      "required": [
+        "base",
+        "profile",
+        "sampleTwoThetaDegreeF64Bits",
+        "phases",
+        "backgroundF64Bits",
+        "normalization",
+        "policy",
+        "maxOutputBytes",
+        "maxResidentBytes"
+      ],
+      "additionalProperties": false
+    },
+    "NativePowderAccumulateOutput": {
+      "type": "object",
+      "properties": {
+        "profile": {
+          "const": "vesta3909a-native-pattern-accumulation"
+        },
+        "sampleTwoThetaDegreeF64Bits": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/F64Bits"
+          },
+          "minItems": 0
+        },
+        "rawPhaseCurvesF64Bits": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/F64Bits"
+            },
+            "minItems": 0
+          },
+          "minItems": 0
+        },
+        "rawAggregateF64Bits": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/F64Bits"
+          },
+          "minItems": 0
+        },
+        "maxRawYcF64Bits": {
+          "$ref": "#/$defs/F64Bits"
+        },
+        "targetF64Bits": {
+          "$ref": "#/$defs/F64Bits"
+        },
+        "commonScaleF64Bits": {
+          "$ref": "#/$defs/F64Bits"
+        },
+        "scaledPhaseCurvesF64Bits": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/F64Bits"
+            },
+            "minItems": 0
+          },
+          "minItems": 0
+        },
+        "backgroundF64Bits": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/F64Bits"
+          },
+          "minItems": 0
+        },
+        "totalF64Bits": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/F64Bits"
+          },
+          "minItems": 0
+        },
+        "unit": {
+          "const": "relativeDisplayIntensity"
+        },
+        "parameterDigest": {
+          "$ref": "#/$defs/FS1_Digest"
+        }
+      },
+      "required": [
+        "profile",
+        "sampleTwoThetaDegreeF64Bits",
+        "rawPhaseCurvesF64Bits",
+        "rawAggregateF64Bits",
+        "maxRawYcF64Bits",
+        "targetF64Bits",
+        "commonScaleF64Bits",
+        "scaledPhaseCurvesF64Bits",
+        "backgroundF64Bits",
+        "totalF64Bits",
+        "unit",
+        "parameterDigest"
+      ],
+      "additionalProperties": false
+    },
+    "QualifiedFieldSource": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "const": "qualified-fs-field"
+        },
+        "field": {
+          "$ref": "#/$defs/FS1_FSFieldBinding"
+        },
+        "sourceFormatDescriptorDigest": {
+          "$ref": "#/$defs/FS1_Digest"
+        }
+      },
+      "required": [
+        "kind",
+        "field",
+        "sourceFormatDescriptorDigest"
+      ],
+      "additionalProperties": false
+    },
+    "NativeFractionalSource": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "const": "native-wien-current-single-f32"
+        },
+        "current": {
+          "$ref": "#/$defs/FC_NativeFractionalGridCurrent1"
+        },
+        "source": {
+          "$ref": "#/$defs/FS1_FSByteSpan"
+        },
+        "sourceRuleDigest": {
+          "$ref": "#/$defs/FS1_Digest"
+        }
+      },
+      "required": [
+        "kind",
+        "current",
+        "source",
+        "sourceRuleDigest"
+      ],
+      "additionalProperties": false
+    },
+    "NativeAffineSource": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "const": "native-affine-current-scalar"
+        },
+        "current": {
+          "$ref": "#/$defs/FC_NativeScalarGridCurrent1"
+        },
+        "source": {
+          "$ref": "#/$defs/FS1_FSByteSpan"
+        },
+        "sourceRuleDigest": {
+          "$ref": "#/$defs/FS1_Digest"
+        }
+      },
+      "required": [
+        "kind",
+        "current",
+        "source",
+        "sourceRuleDigest"
+      ],
+      "additionalProperties": false
+    },
+    "ScalarSource": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/QualifiedFieldSource"
+        },
+        {
+          "$ref": "#/$defs/NativeFractionalSource"
+        },
+        {
+          "$ref": "#/$defs/NativeAffineSource"
+        }
+      ]
+    },
+    "NoComponentSelector": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "const": "none"
+        }
+      },
+      "required": [
+        "kind"
+      ],
+      "additionalProperties": false
+    },
+    "FlatIgnoredSelector": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "const": "native-grid30-flat-selector-ignored"
+        },
+        "selectionIndexI32": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "group0Count": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "group1Count": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "remapFlagI32": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        }
+      },
+      "required": [
+        "kind",
+        "selectionIndexI32",
+        "group0Count",
+        "group1Count",
+        "remapFlagI32"
+      ],
+      "additionalProperties": false
+    },
+    "IndexedNativeSelector": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "const": "native-grid30-indexed-selector"
+        },
+        "selectionIndexI32": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "group0Count": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "group1Count": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "remapFlagI32": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "secondGroupRule": {
+          "const": "selection-equals-two-times-n0-plus-localOrdinal1"
+        }
+      },
+      "required": [
+        "kind",
+        "selectionIndexI32",
+        "group0Count",
+        "group1Count",
+        "remapFlagI32",
+        "secondGroupRule"
+      ],
+      "additionalProperties": false
+    },
+    "IndexedCorrectedSelector": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "const": "corrected-grid30-indexed-selector"
+        },
+        "selectionIndexI32": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "group0Count": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "group1Count": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "remapFlagI32": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "secondGroupRule": {
+          "const": "selection-equals-n0-plus-localOrdinal1"
+        }
+      },
+      "required": [
+        "kind",
+        "selectionIndexI32",
+        "group0Count",
+        "group1Count",
+        "remapFlagI32",
+        "secondGroupRule"
+      ],
+      "additionalProperties": false
+    },
+    "ComponentSelector": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/NoComponentSelector"
+        },
+        {
+          "$ref": "#/$defs/FlatIgnoredSelector"
+        },
+        {
+          "$ref": "#/$defs/IndexedNativeSelector"
+        },
+        {
+          "$ref": "#/$defs/IndexedCorrectedSelector"
+        }
+      ]
+    },
+    "OrderedExpressionEntry": {
+      "type": "object",
+      "properties": {
+        "source": {
+          "$ref": "#/$defs/ScalarSource"
+        },
+        "originalReference": {
+          "$ref": "#/$defs/FS1_FSByteSpan"
+        },
+        "sourceFormat": {
+          "enum": [
+            "materialized-qualified-field",
+            "native-wien-single",
+            "native-grid30-flat",
+            "native-grid30-indexed",
+            "corrected-grid30-indexed"
+          ]
+        },
+        "selector": {
+          "$ref": "#/$defs/ComponentSelector"
+        },
+        "prefix": {
+          "enum": [
+            "add",
+            "multiply",
+            "divide"
+          ]
+        },
+        "coefficientF32Bits": {
+          "$ref": "#/$defs/F32Bits"
+        },
+        "powerF32Bits": {
+          "$ref": "#/$defs/F32Bits"
+        },
+        "formatRuleDigest": {
+          "$ref": "#/$defs/FS1_Digest"
+        }
+      },
+      "required": [
+        "source",
+        "originalReference",
+        "sourceFormat",
+        "selector",
+        "prefix",
+        "coefficientF32Bits",
+        "powerF32Bits",
+        "formatRuleDigest"
+      ],
+      "additionalProperties": false
+    },
+    "ResultQuantityBinding": {
+      "type": "object",
+      "properties": {
+        "meaning": {
+          "enum": [
+            "qualified-physical",
+            "uninterpreted-current-numerical"
+          ]
+        },
+        "physicalKind": {
+          "enum": [
+            "electronDensity",
+            "nuclearDensity",
+            "electronPatterson",
+            "nuclearPatterson",
+            "generic"
+          ]
+        },
+        "unit": {
+          "enum": [
+            "ePerA3",
+            "fmPerA3",
+            "e2PerA3",
+            "fm2PerA3",
+            "declared"
+          ]
+        },
+        "declaredUnit": {
+          "oneOf": [
+            {
+              "type": "string",
+              "minLength": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "resultQuantityRuleDigest": {
+          "$ref": "#/$defs/FS1_Digest"
+        }
+      },
+      "required": [
+        "meaning",
+        "physicalKind",
+        "unit",
+        "declaredUnit",
+        "resultQuantityRuleDigest"
+      ],
+      "additionalProperties": false
+    },
+    "OrderedExpressionInput": {
+      "type": "object",
+      "properties": {
+        "base": {
+          "$ref": "#/$defs/FS1_FSContext"
+        },
+        "phaseId": {
+          "$ref": "#/$defs/FS1_Id"
+        },
+        "profile": {
+          "enum": [
+            "vesta3909a-native-f32-ordered-expression",
+            "corrected-explicit-f32-ordered-expression"
+          ]
+        },
+        "entries": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/OrderedExpressionEntry"
+          },
+          "minItems": 1
+        },
+        "initialization": {
+          "const": "empty-new-output"
+        },
+        "geometryPolicy": {
+          "const": "require-exact-qualified-common-geometry"
+        },
+        "resultQuantity": {
+          "$ref": "#/$defs/ResultQuantityBinding"
+        },
+        "arithmetic": {
+          "const": "native-first-mul32-add-fma32-multiply-mul32-divide-div32-then-mul32"
+        },
+        "reopen": {
+          "const": "restore-materialized-current-do-not-replay"
+        },
+        "maxResidentBytes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "maxOutputBytes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        }
+      },
+      "required": [
+        "base",
+        "phaseId",
+        "profile",
+        "entries",
+        "initialization",
+        "geometryPolicy",
+        "resultQuantity",
+        "arithmetic",
+        "reopen",
+        "maxResidentBytes",
+        "maxOutputBytes"
+      ],
+      "additionalProperties": false
+    },
+    "OrderedExpressionOutput": {
+      "type": "object",
+      "properties": {
+        "base": {
+          "$ref": "#/$defs/FS1_FSContext"
+        },
+        "phaseId": {
+          "$ref": "#/$defs/FS1_Id"
+        },
+        "materialized": {
+          "$ref": "#/$defs/ScalarSource"
+        },
+        "ownership": {
+          "const": "candidate-retained"
+        },
+        "orderedSources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/OrderedExpressionEntry"
+          },
+          "minItems": 1
+        },
+        "resultQuantity": {
+          "$ref": "#/$defs/ResultQuantityBinding"
+        },
+        "materializedDataDigest": {
+          "$ref": "#/$defs/FS1_Digest"
+        },
+        "materializedDescriptorDigest": {
+          "$ref": "#/$defs/FS1_Digest"
+        },
+        "operationRuleDigest": {
+          "$ref": "#/$defs/FS1_Digest"
+        },
+        "parameterDigest": {
+          "$ref": "#/$defs/FS1_Digest"
+        }
+      },
+      "required": [
+        "base",
+        "phaseId",
+        "materialized",
+        "ownership",
+        "orderedSources",
+        "resultQuantity",
+        "materializedDataDigest",
+        "materializedDescriptorDigest",
+        "operationRuleDigest",
+        "parameterDigest"
+      ],
+      "additionalProperties": false
+    },
+    "ExactComparison": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "const": "exact"
+        },
+        "domain": {
+          "enum": [
+            "discrete",
+            "ieee754-bits",
+            "rational",
+            "symbolic-rational-plus-coefficient-over-pi"
+          ]
+        }
+      },
+      "required": [
+        "kind",
+        "domain"
+      ],
+      "additionalProperties": false
+    },
+    "BoundedComparison": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "const": "fixture-f64-absolute-bound"
+        },
+        "absoluteBound": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "unit": {
+          "type": "string",
+          "minLength": 1
+        },
+        "scope": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "kind",
+        "absoluteBound",
+        "unit",
+        "scope"
+      ],
+      "additionalProperties": false
+    },
+    "OracleBinding": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "classification": {
+          "enum": [
+            "original-frozen-prior",
+            "independent-mathematical-prior",
+            "source-derived-reference",
+            "supporting-only"
+          ]
+        },
+        "expectedPath": {
+          "type": "string",
+          "minLength": 1
+        },
+        "expectedSha256": {
+          "$ref": "#/$defs/FS1_Digest"
+        },
+        "expectedPointers": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1
+        },
+        "requiredOutputFields": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1
+        },
+        "comparison": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/ExactComparison"
+            },
+            {
+              "$ref": "#/$defs/BoundedComparison"
+            }
+          ]
+        },
+        "completeArrayCounts": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 9007199254740991
+          },
+          "minItems": 0
+        },
+        "nativeExecutionClaim": {
+          "const": false
+        }
+      },
+      "required": [
+        "id",
+        "classification",
+        "expectedPath",
+        "expectedSha256",
+        "expectedPointers",
+        "requiredOutputFields",
+        "comparison",
+        "completeArrayCounts",
+        "nativeExecutionClaim"
+      ],
+      "additionalProperties": false
+    },
+    "SG2_NativeDimensionDState": {
+      "$ref": "../sg/sg2.schema.json#/$defs/NativeDimensionDState"
+    },
+    "FC_NativeLayerCurrent1": {
+      "$ref": "../../../../../20261115-092025-p1-03-completion/native-layer-current.schema.json"
+    },
+    "FS1_Mesh": {
+      "$ref": "../../../../../20261115-062917-p1-02-o1-o4-corrections/contracts/field-science.contract.json#/$defs/Mesh"
+    },
+    "FS1_FSNonfiniteDiagnostic": {
+      "$ref": "../../../../../20261115-062917-p1-02-o1-o4-corrections/contracts/field-science.contract.json#/$defs/FSNonfiniteDiagnostic"
+    },
+    "FS1_FSConversionResult": {
+      "$ref": "../../../../../20261115-062917-p1-02-o1-o4-corrections/contracts/field-science.contract.json#/$defs/FSConversionResult"
+    },
+    "FS1_FSPeakResult": {
+      "$ref": "../../../../../20261115-062917-p1-02-o1-o4-corrections/contracts/field-science.contract.json#/$defs/FSPeakResult"
+    },
+    "FS1_Field": {
+      "$ref": "../../../../../20261115-062917-p1-02-o1-o4-corrections/contracts/field-science.contract.json#/$defs/Field"
+    },
+    "FS1_Plane": {
+      "$ref": "../../../../../20261115-062917-p1-02-o1-o4-corrections/contracts/field-science.contract.json#/$defs/Plane"
+    },
+    "NativeFailure": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "const": "reference-failure"
+        },
+        "code": {
+          "enum": [
+            "E_REFERENCE_FAILURE",
+            "E_NATIVE_NONFINITE",
+            "E_NATIVE_GRID_DIMENSION_LAYOUT",
+            "E_SOURCE_PARSE",
+            "E_SOURCE_BOUNDS",
+            "E_ZERO_PROFILE_MAX"
+          ]
+        },
+        "sourceProcedure": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sourceAddress": {
+          "type": "string",
+          "minLength": 1
+        },
+        "diagnostic": {
+          "type": "string",
+          "minLength": 1
+        },
+        "preservedInputDigest": {
+          "$ref": "#/$defs/FS1_Digest"
+        },
+        "candidateReleased": {
+          "const": true
+        }
+      },
+      "required": [
+        "status",
+        "code",
+        "sourceProcedure",
+        "sourceAddress",
+        "diagnostic",
+        "preservedInputDigest",
+        "candidateReleased"
+      ],
+      "additionalProperties": false
+    },
+    "ScientificSourceRow": {
+      "type": "object",
+      "properties": {
+        "speciesLabel": {
+          "type": "string",
+          "minLength": 1
+        },
+        "atomicNumberI32": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "actualElementIndexI16": {
+          "type": "integer",
+          "minimum": -32768,
+          "maximum": 32767
+        },
+        "asfdcSource": {
+          "$ref": "#/$defs/TableSourceIdentity"
+        },
+        "selectedFourLineSpan": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/FS1_FSByteSpan"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "selection": {
+          "enum": [
+            "exact-complete-label",
+            "last-provisional-source-row",
+            "no-matching-source-row-zero-amplitudes"
+          ]
+        },
+        "candidateSpansInActualScanOrder": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/FS1_FSByteSpan"
+          },
+          "minItems": 0
+        },
+        "fiveGaussianAF64Bits": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/F64Bits"
+          },
+          "minItems": 5,
+          "maxItems": 5
+        },
+        "fiveGaussianBA2F64Bits": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/F64Bits"
+          },
+          "minItems": 5,
+          "maxItems": 5
+        },
+        "constantElectronF64Bits": {
+          "$ref": "#/$defs/F64Bits"
+        },
+        "coherentBcFmF64Bits": {
+          "$ref": "#/$defs/F64Bits"
+        },
+        "printedMassF64Bits": {
+          "$ref": "#/$defs/F64Bits"
+        },
+        "sourceRuleDigest": {
+          "$ref": "#/$defs/FS1_Digest"
+        },
+        "printedMassUnit": {
+          "const": "source-printed-relative-atomic-mass"
+        }
+      },
+      "required": [
+        "speciesLabel",
+        "atomicNumberI32",
+        "actualElementIndexI16",
+        "asfdcSource",
+        "selectedFourLineSpan",
+        "selection",
+        "candidateSpansInActualScanOrder",
+        "fiveGaussianAF64Bits",
+        "fiveGaussianBA2F64Bits",
+        "constantElectronF64Bits",
+        "coherentBcFmF64Bits",
+        "printedMassF64Bits",
+        "sourceRuleDigest",
+        "printedMassUnit"
+      ],
+      "additionalProperties": false
+    },
+    "DispersionEightColumnRow": {
+      "type": "object",
+      "properties": {
+        "source": {
+          "$ref": "#/$defs/FS1_FSByteSpan"
+        },
+        "valuesF32Bits": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/F32Bits"
+          },
+          "minItems": 8,
+          "maxItems": 8
+        }
+      },
+      "required": [
+        "source",
+        "valuesF32Bits"
+      ],
+      "additionalProperties": false
+    },
+    "NativeDispersionInput": {
+      "type": "object",
+      "properties": {
+        "profile": {
+          "const": "vesta3909a-ffast-linear-f32"
+        },
+        "sourceIdentity": {
+          "$ref": "#/$defs/TableSourceIdentity"
+        },
+        "atomicNumberI32": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "wavelengthNmF32Bits": {
+          "$ref": "#/$defs/F32Bits"
+        },
+        "relativisticCorrectionF32Bits": {
+          "$ref": "#/$defs/F32Bits"
+        },
+        "nuclearThomsonF32Bits": {
+          "$ref": "#/$defs/F32Bits"
+        },
+        "completeRows": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/DispersionEightColumnRow"
+          },
+          "minItems": 1
+        },
+        "sourceEdgeHeaderSpans": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/FS1_FSByteSpan"
+          },
+          "minItems": 0
+        }
+      },
+      "required": [
+        "profile",
+        "sourceIdentity",
+        "atomicNumberI32",
+        "wavelengthNmF32Bits",
+        "relativisticCorrectionF32Bits",
+        "nuclearThomsonF32Bits",
+        "completeRows",
+        "sourceEdgeHeaderSpans"
+      ],
+      "additionalProperties": false
+    },
+    "NativeDispersionOutput": {
+      "type": "object",
+      "properties": {
+        "energyKeVF32Bits": {
+          "$ref": "#/$defs/F32Bits"
+        },
+        "lowerSourceOrdinal": {
+          "oneOf": [
+            {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "upperSourceOrdinal": {
+          "oneOf": [
+            {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "lowerWasInitializedZero": {
+          "type": "boolean"
+        },
+        "upperWasResetZeroAtEof": {
+          "type": "boolean"
+        },
+        "fpElectronF32Bits": {
+          "$ref": "#/$defs/F32Bits"
+        },
+        "fppElectronF32Bits": {
+          "$ref": "#/$defs/F32Bits"
+        },
+        "massAttenuationCm2PerGF32Bits": {
+          "$ref": "#/$defs/F32Bits"
+        },
+        "parameterDigest": {
+          "$ref": "#/$defs/FS1_Digest"
+        }
+      },
+      "required": [
+        "energyKeVF32Bits",
+        "lowerSourceOrdinal",
+        "upperSourceOrdinal",
+        "lowerWasInitializedZero",
+        "upperWasResetZeroAtEof",
+        "fpElectronF32Bits",
+        "fppElectronF32Bits",
+        "massAttenuationCm2PerGF32Bits",
+        "parameterDigest"
+      ],
+      "additionalProperties": false
+    },
+    "NativeEquivalentD3": {
+      "type": "object",
+      "properties": {
+        "hklD": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": -2147483648,
+            "maximum": 2147483647
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "phasePairF64Bits": {
+          "$ref": "#/$defs/ComplexF64Bits"
+        },
+        "sourceOrdinalZeroBased": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        }
+      },
+      "required": [
+        "hklD",
+        "phasePairF64Bits",
+        "sourceOrdinalZeroBased"
+      ],
+      "additionalProperties": false
+    },
+    "NativeReflectionD3": {
+      "type": "object",
+      "properties": {
+        "hklD": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": -2147483648,
+            "maximum": 2147483647
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "physicalReciprocalMagnitudePerAF64Bits": {
+          "$ref": "#/$defs/F64Bits"
+        },
+        "internalReciprocalMagnitudeNativeF64Bits": {
+          "$ref": "#/$defs/F64Bits"
+        },
+        "integerPhaseMultiplicityI32": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "friedelFlagsU32": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4294967295
+        },
+        "equivalents": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/NativeEquivalentD3"
+          },
+          "minItems": 1
+        },
+        "coefficientF64Bits": {
+          "$ref": "#/$defs/ComplexF64Bits"
+        },
+        "sourceOrdinalZeroBased": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        }
+      },
+      "required": [
+        "hklD",
+        "physicalReciprocalMagnitudePerAF64Bits",
+        "internalReciprocalMagnitudeNativeF64Bits",
+        "integerPhaseMultiplicityI32",
+        "friedelFlagsU32",
+        "equivalents",
+        "coefficientF64Bits",
+        "sourceOrdinalZeroBased"
+      ],
+      "additionalProperties": false
+    },
+    "NativeReflectionPopulationD3": {
+      "type": "object",
+      "properties": {
+        "dimensionD": {
+          "const": 3
+        },
+        "rows": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/NativeReflectionD3"
+          },
+          "minItems": 0
+        },
+        "populationDigest": {
+          "$ref": "#/$defs/FS1_Digest"
+        },
+        "producerRuleDigest": {
+          "$ref": "#/$defs/FS1_Digest"
+        }
+      },
+      "required": [
+        "dimensionD",
+        "rows",
+        "populationDigest",
+        "producerRuleDigest"
+      ],
+      "additionalProperties": false
+    },
+    "NativeEquivalentD4": {
+      "type": "object",
+      "properties": {
+        "hklD": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": -2147483648,
+            "maximum": 2147483647
+          },
+          "minItems": 4,
+          "maxItems": 4
+        },
+        "phasePairF64Bits": {
+          "$ref": "#/$defs/ComplexF64Bits"
+        },
+        "sourceOrdinalZeroBased": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        }
+      },
+      "required": [
+        "hklD",
+        "phasePairF64Bits",
+        "sourceOrdinalZeroBased"
+      ],
+      "additionalProperties": false
+    },
+    "NativeReflectionD4": {
+      "type": "object",
+      "properties": {
+        "hklD": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": -2147483648,
+            "maximum": 2147483647
+          },
+          "minItems": 4,
+          "maxItems": 4
+        },
+        "physicalReciprocalMagnitudePerAF64Bits": {
+          "$ref": "#/$defs/F64Bits"
+        },
+        "internalReciprocalMagnitudeNativeF64Bits": {
+          "$ref": "#/$defs/F64Bits"
+        },
+        "integerPhaseMultiplicityI32": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "friedelFlagsU32": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4294967295
+        },
+        "equivalents": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/NativeEquivalentD4"
+          },
+          "minItems": 1
+        },
+        "coefficientF64Bits": {
+          "$ref": "#/$defs/ComplexF64Bits"
+        },
+        "sourceOrdinalZeroBased": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        }
+      },
+      "required": [
+        "hklD",
+        "physicalReciprocalMagnitudePerAF64Bits",
+        "internalReciprocalMagnitudeNativeF64Bits",
+        "integerPhaseMultiplicityI32",
+        "friedelFlagsU32",
+        "equivalents",
+        "coefficientF64Bits",
+        "sourceOrdinalZeroBased"
+      ],
+      "additionalProperties": false
+    },
+    "NativeReflectionPopulationD4": {
+      "type": "object",
+      "properties": {
+        "dimensionD": {
+          "const": 4
+        },
+        "rows": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/NativeReflectionD4"
+          },
+          "minItems": 0
+        },
+        "populationDigest": {
+          "$ref": "#/$defs/FS1_Digest"
+        },
+        "producerRuleDigest": {
+          "$ref": "#/$defs/FS1_Digest"
+        }
+      },
+      "required": [
+        "dimensionD",
+        "rows",
+        "populationDigest",
+        "producerRuleDigest"
+      ],
+      "additionalProperties": false
+    },
+    "NativeEquivalentD5": {
+      "type": "object",
+      "properties": {
+        "hklD": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": -2147483648,
+            "maximum": 2147483647
+          },
+          "minItems": 5,
+          "maxItems": 5
+        },
+        "phasePairF64Bits": {
+          "$ref": "#/$defs/ComplexF64Bits"
+        },
+        "sourceOrdinalZeroBased": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        }
+      },
+      "required": [
+        "hklD",
+        "phasePairF64Bits",
+        "sourceOrdinalZeroBased"
+      ],
+      "additionalProperties": false
+    },
+    "NativeReflectionD5": {
+      "type": "object",
+      "properties": {
+        "hklD": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": -2147483648,
+            "maximum": 2147483647
+          },
+          "minItems": 5,
+          "maxItems": 5
+        },
+        "physicalReciprocalMagnitudePerAF64Bits": {
+          "$ref": "#/$defs/F64Bits"
+        },
+        "internalReciprocalMagnitudeNativeF64Bits": {
+          "$ref": "#/$defs/F64Bits"
+        },
+        "integerPhaseMultiplicityI32": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "friedelFlagsU32": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4294967295
+        },
+        "equivalents": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/NativeEquivalentD5"
+          },
+          "minItems": 1
+        },
+        "coefficientF64Bits": {
+          "$ref": "#/$defs/ComplexF64Bits"
+        },
+        "sourceOrdinalZeroBased": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        }
+      },
+      "required": [
+        "hklD",
+        "physicalReciprocalMagnitudePerAF64Bits",
+        "internalReciprocalMagnitudeNativeF64Bits",
+        "integerPhaseMultiplicityI32",
+        "friedelFlagsU32",
+        "equivalents",
+        "coefficientF64Bits",
+        "sourceOrdinalZeroBased"
+      ],
+      "additionalProperties": false
+    },
+    "NativeReflectionPopulationD5": {
+      "type": "object",
+      "properties": {
+        "dimensionD": {
+          "const": 5
+        },
+        "rows": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/NativeReflectionD5"
+          },
+          "minItems": 0
+        },
+        "populationDigest": {
+          "$ref": "#/$defs/FS1_Digest"
+        },
+        "producerRuleDigest": {
+          "$ref": "#/$defs/FS1_Digest"
+        }
+      },
+      "required": [
+        "dimensionD",
+        "rows",
+        "populationDigest",
+        "producerRuleDigest"
+      ],
+      "additionalProperties": false
+    },
+    "NativeEquivalentD6": {
+      "type": "object",
+      "properties": {
+        "hklD": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": -2147483648,
+            "maximum": 2147483647
+          },
+          "minItems": 6,
+          "maxItems": 6
+        },
+        "phasePairF64Bits": {
+          "$ref": "#/$defs/ComplexF64Bits"
+        },
+        "sourceOrdinalZeroBased": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        }
+      },
+      "required": [
+        "hklD",
+        "phasePairF64Bits",
+        "sourceOrdinalZeroBased"
+      ],
+      "additionalProperties": false
+    },
+    "NativeReflectionD6": {
+      "type": "object",
+      "properties": {
+        "hklD": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": -2147483648,
+            "maximum": 2147483647
+          },
+          "minItems": 6,
+          "maxItems": 6
+        },
+        "physicalReciprocalMagnitudePerAF64Bits": {
+          "$ref": "#/$defs/F64Bits"
+        },
+        "internalReciprocalMagnitudeNativeF64Bits": {
+          "$ref": "#/$defs/F64Bits"
+        },
+        "integerPhaseMultiplicityI32": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "friedelFlagsU32": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4294967295
+        },
+        "equivalents": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/NativeEquivalentD6"
+          },
+          "minItems": 1
+        },
+        "coefficientF64Bits": {
+          "$ref": "#/$defs/ComplexF64Bits"
+        },
+        "sourceOrdinalZeroBased": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        }
+      },
+      "required": [
+        "hklD",
+        "physicalReciprocalMagnitudePerAF64Bits",
+        "internalReciprocalMagnitudeNativeF64Bits",
+        "integerPhaseMultiplicityI32",
+        "friedelFlagsU32",
+        "equivalents",
+        "coefficientF64Bits",
+        "sourceOrdinalZeroBased"
+      ],
+      "additionalProperties": false
+    },
+    "NativeReflectionPopulationD6": {
+      "type": "object",
+      "properties": {
+        "dimensionD": {
+          "const": 6
+        },
+        "rows": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/NativeReflectionD6"
+          },
+          "minItems": 0
+        },
+        "populationDigest": {
+          "$ref": "#/$defs/FS1_Digest"
+        },
+        "producerRuleDigest": {
+          "$ref": "#/$defs/FS1_Digest"
+        }
+      },
+      "required": [
+        "dimensionD",
+        "rows",
+        "populationDigest",
+        "producerRuleDigest"
+      ],
+      "additionalProperties": false
+    },
+    "NativeReflectionPopulation": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/NativeReflectionPopulationD3"
+        },
+        {
+          "$ref": "#/$defs/NativeReflectionPopulationD4"
+        },
+        {
+          "$ref": "#/$defs/NativeReflectionPopulationD5"
+        },
+        {
+          "$ref": "#/$defs/NativeReflectionPopulationD6"
+        }
+      ]
+    },
+    "NativeThermalSelection": {
+      "type": "object",
+      "properties": {
+        "anisotropicEnabledI32": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "anisotropicRepresentation": {
+          "enum": [
+            "phase214-Uij0",
+            "phase214-beta1"
+          ]
+        },
+        "isotropicRepresentation": {
+          "enum": [
+            "phase218-U0",
+            "phase218-B1"
+          ]
+        },
+        "perSiteFlagsPolicy": {
+          "const": "actual-da-bit3-source-dispatch"
+        },
+        "covariancePolicy": {
+          "const": "native-diagonal-and-actual-SUD; ORFFE-full-is-separate-explicit-profile"
+        },
+        "sourceRuleDigest": {
+          "$ref": "#/$defs/FS1_Digest"
+        }
+      },
+      "required": [
+        "anisotropicEnabledI32",
+        "anisotropicRepresentation",
+        "isotropicRepresentation",
+        "perSiteFlagsPolicy",
+        "covariancePolicy",
+        "sourceRuleDigest"
+      ],
+      "additionalProperties": false
+    },
+    "NativeScatteringInput": {
+      "type": "object",
+      "properties": {
+        "base": {
+          "$ref": "#/$defs/FS1_FSContext"
+        },
+        "phaseId": {
+          "$ref": "#/$defs/FS1_Id"
+        },
+        "profile": {
+          "const": "vesta3909a-actual-site-scattering"
+        },
+        "model": {
+          "$ref": "#/$defs/SG2_NativeDimensionDState"
+        },
+        "radiation": {
+          "enum": [
+            "xray-electron-amplitude",
+            "neutron-coherent-fm"
+          ]
+        },
+        "thermal": {
+          "$ref": "#/$defs/NativeThermalSelection"
+        },
+        "completeElementRows": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ScientificSourceRow"
+          },
+          "minItems": 0
+        },
+        "completeDispersionByElement": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/NativeDispersionOutput"
+          },
+          "minItems": 0
+        },
+        "actualSymmetryOperatorCount": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 2147483647
+        },
+        "reflections": {
+          "$ref": "#/$defs/NativeReflectionPopulation"
+        },
+        "maxOutputBytes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "maxResidentBytes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        }
+      },
+      "required": [
+        "base",
+        "phaseId",
+        "profile",
+        "model",
+        "radiation",
+        "thermal",
+        "completeElementRows",
+        "completeDispersionByElement",
+        "actualSymmetryOperatorCount",
+        "reflections",
+        "maxOutputBytes",
+        "maxResidentBytes"
+      ],
+      "additionalProperties": false
+    },
+    "SiteReflectionContribution": {
+      "type": "object",
+      "properties": {
+        "siteId": {
+          "$ref": "#/$defs/FS1_Id"
+        },
+        "reflectionSourceOrdinalZeroBased": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "equivalentSourceOrdinalZeroBased": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "coefficientF64Bits": {
+          "$ref": "#/$defs/ComplexF64Bits"
+        },
+        "thermalFactorF64Bits": {
+          "$ref": "#/$defs/F64Bits"
+        },
+        "weightedAmplitudeF64Bits": {
+          "$ref": "#/$defs/ComplexF64Bits"
+        }
+      },
+      "required": [
+        "siteId",
+        "reflectionSourceOrdinalZeroBased",
+        "equivalentSourceOrdinalZeroBased",
+        "coefficientF64Bits",
+        "thermalFactorF64Bits",
+        "weightedAmplitudeF64Bits"
+      ],
+      "additionalProperties": false
+    },
+    "NativeScatteringOutput": {
+      "type": "object",
+      "properties": {
+        "profile": {
+          "const": "vesta3909a-actual-site-scattering"
+        },
+        "reflections": {
+          "$ref": "#/$defs/NativeReflectionPopulation"
+        },
+        "allSiteEquivalentContributions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SiteReflectionContribution"
+          },
+          "minItems": 0
+        },
+        "amplitudeUnit": {
+          "enum": [
+            "electron",
+            "fm"
+          ]
+        },
+        "elementRowsUsed": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ScientificSourceRow"
+          },
+          "minItems": 0
+        },
+        "diagnostics": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/FS1_Diagnostic"
+          },
+          "minItems": 0
+        },
+        "parameterDigest": {
+          "$ref": "#/$defs/FS1_Digest"
+        }
+      },
+      "required": [
+        "profile",
+        "reflections",
+        "allSiteEquivalentContributions",
+        "amplitudeUnit",
+        "elementRowsUsed",
+        "diagnostics",
+        "parameterDigest"
+      ],
+      "additionalProperties": false
+    },
+    "NativeFieldGrid": {
+      "type": "object",
+      "properties": {
+        "actualDimensionD": {
+          "enum": [
+            3,
+            4,
+            5,
+            6
+          ]
+        },
+        "nativeThreeDivisions": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2147483647
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "currentC2OColumnsF64Bits": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Vec3F64Bits"
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "physicalFieldQuantity": {
+          "enum": [
+            "electronDensity",
+            "nuclearDensity",
+            "electronPatterson",
+            "nuclearPatterson"
+          ]
+        },
+        "sourceLayoutRule": {
+          "const": "VolData-c-10-14-divisions-18-vector-pointer"
+        },
+        "gridProducerRuleDigest": {
+          "$ref": "#/$defs/FS1_Digest"
+        }
+      },
+      "required": [
+        "actualDimensionD",
+        "nativeThreeDivisions",
+        "currentC2OColumnsF64Bits",
+        "physicalFieldQuantity",
+        "sourceLayoutRule",
+        "gridProducerRuleDigest"
+      ],
+      "additionalProperties": false
+    },
+    "NativeFourierFieldInput": {
+      "type": "object",
+      "properties": {
+        "base": {
+          "$ref": "#/$defs/FS1_FSContext"
+        },
+        "phaseId": {
+          "$ref": "#/$defs/FS1_Id"
+        },
+        "profile": {
+          "const": "vesta3909a-native-full-fourier"
+        },
+        "grid": {
+          "$ref": "#/$defs/NativeFieldGrid"
+        },
+        "reflections": {
+          "$ref": "#/$defs/NativeReflectionPopulation"
+        },
+        "actualCurrentF000F64Bits": {
+          "$ref": "#/$defs/F64Bits"
+        },
+        "rawModeI32": {
+          "enum": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        "amplitudeUnit": {
+          "enum": [
+            "electron",
+            "fm",
+            "electron2",
+            "fm2"
+          ]
+        },
+        "packingPolicy": {
+          "const": "native-half-grid-last-writer-flags-and-Friedel-order"
+        },
+        "maxOutputBytes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "maxResidentBytes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        }
+      },
+      "required": [
+        "base",
+        "phaseId",
+        "profile",
+        "grid",
+        "reflections",
+        "actualCurrentF000F64Bits",
+        "rawModeI32",
+        "amplitudeUnit",
+        "packingPolicy",
+        "maxOutputBytes",
+        "maxResidentBytes"
+      ],
+      "additionalProperties": false
+    },
+    "NativeFullFieldOutput": {
+      "type": "object",
+      "properties": {
+        "base": {
+          "$ref": "#/$defs/FS1_FSContext"
+        },
+        "phaseId": {
+          "$ref": "#/$defs/FS1_Id"
+        },
+        "grid": {
+          "$ref": "#/$defs/NativeFieldGrid"
+        },
+        "coreValuesF32Bits": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/F32Bits"
+          },
+          "minItems": 0
+        },
+        "periodicClosureValuesF32Bits": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/F32Bits"
+          },
+          "minItems": 0
+        },
+        "packedSpectrumF64Bits": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ComplexF64Bits"
+          },
+          "minItems": 0
+        },
+        "field": {
+          "$ref": "#/$defs/ScalarSource"
+        },
+        "quantityUnit": {
+          "enum": [
+            "ePerA3",
+            "fmPerA3",
+            "e2PerA3",
+            "fm2PerA3"
+          ]
+        },
+        "actualF000F64Bits": {
+          "$ref": "#/$defs/F64Bits"
+        },
+        "sourcePopulationDigest": {
+          "$ref": "#/$defs/FS1_Digest"
+        },
+        "parameterDigest": {
+          "$ref": "#/$defs/FS1_Digest"
+        }
+      },
+      "required": [
+        "base",
+        "phaseId",
+        "grid",
+        "coreValuesF32Bits",
+        "periodicClosureValuesF32Bits",
+        "packedSpectrumF64Bits",
+        "field",
+        "quantityUnit",
+        "actualF000F64Bits",
+        "sourcePopulationDigest",
+        "parameterDigest"
+      ],
+      "additionalProperties": false
+    },
+    "NativeModelFieldInput": {
+      "type": "object",
+      "properties": {
+        "base": {
+          "$ref": "#/$defs/FS1_FSContext"
+        },
+        "phaseId": {
+          "$ref": "#/$defs/FS1_Id"
+        },
+        "profile": {
+          "const": "vesta3909a-native-model-full-field"
+        },
+        "model": {
+          "$ref": "#/$defs/SG2_NativeDimensionDState"
+        },
+        "gridSelection": {
+          "$ref": "#/$defs/NativeGridNoInput"
+        },
+        "rawModelModeI32": {
+          "enum": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        "thermal": {
+          "$ref": "#/$defs/NativeThermalSelection"
+        },
+        "completeElementRows": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ScientificSourceRow"
+          },
+          "minItems": 0
+        },
+        "anomalousPolicy": {
+          "const": "CalcModelDensity-zero-three-column-array"
+        },
+        "maxOutputBytes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "maxResidentBytes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        }
+      },
+      "required": [
+        "base",
+        "phaseId",
+        "profile",
+        "model",
+        "gridSelection",
+        "rawModelModeI32",
+        "thermal",
+        "completeElementRows",
+        "anomalousPolicy",
+        "maxOutputBytes",
+        "maxResidentBytes"
+      ],
+      "additionalProperties": false
+    },
+    "NativeModelFieldOutput": {
+      "type": "object",
+      "properties": {
+        "fullField": {
+          "$ref": "#/$defs/NativeFullFieldOutput"
+        },
+        "fullScattering": {
+          "$ref": "#/$defs/NativeScatteringOutput"
+        },
+        "F000PositiveF64Bits": {
+          "$ref": "#/$defs/F64Bits"
+        },
+        "F000NegativeF64Bits": {
+          "$ref": "#/$defs/F64Bits"
+        },
+        "F000BeforePattersonSquareF64Bits": {
+          "$ref": "#/$defs/F64Bits"
+        },
+        "allSourceRows": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ScientificSourceRow"
+          },
+          "minItems": 0
+        }
+      },
+      "required": [
+        "fullField",
+        "fullScattering",
+        "F000PositiveF64Bits",
+        "F000NegativeF64Bits",
+        "F000BeforePattersonSquareF64Bits",
+        "allSourceRows"
+      ],
+      "additionalProperties": false
+    },
+    "NativeVolumeTransformInput": {
+      "type": "object",
+      "properties": {
+        "base": {
+          "$ref": "#/$defs/FS1_FSContext"
+        },
+        "phaseId": {
+          "$ref": "#/$defs/FS1_Id"
+        },
+        "profile": {
+          "enum": [
+            "vesta3909a-volume-to-structure-factors",
+            "vesta3909a-volume-patterson"
+          ]
+        },
+        "source": {
+          "$ref": "#/$defs/ScalarSource"
+        },
+        "grid": {
+          "$ref": "#/$defs/NativeFieldGrid"
+        },
+        "requestedReflections": {
+          "$ref": "#/$defs/NativeReflectionPopulation"
+        },
+        "maxOutputBytes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "maxResidentBytes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        }
+      },
+      "required": [
+        "base",
+        "phaseId",
+        "profile",
+        "source",
+        "grid",
+        "requestedReflections",
+        "maxOutputBytes",
+        "maxResidentBytes"
+      ],
+      "additionalProperties": false
+    },
+    "NativeVolumeTransformOutput": {
+      "type": "object",
+      "properties": {
+        "fullField": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/NativeFullFieldOutput"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "reflections": {
+          "$ref": "#/$defs/NativeReflectionPopulation"
+        },
+        "sourceDescriptorDigest": {
+          "$ref": "#/$defs/FS1_Digest"
+        },
+        "transformScaleVolumePerCorePointF64Bits": {
+          "$ref": "#/$defs/F64Bits"
+        },
+        "packedSpectrumF64Bits": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ComplexF64Bits"
+          },
+          "minItems": 0
+        },
+        "parameterDigest": {
+          "$ref": "#/$defs/FS1_Digest"
+        }
+      },
+      "required": [
+        "fullField",
+        "reflections",
+        "sourceDescriptorDigest",
+        "transformScaleVolumePerCorePointF64Bits",
+        "packedSpectrumF64Bits",
+        "parameterDigest"
+      ],
+      "additionalProperties": false
+    },
+    "NativePeakRecord": {
+      "type": "object",
+      "properties": {
+        "sourceCoreIndex": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "fractionalPositionF64Bits": {
+          "$ref": "#/$defs/Vec3F64Bits"
+        },
+        "peakValueF64Bits": {
+          "$ref": "#/$defs/F64Bits"
+        },
+        "integralF64Bits": {
+          "$ref": "#/$defs/F64Bits"
+        },
+        "volumeA3F64Bits": {
+          "$ref": "#/$defs/F64Bits"
+        },
+        "metricWeightF64Bits": {
+          "$ref": "#/$defs/F64Bits"
+        },
+        "metricOffsetF64Bits": {
+          "$ref": "#/$defs/F64Bits"
+        }
+      },
+      "required": [
+        "sourceCoreIndex",
+        "fractionalPositionF64Bits",
+        "peakValueF64Bits",
+        "integralF64Bits",
+        "volumeA3F64Bits",
+        "metricWeightF64Bits",
+        "metricOffsetF64Bits"
+      ],
+      "additionalProperties": false
+    },
+    "NativePeakSearchInput": {
+      "type": "object",
+      "properties": {
+        "base": {
+          "$ref": "#/$defs/FS1_FSContext"
+        },
+        "phaseId": {
+          "$ref": "#/$defs/FS1_Id"
+        },
+        "profile": {
+          "const": "vesta3909a-peak-13-half-neighbours"
+        },
+        "source": {
+          "$ref": "#/$defs/ScalarSource"
+        },
+        "actualC2OColumnsF64Bits": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Vec3F64Bits"
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "requestedCountI32": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "includeNegative": {
+          "type": "boolean"
+        },
+        "automaticIntegration": {
+          "const": "native-Voronoi-t2-method0"
+        },
+        "maxOutputBytes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "maxResidentBytes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        }
+      },
+      "required": [
+        "base",
+        "phaseId",
+        "profile",
+        "source",
+        "actualC2OColumnsF64Bits",
+        "requestedCountI32",
+        "includeNegative",
+        "automaticIntegration",
+        "maxOutputBytes",
+        "maxResidentBytes"
+      ],
+      "additionalProperties": false
+    },
+    "NativeVoronoiInput": {
+      "type": "object",
+      "properties": {
+        "base": {
+          "$ref": "#/$defs/FS1_FSContext"
+        },
+        "phaseId": {
+          "$ref": "#/$defs/FS1_Id"
+        },
+        "profile": {
+          "const": "vesta3909a-voronoi-shell-and-local-refinement"
+        },
+        "source": {
+          "$ref": "#/$defs/ScalarSource"
+        },
+        "actualC2OColumnsF64Bits": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Vec3F64Bits"
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "orderedPeaks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/NativePeakRecord"
+          },
+          "minItems": 1
+        },
+        "subdivisionsPerAxis": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 2147483647
+        },
+        "metricMethodI32": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "boundaryToleranceF64Bits": {
+          "const": "3eb0c6f7a0b5ed8d"
+        },
+        "candidateRule": {
+          "const": "node-plus-26-wrapped-neighbour-owners"
+        },
+        "densityRule": {
+          "const": "piecewise-constant-original-node-f32"
+        },
+        "maxOutputBytes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "maxResidentBytes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        }
+      },
+      "required": [
+        "base",
+        "phaseId",
+        "profile",
+        "source",
+        "actualC2OColumnsF64Bits",
+        "orderedPeaks",
+        "subdivisionsPerAxis",
+        "metricMethodI32",
+        "boundaryToleranceF64Bits",
+        "candidateRule",
+        "densityRule",
+        "maxOutputBytes",
+        "maxResidentBytes"
+      ],
+      "additionalProperties": false
+    },
+    "NativeNodeAllocation": {
+      "type": "object",
+      "properties": {
+        "coreIndex": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "subsampleOrdinalZeroBased": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "tiedOwnerOrdinals": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 9007199254740991
+          },
+          "minItems": 1
+        },
+        "fractionF64Bits": {
+          "$ref": "#/$defs/F64Bits"
+        },
+        "signedDensityContributionF64Bits": {
+          "$ref": "#/$defs/F64Bits"
+        },
+        "volumeContributionA3F64Bits": {
+          "$ref": "#/$defs/F64Bits"
+        }
+      },
+      "required": [
+        "coreIndex",
+        "subsampleOrdinalZeroBased",
+        "tiedOwnerOrdinals",
+        "fractionF64Bits",
+        "signedDensityContributionF64Bits",
+        "volumeContributionA3F64Bits"
+      ],
+      "additionalProperties": false
+    },
+    "NativePeakVoronoiOutput": {
+      "type": "object",
+      "properties": {
+        "counterU16": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 65535
+          },
+          "minItems": 0
+        },
+        "orderedPeaks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/NativePeakRecord"
+          },
+          "minItems": 0
+        },
+        "initialCoreOwners": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 9007199254740991
+          },
+          "minItems": 0
+        },
+        "initialCoreScoresF64Bits": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/F64Bits"
+          },
+          "minItems": 0
+        },
+        "allAllocations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/NativeNodeAllocation"
+          },
+          "minItems": 0
+        },
+        "boundaryVoxelCount": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "totalSignedIntegralF64Bits": {
+          "$ref": "#/$defs/F64Bits"
+        },
+        "totalAssignedVolumeA3F64Bits": {
+          "$ref": "#/$defs/F64Bits"
+        },
+        "parameterDigest": {
+          "$ref": "#/$defs/FS1_Digest"
+        }
+      },
+      "required": [
+        "counterU16",
+        "orderedPeaks",
+        "initialCoreOwners",
+        "initialCoreScoresF64Bits",
+        "allAllocations",
+        "boundaryVoxelCount",
+        "totalSignedIntegralF64Bits",
+        "totalAssignedVolumeA3F64Bits",
+        "parameterDigest"
+      ],
+      "additionalProperties": false
+    },
+    "NativeMeshInput": {
+      "type": "object",
+      "properties": {
+        "base": {
+          "$ref": "#/$defs/FS1_FSContext"
+        },
+        "profile": {
+          "const": "vesta3909a-native-isosurface-mesh"
+        },
+        "orderedActualPhases": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/NativeMeshPhase"
+          },
+          "minItems": 0
+        },
+        "actualLayerPopulation": {
+          "$ref": "#/$defs/FC_NativeLayerCurrent1"
+        },
+        "storedLevels": {
+          "$ref": "#/$defs/FC_NativeStoredScalarIsoview1"
+        },
+        "textureSettings": {
+          "$ref": "#/$defs/NativeMeshTextureSettings"
+        },
+        "sourceConsumerRuleDigest": {
+          "$ref": "#/$defs/FS1_Digest"
+        },
+        "maxOutputBytes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "maxResidentBytes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        }
+      },
+      "required": [
+        "base",
+        "profile",
+        "orderedActualPhases",
+        "actualLayerPopulation",
+        "storedLevels",
+        "textureSettings",
+        "sourceConsumerRuleDigest",
+        "maxOutputBytes",
+        "maxResidentBytes"
+      ],
+      "additionalProperties": false
+    },
+    "NativeMeshTriangle": {
+      "type": "object",
+      "properties": {
+        "levelOrdinal": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "sign": {
+          "enum": [
+            -1,
+            1
+          ]
+        },
+        "coreCellIndex": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "nativeCaseId": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 255
+        },
+        "sourceRowTriangleOrdinal": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4
+        },
+        "edgeIds": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 11
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "vertexIndices": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 9007199254740991
+          },
+          "minItems": 3,
+          "maxItems": 3
+        }
+      },
+      "required": [
+        "levelOrdinal",
+        "sign",
+        "coreCellIndex",
+        "nativeCaseId",
+        "sourceRowTriangleOrdinal",
+        "edgeIds",
+        "vertexIndices"
+      ],
+      "additionalProperties": false
+    },
+    "NativeMeshOutput": {
+      "type": "object",
+      "properties": {
+        "verticesCartesianF32Bits": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Vec3F32Bits"
+          },
+          "minItems": 0
+        },
+        "triangles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/NativeMeshTriangle"
+          },
+          "minItems": 0
+        },
+        "faceNormalsF32Bits": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Vec3F32Bits"
+          },
+          "minItems": 0
+        },
+        "vertexNormalsF32Bits": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Vec3F32Bits"
+          },
+          "minItems": 0
+        },
+        "levelBindings": {
+          "$ref": "#/$defs/FC_NativeStoredScalarIsoview1"
+        },
+        "layerBindings": {
+          "$ref": "#/$defs/FC_NativeLayerCurrent1"
+        },
+        "sourceDescriptorDigest": {
+          "$ref": "#/$defs/FS1_Digest"
+        },
+        "nativeNonfiniteTriangleOrdinals": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 9007199254740991
+          },
+          "minItems": 0
+        },
+        "parameterDigest": {
+          "$ref": "#/$defs/FS1_Digest"
+        },
+        "vertexColorScalarsF32Bits": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/F32Bits"
+          },
+          "minItems": 0
+        },
+        "vertexTextureCoordinatesF32Bits": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/F32Bits"
+          },
+          "minItems": 0
+        },
+        "completeClippedPolygonVertexIndices": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            },
+            "minItems": 3
+          },
+          "minItems": 0
+        },
+        "sourcePhaseByTriangle": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/FS1_Id"
+          },
+          "minItems": 0
+        },
+        "stage": {
+          "const": "native-pre-camera-sort-geometry-normals-scalar-texture"
+        },
+        "levelBranchRanges": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/NativeMeshBranchRange"
+          },
+          "minItems": 0
+        },
+        "nativeNonfiniteUsedVertexOrdinals": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 9007199254740991
+          },
+          "minItems": 0
+        },
+        "nativeNonfiniteUnusedVertexOrdinals": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 9007199254740991
+          },
+          "minItems": 0
+        }
+      },
+      "required": [
+        "verticesCartesianF32Bits",
+        "triangles",
+        "faceNormalsF32Bits",
+        "vertexNormalsF32Bits",
+        "levelBindings",
+        "layerBindings",
+        "sourceDescriptorDigest",
+        "nativeNonfiniteTriangleOrdinals",
+        "parameterDigest",
+        "vertexColorScalarsF32Bits",
+        "vertexTextureCoordinatesF32Bits",
+        "completeClippedPolygonVertexIndices",
+        "sourcePhaseByTriangle",
+        "stage",
+        "levelBranchRanges",
+        "nativeNonfiniteUsedVertexOrdinals",
+        "nativeNonfiniteUnusedVertexOrdinals"
+      ],
+      "additionalProperties": false
+    },
+    "NativeConversionInput": {
+      "type": "object",
+      "properties": {
+        "base": {
+          "$ref": "#/$defs/FS1_FSContext"
+        },
+        "phaseId": {
+          "$ref": "#/$defs/FS1_Id"
+        },
+        "profile": {
+          "const": "vesta3909a-native-electronic-energy-grid"
+        },
+        "source": {
+          "$ref": "#/$defs/ScalarSource"
+        },
+        "actualC2OColumnsF64Bits": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Vec3F64Bits"
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "nativeCellSixF32Bits": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/F32Bits"
+          },
+          "minItems": 6,
+          "maxItems": 6
+        },
+        "inputDensityUnit": {
+          "enum": [
+            "ePerA3",
+            "ePerBohr3"
+          ]
+        },
+        "argumentLengthScaleF64Bits": {
+          "enum": [
+            "3ff0000000000000",
+            "3fe0ef050a9737de"
+          ]
+        },
+        "unitProducerRuleDigest": {
+          "$ref": "#/$defs/FS1_Digest"
+        },
+        "kineticSelectorI32": {
+          "enum": [
+            0,
+            1
+          ]
+        },
+        "requestedOutputs": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "laplacian",
+              "kinetic-G",
+              "potential-V",
+              "total-H",
+              "log-abs-density"
+            ]
+          },
+          "minItems": 1,
+          "maxItems": 5
+        },
+        "maxOutputBytes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "maxResidentBytes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        }
+      },
+      "required": [
+        "base",
+        "phaseId",
+        "profile",
+        "source",
+        "actualC2OColumnsF64Bits",
+        "nativeCellSixF32Bits",
+        "inputDensityUnit",
+        "argumentLengthScaleF64Bits",
+        "unitProducerRuleDigest",
+        "kineticSelectorI32",
+        "requestedOutputs",
+        "maxOutputBytes",
+        "maxResidentBytes"
+      ],
+      "additionalProperties": false
+    },
+    "NativeConversionOutput": {
+      "type": "object",
+      "properties": {
+        "stencil27F64Bits": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/F64Bits"
+          },
+          "minItems": 27,
+          "maxItems": 27
+        },
+        "includedNeighbourOffsets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/FS1_Int3"
+          },
+          "minItems": 20,
+          "maxItems": 26
+        },
+        "laplacianF64Bits": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/F64Bits"
+          },
+          "minItems": 0
+        },
+        "centralDifferenceStencilSurrogateF64Bits": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/F64Bits"
+          },
+          "minItems": 0
+        },
+        "kineticGF64Bits": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/F64Bits"
+          },
+          "minItems": 0
+        },
+        "potentialVF64Bits": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/F64Bits"
+          },
+          "minItems": 0
+        },
+        "totalHF64Bits": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/F64Bits"
+          },
+          "minItems": 0
+        },
+        "logAbsDensityF64Bits": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/F64Bits"
+          },
+          "minItems": 0
+        },
+        "laplacianUnit": {
+          "enum": [
+            "ePerA5",
+            "ePerBohr5"
+          ]
+        },
+        "energyDensityUnit": {
+          "const": "hartreePerBohr3"
+        },
+        "logarithmArgument": {
+          "const": "absolute-native-numerical-density"
+        },
+        "energyScaleF64Bits": {
+          "$ref": "#/$defs/F64Bits"
+        },
+        "nonfiniteDiagnostics": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/FS1_FSNonfiniteDiagnostic"
+          },
+          "minItems": 0
+        },
+        "nativeExportSuccessDoesNotCertifyWrite": {
+          "const": true
+        },
+        "parameterDigest": {
+          "$ref": "#/$defs/FS1_Digest"
+        }
+      },
+      "required": [
+        "stencil27F64Bits",
+        "includedNeighbourOffsets",
+        "laplacianF64Bits",
+        "centralDifferenceStencilSurrogateF64Bits",
+        "kineticGF64Bits",
+        "potentialVF64Bits",
+        "totalHF64Bits",
+        "logAbsDensityF64Bits",
+        "laplacianUnit",
+        "energyDensityUnit",
+        "logarithmArgument",
+        "energyScaleF64Bits",
+        "nonfiniteDiagnostics",
+        "nativeExportSuccessDoesNotCertifyWrite",
+        "parameterDigest"
+      ],
+      "additionalProperties": false
+    },
+    "NativeDispersionOutputOrFailure": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/NativeDispersionOutput"
+        },
+        {
+          "$ref": "#/$defs/NativeFailure"
+        }
+      ]
+    },
+    "NativeScatteringOutputOrFailure": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/NativeScatteringOutput"
+        },
+        {
+          "$ref": "#/$defs/NativeFailure"
+        }
+      ]
+    },
+    "NativeFullFieldOutputOrFailure": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/NativeFullFieldOutput"
+        },
+        {
+          "$ref": "#/$defs/NativeFailure"
+        }
+      ]
+    },
+    "NativeModelFieldOutputOrFailure": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/NativeModelFieldOutput"
+        },
+        {
+          "$ref": "#/$defs/NativeFailure"
+        }
+      ]
+    },
+    "NativeVolumeTransformOutputOrFailure": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/NativeVolumeTransformOutput"
+        },
+        {
+          "$ref": "#/$defs/NativeFailure"
+        }
+      ]
+    },
+    "NativePeakVoronoiOutputOrFailure": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/NativePeakVoronoiOutput"
+        },
+        {
+          "$ref": "#/$defs/NativeFailure"
+        }
+      ]
+    },
+    "NativeMeshOutputOrFailure": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/NativeMeshOutput"
+        },
+        {
+          "$ref": "#/$defs/NativeFailure"
+        }
+      ]
+    },
+    "NativeConversionOutputOrFailure": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/NativeConversionOutput"
+        },
+        {
+          "$ref": "#/$defs/NativeFailure"
+        }
+      ]
+    },
+    "NativePowderBeam": {
+      "type": "object",
+      "properties": {
+        "sourceIndexU16": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 65535
+        },
+        "wavelengthAF64Bits": {
+          "$ref": "#/$defs/F64Bits"
+        },
+        "relativeWeightF64Bits": {
+          "$ref": "#/$defs/F64Bits"
+        },
+        "radiation": {
+          "enum": [
+            "xray-electron-amplitude",
+            "neutron-coherent-fm"
+          ]
+        }
+      },
+      "required": [
+        "sourceIndexU16",
+        "wavelengthAF64Bits",
+        "relativeWeightF64Bits",
+        "radiation"
+      ],
+      "additionalProperties": false
+    },
+    "NativePowderShift": {
+      "type": "object",
+      "properties": {
+        "p0TwoThetaDegreeF64Bits": {
+          "$ref": "#/$defs/F64Bits"
+        },
+        "p1TwoThetaDegreeF64Bits": {
+          "$ref": "#/$defs/F64Bits"
+        },
+        "p2TwoThetaDegreeF64Bits": {
+          "$ref": "#/$defs/F64Bits"
+        },
+        "rule": {
+          "const": "native-asintheta-with-cos-theta-over2-and-sin-theta"
+        }
+      },
+      "required": [
+        "p0TwoThetaDegreeF64Bits",
+        "p1TwoThetaDegreeF64Bits",
+        "p2TwoThetaDegreeF64Bits",
+        "rule"
+      ],
+      "additionalProperties": false
+    },
+    "NativePowderFullPhase": {
+      "type": "object",
+      "properties": {
+        "phaseId": {
+          "$ref": "#/$defs/FS1_Id"
+        },
+        "model": {
+          "$ref": "#/$defs/SG2_NativeDimensionDState"
+        },
+        "thermal": {
+          "$ref": "#/$defs/NativeThermalSelection"
+        },
+        "elementRows": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ScientificSourceRow"
+          },
+          "minItems": 0
+        },
+        "dispersionByBeamElement": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/NativeDispersionOutput"
+            },
+            "minItems": 0
+          },
+          "minItems": 0
+        },
+        "actualSymmetryOperatorCount": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 2147483647
+        },
+        "phaseScaleF64Bits": {
+          "$ref": "#/$defs/F64Bits"
+        },
+        "parameters": {
+          "$ref": "#/$defs/PowderTch13Parameters"
+        },
+        "profileKind": {
+          "enum": [
+            "vesta3909a-TCH",
+            "vesta3909a-TCH-Ida"
+          ]
+        },
+        "xShift": {
+          "$ref": "#/$defs/NativePowderShift"
+        },
+        "lorentzParameterM_F64Bits": {
+          "$ref": "#/$defs/F64Bits"
+        },
+        "lorentzParameterP_F64Bits": {
+          "$ref": "#/$defs/F64Bits"
+        },
+        "perObservationFactorsF64Bits": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/F64Bits"
+          },
+          "minItems": 0
+        },
+        "sourcePopulation": {
+          "$ref": "#/$defs/NativeReflectionPopulation"
+        },
+        "actualGlobalReferenceMaxIntensityF64Bits": {
+          "$ref": "#/$defs/F64Bits"
+        },
+        "cutRatioDimensionlessF64Bits": {
+          "$ref": "#/$defs/F64Bits"
+        },
+        "cutoffProducerRuleDigest": {
+          "$ref": "#/$defs/FS1_Digest"
+        },
+        "enumerationRecipe": {
+          "$ref": "#/$defs/NativePowderEnumerationRecipe"
+        }
+      },
+      "required": [
+        "phaseId",
+        "model",
+        "thermal",
+        "elementRows",
+        "dispersionByBeamElement",
+        "actualSymmetryOperatorCount",
+        "phaseScaleF64Bits",
+        "parameters",
+        "profileKind",
+        "xShift",
+        "lorentzParameterM_F64Bits",
+        "lorentzParameterP_F64Bits",
+        "perObservationFactorsF64Bits",
+        "sourcePopulation",
+        "actualGlobalReferenceMaxIntensityF64Bits",
+        "cutRatioDimensionlessF64Bits",
+        "cutoffProducerRuleDigest",
+        "enumerationRecipe"
+      ],
+      "additionalProperties": false
+    },
+    "NativePowderFullInput": {
+      "type": "object",
+      "properties": {
+        "base": {
+          "$ref": "#/$defs/FS1_FSContext"
+        },
+        "profile": {
+          "const": "vesta3909a-full-native-powder-pipeline"
+        },
+        "sampleTwoThetaDegreeF64Bits": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/F64Bits"
+          },
+          "minItems": 2
+        },
+        "beams": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/NativePowderBeam"
+          },
+          "minItems": 1
+        },
+        "phases": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/NativePowderFullPhase"
+          },
+          "minItems": 1
+        },
+        "normalization": {
+          "$ref": "#/$defs/NativePowderNormalization"
+        },
+        "backgroundF64Bits": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/F64Bits"
+          },
+          "minItems": 0
+        },
+        "maxOutputBytes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "maxResidentBytes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        }
+      },
+      "required": [
+        "base",
+        "profile",
+        "sampleTwoThetaDegreeF64Bits",
+        "beams",
+        "phases",
+        "normalization",
+        "backgroundF64Bits",
+        "maxOutputBytes",
+        "maxResidentBytes"
+      ],
+      "additionalProperties": false
+    },
+    "NativePowderProfileWitness": {
+      "type": "object",
+      "properties": {
+        "phaseId": {
+          "$ref": "#/$defs/FS1_Id"
+        },
+        "reflectionSourceOrdinalZeroBased": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "beamSourceIndexU16": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 65535
+        },
+        "twoThetaDegreeF64Bits": {
+          "$ref": "#/$defs/F64Bits"
+        },
+        "width": {
+          "$ref": "#/$defs/NativeTchWidthOutput"
+        },
+        "equivalentMultiplicity": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 2147483647
+        },
+        "coefficientF64Bits": {
+          "$ref": "#/$defs/ComplexF64Bits"
+        },
+        "startSampleOrdinal": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "endSampleOrdinalExclusive": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "completeProfileF64Bits": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/F64Bits"
+          },
+          "minItems": 0
+        },
+        "firstSamplePolicy": {
+          "const": "native-index0-remains-initialized-zero"
+        },
+        "completeProfileStage": {
+          "const": "native-weighted-by-observation-beam-phase-once"
+        }
+      },
+      "required": [
+        "phaseId",
+        "reflectionSourceOrdinalZeroBased",
+        "beamSourceIndexU16",
+        "twoThetaDegreeF64Bits",
+        "width",
+        "equivalentMultiplicity",
+        "coefficientF64Bits",
+        "startSampleOrdinal",
+        "endSampleOrdinalExclusive",
+        "completeProfileF64Bits",
+        "firstSamplePolicy",
+        "completeProfileStage"
+      ],
+      "additionalProperties": false
+    },
+    "NativePowderFullOutput": {
+      "type": "object",
+      "properties": {
+        "pattern": {
+          "$ref": "#/$defs/NativePowderAccumulateOutput"
+        },
+        "reflectionPopulations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/NativeReflectionPopulation"
+          },
+          "minItems": 0
+        },
+        "allProfileWitnesses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/NativePowderProfileWitness"
+          },
+          "minItems": 0
+        },
+        "actualElementRows": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ScientificSourceRow"
+          },
+          "minItems": 0
+        },
+        "parameterDigest": {
+          "$ref": "#/$defs/FS1_Digest"
+        }
+      },
+      "required": [
+        "pattern",
+        "reflectionPopulations",
+        "allProfileWitnesses",
+        "actualElementRows",
+        "parameterDigest"
+      ],
+      "additionalProperties": false
+    },
+    "NativeIsoPhaseBuffer": {
+      "type": "object",
+      "properties": {
+        "phaseId": {
+          "$ref": "#/$defs/FS1_Id"
+        },
+        "source": {
+          "$ref": "#/$defs/ScalarSource"
+        },
+        "actualStoredVectorF32Bits": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/F32Bits"
+          },
+          "minItems": 0
+        },
+        "includesActualStoredClosure": {
+          "const": true
+        },
+        "sourceDescriptorDigest": {
+          "$ref": "#/$defs/FS1_Digest"
+        }
+      },
+      "required": [
+        "phaseId",
+        "source",
+        "actualStoredVectorF32Bits",
+        "includesActualStoredClosure",
+        "sourceDescriptorDigest"
+      ],
+      "additionalProperties": false
+    },
+    "NativeDefaultIsoInput": {
+      "type": "object",
+      "properties": {
+        "base": {
+          "$ref": "#/$defs/FS1_FSContext"
+        },
+        "profile": {
+          "const": "vesta3909a-check-isolevel-global-abs-population"
+        },
+        "orderedActualPhaseBuffers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/NativeIsoPhaseBuffer"
+          },
+          "minItems": 0
+        },
+        "parameterNF32Bits": {
+          "$ref": "#/$defs/F32Bits"
+        },
+        "preferenceLabel": {
+          "const": "Parameter (n): "
+        },
+        "preferenceProducerRuleDigest": {
+          "$ref": "#/$defs/FS1_Digest"
+        }
+      },
+      "required": [
+        "base",
+        "profile",
+        "orderedActualPhaseBuffers",
+        "parameterNF32Bits",
+        "preferenceLabel",
+        "preferenceProducerRuleDigest"
+      ],
+      "additionalProperties": false
+    },
+    "NativeDefaultIsoOutput": {
+      "type": "object",
+      "properties": {
+        "countAllStoredValues": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "signedMinF32Bits": {
+          "$ref": "#/$defs/F32Bits"
+        },
+        "signedMaxF32Bits": {
+          "$ref": "#/$defs/F32Bits"
+        },
+        "absoluteMeanF64Bits": {
+          "$ref": "#/$defs/F64Bits"
+        },
+        "absolutePopulationStdDevF64Bits": {
+          "$ref": "#/$defs/F64Bits"
+        },
+        "storedLevelF32Bits": {
+          "$ref": "#/$defs/F32Bits"
+        },
+        "nativeSignModeI32": {
+          "enum": [
+            0,
+            1,
+            2
+          ]
+        },
+        "signMode": {
+          "enum": [
+            "both",
+            "positive",
+            "negative"
+          ]
+        },
+        "parameterDigest": {
+          "$ref": "#/$defs/FS1_Digest"
+        }
+      },
+      "required": [
+        "countAllStoredValues",
+        "signedMinF32Bits",
+        "signedMaxF32Bits",
+        "absoluteMeanF64Bits",
+        "absolutePopulationStdDevF64Bits",
+        "storedLevelF32Bits",
+        "nativeSignModeI32",
+        "signMode",
+        "parameterDigest"
+      ],
+      "additionalProperties": false
+    },
+    "NativeFractionalCutoffPlane": {
+      "type": "object",
+      "properties": {
+        "normalFractionalF64Bits": {
+          "$ref": "#/$defs/Vec3F64Bits"
+        },
+        "distanceFractionalF64Bits": {
+          "$ref": "#/$defs/F64Bits"
+        },
+        "sourcePhaseId": {
+          "$ref": "#/$defs/FS1_Id"
+        },
+        "sourceSliceId": {
+          "$ref": "#/$defs/FS1_Id"
+        },
+        "producerRuleDigest": {
+          "$ref": "#/$defs/FS1_Digest"
+        },
+        "orthogonalGeometry": {
+          "$ref": "#/$defs/Slice_NativeOrthoCutoffPlaneGeometry"
+        }
+      },
+      "required": [
+        "normalFractionalF64Bits",
+        "distanceFractionalF64Bits",
+        "sourcePhaseId",
+        "sourceSliceId",
+        "producerRuleDigest",
+        "orthogonalGeometry"
+      ],
+      "additionalProperties": false
+    },
+    "NativeMeshPhase": {
+      "type": "object",
+      "properties": {
+        "phaseId": {
+          "$ref": "#/$defs/FS1_Id"
+        },
+        "source": {
+          "$ref": "#/$defs/ScalarSource"
+        },
+        "colorSource": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/ScalarSource"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "nativeVisibility878U8": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 255
+        },
+        "fractionalBoundsInterleavedF32Bits": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/F32Bits"
+          },
+          "minItems": 6,
+          "maxItems": 6
+        },
+        "cutoffPlanes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/NativeFractionalCutoffPlane"
+          },
+          "minItems": 0
+        },
+        "effectiveNativeMatrix4": {
+          "$ref": "#/$defs/Mat4ColumnsF64Bits"
+        },
+        "effectiveNativeTranslationF32Bits": {
+          "$ref": "#/$defs/Vec3F32Bits"
+        },
+        "layerQualificationDigest": {
+          "$ref": "#/$defs/FS1_Digest"
+        }
+      },
+      "required": [
+        "phaseId",
+        "source",
+        "colorSource",
+        "nativeVisibility878U8",
+        "fractionalBoundsInterleavedF32Bits",
+        "cutoffPlanes",
+        "effectiveNativeMatrix4",
+        "effectiveNativeTranslationF32Bits",
+        "layerQualificationDigest"
+      ],
+      "additionalProperties": false
+    },
+    "NativeMeshTextureSettings": {
+      "type": "object",
+      "properties": {
+        "lowerRangeFractionF32Bits": {
+          "$ref": "#/$defs/F32Bits"
+        },
+        "upperRangeFractionF32Bits": {
+          "$ref": "#/$defs/F32Bits"
+        },
+        "signedTextureFactorI8": {
+          "type": "integer",
+          "minimum": -128,
+          "maximum": 127
+        },
+        "sourceRuleDigest": {
+          "$ref": "#/$defs/FS1_Digest"
+        }
+      },
+      "required": [
+        "lowerRangeFractionF32Bits",
+        "upperRangeFractionF32Bits",
+        "signedTextureFactorI8",
+        "sourceRuleDigest"
+      ],
+      "additionalProperties": false
+    },
+    "NativePowderFullOutputOrFailure": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/NativePowderFullOutput"
+        },
+        {
+          "$ref": "#/$defs/NativeFailure"
+        }
+      ]
+    },
+    "NativeDefaultIsoOutputOrFailure": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/NativeDefaultIsoOutput"
+        },
+        {
+          "$ref": "#/$defs/NativeFailure"
+        }
+      ]
+    },
+    "NativeReflectionReaderSettings": {
+      "type": "object",
+      "properties": {
+        "formatCodeI32": {
+          "enum": [
+            -1,
+            3,
+            55,
+            56,
+            57,
+            58,
+            59
+          ]
+        },
+        "coefficientSelectionI32": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 3
+        },
+        "calculatedF000ElectronF64Bits": {
+          "$ref": "#/$defs/F64Bits"
+        },
+        "calculatedF000NeutronF64Bits": {
+          "$ref": "#/$defs/F64Bits"
+        },
+        "incomingCurrentF000F64Bits": {
+          "$ref": "#/$defs/F64Bits"
+        },
+        "lineBufferBytes": {
+          "const": 150
+        },
+        "sourceRuleDigest": {
+          "$ref": "#/$defs/FS1_Digest"
+        }
+      },
+      "required": [
+        "formatCodeI32",
+        "coefficientSelectionI32",
+        "calculatedF000ElectronF64Bits",
+        "calculatedF000NeutronF64Bits",
+        "incomingCurrentF000F64Bits",
+        "lineBufferBytes",
+        "sourceRuleDigest"
+      ],
+      "additionalProperties": false
+    },
+    "NativeReflectionReadInput": {
+      "type": "object",
+      "properties": {
+        "base": {
+          "$ref": "#/$defs/FS1_FSContext"
+        },
+        "phaseId": {
+          "$ref": "#/$defs/FS1_Id"
+        },
+        "profile": {
+          "const": "vesta3909a-native-reflection-file-reader"
+        },
+        "source": {
+          "$ref": "#/$defs/FS1_FSByteSpan"
+        },
+        "settings": {
+          "$ref": "#/$defs/NativeReflectionReaderSettings"
+        },
+        "model": {
+          "$ref": "#/$defs/SG2_NativeDimensionDState"
+        },
+        "completeElementRows": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ScientificSourceRow"
+          },
+          "minItems": 0
+        },
+        "maxOutputBytes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "maxResidentBytes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        }
+      },
+      "required": [
+        "base",
+        "phaseId",
+        "profile",
+        "source",
+        "settings",
+        "model",
+        "completeElementRows",
+        "maxOutputBytes",
+        "maxResidentBytes"
+      ],
+      "additionalProperties": false
+    },
+    "NativeSkippedReflectionRow": {
+      "type": "object",
+      "properties": {
+        "source": {
+          "$ref": "#/$defs/FS1_FSByteSpan"
+        },
+        "sourceLineOrdinalZeroBased": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "actualScanfAssignmentCountI32": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "requiredAssignmentCountI32": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "reason": {
+          "enum": [
+            "native-scanf-count-skip",
+            "native-loop-unrelated-tag",
+            "native-missing-column",
+            "native-zero-calculated-phase",
+            "native-row-filter"
+          ]
+        }
+      },
+      "required": [
+        "source",
+        "sourceLineOrdinalZeroBased",
+        "actualScanfAssignmentCountI32",
+        "requiredAssignmentCountI32",
+        "reason"
+      ],
+      "additionalProperties": false
+    },
+    "NativeReflectionReadOutput": {
+      "type": "object",
+      "properties": {
+        "source": {
+          "$ref": "#/$defs/ReflectionSource"
+        },
+        "completeRows": {
+          "$ref": "#/$defs/NativeReflectionPopulation"
+        },
+        "actualF000F64Bits": {
+          "$ref": "#/$defs/F64Bits"
+        },
+        "sourceOrderedSkippedRows": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/NativeSkippedReflectionRow"
+          },
+          "minItems": 0
+        },
+        "nativeReturnI32": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "nativeReadDoesNotCertifyAllRowsValid": {
+          "const": true
+        },
+        "parameterDigest": {
+          "$ref": "#/$defs/FS1_Digest"
+        }
+      },
+      "required": [
+        "source",
+        "completeRows",
+        "actualF000F64Bits",
+        "sourceOrderedSkippedRows",
+        "nativeReturnI32",
+        "nativeReadDoesNotCertifyAllRowsValid",
+        "parameterDigest"
+      ],
+      "additionalProperties": false
+    },
+    "NativeReflectionReadOutputOrFailure": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/NativeReflectionReadOutput"
+        },
+        {
+          "$ref": "#/$defs/NativeFailure"
+        }
+      ]
+    },
+    "Sampling_NativePointSampleInput": {
+      "$ref": "../../science-supplement/native-sampling.schema.json#/$defs/NativePointSampleInput"
+    },
+    "Sampling_NativePointSampleOutput": {
+      "$ref": "../../science-supplement/native-sampling.schema.json#/$defs/NativePointSampleOutput"
+    },
+    "Sampling_NativePointSampleOutputOrFailure": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/Sampling_NativePointSampleOutput"
+        },
+        {
+          "$ref": "#/$defs/NativeFailure"
+        }
+      ]
+    },
+    "Sampling_NativeLineProfileInput": {
+      "$ref": "../../science-supplement/native-sampling.schema.json#/$defs/NativeLineProfileInput"
+    },
+    "Sampling_NativeLineProfileOutput": {
+      "$ref": "../../science-supplement/native-sampling.schema.json#/$defs/NativeLineProfileOutput"
+    },
+    "Sampling_NativeLineProfileOutputOrFailure": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/Sampling_NativeLineProfileOutput"
+        },
+        {
+          "$ref": "#/$defs/NativeFailure"
+        }
+      ]
+    },
+    "Sampling_NativeContourLevelsInput": {
+      "$ref": "../../science-supplement/native-sampling.schema.json#/$defs/NativeContourLevelsInput"
+    },
+    "Sampling_NativeContourLevelsOutput": {
+      "$ref": "../../science-supplement/native-sampling.schema.json#/$defs/NativeContourLevelsOutput"
+    },
+    "Sampling_NativeContourLevelsOutputOrFailure": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/Sampling_NativeContourLevelsOutput"
+        },
+        {
+          "$ref": "#/$defs/NativeFailure"
+        }
+      ]
+    },
+    "Sampling_NativeContourSegmentsInput": {
+      "$ref": "../../science-supplement/native-sampling.schema.json#/$defs/NativeContourSegmentsInput"
+    },
+    "Sampling_NativeContourSegmentsOutput": {
+      "$ref": "../../science-supplement/native-sampling.schema.json#/$defs/NativeContourSegmentsOutput"
+    },
+    "Sampling_NativeContourSegmentsOutputOrFailure": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/Sampling_NativeContourSegmentsOutput"
+        },
+        {
+          "$ref": "#/$defs/NativeFailure"
+        }
+      ]
+    },
+    "Sampling_NativePolyIntegralInput": {
+      "$ref": "../../science-supplement/native-sampling.schema.json#/$defs/NativePolyIntegralInput"
+    },
+    "Sampling_NativePolyIntegralOutput": {
+      "$ref": "../../science-supplement/native-sampling.schema.json#/$defs/NativePolyIntegralOutput"
+    },
+    "Sampling_NativePolyIntegralOutputOrFailure": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/Sampling_NativePolyIntegralOutput"
+        },
+        {
+          "$ref": "#/$defs/NativeFailure"
+        }
+      ]
+    },
+    "Slice_NativeObliqueSliceInput": {
+      "$ref": "../slice-geometry/slice-geometry.schema.json#/$defs/NativeObliqueSliceInput"
+    },
+    "Slice_NativeObliqueSliceOutput": {
+      "$ref": "../slice-geometry/slice-geometry.schema.json#/$defs/NativeObliqueSliceOutput"
+    },
+    "Slice_NativeObliqueSliceOutputOrFailure": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/Slice_NativeObliqueSliceOutput"
+        },
+        {
+          "$ref": "#/$defs/NativeFailure"
+        }
+      ]
+    },
+    "Slice_NativePeriodicSliceInput": {
+      "$ref": "../slice-geometry/slice-geometry.schema.json#/$defs/NativePeriodicSliceInput"
+    },
+    "Slice_NativePeriodicSliceOutput": {
+      "$ref": "../slice-geometry/slice-geometry.schema.json#/$defs/NativePeriodicSliceOutput"
+    },
+    "Slice_NativePeriodicSliceOutputOrFailure": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/Slice_NativePeriodicSliceOutput"
+        },
+        {
+          "$ref": "#/$defs/NativeFailure"
+        }
+      ]
+    },
+    "Slice_NativeOrthoCutoffPlaneGeometry": {
+      "$ref": "../slice-geometry/slice-geometry.schema.json#/$defs/NativeOrthoCutoffPlaneGeometry"
+    },
+    "NativeMeshBranchRange": {
+      "type": "object",
+      "properties": {
+        "levelOrdinal": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "sign": {
+          "enum": [
+            -1,
+            1
+          ]
+        },
+        "firstVertexIndex": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "endVertexIndexExclusive": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "firstTriangleOrdinal": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "endTriangleOrdinalExclusive": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        }
+      },
+      "required": [
+        "levelOrdinal",
+        "sign",
+        "firstVertexIndex",
+        "endVertexIndexExclusive",
+        "firstTriangleOrdinal",
+        "endTriangleOrdinalExclusive"
+      ],
+      "additionalProperties": false
+    },
+    "NativePowderEnumerationRecipe": {
+      "type": "object",
+      "properties": {
+        "sourceTwoThetaRangeDegreeF64Bits": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/F64Bits"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "allBeamWavelengthsAF64Bits": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/F64Bits"
+          },
+          "minItems": 1
+        },
+        "actualDRangeAF64Bits": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/F64Bits"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "actualHklAxisBoundsI32": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": -2147483648,
+            "maximum": 2147483647
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "prototypeReflectionDimension": {
+          "const": 3
+        },
+        "rangeRule": {
+          "const": "actual-TCH-Calc_d_Range-integer-width-cutoff-extension"
+        },
+        "populationAuthority": {
+          "const": "rederive-from-actual-model-range-beams-profile-compare-all-sourcePopulation-rows"
+        },
+        "sourceRuleDigest": {
+          "$ref": "#/$defs/FS1_Digest"
+        }
+      },
+      "required": [
+        "sourceTwoThetaRangeDegreeF64Bits",
+        "allBeamWavelengthsAF64Bits",
+        "actualDRangeAF64Bits",
+        "actualHklAxisBoundsI32",
+        "prototypeReflectionDimension",
+        "rangeRule",
+        "populationAuthority",
+        "sourceRuleDigest"
+      ],
+      "additionalProperties": false
+    },
+    "BoundaryRequest": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "schemaVersion": {
+              "const": "FS/2"
+            },
+            "operation": {
+              "const": "PrepareNativeFourierUi"
+            },
+            "input": {
+              "$ref": "#/$defs/NativeFourierUiInput"
+            }
+          },
+          "required": [
+            "schemaVersion",
+            "operation",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "schemaVersion": {
+              "const": "FS/2"
+            },
+            "operation": {
+              "const": "CalcNativeGridNo"
+            },
+            "input": {
+              "$ref": "#/$defs/NativeGridNoInput"
+            }
+          },
+          "required": [
+            "schemaVersion",
+            "operation",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "schemaVersion": {
+              "const": "FS/2"
+            },
+            "operation": {
+              "const": "CalcNativeTchWidth"
+            },
+            "input": {
+              "$ref": "#/$defs/NativeTchWidthInput"
+            }
+          },
+          "required": [
+            "schemaVersion",
+            "operation",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "schemaVersion": {
+              "const": "FS/2"
+            },
+            "operation": {
+              "const": "AccumulateNativePowderPattern"
+            },
+            "input": {
+              "$ref": "#/$defs/NativePowderAccumulateInput"
+            }
+          },
+          "required": [
+            "schemaVersion",
+            "operation",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "schemaVersion": {
+              "const": "FS/2"
+            },
+            "operation": {
+              "const": "MaterializeOrderedScalarExpression"
+            },
+            "input": {
+              "$ref": "#/$defs/OrderedExpressionInput"
+            }
+          },
+          "required": [
+            "schemaVersion",
+            "operation",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "schemaVersion": {
+              "const": "FS/2"
+            },
+            "operation": {
+              "const": "ResampleAffineTrilinear"
+            },
+            "input": {
+              "$ref": "#/$defs/Math_FSResampleAffineInput"
+            }
+          },
+          "required": [
+            "schemaVersion",
+            "operation",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "schemaVersion": {
+              "const": "FS/2"
+            },
+            "operation": {
+              "const": "LinearCombineFields"
+            },
+            "input": {
+              "$ref": "#/$defs/Math_FSLinearCombineFieldsInput"
+            }
+          },
+          "required": [
+            "schemaVersion",
+            "operation",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "schemaVersion": {
+              "const": "FS/2"
+            },
+            "operation": {
+              "const": "SampleCartesianLine"
+            },
+            "input": {
+              "$ref": "#/$defs/Math_FSCartesianLineInput"
+            }
+          },
+          "required": [
+            "schemaVersion",
+            "operation",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "schemaVersion": {
+              "const": "FS/2"
+            },
+            "operation": {
+              "const": "LinearCombineCurves"
+            },
+            "input": {
+              "$ref": "#/$defs/Math_FSLinearCombineCurvesInput"
+            }
+          },
+          "required": [
+            "schemaVersion",
+            "operation",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "schemaVersion": {
+              "const": "FS/2"
+            },
+            "operation": {
+              "const": "EvaluateNativeDispersion"
+            },
+            "input": {
+              "$ref": "#/$defs/NativeDispersionInput"
+            }
+          },
+          "required": [
+            "schemaVersion",
+            "operation",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "schemaVersion": {
+              "const": "FS/2"
+            },
+            "operation": {
+              "const": "CalculateNativeStructureFactors"
+            },
+            "input": {
+              "$ref": "#/$defs/NativeScatteringInput"
+            }
+          },
+          "required": [
+            "schemaVersion",
+            "operation",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "schemaVersion": {
+              "const": "FS/2"
+            },
+            "operation": {
+              "const": "SynthesizeNativeFourierField"
+            },
+            "input": {
+              "$ref": "#/$defs/NativeFourierFieldInput"
+            }
+          },
+          "required": [
+            "schemaVersion",
+            "operation",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "schemaVersion": {
+              "const": "FS/2"
+            },
+            "operation": {
+              "const": "GenerateNativeModelField"
+            },
+            "input": {
+              "$ref": "#/$defs/NativeModelFieldInput"
+            }
+          },
+          "required": [
+            "schemaVersion",
+            "operation",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "schemaVersion": {
+              "const": "FS/2"
+            },
+            "operation": {
+              "const": "TransformNativeVolume"
+            },
+            "input": {
+              "$ref": "#/$defs/NativeVolumeTransformInput"
+            }
+          },
+          "required": [
+            "schemaVersion",
+            "operation",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "schemaVersion": {
+              "const": "FS/2"
+            },
+            "operation": {
+              "const": "SearchNativePeaksAndIntegrate"
+            },
+            "input": {
+              "$ref": "#/$defs/NativePeakSearchInput"
+            }
+          },
+          "required": [
+            "schemaVersion",
+            "operation",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "schemaVersion": {
+              "const": "FS/2"
+            },
+            "operation": {
+              "const": "IntegrateNativeVoronoi"
+            },
+            "input": {
+              "$ref": "#/$defs/NativeVoronoiInput"
+            }
+          },
+          "required": [
+            "schemaVersion",
+            "operation",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "schemaVersion": {
+              "const": "FS/2"
+            },
+            "operation": {
+              "const": "BuildNativeIsosurfaceMesh"
+            },
+            "input": {
+              "$ref": "#/$defs/NativeMeshInput"
+            }
+          },
+          "required": [
+            "schemaVersion",
+            "operation",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "schemaVersion": {
+              "const": "FS/2"
+            },
+            "operation": {
+              "const": "ConvertNativeElectronicEnergy"
+            },
+            "input": {
+              "$ref": "#/$defs/NativeConversionInput"
+            }
+          },
+          "required": [
+            "schemaVersion",
+            "operation",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "schemaVersion": {
+              "const": "FS/2"
+            },
+            "operation": {
+              "const": "SynthesizeNativePowderPattern"
+            },
+            "input": {
+              "$ref": "#/$defs/NativePowderFullInput"
+            }
+          },
+          "required": [
+            "schemaVersion",
+            "operation",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "schemaVersion": {
+              "const": "FS/2"
+            },
+            "operation": {
+              "const": "ResolveNativeDefaultIsovalue"
+            },
+            "input": {
+              "$ref": "#/$defs/NativeDefaultIsoInput"
+            }
+          },
+          "required": [
+            "schemaVersion",
+            "operation",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "schemaVersion": {
+              "const": "FS/2"
+            },
+            "operation": {
+              "const": "ReadNativeReflectionSource"
+            },
+            "input": {
+              "$ref": "#/$defs/NativeReflectionReadInput"
+            }
+          },
+          "required": [
+            "schemaVersion",
+            "operation",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "schemaVersion": {
+              "const": "FS/2"
+            },
+            "operation": {
+              "const": "SampleNativeFractionalPoint"
+            },
+            "input": {
+              "$ref": "#/$defs/Sampling_NativePointSampleInput"
+            }
+          },
+          "required": [
+            "schemaVersion",
+            "operation",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "schemaVersion": {
+              "const": "FS/2"
+            },
+            "operation": {
+              "const": "ExportNativeLineProfile"
+            },
+            "input": {
+              "$ref": "#/$defs/Sampling_NativeLineProfileInput"
+            }
+          },
+          "required": [
+            "schemaVersion",
+            "operation",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "schemaVersion": {
+              "const": "FS/2"
+            },
+            "operation": {
+              "const": "GenerateNativeContourLevels"
+            },
+            "input": {
+              "$ref": "#/$defs/Sampling_NativeContourLevelsInput"
+            }
+          },
+          "required": [
+            "schemaVersion",
+            "operation",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "schemaVersion": {
+              "const": "FS/2"
+            },
+            "operation": {
+              "const": "BuildNativeContourSegments"
+            },
+            "input": {
+              "$ref": "#/$defs/Sampling_NativeContourSegmentsInput"
+            }
+          },
+          "required": [
+            "schemaVersion",
+            "operation",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "schemaVersion": {
+              "const": "FS/2"
+            },
+            "operation": {
+              "const": "ExecuteNativePolyIntegralMenu"
+            },
+            "input": {
+              "$ref": "#/$defs/Sampling_NativePolyIntegralInput"
+            }
+          },
+          "required": [
+            "schemaVersion",
+            "operation",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "schemaVersion": {
+              "const": "FS/2"
+            },
+            "operation": {
+              "const": "BuildNativeObliqueSlice"
+            },
+            "input": {
+              "$ref": "#/$defs/Slice_NativeObliqueSliceInput"
+            }
+          },
+          "required": [
+            "schemaVersion",
+            "operation",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "schemaVersion": {
+              "const": "FS/2"
+            },
+            "operation": {
+              "const": "BuildNativePeriodicSlice"
+            },
+            "input": {
+              "$ref": "#/$defs/Slice_NativePeriodicSliceInput"
+            }
+          },
+          "required": [
+            "schemaVersion",
+            "operation",
+            "input"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    }
+  },
+  "x-imports": [
+    {
+      "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261115-062917-p1-02-o1-o4-corrections/contracts/field-science.contract.json",
+      "relativePath": "../../../../../20261115-062917-p1-02-o1-o4-corrections/contracts/field-science.contract.json",
+      "sha256": "adf539aac53ddd41b46651886b00e9d5394a96c36b83f74aeb6e35984898000a"
+    },
+    {
+      "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261115-092025-p1-03-completion/native-fractional-grid-current.schema.json",
+      "relativePath": "../../../../../20261115-092025-p1-03-completion/native-fractional-grid-current.schema.json",
+      "sha256": "024353fc084874aa0bf0b7aa41225129672ec9fd8cff0ed1fcdd2b746e408ae9"
+    },
+    {
+      "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261115-092025-p1-03-completion/native-scalar-grid-current.schema.json",
+      "relativePath": "../../../../../20261115-092025-p1-03-completion/native-scalar-grid-current.schema.json",
+      "sha256": "aae3f7260198c218b376c35b756e102d9acedf7d66a745b0df526202651c69af"
+    },
+    {
+      "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261115-092025-p1-03-completion/native-stored-isoview.schema.json",
+      "relativePath": "../../../../../20261115-092025-p1-03-completion/native-stored-isoview.schema.json",
+      "sha256": "5cdc2d8ddd4c1f146c984b61bc2a4f869d96d5411f870e788aa61cd4dc6387db"
+    },
+    {
+      "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/functional-additions.schema.json",
+      "relativePath": "functional-additions.schema.json",
+      "sha256": "89a82dfcab19f813e65c1c89c7a308d1e37a02239ed6e038fd3706af7a002a76"
+    },
+    {
+      "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/sg/sg2.schema.json",
+      "relativePath": "../sg/sg2.schema.json",
+      "sha256": "5d24de755b9e937a6d0e18f02ad967889e8a8cf7221cad8c41b326c97647f688"
+    },
+    {
+      "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261115-092025-p1-03-completion/native-layer-current.schema.json",
+      "relativePath": "../../../../../20261115-092025-p1-03-completion/native-layer-current.schema.json",
+      "sha256": "31e8aa75b924339c9168994f7a8615b4540a52c3294c07a694613a66874a42de"
+    },
+    {
+      "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/science-supplement/native-sampling.schema.json",
+      "relativePath": "../../science-supplement/native-sampling.schema.json",
+      "sha256": "5751d8dc422c31e9e215c0488decf69cd5fd250252b67c0b9fa6bc72a9e927f6"
+    },
+    {
+      "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/slice-geometry/slice-geometry.schema.json",
+      "relativePath": "../slice-geometry/slice-geometry.schema.json",
+      "sha256": "7a6caa11871d38ae83919c6f729155742fe0dae79d18852d8111fb7102caba92"
+    }
+  ],
+  "x-semanticRules": [
+    "Native source identities preserve actual known licenseTextDigest (VESTA LICENSE c6690795ed2edf9f2c45d6a075d1964e242d5ef7ba1333891ece1da73b2bf1c1 where applicable) separately from writtenPermissionEvidenceDigest. The former is text identity, not authorization. Licensing is deferred; own mathematical/caller input may explicitlynot-applicable. Scientific source/producer/consumer/unit qualification remains required; no syntheticlicense digest or permission grant.",
+    "Independent successor namespace. FS/1, bounded3 and the177 operation signatures are unchanged; these are future design constructors, not implemented protocol3 methods.",
+    "Every original source format is a named typed variant plus exact actual source bytes/materialized rows. Import grammar qualification remains per declared dialect; no options JSON or absent phase guessed tozero.",
+    "Fourier firstSource.readerSelection equalsuiSelection; secondSource exists only forUI3 and hasreaderSelection3. Eachsource.base/phaseId mustequalrootbase/phaseId andactualcurrenttypedsource owner, withall references rederivedfromoneimmutable current snapshot; sourceDigest alone cannot grantcurrentauthority. Onephase/context/amplitudeunit acrosssources. ActualF000 is independent currentUI scalar, not recomputed difference. Raw backendmode is always0.",
+    "NativeGridNo population must equal complete actual qualified selected Wyckoff/current symmetry populations, independently rederived fromsource/current state. Digest equality supplied bycaller cannot grant authority. All matrix/axis/resolution bits decodefinite, positive admitted counts, checked integer arithmetic and budgets.",
+    "Powder13 name/offset/count/unit record is exact. GetParam returns10, names13. rs/rd are native dimensionless profile coefficients with author geometry reference; preserve raw values and actual algorithm, no silent degree/radian/FCJ substitution. Width consumesU..Ye and rawaxis slot; rs/rd are not consumed bythiswidth body.",
+    "Native powder accumulation usesallphases inactualorder, perreflection absF2*multiplicity*beamWeight*phaseScale*perObservationFactor*materializedProfile; actualReflection88 correction affectsrawCalcIcmax/cutoff, not finalpointmultiplication. materializedProfileStage explicitlymeansbareunweightedphi; completeNativeProfileWitnessalreadyhasobservation*beam*phaseonceandisnotmultipliedagain. All sampledarrays exactlymatchsamplecount. Sharedscale=actualtarget/max(0,rawaggregate) withtarget100 for noobservedpattern oractualstoredobservedMax otherwise; addbackground onlyaftersharedscale. Expose everyraw/scaledphase, aggregate/background/total. Zero max produces sourcefailure; valid finiteproductoutput failsatomically ratherthaninventingzero. This isrelativeDisplayIntensity, not absolute radiationintensity or externalRIETAN1e5.",
+    "Ordered native expression uses source entry order, originalformat selector and explicit f32 arithmetic. Firstentry initialization ignores multiply/divide prefix per source; add usesfma32; multiply anddivide retain separate operations. Result physical quantity/unit needs qualified derivation; native unqualified scalar remainsuninterpreted.",
+    "Physical FSFieldBinding and original current numerical SourceEntity types remain distinct; no retagging native numerical grids into physical Fields. All descriptor/resource/owner/context/reference roles must validate under complete sourcevisitor.",
+    "Native expression profiles cannot select corrected indexed selector; correctedprofile must identify correction. Sourceformat and selector taggedvariant must match. 3.6 source absent is not published as a qualified3.0 variant.",
+    "Finite/count/domain/closure/geometric/quantity/source compatibility and all array lengths are semantic checks beyond JSONSchema. Failed/canceledjobs preserveinput and release owncandidate resources atomically.",
+    "Native fullD scattering consumes completeactualSG2state including I16 orbit and U16 siteflags; source selection isactual217recordalgorithm, not an upgradedall-isotope database. EveryElementrow isrederivedfrombyteboundsource, notcallerassertedselfauthority. AllsourceD/hkl/coordinate lengthsagree. Nativefield success requiresactualD3: VolDatac/10/14 arethree divisions;18isvectorpointer; FFVTreadsD i32s, soD4..6 shape conflictsreturnE_NATIVE_GRID_DIMENSION_LAYOUTbeforeunsafeaccess. This isstaticlayoutfailuredesign, not observedoriginalcrash; fullD scatteringstillavailable.",
+    "Fullfieldgenerators exposeallcoefficients, fullcoreandclosure; source-onlyunqualifiednativevaluesneverbecomephysicalFSFieldbyretagging. VolumePattersonconsumesactualgrid, scaleV/N beforeforwardFFTand1/V afterbackward; noabsolute-inputcorrection. Peak/Voronoi exposeallcounters/owners/scores/allocations; onlyboundaryt3subsamplesplitsofpiecewiseconstantnodevalueandnativecomponentwiseminimage, notglobaltriclinicCVP.",
+    "Electronicenergy requestedoutputs mapexact5nativeflags:laplacian,G,V,H,logabsrho; sourceinpute/A3ore/bohr3determinesnative1ora0lengthscale, laplacianmatchinglength^-5andenergieshartree/bohr3. Nativefailure/nonfiniteoutputmustretainfullclassification; nozero-for-infinitysubstitution.",
+    "All complete output/oracle arrays are compared, with one exact path/SHA binding and perfixture comparison. Source-derived controls are not independent runtime holdouts. Future execution/performance qualification does not make these public payload types unspecified."
+  ],
+  "x-designOnly": true,
+  "x-productImplemented": false,
+  "x-nativeRuntimeValidated": false
+}

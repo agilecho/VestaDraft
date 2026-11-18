@@ -1,0 +1,734 @@
+{
+  "schema": "p1-06-interface-composition/2",
+  "revision": "I33-r1",
+  "nativeProtocol": "NS/2",
+  "status": "author design successor, not product runtime/independent acceptance",
+  "schemas": [
+    {
+      "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-134209-two-residuals/contracts/scientific-composition.schema.json",
+      "sha256": "df6d56722eff081017222437dc204febd5409e21de4a45abe83a16b369d61d40"
+    },
+    {
+      "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-134209-two-residuals/contracts/native-session-v2.schema.json",
+      "sha256": "9e2e5b14de2ddccbd4e7f724f98b2951824ed50300d35764fc909818b51337e9"
+    },
+    {
+      "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-134209-two-residuals/contracts/history-effects-wire.schema.json",
+      "sha256": "ca89dd2d3c993611f9f65bd94f8c835a3583e2da7e4d7d55b38dcfd06aba89a7"
+    }
+  ],
+  "operations": [
+    {
+      "name": "sg2.ResolveNativePlacements",
+      "input": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/sg/sg2.schema.json#/$defs/ResolveNativePlacementsRequest",
+      "output": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/sg/sg2.schema.json#/$defs/ResolveNativePlacementsResponse",
+      "owner": "kernel-geometry",
+      "sourceContract": {
+        "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/sg/sg2-producer-consumer.json",
+        "sha256": "99eacb7d86352a272d7d009e15b4e5c2fad3aa992d7f140960078e65aa30e43a"
+      },
+      "preparationSignature": "EngineV2::prepare_domain(current:DocumentAt,input:OperationRequest2,resources:&mut dyn ResourcePort,cx:&mut PureJobContext)->Result<JobStep<TypedResultLease2>,DomainError>",
+      "application": "query by default; candidate only for registry-admitted model-bearing output with registered target projector and complete result; apply never trusts caller-supplied result",
+      "historyEffect": "server-derived record for actual model mutation; query unchanged; only registered trusted camera animation preserve-history-cursor",
+      "ownership": "captured input retains + job temporary arena + result lease; apply transfers actual referenced resources to live/current/history, cancel/error releases own retains",
+      "noPublicUnqualifiedFlag": true
+    },
+    {
+      "name": "sg2.NativeGroup",
+      "input": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/sg/sg2.schema.json#/$defs/NativeGroupRequest",
+      "output": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/sg/sg2.schema.json#/$defs/NativeGroupResponse",
+      "owner": "kernel-geometry",
+      "sourceContract": {
+        "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/sg/sg2-producer-consumer.json",
+        "sha256": "99eacb7d86352a272d7d009e15b4e5c2fad3aa992d7f140960078e65aa30e43a"
+      },
+      "preparationSignature": "EngineV2::prepare_domain(current:DocumentAt,input:OperationRequest2,resources:&mut dyn ResourcePort,cx:&mut PureJobContext)->Result<JobStep<TypedResultLease2>,DomainError>",
+      "application": "query by default; candidate only for registry-admitted model-bearing output with registered target projector and complete result; apply never trusts caller-supplied result",
+      "historyEffect": "server-derived record for actual model mutation; query unchanged; only registered trusted camera animation preserve-history-cursor",
+      "ownership": "captured input retains + job temporary arena + result lease; apply transfers actual referenced resources to live/current/history, cancel/error releases own retains",
+      "noPublicUnqualifiedFlag": true
+    },
+    {
+      "name": "sg2.NativeWyckoff",
+      "input": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/sg/sg2.schema.json#/$defs/NativeWyckoffRequest",
+      "output": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/sg/sg2.schema.json#/$defs/NativeWyckoffResponse",
+      "owner": "kernel-geometry",
+      "sourceContract": {
+        "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/sg/sg2-producer-consumer.json",
+        "sha256": "99eacb7d86352a272d7d009e15b4e5c2fad3aa992d7f140960078e65aa30e43a"
+      },
+      "preparationSignature": "EngineV2::prepare_domain(current:DocumentAt,input:OperationRequest2,resources:&mut dyn ResourcePort,cx:&mut PureJobContext)->Result<JobStep<TypedResultLease2>,DomainError>",
+      "application": "query by default; candidate only for registry-admitted model-bearing output with registered target projector and complete result; apply never trusts caller-supplied result",
+      "historyEffect": "server-derived record for actual model mutation; query unchanged; only registered trusted camera animation preserve-history-cursor",
+      "ownership": "captured input retains + job temporary arena + result lease; apply transfers actual referenced resources to live/current/history, cancel/error releases own retains",
+      "noPublicUnqualifiedFlag": true
+    },
+    {
+      "name": "sg2.NativeDimensionD",
+      "input": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/sg/sg2.schema.json#/$defs/NativeDimensionDRequest",
+      "output": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/sg/sg2.schema.json#/$defs/NativeDimensionDResponse",
+      "owner": "kernel-geometry",
+      "sourceContract": {
+        "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/sg/sg2-producer-consumer.json",
+        "sha256": "99eacb7d86352a272d7d009e15b4e5c2fad3aa992d7f140960078e65aa30e43a"
+      },
+      "preparationSignature": "EngineV2::prepare_domain(current:DocumentAt,input:OperationRequest2,resources:&mut dyn ResourcePort,cx:&mut PureJobContext)->Result<JobStep<TypedResultLease2>,DomainError>",
+      "application": "query by default; candidate only for registry-admitted model-bearing output with registered target projector and complete result; apply never trusts caller-supplied result",
+      "historyEffect": "server-derived record for actual model mutation; query unchanged; only registered trusted camera animation preserve-history-cursor",
+      "ownership": "captured input retains + job temporary arena + result lease; apply transfers actual referenced resources to live/current/history, cancel/error releases own retains",
+      "noPublicUnqualifiedFlag": true
+    },
+    {
+      "name": "sg2.ApplyNativeDomainParameters",
+      "input": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/sg/sg2.schema.json#/$defs/ApplyNativeDomainParametersRequest",
+      "output": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/sg/sg2.schema.json#/$defs/ApplyNativeDomainParametersResponse",
+      "owner": "kernel-geometry",
+      "sourceContract": {
+        "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/sg/sg2-producer-consumer.json",
+        "sha256": "99eacb7d86352a272d7d009e15b4e5c2fad3aa992d7f140960078e65aa30e43a"
+      },
+      "preparationSignature": "EngineV2::prepare_domain(current:DocumentAt,input:OperationRequest2,resources:&mut dyn ResourcePort,cx:&mut PureJobContext)->Result<JobStep<TypedResultLease2>,DomainError>",
+      "application": "query by default; candidate only for registry-admitted model-bearing output with registered target projector and complete result; apply never trusts caller-supplied result",
+      "historyEffect": "server-derived record for actual model mutation; query unchanged; only registered trusted camera animation preserve-history-cursor",
+      "ownership": "captured input retains + job temporary arena + result lease; apply transfers actual referenced resources to live/current/history, cancel/error releases own retains",
+      "noPublicUnqualifiedFlag": true
+    },
+    {
+      "name": "sg2.NativeADPAndUncertainty",
+      "input": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/sg/sg2.schema.json#/$defs/NativeADPAndUncertaintyRequest",
+      "output": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/sg/sg2.schema.json#/$defs/NativeADPAndUncertaintyResponse",
+      "owner": "kernel-geometry",
+      "sourceContract": {
+        "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/sg/sg2-producer-consumer.json",
+        "sha256": "99eacb7d86352a272d7d009e15b4e5c2fad3aa992d7f140960078e65aa30e43a"
+      },
+      "preparationSignature": "EngineV2::prepare_domain(current:DocumentAt,input:OperationRequest2,resources:&mut dyn ResourcePort,cx:&mut PureJobContext)->Result<JobStep<TypedResultLease2>,DomainError>",
+      "application": "query by default; candidate only for registry-admitted model-bearing output with registered target projector and complete result; apply never trusts caller-supplied result",
+      "historyEffect": "server-derived record for actual model mutation; query unchanged; only registered trusted camera animation preserve-history-cursor",
+      "ownership": "captured input retains + job temporary arena + result lease; apply transfers actual referenced resources to live/current/history, cancel/error releases own retains",
+      "noPublicUnqualifiedFlag": true
+    },
+    {
+      "name": "sg2.NativeMerge",
+      "input": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/sg/sg2.schema.json#/$defs/NativeMergeRequest",
+      "output": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/sg/sg2.schema.json#/$defs/NativeMergeResponse",
+      "owner": "kernel-geometry",
+      "sourceContract": {
+        "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/sg/sg2-producer-consumer.json",
+        "sha256": "99eacb7d86352a272d7d009e15b4e5c2fad3aa992d7f140960078e65aa30e43a"
+      },
+      "preparationSignature": "EngineV2::prepare_domain(current:DocumentAt,input:OperationRequest2,resources:&mut dyn ResourcePort,cx:&mut PureJobContext)->Result<JobStep<TypedResultLease2>,DomainError>",
+      "application": "query by default; candidate only for registry-admitted model-bearing output with registered target projector and complete result; apply never trusts caller-supplied result",
+      "historyEffect": "server-derived record for actual model mutation; query unchanged; only registered trusted camera animation preserve-history-cursor",
+      "ownership": "captured input retains + job temporary arena + result lease; apply transfers actual referenced resources to live/current/history, cancel/error releases own retains",
+      "noPublicUnqualifiedFlag": true
+    },
+    {
+      "name": "sg2.NativeBondValence",
+      "input": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/sg/sg2.schema.json#/$defs/NativeBVRequest",
+      "output": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/sg/sg2.schema.json#/$defs/NativeBVResponse",
+      "owner": "kernel-geometry",
+      "sourceContract": {
+        "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/sg/sg2-producer-consumer.json",
+        "sha256": "99eacb7d86352a272d7d009e15b4e5c2fad3aa992d7f140960078e65aa30e43a"
+      },
+      "preparationSignature": "EngineV2::prepare_domain(current:DocumentAt,input:OperationRequest2,resources:&mut dyn ResourcePort,cx:&mut PureJobContext)->Result<JobStep<TypedResultLease2>,DomainError>",
+      "application": "query by default; candidate only for registry-admitted model-bearing output with registered target projector and complete result; apply never trusts caller-supplied result",
+      "historyEffect": "server-derived record for actual model mutation; query unchanged; only registered trusted camera animation preserve-history-cursor",
+      "ownership": "captured input retains + job temporary arena + result lease; apply transfers actual referenced resources to live/current/history, cancel/error releases own retains",
+      "noPublicUnqualifiedFlag": true
+    },
+    {
+      "name": "sg2.NativePlane",
+      "input": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/sg/sg2.schema.json#/$defs/NativePlaneRequest",
+      "output": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/sg/sg2.schema.json#/$defs/NativePlaneResponse",
+      "owner": "kernel-geometry",
+      "sourceContract": {
+        "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/sg/sg2-producer-consumer.json",
+        "sha256": "99eacb7d86352a272d7d009e15b4e5c2fad3aa992d7f140960078e65aa30e43a"
+      },
+      "preparationSignature": "EngineV2::prepare_domain(current:DocumentAt,input:OperationRequest2,resources:&mut dyn ResourcePort,cx:&mut PureJobContext)->Result<JobStep<TypedResultLease2>,DomainError>",
+      "application": "query by default; candidate only for registry-admitted model-bearing output with registered target projector and complete result; apply never trusts caller-supplied result",
+      "historyEffect": "server-derived record for actual model mutation; query unchanged; only registered trusted camera animation preserve-history-cursor",
+      "ownership": "captured input retains + job temporary arena + result lease; apply transfers actual referenced resources to live/current/history, cancel/error releases own retains",
+      "noPublicUnqualifiedFlag": true
+    },
+    {
+      "name": "sg2.NativeShape",
+      "input": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/sg/sg2.schema.json#/$defs/NativeShapeRequest",
+      "output": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/sg/sg2.schema.json#/$defs/NativeShapeResponse",
+      "owner": "kernel-geometry",
+      "sourceContract": {
+        "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/sg/sg2-producer-consumer.json",
+        "sha256": "99eacb7d86352a272d7d009e15b4e5c2fad3aa992d7f140960078e65aa30e43a"
+      },
+      "preparationSignature": "EngineV2::prepare_domain(current:DocumentAt,input:OperationRequest2,resources:&mut dyn ResourcePort,cx:&mut PureJobContext)->Result<JobStep<TypedResultLease2>,DomainError>",
+      "application": "query by default; candidate only for registry-admitted model-bearing output with registered target projector and complete result; apply never trusts caller-supplied result",
+      "historyEffect": "server-derived record for actual model mutation; query unchanged; only registered trusted camera animation preserve-history-cursor",
+      "ownership": "captured input retains + job temporary arena + result lease; apply transfers actual referenced resources to live/current/history, cancel/error releases own retains",
+      "noPublicUnqualifiedFlag": true
+    },
+    {
+      "name": "sg2.NativeCamera",
+      "input": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/sg/sg2.schema.json#/$defs/NativeCameraRequest",
+      "output": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/sg/sg2.schema.json#/$defs/NativeCameraResponse",
+      "owner": "kernel-geometry",
+      "sourceContract": {
+        "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/sg/sg2-producer-consumer.json",
+        "sha256": "99eacb7d86352a272d7d009e15b4e5c2fad3aa992d7f140960078e65aa30e43a"
+      },
+      "preparationSignature": "EngineV2::prepare_domain(current:DocumentAt,input:OperationRequest2,resources:&mut dyn ResourcePort,cx:&mut PureJobContext)->Result<JobStep<TypedResultLease2>,DomainError>",
+      "application": "query by default; candidate only for registry-admitted model-bearing output with registered target projector and complete result; apply never trusts caller-supplied result",
+      "historyEffect": "server-derived record for actual model mutation; query unchanged; only registered trusted camera animation preserve-history-cursor",
+      "ownership": "captured input retains + job temporary arena + result lease; apply transfers actual referenced resources to live/current/history, cancel/error releases own retains",
+      "noPublicUnqualifiedFlag": true
+    },
+    {
+      "name": "fs2.PrepareNativeFourierUi",
+      "input": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/NativeFourierUiInput",
+      "output": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/NativePreparedFourierOutput",
+      "owner": "kernel-science",
+      "sourceContract": {
+        "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-functional-contract.json",
+        "sha256": "5bb9a766472e3f6ab52c9ec157af42eff1d97bbbfff89bbf75d7098deb427332"
+      },
+      "preparationSignature": "EngineV2::prepare_domain(current:DocumentAt,input:OperationRequest2,resources:&mut dyn ResourcePort,cx:&mut PureJobContext)->Result<JobStep<TypedResultLease2>,DomainError>",
+      "application": "query by default; candidate only for registry-admitted model-bearing output with registered target projector and complete result; apply never trusts caller-supplied result",
+      "historyEffect": "server-derived record for actual model mutation; query unchanged; only registered trusted camera animation preserve-history-cursor",
+      "ownership": "captured input retains + job temporary arena + result lease; apply transfers actual referenced resources to live/current/history, cancel/error releases own retains",
+      "noPublicUnqualifiedFlag": true
+    },
+    {
+      "name": "fs2.CalcNativeGridNo",
+      "input": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/NativeGridNoInput",
+      "output": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/NativeGridNoOutput",
+      "owner": "kernel-science",
+      "sourceContract": {
+        "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-functional-contract.json",
+        "sha256": "5bb9a766472e3f6ab52c9ec157af42eff1d97bbbfff89bbf75d7098deb427332"
+      },
+      "preparationSignature": "EngineV2::prepare_domain(current:DocumentAt,input:OperationRequest2,resources:&mut dyn ResourcePort,cx:&mut PureJobContext)->Result<JobStep<TypedResultLease2>,DomainError>",
+      "application": "query by default; candidate only for registry-admitted model-bearing output with registered target projector and complete result; apply never trusts caller-supplied result",
+      "historyEffect": "server-derived record for actual model mutation; query unchanged; only registered trusted camera animation preserve-history-cursor",
+      "ownership": "captured input retains + job temporary arena + result lease; apply transfers actual referenced resources to live/current/history, cancel/error releases own retains",
+      "noPublicUnqualifiedFlag": true
+    },
+    {
+      "name": "fs2.CalcNativeTchWidth",
+      "input": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/NativeTchWidthInput",
+      "output": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/NativeTchWidthOutput",
+      "owner": "kernel-science",
+      "sourceContract": {
+        "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-functional-contract.json",
+        "sha256": "5bb9a766472e3f6ab52c9ec157af42eff1d97bbbfff89bbf75d7098deb427332"
+      },
+      "preparationSignature": "EngineV2::prepare_domain(current:DocumentAt,input:OperationRequest2,resources:&mut dyn ResourcePort,cx:&mut PureJobContext)->Result<JobStep<TypedResultLease2>,DomainError>",
+      "application": "query by default; candidate only for registry-admitted model-bearing output with registered target projector and complete result; apply never trusts caller-supplied result",
+      "historyEffect": "server-derived record for actual model mutation; query unchanged; only registered trusted camera animation preserve-history-cursor",
+      "ownership": "captured input retains + job temporary arena + result lease; apply transfers actual referenced resources to live/current/history, cancel/error releases own retains",
+      "noPublicUnqualifiedFlag": true
+    },
+    {
+      "name": "fs2.AccumulateNativePowderPattern",
+      "input": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/NativePowderAccumulateInput",
+      "output": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/NativePowderAccumulateOutput",
+      "owner": "kernel-science",
+      "sourceContract": {
+        "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-functional-contract.json",
+        "sha256": "5bb9a766472e3f6ab52c9ec157af42eff1d97bbbfff89bbf75d7098deb427332"
+      },
+      "preparationSignature": "EngineV2::prepare_domain(current:DocumentAt,input:OperationRequest2,resources:&mut dyn ResourcePort,cx:&mut PureJobContext)->Result<JobStep<TypedResultLease2>,DomainError>",
+      "application": "query by default; candidate only for registry-admitted model-bearing output with registered target projector and complete result; apply never trusts caller-supplied result",
+      "historyEffect": "server-derived record for actual model mutation; query unchanged; only registered trusted camera animation preserve-history-cursor",
+      "ownership": "captured input retains + job temporary arena + result lease; apply transfers actual referenced resources to live/current/history, cancel/error releases own retains",
+      "noPublicUnqualifiedFlag": true
+    },
+    {
+      "name": "fs2.MaterializeOrderedScalarExpression",
+      "input": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/OrderedExpressionInput",
+      "output": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/OrderedExpressionOutput",
+      "owner": "kernel-science",
+      "sourceContract": {
+        "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-functional-contract.json",
+        "sha256": "5bb9a766472e3f6ab52c9ec157af42eff1d97bbbfff89bbf75d7098deb427332"
+      },
+      "preparationSignature": "EngineV2::prepare_domain(current:DocumentAt,input:OperationRequest2,resources:&mut dyn ResourcePort,cx:&mut PureJobContext)->Result<JobStep<TypedResultLease2>,DomainError>",
+      "application": "query by default; candidate only for registry-admitted model-bearing output with registered target projector and complete result; apply never trusts caller-supplied result",
+      "historyEffect": "server-derived record for actual model mutation; query unchanged; only registered trusted camera animation preserve-history-cursor",
+      "ownership": "captured input retains + job temporary arena + result lease; apply transfers actual referenced resources to live/current/history, cancel/error releases own retains",
+      "noPublicUnqualifiedFlag": true
+    },
+    {
+      "name": "fs2.ResampleAffineTrilinear",
+      "input": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/Math_FSResampleAffineInput",
+      "output": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/FS1_FSFieldOutput",
+      "owner": "kernel-science",
+      "sourceContract": {
+        "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-functional-contract.json",
+        "sha256": "5bb9a766472e3f6ab52c9ec157af42eff1d97bbbfff89bbf75d7098deb427332"
+      },
+      "preparationSignature": "EngineV2::prepare_domain(current:DocumentAt,input:OperationRequest2,resources:&mut dyn ResourcePort,cx:&mut PureJobContext)->Result<JobStep<TypedResultLease2>,DomainError>",
+      "application": "query by default; candidate only for registry-admitted model-bearing output with registered target projector and complete result; apply never trusts caller-supplied result",
+      "historyEffect": "server-derived record for actual model mutation; query unchanged; only registered trusted camera animation preserve-history-cursor",
+      "ownership": "captured input retains + job temporary arena + result lease; apply transfers actual referenced resources to live/current/history, cancel/error releases own retains",
+      "noPublicUnqualifiedFlag": true
+    },
+    {
+      "name": "fs2.LinearCombineFields",
+      "input": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/Math_FSLinearCombineFieldsInput",
+      "output": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/FS1_FSFieldOutput",
+      "owner": "kernel-science",
+      "sourceContract": {
+        "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-functional-contract.json",
+        "sha256": "5bb9a766472e3f6ab52c9ec157af42eff1d97bbbfff89bbf75d7098deb427332"
+      },
+      "preparationSignature": "EngineV2::prepare_domain(current:DocumentAt,input:OperationRequest2,resources:&mut dyn ResourcePort,cx:&mut PureJobContext)->Result<JobStep<TypedResultLease2>,DomainError>",
+      "application": "query by default; candidate only for registry-admitted model-bearing output with registered target projector and complete result; apply never trusts caller-supplied result",
+      "historyEffect": "server-derived record for actual model mutation; query unchanged; only registered trusted camera animation preserve-history-cursor",
+      "ownership": "captured input retains + job temporary arena + result lease; apply transfers actual referenced resources to live/current/history, cancel/error releases own retains",
+      "noPublicUnqualifiedFlag": true
+    },
+    {
+      "name": "fs2.SampleCartesianLine",
+      "input": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/Math_FSCartesianLineInput",
+      "output": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/Math_FSCartesianLineOutput",
+      "owner": "kernel-science",
+      "sourceContract": {
+        "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-functional-contract.json",
+        "sha256": "5bb9a766472e3f6ab52c9ec157af42eff1d97bbbfff89bbf75d7098deb427332"
+      },
+      "preparationSignature": "EngineV2::prepare_domain(current:DocumentAt,input:OperationRequest2,resources:&mut dyn ResourcePort,cx:&mut PureJobContext)->Result<JobStep<TypedResultLease2>,DomainError>",
+      "application": "query by default; candidate only for registry-admitted model-bearing output with registered target projector and complete result; apply never trusts caller-supplied result",
+      "historyEffect": "server-derived record for actual model mutation; query unchanged; only registered trusted camera animation preserve-history-cursor",
+      "ownership": "captured input retains + job temporary arena + result lease; apply transfers actual referenced resources to live/current/history, cancel/error releases own retains",
+      "noPublicUnqualifiedFlag": true
+    },
+    {
+      "name": "fs2.LinearCombineCurves",
+      "input": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/Math_FSLinearCombineCurvesInput",
+      "output": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/Math_FSLinearCombineCurvesOutput",
+      "owner": "kernel-science",
+      "sourceContract": {
+        "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-functional-contract.json",
+        "sha256": "5bb9a766472e3f6ab52c9ec157af42eff1d97bbbfff89bbf75d7098deb427332"
+      },
+      "preparationSignature": "EngineV2::prepare_domain(current:DocumentAt,input:OperationRequest2,resources:&mut dyn ResourcePort,cx:&mut PureJobContext)->Result<JobStep<TypedResultLease2>,DomainError>",
+      "application": "query by default; candidate only for registry-admitted model-bearing output with registered target projector and complete result; apply never trusts caller-supplied result",
+      "historyEffect": "server-derived record for actual model mutation; query unchanged; only registered trusted camera animation preserve-history-cursor",
+      "ownership": "captured input retains + job temporary arena + result lease; apply transfers actual referenced resources to live/current/history, cancel/error releases own retains",
+      "noPublicUnqualifiedFlag": true
+    },
+    {
+      "name": "fs2.EvaluateNativeDispersion",
+      "input": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/NativeDispersionInput",
+      "output": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/NativeDispersionOutputOrFailure",
+      "owner": "kernel-science",
+      "sourceContract": {
+        "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-functional-contract.json",
+        "sha256": "5bb9a766472e3f6ab52c9ec157af42eff1d97bbbfff89bbf75d7098deb427332"
+      },
+      "preparationSignature": "EngineV2::prepare_domain(current:DocumentAt,input:OperationRequest2,resources:&mut dyn ResourcePort,cx:&mut PureJobContext)->Result<JobStep<TypedResultLease2>,DomainError>",
+      "application": "query by default; candidate only for registry-admitted model-bearing output with registered target projector and complete result; apply never trusts caller-supplied result",
+      "historyEffect": "server-derived record for actual model mutation; query unchanged; only registered trusted camera animation preserve-history-cursor",
+      "ownership": "captured input retains + job temporary arena + result lease; apply transfers actual referenced resources to live/current/history, cancel/error releases own retains",
+      "noPublicUnqualifiedFlag": true
+    },
+    {
+      "name": "fs2.CalculateNativeStructureFactors",
+      "input": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/NativeScatteringInput",
+      "output": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/NativeScatteringOutputOrFailure",
+      "owner": "kernel-science",
+      "sourceContract": {
+        "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-functional-contract.json",
+        "sha256": "5bb9a766472e3f6ab52c9ec157af42eff1d97bbbfff89bbf75d7098deb427332"
+      },
+      "preparationSignature": "EngineV2::prepare_domain(current:DocumentAt,input:OperationRequest2,resources:&mut dyn ResourcePort,cx:&mut PureJobContext)->Result<JobStep<TypedResultLease2>,DomainError>",
+      "application": "query by default; candidate only for registry-admitted model-bearing output with registered target projector and complete result; apply never trusts caller-supplied result",
+      "historyEffect": "server-derived record for actual model mutation; query unchanged; only registered trusted camera animation preserve-history-cursor",
+      "ownership": "captured input retains + job temporary arena + result lease; apply transfers actual referenced resources to live/current/history, cancel/error releases own retains",
+      "noPublicUnqualifiedFlag": true
+    },
+    {
+      "name": "fs2.SynthesizeNativeFourierField",
+      "input": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/NativeFourierFieldInput",
+      "output": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/NativeFullFieldOutputOrFailure",
+      "owner": "kernel-science",
+      "sourceContract": {
+        "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-functional-contract.json",
+        "sha256": "5bb9a766472e3f6ab52c9ec157af42eff1d97bbbfff89bbf75d7098deb427332"
+      },
+      "preparationSignature": "EngineV2::prepare_domain(current:DocumentAt,input:OperationRequest2,resources:&mut dyn ResourcePort,cx:&mut PureJobContext)->Result<JobStep<TypedResultLease2>,DomainError>",
+      "application": "query by default; candidate only for registry-admitted model-bearing output with registered target projector and complete result; apply never trusts caller-supplied result",
+      "historyEffect": "server-derived record for actual model mutation; query unchanged; only registered trusted camera animation preserve-history-cursor",
+      "ownership": "captured input retains + job temporary arena + result lease; apply transfers actual referenced resources to live/current/history, cancel/error releases own retains",
+      "noPublicUnqualifiedFlag": true
+    },
+    {
+      "name": "fs2.GenerateNativeModelField",
+      "input": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/NativeModelFieldInput",
+      "output": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/NativeModelFieldOutputOrFailure",
+      "owner": "kernel-science",
+      "sourceContract": {
+        "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-functional-contract.json",
+        "sha256": "5bb9a766472e3f6ab52c9ec157af42eff1d97bbbfff89bbf75d7098deb427332"
+      },
+      "preparationSignature": "EngineV2::prepare_domain(current:DocumentAt,input:OperationRequest2,resources:&mut dyn ResourcePort,cx:&mut PureJobContext)->Result<JobStep<TypedResultLease2>,DomainError>",
+      "application": "query by default; candidate only for registry-admitted model-bearing output with registered target projector and complete result; apply never trusts caller-supplied result",
+      "historyEffect": "server-derived record for actual model mutation; query unchanged; only registered trusted camera animation preserve-history-cursor",
+      "ownership": "captured input retains + job temporary arena + result lease; apply transfers actual referenced resources to live/current/history, cancel/error releases own retains",
+      "noPublicUnqualifiedFlag": true
+    },
+    {
+      "name": "fs2.TransformNativeVolume",
+      "input": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/NativeVolumeTransformInput",
+      "output": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/NativeVolumeTransformOutputOrFailure",
+      "owner": "kernel-science",
+      "sourceContract": {
+        "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-functional-contract.json",
+        "sha256": "5bb9a766472e3f6ab52c9ec157af42eff1d97bbbfff89bbf75d7098deb427332"
+      },
+      "preparationSignature": "EngineV2::prepare_domain(current:DocumentAt,input:OperationRequest2,resources:&mut dyn ResourcePort,cx:&mut PureJobContext)->Result<JobStep<TypedResultLease2>,DomainError>",
+      "application": "query by default; candidate only for registry-admitted model-bearing output with registered target projector and complete result; apply never trusts caller-supplied result",
+      "historyEffect": "server-derived record for actual model mutation; query unchanged; only registered trusted camera animation preserve-history-cursor",
+      "ownership": "captured input retains + job temporary arena + result lease; apply transfers actual referenced resources to live/current/history, cancel/error releases own retains",
+      "noPublicUnqualifiedFlag": true
+    },
+    {
+      "name": "fs2.SearchNativePeaksAndIntegrate",
+      "input": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/NativePeakSearchInput",
+      "output": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/NativePeakVoronoiOutputOrFailure",
+      "owner": "kernel-science",
+      "sourceContract": {
+        "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-functional-contract.json",
+        "sha256": "5bb9a766472e3f6ab52c9ec157af42eff1d97bbbfff89bbf75d7098deb427332"
+      },
+      "preparationSignature": "EngineV2::prepare_domain(current:DocumentAt,input:OperationRequest2,resources:&mut dyn ResourcePort,cx:&mut PureJobContext)->Result<JobStep<TypedResultLease2>,DomainError>",
+      "application": "query by default; candidate only for registry-admitted model-bearing output with registered target projector and complete result; apply never trusts caller-supplied result",
+      "historyEffect": "server-derived record for actual model mutation; query unchanged; only registered trusted camera animation preserve-history-cursor",
+      "ownership": "captured input retains + job temporary arena + result lease; apply transfers actual referenced resources to live/current/history, cancel/error releases own retains",
+      "noPublicUnqualifiedFlag": true
+    },
+    {
+      "name": "fs2.IntegrateNativeVoronoi",
+      "input": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/NativeVoronoiInput",
+      "output": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/NativePeakVoronoiOutputOrFailure",
+      "owner": "kernel-science",
+      "sourceContract": {
+        "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-functional-contract.json",
+        "sha256": "5bb9a766472e3f6ab52c9ec157af42eff1d97bbbfff89bbf75d7098deb427332"
+      },
+      "preparationSignature": "EngineV2::prepare_domain(current:DocumentAt,input:OperationRequest2,resources:&mut dyn ResourcePort,cx:&mut PureJobContext)->Result<JobStep<TypedResultLease2>,DomainError>",
+      "application": "query by default; candidate only for registry-admitted model-bearing output with registered target projector and complete result; apply never trusts caller-supplied result",
+      "historyEffect": "server-derived record for actual model mutation; query unchanged; only registered trusted camera animation preserve-history-cursor",
+      "ownership": "captured input retains + job temporary arena + result lease; apply transfers actual referenced resources to live/current/history, cancel/error releases own retains",
+      "noPublicUnqualifiedFlag": true
+    },
+    {
+      "name": "fs2.BuildNativeIsosurfaceMesh",
+      "input": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/NativeMeshInput",
+      "output": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/NativeMeshOutputOrFailure",
+      "owner": "kernel-science",
+      "sourceContract": {
+        "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-functional-contract.json",
+        "sha256": "5bb9a766472e3f6ab52c9ec157af42eff1d97bbbfff89bbf75d7098deb427332"
+      },
+      "preparationSignature": "EngineV2::prepare_domain(current:DocumentAt,input:OperationRequest2,resources:&mut dyn ResourcePort,cx:&mut PureJobContext)->Result<JobStep<TypedResultLease2>,DomainError>",
+      "application": "query by default; candidate only for registry-admitted model-bearing output with registered target projector and complete result; apply never trusts caller-supplied result",
+      "historyEffect": "server-derived record for actual model mutation; query unchanged; only registered trusted camera animation preserve-history-cursor",
+      "ownership": "captured input retains + job temporary arena + result lease; apply transfers actual referenced resources to live/current/history, cancel/error releases own retains",
+      "noPublicUnqualifiedFlag": true
+    },
+    {
+      "name": "fs2.ConvertNativeElectronicEnergy",
+      "input": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/NativeConversionInput",
+      "output": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/NativeConversionOutputOrFailure",
+      "owner": "kernel-science",
+      "sourceContract": {
+        "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-functional-contract.json",
+        "sha256": "5bb9a766472e3f6ab52c9ec157af42eff1d97bbbfff89bbf75d7098deb427332"
+      },
+      "preparationSignature": "EngineV2::prepare_domain(current:DocumentAt,input:OperationRequest2,resources:&mut dyn ResourcePort,cx:&mut PureJobContext)->Result<JobStep<TypedResultLease2>,DomainError>",
+      "application": "query by default; candidate only for registry-admitted model-bearing output with registered target projector and complete result; apply never trusts caller-supplied result",
+      "historyEffect": "server-derived record for actual model mutation; query unchanged; only registered trusted camera animation preserve-history-cursor",
+      "ownership": "captured input retains + job temporary arena + result lease; apply transfers actual referenced resources to live/current/history, cancel/error releases own retains",
+      "noPublicUnqualifiedFlag": true
+    },
+    {
+      "name": "fs2.SynthesizeNativePowderPattern",
+      "input": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/NativePowderFullInput",
+      "output": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/NativePowderFullOutputOrFailure",
+      "owner": "kernel-science",
+      "sourceContract": {
+        "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-functional-contract.json",
+        "sha256": "5bb9a766472e3f6ab52c9ec157af42eff1d97bbbfff89bbf75d7098deb427332"
+      },
+      "preparationSignature": "EngineV2::prepare_domain(current:DocumentAt,input:OperationRequest2,resources:&mut dyn ResourcePort,cx:&mut PureJobContext)->Result<JobStep<TypedResultLease2>,DomainError>",
+      "application": "query by default; candidate only for registry-admitted model-bearing output with registered target projector and complete result; apply never trusts caller-supplied result",
+      "historyEffect": "server-derived record for actual model mutation; query unchanged; only registered trusted camera animation preserve-history-cursor",
+      "ownership": "captured input retains + job temporary arena + result lease; apply transfers actual referenced resources to live/current/history, cancel/error releases own retains",
+      "noPublicUnqualifiedFlag": true
+    },
+    {
+      "name": "fs2.ResolveNativeDefaultIsovalue",
+      "input": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/NativeDefaultIsoInput",
+      "output": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/NativeDefaultIsoOutputOrFailure",
+      "owner": "kernel-science",
+      "sourceContract": {
+        "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-functional-contract.json",
+        "sha256": "5bb9a766472e3f6ab52c9ec157af42eff1d97bbbfff89bbf75d7098deb427332"
+      },
+      "preparationSignature": "EngineV2::prepare_domain(current:DocumentAt,input:OperationRequest2,resources:&mut dyn ResourcePort,cx:&mut PureJobContext)->Result<JobStep<TypedResultLease2>,DomainError>",
+      "application": "query by default; candidate only for registry-admitted model-bearing output with registered target projector and complete result; apply never trusts caller-supplied result",
+      "historyEffect": "server-derived record for actual model mutation; query unchanged; only registered trusted camera animation preserve-history-cursor",
+      "ownership": "captured input retains + job temporary arena + result lease; apply transfers actual referenced resources to live/current/history, cancel/error releases own retains",
+      "noPublicUnqualifiedFlag": true
+    },
+    {
+      "name": "fs2.ReadNativeReflectionSource",
+      "input": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/NativeReflectionReadInput",
+      "output": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/NativeReflectionReadOutputOrFailure",
+      "owner": "kernel-science",
+      "sourceContract": {
+        "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-functional-contract.json",
+        "sha256": "5bb9a766472e3f6ab52c9ec157af42eff1d97bbbfff89bbf75d7098deb427332"
+      },
+      "preparationSignature": "EngineV2::prepare_domain(current:DocumentAt,input:OperationRequest2,resources:&mut dyn ResourcePort,cx:&mut PureJobContext)->Result<JobStep<TypedResultLease2>,DomainError>",
+      "application": "query by default; candidate only for registry-admitted model-bearing output with registered target projector and complete result; apply never trusts caller-supplied result",
+      "historyEffect": "server-derived record for actual model mutation; query unchanged; only registered trusted camera animation preserve-history-cursor",
+      "ownership": "captured input retains + job temporary arena + result lease; apply transfers actual referenced resources to live/current/history, cancel/error releases own retains",
+      "noPublicUnqualifiedFlag": true
+    },
+    {
+      "name": "fs2.SampleNativeFractionalPoint",
+      "input": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/Sampling_NativePointSampleInput",
+      "output": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/Sampling_NativePointSampleOutputOrFailure",
+      "owner": "kernel-science",
+      "sourceContract": {
+        "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-functional-contract.json",
+        "sha256": "5bb9a766472e3f6ab52c9ec157af42eff1d97bbbfff89bbf75d7098deb427332"
+      },
+      "preparationSignature": "EngineV2::prepare_domain(current:DocumentAt,input:OperationRequest2,resources:&mut dyn ResourcePort,cx:&mut PureJobContext)->Result<JobStep<TypedResultLease2>,DomainError>",
+      "application": "query by default; candidate only for registry-admitted model-bearing output with registered target projector and complete result; apply never trusts caller-supplied result",
+      "historyEffect": "server-derived record for actual model mutation; query unchanged; only registered trusted camera animation preserve-history-cursor",
+      "ownership": "captured input retains + job temporary arena + result lease; apply transfers actual referenced resources to live/current/history, cancel/error releases own retains",
+      "noPublicUnqualifiedFlag": true
+    },
+    {
+      "name": "fs2.ExportNativeLineProfile",
+      "input": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/Sampling_NativeLineProfileInput",
+      "output": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/Sampling_NativeLineProfileOutputOrFailure",
+      "owner": "kernel-science",
+      "sourceContract": {
+        "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-functional-contract.json",
+        "sha256": "5bb9a766472e3f6ab52c9ec157af42eff1d97bbbfff89bbf75d7098deb427332"
+      },
+      "preparationSignature": "EngineV2::prepare_domain(current:DocumentAt,input:OperationRequest2,resources:&mut dyn ResourcePort,cx:&mut PureJobContext)->Result<JobStep<TypedResultLease2>,DomainError>",
+      "application": "query by default; candidate only for registry-admitted model-bearing output with registered target projector and complete result; apply never trusts caller-supplied result",
+      "historyEffect": "server-derived record for actual model mutation; query unchanged; only registered trusted camera animation preserve-history-cursor",
+      "ownership": "captured input retains + job temporary arena + result lease; apply transfers actual referenced resources to live/current/history, cancel/error releases own retains",
+      "noPublicUnqualifiedFlag": true
+    },
+    {
+      "name": "fs2.GenerateNativeContourLevels",
+      "input": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/Sampling_NativeContourLevelsInput",
+      "output": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/Sampling_NativeContourLevelsOutputOrFailure",
+      "owner": "kernel-science",
+      "sourceContract": {
+        "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-functional-contract.json",
+        "sha256": "5bb9a766472e3f6ab52c9ec157af42eff1d97bbbfff89bbf75d7098deb427332"
+      },
+      "preparationSignature": "EngineV2::prepare_domain(current:DocumentAt,input:OperationRequest2,resources:&mut dyn ResourcePort,cx:&mut PureJobContext)->Result<JobStep<TypedResultLease2>,DomainError>",
+      "application": "query by default; candidate only for registry-admitted model-bearing output with registered target projector and complete result; apply never trusts caller-supplied result",
+      "historyEffect": "server-derived record for actual model mutation; query unchanged; only registered trusted camera animation preserve-history-cursor",
+      "ownership": "captured input retains + job temporary arena + result lease; apply transfers actual referenced resources to live/current/history, cancel/error releases own retains",
+      "noPublicUnqualifiedFlag": true
+    },
+    {
+      "name": "fs2.BuildNativeContourSegments",
+      "input": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/Sampling_NativeContourSegmentsInput",
+      "output": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/Sampling_NativeContourSegmentsOutputOrFailure",
+      "owner": "kernel-science",
+      "sourceContract": {
+        "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-functional-contract.json",
+        "sha256": "5bb9a766472e3f6ab52c9ec157af42eff1d97bbbfff89bbf75d7098deb427332"
+      },
+      "preparationSignature": "EngineV2::prepare_domain(current:DocumentAt,input:OperationRequest2,resources:&mut dyn ResourcePort,cx:&mut PureJobContext)->Result<JobStep<TypedResultLease2>,DomainError>",
+      "application": "query by default; candidate only for registry-admitted model-bearing output with registered target projector and complete result; apply never trusts caller-supplied result",
+      "historyEffect": "server-derived record for actual model mutation; query unchanged; only registered trusted camera animation preserve-history-cursor",
+      "ownership": "captured input retains + job temporary arena + result lease; apply transfers actual referenced resources to live/current/history, cancel/error releases own retains",
+      "noPublicUnqualifiedFlag": true
+    },
+    {
+      "name": "fs2.ExecuteNativePolyIntegralMenu",
+      "input": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/Sampling_NativePolyIntegralInput",
+      "output": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/Sampling_NativePolyIntegralOutputOrFailure",
+      "owner": "kernel-science",
+      "sourceContract": {
+        "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-functional-contract.json",
+        "sha256": "5bb9a766472e3f6ab52c9ec157af42eff1d97bbbfff89bbf75d7098deb427332"
+      },
+      "preparationSignature": "EngineV2::prepare_domain(current:DocumentAt,input:OperationRequest2,resources:&mut dyn ResourcePort,cx:&mut PureJobContext)->Result<JobStep<TypedResultLease2>,DomainError>",
+      "application": "query by default; candidate only for registry-admitted model-bearing output with registered target projector and complete result; apply never trusts caller-supplied result",
+      "historyEffect": "server-derived record for actual model mutation; query unchanged; only registered trusted camera animation preserve-history-cursor",
+      "ownership": "captured input retains + job temporary arena + result lease; apply transfers actual referenced resources to live/current/history, cancel/error releases own retains",
+      "noPublicUnqualifiedFlag": true
+    },
+    {
+      "name": "fs2.BuildNativeObliqueSlice",
+      "input": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/Slice_NativeObliqueSliceInput",
+      "output": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/Slice_NativeObliqueSliceOutputOrFailure",
+      "owner": "kernel-science",
+      "sourceContract": {
+        "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-functional-contract.json",
+        "sha256": "5bb9a766472e3f6ab52c9ec157af42eff1d97bbbfff89bbf75d7098deb427332"
+      },
+      "preparationSignature": "EngineV2::prepare_domain(current:DocumentAt,input:OperationRequest2,resources:&mut dyn ResourcePort,cx:&mut PureJobContext)->Result<JobStep<TypedResultLease2>,DomainError>",
+      "application": "query by default; candidate only for registry-admitted model-bearing output with registered target projector and complete result; apply never trusts caller-supplied result",
+      "historyEffect": "server-derived record for actual model mutation; query unchanged; only registered trusted camera animation preserve-history-cursor",
+      "ownership": "captured input retains + job temporary arena + result lease; apply transfers actual referenced resources to live/current/history, cancel/error releases own retains",
+      "noPublicUnqualifiedFlag": true
+    },
+    {
+      "name": "fs2.BuildNativePeriodicSlice",
+      "input": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/Slice_NativePeriodicSliceInput",
+      "output": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-scientific-successor.schema.json#/$defs/Slice_NativePeriodicSliceOutputOrFailure",
+      "owner": "kernel-science",
+      "sourceContract": {
+        "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/fs/fs2-functional-contract.json",
+        "sha256": "5bb9a766472e3f6ab52c9ec157af42eff1d97bbbfff89bbf75d7098deb427332"
+      },
+      "preparationSignature": "EngineV2::prepare_domain(current:DocumentAt,input:OperationRequest2,resources:&mut dyn ResourcePort,cx:&mut PureJobContext)->Result<JobStep<TypedResultLease2>,DomainError>",
+      "application": "query by default; candidate only for registry-admitted model-bearing output with registered target projector and complete result; apply never trusts caller-supplied result",
+      "historyEffect": "server-derived record for actual model mutation; query unchanged; only registered trusted camera animation preserve-history-cursor",
+      "ownership": "captured input retains + job temporary arena + result lease; apply transfers actual referenced resources to live/current/history, cancel/error releases own retains",
+      "noPublicUnqualifiedFlag": true
+    },
+    {
+      "name": "surface.RenderNativeIsosurfacePacket",
+      "input": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/render-consumption/render-packet.schema.json#/$defs/RenderNativeIsosurfacePacketRequest",
+      "output": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/render-consumption/render-packet.schema.json#/$defs/RenderNativeIsosurfacePacketResponse",
+      "owner": "renderer",
+      "sourceContract": {
+        "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/render-consumption/render-consumption.contract.json",
+        "sha256": "7fc4cbf807b4ef2ed2ad429b957b9ceaa399a40e2f798c5ee041d73a86daed7c"
+      },
+      "preparationSignature": "EngineV2::prepare_domain(current:DocumentAt,input:OperationRequest2,resources:&mut dyn ResourcePort,cx:&mut PureJobContext)->Result<JobStep<TypedResultLease2>,DomainError>",
+      "application": "query by default; candidate only for registry-admitted model-bearing output with registered target projector and complete result; apply never trusts caller-supplied result",
+      "historyEffect": "server-derived record for actual model mutation; query unchanged; only registered trusted camera animation preserve-history-cursor",
+      "ownership": "captured input retains + job temporary arena + result lease; apply transfers actual referenced resources to live/current/history, cancel/error releases own retains",
+      "noPublicUnqualifiedFlag": true
+    }
+  ],
+  "componentEdits": {
+    "input": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-134209-two-residuals/contracts/scientific-composition.schema.json#/$defs/ScientificStateEdit2",
+    "purpose": "full current state edits, not replay immutable old source",
+    "admission": [
+      "target phase IDs/currentdoc/currentepoch/expectedrevision verified before preparation",
+      "existing IDs cannot be relabeled/moved to anotherowner; new identities allocated through trustedIdSource/remap and resultingmapping inspected",
+      "immutable source archive and source-row provenance retained; changed typed current fields separately captured",
+      "C2O/O2C/PHASON/nativeC2XYZ and derived sites/OD caches recomputed and compared by SG2 rules, no caller self-certification",
+      "all edited component relationships validated; singular/missing reference/overbudget/invalidnumeric rejectscandidate",
+      "only actual contentdifference commits+1, record history andinvalidate correctscene/field/render; no-op leavesrevision/history unchanged"
+    ]
+  },
+  "resultProjectors": {
+    "phase": "resolvedplacement/group/currentNativeDimensionD -> actual typed PhaseState2 plus allsource/currentfieldbindings",
+    "geometry": "native merge survivor/delete/remap/rules and shape planes/meshes -> actual targeted current fields, no merge ownership ambiguity",
+    "field": "complete FS generated/materialized field resource + exact descriptor ->new FieldLayer with trusted IDs and complete actualarray",
+    "render": "complete mesh/slice/contour only ->preview/frame/export resource; no scientific field Saved merely by render",
+    "reports": "pure measurements/line/contour/no-op reports ->owned artifact/report only; no documentmutation unless named outputmaterialization explicitly requested",
+    "external": "EX3 actualhost workflow result: only Tidy/FFE attach candidates maychange actualmodel; MADEL/RIETAN reports do not invent modelreturn"
+  },
+  "applySignature": "EngineV2::apply_domain(document:DocumentAt,candidate:CandidateId,candidateDigest:Digest,resources:&mut dyn ResourcePort)->Result<CommandOutcome2,DomainError>",
+  "sharedConsumers": [
+    {
+      "actor": "RustEngine",
+      "plannedFile": "kernel/crates/commands/src/{engine_v2,registry_v2,history_effects}.rs",
+      "rule": "one strictschema/catalog generation, trusted effect and source/projector checks"
+    },
+    {
+      "actor": "WebWorker",
+      "plannedFile": "web/src/worker/protocol-v2.ts",
+      "rule": "sameengine/directsource; no independent scientificfork"
+    },
+    {
+      "actor": "EditorRender",
+      "plannedFile": "web/src/{editor,render}/",
+      "rule": "actualnew typed current state andrevision, frame ownsresources untilcompleted"
+    },
+    {
+      "actor": "NativeCLI",
+      "plannedFile": "kernel/crates/cli/src/session_v2.rs",
+      "rule": "NS2hello matchesallprofile digests; sameEngine actual IDs, resource-carried strictpayloads, maxframe/chunk unchanged"
+    },
+    {
+      "actor": "HostAgentMCP",
+      "plannedFile": "/Users/agilecho/code/BranchDraft/dsh/plugins/software/vesta-tools.mjs",
+      "rule": "host authenticatesprincipal/scope; routes engine/prefs/EX namespaces; no rawprivateHostAck forwarding"
+    },
+    {
+      "actor": "HostSave",
+      "plannedFile": "/Users/agilecho/code/BranchDraft/dsh/plugins/software/vesta-coordinator.mjs",
+      "rule": "FC/HS exactcurrent/snapshot/publication/independentreadback; history alone cannotprovecleanclose"
+    },
+    {
+      "actor": "CodecRestore",
+      "plannedFile": "kernel/crates/codecs/src/formats/native_vesta_v2.rs",
+      "rule": "03 field/source/candidate/artifact independentfullsemanticcompare upgraded for each SG2 currentfield; native sections remainoriginalformat"
+    }
+  ],
+  "preferences": {
+    "contract": {
+      "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/application/application-composition.contract.json",
+      "sha256": "e715905df71fc68cc3578ff79ec84b2265c41588112e4ae5ae3e1491cd139227"
+    },
+    "schema": {
+      "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/application/preferences-composition.schema.json",
+      "sha256": "1d2cbe659e7fc33bf5635d68c0152ab7b6343b39b1fd0441ae7a038152f36f23"
+    },
+    "routing": "existing authenticated per-account+software preference owner; all12 typed fields/recovery/independentreadback/atomicinstall; not an Engine document mutation or arbitrary nativefilesystem access"
+  },
+  "external": {
+    "contract": {
+      "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/external/external-workflow-final.contract.json",
+      "sha256": "8d9fa16e8661d5ef730afdff0f3fec3897c9b44bb735d5bb6d9d5aec10ddf4e7"
+    },
+    "schema": {
+      "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/subtasks/external/external-workflow-final.schema.json",
+      "sha256": "e933cace8217c73d539c15867e4bcfed42f33cc46dbf4e966d03c4815a4f0ea7"
+    },
+    "routing": "existing owned-process host workflow runner EX3; nativeEngine cannot acquire credentials or spawn by business parameters"
+  },
+  "ns1Preserved": {
+    "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-071145-native-session/contracts/native-session.schema.json",
+    "sha256": "bfcae2e333ce537a0be47cef7008558de78909a7e50627c492abf11003c3198f"
+  },
+  "immutableLegacy": {
+    "bounded3": true,
+    "original177": true,
+    "C6": true,
+    "oldNS1": true
+  },
+  "profileGeneration": "mandatory nine-row profile-derivation.contract.json; exact canonical bytes/domain separation/input projection/vectors, no caller hash grants authority",
+  "productImplemented": false,
+  "runtimeExecuted": false,
+  "independentlyReviewed": false,
+  "predecessor": {
+    "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-124023-rev64-review-corrections/interface-composition.json",
+    "sha256": "982cf39bfaa472e7d4a1f001f43a74f56736cad97f905d4867868187236da60c"
+  },
+  "resourceBinding": {
+    "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-134209-two-residuals/contracts/resource-bindings.contract.json",
+    "sha256": "2406d2b076413296ee940bb16501c4f203c5c688f6630f13c57c7e31e3749bb4"
+  },
+  "currentCorrectionScope": "only F5-r currentroutehandler and F3-r explicit envelope/generation source; scientificschemas/NS2wire I33 unchanged",
+  "profileDerivation": {
+    "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-134209-two-residuals/contracts/profile-derivation.contract.json",
+    "sha256": "269a5cda03e8d0a979cc3479af6f127e578700cc69188bd6871021c57eeff98d"
+  },
+  "operationCatalog": {
+    "path": "/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-134209-two-residuals/scientific-operation-catalog.json",
+    "sha256": "dbc08af138a1247f5b381e38639fde19773fa20b44f9625d7acce97fee9a39a6"
+  },
+  "profileGenerationId": "I33"
+}
