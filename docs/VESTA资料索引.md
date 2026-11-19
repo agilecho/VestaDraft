@@ -1,6 +1,14 @@
 # VESTA 重写资料索引
 
-当前状态：2026-11-14 R7：D9/I11完成R6-R1–R4设计勘误，R6-R5未证明边界明确；Codex自验待用户手动转dsh。P1.1继承接受，P1.3 C4设计级接受保持、C6原字节且增量未审；P1.2/P1.4/整体P1仍partial，2接受/2未接受。资料基线rev32；不进入P2–P5、产品实现或运行验证，真实worker／Check／launcher另行授权。
+<!-- P1-CURRENT-STATUS BEGIN -->
+当前状态：03整卡设计施工完成，待用户手动转dsh整卡独审；rev48/D18-I20-C6。
+
+2026-11-17 P1-03整卡设计施工完成：rev48/D18-I20-C6。85原路由、234参数和291组选定字段逐项冻结精确消费/来源/当前模型/单位精度/失败，1865组件覆盖290组，JP2一组保留真实无产物。完整源、损失同意、资源图、候选与提交后语义重开、D4-31/Saved及85键外既有IO设计齐备。最终完整自验243/0、exit0、输入稳定；旧失败及额外producer/上游资格边界保留。待用户手动转dsh整卡独审，尚无独立接受；rev45有界独审及旧4/81、01/02/05 partial、SG六/FS11/C6/P1两接受两未接受保持。04/06未启动。
+
+[整卡设计](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261115-092025-p1-03-completion/design.md) / [当前profile](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261115-092025-p1-03-completion/contracts/format-profiles.json) / [后续消费](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261115-092025-p1-03-completion/consumer-handoff.md)。
+<!-- P1-CURRENT-STATUS END -->
+
+R8／rev33历史摘要（当时待独审；现已收到dsh R8，当前入口见文首）：2026-11-14 R8：D9/I11交接勘误，修正R7-R1–R3并补跨材料一致性检查；沿用R6-R5证明边界。Codex自验待用户手动转dsh。P1.1继承接受，P1.3 C4设计级接受保持、C6原字节且增量未审；P1.2/P1.4/整体P1仍partial，2接受/2未接受。资料基线rev33；不进入P2–P5、产品实现或运行验证，真实worker／Check／launcher另行授权。
 
 ## 使用规则
 
@@ -27,6 +35,19 @@
 | <a id="d10"></a>D10 | [Agent 工具协作](方法/05-Agent工具与开发协作.md)、[安全边界](专题/13-安全扩展与协作边界.md)、[长任务](专题/06-模型接入与长任务系统.md) | 正式命令、受限路径、单写者、任务取消、模型归属及恢复 |
 | <a id="d11"></a>D11 | [测试与交付方法](方法/07-测试验收与构建交付.md)、[测试诊断](专题/07-自动化测试与故障诊断.md)、[构建维护](专题/08-构建发布与升级维护.md) | 新增/关联测试、独立断言、真实链、版本/制品、目标环境和交接 |
 | <a id="d12"></a>D12 | [软件方案模板](模板/单款软件Craft方案模板.md)、[新项目文档骨架](模板/新项目文档骨架.md) | Study 收束、设计输入、状态和新会话接手 |
+
+<a id="wordcraft-structure"></a>
+## WordCraft 软件结构参考
+
+2026-11-14 用户追加 DEC-P1-04：最终软件结构参考 `/Volumes/T9/Development/Sources/Artcraft/wordcraft`，适配要求以[专用要求](VESTA全功能重写要求.md)为准。只读核对时 HEAD 为 `514085ca444ecf0391ee1105a743d225677b391d`，工作区有既有改动；以下 SHA-256 锁定实际读取字节，不将 HEAD 当作工作区内容的完整身份。后续消费先核文件摘要，变化时保留本次身份并说明新版本影响，不清理上游改动。
+
+| ID | 直接入口 | 参考内容与本次 SHA-256 |
+|---|---|---|
+| <a id="wc01"></a>WC01 | [架构说明](/Volumes/T9/Development/Sources/Artcraft/wordcraft/docs/architecture.md) | Layers、Data flow、Testing and gates：层次职责、统一命令与数据流、依赖检查；`08f48f7bd3a694def33840ca461b1f498da9f27997deb15b8d1756533c70c99b` |
+| <a id="wc02"></a>WC02 | [工作区清单](/Volumes/T9/Development/Sources/Artcraft/wordcraft/Cargo.toml) | `crates/*`、`apps/*`、`xtask` 成员与依赖组织；`e340768269614b83d35424b83dd9fc3d97265208ca1e3ff0fb8aa337ab661403` |
+| <a id="wc03"></a>WC03 | [项目说明](/Volumes/T9/Development/Sources/Artcraft/wordcraft/README.md) | Architecture 节、桌面/CLI/Web 入口；`67a411d711851ef6ad7b84e1ff87a03e1175803411e205323970d968002cddd1` |
+
+上述内容是结构参考，不证明 VESTA 已完成分层适配或通过相应构建、测试和运行验证；具体实现设计由后续任务交回，用户手动转 dsh 独立复审。
 
 ## Craft Anything 当前源码
 
@@ -446,4 +467,13 @@ P1.1按D05/D07/CA07：[架构设计§2](superpowers/specs/2026-11-10-vesta-p1-de
 历史R6同卡整改：2026-11-14 R6：D8/I10按dsh R5复审整改D1–D14及σ公式，Codex自验待用户手动转dsh。P1.1继承接受、P1.3 C4设计级接受保持，C6原字节及未审增量身份不变；P1.2/P1.4/整体P1仍partial，2接受/2未接受。资料rev31；不进入P2–P5、产品实现、部署或运行验证，真实worker／Check／launcher未授权、未验证。 施工回执与手动复审入口：[R6](../output/vesta-study/20261108-113622/reviews/20261114-141647-p1-design-r6-corrections/README.md)。
 
 
-当前R7勘误：2026-11-14 R7：D9/I11完成R6-R1–R4设计勘误，R6-R5未证明边界明确；Codex自验待用户手动转dsh。P1.1继承接受，P1.3 C4设计级接受保持、C6原字节且增量未审；P1.2/P1.4/整体P1仍partial，2接受/2未接受。资料基线rev32；不进入P2–P5、产品实现或运行验证，真实worker／Check／launcher另行授权。 [回执/复审入口](../output/vesta-study/20261108-113622/reviews/20261114-152228-p1-design-r7-errata/README.md)。
+R8／rev33历史摘要（当时待独审；现已收到dsh R8，当前入口见文首）：2026-11-14 R8：D9/I11交接勘误，修正R7-R1–R3并补跨材料一致性检查；沿用R6-R5证明边界。Codex自验待用户手动转dsh。P1.1继承接受，P1.3 C4设计级接受保持、C6原字节且增量未审；P1.2/P1.4/整体P1仍partial，2接受/2未接受。资料基线rev33；不进入P2–P5、产品实现或运行验证，真实worker／Check／launcher另行授权。 [回执/复审入口](../output/vesta-study/20261108-113622/reviews/20261114-161832-p1-design-r8-consistency/README.md)。
+
+
+## 当前续办：P1-01 F1–F6独审结论登记（rev39）
+
+2026-11-14 P1-01同卡独审结论登记：追加资料rev39，技术版本仍D11/I13/C6；dsh已独立复审通过rev38的F1–F6证据/边界修补，最新独审指针指向该被审包及真实JSON/SHA。本次rev39仅回写结论并Codex自验，O1登记为非阻断报告导航说明，不改旧封存或AGENTS。P1.1及P1.3 C4接受保持，C5条件复审/C6增量未审；P1.2/P1.4/整体仍partial，2接受/2未接受，SG-01…SG-06六项科学缺口不变。02–06未启动，产品和运行验证未授权。
+
+最新[dsh独审](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261114-194200-p1-01-f1-f6-dsh-review/REVIEW.md) / [真实JSON](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261114-194200-p1-01-f1-f6-dsh-review/review-result.json) / [本次登记回执](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261114-200614-p1-01-f1-f6-dsh-registration/RECEIPT.md) / [O1非阻断说明](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261114-200614-p1-01-f1-f6-dsh-registration/nonblocking-observations.json)。
+
+O1：旧oracle-bindings.currentVerificationEvidence定位04-full正常模式546项报告；封存只读final为570项，两者均exit0/0失败。final入口为[/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261114-191308-p1-01-f1-f6-corrections/runs/final/stdout.json](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261114-191308-p1-01-f1-f6-corrections/runs/final/stdout.json)。本次只登记该导航边界，不改旧字段、旧报告或封存。独审被审版本是rev38，rev39仅为结论回写且尚无新的独立复审。

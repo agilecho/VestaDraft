@@ -1,5 +1,13 @@
 # VESTA Study 阶段执行计划
 
+<!-- P1-CURRENT-STATUS BEGIN -->
+当前状态：03整卡设计施工完成，待用户手动转dsh整卡独审；rev48/D18-I20-C6。
+
+2026-11-17 P1-03整卡设计施工完成：rev48/D18-I20-C6。85原路由、234参数和291组选定字段逐项冻结精确消费/来源/当前模型/单位精度/失败，1865组件覆盖290组，JP2一组保留真实无产物。完整源、损失同意、资源图、候选与提交后语义重开、D4-31/Saved及85键外既有IO设计齐备。最终完整自验243/0、exit0、输入稳定；旧失败及额外producer/上游资格边界保留。待用户手动转dsh整卡独审，尚无独立接受；rev45有界独审及旧4/81、01/02/05 partial、SG六/FS11/C6/P1两接受两未接受保持。04/06未启动。
+
+[整卡设计](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261115-092025-p1-03-completion/design.md) / [当前profile](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261115-092025-p1-03-completion/contracts/format-profiles.json) / [后续消费](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261115-092025-p1-03-completion/consumer-handoff.md)。
+<!-- P1-CURRENT-STATUS END -->
+
 > **For agentic workers:** 执行使用 `superpowers:executing-plans`，由 Codex 直接按 S01–S08 顺序实施并勾选真实完成步骤；施工仅在用户明确要求时交 dsh。独立复审统一由 dsh 承担，不再使用 Hermes 复审口径（2026-11-08 用户确认，见根目录 AGENTS.md）。每一步先读所列资料和前置产物，保留原始证据。
 
 **Goal:** 严格按 Craft Anything 的 Study 方法，查清锁定本地 VESTA 的全部功能、行为、格式、科学规则与工具能力，形成无需重新搜索材料即可进入设计的依据。
@@ -10,7 +18,7 @@
 
 **Spec:** [VESTA 全功能重写要求](../../VESTA全功能重写要求.md)；[总体计划 P0](2026-11-08-vesta-full-rewrite.md)；[资料索引](../../VESTA资料索引.md)。
 
-当前状态：2026-11-14 R7：D9/I11完成R6-R1–R4设计勘误，R6-R5未证明边界明确；Codex自验待用户手动转dsh。P1.1继承接受，P1.3 C4设计级接受保持、C6原字节且增量未审；P1.2/P1.4/整体P1仍partial，2接受/2未接受。资料基线rev32；不进入P2–P5、产品实现或运行验证，真实worker／Check／launcher另行授权。
+R8／rev33历史摘要（当时待独审；现已收到dsh R8，当前入口见文首）：2026-11-14 R8：D9/I11交接勘误，修正R7-R1–R3并补跨材料一致性检查；沿用R6-R5证明边界。Codex自验待用户手动转dsh。P1.1继承接受，P1.3 C4设计级接受保持、C6原字节且增量未审；P1.2/P1.4/整体P1仍partial，2接受/2未接受。资料基线rev33；不进入P2–P5、产品实现或运行验证，真实worker／Check／launcher另行授权。
 
 ## 全局约束（Global Constraints）
 
@@ -1275,4 +1283,13 @@ PID59440/61082正常0退出，93.935/90.309秒，均<120、全部功能动作180
 历史R6同卡整改：2026-11-14 R6：D8/I10按dsh R5复审整改D1–D14及σ公式，Codex自验待用户手动转dsh。P1.1继承接受、P1.3 C4设计级接受保持，C6原字节及未审增量身份不变；P1.2/P1.4/整体P1仍partial，2接受/2未接受。资料rev31；不进入P2–P5、产品实现、部署或运行验证，真实worker／Check／launcher未授权、未验证。 施工回执与手动复审入口：[R6](../../../output/vesta-study/20261108-113622/reviews/20261114-141647-p1-design-r6-corrections/README.md)。
 
 
-当前R7勘误：2026-11-14 R7：D9/I11完成R6-R1–R4设计勘误，R6-R5未证明边界明确；Codex自验待用户手动转dsh。P1.1继承接受，P1.3 C4设计级接受保持、C6原字节且增量未审；P1.2/P1.4/整体P1仍partial，2接受/2未接受。资料基线rev32；不进入P2–P5、产品实现或运行验证，真实worker／Check／launcher另行授权。 [回执/复审入口](../../../output/vesta-study/20261108-113622/reviews/20261114-152228-p1-design-r7-errata/README.md)。
+R8／rev33历史摘要（当时待独审；现已收到dsh R8，当前入口见文首）：2026-11-14 R8：D9/I11交接勘误，修正R7-R1–R3并补跨材料一致性检查；沿用R6-R5证明边界。Codex自验待用户手动转dsh。P1.1继承接受，P1.3 C4设计级接受保持、C6原字节且增量未审；P1.2/P1.4/整体P1仍partial，2接受/2未接受。资料基线rev33；不进入P2–P5、产品实现或运行验证，真实worker／Check／launcher另行授权。 [回执/复审入口](../../../output/vesta-study/20261108-113622/reviews/20261114-152228-p1-design-r7-errata/README.md)。
+
+
+## 当前续办：P1-01 F1–F6独审结论登记（rev39）
+
+2026-11-14 P1-01同卡独审结论登记：追加资料rev39，技术版本仍D11/I13/C6；dsh已独立复审通过rev38的F1–F6证据/边界修补，最新独审指针指向该被审包及真实JSON/SHA。本次rev39仅回写结论并Codex自验，O1登记为非阻断报告导航说明，不改旧封存或AGENTS。P1.1及P1.3 C4接受保持，C5条件复审/C6增量未审；P1.2/P1.4/整体仍partial，2接受/2未接受，SG-01…SG-06六项科学缺口不变。02–06未启动，产品和运行验证未授权。
+
+最新[dsh独审](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261114-194200-p1-01-f1-f6-dsh-review/REVIEW.md) / [真实JSON](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261114-194200-p1-01-f1-f6-dsh-review/review-result.json) / [本次登记回执](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261114-200614-p1-01-f1-f6-dsh-registration/RECEIPT.md) / [O1非阻断说明](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261114-200614-p1-01-f1-f6-dsh-registration/nonblocking-observations.json)。
+
+O1：旧oracle-bindings.currentVerificationEvidence定位04-full正常模式546项报告；封存只读final为570项，两者均exit0/0失败。final入口为[/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261114-191308-p1-01-f1-f6-corrections/runs/final/stdout.json](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261114-191308-p1-01-f1-f6-corrections/runs/final/stdout.json)。本次只登记该导航边界，不改旧字段、旧报告或封存。独审被审版本是rev38，rev39仅为结论回写且尚无新的独立复审。

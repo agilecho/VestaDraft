@@ -1,6 +1,14 @@
 # VESTA P1 领域、命令、页面和保存契约
 
-2026-11-14，P1-I11。2026-11-14 R7：D9/I11完成R6-R1–R4设计勘误，R6-R5未证明边界明确；Codex自验待用户手动转dsh。P1.1继承接受，P1.3 C4设计级接受保持、C6原字节且增量未审；P1.2/P1.4/整体P1仍partial，2接受/2未接受。资料基线rev32；不进入P2–P5、产品实现或运行验证，真实worker／Check／launcher另行授权。
+<!-- P1-CURRENT-STATUS BEGIN -->
+当前状态：rev66 已由用户带回 dsh 独审通过，F5-r／F3-r及回归闭合；用户已确认 P1.2／P1.4设计级接受，P1四项设计接受为[true,true,true,true,true]（依次为P1.1、P1.2、P1.3、P1.4、整体），P1设计阶段收口。资料基线rev67仅登记；被审技术交付仍为rev66 / D35-I33-r1-C6 / IP6，wire/profile代际I33，九摘要不变。P1.1及P1.3 C4既有接受保持，C5条件／C6未审及03rev48、04rev57/58历史范围不追认。仍停在设计阶段，不进入产品实现或真实运行。
+
+[06接受登记回执](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-160449-rev66-acceptance-registration/RECEIPT.md) / [设计接受记录](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-160449-rev66-acceptance-registration/accepted-design.json) / [复审原文](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-160449-rev66-acceptance-registration/inbound/dsh-rev66-review.md) / [过程及统计勘误](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-160449-rev66-acceptance-registration/REVIEW-PROCESS-ERRATA.md) / [已接受的rev66技术封存](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-134209-two-residuals/final-seal.json)。
+<!-- P1-CURRENT-STATUS END -->
+
+2026-11-18，P1-I33-r1（rev66设计已独审通过，P1.2设计级接受；rev67仅登记，wire/profileGeneration仍I33，九摘要沿用rev66；C5条件/C6未审保持）。
+
+R8／rev33历史摘要（当时待独审；现已收到dsh R8，当前入口见文首）：2026-11-14 R8：D9/I11交接勘误，修正R7-R1–R3并补跨材料一致性检查；沿用R6-R5证明边界。Codex自验待用户手动转dsh。P1.1继承接受，P1.3 C4设计级接受保持、C6原字节且增量未审；P1.2/P1.4/整体P1仍partial，2接受/2未接受。资料基线rev33；不进入P2–P5、产品实现或运行验证，真实worker／Check／launcher另行授权。
 
 逐步引用：D06《方法/03-命令内核与多端架构》§1–6、《模板/命令与页面接口契约》全部；唯一functions.json的对应VF/studyHandoff；FORMATS原生工程/R85–97/S05收束，ALGORITHMS与S06_ORACLES选定规则；CLI S07合同、CLI_COMPLETION和MADEL_COMPLETION；行为01的Apply/Cancel/Undo、行为02的相/图像/磁矢量、行为03的场、行为04的科学/外算、行为05的保存/CLI。宿主语义以D02 §4–6为准。
 
@@ -119,16 +127,16 @@ Host算法使用既有认证、配额、路径与serial，不另建存储服务�
 2. 对primary旧SHA和所有实际写目标跑SoftwareFiles基线verify；资源hash路径已存在时必须读回相同SHA，否则E_EXTERNAL_CHANGE。配额检查走现有平台服务；没有多文件预留接口就逐写失败保留旧主文件，不声称预留成功。
 3. 顺序写不可变资源并读回SHA；写manifest并读回；任一失败停止，不触碰primary。生成本轮孤立资源清单供后续可审清理，不自动删旧资源。
 4. 主文件提交前再次verify primary基线，使用SpaceFiles安全temp+sync+rename。现有verify/write不是任意外部并发CAS，G-HOST需冻结共享写者的实际串行保证/剩余竞争边界。
-5. 读回主SHA与全部依赖；仅全相符返回HostAck。若主已提交但读回/连接失败，状态是`indeterminate`，下一次按快照SHA+依赖复核，而不是返回已保存或直接回滚新文件。
+5. 读回主SHA与全部依赖，并完成03独立artifact-only对象、owner、全数值和来源验证；主提交和语义凭据绑定同一操作后才返回HostAck。若主已提交但读回/连接失败，状态是`indeterminate`，下一次按快照SHA+依赖复核，而不是返回已保存或直接回滚新文件。
 6. ack携带`{snapshotId,documentId,epoch,revision,stateDigest,purpose,targetToken,actualPrimarySha256,verifiedFiles}`；页面匹配原快照，保存的是R7而当前R8则lastSaved=R7、dirty=true。切到新稿epoch后旧ack只结清原快照，不能动新稿。saveAs仅匹配同稿的成功ack后重绑目标，export永不重绑/清dirty。
 
 单文件（无外部资源）同样走主文件真实确认及60秒自动保存。多文件自动保存仍用同一协议；避免把“单文件60秒已确认”扩大成实测大资源每60秒均可完成。快照进行中周期触发合并为最新待存revision，不重复排旧快照。受控关闭：阻止新编辑→等待当前job提交/取消→snapshot最新revision→Saved→release/交接；保存失败恢复页面编辑权/dirty，不假关页。硬关闭/进程崩溃后，只能确认已写主文件/资源，不保证未保存修改恢复。
 
-具体失败断言（未来真实测试，不是结果）：R7 snapshot后site编辑为R8，ackR7不能clear dirty；A稿ack晚于B稿load，B状态完全不变；资源2写507时primary旧SHA不变；primary409时已写资源仅为orphan；saveAs失败path不变；exportPNG成功工程path/revision/dirty不变；丢ack但文件全SHA匹配通过status恢复Saved，若不匹配保持indeterminate和dirty。
+具体失败断言（未来真实测试，不是结果）：R7 snapshot后site编辑为R8，ackR7不能clear dirty；A稿ack晚于B稿load，B状态完全不变；资源2写507时primary旧SHA不变；primary409时已写资源仅为orphan；saveAs失败path不变；exportPNG成功工程path/revision/dirty不变；丢ack须查同一宿主操作及真实文件和完整语义；SHA匹配仍不足，缺操作或语义凭据保持commit-unknown/committed-unverified及dirty。
 
 ## 6. CLI/外算与四种完成时刻
 
-计划产品原生CLI为`vestacraft`，不是原件VESTA命令包装；首链接口：
+计划产品原生CLI为`vestacraft`，不是原件VESTA命令包装；下列为I30历史示例，身份敏感续作以文末I31 NS/1为准：
 
 ```text
 vestacraft commands --json
@@ -456,9 +464,9 @@ I9准入补充：有界DTO不自动注册产品命令，仍由Engine的已实现
 R5 source-adapter-plans.json补11个可从旧证据逐字段固定的输入映射（line/sf/fourier/ADP/transform/bonds/Patterson/volume/2d/peak/conversion），其余20组完整映射仍未建立；它是fixture设计，不是已实现解析器。转换算子显式lengthUnit=angstrom/bohr，避免两个旧holdout单位被默认合并。
 
 
-## 16 I10／R6 当前有界契约与D1–D14修正
+## 历史及继承：16 I10／R6有界契约（差异以§17为准）
 
-当前机器契约位于[R6 contracts](../../../output/vesta-study/20261108-113622/reviews/20261114-141647-p1-design-r6-corrections/contracts/)。§15及模块R3/R5旧签名已标历史；I8首链不变，新增科学请求必须`protocol=vestacraft.scientific.bounded/2`，不是把旧协议改名后接收。当前112个有名定义、31领域/32操作；领域数不是操作数上限。全部新操作仍productImplemented=false、fullLegacyQualification=false；完整P1继续partial。
+R6时点历史（仅追溯，不作当前准入）：该轮机器契约位于[R6 contracts](../../../output/vesta-study/20261108-113622/reviews/20261114-141647-p1-design-r6-corrections/contracts/)。当时新增科学请求使用`protocol=vestacraft.scientific.bounded/2`，该轮有112个有名定义、31领域/32操作。此处保留旧时点，现行消息准入和当前契约以§18及文首R9入口为准；旧protocol2消息不因保留历史文字而获准。
 
 ### 16.1 测量身份、协方差及标准不确定度
 
@@ -495,9 +503,9 @@ I8的6个Field示例保持原值并标版本；protocol/2新增8个Field例子�
 I10导出用途补充：PlanEncode/EncodePlan/LossReport均带purpose，resolver同时核注册profile的encode方向及allowed purposes；purpose进入完整报告摘要。不能拿decode profile或未冻结profile借LossConsent绕过准入，旧SnapshotOptions和宿主SaveBundle的save/saveAs/export规则保持。
 
 
-## 17 I11／R7 当前字段身份、投影与基线勘误
+## 17 I11字段身份与投影（继承R7设计，当前接续见§18）
 
-本节覆盖§16中本轮修正的部分；其余I10有界合同与首链协议继续继承，未因此全域冻结。当前契约见[R7](../../../output/vesta-study/20261108-113622/reviews/20261114-152228-p1-design-r7-errata/contracts/)，113定义、31领域/32操作，所有新操作仍未实现。Field值形状不变；新增FieldHandle及loss objectKind使封闭消息采用`vestacraft.scientific.bounded/3`，不得无提示接受旧protocol2 inventory或旧损失同意。
+本节覆盖§16中本轮修正的部分；其余I10有界合同与首链协议继续继承，未因此全域冻结。当前契约见[R9](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261114-163802-p1-design-r9-doc-state/contracts)，113定义、31领域/32操作，所有新操作仍未实现。Field值形状不变；新增FieldHandle及loss objectKind使封闭消息采用`vestacraft.scientific.bounded/3`，不得无提示接受旧protocol2 inventory或旧损失同意。
 
 ### 17.1 身份贯通迁移、清单与字段损失
 
@@ -527,4 +535,371 @@ outputFields现在明示为展示标签，不假装每个散文不变量都是JS
 
 proof-boundaries.json明确：一般半空间空/无界/降维分类，以及powder数组配对/单调/空采样拒绝套件仍not-machine-verified；已有合法输入的数值/边界投影例不能替代它们。字段损失身份新增设计例已覆盖，真实读取/编码/往返仍未验证。没有为补台账制造实验。
 
-追加rev32，status/status_correction与结构化current_status及当前P1状态统一，rev31按原SHA封存保留，旧顶层文字只作为明确historical记录。最新真实review_result指dsh R6原JSON；R7为作者勘误待手动独立复审，P1.2/P1.4/整体partial，P1.3 C4设计接受保持，C6增量未审。不进入产品或runtime。
+历史基线：R7追加rev32、R8追加rev33，各自封存保留；当时独审指针及待审状态只属对应轮次。R9/rev34施工时review_result指dsh R8、当时待独审；现已由dsh R9确认R8-R1–R3闭合，rev35回写真实dsh R9 JSON及其SHA。P1.2/P1.4/整体partial，P1.3 C4设计接受保持，C6增量未审，不进入产品或runtime。
+
+I11身份准入补充：Engine必须按可信不可变对象表重新派生/核对完整inventory；不能只核调用方自报的stateDigest。即使phase存在，字段owner或描述不符合该fieldId的源对象也拒绝。trustedSnapshot只用于纸面观察夹具，不是客户端自签权限。
+
+### 17.5 继承R8的交接一致性规则（I11协议及类型不变）
+
+当前契约与复跑入口见[R9](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261114-163802-p1-design-r9-doc-state/README.md)。该规则来自R8：当时同步currentTypeAuthority为protocol3，并使measure来源适配计划与measurementCoverage及原生/有界投影限制一致。R9逐字节继承这些契约，完整来源映射仍未建立。
+
+当前shape oracle角色：`local-halfspace-mesh=result-invariant`；`area-crosscheck=supporting-only`。
+
+前者按既有convex-local-boundary/1比较选定凸边界，后者只作显示面积辅助。该行与模块单元、JSON角色需交叉核验。schema、字段身份、shape投影例与R6-R5证明边界保留R7字节；实际资源读、writer、codec及往返/运行仍未验证。
+
+## 18 R9当前文书准入与状态导航（I11语义不变）
+
+当前机器契约位于[R9 contracts](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261114-163802-p1-design-r9-doc-state/contracts)。新增科学请求使用`protocol=vestacraft.scientific.bounded/3`，对应113个有名定义、31领域/32操作；R6时点的protocol2/112定义仅供追溯。字段身份、损失同意、shape比较及其正反例均逐字节继承R8，不作新数值或运行通过声明。rev34/R9被审时点的next_card、整改结果和归档原件保留；当前rev35将next_card转为P1-01未施工，真实独审与非阻塞登记见文首收口入口，rev32/33/34不回写。
+
+### 18.1 R9独审闭合回写（rev35，接口语义不变）
+
+R8-R1–R3已由[dsh R9](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261114-170522-p1-design-r9-dsh-review/review-result.json)在列明范围闭合；当前契约仍为原R9/protocol3，113定义、32操作、31领域，完整资格未冻结。M1短式协议覆盖、M8历史正文机器化等八条只登记[非阻塞续办](/Users/agilecho/code/Draft/docs/任务卡/阶段1-架构与施工设计/非阻塞续办.md)，不改变当前类型或使01等待新实验。
+
+
+## 19. P1-01公共类型提案（I12，SG/1 partial）
+
+消费[新契约](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261114-180028-p1-01-structure-geometry/contracts/structure-geometry.contract.json)、[字段绑定](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261114-180028-p1-01-structure-geometry/source-field-bindings.json)、[原生字段span](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261114-180028-p1-01-structure-geometry/native-block-bindings.json)及[完整语义](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261114-180028-p1-01-structure-geometry/design.md)；旧R9/contracts保持原字节。SGCovariance是参数aware提议，不允许塞进原CartesianPointCovariance输入；缺失covariance非0，variance=J C Jᵀ、sigma=√variance。SGPeriodic3只代表明确3D周期结构，未给调制/超空间冒造类型；完整域仍partial。SGCamera canonical与SGNativeCameraFields分开，原shift/FOV适配未知。消息协议仍vestacraft.scientific.bounded/3；SG/1不注册可执行命令。源缺口与对02–05影响见本卡remaining-issues/shared-type-impact。
+
+
+## 20. SG/1-r2当前修补边界（I13）
+
+当前[契约](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261114-191308-p1-01-f1-f6-corrections/contracts/structure-geometry.contract.json)与[语义义务](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261114-191308-p1-01-f1-f6-corrections/contracts/structure-geometry.semantics.json)替代SG/1前稿中对应的variance/covariance/RGBA范围；type名不变，wire仍vestacraft.scientific.bounded/3，未注册可执行能力。negativevariance/空supplied covariance/RGBA越界在schema层拒绝；方阵/PSD/对角来源/far>near/variance-sigma必须在语义层拒绝。原生fractional/cell链仍SG-03，不因有设计谓词声称已实现。旧角色明确继承R9 domain-handoff的comparisonBindings，冲突flattened表不作角色准入；16条原角色不变。新旧入口和精确source定位见[修补说明](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261114-191308-p1-01-f1-f6-corrections/correction-notes.md)，对02–05影响见[类型影响](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261114-191308-p1-01-f1-f6-corrections/shared-type-impact.json)。
+
+
+## 当前续办：P1-01 F1–F6独审结论登记（rev39）
+
+2026-11-14 P1-01同卡独审结论登记：追加资料rev39，技术版本仍D11/I13/C6；dsh已独立复审通过rev38的F1–F6证据/边界修补，最新独审指针指向该被审包及真实JSON/SHA。本次rev39仅回写结论并Codex自验，O1登记为非阻断报告导航说明，不改旧封存或AGENTS。P1.1及P1.3 C4接受保持，C5条件复审/C6增量未审；P1.2/P1.4/整体仍partial，2接受/2未接受，SG-01…SG-06六项科学缺口不变。02–06未启动，产品和运行验证未授权。
+
+最新[dsh独审](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261114-194200-p1-01-f1-f6-dsh-review/REVIEW.md) / [真实JSON](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261114-194200-p1-01-f1-f6-dsh-review/review-result.json) / [本次登记回执](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261114-200614-p1-01-f1-f6-dsh-registration/RECEIPT.md) / [O1非阻断说明](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261114-200614-p1-01-f1-f6-dsh-registration/nonblocking-observations.json)。
+
+O1：旧oracle-bindings.currentVerificationEvidence定位04-full正常模式546项报告；封存只读final为570项，两者均exit0/0失败。final入口为[/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261114-191308-p1-01-f1-f6-corrections/runs/final/stdout.json](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261114-191308-p1-01-f1-f6-corrections/runs/final/stdout.json)。本次只登记该导航边界，不改旧字段、旧报告或封存。独审被审版本是rev38，rev39仅为结论回写且尚无新的独立复审。
+
+
+## P1-05资产与外算交接增量（I14；protocol3及SG/1-r2不变）
+
+[AB/1](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261114-205326-p1-05-assets-build-external/contracts/asset-inputs.json)消费旧SGTableIdentity七字段，明确resource整源SHA、tableContentDigest所选raw span/face SHA、tableKey源内定位、sourceVersion/edition及licenseResource。未标版本与未知setting/origin如实保留，不能靠字符串schema通过升为可用科学表。A05 Ro/B成对、同离子多候选/氧化9/unchecked不隐式选首行；A09缺精确同位素质量，不以massNumber代替u。A11–13分别可提供font-face身份，cmap非零不证明排版、字体就绪、IME或导出。
+
+[EX/1](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261114-205326-p1-05-assets-build-external/external-tools.contract.json)补§6和ExternalCandidate：jobId、kind、baseDocument/baseEpoch/baseRevision、phaseId、输入资源、tool/asset/manifest摘要、profileId、授权及预算全部绑定可信队列快照。启动→子退出→完整解析→独立科学检查→候选→当前Engine正式提交→保存ack分开；迟到/取消/超时/旧身份/缺产物拒绝，原稿保留，不直写.vesta。未知完成查询receipt再决定，不盲重跑；TERM/grace/KILL仅拥有进程树，完整归属/退出/清理留证。
+
+TIDY给选定P1 grammar及0/29/0/29旧子返回，坏群exit0无ATOM仍失败；一般群/setting未冻结。MADEL旧pre-main缺库-6不算零能量；完整PME/输出/能量归一与Ewald预期仍缺。RIETAN18argv顺序固定为脚本证据，实际方向/必需产物须按已资格化版本和模式，内置粉末或ins导出不能冒称外算完成。ORFFE是已证FFE读取/链接路径，未发现producer进程调用；不制造通用ORFFE argv。其它绘图/OS协作入口分别保留。
+
+每工具publicOptionsSchema仍null且productionEligible=false，表示该科学profile未公开冻结，不能注册自由options JSON能力。新合同是P1-05设计补充，未修改原SG1-r2或R9schema、未实现validator/外算/producer。完整关键缺件见[P05-01至10](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261114-205326-p1-05-assets-build-external/remaining-issues.json)。
+
+
+## P1-05独审登记与说明后继（rev41，技术语义不变）
+
+2026-11-14 P1-05独审登记及非阻断勘误：追加rev41，技术版本D12/I14/C6不变；dsh确认被审rev40 AB/1、EX/1、BT/1的partial设计/来源/保全边界准确、无阻断。本轮以独立后继修O1–O4，补未施工卡名单和fontTools复现环境说明，仅Codex自验、说明增量未独审；原施工包、dsh报告及rev40封存不改。05/01继续partial，SG-01…SG-06开放，C4接受/C5条件/C6未审，P1.2/P1.4/整体partial、2接受/2未接受。02/03/04/06未施工；不启动下一卡、产品或真实运行，交回后停止。
+
+被审原稿与SHA见[登记对象](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261114-214811-p1-05-dsh-registration-notes/review-registration.json)；当前定位/粒度补充为[AB/1-notes-r1](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261114-214811-p1-05-dsh-registration-notes/contracts/asset-inputs.json)、[EX/1-notes-r1](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261114-214811-p1-05-dsh-registration-notes/external-tools.contract.json)及[消费说明](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261114-214811-p1-05-dsh-registration-notes/consumer-handoff.md)，BT/1仍消费原被审字节。原17类资产对象、四外算科学/进程规则、build目标、protocol3/SG1-r2及科学缺件未变。新说明仅作者自验，不把本次独审扩成全部D12/I14、C6、产品或运行接受。未施工卡精确为02/03/04/06；05已部分施工并获得设计边界独审。原dsh机器组名与默认Python缺fontTools的复现差异分别在登记/复现说明中保留，不改原报告。
+
+
+## P1-02 Field与科学设计profile（I16，FS/1 evidence-r1 partial）
+
+[FS/1合同](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261115-062917-p1-02-o1-o4-corrections/contracts/field-science.contract.json)继承原152定义并新增25定义；[强制语义](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261115-062917-p1-02-o1-o4-corrections/semantics.json)与[完整设计](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261115-062917-p1-02-o1-o4-corrections/design.md)必须同读。FSFieldBinding由原FieldHandle加可信snapshot/descriptorDigest/IEEE编码组成；FSProvenance保留job原base；输出候选表与输入表分开，正式提交后才由Engine重绑输出revision，取消不能抹掉已提交结果。
+
+FSSpectrumInput/Result明确有限系数、独立DC、Hermitian/偶奇Nyquist/别名和V/N归一；FSSumInput/ReflectionResult只消费显式image/复振幅，不代替表/全反射生成；FSProjection为显式长度权重求积，FSLine/Slice结果保留完整几何/全数组；FSPeakResult区分detected与参与盆地selected集合；FSConversionResult分finite-field与reference-nonfinite诊断；FSNoActionResult不制造数值积分。非周期布局未算积分时成对null，已声明生成器的积分验收不得省略。
+
+[01/03/04/05/06迁移影响](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261115-062917-p1-02-o1-o4-corrections/shared-type-impact.json)说明新增FS结构不得作为额外字段静默通过protocol3封闭Request；未来公开须显式schema/版本/注册和损失同意审查。[来源字段](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261115-062917-p1-02-o1-o4-corrections/source-field-bindings.json)保留8组选定映射/6组未建立完整映射；[预期角色](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261115-062917-p1-02-o1-o4-corrections/oracle-bindings.json)沿R9权威。原参数/许可/完整网格拓扑等缺口仍partial，当前不是全ScientificRequest冻结。
+
+
+## 当前接续：02同卡O1–O4（rev43）
+
+2026-11-15 P1-02同卡O1–O4整改交回：追加rev43，D14/I16/C6，FS/1 evidence-r1；补35个真实投影合同有限例、澄清Patterson平方单位、固定Xcode3.9.6和11个旧WordCraft来源快照并披露2处漂移、将生命周期4个事件例移出准入证明。177定义/协议字节、11项本卡缺口及SG六缺口不改。dsh旧结论只覆盖rev42 partial设计/来源/保全边界，本轮整改增量仅Codex自验、待用户手动转dsh。01/05原partial与接受范围保持；C4接受/C5条件/C6未审，P1.2/P1.4/整体partial、2接受/2未接受。03/04/06未施工，无产品或真实运行授权；交回后停止。
+
+[本轮回执](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261115-062917-p1-02-o1-o4-corrections/RECEIPT.md) / [整改说明](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261115-062917-p1-02-o1-o4-corrections/correction-notes.md) / [复现与漂移](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261115-062917-p1-02-o1-o4-corrections/reproduction-notes.md) / [下游边界](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261115-062917-p1-02-o1-o4-corrections/consumer-handoff.md) / [手动dsh材料](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261115-062917-p1-02-o1-o4-corrections/DSH-REVIEW-HANDOFF.md)。
+
+本次授权为02同卡整改，沿用原会话/预算/权限/费用/次数/停报；不自动开新卡或扩大实现。投影helper只证明选定精确几何的schema/有限语义/资源域准入，未证明一般法向容差、插值/求积或完整科学能力。83例不含4个生命周期事件序列，7个output例仍是静态对象关系；租约释放、迟到原base/provenance及真实竞态均留未来04。复现使用新包reproduce.sh固定Xcode3.9.6，错误解释器exit2；WordCraft11旧Git blob锁SHA，当前两处来源漂移另记，不回滚外部仓库。原FS/1及dsh/旧复核/基线全部保全。
+
+
+## 历史：21 P1-03 FC/1格式字段、选项与读写合同（I17/rev44，partial被审范围）
+
+当前入口：[format-profiles](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261115-065047-p1-03-format-contracts/contracts/format-profiles.json)、[codec-field-policies](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261115-065047-p1-03-format-contracts/contracts/codec-field-policies.json)、[encode-resource-contract](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261115-065047-p1-03-format-contracts/contracts/encode-resource-contract.json)、[roundtrip-assertions](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261115-065047-p1-03-format-contracts/contracts/roundtrip-assertions.json)、[remaining](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261115-065047-p1-03-format-contracts/remaining-issues.json)。上述覆盖本轮格式设计的有界审计；旧§12/15–17的57未审/28选定是历史快照，原注册身份、四个首链空schema和81未准入边界仍保持。新的291源字段组不是291项已实现能力。
+
+85路由分别按原键+方向+purpose+profile判定，不按Chem3D名称子串走m3d。81候选Schema提供显式dialect/参数类型和来源/消费方/最小缺件，但不进入可接收联合；未知ID/方向/用途E_SCHEMA，已知未冻E_RULE_UNFROZEN。source-audit逐路由锁原行SHA/Pointer、原始wire及独立内容预期；保留raw不得称可编辑或可计算。m3d量化/PRI非零flag、DEN/STO、Elk/ASSE/GAMESS等仍各停对应冻结。
+
+PlanEncode→LossReport→Consent→EncodeApproved沿既有schema：Engine同稿全文核身份与资源，Plan无编码/文件副作用；field loss绑objectKind=field、可信owner和fieldId及相对Field的RFC6901指针。共享bytes的两个场分列，不靠Resource.digest或行序推ID。报告完整objectKind/purpose参与原canonical UTF8 SHA；旧epoch/revision/report/protocol2 consent拒绝。完整非field字段审计和SGGraph→旧EncodeInventory桥未齐时拒绝完整规划，不把控制性guard当真实Engine/ResourcePort证明。
+
+sourcefile字节SHA、解码数组SHA、FieldHandle、descriptorDigest、logicalPath分别处理；缺资源保持原文+诊断/可选只读，不制造空场。目录沿§5提案，原件相对布局与04host承诺尚未接受；actualsafeFS/lease/配额/竞态由04。取消只释放本job所有权，宿主已发送后结果可能indeterminate；迟到旧快照不能清新稿dirty，export不重绑，编码不等于Saved。
+
+85条future断言规定真实软件写出→独立读取实际内容/精度/损失→新实例重开同作品；导入only不凭空新增writer，image/mesh/外部输入用各自合格消费者。2D/Text另列辅助合同，不新增原85路由。未实施产品，无真实往返。SG/FS/AB及C4/C5/C6、P1partial和原预算不因本节改变。
+
+
+## 22 当前P1-03证据范围与直接输入绑定（I18，evidence-r1）
+
+当前[format-profiles](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261115-074631-p1-03-o1-o7-corrections/contracts/format-profiles.json)、[字段清单](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261115-074631-p1-03-o1-o7-corrections/contracts/codec-field-policies.json)、[读入/往返提案](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261115-074631-p1-03-o1-o7-corrections/contracts/roundtrip-assertions.json)为原85身份的证据后继，schema/wire/177公共类型不变。291组统一标route-level-inventory，individualSemanticValidation=not-established；原先“字段位置取具体span”不作已完成声明，完整字段定位/语义/精度仍缺。
+
+I01直接绑VS0001/0002原生.vesta与其注册预期，I06绑VS0009/0070 CIF，MCIF绑VS0074/0075并保留其“完整展开磁矩未证”范围。I01数字预算不再用CIF作为原生源；全部write/reopen仍是未来。RAWwidth/height仅为设计所需导出缓冲元数据，非原件UI选项，须与实际payload相符；81candidate不进入准入联合。
+
+有限admit_encode仅证明已列loss的身份/指针、source/owner、freshconsent和与控制trustedPlan的一致性，不证明PlanEncode完整枚举droppedFields或unsupportedBlocks。完整性见证明确：请求漏一场而trustedPlan完整则E_PLAN；两者控制性地同漏且重绑摘要时仍接受，不能以此宣称完整审计或真实产品漏洞。该未证项在[proof-boundaries](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261115-074631-p1-03-o1-o7-corrections/proof-boundaries.json)和remaining-issues开放；helper字节未改，未补产品codec。
+
+用户转交的rev44复审原文保留6项标签/实列7项差异，411计数不采纳；真实被审范围与当前整改未审分列。资源目录、04host、SG/FS/AB、C4/C5/C6及P1partial原边界保持，见[相邻消费](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261115-074631-p1-03-o1-o7-corrections/consumer-handoff.md)。
+
+
+## FC/1 evidence-r2具体消费（I19 / rev47）
+
+本轮field-evidence以SHA+byteOffset/Length+原词法/位及具体字段locator绑定84组的91处组件；19个独立数值例不外推完整291组。typed选项来源/互斥/默认/消费方/失败见parameter-qualification，16路由有选定域细化，全部81候选仍不得进入已准入联合。m3d旧direct-f32候选错误，真实UI为direct32bit integer；改名direct-i32不补位打包资格。PRI只flag0/little32的现有三个例；不支持非零flag或别的ABI。PDB坐标8.3、B6.2、U/B显式选择、二进制32和MMP n-1各有独立规则，历史最大误差不作通用容差。
+
+Plan/LossReport完整性候选须独立从全源枚举，不能将trustedPlan共同漏项当证明。当前64叶人工完整源能拒绝漏第二个共享资源场、新增源场旧报告、未知key及伪造保留值；它没有实现Engine/codec或修改当前LossReport/Consent schema。真实完整源/报告版本迁移未冻结时E_RULE_UNFROZEN。
+
+IMPORT_DENSITY真实相对名、scale及实际pgrid SHA已静态绑定，同时原registry的恢复未解决失败保留。默认.vesta加资源裁定不变；拟定hash嵌套路径仍未获原件兼容证明。ResourceReader只消费明确logicalPath映射；缺件/摘要错/别名拒绝，安全根/真实lease/配额/竞争/ack/恢复仍由04证明。
+
+
+### 03续办工作稿：资源捕获与语义重开（未封存、未准入）
+
+本段消费本轮真实失败：8³原网格直接加载/原件保存阳性，实际工程和资源SHA及逻辑相对引用可核，但新原件进程未恢复体数据。当前§5/§8.2的字节、资源和精确快照确认仍必要；完整保存还必须独立证明预期对象确实被重建。只有主SHA/资源SHA/文件存在或exit0不足以返回Saved。
+
+具体设计见[资源保存/重开合同](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261115-092025-p1-03-completion/resource-reopen.md)、[闭合合同](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261115-092025-p1-03-completion/resource-reopen.contract.json)和[未准入schema](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261115-092025-p1-03-completion/resource-reopen.schema.json)。它们是当前03草案，不扩展已接受protocol3或悄悄向原闭合消息添加字段；完整实施须显式版本化准入。
+
+拟议`decodeCaptured(primary,profile,CapturedInputContext{reader,validatedBindings})`先验证主文件SHA/真实路径范围或隐式seed及规则，再使用安全canonicalKey调用既有ResourceReader。旧源`../../inputs/source.pgrid`是可在实际本人授权根内捕获的原路径事实，不是核心可直接resolve的安全逻辑键；新便携输出仍不允许`..`。源主记录、请求/SourceDescriptor上下文和Engine资源都要独立枚举并绑定，不能因路径不在文件文本里而漏掉。未知块依赖闭合未证时只读保留/拒绝破坏性写回，不构造全零场或覆盖当前稿。
+
+PlanEncode将由完整源独立生成的预期对象/owner/数据/单位坐标/保留源账本与比较规则固定到原Engine-issued planId及既有LossReport/Consent；修改集合或规则必须新计划和新同意。编码候选与主文件落盘读回分别进行artifact-only的一次性语义解码/核验，禁止从当前Engine、旧ResourceId、原路径、CWD或缓存补缺。新实例runtime ID可变化，但来源到输出对象必须有双射，两个owner不能因为共享bytes合并。缺预期Field即E_REOPEN_COVERAGE，不能以全SHA相同覆盖该错误。
+
+Saved须同时满足实际宿主持久提交、相同字节集合上的内部可信语义核验及精确捕获快照确认。主文件可能发布后的错误保留committed-unverified/unknown、稿/dirty、旧资源、新文件和诊断；查询必须重核语义，不能盲重放/回滚/重绑/假关闭。受控关闭只在最新稿相符Saved后释放；export确认副本，不清工程dirty或重绑WorkRef。
+
+48个输入路由不得虚构各自encoder：先证明导入内容，再仅在独立OBS-O01有能力保存完整结果时走原生持久化分支；不满足则保留明确阻塞。1个原生保存、22个数据导出、14个图像输出按各自内容和用途验证，导出不是完整工程保存。85条未来断言已按这些路径分开，均未被标为产品往返完成。
+
+一次性解码上下文不要求每次保存启动原VESTA/新OS进程；真实独立读者/新实例资格仍属后续具名profile实现验收。原件实际失败保持，04/06未启动，真实Engine/宿主未实现；03整卡仍待其余卡面工作完成后一并提审。
+
+03同卡资源后继草案进一步区分：编码前的SourceExpectation只固定完整源/对象/资源角色/布局/预算；编码后CandidateArtifactBinding才固定真实候选SHA和长度，不能反过来改源预期。精确内容继续用原exact分支；非精确内容须由[逐叶内容比较](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261115-092025-p1-03-completion/resource-content-comparison.contract.json)完整绑定owner、pointer、单位、数量、结构分区与先验PrecisionBudget，原protocol3不改。
+
+[递归/可选资源图](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261115-092025-p1-03-completion/resource-graph.contract.json)按每个引用主文件独立解析，区分递归解码与源配对，RIETAN同名FFE的存在/缺失须进入捕获快照；不从“RIETAN写.vesta”推断VESTA普通加载扫描.ins。[完整源保全草案](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261115-092025-p1-03-completion/native-source-envelope.contract.json)延续.vesta及<leaf>.resources/blobs和manifests/<实际主SHA>.json布局，显式提出sourceSHA头标记、SavedSourceDocument和manifest2，以独立保存完整源而非仅hash清单。它不是已接受manifest1的暗加字段，也不是公开跨重开稳定ObjectId：重载换document/epoch/runtime资源，只按验证后的本地saved-key双射还原。新标记/源树的原件互操作、实际typed恢复、产品实现及宿主资格均未通过；不足时拒绝完整保存/加载而保留原稿。
+
+对应请求显式升为未准入FC-request-proposal-3，原生decode/save的preservationProfile必须与实际头和完整保全政策相符，原proposal2工作快照另存；原4旧空子集/81未准入不变。当前仍03整卡施工，全部新增值与此前已审范围分开，未启动04/06。
+# 03当前恢复与确认后继（未封存）
+
+03当前资源后继还消费completion工作目录的typed-source-restore.contract.json与save-settlement.contract.json：完整类型角色、全新生命周期映射和实际语义对象覆盖，与候选语义、宿主操作、持久语义的相同源/产物/目标/规则绑定分别必须成立。R7完成不清R8，旧document/epoch只结旧ticket；export不重绑、清dirty或关工程；关闭需先静止编辑并等当前精确修订。未知结果只能查询既有操作及实际字节/语义，不能盲重写或承诺回滚。已批准不可变快照任务的后到完成仅结捕获修订，不能替陈旧新提交豁免重计划。source-envelope标记移位或重复不得降级legacy丢弃保全。上述仍为03未准入proposal3请求/manifest2设计与条件有限见证，原native资源重开仍失败，实际Engine/宿主/认证未实现，04/06未启动。
+
+03未封存源模型后继现为CodecSourceDocument-proposal-4：必须包含sections数组，每项有独立section身份、实际phase/source-entity所有者、完整native-section-source记录、被消费场引用、资格/描述符和源元数据。Owner增加section，SceneNode增加section-instance；不将截面等同全局SCENE、相或共享bytes场。完整源/资源/新生命周期遍历及未来语义重开须比较全部截面集合，缺活动截面不能由完整archive摘要抵消。旧proposal3在completion/pre-section-source-model按SHA保留，不静默接纳为完整当前快照。resource-reopen和source-artifact内部提案2显式纳入section对象种类；请求提案仍3，现行产品protocol3、旧177定义及SG/FS partial不变。选定布局/作者例不证明全模式几何、非空原件PLN2D保存或实际Engine恢复；04/06未启动。
+
+03当前未封存SourceDescriptor后继显式为proposal2，定义资源仍经请求proposal3的实际资源/SHA绑定；descriptor1前态保持，旧1须有冻结迁移或source-only/拒绝。封闭单位表补至35，source-unit-domains.contract.json区分U/B/beta、张量基底与四种FS密度/Patterson量，不凭同量纲授科学资格。SourceDTO4的Field数据消费既有FS绑定的IEEE754 little-endian，storedShape=N+closure、closure⇒periodic、实际全部bytes/有限性及每个面/棱/角一致性都须在规划前和重开后核验；裸legacy Field无编码证明不能猜本机字节序。核心512与闭合存储729不可混为同一计数，原始wire资源独立保存。产品protocol3及02/SG/C6/P1原partial不变，04/06未启动。
+
+03当前向量后继消费completion/native-vector-format-contract.json：逐向量的所有者、类型、分量、全部位点/运算关联及半径/RGB/样式都是持久内容，VECTR末列不是坐标模式。源元数据与科学投影分开；未知物理基底不能造SGVector。源/损失/重开覆盖集须保留多个同值向量及其不同身份，不能用坐标展开通过替代缺失磁矩。临时对象Polar置位未清和样式高位覆盖类型仅有静态机制证据，原P1缺第二磁矩的真实失败保持。
+
+03资源运算保存政策消费completion/density-resource-effect.contract.json：默认捕获当前已完成Field的完整不可变值与描述符，作为独立物化资源；原始输入、顺序、运算、分量规则和依赖另行完整保留。规划与普通重开不隐式重算表达式、不依赖活源路径、不将原数据顶替变换结果，也不重复施加系数/幂。经显式资格的源重放是另一条路径；完整Saved还需同一源/产物/目标身份下的全值和元数据读回。02科学执行、powf跨平台资格、原件元数据互操作及实际Engine/04实现没有因此建立，04/06未启动。
+
+03当前未准入解析结果补failed-before-apply，区分预算/能力/规则不足与已核实invalid-source。completion/parse-budget.contract.json规定48条decode现有五项限额跨递归资源、源树和所有语义场累计，包含stored闭合/分量，checked计数先于分配；子读取器不可重置或自提额度。未完整读取时不得称完整source-only保全，候选/持久验证须用独立注册并绑定同源/产物的限额。该设计不暗加产品protocol3结果或宿主quota承诺；04/06仍未施工。
+
+03未封存源模型现显式后继为CodecSourceDocument-proposal-5，补bondRules/boundaries/planes三个独立根，不能由phaseGraph或SGDisplay替代；sg-persistent-source.contract.json沿现行SGReviewBundle八类持久类型逐项消费，仍不称ReviewBundle穷尽真实Engine状态。源对象id与内含SG值id在已知包装类型中是一个定义与类型化别名，须相等并只重映射一次，SG身份仍遵守现有32位小写hex域。每条边界保留所属相及全部规则引用，平面保留源几何和local/world值；源元数据/原生搜索规则与派生键/渲染mesh分开。旧4/2的8份真实前态另存；旧4不得靠补空根静默升级，实际原源缺项须有独立迁移依据。资源重开/产物内部提案3纳入全部已知对象种类；请求3/描述符2/manifest2/现行产品protocol3与SG/FS partial分别保持。原件实际资源重开仍失败，无04/06施工。
+
+03当前源后继继续显式为CodecSourceDocument-proposal-6，仍22必需根；bondRules现在是SG pair包装或NativeBondSource的闭合联合。原件mode1只指定A1、mode2不指定任一端点，现行SG site/element pair不能冒充这些模式。NativeBondSource按NBOND1完整保留原生15字段、独立32hex id/真实owner和任意已资格SG投影的类型化引用；SG包装保留内含id别名，原生记录没有伪造value.id。界面改写XX/清标志不能覆盖原输入源值；算法/递归/边界等价必须独立证明。旧5/3的8前态另保留且与253输入一致；不改资源/产物3、请求3、descriptor2、manifest2、产品protocol3或上游科学资格。没有新增原件运行、04/06施工或整卡接受。
+
+03当前未封存合同又补出原生路径组装的条件静态反例：目标字符串与末输入别名，辅助函数只追加而未清空，不能得到要求的“操作＋空格＋路径”。纠正设计以不可变操作/路径和不同的空目标或类型化句柄交接；新鲜语义读回的resolvedReferenceGraphDigest须由实际资源读取和完成的对象关联生成，不能回显计划图。见本轮native-resource-path-assembly.contract.json，真实原件失败及缺少实际打开路径/唯一根因追踪保持。原生六种键样式和SBOND半径/线宽与BONDP反序另有精确源绑定；不以此授予渲染等价。VM18-I29补两版FILE06报告的三行/三观察量设计和显式源块选择，不能与FILE07重启文件或热参数合并；请求3的当前226属性仍为未封存提案。旧接受边界、Source6/资源3/manifest2/产品protocol3、04/06未施工均保持。
+
+03历史源记录前态以NVIS1/NativeObjectFlags-proposal-1封闭五类phase持久标签/禁用源记录，置于既有SourceMetadata.tree，不增加SourceDTO6根。原生零基生成序号不是SG持久id；原子映射既有Image及SGDisplay.hiddenImages，键、多面体、形貌面各绑定自己的源定义/目标和枚举依据。LBLSP指生成形貌面，SPLAN是不同的切片源列表。类型化ID须作EntityRef并核完整源定义/真实所有者；schema版本或自称qualified不替代可信枚举上下文/映射。新实例须比较全部源状态和实际适用标签/可见性，并从同一不可变主文件捕获及应用，不能另开环境路径或回显计划图。完整原生生成、SG科学及Engine恢复仍未因此接受；不启动04/06。
+
+
+03当前未封存源合同以CodecSourceDocument-proposal-7为准，前文proposal3–6均是保留的历史演进。22个必需根不变；SectionSource.nativeRecord显式联合未改的现代18行/80值与独立选定旧15行/69值记录。旧作者工程名义3.0头不足判定布局；旧记录四套颜色与现代六套不同，不补行、补颜色或按行号静默转换。16份实际Source6前态独立保留；迁移须证明实际旧内容/身份/当前状态完整，不能靠补空数组恢复遗漏内容。来源字节和typed记录完整不自动证明活动截面已重建；真实新实例必须覆盖完整预期section集合、owner/field/mode/basis/matrix/colors及资格。未执行实际Engine或新原件核验，仍不启动04/06。
+
+当前持久标签/禁用状态采用NVIS2/NativeFlagState-proposal-2，NVIS1只保留原始源记录前态。不可变来源观察与五套完整当前集合分别捕获；用户编辑/删除后不能从原始列表推回当前状态。原生序号必须绑定可信有序源population，不能只验证摘要或另一个真实对象存在；当前稳定目标须按实际输出population重映射。周期目标用实际Image/规则/半空间，非周期目标用已有Molecule/MoleculeFrame/Atom/Bond身份；latent状态须有独立适用性依据，不能自报潜伏掩盖恢复缺件。完整保存/重开分别核原始来源保全和当前适用效果，裸raw列表、全局STYLE、archive摘要都不能替代。资源/产物内部3、请求3、描述符2、manifest2与现行产品protocol3分别保持；旧接受和SG/FS/C6/P1 partial边界不变。
+
+03当前未封存EB数值消费后继（2026-11-17）见completion目录的`native-numerical-consumption.contract.json`。原生47/46共用单标量读者；其等值面输入消费存储f32数值，不读取能量单位、偏移或费米能级。物理信息缺失不能笼统阻断原版按存储数值显示，但仍不能猜eV/Ry、偏移0或授予物理费米面资格。导入到现有模型的晶格选择、当前有效仿射变换与等值面数值都须保存，原始文件不能代替这些当前状态。
+
+Source7的开放SourceEntity/AuditNode域新增闭合`NativeFractionalGridCurrent1`和`NativeStoredScalarIsoview1`设计记录：前者保存实际未掩码f32全缓冲、N点/N-1分段与实际3×4 binary64分数坐标到显示坐标矩阵；后者以实际EntityRef绑定同一当前对象，保存存储f32等值数和正/负/双面模式。三个闭合schema分别限制当前记录、无引用frame及view，具体owner/dataRef/SceneNode角色及Descriptor2实际定义、owner/use上下文沿原完整源合同消费；不能以普通字符串、同SHA资源或旧别名替代。数值坐标按原生先求1/(N-1)再乘索引，再用实际仿射及平移，不能以代数等价就声称IEEE逐位等价。
+
+不可变`NativeScalarGridSource1`原输入历史、已有可带mask/f64的`NativeScalarGridCurrent1`仿射步长对象和新增原生分数网格对象是不同持久类型，不互相静默迁移，更不接管实际FS/倒易Field。全部当前样本、坐标参数、实际view和原历史须独立捕获并在新生命周期重建/比较；原输入回放、遗漏平移/负面、猜费米0不能通过完整保存审计。原生完整周期显示扩展、cutoff/其他场景字段继续完整审计；本有限存储域的输入合同不冒充完整mesh/renderer或物理Brillouin域证明。后续实际Engine/renderer及其原件对照是独立施工验收，不作为03尚未编码的阻塞理由。Source7/Descriptor2/request3/Graph2/resource3/manifest2/loss2及产品protocol3版本、原4子集/81未准入及SG/FS/C6原partial均保持。
+## 2026-11-17 · 03当前补充：旧数据库实际消费、自旋图表与首次保存
+
+以下是03同卡施工后继，精确当前合同位于[03工作目录](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261115-092025-p1-03-completion)。未改变产品protocol3、旧封存47或其他卡接受状态，也不表示产品已实现。
+
+`historical-native-record-consumption.contract.json`补齐锁定读者的ICSD TF分支：六个系数按独立热参数序号写到当前槽，随后跳过一个非空非注释物理行；原标签、被跳过行与当前位点身份分别保存，不能猜成另一个张量或已定SU。CRYSTIN完整数值分派只消费十个记录码，原生忽略SMAT、Bij和条目分隔记录，不能把它们包装为已计算群或张量。新增请求方言明确限于所选原生legacy消费，原有选定修正方言及其资格边界独立保留；历史1986/1991手册未取得不再等于这些原生布局仍未知。
+
+`gsas-original-spin-chart.contract.json`依据原作者APS r1253 POWPREF真实字节，区分十二个SPNFLP生成元/中心输入与完整操作集。可信、来源版本/相/setting/origin绑定的图表给每个实际操作计算tau；SG的timeSign取tau，轴向变换另施det(R)，不能重复乘行列式。闭合源图表定义可无引用保存；当前`GSASSpinProjection1`必须绑定真实相、全部实际操作EntityRef和本次拥有的chart BytesRef。新生命周期重建逐操作精确比旋转、平移和timeSign；实际编辑状态不得被旧导入标志覆盖。真实图表factory、完整SG科学资格和产品实现仍由后续对应施工验证承担。
+
+`save-target-policy.contract.json`消费现行PRD §10.10/D4-31：已有工程Save回原WorkRef；新工程有合法指定路径时优先，否则用当前会话工作区，缺位置/名称先进入选择状态，尚不编码。切换软件页签和后续工作区变动不得重定向已捕获操作；导出独立选择目的地且不自动下载。
+
+此前保存说明中仅列SaveAs重绑的措辞在此补齐：未绑定新工程的首次Save，在同document/epoch且真实提交及完整语义读回通过后，安装该回执实际WorkRef。若当前已到R8，R7保存仍可登记其实际路径，但R8保持dirty且不能关闭；旧epoch/其他稿、失败或未知结果不能绑定。已有工程的普通Save保留原目标，export不重绑。该角色绑定进既有内部targetDigest，不新增客户端确认权限或静默修改Receipt/protocol3。实际写入路径须可从本人空间文件列表找到并以完整内容重开，路径字符串或SHA相同不足Saved。
+### 当前多模型定位与原始来源的独立保存（03施工后继）
+
+`native-layer-source.schema.json`原有Source1形状继续表示原始来源；其中kind/id字符串是历史别名，不能当作跨新实例仍有效的活动引用。新增`native-layer-current.contract.json`与闭合Current1形状，逐项捕获实际完整、有序的当前原生3D实例：真实phase/frame/source-entity定义、位置与取向两套独立EntityRef、全部18个锚/方向f64值、完整32位当前flag、实际16个矩阵f64值及3个平移f32值。分子包含多帧时必须由真实实例映射确定frame，不能用moleculeId或默认frame1替代。
+
+当前记录由文档拥有并按`NativeLayerCurrent1`写入Source7既有元数据类型；EntityRef及IEEE位保留各自角色，原始选择器/历史标签保持字面。新实例分别重绑两套引用和全部owner，原生输出序号从本次真实输出顺序重建。当前矩阵、SG位姿与SceneNode的真实显示状态也分别捕获，不能在Save中从旧来源重放，不能将一套矩阵重复应用。原生四个打印flag或一套SG parent均不能替代完整当前状态。该补充不授物理flag、高维科学、实际Engine捕获或原件互操作资格。
+
+
+## P1-03整卡读写设计后继（I20，待独审）
+
+本节和[整卡设计](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261115-092025-p1-03-completion/design.md)是03本次精确消费入口，取代旧rev44–47关于本卡自身“全部未知/参数仅shape”的笼统施工状态；原封存和科学/资产/运行资格不改。三个继任合同分别为[profile](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261115-092025-p1-03-completion/contracts/format-profiles.json)、[字段](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261115-092025-p1-03-completion/contracts/codec-field-policies.json)、[未来完整内容断言](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261115-092025-p1-03-completion/contracts/roundtrip-assertions.json)。每条selectedParameterDesign/selectedFieldDesign有精确SHA/record绑定，变化必须重新冻结；历史4空/81准入不充当新协议接受。
+
+Source7及AuditNode注册实际当前NativeLegacyDisplayCurrent1/NativeLegacyViewCurrent1、NativeThermalState1、NativeLayerCurrent1、完整数值网格/显式存储等值视图、截面及既有类型；MXDReportBlockObservations1是独立原始观察。原始tokens/aliases和当前typed引用不同角色，不从源重放当前编辑；未表示的实际Engine字段/角色拒绝完整捕获。源存档不证明活动Field/科学投影成立。
+
+PlanEncode在同一不可变完整源上独立枚举全部叶/对象/资源，先冻结units/frame、精度、固定codec/view/color/alpha/background政策，再列LossReport和新Consent。精确数值消费采用[有界decimal](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261115-092025-p1-03-completion/decimal-consumption.contract.json)，完整ASCII token和可信job累计额度在扩张前检查；m3d预算和外层每叶预算同时满足。比较不是只看摘要、头/尾值或误差均值。
+
+编码私有候选后，artifact-only全新上下文先恢复完整独立预期；宿主依赖先行/主文件最后发布，实际持久字节和语义读回都满足才发精确Saved。提交后未知/失败为committed-unverified，保留dirty；D4-31现有路径/显式新位置/会话workspace及首次Save绑定消费[目标政策](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261115-092025-p1-03-completion/save-target-policy.contract.json)。导出不重绑工程/清dirty/自动下载。04适配和真实Engine/codec/新实例验证属于后续实施，原资源失败是必须保留的回归。
+
+参数差异详见选定合同：STIN GUI19/native20的mode0不能抄P1的选项，恰一相且真实old-name/control；WIEN原生读停后不消费Precise尾段；RIETAN实际临时表示开关不能泛化8pi²；旧材质、TF及ignored records与实际当前类型分存。完整31关键词/16分派/十码域和source-only/错误不冒充额外producer或科学能力。
+
+
+## P1-04 保存和应用内部合同后继（I21，partial待独审）
+
+HS/1及其封闭值定义目标/能力摘要、source→actual-artifact分层、operation/query/close身份和生命周期；AL/1及其封闭值定义数据库请求/候选、Preferences2和HostAction字段。所有字段、单位、生产消费方、失败/取消及未证能力见合同，不用自由JSON或客户端passed授权。
+
+03 proposal按准确URI/SHA消费；旧protocol3及177公共定义未增加字段。未来必须显式选择transport版本并协商HS/AL+03 schema摘要，生成类型/validators，更新server action allowlist、client bundle及消费者，拒绝旧版本/额外字段。本卡不准入产品消息。WorkRef旧形状不变，新source/target/intent元数据在内部registry。当前service没有Vesta/querySnapshot动作，不能称为现有API。
+
+§5及历史§11.5的hash-only查询描述以本节和03settlement完整证明要求为准。不同document/epoch只结旧历史；R7回执不清不同内容R8；较旧bindingIntent不得重绑，较旧publicationSequence不得倒退lastSaved。新工程首次Save/SaveAs完整同生命周期确认才绑实际路径；Export不重绑/清dirty/自动下载。close先处理控件/IME及全部maypublish操作，稳定最新revision后释放。
+
+完整设计、精确字段、来源与8项具名缺口见[04设计](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261117-224424-p1-04-host-save-application/design.md)、[HS/1](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261117-224424-p1-04-host-save-application/contracts/host-save.contract.json)、[AL/1](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261117-224424-p1-04-host-save-application/application-lifecycle.contract.json)、[源码绑定](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261117-224424-p1-04-host-save-application/host-source-bindings.json)、[remaining](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261117-224424-p1-04-host-save-application/remaining-issues.json)及[未来验收](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261117-224424-p1-04-host-save-application/verification-plan.md)。本轮仅Codex自验、待用户手动dsh；旧03/01/02/05/C6资格不升级。
+
+
+## P1-04 同卡续办接口（I22，HS/2、AL/2，partial）
+
+旧HS/1、AL/1文件及177公共定义不改。新[恢复合同](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261117-224424-p1-04-host-save-application/attempts/20261117-232931-design-completion/contracts/host-recovery.contract.json)、[页面投递合同](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261117-224424-p1-04-host-save-application/attempts/20261117-232931-design-completion/contracts/page-delivery.contract.json)、[应用合同](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261117-224424-p1-04-host-save-application/attempts/20261117-232931-design-completion/contracts/application.contract.json)和[封闭值](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261117-224424-p1-04-host-save-application/attempts/20261117-232931-design-completion/contracts/continuation-values.schema.json)是后继设计，消费时须同时读取父合同，明确冲突以本后继局部字段为准。所有新类型仅用于设计，不接收为现有protocol3消息；未来显式协商版本、服务器准入、客户端bundle和receiver一起迁移。
+
+FormSubmission分四个表单，以descriptorDigest/formIndex和精确可编辑字段绑定；隐藏字段、endpoint和submit由来源描述符生产，客户端不能注入。文本保持原表单词法值，checkbox为布尔，未选项不发送；size不是输入上限。HostActionRequest按11种kind给封闭payload，回复按6种status约束effect/receipt；内部登记须匹配request/kind/payloadDigest和真实完成范围，字符串receipt不构成授权。RecoveryReply将原操作可信结算与新生命周期可恢复产物分开，未知不Saved。PageCommandKey含身份/代际/摘要；重复未知修改不能重放。全部字段和失败语义见上述合同及[演算](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261117-224424-p1-04-host-save-application/attempts/20261117-232931-design-completion/wire-examples.json)。
+
+04同卡续办已补HS/2页面投递与恢复、AL/2真实表单及逐种系统动作设计。原8项均保留：4项缺设计输入，4项留待后续真实资格；整卡partial，待用户手动dsh。03 rev48整卡待审、01/02/05 partial、SG六/FS11、C4设计接受/C6未审、P1两接受两未接受保持。 [04续办回执](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261117-224424-p1-04-host-save-application/attempts/20261117-232931-design-completion/RECEIPT.md) / [续办设计](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261117-224424-p1-04-host-save-application/attempts/20261117-232931-design-completion/design.md) / [具体缺口](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261117-224424-p1-04-host-save-application/attempts/20261117-232931-design-completion/remaining-issues.json) / [手动dsh材料](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261117-224424-p1-04-host-save-application/attempts/20261117-232931-design-completion/DSH-REVIEW-HANDOFF.md)。
+
+
+## P1-04 缺口设计后继（I23 / HS/3、AL/3）
+
+[Host profile](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261117-224424-p1-04-host-save-application/attempts/20261118-004924-four-design-gaps/contracts/host-profile.contract.json)绑定server principal/build/volume/writer-domain/metadata isolation/durability/实际limits与verifier；实际宿主产生和准入，客户端passed或hash不能授权。[恢复](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261117-224424-p1-04-host-save-application/attempts/20261118-004924-four-design-gaps/contracts/operation-recovery.contract.json)固定host-issued capture代际与request绑定、不可变操作记录、只读query/principal-target守卫、失去凭据的新生命周期恢复、未知可达保留和终态退休。过期旧capture不重放，查询不自动重绑当前稿。
+
+[偏好](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261117-224424-p1-04-host-save-application/attempts/20261118-004924-four-design-gaps/contracts/preferences.contract.json)以changedFields+stagedValues+version/profileDigest整笔提交/独立读回；AL/3将数值草稿改为词法字符串，替代旧内部u64示例对未知native域的过早约束，**不是**允许任意负数/小数。native类型/精度/词法域须有合格证据；宿主安全上限独立。新profile/query/preference值在[封闭值](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261117-224424-p1-04-host-save-application/attempts/20261118-004924-four-design-gaps/contracts/values.schema.json)，mask/权限/真正持久化仍有语义校核，有限schema不能替代它们。[历史/动画](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261117-224424-p1-04-host-save-application/attempts/20261118-004924-four-design-gaps/contracts/history-animation.contract.json)补snapshot容量及单tick/session/pref/epoch/revision、资源leases和屏障。
+
+以上仅设计后继，旧HS/1、HS/2、AL/1、AL/2及177定义原字节保持；必须同时消费父合同，局部差异按本后继明确段落覆盖。未来生产schema/服务器准入/receiver/client bundle须显式协商迁移，productprotocol3未准入。[04本轮回执](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261117-224424-p1-04-host-save-application/attempts/20261118-004924-four-design-gaps/RECEIPT.md) / [完整设计](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261117-224424-p1-04-host-save-application/attempts/20261118-004924-four-design-gaps/design.md) / [最少补件](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261117-224424-p1-04-host-save-application/attempts/20261118-004924-four-design-gaps/external-inputs.md) / [手动dsh材料](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261117-224424-p1-04-host-save-application/attempts/20261118-004924-four-design-gaps/DSH-REVIEW-HANDOFF.md)。
+
+
+## P1-04 宿主范围后继（I24 / HS/4）
+
+[HS/4](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261117-224424-p1-04-host-save-application/attempts/20261118-011705-source-history-resolution/contracts/host-binding.contract.json)显式局部覆盖HS/3“所有外写者均受强制原子域才允许保存”的作者前置；按原卡选定same-service-controlled-writers+observed-baseline范围，不降低权限/配额/父sync/完整语义/真实registry资格。额外globalCAS请求E_HOST_SCOPE_UNSUPPORTED；source-bound不生成runtime-qualified。
+
+新[封闭profile/采集值](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261117-224424-p1-04-host-save-application/attempts/20261118-011705-source-history-resolution/contracts/values.schema.json)仅内部设计，旧HS/1～3及AL/1～3、177定义原字节不改，productprotocol3未准入。AL/3仅[evidence-r2](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261117-224424-p1-04-host-save-application/attempts/20261118-011705-source-history-resolution/application-source-status.json)：定位Prefs内部OK/Cancel/Get/Set，复用已有MouseLeftUp条件timerStop，不填造native域/分组。未来schema/server admission/receiver/client须显式版本迁移。[04本轮回执](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261117-224424-p1-04-host-save-application/attempts/20261118-011705-source-history-resolution/RECEIPT.md) / [设计与来源](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261117-224424-p1-04-host-save-application/attempts/20261118-011705-source-history-resolution/design.md) / [最小原件取证方案](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261117-224424-p1-04-host-save-application/attempts/20261118-011705-source-history-resolution/collection-plan.md) / [手动dsh材料](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261117-224424-p1-04-host-save-application/attempts/20261118-011705-source-history-resolution/DSH-REVIEW-HANDOFF.md)。
+
+
+## P1-04 静态来源后继（I25 / AL/3 evidence-r3）
+
+[偏好证据合同](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261117-224424-p1-04-host-save-application/attempts/20261118-020831-authorized-static/contracts/preferences-evidence.contract.json)和[历史证据合同](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261117-224424-p1-04-host-save-application/attempts/20261118-020831-authorized-static/contracts/history-evidence.contract.json)继承AL/3并补逐地址观察，未改变旧Apply/Cancel、历史/revision或productprotocol3准入。ID8/14声明1～10000/1～1000000且step1，经已有spin构造/事件证据关联；完整字段语义、失焦/钳位/词法仍未证，不自动开放未知字段。
+
+OnOK本体GetValue→Set→InitCanvas→5100，Cancel本体5101→关闭；外层与虚调用副作用未验证。Timer/Idle已读不等于原件历史链闭合；精确缺口和下一范围见本轮证据。动态仍未授权，不以静态推执行。[04本轮回执](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261117-224424-p1-04-host-save-application/attempts/20261118-020831-authorized-static/RECEIPT.md) / [设计与静态事实](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261117-224424-p1-04-host-save-application/attempts/20261118-020831-authorized-static/design.md) / [最小剩余范围](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261117-224424-p1-04-host-save-application/attempts/20261118-020831-authorized-static/collection-plan.md) / [手动dsh材料](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261117-224424-p1-04-host-save-application/attempts/20261118-020831-authorized-static/DSH-REVIEW-HANDOFF.md)。
+
+
+## P1-04 偏好输入后继与历史新证据（I26）
+
+[AL/4-preferences-input](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261117-224424-p1-04-host-save-application/attempts/20261118-030321-static-completion/contracts/preferences-input.contract.json)明确继任AL/3数字输入设计；原177定义/productprotocol3/旧AL3原字节不改，未来显式协商并一起迁移producer/schema/server/receiver/client。rawText+baseVersion+profile输入，服务端拥有资格，结果区分parsed-scalar/parsed-binary/kept-previous/unqualified/safety-rejected，候选不等于安装值。对12字段保留单位/默认/原生与安全资格；interval绑定i32，不按u64宣传完整原生域。
+
+[AL3 history evidence-r4](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261117-224424-p1-04-host-save-application/attempts/20261118-030321-static-completion/contracts/history-evidence.contract.json)补timer入口及undo1/redo1成功门控，不证明int1是一快照或原件动画归组。保留焦点/IME、tick、save/close/Apply/Undo屏障及资源lease规则；未解虚表/库语义明确列出。[04本轮回执](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261117-224424-p1-04-host-save-application/attempts/20261118-030321-static-completion/RECEIPT.md) / [设计与事实](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261117-224424-p1-04-host-save-application/attempts/20261118-030321-static-completion/design.md) / [最小剩余](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261117-224424-p1-04-host-save-application/attempts/20261118-030321-static-completion/collection-plan.md) / [手动dsh材料](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261117-224424-p1-04-host-save-application/attempts/20261118-030321-static-completion/DSH-REVIEW-HANDOFF.md)。
+
+
+## P1-04 转换profile与历史证据后继（I27）
+
+[AL/4输入evidence-r2](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261117-224424-p1-04-host-save-application/attempts/20261118-032858-static-conversion-rotation/contracts/preferences-input.contract.json)形状继承；新增[数值转换profile](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261117-224424-p1-04-host-save-application/attempts/20261118-032858-static-conversion-rotation/contracts/numeric-conversion-profile.json)，field/tag/profile由server绑定。已资格finite/inrange i32截断、f32明确舍入资格、f64复制；candidateConvertedValue仍待真实整代持久/读回/安装，不能把Printf输入或返回数宣布effective。旧177定义/productprotocol3不变，未来显式迁移。
+
+[历史evidence-r5](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261117-224424-p1-04-host-save-application/attempts/20261118-032858-static-conversion-rotation/contracts/history-evidence.contract.json)解析Canvas230/310/6f8静态目标为聚焦/刷新/交换缓冲，OnRotate固定轴按钮职责已定；没有追取其它函数、callee或运行轨迹，持续动画分组仍未证。[04本轮回执](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261117-224424-p1-04-host-save-application/attempts/20261118-032858-static-conversion-rotation/RECEIPT.md) / [设计与事实](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261117-224424-p1-04-host-save-application/attempts/20261118-032858-static-conversion-rotation/design.md) / [最小剩余输入](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261117-224424-p1-04-host-save-application/attempts/20261118-032858-static-conversion-rotation/collection-plan.md) / [手动dsh材料](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261117-224424-p1-04-host-save-application/attempts/20261118-032858-static-conversion-rotation/DSH-REVIEW-HANDOFF.md)。
+
+
+## P1-04 AL4历史范围与格式来源（I28）
+
+> 历史rev56正文：作用范围、profile字段、聚合与handler口径由文末rev57整改后继覆盖；旧包保持封存，不以本历史段作为当前合同。
+
+[偏好evidence-r3](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261117-224424-p1-04-host-save-application/attempts/20261118-035409-static-format-modes/contracts/preferences-input.contract.json)绑定%g/%.*f字节并保持候选/存储/显示/生效确认分离；全locale/FPCR/词法资格不自动提升。
+
+[AL4-history-manipulation](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261117-224424-p1-04-host-save-application/attempts/20261118-035409-static-format-modes/contracts/history-evidence.contract.json)显式覆盖AL3泛化中“纯UI不记历史”对真实清选择提交的误用，保留纯focus/noop规则。新[闭合值](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261117-224424-p1-04-host-save-application/attempts/20261118-035409-static-format-modes/contracts/manipulation-history.schema.json)区分owner集合请求、逐Doc committed/unchanged/failed/unknown和集合complete/partial/unresolved/failed；server绑定route/profile/scope，client不得声明已资格或将单Doc命令扩集合。旧177定义/productprotocol3未改，未来需显式同步迁移，不是已实现/准入API。[04本轮回执](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261117-224424-p1-04-host-save-application/attempts/20261118-035409-static-format-modes/RECEIPT.md) / [设计与事实](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261117-224424-p1-04-host-save-application/attempts/20261118-035409-static-format-modes/design.md) / [最小剩余证据](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261117-224424-p1-04-host-save-application/attempts/20261118-035409-static-format-modes/collection-plan.md) / [手动dsh材料](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261117-224424-p1-04-host-save-application/attempts/20261118-035409-static-format-modes/DSH-REVIEW-HANDOFF.md)。
+
+## 04复核整改后继（rev57 / D27-I29-C6）
+
+> 历史交付时状态；随后R57已独审通过F1–F6技术增量，登记及当前R1–R3修补以文末rev58为准。历史“待dsh”不表示本次技术增量仍未审；R3正文已按后继补清。
+
+04按dsh复核完成F1–F6设计整改，rev57/D27-I29-C6；rev56静态证据独审通过，整改增量仅作者自验、待用户手动dsh。当前notebook全部已开文档的原生作用范围、逐Doc配置摘要、汇总优先级和事件处理器副作用已澄清；完整偏好输入资格与实际动画撤销重做分组仍缺，04整卡partial、未接受。
+
+F1：原生身份链为canvas+0x568→WinManager*、manager+8→vxNotebook*、notebook+0x3c0/+0x3c8→本notebook全部已开文档向量；不推及其它notebook/窗口或账号。raw manipulation为1或>=4时，有效Doc当前Scene清选择返回>=1才逐Doc请求PushHistory(2)。适配器单Doc/明确授权集合是对原生范围的有意收窄。rev56“ownerDoc/ownerDocument”表述已由本段修订，冻结旧包和复审原件不改。
+
+F2：`selectionProfileDigest`必须放在每个`capturedDocuments`条目，允许不同文档使用不同profile；请求级同名字段禁止。逐Doc权限/资格由服务器预检，不接收客户端permission/qualified声明。documentEnvelope、schema、闭合值、真实构造请求与有限例一致。[后继合同](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261117-224424-p1-04-host-save-application/attempts/20261118-045848-rev56-design-corrections/contracts/history-evidence.contract.json) / [schema](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261117-224424-p1-04-host-save-application/attempts/20261118-045848-rev56-design-corrections/contracts/manipulation-history.schema.json)。
+
+F3：集合结果按顺序计算：任一unknown→unresolved；无unknown且failed+committed→partial；有failed但无committed（含failed+unchanged）→failed；全unchanged含空集合→unchanged；其余至少有committed、仅committed/unchanged→complete。逐Doc失败/unknown保留已提交结果，不宣称跨Doc原子性或自动整批回滚/重放。
+
+F4：Mode0主选择0写raw0、隐藏次选择、停运行timer并Enable(1)；非0显示次选择并写raw=secondary+1，raw2停运行timer，其它已资格raw仅未运行时start(pref+3a0,false)，此分支不调用Enable。Modes1同样写raw=secondary+1，沿同timer规则且Enable(raw!=3)，raw1/raw2启用、raw3禁用；Modes2写axis selector并重置向量(1,0,0)。事件处理器副作用与适配器停止/屏障/不自动恢复策略分开；named映射仍为跨源推断，未测实际节拍或历史分组。
+
+F5：[数值子集schema](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261117-224424-p1-04-host-save-application/attempts/20261118-045848-rev56-design-corrections/contracts/preferences-input.schema.json)只覆盖animationStepDeg、animationIntervalMs、historyLimit、rasterTessellationFactor、isosurfaceN五项。其余textFont、三artifact、openTarget、startupBondSearch、hardwareAntialias七项各自沿AL3/05字体资产、宿主和能力资格，去向见[偏好合同](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261117-224424-p1-04-host-save-application/attempts/20261118-045848-rev56-design-corrections/contracts/preferences-input.contract.json)；12字段矩阵不等于全字段wire准入或全原生资格。
+
+F6：仅解码既存rev55 SetValue指令bytes：ADRP@0x100016e00+ADD@0x100016e04→0x1004d4f28（%.*f），ADRP@0x100016e28+ADD@0x100016e2c→0x1004d4f1c（%g），连同BL到Printf重载核对。候选double、typed存储、显示与实际生效读回保持分离；locale/FPCR/完整词法溢出和原件实际格式结果未验证。
+
+本轮新增原件读取/绑定/GUI/动态/网络/额外模型均0，未运行会读原件的旧复审检查器。原复审含当前原件离线otool/nm与旧字节比较，不能笼统记为“未新读原件静态”；未target绑定/GUI/运行是另一边界。只追加补注，不改R或裁定权限违规，不重置累计预算/费用/次数/停报。原8问题ID、AL-02/AL-04、03rev48待整卡独审及旧47子项、01/02/05、SG六/FS11、C4接受/C6未审、P1两接受两未接受、06未启动均保持。未实现产品、未迁移177定义/productprotocol3、未自动转审。
+
+[04整改回执](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261117-224424-p1-04-host-save-application/attempts/20261118-045848-rev56-design-corrections/RECEIPT.md) / [整改设计](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261117-224424-p1-04-host-save-application/attempts/20261118-045848-rev56-design-corrections/design.md) / [最小剩余输入](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261117-224424-p1-04-host-save-application/attempts/20261118-045848-rev56-design-corrections/collection-plan.md) / [手动dsh待审材料](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261117-224424-p1-04-host-save-application/attempts/20261118-045848-rev56-design-corrections/DSH-REVIEW-HANDOFF.md) / [复审边界补注](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261117-224424-p1-04-host-save-application/attempts/20261118-045848-rev56-design-corrections/boundary-errata.md)。
+
+## 04独审登记与R1–R3修补（rev58 / D28-I30-C6）
+
+04本轮登记rev57 F1–F6技术整改独审通过（53/53），并完成R1–R3设计修补；当前rev58/D28-I30-C6，本轮增量仅作者自验、待用户手动dsh。04整卡仍partial、不接受，AL-02/AL-04未闭合，C6未审，未实现产品或启动运行/06。
+
+登记范围仅为[rev57 dsh报告](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-053126-p1-04-rev57-dsh-review/REVIEW.md)的F1–F6技术整改增量：53/53，182例零失配、85种聚合组合一致，作者及复审411/0、七负控检出；原文correctionVerdict仍为pass-with-minor-doc-residual。未扩大为04整卡、整个接口、C6、其它P1或产品/运行接受。本轮R1–R3尚待用户手动dsh。原8问题ID、AL-02/AL-04、03rev48另案待整卡独审/旧47子项、01/02/05 partial、SG6/FS11、C4接受/C6未审、P1两接受两未接受、06未启动保持。
+
+R1：当前摘要/导航统一到rev58/D28-I30-C6；原生范围为当前notebook全部已开文档，单Doc/明确授权集合是适配器有意收窄。STATE的P1.scope_clarification、P1.items.P1.2/P1.4及P1.bookkeeping_round已具名修正；历史rev56/57记录保留并标明由本节覆盖。新校验只放行这些精确字段及04当前指针/登记，不豁免其它P1字段、其它卡或user_decisions。
+
+R2：新检查器按sorted(others)输出七项非数值排除检查，另核其它输出循环的顺序。相同冻结输入、final阶段及同一解释器用两个不同PYTHONHASHSEED实跑，逐字节stdout SHA/检查顺序/内容对照见[确定性记录](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261117-224424-p1-04-host-save-application/attempts/20261118-054254-rev57-review-registration/determinism.json)。不修改旧checker/stdout/seal。
+
+F4：Mode0主选择0写raw0、隐藏次选择、停运行timer并Enable(1)；非0显示次选择并写raw=secondary+1，raw2停运行timer，其它已资格raw仅未运行时start(pref+3a0,false)，此分支不调用Enable。Modes1同样写raw=secondary+1，沿同timer规则且Enable(raw!=3)，raw1/raw2启用、raw3禁用；Modes2写axis selector并重置向量(1,0,0)。事件处理器副作用与适配器停止/屏障/不自动恢复策略分开；named映射仍为跨源推断，未测实际节拍或历史分组。
+
+R3补注：rev57模型native_mode0已写secondary='show'，但rev57合同primaryNonzero并无显式secondary/show字段，R57称“合同与模型均覆盖”不够精确。本后继合同显式增加secondary='show'，正文同步Mode0非0显示及Modes1 secondary+1，并核模型/合同一致；只消费已保存证据，不新增原生行为或取证。R57原报告不改。
+
+rev57 sealed189产物、18作者run及复审另加的runs/20261118-053226-180186-final一并保全；该复审run仍非原作者seal成员。rev56及两份dsh目录/旧失败/基线原字节保留；本轮新增原件读取、target绑定、GUI、动态、网络、额外模型均0，不运行会访问原件的旧R56/E56检查器，不重置预算/费用/累计次数/停报。[04本轮回执](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261117-224424-p1-04-host-save-application/attempts/20261118-054254-rev57-review-registration/RECEIPT.md) / [登记与R1–R3设计](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261117-224424-p1-04-host-save-application/attempts/20261118-054254-rev57-review-registration/design.md) / [手动dsh待审材料](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261117-224424-p1-04-host-save-application/attempts/20261118-054254-rev57-review-registration/DSH-REVIEW-HANDOFF.md)。
+
+
+## I31 · NS/1同生命周期CLI身份与保存衔接
+
+本节是用户明确授权06补齐CLI契约后的有界后继：[规范设计](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-071145-native-session/native-session-design.md)、[机器合同](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-071145-native-session/contracts/native-session.contract.json)、[封闭Request/Response及具名资源schema](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-071145-native-session/contracts/native-session.schema.json)、[producer/consumer与host权限边界](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-071145-native-session/producer-consumer.json)。这些是本接口规范的精确组成部分，需一并读取，不是已实现API。
+
+身份敏感续作采用一次 `vestacraft serve --stdio --root <host-derived mount>`：hello严格匹配native/core/save/host profile摘要；stage已授权真实字节→open一次返回实际doc/epoch→同Engine inspect取phase/siteId→携DocumentAt执行现有8个core命令→snapshot候选→既有host实际发布及完整独立读回→私有HostAck确认→settled close/shutdown。所有u64十进制字符串；顺序seq生成core requestId，不接受另外一个调用者requestId。
+
+逐字节同seq只重放原Accepted/终态，淘汰后expired绝不重执行；contextVersion不符是准入后失败并消耗seq。status/cancel为OOB；EOF不隐式保存，新进程freshsid，旧工具不得换seq/新身份盲重放。资源、分页身份、负向/退出、关闭证明及捕获版本的精确规则以具名合同为准。
+
+本节明确取代§6独立inspect进程的身份传给另一个run进程的错误编辑配方。one-shot commands/inspect可保留诊断，返回身份随进程失效；历史run示例不提供跨进程编辑入口，不按label/index/SHA重新猜对象。没有删除原件16CLI要求，没有改变现有command/1核心语义或bounded/3/177科学定义。
+
+native无私有registry/host凭据或主文件直写权；只通过现有认证host的私有pipe/allowlist接控制帧。HostAck元数据不自行构成权威，必须源自HS3/4同op可信查询与新鲜全语义比较；export/旧revision确认不能清当前dirty。close必须结清全部可能发布的操作，dirty=false、exit0、文件存在或SHA相同均不够。新增NS schema生成器/driver/严格profile consumer升级和真实R01往返是未来独立施工/运行范围，当前未实施或获接受。
+
+
+## 历史同卡CLI契约续办（rev63 / IP3；当前见rev64）
+
+P1-06同卡CLI续作身份契约设计交回，rev63/D32-I31-C6。NS/1补齐一次serve载入后的实际身份、消息/资源/重试、候选保存与宿主确认、关闭恢复；仅首链有界设计作者完成，待用户手动dsh。15单元/56步骤保留，SG六/FS11/AL02与AL04/资产及运行资格保持；P1两接受两未接受、整体partial。未进入产品实现或运行。
+
+[06本轮回执](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-071145-native-session/RECEIPT.md) / [CLI契约设计](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-071145-native-session/native-session-design.md) / [手动dsh待审材料](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-071145-native-session/DSH-REVIEW-HANDOFF.md)。
+
+设计与验收依据沿原06需求材料；[NS/1机器合同](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-071145-native-session/contracts/native-session.contract.json)、[封闭schema](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-071145-native-session/contracts/native-session.schema.json)、[生产消费和权限](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-071145-native-session/producer-consumer.json)、[设计身份链](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-071145-native-session/identity-trace.json)、[当前步骤图](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-071145-native-session/step-plan.json)。P106-CLI-BINDING仅在NS/1首链范围作者设计补齐、未获独审或运行接受。I31明确取代I30跨进程inspect→run传runtime ID的错误续作配方，commands/inspect可保留诊断身份；完整254/31领域/85格式需求与SG/FS/AL/资产缺口不缩减。
+
+历史rev60/61与原封存保持；文中旧“CLI合同未冻结”是当时缺口，不是当前NS/1状态。未来实现须迁移native/core/save/host严格profile生成及现有私有宿主driver，再单独获产品/运行授权、分配具体根/环境/预算/次数；本轮没有操作VESTA/产品/worker/Check/launcher/模型，没有自动发起dsh或新卡。累计费用/次数/停报继承原06，完整账本未核不记零总额。
+
+
+### rev63上位输入对齐
+
+封存前只读核验发现平台PRD/技术方案/阶段4决策新增D4-33；已核三份全文差异均仅插入新条目。平台软件后续目标由旧三模式改两布局，布局切换保留同一页面、工程、任务和草稿；本轮不重做UI，CLI仍仅真实受控关页后启动。旧三模式表述作为历史背景，不作为现行平台布局要求。新条目不改变本NS/1身份/宿主保存合同或开放产品/运行。首轮3项SHA失败与中间baseline62及其字节快照保留，当前追加rev63/D32-I31-C6对齐输入，NS/1 schema及核心类型未改。
+
+[实际差异与输入SHA](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-071145-native-session/input-drift.json)。
+
+## 历史 P1-06 全功能设计交付（rev64 / D33-I32-C6 / IP4，存在复审漏项）
+
+P1-06 全功能作者设计已完成，rev64 / D33-I32-C6 / IP4，整体待用户手动 dsh 独立复审。科学六域、FS十一项、偏好与动画历史、资产及四个外算流程已有具体类型、来源规则与完整输出先验；同生命周期 CLI 由保留的 NS/1 明确扩展为 NS/2。15 实施单元、56 依赖步骤覆盖原 254 功能和 85 格式路由。当前没有待补且会改变公共契约的来源/类型字段；未来产品与原件运行资格另列。P1 接受仍为两项接受、两项未接受，整体未接受；没有产品实现或运行。
+
+[06 最终回执](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/RECEIPT.md) / [统一接口与 CLI](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/composition-design.md) / [完整实施计划](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/implementation-readiness.json) / [一次性手动 dsh 待审包](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/DSH-REVIEW-HANDOFF.md)。本节为当前同卡后继；下文/前文各 rev60–63 及更早的“当前、partial、尚缺”描述均保留为当时记录，原字节证据与旧 baseline 不改。新合同是明确的设计后继，不追认旧卡、旧 177 定义、bounded protocol3、NS/1 或 C6 已支持新字段。
+
+用户 DEC-P1-05 已确认“先不管许可的事，先完成功能”：许可不再阻塞本轮功能设计；保留资产来源与条款身份，不推定已取得授权。当前只做设计，继续原卡累计预算、权限、费用、次数及停报；完整旧账本未核，不记零累计。原件执行、产品运行、worker、Check、launcher、模型调用均未发生。dsh 由用户手动发起，本轮不代发或建立复审会话。
+
+I32 是显式后继：[封闭科学请求/结果与状态编辑](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/contracts/scientific-composition.schema.json)共40个具名操作，SG11＋FS28＋唯一surface操作；没有free options或caller qualified标志。[NS/2](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/contracts/native-session-v2.schema.json)继承NS/1实际session/document/epoch/context/seq、资源传输、重试高水位、发布ack、关闭与新生命周期规则，新增 domain.prepare/domain.state.prepare/domain.apply，所有11条命令完成均带可信历史摘要。握手强制9项schema/catalog/资产/历史/偏好/外算等摘要与候选数量/字节/保留预算；旧generation执行前拒绝。候选只来自完整具名结果，绑定实际owner/source/revision/profile/digest，query不改变当前工程，apply只原子提交真实差异。[历史线协议](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/contracts/history-effects-wire.schema.json)以规范十进制u64字符串投影内部逻辑整数，禁止JS Number丢精度；source/current/candidate/hostack权限互不冒充。全部输入输出及生产消费精确引用在 [接口组合](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-080304-full-design-closure/interface-composition.json)。旧177定义、bounded protocol3、NS/1、C6原字节保持；迁移后重新做真实共享端往返，不能声称旧客户端已支持。
+
+## 历史 P1-06 同卡复审整改（rev65 / D34-I33-C6 / IP5，仍有两项残留）
+
+P1-06 rev64复审问题已同轮完成作者设计整改，当前 rev65 / D34-I33-C6 / IP5，待用户一次性手动dsh复审。NS2计划、九摘要派生、typed资源、31域预期、15单元证据与canonical文件已统一；rev64原封存保持。P1接受仍为两项接受、两项未接受、整体未接受。只做设计，真实运行/目标资格是后续施工产物，不作为本轮设计接受前置。
+
+[06整改回执](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-124023-rev64-review-corrections/RECEIPT.md) / [I33/IP5整改设计](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-124023-rev64-review-corrections/DESIGN.md) / [当前实施计划](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-124023-rev64-review-corrections/implementation-readiness.json) / [一次性手动dsh待审材料](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-124023-rev64-review-corrections/DSH-REVIEW-HANDOFF.md)。旧rev64“全部作者设计完成”的表述是当时交付结论；收到复审后已确认计划与接口接线漏项，本节替代其当前判断，保留原证据和原文作为历史。
+
+当前精确输入见本轮 `contracts/profile-derivation.contract.json`（9个输入选择/CPJ1/SHA及固定向量）、`contracts/resource-bindings.contract.json`（6类资源及11完成类型）、`current-oracle-bindings.json`、`unit-result-assertions.json`、`planned-files.json`。NS2仍17外层操作/14顺序＋3带外、11内核命令，当前40科学/表面操作保持；新代际必须同步Rust/Worker/editor/CLI/HostAgentMCP/HostSave/CodecRestore。旧NS1仅明确的前代参考，不允许自动降级。
+
+IP5保留15结果单元和56按产物依赖步骤，U00生成器及delivery CLI分支必须执行NS2/资源/摘要契约测试；U02完整终端不再因“缺NS1设计”受阻。31域的旧 `missingExpected/blockedBy` 仅在显式predecessor中，当前预期按完整字段/数组/资源绑定；shape-only示例不代替科学数值预期。15单元入口均指本轮文件并锁SHA，当前原生codec唯一计划文件为 `kernel/crates/codecs/src/formats/native_vesta_v2.rs`，高维模型在 `kernel/crates/model/src/native_dimension.rs`。所有产品文件/命令均待创建/待执行。
+
+接受沿DEC-P1-03设计级口径：现有P1.1/C4接受保持，C5条件/C6未审及03/04旧整卡边界不追认。实际锁/构建/OS/ABI/GPU/IME/宿主持久化/外算/数值误差资格留给获授权的实施步骤；不能改为本轮设计验收必须先运行。DEC-P1-05许可后置保持，既有预算/累计费用/次数/停报不重置。只由用户转交dsh，本轮无产品/原件/worker/Check/launcher/模型、安装、部署、stage/commit/push。
+
+## 历史：P1-06 两项残留同卡整改（rev66 / D35-I33-r1-C6 / IP6）
+
+P1-06 rev65两项残留已同轮作者整改，当前 rev66 / D35-I33-r1-C6 / IP6，线协议摘要代际保持I33。两条原生路由handler统一v2，payloadEnvelope及代际来源已入唯一合同，生成/校验实际读取声明并新增反例；九摘要全部重算，仅保存profile摘要变化，另八项字节不变。rev64/rev65原封存保持。仅设计，接受仍[true,false,true,false,false]，待一次性手动dsh。
+
+[06本轮回执](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-134209-two-residuals/RECEIPT.md) / [两项整改设计](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-134209-two-residuals/DESIGN.md) / [摘要变更对照](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-134209-two-residuals/profile-digest-delta.json) / [一次性手动dsh待审材料](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-134209-two-residuals/DSH-REVIEW-HANDOFF.md)。
+
+当前原生输入VM18-I01与输出OBS-O01的 `handlerPlanned` 均为 `kernel/crates/codecs/src/formats/native_vesta_v2.rs`；85路由绑定表是本轮后继，底层codec资料仍按SHA引用，不声称整套源文件复制入包。全85路由当前handler、两处部分漏改、其它路由误指旧名均有回归检查。
+
+派生合同明确三字段信封、四字段输入记录、选择/投影/逻辑根替换顺序和唯一 `interfaceGeneration` 来源。文档修订I33-r1与wire/profile代际I33分开；所有9项按合同重算。单补信封不改变任何原向量；本轮两条handler改变仅saveBundleProfileDigest。若以后真正改代际，全部九项需重算/协商，不能沿用本轮“只变一项”结论。缺声明/代际冲突/记录缺项或多项/错序拒绝，禁止从脚本常量或样例反推。
+
+本次只关闭F5-r/F3-r及对应回归检查，原科学模型/源/NS2消息/NS1/C6不改；15单元/56步骤/31域/40操作/254主责/85路由保持。原03/04及C5/C6被审范围不追认。DEC-P1-03仍按设计级复审，不新增真实运行前置；许可后置和原预算/累计费用次数/停报继承，不归零。产品/原件/worker/Check/launcher/外算/模型未运行，未安装部署或提交推送；仅由用户手动转dsh。
+
+## rev67：rev66独审通过与P1设计阶段收口登记
+
+rev66 已由用户带回 dsh 独审通过，F5-r／F3-r及回归闭合；用户已确认 P1.2／P1.4设计级接受，P1四项设计接受为[true,true,true,true,true]（依次为P1.1、P1.2、P1.3、P1.4、整体），P1设计阶段收口。资料基线rev67仅登记；被审技术交付仍为rev66 / D35-I33-r1-C6 / IP6，wire/profile代际I33，九摘要不变。P1.1及P1.3 C4既有接受保持，C5条件／C6未审及03rev48、04rev57/58历史范围不追认。仍停在设计阶段，不进入产品实现或真实运行。
+
+[06接受登记回执](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-160449-rev66-acceptance-registration/RECEIPT.md) / [设计接受记录](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-160449-rev66-acceptance-registration/accepted-design.json) / [复审原文](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-160449-rev66-acceptance-registration/inbound/dsh-rev66-review.md) / [过程及统计勘误](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-160449-rev66-acceptance-registration/REVIEW-PROCESS-ERRATA.md) / [已接受的rev66技术封存](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-134209-two-residuals/final-seal.json)。
+
+这是接受状态后继，不改rev64／rev65／rev66封存。上文带历史版本号的partial、待审和未完成段落保留其当时范围；现行接受状态以文首登记和本节为准。未来实际构建、宿主及数值资格仍按获授权步骤验证，不反向变成本次设计接受前置。原累计预算／费用／次数和停报规则继承，不归零。

@@ -1,12 +1,20 @@
 # VESTA Study 接续
 
+<!-- P1-CURRENT-STATUS BEGIN -->
+当前状态：03整卡设计施工完成，待用户手动转dsh整卡独审；rev48/D18-I20-C6。
+
+2026-11-17 P1-03整卡设计施工完成：rev48/D18-I20-C6。85原路由、234参数和291组选定字段逐项冻结精确消费/来源/当前模型/单位精度/失败，1865组件覆盖290组，JP2一组保留真实无产物。完整源、损失同意、资源图、候选与提交后语义重开、D4-31/Saved及85键外既有IO设计齐备。最终完整自验243/0、exit0、输入稳定；旧失败及额外producer/上游资格边界保留。待用户手动转dsh整卡独审，尚无独立接受；rev45有界独审及旧4/81、01/02/05 partial、SG六/FS11/C6/P1两接受两未接受保持。04/06未启动。
+
+[整卡设计](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261115-092025-p1-03-completion/design.md) / [当前profile](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261115-092025-p1-03-completion/contracts/format-profiles.json) / [后续消费](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261115-092025-p1-03-completion/consumer-handoff.md)。
+<!-- P1-CURRENT-STATUS END -->
+
 计划：`docs/superpowers/plans/2026-11-08-vesta-study.md`。
 证据：`/Users/agilecho/code/Draft/output/vesta-study/20261108-113622`（历史 Craft 前缀按同后缀核SHA重定位）。
 台账：本轮R7（20261114-152228-p1-design-r7-errata）/progress.md；R1–R6及原研究总账保留历史。
 
 ## 当前状态
 
-2026-11-14 R7：D9/I11完成R6-R1–R4设计勘误，R6-R5未证明边界明确；Codex自验待用户手动转dsh。P1.1继承接受，P1.3 C4设计级接受保持、C6原字节且增量未审；P1.2/P1.4/整体P1仍partial，2接受/2未接受。资料基线rev32；不进入P2–P5、产品实现或运行验证，真实worker／Check／launcher另行授权。
+R8／rev33历史摘要（当时待独审；现已收到dsh R8，当前入口见文首）：2026-11-14 R8：D9/I11交接勘误，修正R7-R1–R3并补跨材料一致性检查；沿用R6-R5证明边界。Codex自验待用户手动转dsh。P1.1继承接受，P1.3 C4设计级接受保持、C6原字节且增量未审；P1.2/P1.4/整体P1仍partial，2接受/2未接受。资料基线rev33；不进入P2–P5、产品实现或运行验证，真实worker／Check／launcher另行授权。
 
 当前入口：[R4回执](../../output/vesta-study/20261108-113622/reviews/20261114-124229-p1-design-r4/RECEIPT.md)、[用户手动转交dsh材料](../../output/vesta-study/20261108-113622/reviews/20261114-124229-p1-design-r4/DSH-REVIEW-HANDOFF.md)。当前review_result直接指向[真实dsh R3结果](../../output/vesta-study/20261108-113622/reviews/20261114-122114-p1-design-r3-dsh-review/review-result.json)，用户授权后的P1.3设计接受仅在独立接受记录和当前状态，不能把作者转录当原始review_result。原R3的错误转录保留历史字节，R4忠实摘要保持原文字段false。
 
@@ -1263,4 +1271,43 @@ I5补canonical相定位、带基底ADP、单步网格、格式loss及宿主查�
 历史R6同卡整改：2026-11-14 R6：D8/I10按dsh R5复审整改D1–D14及σ公式，Codex自验待用户手动转dsh。P1.1继承接受、P1.3 C4设计级接受保持，C6原字节及未审增量身份不变；P1.2/P1.4/整体P1仍partial，2接受/2未接受。资料rev31；不进入P2–P5、产品实现、部署或运行验证，真实worker／Check／launcher未授权、未验证。 施工回执与手动复审入口：[R6](../../output/vesta-study/20261108-113622/reviews/20261114-141647-p1-design-r6-corrections/README.md)。
 
 
-当前R7勘误：2026-11-14 R7：D9/I11完成R6-R1–R4设计勘误，R6-R5未证明边界明确；Codex自验待用户手动转dsh。P1.1继承接受，P1.3 C4设计级接受保持、C6原字节且增量未审；P1.2/P1.4/整体P1仍partial，2接受/2未接受。资料基线rev32；不进入P2–P5、产品实现或运行验证，真实worker／Check／launcher另行授权。 [回执/复审入口](../../output/vesta-study/20261108-113622/reviews/20261114-152228-p1-design-r7-errata/README.md)。
+R8／rev33历史摘要（当时待独审；现已收到dsh R8，当前入口见文首）：2026-11-14 R8：D9/I11交接勘误，修正R7-R1–R3并补跨材料一致性检查；沿用R6-R5证明边界。Codex自验待用户手动转dsh。P1.1继承接受，P1.3 C4设计级接受保持、C6原字节且增量未审；P1.2/P1.4/整体P1仍partial，2接受/2未接受。资料基线rev33；不进入P2–P5、产品实现或运行验证，真实worker／Check／launcher另行授权。 [回执/复审入口](../../output/vesta-study/20261108-113622/reviews/20261114-161832-p1-design-r8-consistency/README.md)。
+
+
+## P1-01设计交回（rev36；不自动推进）
+
+2026-11-14 P1-01设计交回：追加rev36，D10/I12增量提出SG/1结构、群与几何公共设计及来源/独立演算；完整14组接口仍有6项精确缺口，本卡partial、待用户手动转dsh。P1.1继承接受，P1.3 C4设计级接受保持，C5条件复审/C6增量未审；P1.2/P1.4/整体仍partial，2接受/2未接受。R9闭合仅属被审rev34，历史补档保留；02–06未施工。不进入产品实现或运行验证，真实worker／Check／launcher另行授权。
+
+请用户手动转交[复审材料](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261114-180028-p1-01-structure-geometry/DSH-REVIEW-HANDOFF.md)。同卡整改可沿当前施工会话，02–06仍未施工。详细原件字段/未证/最小新材料见本包，不重开历史补档、不自动联系dsh。
+
+
+## P1-01 F1–F6整改交回（rev38；不推进02）
+
+2026-11-14 P1-01同卡F1–F6整改：追加rev38，D11/I13/C6；另建SG/1-r2证据后继，修复数学引用、明确角色权威及四条旧表冲突、登记保留AGENTS后继、补13条MODEL/VECTS入口，并补schema范围/语义拒绝例及归档基路径。rev37旧SG/1已获dsh“主体准确、partial、轻微证据整改”结论；本次新增量仅Codex自验、待用户手动转dsh。完整六项科学缺口不变，P1.1及P1.3 C4接受保持，C5条件复审/C6增量未审；P1.2/P1.4/整体仍partial、2接受/2未接受。02–06未启动，产品和真实运行未授权未验证。
+
+请手动转交[本次DSH材料](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261114-191308-p1-01-f1-f6-corrections/DSH-REVIEW-HANDOFF.md)。旧rev37验证器是历史入口，AGENTS及后继文书合法变化会让它报旧摘要失败；本次使用新包verify_design.py --read-only，不回滚旧输入或AGENTS。
+
+
+## 当前续办：P1-01 F1–F6独审结论登记（rev39）
+
+2026-11-14 P1-01同卡独审结论登记：追加资料rev39，技术版本仍D11/I13/C6；dsh已独立复审通过rev38的F1–F6证据/边界修补，最新独审指针指向该被审包及真实JSON/SHA。本次rev39仅回写结论并Codex自验，O1登记为非阻断报告导航说明，不改旧封存或AGENTS。P1.1及P1.3 C4接受保持，C5条件复审/C6增量未审；P1.2/P1.4/整体仍partial，2接受/2未接受，SG-01…SG-06六项科学缺口不变。02–06未启动，产品和运行验证未授权。
+
+最新[dsh独审](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261114-194200-p1-01-f1-f6-dsh-review/REVIEW.md) / [真实JSON](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261114-194200-p1-01-f1-f6-dsh-review/review-result.json) / [本次登记回执](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261114-200614-p1-01-f1-f6-dsh-registration/RECEIPT.md) / [O1非阻断说明](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261114-200614-p1-01-f1-f6-dsh-registration/nonblocking-observations.json)。
+
+O1：旧oracle-bindings.currentVerificationEvidence定位04-full正常模式546项报告；封存只读final为570项，两者均exit0/0失败。final入口为[/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261114-191308-p1-01-f1-f6-corrections/runs/final/stdout.json](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261114-191308-p1-01-f1-f6-corrections/runs/final/stdout.json)。本次只登记该导航边界，不改旧字段、旧报告或封存。独审被审版本是rev38，rev39仅为结论回写且尚无新的独立复审。
+
+
+## 当前交回：P1-02场与科学设计（rev42）
+
+2026-11-14 P1-02设计交回：追加rev42，D13/I15/C6；提出FS/1场与科学接口设计，14组按实际来源和独立预期逐项划界，保留完整生成器、参数/许可、网格/拓扑/投影/盆地等11项具名缺口，02整卡partial，待用户手动转dsh。01/05原partial及真实独审范围不变，SG-01…SG-06开放；P1.1与P1.3 C4设计接受保持，C5条件/C6未审，P1.2/P1.4/整体partial、2接受/2未接受。03/04/06未施工；无产品、新运行或新实验，交回后停止。
+
+[施工回执](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261114-221623-p1-02-field-science/RECEIPT.md) / [用户手动转dsh](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261114-221623-p1-02-field-science/DSH-REVIEW-HANDOFF.md)。本段为最新入口，前述rev41与更早停卡/next_card句保留历史时点。03/04/06未施工，01/05partial原样保留，不自动接续。
+
+
+## 当前接续：02同卡O1–O4（rev43）
+
+2026-11-15 P1-02同卡O1–O4整改交回：追加rev43，D14/I16/C6，FS/1 evidence-r1；补35个真实投影合同有限例、澄清Patterson平方单位、固定Xcode3.9.6和11个旧WordCraft来源快照并披露2处漂移、将生命周期4个事件例移出准入证明。177定义/协议字节、11项本卡缺口及SG六缺口不改。dsh旧结论只覆盖rev42 partial设计/来源/保全边界，本轮整改增量仅Codex自验、待用户手动转dsh。01/05原partial与接受范围保持；C4接受/C5条件/C6未审，P1.2/P1.4/整体partial、2接受/2未接受。03/04/06未施工，无产品或真实运行授权；交回后停止。
+
+[本轮回执](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261115-062917-p1-02-o1-o4-corrections/RECEIPT.md) / [整改说明](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261115-062917-p1-02-o1-o4-corrections/correction-notes.md) / [复现与漂移](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261115-062917-p1-02-o1-o4-corrections/reproduction-notes.md) / [下游边界](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261115-062917-p1-02-o1-o4-corrections/consumer-handoff.md) / [手动dsh材料](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261115-062917-p1-02-o1-o4-corrections/DSH-REVIEW-HANDOFF.md)。
+
+本次授权为02同卡整改，沿用原会话/预算/权限/费用/次数/停报；不自动开新卡或扩大实现。投影helper只证明选定精确几何的schema/有限语义/资源域准入，未证明一般法向容差、插值/求积或完整科学能力。83例不含4个生命周期事件序列，7个output例仍是静态对象关系；租约释放、迟到原base/provenance及真实竞态均留未来04。复现使用新包reproduce.sh固定Xcode3.9.6，错误解释器exit2；WordCraft11旧Git blob锁SHA，当前两处来源漂移另记，不回滚外部仓库。原FS/1及dsh/旧复核/基线全部保全。
