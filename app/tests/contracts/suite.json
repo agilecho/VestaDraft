@@ -1,0 +1,111 @@
+{
+  "files": [
+    "tests/contracts/profile-digests.test.mjs",
+    "tests/contracts/native-resource-types-v2.test.mjs",
+    "tests/contracts/native-session-v2.test.mjs",
+    "tests/delivery/source-inputs.test.mjs",
+    "tests/contracts/verification-gates.test.mjs"
+  ],
+  "expected": [
+    {
+      "file": "tests/contracts/profile-digests.test.mjs",
+      "name": "nine full CPJ bytes, independent Python oracle, all consumers"
+    },
+    {
+      "file": "tests/contracts/profile-digests.test.mjs",
+      "name": "CPJ distinguishes large exact integers and scalar order"
+    },
+    {
+      "file": "tests/contracts/profile-digests.test.mjs",
+      "name": "envelope generation reads declaration and I34 changes all nine"
+    },
+    {
+      "file": "tests/contracts/profile-digests.test.mjs",
+      "name": "selected input order and independent wrong expected fail"
+    },
+    {
+      "file": "tests/contracts/profile-digests.test.mjs",
+      "name": "CPJ coefficient and adjusted exponent budgets have inclusive boundaries"
+    },
+    {
+      "file": "tests/contracts/native-resource-types-v2.test.mjs",
+      "name": "strict typed bytes OpenBundle"
+    },
+    {
+      "file": "tests/contracts/native-resource-types-v2.test.mjs",
+      "name": "strict typed bytes InspectionPage"
+    },
+    {
+      "file": "tests/contracts/native-resource-types-v2.test.mjs",
+      "name": "strict typed bytes HostAck"
+    },
+    {
+      "file": "tests/contracts/native-resource-types-v2.test.mjs",
+      "name": "strict typed bytes HostNack"
+    },
+    {
+      "file": "tests/contracts/native-resource-types-v2.test.mjs",
+      "name": "strict typed bytes CommandCompletion"
+    },
+    {
+      "file": "tests/contracts/native-resource-types-v2.test.mjs",
+      "name": "strict typed bytes FailureNotice"
+    },
+    {
+      "file": "tests/contracts/native-resource-types-v2.test.mjs",
+      "name": "six role schemas are traversed and carry no execution authority"
+    },
+    {
+      "file": "tests/contracts/native-session-v2.test.mjs",
+      "name": "profile envelope schema rejects missing extra fields and revision literal"
+    },
+    {
+      "file": "tests/contracts/native-session-v2.test.mjs",
+      "name": "all 85 native routes preserve current v2 and other identities"
+    },
+    {
+      "file": "tests/delivery/source-inputs.test.mjs",
+      "name": "source pins, refs, escapes and symlinks reject before reading"
+    },
+    {
+      "file": "tests/delivery/source-inputs.test.mjs",
+      "name": "check compares generated file bytes and never repairs them"
+    },
+    {
+      "file": "tests/delivery/source-inputs.test.mjs",
+      "name": "Web consumer import closure contains no Node builtins or globals"
+    },
+    {
+      "file": "tests/delivery/source-inputs.test.mjs",
+      "name": "frozen current handler and envelope regressions refuse on resealed copies"
+    },
+    {
+      "file": "tests/delivery/source-inputs.test.mjs",
+      "name": "AST traverses all same-line and multiline static imports and exports"
+    },
+    {
+      "file": "tests/delivery/source-inputs.test.mjs",
+      "name": "AST cannot hide Node dependencies after first import or in nested re-exports"
+    },
+    {
+      "file": "tests/delivery/source-inputs.test.mjs",
+      "name": "top-level commands propagate missing lock, package, tool and bad oracle expected"
+    },
+    {
+      "file": "tests/contracts/verification-gates.test.mjs",
+      "name": "input entry rejects missing and misbound contract selections"
+    },
+    {
+      "file": "tests/contracts/verification-gates.test.mjs",
+      "name": "test gate rejects empty skipped and failed required tests"
+    },
+    {
+      "file": "tests/contracts/verification-gates.test.mjs",
+      "name": "test gate requires the complete unique named test inventory"
+    },
+    {
+      "file": "tests/contracts/verification-gates.test.mjs",
+      "name": "source manifest verifies explicit toolchain identity references"
+    }
+  ]
+}

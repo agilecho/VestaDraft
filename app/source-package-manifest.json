@@ -1,6 +1,6 @@
 {
   "schema": "vestacraft.shared-contract-source-package/1",
-  "sourceDigest": "793d8bd7bd339f4f5d5d0646ce4471baa0e1b06b9b2b507c72fa4e1502f8c703",
+  "sourceDigest": "8b4eade7ca3510cd414bf5a01e089b424a03fa469fe62ed082090b7ad2f1bd90",
   "exclusions": [
     "manifest itself",
     "node_modules/",
@@ -10,8 +10,13 @@
   "files": [
     {
       "path": "BUILDING.md",
-      "sha256": "7eeff62e7902fb451a8c4eb8822ec160ee5662af88ee76ceec64e153c6a13600",
-      "bytes": 4163
+      "sha256": "5d01c721caed00a4298c2c6d2788eaa26a5b002564f91efe956a5f94d92edc75",
+      "bytes": 5347
+    },
+    {
+      "path": "CPJ-NUMBERS.md",
+      "sha256": "6b6cfbd05c9e769b732ed94ede6aef4acbda4904c06e5b17dbe787d37e032caf",
+      "bytes": 1355
     },
     {
       "path": "README.md",
@@ -630,8 +635,8 @@
     },
     {
       "path": "scripts/lib/materials.mjs",
-      "sha256": "37c8822ddbd475a5416a1c703a82c28686c49c8fc4819763e3212a51f0393f5b",
-      "bytes": 2065
+      "sha256": "e2ab062c9d3614950869cff672edaf8c7b03dba4226ef259b3280f6bcf974396",
+      "bytes": 3161
     },
     {
       "path": "scripts/lib/pointer.mjs",
@@ -654,14 +659,24 @@
       "bytes": 3045
     },
     {
+      "path": "scripts/lib/test-gate.mjs",
+      "sha256": "d8073264e9ee6fed0d15d58edc167e683c12d7894fa193ae66d1344a5a5053a2",
+      "bytes": 2332
+    },
+    {
       "path": "scripts/lib/types.mjs",
       "sha256": "51e4318fa1bb81c4efe4f259e14f620490afa743a0a6212e1bc08b5fb1f06110",
       "bytes": 4537
     },
     {
+      "path": "scripts/run-contract-tests.mjs",
+      "sha256": "1acadd1f785ebdae2f64414e4224114ac1c4f8167e86987ec9fba288e0aafac5",
+      "bytes": 545
+    },
+    {
       "path": "scripts/test-contracts.mjs",
-      "sha256": "5d1186a6f0f8823232a0ceb1b986a73a3e57df97980645648c95c4579a82e37f",
-      "bytes": 910
+      "sha256": "171836336743d88fff28a6492cf300e05d0939275c342f2dc9b8de0c9443c90c",
+      "bytes": 801
     },
     {
       "path": "scripts/verify-inputs.mjs",
@@ -670,8 +685,8 @@
     },
     {
       "path": "scripts/verify-source-package.mjs",
-      "sha256": "f880cf5456c0bec5274b083b743deec4167c6c43020254236e9630ae229db201",
-      "bytes": 1919
+      "sha256": "cdc81378ee1de3a5bcf436f4fafc1dcf65f516bad5625e18397ca40b3e31918f",
+      "bytes": 2809
     },
     {
       "path": "tests/contracts/native-resource-types-v2.test.mjs",
@@ -685,8 +700,18 @@
     },
     {
       "path": "tests/contracts/profile-digests.test.mjs",
-      "sha256": "18b4796211539a848713e84e75c9510b45ba5702652087d26beabcaa7e781b7b",
-      "bytes": 2578
+      "sha256": "97f9fb12298b460a32f29a6ffd9a936e48e6a0e94011be777f4cc55fb829f255",
+      "bytes": 3400
+    },
+    {
+      "path": "tests/contracts/suite.json",
+      "sha256": "372d91d163a607103eb5c471495d3785741ba0d830b58a5661f466944cad91d5",
+      "bytes": 3953
+    },
+    {
+      "path": "tests/contracts/verification-gates.test.mjs",
+      "sha256": "8d8e4545c056bb45d6a9e892b7bbb193473c690d7cad003defdb8366370a7ce0",
+      "bytes": 4621
     },
     {
       "path": "tests/delivery/source-inputs.test.mjs",
@@ -710,13 +735,13 @@
     },
     {
       "path": "toolchain.inputs.json",
-      "sha256": "2e6d9f95dd3097337a550a17cdbcb42b3d16eb7508e47d6c0ee4be97a4993b3f",
-      "bytes": 1117
+      "sha256": "65400bad30446ca163842373369854fcd9737f942e1772f2d12623834ecf5f4a",
+      "bytes": 10670
     },
     {
       "path": "toolchain.sources.json",
-      "sha256": "e5dda7c300f35b40e481b6463455b1704779dbebdc49e4197ee8272533e80e25",
-      "bytes": 262607
+      "sha256": "51184888b2ac2be3e3ff3b86ac6a4c3371f7138bc476db30ad8f147156e9ab4f",
+      "bytes": 262882
     },
     {
       "path": "tsconfig.contracts.json",
@@ -857,5 +882,25 @@
       "sha256": "3397d9e0234481ccbc4c2713f5da528688e49d6a670d26dc77085ba8030a5217",
       "bytes": 1276
     }
-  ]
+  ],
+  "toolchain": {
+    "inputs": {
+      "path": "toolchain.inputs.json",
+      "sha256": "65400bad30446ca163842373369854fcd9737f942e1772f2d12623834ecf5f4a",
+      "bytes": 10670
+    },
+    "sources": {
+      "path": "toolchain.sources.json",
+      "sha256": "51184888b2ac2be3e3ff3b86ac6a4c3371f7138bc476db30ad8f147156e9ab4f",
+      "bytes": 262882
+    },
+    "versions": {
+      "node": "22.23.2",
+      "npm": "12.0.2",
+      "rust": "1.99.1",
+      "typescript": "7.0.2",
+      "python": "3.9.6 (default, Oct 19 2026, 19:18:13) \n[Clang 21.0.0 (clang-2100.4.1.1)]"
+    },
+    "scope": "Exact source references; current observations and historical execution limits remain distinguished in these documents."
+  }
 }

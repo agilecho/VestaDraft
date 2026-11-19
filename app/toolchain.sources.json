@@ -6472,5 +6472,10 @@
       "lib/commands/trust/revoke.js"
     ]
   },
-  "rustInstalledManifest": "existing rustup channel manifest and installed component lists; tool byte pins maintained; upstream signature/archive to file attribution remains unverified"
+  "rustInstalledManifest": "existing rustup channel manifest and installed component lists; tool byte pins maintained; upstream signature/archive to file attribution remains unverified",
+  "reviewCorrectionIdentityEntry": {
+    "path": "toolchain.inputs.json",
+    "pointer": "/observedTools",
+    "scope": "Current executable SHA, TypeScript SRI/entry/native bytes and current cc/clang/linker/SDK metadata; original source/signature limitations retained."
+  }
 }

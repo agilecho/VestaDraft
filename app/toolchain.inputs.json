@@ -31,5 +31,174 @@
       "bytes": 1086673
     }
   ],
-  "qualification": "Node source archive matches official HTTPS SHASUMS; installed byte match. npm coverage and Rust manifest limits recorded in toolchain.sources.json; no target/browser/whole SDK qualification implied."
+  "qualification": "Node source archive matches official HTTPS SHASUMS; installed byte match. npm coverage and Rust manifest limits recorded in toolchain.sources.json; no target/browser/whole SDK qualification implied.",
+  "observedTools": {
+    "node": {
+      "path": "/Users/agilecho/.nvm/versions/node/v22.23.2/bin/node",
+      "realPath": "/Users/agilecho/.nvm/versions/node/v22.23.2/bin/node",
+      "sha256": "18e387c90ab8a8400183e8bdd396376e1e875b91b4c874b894dcade7b35bf572",
+      "bytes": 112937728,
+      "version": "v22.23.2"
+    },
+    "rustc": {
+      "path": "/Users/agilecho/.rustup/toolchains/1.99.1-aarch64-apple-darwin/bin/rustc",
+      "realPath": "/Users/agilecho/.rustup/toolchains/1.99.1-aarch64-apple-darwin/bin/rustc",
+      "sha256": "1ba7bb8e273bd64125f4048d2ecce530e0a6470e565ab1b3aecf0b82b532f7b1",
+      "bytes": 413480,
+      "version": "rustc 1.99.1 (58cf8f9c3 2026-10-13)\nbinary: rustc\ncommit-hash: 58cf8f9c35b355199727627d07ae34a4e2846d67\ncommit-date: 2026-10-13\nhost: aarch64-apple-darwin\nrelease: 1.99.1\nLLVM version: 23.1.1"
+    },
+    "cargo": {
+      "path": "/Users/agilecho/.rustup/toolchains/1.99.1-aarch64-apple-darwin/bin/cargo",
+      "realPath": "/Users/agilecho/.rustup/toolchains/1.99.1-aarch64-apple-darwin/bin/cargo",
+      "sha256": "6d576d8058f8ca643e8fce55b64ee3c614ba64c9da2e536bae843e6a2e1f3951",
+      "bytes": 32182376,
+      "version": "cargo 1.99.1 (5f94df478 2026-08-27)"
+    },
+    "python": {
+      "path": "/usr/bin/python3",
+      "realPath": "/usr/bin/python3",
+      "sha256": "ed6f5284033aa2aae6a58427c25ba3ab119947b40365627b24e5d51a4b70a1cd",
+      "bytes": 200560,
+      "version": "3.9.6 (default, Oct 19 2026, 19:18:13) \n[Clang 21.0.0 (clang-2100.4.1.1)]",
+      "runtimeExecutable": {
+        "path": "/Applications/Xcode.app/Contents/Developer/usr/bin/python3",
+        "realPath": "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/bin/python3.9",
+        "sha256": "c5a13e37785524fbc0384539d3c99aa4f888cb7c89e13e0bf0018436378b13bc",
+        "bytes": 102352
+      }
+    },
+    "typescript": {
+      "version": "Version 7.0.2",
+      "entry": {
+        "path": "/Users/agilecho/code/Draft/app/node_modules/typescript/bin/tsc",
+        "realPath": "/Users/agilecho/code/Draft/app/node_modules/typescript/bin/tsc",
+        "sha256": "2219f428a7e55aaf1f7ad85b9b0f0cf5078aeb76ccc9a7c6036c92d48f492ffd",
+        "bytes": 44
+      },
+      "nativeCompiler": {
+        "path": "/Users/agilecho/code/Draft/app/node_modules/@typescript/typescript-darwin-arm64/lib/tsc",
+        "realPath": "/Users/agilecho/code/Draft/app/node_modules/@typescript/typescript-darwin-arm64/lib/tsc",
+        "sha256": "a82f731365ad69d5c4c15f5e18fba4584bf3b7b839960172a76c3462b5114bf2",
+        "bytes": 23653616
+      },
+      "packages": {
+        "node_modules/typescript": {
+          "version": "7.0.2",
+          "resolved": "https://registry.npmjs.org/typescript/-/typescript-7.0.2.tgz",
+          "integrity": "sha512-8FYau96o3NKOhbjKi/qNvG/W5jhzxkbdm5sj9AbZ/5T5sWqn3hJgLfGx27sRKZWTvyzCP8dLRBTf5tBTSRVUNA==",
+          "dev": true,
+          "license": "Apache-2.0",
+          "bin": {
+            "tsc": "bin/tsc"
+          },
+          "engines": {
+            "node": ">=16.20.0"
+          },
+          "optionalDependencies": {
+            "@typescript/typescript-aix-ppc64": "7.0.2",
+            "@typescript/typescript-darwin-arm64": "7.0.2",
+            "@typescript/typescript-darwin-x64": "7.0.2",
+            "@typescript/typescript-freebsd-arm64": "7.0.2",
+            "@typescript/typescript-freebsd-x64": "7.0.2",
+            "@typescript/typescript-linux-arm": "7.0.2",
+            "@typescript/typescript-linux-arm64": "7.0.2",
+            "@typescript/typescript-linux-loong64": "7.0.2",
+            "@typescript/typescript-linux-mips64el": "7.0.2",
+            "@typescript/typescript-linux-ppc64": "7.0.2",
+            "@typescript/typescript-linux-riscv64": "7.0.2",
+            "@typescript/typescript-linux-s390x": "7.0.2",
+            "@typescript/typescript-linux-x64": "7.0.2",
+            "@typescript/typescript-netbsd-arm64": "7.0.2",
+            "@typescript/typescript-netbsd-x64": "7.0.2",
+            "@typescript/typescript-openbsd-arm64": "7.0.2",
+            "@typescript/typescript-openbsd-x64": "7.0.2",
+            "@typescript/typescript-sunos-x64": "7.0.2",
+            "@typescript/typescript-win32-arm64": "7.0.2",
+            "@typescript/typescript-win32-x64": "7.0.2"
+          }
+        },
+        "node_modules/@typescript/typescript-darwin-arm64": {
+          "version": "7.0.2",
+          "resolved": "https://registry.npmjs.org/@typescript/typescript-darwin-arm64/-/typescript-darwin-arm64-7.0.2.tgz",
+          "integrity": "sha512-gowzar9MwS/aRWp6f3a4KUqzRjAZjOsmGNCM6LcTgXum+dBfgsBVMN+AgvOCCbguXyick6LJhpBszxMebJ8syA==",
+          "cpu": [
+            "arm64"
+          ],
+          "dev": true,
+          "license": "Apache-2.0",
+          "optional": true,
+          "os": [
+            "darwin"
+          ],
+          "engines": {
+            "node": ">=16.20.0"
+          }
+        }
+      },
+      "operation": "version observation only; no new typecheck/compile"
+    },
+    "cc": {
+      "path": "/usr/bin/cc",
+      "realPath": "/usr/bin/cc",
+      "sha256": "ed6f5284033aa2aae6a58427c25ba3ab119947b40365627b24e5d51a4b70a1cd",
+      "bytes": 200560,
+      "version": "Apple clang version 21.0.0 (clang-2100.4.1.1)\nTarget: arm64-apple-darwin27.2.0\nThread model: posix\nInstalledDir: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin"
+    },
+    "clang": {
+      "path": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang",
+      "realPath": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang",
+      "sha256": "fc5e3cbba6ad54059295cad716aacb05ace8235f5f7a6031f1d8c15d24bd6d66",
+      "bytes": 124520368,
+      "version": "Apple clang version 21.0.0 (clang-2100.4.1.1)\nTarget: arm64-apple-darwin27.2.0\nThread model: posix\nInstalledDir: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin"
+    },
+    "linker": {
+      "path": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld",
+      "realPath": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld",
+      "sha256": "7f7041b1bb30e5e6a815a55edf374065d5c82e1ab93f84d5b6ed5656ded24bcf",
+      "bytes": 2749968,
+      "version": "{\n\t\"version\": \"27106.1\",\n\t\"architectures\": [\n\t\t\"armv6\",\n\t\t\"armv7\",\n\t\t\"armv7s\",\n\t\t\"arm64\",\n\t\t\"arm64e\",\n\t\t\"arm64_32\",\n\t\t\"i386\",\n\t\t\"x86_64\",\n\t\t\"x86_64h\",\n\t\t\"armv6m\",\n\t\t\"armv7k\",\n\t\t\"armv7m\",\n\t\t\"armv7em\",\n\t\t\"armv8m.main\",\n\t\t\"armv8.1m.main\"\n\t],\n\t\"lto\": {\n\t\t\"runtime_api_version\": 30,\n\t\t\"static_api_version\": 30,\n\t\t\"version_string\": \"LLVM version 21.0.0\"\n\t},\n\t\"tapi\": {\n\t\t\"version\": \"21.0.0\",\n\t\t\"version_string\": \"Apple TAPI version 21.0.0 (tapi-2100.3.8.1)\"\n\t}\n}"
+    },
+    "sdk": {
+      "path": "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk",
+      "realPath": "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk",
+      "version": "27.2",
+      "settings": {
+        "path": "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/SDKSettings.json",
+        "realPath": "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/SDKSettings.json",
+        "sha256": "82165b15ee21419d4cffaba8895797391b908ac9499ba70f561f3e1bd16758d6",
+        "bytes": 8018
+      },
+      "scope": "Selected current SDK metadata, not a hash of every SDK file or proof of the original compile path."
+    }
+  },
+  "observationScope": {
+    "date": "2026-11-19",
+    "run": "P2-01 review corrections on main",
+    "pythonInvocation": "/usr/bin/python3",
+    "historicalLimit": "Old runs did not record Python/linker/SDK paths completely; current observations are not retroactive old-run identities. Current oracle uses the captured absolute Python. Unchanged Rust/TS consumer proofs are scoped by exact consumer bytes, not the changed whole source digest.",
+    "nativeBuildMetadata": [
+      {
+        "binary": {
+          "path": "/Users/agilecho/code/Draft/output/vesta-p2-01/20261118-123901-attempt2/replay-a/target/debug/deps/generated_contracts-75d5d814f97ca477",
+          "realPath": "/Users/agilecho/code/Draft/output/vesta-p2-01/20261118-123901-attempt2/replay-a/target/debug/deps/generated_contracts-75d5d814f97ca477",
+          "sha256": "743b7b85b80d5da068c61eefe5505107a21a221e23f52e2efe6cca0270b67f65",
+          "bytes": 4350440
+        },
+        "buildVersionBlocks": [
+          "cmd LC_BUILD_VERSION\n  cmdsize 32\n platform 1\n    minos 11.0\n      sdk 27.2\n   ntools 1\n     tool 3\n  version 27106.1\n"
+        ]
+      },
+      {
+        "binary": {
+          "path": "/Users/agilecho/code/Draft/output/vesta-p2-01/20261118-123901-attempt2/replay-b/target/debug/deps/generated_contracts-75d5d814f97ca477",
+          "realPath": "/Users/agilecho/code/Draft/output/vesta-p2-01/20261118-123901-attempt2/replay-b/target/debug/deps/generated_contracts-75d5d814f97ca477",
+          "sha256": "cf2010eb1a5708e557e9506ff157af794419ac75152418cf65720f7e15a6926e",
+          "bytes": 4350440
+        },
+        "buildVersionBlocks": [
+          "cmd LC_BUILD_VERSION\n  cmdsize 32\n platform 1\n    minos 11.0\n      sdk 27.2\n   ntools 1\n     tool 3\n  version 27106.1\n"
+        ]
+      }
+    ]
+  }
 }
