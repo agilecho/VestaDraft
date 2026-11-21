@@ -1,6 +1,14 @@
 # Craft 软件方法与接入指南
 
-**当前源码入口（2026-11-19）**：用户明确指定代码直接放在本项目 `/Users/agilecho/code/Draft`；应用在 [app/](../app/README.md)、引导工具在 `tools/ca-bootstrap/`，与文档使用同一 Git 仓库。`output/` 保留原证据。[开发与构建](开发与构建.md) / [用户目录裁定](任务卡/源码项目目录调整.md)。
+**2026-11-21最新交回已接收**：C7已自验选定递归结构引用保存、移开原目录后新进程重开续改；C8工作树准备已交回，尚未编译或运行，停在完整构建准入。全类型身份绑定与非空落盘、Field独立资源归属、RIETAN活动表归属/往返三类缺口仍在。已批C8一轮与G29/G30两组共3000秒未用，当前构建7/8、测试28/30，全卡643.504396127/14400秒。整卡partial、未接受，P2-04未准入。 [接收回执](/Users/agilecho/code/VestaDraft/output/vesta-execution/20261121-p2-03-c7-c8-result-intake/RECEIPT.md)。
+
+2026-11-21方案独审通过（仅方案）：用户带回dsh pass，Codex复核支持[最终公共框架接入方案](/Users/agilecho/code/VestaDraft/docs/任务卡/阶段2-首条完整链/P2-03-公共框架接入整改最终方案.md)可作为未来施工依据；[复核及N1–N3登记](/Users/agilecho/code/VestaDraft/output/vesta-execution/20261121-p2-03-final-framework-plan-review-recheck/RECHECK.md)保留非UI依赖patch/成本和统计澄清。未授权或执行施工，原138.027328167/14400秒、14/14、冷3/3、0新获取与partial停报保持，整卡未接受、P2-04未准入。已审正文/旧RUN原字节保持。
+
+2026-11-21后继：用户批准8→14后已完成六组有界整改，26项Rust、16编译门禁、14项NS2合同通过；两条真实CLI驱动仍失败，四旧件迁移及完整生命周期矩阵未跑完，整卡partial/未接受。测试14/14、冷3/3、累计受控138.027328167/14400秒，无新获取，停止产品运行。[本轮整改回执](/Users/agilecho/code/VestaDraft/output/vesta-p2-03/20261121-review-corrections/RECEIPT.md)。
+
+**2026-11-21 P2-03有限原生结果独审通过，整卡partial**：P2-02独立工具编译、16项正常测试和临时迁入验证已获用户手动带回的dsh独审通过；整卡仍partial，拒绝验证与中断留证、正式工作区创建和P2-01已审安装尚未闭合。P2-03的F6/L6最终施工已获dsh独立复审：有限原生结果通过，F1/F2在本卡26个类型与扁平资源集内闭合；T66全域生成式访问、FC递归资源图及最终CLI的HostAck证据未闭合，整卡仍partial、cardComplete=false，不进入P2-04。测试22/22及原账保持。[最终复审](/Users/agilecho/code/VestaDraft/output/vesta-dsh-reviews/20261121-143500-p2-03-final-native-review/REVIEW.md)。实际仓库根为 `/Users/agilecho/code/VestaDraft`，历史旧路径与封存保留。 [本卡原生续办](任务卡/阶段2-首条完整链/P2-03-原生实现续办.md)。
+
+**当前源码入口（2026-11-20实测位置）**：沿用用户同仓库决定，代码直接放在本项目 `/Users/agilecho/code/VestaDraft`；应用在 [app/](../app/README.md)、引导工具在 `tools/ca-bootstrap/`，与文档使用同一 Git 仓库。`output/` 保留原证据。[开发与构建](开发与构建.md) / [用户目录裁定](任务卡/源码项目目录调整.md)。
 
 <!-- P1-CURRENT-STATUS BEGIN -->
 当前状态：rev66 已由用户带回 dsh 独审通过，F5-r／F3-r及回归闭合；用户已确认 P1.2／P1.4设计级接受，P1四项设计接受为[true,true,true,true,true]（依次为P1.1、P1.2、P1.3、P1.4、整体），P1设计阶段收口。资料基线rev67仅登记；被审技术交付仍为rev66 / D35-I33-r1-C6 / IP6，wire/profile代际I33，九摘要不变。P1.1及P1.3 C4既有接受保持，C5条件／C6未审及03rev48、04rev57/58历史范围不追认。该接受仅属P1设计交付。用户随后已授权按独立任务卡继续施工与验证；当前实现状态见下方任务组织，P1接受范围不扩大。
@@ -8,7 +16,7 @@
 [06接受登记回执](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-160449-rev66-acceptance-registration/RECEIPT.md) / [设计接受记录](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-160449-rev66-acceptance-registration/accepted-design.json) / [复审原文](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-160449-rev66-acceptance-registration/inbound/dsh-rev66-review.md) / [过程及统计勘误](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-160449-rev66-acceptance-registration/REVIEW-PROCESS-ERRATA.md) / [已接受的rev66技术封存](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-134209-two-residuals/final-seal.json)。
 <!-- P1-CURRENT-STATUS END -->
 
-**当前任务组织（2026-11-19）**：P0研究与P1当前设计已收口；现行25卡v4/v3及共同约定v3已有dsh独立审卡通过，精确SHA接受见[登记](/Users/agilecho/code/Draft/docs/任务卡/后续任务卡规则对齐接受登记.md)。用户已授权Codex逐卡代建独立施工会话；P2-01已按用户要求在main完成独审整改，双目录各25/25自验通过，待用户手动dsh复审后继版本；目录一致性独审通过，P2-02已交partial、冷构建封顶待裁定，其余按依赖接续，四阶段整体UI E2E仍未执行。[任务总览](/Users/agilecho/code/Draft/docs/任务卡/README.md) / [执行预检](/Users/agilecho/code/Draft/output/vesta-task-handoffs/20261118-115219-rules-acceptance-execution-preflight/README.md)。原接受/封存及原累计预算保持，下方旧进度按历史时点理解。
+**当前任务组织（2026-11-20）**：P0研究与P1当前设计已收口；现行25卡及共同约定的原卡面接受保持。P2-01整改后继双目录各25/25自验完成，待用户手动dsh复审；P2-02独立工具子结果获dsh复核通过，整卡仍partial，拒绝验证与中断留证、正式创建及已审安装未完成。P2-03的F6/L6最终施工经dsh复审，有限原生结果通过，F1/F2在本卡类型/扁平资源集内闭合；T66全域生成式访问、FC递归资源图及最终CLI的HostAck证据未闭合，整卡仍partial，测试22/22保持，不自动进入下一卡。四阶段整体UI E2E均未执行，阶段未结束。原预算/失败/封存保持。[任务总览](任务卡/README.md) / [下一卡及开工条件](任务卡/阶段2-首条完整链/P2-03-发卡与接手.md)。
 
 **本机存储（2026-11-19更新）**：Craft Anything参考源码为`/Volumes/T9/Development/Sources/Artcraft/craft-anything`；用户明确指定本项目的源码和文档均在`/Users/agilecho/code/Draft`维护。`output/`及原封存继续保留，旧证据原路径不改，当前源码按[目录裁定](任务卡/源码项目目录调整.md)在本仓库维护。
 

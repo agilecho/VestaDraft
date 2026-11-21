@@ -1,6 +1,48 @@
-# Draft
+# VestaDraft
 
-**源码入口（2026-11-19）**：代码直接放在本项目 `/Users/agilecho/code/Draft`，与文档使用同一 Git 仓库。应用源码在 [app/](app/README.md)，引导工具在 [tools/ca-bootstrap/crates/p1-ca-bootstrap/](tools/ca-bootstrap/crates/p1-ca-bootstrap/src/lib.rs)。[开发与构建](docs/开发与构建.md) / [目录裁定与迁入核验](docs/任务卡/源码项目目录调整.md)。
+**2026-11-21 P2-03 C8 静态断言独审与后继。** 原静态准备获 dsh 通过，登记前复跑 66/66、11 个独立反例。后继已补摘要复算、三种模拟诊断、空目录、CaTi／YBa 合成控制及 MXD 中段缺轴用例。保留暂存差异，后继待用户手动转 dsh。C8、G29/G30 等全量准入，P2-03 partial、未接受，P2-04 未准入。 [回执](/Users/agilecho/code/VestaDraft/output/vesta-p2-03/20261121-c8-assertions-review-followup/RECEIPT.md) · [先前裁定](/Users/agilecho/code/VestaDraft/output/vesta-dsh-reviews/20261121-231500-p2-03-c8-assertions-review/verdict.json)
+
+**2026-11-21 P2-03 C8 验证断言续办。** 旧 VICS 归档热参篡改及读回归属、MXD 三轴截断、四个 CLI 拒绝的诊断码和完整文件集核对已准备。690 项输入已更新。仅静态自验，C8、G29/G30 待全量准入。P2-03 partial、未接受，P2-04 未准入。 [回执](/Users/agilecho/code/VestaDraft/output/vesta-p2-03/20261121-c8-validation-assertions/RECEIPT.md) · [同源矩阵](/Users/agilecho/code/VestaDraft/output/vesta-p2-03/20261121-c8-validation-assertions/matrix.json)
+
+**2026-11-21 P2-03 C8 冻结规范本地补齐。** 已写 GSAS 定列源记录、旧 VICS 热源行、Anatase 历史旗标和 MXD 报表校验的解析、保存重验与拒绝候选。仅静态自验。后继矩阵登记 80 项 Rust 用例和 17 条 G30 命令，均待执行。P2-03 partial、未接受，P2-04 未准入。 [回执](/Users/agilecho/code/VestaDraft/output/vesta-p2-03/20261121-c8-frozen-format-static/RECEIPT.md) · [实证缺项](/Users/agilecho/code/VestaDraft/output/vesta-p2-03/20261121-c8-frozen-format-static/EXTERNAL-VALIDATION.md)
+
+**2026-11-21 P2-03 C8 外部证据复查。** 已留存 GSAS 原版公开输出，相 2 的翻转选项和 24 个展开磁性位点可独立对照。原始磁性 EXP 与绑定同相的可信操作表仍缺。旧 VICS／Anatase 活态未获补齐，NIMS 六包八份归档 FILE06 均无 COORDN。本轮无合格新增准入材料、无目标运行。C8、G29/G30 继续等全量准入，P2-03 partial、未接受，P2-04 未准入。 [回执](/Users/agilecho/code/VestaDraft/output/vesta-p2-03/20261121-c8-external-source-recheck/RECEIPT.md) · [外部缺项](/Users/agilecho/code/VestaDraft/output/vesta-p2-03/20261121-c8-external-source-recheck/EXTERNAL-HANDOFF.md)
+
+**2026-11-21 P2-03 C8 宿主预检和同源证据续办。** 两份沙箱通过 12 项本机探针，阶段回执新增同源制品、种子与产物摘要绑定，8 个改写反例均拒绝。C8、G29/G30 未启动，仍等全量准入。 [本轮回执](/Users/agilecho/code/VestaDraft/output/vesta-p2-03/20261121-c8-stage-preflight/RECEIPT.md) · [后继矩阵](/Users/agilecho/code/VestaDraft/output/vesta-p2-03/20261121-c8-stage-preflight/matrix.json)
+
+**2026-11-21 P2-03 C8 本地验收补齐。** Source7、Field、Graph2 补正反例，G29 预登记 75 项 Rust 测试和 16 项编译门禁，G30 归并 16 条同源验证命令。本轮仅静态核对，C8、G29/G30 均未启动，仍待全量准入。 [验收矩阵](/Users/agilecho/code/VestaDraft/output/vesta-p2-03/20261121-c8-local-acceptance/ACCEPTANCE-MATRIX.md) · [外部缺项](/Users/agilecho/code/VestaDraft/output/vesta-p2-03/20261121-c8-local-acceptance/EXTERNAL-INPUTS.md) · [回执](/Users/agilecho/code/VestaDraft/output/vesta-p2-03/20261121-c8-local-acceptance/RECEIPT.md)
+
+**2026-11-21 P2-03 C8 收件入口 F2／F3／F4 后继已自验。** 后继 RUN 已存复跑命令、合成夹具摘要和逐项完整输出。GSAS 配对显式报告所选相缺 SPNFLP，轨迹清单补签名身份。静态自验 14/14，待用户手动转 dsh。本轮未收件或启动，C8、G29/G30 等全量准入。 [后继回执](/Users/agilecho/code/VestaDraft/output/vesta-p2-03/20261121-c8-external-intake-f2-f3-f4/RECEIPT.md) · [手动复审](/Users/agilecho/code/VestaDraft/output/vesta-p2-03/20261121-c8-external-intake-f2-f3-f4/DSH-REVIEW-HANDOFF.md)
+
+**2026-11-21 P2-03 C8 外部材料收件准备获独审通过。** 清单与只读入口可用于收件。本轮未收件、无合格材料，整卡 partial、未接受，P2-04 未准入。登记前复跑 79/79，六项发现均非阻断。C8、G29/G30 等全量准入。 [收件清单](/Users/agilecho/code/VestaDraft/docs/任务卡/阶段2-首条完整链/P2-03-C8外部材料转交清单.md) · [只读验收](/Users/agilecho/code/VestaDraft/output/vesta-p2-03/20261121-c8-external-evidence-intake/READONLY-INTAKE.md) · [复核登记](/Users/agilecho/code/VestaDraft/output/vesta-execution/20261121-p2-03-c8-external-intake-dsh-recheck/RECHECK.md)
+
+**2026-11-21 P2-03 诊断副本与既有轨迹复核。** 在实核范围内未找到当前 macOS 可用的同代码诊断副本，或满足全部原判据的轨迹。YBa 有原签名读取、编辑、保存及新进程重开的实证，V2 活态与 Anatase 实际对象映射仍缺。本轮无启动或改签，CaTi 已用 1 次，YBa 和 Anatase 各保留 1 次。C8、G29/G30 待全量准入。 [资格及授权](/Users/agilecho/code/VestaDraft/docs/任务卡/阶段2-首条完整链/P2-03-C8诊断副本与既有轨迹资格复核.md) · [回执](/Users/agilecho/code/VestaDraft/output/vesta-p2-03/20261121-c8-diagnostic-evidence-inventory/RECEIPT.md)
+
+**2026-11-21 P2-03 V2/V3 诊断副本实跑停报。** 同代码副本创建及签名各 1 次，库与资源核对通过。CaTi 启动后在采集点前被 AppleSystemPolicy 拒绝，计 1 次及 13.671858167 秒。YBa、Anatase 未启动。Win32、MXD 继续等现成条件，GSAS 两件来源继续单列。C8、G29/G30 未启动，构建 7/8、测试 28/30。 [回执](/Users/agilecho/code/VestaDraft/output/vesta-p2-03/20261121-c8-v2-v3-diagnostic/RECEIPT.md)
+
+**2026-11-21 P2-03 环境解阻方案待批。** 本机 VirtualBox 仅找到旧 Windows 磁盘记录，旧磁盘和管理器目标缺席。VESTA 现存原包与旧诊断记录复算相符，副本替代与必要的单次副本派生须明示批准。MXD 优先现成离线 Fortran 或来源可验证的同版制品，三件 XD input 已待用。本轮未安装、改签或运行。原 4 次补证、MXD 两段和 C8/G29/G30 预算与停报保持。 [方案](/Users/agilecho/code/VestaDraft/docs/任务卡/阶段2-首条完整链/P2-03-C8环境解阻最小方案.md)
+
+**2026-11-21 P2-03 归档生产者补证获准，停在环境预检。** 已固化并读回核对 MXD 32 粒子 XD 的 FILE05、FILE07、FILE10。Windows 原 VICS 缺可用离线调试客体，锁定 VESTA 原签名缺已批采集所需的调试许可，MXD 缺离线 Fortran 环境或同版源绑定制品。本轮无目标、编译或产品启动。C8、G29/G30 未启动，构建 7/8、测试 28/30，全卡 643.504396127/14400 秒。 [回执](/Users/agilecho/code/VestaDraft/output/vesta-p2-03/20261121-c8-producer-evidence-execution/RECEIPT.md) · [缺项](/Users/agilecho/code/VestaDraft/output/vesta-p2-03/20261121-c8-producer-evidence-execution/OPEN-MATRIX.md)
+
+**2026-11-21 P2-03 归档生产者补证方案待批。** VICS/NVIS 拟 4 次启动≤900 秒。MXD ortho 拟 1 次编译≤300 秒、1 次生产≤180 秒。已静态核实可从 Ni 官方初始构型派生新的 32 粒子工程 XD 与匹配 FILE10，历史 FILE10 仍缺。GSAS 磁性 EXP 和同相可信表单列。本轮无目标运行或编译，C8、G29/G30 停报、全卡 643.504396127/14400 秒、构建 7/8 和测试 28/30 保持。 [两案及静态核对](/Users/agilecho/code/VestaDraft/output/vesta-p2-03/20261121-c8-producer-evidence-plans/RECEIPT.md)
+
+**2026-11-21 P2-03 归档生产者复核。** 已绑定原版 Windows VICS 程序与锁定版 VESTA 的 YBa 实际读取输出，确认 197 个原子、180 条键、40 个多面体及读后的序列化设置。旧读取前后活态与 Anatase 逐对象映射仍缺。NIMS 两版可在 XD 作业产生 COORDN，现有示例为 MD 且缺 FILE10。GSAS 磁性 EXP 和同相合资格操作表仍单列。C8、G29/G30 未启动，构建 7/8、测试 28/30，全卡 643.504396127/14400 秒。整卡 partial，P2-04 未准入。 [回执](/Users/agilecho/code/VestaDraft/output/vesta-p2-03/20261121-c8-archived-producers/RECEIPT.md) · [输入与运行资格](/Users/agilecho/code/VestaDraft/output/vesta-p2-03/20261121-c8-archived-producers/OPEN-MATRIX.md)
+
+**2026-11-21 P2-03 历史构造与公开原件续办。** 已准备 NVIS 形态面、键、配位多面体和实际分子帧的对象保存，以及两份原始 VICS 的历史结构保存。NIMS 的两个同版原始 FILE06 可用于拒绝验证。待补完整历史状态、GSAS 磁性 EXP 与同相可信操作表、实际含 COORDN 的 FILE06 及其余联合覆盖。C8、G29/G30 未启动，构建 7/8、测试 28/30，全卡 643.504396127/14400 秒。整卡 partial、未接受，P2-04 未准入。 [回执](/Users/agilecho/code/VestaDraft/output/vesta-p2-03/20261121-c8-historical-and-public/RECEIPT.md) · [输入资格](/Users/agilecho/code/VestaDraft/output/vesta-p2-03/20261121-c8-historical-and-public/OPEN-MATRIX.md)
+
+**2026-11-21 P2-03 注册格式续办。** 已接入选定 NVIS、旧 VICS 显示与视图、两件真实非空 FDAT，以及两支 MXD FILE06 工程报表的保存与重开候选。静态核验通过。原始 GSAS 磁性 EXP 和同相可信 chart 仍缺，其他注册分支及联合验收矩阵待齐。C8、G29/G30 未启动，构建 7/8、测试 28/30，全卡 643.504396127/14400 秒。整卡 partial、未接受，P2-04 未准入。 [回执](/Users/agilecho/code/VestaDraft/output/vesta-p2-03/20261121-c8-retained-formats/RECEIPT.md)
+
+**2026-11-21 P2-03 原生当前状态续办。** 原生当前网格、独立掩码与数值帧/视图，有序场景层、两类目标与姿态，以及热槽、当前视图、C57 FDAT 的已选正例已接入候选和落盘重开驱动。候选未编译。全注册变体矩阵仍缺 GSAS 磁性输入与可信群 chart，NVIS、VICS 显示、FDAT 非空和 MXD 还有施工缺口。C8、G29/G30 等待全量准入，构建 7/8、测试 28/30、全卡 643.504396127/14400 秒。整卡 partial、未接受，P2-04 未准入。 [回执](/Users/agilecho/code/VestaDraft/output/vesta-p2-03/20261121-c8-live-state/RECEIPT.md)
+
+**2026-11-21 P2-03 源绑定与 opaque 续办。** 现有材料支持两条候选。已接入选定 EB 读取器的独立描述器资源链与 FEFF 有效 END 后的可信足迹，已准备真实往返用例。实际当前网格/掩码和场景层所有者捕获、剩余注册变体生产正例待补，仍停在完整构建准入。C8、G29/G30 未启动，已批 3000 秒可用。构建 7/8、测试 28/30，全卡 643.504396127/14400 秒。整卡 partial、未接受，P2-04 未准入。[回执](/Users/agilecho/code/VestaDraft/output/vesta-p2-03/20261121-c8-source-authority/RECEIPT.md)
+
+2026-11-21 F4/L4 停在直连预检。持续监听与分段日志证实沙箱内同端口非环回 connect 成功，Cargo 启动、新锁及外部网络接收均为 0。G15 与 F3/L3 已通过的证据保留。当前 150.700205500/14400 秒、获取及锁各 4/4、构建 3/5、测试 15/22。P2-03 partial，未接受。[回执](/Users/agilecho/code/VestaDraft/output/vesta-p2-03/20261121-framework-f4-l4/RECEIPT.md)。
+
+2026-11-21方案独审通过（仅方案）：用户带回dsh pass，Codex复核支持[最终公共框架接入方案](/Users/agilecho/code/VestaDraft/docs/任务卡/阶段2-首条完整链/P2-03-公共框架接入整改最终方案.md)可作为未来施工依据；[复核及N1–N3登记](/Users/agilecho/code/VestaDraft/output/vesta-execution/20261121-p2-03-final-framework-plan-review-recheck/RECHECK.md)保留非UI依赖patch/成本和统计澄清。未授权或执行施工，原138.027328167/14400秒、14/14、冷3/3、0新获取与partial停报保持，整卡未接受、P2-04未准入。已审正文/旧RUN原字节保持。
+
+**P2-03有界整改后仍partial（2026-11-21）**：已批准追加6组，26项Rust、16个编译门禁和14项NS2合同通过；实际非默认状态及fresh双逻辑资源的跨进程文件独立读回通过。但两条CLI驱动未完成，四旧件迁移及完整生命周期矩阵缺证据，cardComplete=false/accepted=false。测试14/14、冷3/3、受控138.027328167/14400秒，无新获取，产品运行停止。旧有限首链dsh接受和P2-02未闭合范围保持，不进入P2-04。[本轮整改回执](/Users/agilecho/code/VestaDraft/output/vesta-p2-03/20261121-review-corrections/RECEIPT.md)。
+
+**源码入口（2026-11-20实测位置，沿用同仓库决定）**：代码直接放在本项目 `/Users/agilecho/code/VestaDraft`，与文档使用同一 Git 仓库。应用源码在 [app/](app/README.md)，引导工具在 [tools/ca-bootstrap/crates/p1-ca-bootstrap/](tools/ca-bootstrap/crates/p1-ca-bootstrap/src/lib.rs)。[开发与构建](docs/开发与构建.md) / [目录裁定与迁入核验](docs/任务卡/源码项目目录调整.md)。
 
 <!-- P1-CURRENT-STATUS BEGIN -->
 当前状态：rev66 已由用户带回 dsh 独审通过，F5-r／F3-r及回归闭合；用户已确认 P1.2／P1.4设计级接受，P1四项设计接受为[true,true,true,true,true]（依次为P1.1、P1.2、P1.3、P1.4、整体），P1设计阶段收口。资料基线rev67仅登记；被审技术交付仍为rev66 / D35-I33-r1-C6 / IP6，wire/profile代际I33，九摘要不变。P1.1及P1.3 C4既有接受保持，C5条件／C6未审及03rev48、04rev57/58历史范围不追认。该接受仅属P1设计交付。用户随后已授权按独立任务卡继续施工与验证；当前实现状态见下方任务组织，P1接受范围不扩大。
@@ -8,7 +50,7 @@
 [06接受登记回执](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-160449-rev66-acceptance-registration/RECEIPT.md) / [设计接受记录](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-160449-rev66-acceptance-registration/accepted-design.json) / [复审原文](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-160449-rev66-acceptance-registration/inbound/dsh-rev66-review.md) / [过程及统计勘误](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-160449-rev66-acceptance-registration/REVIEW-PROCESS-ERRATA.md) / [已接受的rev66技术封存](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-134209-two-residuals/final-seal.json)。
 <!-- P1-CURRENT-STATUS END -->
 
-**当前任务组织（2026-11-19）**：P0研究与P1当前设计已收口；现行25卡v4/v3及共同约定v3已有dsh独立审卡通过，精确SHA接受见[登记](/Users/agilecho/code/Draft/docs/任务卡/后续任务卡规则对齐接受登记.md)。用户已授权Codex逐卡代建独立施工会话；P2-01已按用户要求在main完成独审整改，双目录各25/25自验通过，待用户手动dsh复审后继版本；目录一致性独审通过，P2-02已交partial、冷构建封顶待裁定，其余按依赖接续，四阶段整体UI E2E仍未执行。[任务总览](/Users/agilecho/code/Draft/docs/任务卡/README.md) / [执行预检](/Users/agilecho/code/Draft/output/vesta-task-handoffs/20261118-115219-rules-acceptance-execution-preflight/README.md)。原接受/封存及原累计预算保持，下方旧进度按历史时点理解。
+**当前任务组织（2026-11-20）**：P0研究与P1当前设计已收口；现行25卡及共同约定的原卡面接受保持。P2-01整改后继双目录各25/25自验完成，待用户手动dsh复审；P2-02独立工具子结果获dsh复核通过，整卡仍partial，拒绝验证与中断留证、正式创建及已审安装未完成。P2-03有限原生首链结果已获dsh复核，整卡仍partial；T66生成访问器、独立资源身份及关键持久字段证明未闭合，测试8/8保持，不自动进入下一卡。四阶段整体UI E2E均未执行，阶段未结束。原预算/失败/封存保持。[任务总览](docs/任务卡/README.md) / [下一卡及开工条件](docs/任务卡/阶段2-首条完整链/P2-03-发卡与接手.md)。
 
 Craft 软件研究、重写与接入方法，以及 VESTA 全功能重写项目的源码、研究和设计文档。
 
