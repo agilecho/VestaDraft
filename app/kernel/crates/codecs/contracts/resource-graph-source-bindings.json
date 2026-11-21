@@ -1,0 +1,109 @@
+{
+  "schema": "FC-resource-recursion-optional-primary/1",
+  "spans": [
+    {
+      "id": "rietan-ins-implicit-ffe",
+      "path": "static/formats/__Z14readINS_RIETANP7__sFILEiR5Scene.asm",
+      "sourceSha256": "3a3ded80286c012c6a94a2f8463ccf866caea26688c1b822c4aad760553ecd9d",
+      "byteOffset": 27908,
+      "byteLength": 2465,
+      "spanSha256": "be0818254ca78e75f71dbeaea7131e6f3dab05f17fa0ab4011aedb3c45ef4f50",
+      "startAddress": "91368",
+      "endExclusive": "91450"
+    },
+    {
+      "id": "rietan-lst-implicit-ffe",
+      "path": "static/formats/__Z11readLSTfileP7__sFILER5Scenei.asm",
+      "sourceSha256": "96426a0d9e77766c6dfda688e6b7b0e98b265c123f2f910ea534f789950734cc",
+      "byteOffset": 16336,
+      "byteLength": 2358,
+      "spanSha256": "573ffaa5d520fcc6cc2e75cc2deec4f89d6f0deaee40fdff11138ab794848d99",
+      "startAddress": "91ed8",
+      "endExclusive": "91fb4"
+    },
+    {
+      "id": "structure-reference-framing",
+      "path": "static/formats/__ZL13readVESTAfileP7__sFILER5Scene.asm",
+      "sourceSha256": "e3b8f5075434d86757cbfb462b7d46b43d5be5ae6a551dbdc4f3370343dcf076",
+      "byteOffset": 78700,
+      "byteLength": 974,
+      "spanSha256": "1b4674e531c623ee8ef1b60ccf48d026dd23ecadba63bf7639e0038eb19fadcd",
+      "startAddress": "a3460",
+      "endExclusive": "a34b4"
+    },
+    {
+      "id": "structure-nested-ReadFile",
+      "path": "static/formats/__ZL13readVESTAfileP7__sFILER5Scene.asm",
+      "sourceSha256": "e3b8f5075434d86757cbfb462b7d46b43d5be5ae6a551dbdc4f3370343dcf076",
+      "byteOffset": 80862,
+      "byteLength": 1728,
+      "spanSha256": "ba7e9caffa81553a3acc3e8c134492f6105f0bdbf217c96235c72388056bfbea",
+      "startAddress": "a3518",
+      "endExclusive": "a35a0"
+    },
+    {
+      "id": "orffe-reference",
+      "path": "static/formats/__ZL13readVESTAfileP7__sFILER5Scene.asm",
+      "sourceSha256": "e3b8f5075434d86757cbfb462b7d46b43d5be5ae6a551dbdc4f3370343dcf076",
+      "byteOffset": 94429,
+      "byteLength": 558,
+      "spanSha256": "6ebcb46b5daec38acc30a79cb584ab559811160357468cffced4a04f16ed8c19",
+      "startAddress": "a3a0c",
+      "endExclusive": "a3a34"
+    },
+    {
+      "id": "texture-reference-list",
+      "path": "static/formats/__ZL13readVESTAfileP7__sFILER5Scene.asm",
+      "sourceSha256": "e3b8f5075434d86757cbfb462b7d46b43d5be5ae6a551dbdc4f3370343dcf076",
+      "byteOffset": 97063,
+      "byteLength": 5166,
+      "spanSha256": "b5c468b37b37530641aa8e6e071ce525e4687e1040d4ca689c43feacc91efc08",
+      "startAddress": "a3af4",
+      "endExclusive": "a3c9c"
+    }
+  ],
+  "documents": [
+    {
+      "path": "inputs/RIETAN-FP_manual.txt",
+      "sha256": "ee40dd3d49ca527f75a35ca4cc3f5cc8d64a0a9e9e8db4cd470e5a57554525d1",
+      "physicalPage": 173,
+      "byteOffset": 491354,
+      "byteLength": 1666,
+      "spanSha256": "f0842d8db33b3516f8c1cd46a6fede89cbd4f8c4bb8c316521dff24b7e141d0e",
+      "headingNeedle": "17.6     File to Impose"
+    },
+    {
+      "path": "inputs/RIETAN-FP_manual.txt",
+      "sha256": "ee40dd3d49ca527f75a35ca4cc3f5cc8d64a0a9e9e8db4cd470e5a57554525d1",
+      "physicalPage": 140,
+      "byteOffset": 410813,
+      "byteLength": 1863,
+      "spanSha256": "413973d75d2e9a97377bcf8731db71702780235a26e57828cfbe3c398d5020b1",
+      "headingNeedle": "   VESTA can input a standard output, hoge.lst"
+    },
+    {
+      "path": "inputs/RIETAN_VESTA_cooperation.txt",
+      "sha256": "878cbd167c6f62f3750ca6eb77a2b48913878a9d585ff243f89843f7a9edead7",
+      "physicalPage": 20,
+      "byteOffset": 59586,
+      "byteLength": 3807,
+      "spanSha256": "cf93c03ea34e20e53f55b5606c20390c67539d8566b11f1b3f7a4b1f9e8e410c",
+      "headingNeedle": "3 ORFFE との連携"
+    },
+    {
+      "path": "inputs/RIETAN_VESTA_cooperation.txt",
+      "sha256": "878cbd167c6f62f3750ca6eb77a2b48913878a9d585ff243f89843f7a9edead7",
+      "physicalPage": 12,
+      "byteOffset": 38544,
+      "byteLength": 2481,
+      "spanSha256": "441a941bda483cd3e1e48742bf6c39bcc5b5cebda7a4d6c747876fa716240829",
+      "headingNeedle": "2.9 実習"
+    }
+  ],
+  "archiveMembers": "rietan-reopen-document-members.json",
+  "selectedVisualPages": [
+    "references/rietan-resource-pages/manual-173.png",
+    "references/rietan-resource-pages/cooperation-12.png"
+  ],
+  "newTargetExecuted": false
+}

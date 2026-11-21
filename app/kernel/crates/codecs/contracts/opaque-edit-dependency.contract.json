@@ -1,0 +1,23 @@
+{
+  "schema": "FC-opaque-edit-dependency-design/1",
+  "typedSource": "CodecSourceDocument-proposal-7",
+  "definition": "codec-source-document.schema.json#/$defs/OpaqueEditDependencies",
+  "authority": "Only authoritative Engine decode/capture and a trusted registered versioned format rule can classify footprint and external-reference closure. A client/codec-supplied accepted flag or rule digest is not trust.",
+  "default": "Every unsupported block defaults to unknown-whole-persistent-source and referenceClosure=unknown. Before edited/native whole-save, compare the authoritative persistent source projection and all baseline contexts. Any changed persistent field, schema/policy, resource graph or reference namespace refuses E_UNSAFE_SOURCE_REWRITE. A document revision alone is not a persistent-content test.",
+  "persistentProjection": "Hash the complete authoritative persistent source tree using frozen roles. Exclude only specifically frozen derived dependency-baseline bookkeeping fields from this projection to avoid self-referential digests; those fields remain identity-only units in CompleteSourceAudit and are included in plan/source/report digests. Never exclude arbitrary metadata/new fields. Unchanged transient selection need not change the persistent projection.",
+  "baseline": "sourceTypeDigest/policyDigest/resourceGraphDigest/referenceNamespaceDigest plus persistentSourceDigest from original decode/capture. Reference namespace binds captured primary location/base and reference resolution rules, so SaveAs/relocation cannot pass solely because primary raw bytes are unchanged.",
+  "qualified": "A trusted rule generates all exact owner/RFC6901/unit-digest footprint identities from the authoritative source, and declares reference closure. Engine independently recomputes them; duplicates, unresolved owners/pointers, changed dependencies, unknown/new type or missing units refuse. Whole-source changes outside a proven complete footprint can proceed only when all fixed contexts match.",
+  "references": "Unknown external-reference closure never confirms a whole project/package Saved, even if a block is copied exactly. Complete-no-external-references or complete-verified-resource-graph must derive from the trusted format rule and independent reference/byte verification. Copying original source for diagnostic inspection is distinct from edited/preserving project Save.",
+  "candidate": "Every opaque-preserved disposition requires exact source extent and actual candidate byte witness. The existing editDependencyDigest is SHA256 of a canonical closed envelope containing proposal version, owner/id, format/dialect, source extent/raw SHA, dependency record and trusted rule identity. No unbound digest or codec-only unchanged flag.",
+  "framing": "If block byte extent or nesting/termination is ambiguous, retain the entire original file as source-only; do not guess a block boundary or patch a token that could belong to unknown content.",
+  "unsupportedChanges": "Do not silently drop/reindex/retarget an unsupported block after sites/labels/basis/frame/field/resources/scene change. Loss consent cannot qualify a falsely described whole-preserving Save; an existing separate export must follow its own admitted purpose and explicit loss policy.",
+  "futureEvidence": [
+    "actual derived Engine persistent projection/role conformance",
+    "trusted rule dependency-completeness validation against authoritative types",
+    "actual candidate bytes and independent full resource-reference closure",
+    "native/product fresh reopen under authorized implementation"
+  ],
+  "actualEngineImplemented": false,
+  "whole03Complete": false,
+  "upstream01_02AcceptanceUnchanged": true
+}

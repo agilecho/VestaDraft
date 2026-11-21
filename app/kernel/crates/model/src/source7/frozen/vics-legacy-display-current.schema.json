@@ -1,0 +1,1083 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:draft:input:VICSLEGACY1",
+  "$defs": {
+    "NativeLegacyDisplayCurrent": {
+      "type": "object",
+      "properties": {
+        "schemaVersion": {
+          "const": "FC-vics-legacy-display-current-1"
+        },
+        "captureRole": {
+          "const": "actual-current-native-display"
+        },
+        "scene": {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "EntityRef"
+            },
+            "objectKind": {
+              "enum": [
+                "scene"
+              ]
+            },
+            "objectId": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "kind",
+            "objectKind",
+            "objectId"
+          ],
+          "additionalProperties": false
+        },
+        "sceneSlots": {
+          "type": "object",
+          "properties": {
+            "0x234": {
+              "type": "integer",
+              "minimum": -2147483648,
+              "maximum": 2147483647
+            },
+            "0x268": {
+              "type": "integer",
+              "minimum": -2147483648,
+              "maximum": 2147483647
+            },
+            "0x26c": {
+              "type": "integer",
+              "minimum": -2147483648,
+              "maximum": 2147483647
+            },
+            "0x270": {
+              "type": "integer",
+              "minimum": -2147483648,
+              "maximum": 2147483647
+            },
+            "0x274": {
+              "type": "integer",
+              "minimum": -2147483648,
+              "maximum": 2147483647
+            },
+            "0x284": {
+              "type": "integer",
+              "minimum": -2147483648,
+              "maximum": 2147483647
+            },
+            "0x288": {
+              "type": "integer",
+              "minimum": -2147483648,
+              "maximum": 2147483647
+            },
+            "0x28c": {
+              "type": "integer",
+              "minimum": -2147483648,
+              "maximum": 2147483647
+            },
+            "0x2a4": {
+              "type": "integer",
+              "minimum": -2147483648,
+              "maximum": 2147483647
+            },
+            "0x2a8": {
+              "type": "integer",
+              "minimum": -2147483648,
+              "maximum": 2147483647
+            },
+            "0x2b8": {
+              "type": "integer",
+              "minimum": -2147483648,
+              "maximum": 2147483647
+            },
+            "0x5b4": {
+              "type": "integer",
+              "minimum": -2147483648,
+              "maximum": 2147483647
+            },
+            "0x228": {
+              "type": "integer",
+              "minimum": -32768,
+              "maximum": 32767
+            },
+            "0x5b0": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 4294967295
+            },
+            "0x22c": {
+              "type": "object",
+              "properties": {
+                "kind": {
+                  "const": "F32Bits"
+                },
+                "ieeeHexBE": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{8}$"
+                }
+              },
+              "required": [
+                "kind",
+                "ieeeHexBE"
+              ],
+              "additionalProperties": false
+            },
+            "0x278": {
+              "type": "object",
+              "properties": {
+                "kind": {
+                  "const": "F32Bits"
+                },
+                "ieeeHexBE": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{8}$"
+                }
+              },
+              "required": [
+                "kind",
+                "ieeeHexBE"
+              ],
+              "additionalProperties": false
+            },
+            "0x298": {
+              "type": "object",
+              "properties": {
+                "kind": {
+                  "const": "F32Bits"
+                },
+                "ieeeHexBE": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{8}$"
+                }
+              },
+              "required": [
+                "kind",
+                "ieeeHexBE"
+              ],
+              "additionalProperties": false
+            },
+            "0x29c": {
+              "type": "object",
+              "properties": {
+                "kind": {
+                  "const": "F32Bits"
+                },
+                "ieeeHexBE": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{8}$"
+                }
+              },
+              "required": [
+                "kind",
+                "ieeeHexBE"
+              ],
+              "additionalProperties": false
+            },
+            "0x2ac": {
+              "type": "object",
+              "properties": {
+                "kind": {
+                  "const": "F32Bits"
+                },
+                "ieeeHexBE": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{8}$"
+                }
+              },
+              "required": [
+                "kind",
+                "ieeeHexBE"
+              ],
+              "additionalProperties": false
+            },
+            "0x2b4": {
+              "type": "object",
+              "properties": {
+                "kind": {
+                  "const": "F32Bits"
+                },
+                "ieeeHexBE": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{8}$"
+                }
+              },
+              "required": [
+                "kind",
+                "ieeeHexBE"
+              ],
+              "additionalProperties": false
+            },
+            "0x3d0": {
+              "type": "object",
+              "properties": {
+                "kind": {
+                  "const": "F32Bits"
+                },
+                "ieeeHexBE": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{8}$"
+                }
+              },
+              "required": [
+                "kind",
+                "ieeeHexBE"
+              ],
+              "additionalProperties": false
+            },
+            "0x3d8": {
+              "type": "object",
+              "properties": {
+                "kind": {
+                  "const": "F32Bits"
+                },
+                "ieeeHexBE": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{8}$"
+                }
+              },
+              "required": [
+                "kind",
+                "ieeeHexBE"
+              ],
+              "additionalProperties": false
+            },
+            "0x3e0": {
+              "type": "object",
+              "properties": {
+                "kind": {
+                  "const": "F32Bits"
+                },
+                "ieeeHexBE": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{8}$"
+                }
+              },
+              "required": [
+                "kind",
+                "ieeeHexBE"
+              ],
+              "additionalProperties": false
+            },
+            "0x3f8": {
+              "type": "object",
+              "properties": {
+                "kind": {
+                  "const": "F32Bits"
+                },
+                "ieeeHexBE": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{8}$"
+                }
+              },
+              "required": [
+                "kind",
+                "ieeeHexBE"
+              ],
+              "additionalProperties": false
+            },
+            "0x40c": {
+              "type": "object",
+              "properties": {
+                "kind": {
+                  "const": "F32Bits"
+                },
+                "ieeeHexBE": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{8}$"
+                }
+              },
+              "required": [
+                "kind",
+                "ieeeHexBE"
+              ],
+              "additionalProperties": false
+            },
+            "0x230:3": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 255
+              },
+              "minItems": 3,
+              "maxItems": 3
+            },
+            "0x2a0:3": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 255
+              },
+              "minItems": 3,
+              "maxItems": 3
+            },
+            "0x2b0:4": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 255
+              },
+              "minItems": 4,
+              "maxItems": 4
+            },
+            "0x3cc:4": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 255
+              },
+              "minItems": 4,
+              "maxItems": 4
+            },
+            "0x3d4:4": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 255
+              },
+              "minItems": 4,
+              "maxItems": 4
+            },
+            "0x3dc:4": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 255
+              },
+              "minItems": 4,
+              "maxItems": 4
+            },
+            "0x3f4:4": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 255
+              },
+              "minItems": 4,
+              "maxItems": 4
+            },
+            "0x3fc:3": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 255
+              },
+              "minItems": 3,
+              "maxItems": 3
+            }
+          },
+          "required": [
+            "0x234",
+            "0x268",
+            "0x26c",
+            "0x270",
+            "0x274",
+            "0x284",
+            "0x288",
+            "0x28c",
+            "0x2a4",
+            "0x2a8",
+            "0x2b8",
+            "0x5b4",
+            "0x228",
+            "0x5b0",
+            "0x22c",
+            "0x278",
+            "0x298",
+            "0x29c",
+            "0x2ac",
+            "0x2b4",
+            "0x3d0",
+            "0x3d8",
+            "0x3e0",
+            "0x3f8",
+            "0x40c",
+            "0x230:3",
+            "0x2a0:3",
+            "0x2b0:4",
+            "0x3cc:4",
+            "0x3d4:4",
+            "0x3dc:4",
+            "0x3f4:4",
+            "0x3fc:3"
+          ],
+          "additionalProperties": false
+        },
+        "lights": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "index": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 3
+              },
+              "matrix16": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "kind": {
+                      "const": "F32Bits"
+                    },
+                    "ieeeHexBE": {
+                      "type": "string",
+                      "pattern": "^[0-9a-f]{8}$"
+                    }
+                  },
+                  "required": [
+                    "kind",
+                    "ieeeHexBE"
+                  ],
+                  "additionalProperties": false
+                },
+                "minItems": 16,
+                "maxItems": 16
+              },
+              "direction3": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "kind": {
+                      "const": "F32Bits"
+                    },
+                    "ieeeHexBE": {
+                      "type": "string",
+                      "pattern": "^[0-9a-f]{8}$"
+                    }
+                  },
+                  "required": [
+                    "kind",
+                    "ieeeHexBE"
+                  ],
+                  "additionalProperties": false
+                },
+                "minItems": 3,
+                "maxItems": 3
+              },
+              "position4": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "kind": {
+                      "const": "F32Bits"
+                    },
+                    "ieeeHexBE": {
+                      "type": "string",
+                      "pattern": "^[0-9a-f]{8}$"
+                    }
+                  },
+                  "required": [
+                    "kind",
+                    "ieeeHexBE"
+                  ],
+                  "additionalProperties": false
+                },
+                "minItems": 4,
+                "maxItems": 4
+              },
+              "rgba": {
+                "type": "array",
+                "items": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 255
+                  },
+                  "minItems": 4,
+                  "maxItems": 4
+                },
+                "minItems": 3,
+                "maxItems": 3
+              }
+            },
+            "required": [
+              "index",
+              "matrix16",
+              "direction3",
+              "position4",
+              "rgba"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "atomTypes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "target": {
+                "type": "object",
+                "properties": {
+                  "kind": {
+                    "const": "EntityRef"
+                  },
+                  "objectKind": {
+                    "enum": [
+                      "display",
+                      "source-entity"
+                    ]
+                  },
+                  "objectId": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "required": [
+                  "kind",
+                  "objectKind",
+                  "objectId"
+                ],
+                "additionalProperties": false
+              },
+              "speciesHex": {
+                "type": "string",
+                "pattern": "^(?:[0-9a-f]{2})+$"
+              },
+              "radius": {
+                "type": "object",
+                "properties": {
+                  "kind": {
+                    "const": "F32Bits"
+                  },
+                  "ieeeHexBE": {
+                    "type": "string",
+                    "pattern": "^[0-9a-f]{8}$"
+                  }
+                },
+                "required": [
+                  "kind",
+                  "ieeeHexBE"
+                ],
+                "additionalProperties": false
+              },
+              "rgba": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 255
+                },
+                "minItems": 4,
+                "maxItems": 4
+              }
+            },
+            "required": [
+              "target",
+              "speciesHex",
+              "radius",
+              "rgba"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "phaseBoundaries": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "owner": {
+                "type": "object",
+                "properties": {
+                  "kind": {
+                    "const": "EntityRef"
+                  },
+                  "objectKind": {
+                    "enum": [
+                      "phase"
+                    ]
+                  },
+                  "objectId": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "required": [
+                  "kind",
+                  "objectKind",
+                  "objectId"
+                ],
+                "additionalProperties": false
+              },
+              "target": {
+                "type": "object",
+                "properties": {
+                  "kind": {
+                    "const": "EntityRef"
+                  },
+                  "objectKind": {
+                    "enum": [
+                      "boundary",
+                      "source-entity"
+                    ]
+                  },
+                  "objectId": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "required": [
+                  "kind",
+                  "objectKind",
+                  "objectId"
+                ],
+                "additionalProperties": false
+              },
+              "bounds6": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "kind": {
+                      "const": "F32Bits"
+                    },
+                    "ieeeHexBE": {
+                      "type": "string",
+                      "pattern": "^[0-9a-f]{8}$"
+                    }
+                  },
+                  "required": [
+                    "kind",
+                    "ieeeHexBE"
+                  ],
+                  "additionalProperties": false
+                },
+                "minItems": 6,
+                "maxItems": 6
+              }
+            },
+            "required": [
+              "owner",
+              "target",
+              "bounds6"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "bondRules": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "owner": {
+                "type": "object",
+                "properties": {
+                  "kind": {
+                    "const": "EntityRef"
+                  },
+                  "objectKind": {
+                    "enum": [
+                      "phase"
+                    ]
+                  },
+                  "objectId": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "required": [
+                  "kind",
+                  "objectKind",
+                  "objectId"
+                ],
+                "additionalProperties": false
+              },
+              "target": {
+                "type": "object",
+                "properties": {
+                  "kind": {
+                    "const": "EntityRef"
+                  },
+                  "objectKind": {
+                    "enum": [
+                      "bond-rule",
+                      "source-entity"
+                    ]
+                  },
+                  "objectId": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "required": [
+                  "kind",
+                  "objectKind",
+                  "objectId"
+                ],
+                "additionalProperties": false
+              },
+              "selectorAHex": {
+                "type": "string",
+                "pattern": "^(?:[0-9a-f]{2}){0,10}$"
+              },
+              "selectorBHex": {
+                "type": "string",
+                "pattern": "^(?:[0-9a-f]{2}){0,10}$"
+              },
+              "minimum": {
+                "type": "object",
+                "properties": {
+                  "kind": {
+                    "const": "F32Bits"
+                  },
+                  "ieeeHexBE": {
+                    "type": "string",
+                    "pattern": "^[0-9a-f]{8}$"
+                  }
+                },
+                "required": [
+                  "kind",
+                  "ieeeHexBE"
+                ],
+                "additionalProperties": false
+              },
+              "maximum": {
+                "type": "object",
+                "properties": {
+                  "kind": {
+                    "const": "F32Bits"
+                  },
+                  "ieeeHexBE": {
+                    "type": "string",
+                    "pattern": "^[0-9a-f]{8}$"
+                  }
+                },
+                "required": [
+                  "kind",
+                  "ieeeHexBE"
+                ],
+                "additionalProperties": false
+              },
+              "searchMode": {
+                "type": "integer",
+                "minimum": -2147483648,
+                "maximum": 2147483647
+              },
+              "boundaryMode": {
+                "type": "integer",
+                "minimum": -2147483648,
+                "maximum": 2147483647
+              },
+              "fullFlags": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 65535
+              },
+              "style": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 255
+              },
+              "radius": {
+                "type": "object",
+                "properties": {
+                  "kind": {
+                    "const": "F32Bits"
+                  },
+                  "ieeeHexBE": {
+                    "type": "string",
+                    "pattern": "^[0-9a-f]{8}$"
+                  }
+                },
+                "required": [
+                  "kind",
+                  "ieeeHexBE"
+                ],
+                "additionalProperties": false
+              },
+              "lineWidth": {
+                "type": "object",
+                "properties": {
+                  "kind": {
+                    "const": "F32Bits"
+                  },
+                  "ieeeHexBE": {
+                    "type": "string",
+                    "pattern": "^[0-9a-f]{8}$"
+                  }
+                },
+                "required": [
+                  "kind",
+                  "ieeeHexBE"
+                ],
+                "additionalProperties": false
+              },
+              "rgba": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 255
+                },
+                "minItems": 4,
+                "maxItems": 4
+              }
+            },
+            "required": [
+              "owner",
+              "target",
+              "selectorAHex",
+              "selectorBHex",
+              "minimum",
+              "maximum",
+              "searchMode",
+              "boundaryMode",
+              "fullFlags",
+              "style",
+              "radius",
+              "lineWidth",
+              "rgba"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "shapeAlpha": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "owner": {
+                "type": "object",
+                "properties": {
+                  "kind": {
+                    "const": "EntityRef"
+                  },
+                  "objectKind": {
+                    "enum": [
+                      "phase"
+                    ]
+                  },
+                  "objectId": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "required": [
+                  "kind",
+                  "objectKind",
+                  "objectId"
+                ],
+                "additionalProperties": false
+              },
+              "target": {
+                "type": "object",
+                "properties": {
+                  "kind": {
+                    "const": "EntityRef"
+                  },
+                  "objectKind": {
+                    "enum": [
+                      "shape",
+                      "source-entity"
+                    ]
+                  },
+                  "objectId": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "required": [
+                  "kind",
+                  "objectKind",
+                  "objectId"
+                ],
+                "additionalProperties": false
+              },
+              "alpha": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 255
+              }
+            },
+            "required": [
+              "owner",
+              "target",
+              "alpha"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "polyhedronAlpha": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "owner": {
+                "type": "object",
+                "properties": {
+                  "kind": {
+                    "const": "EntityRef"
+                  },
+                  "objectKind": {
+                    "enum": [
+                      "phase"
+                    ]
+                  },
+                  "objectId": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "required": [
+                  "kind",
+                  "objectKind",
+                  "objectId"
+                ],
+                "additionalProperties": false
+              },
+              "target": {
+                "type": "object",
+                "properties": {
+                  "kind": {
+                    "const": "EntityRef"
+                  },
+                  "objectKind": {
+                    "enum": [
+                      "shape",
+                      "mesh",
+                      "source-entity"
+                    ]
+                  },
+                  "objectId": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "required": [
+                  "kind",
+                  "objectKind",
+                  "objectId"
+                ],
+                "additionalProperties": false
+              },
+              "alpha": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 255
+              }
+            },
+            "required": [
+              "owner",
+              "target",
+              "alpha"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "captureRole",
+        "scene",
+        "sceneSlots",
+        "lights",
+        "atomTypes",
+        "phaseBoundaries",
+        "bondRules",
+        "shapeAlpha",
+        "polyhedronAlpha"
+      ],
+      "additionalProperties": false
+    },
+    "NativeLegacyViewCurrent": {
+      "type": "object",
+      "properties": {
+        "schemaVersion": {
+          "const": "FC-vics-legacy-view-current-1"
+        },
+        "captureRole": {
+          "const": "actual-current-native-view"
+        },
+        "scene": {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "EntityRef"
+            },
+            "objectKind": {
+              "enum": [
+                "scene"
+              ]
+            },
+            "objectId": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "kind",
+            "objectKind",
+            "objectId"
+          ],
+          "additionalProperties": false
+        },
+        "matrix16": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "kind": {
+                "const": "F64Bits"
+              },
+              "ieeeHexBE": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{16}$"
+              }
+            },
+            "required": [
+              "kind",
+              "ieeeHexBE"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 16,
+          "maxItems": 16
+        },
+        "settings4": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "kind": {
+                "const": "F32Bits"
+              },
+              "ieeeHexBE": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{8}$"
+              }
+            },
+            "required": [
+              "kind",
+              "ieeeHexBE"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 4,
+          "maxItems": 4
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "captureRole",
+        "scene",
+        "matrix16",
+        "settings4"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$ref": "#/$defs/NativeLegacyDisplayCurrent"
+}

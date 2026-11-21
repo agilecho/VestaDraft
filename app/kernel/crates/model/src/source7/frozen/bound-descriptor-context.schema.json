@@ -1,0 +1,135 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:draft:fc:bound-descriptor-context:proposal:1",
+  "title": "Current owner-scoped descriptor references; typed SourceMetadata adapter, not a permission",
+  "$defs": {
+    "ResourceRef": {
+      "type": "object",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "byteLength": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)$"
+        }
+      },
+      "required": [
+        "resourceId",
+        "sha256",
+        "byteLength"
+      ],
+      "additionalProperties": false
+    },
+    "Owner": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "enum": [
+            "document",
+            "phase",
+            "molecule",
+            "frame",
+            "atom",
+            "bond",
+            "scene",
+            "field",
+            "basis-center",
+            "shape",
+            "vector",
+            "material",
+            "display",
+            "camera",
+            "mesh",
+            "scene-node",
+            "source-entity",
+            "section",
+            "bond-rule",
+            "boundary",
+            "plane"
+          ]
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "kind",
+        "id"
+      ],
+      "additionalProperties": false
+    },
+    "ReferenceBinding": {
+      "type": "object",
+      "properties": {
+        "jsonPointer": {
+          "type": "string",
+          "pattern": "^/"
+        },
+        "capturedAlias": {
+          "type": "string",
+          "minLength": 1
+        },
+        "target": {
+          "$ref": "#/$defs/ResourceRef"
+        }
+      },
+      "required": [
+        "jsonPointer",
+        "capturedAlias",
+        "target"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "type": "object",
+  "properties": {
+    "schemaVersion": {
+      "const": "BoundDescriptorContext-proposal-1"
+    },
+    "owner": {
+      "$ref": "#/$defs/Owner"
+    },
+    "sourceTypedPointer": {
+      "type": "string",
+      "pattern": "^/"
+    },
+    "scopeInput": {
+      "$ref": "#/$defs/ResourceRef"
+    },
+    "definition": {
+      "$ref": "#/$defs/ResourceRef"
+    },
+    "descriptorSchemaDigest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "referenceRuleDigest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "bindings": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/ReferenceBinding"
+      }
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "owner",
+    "sourceTypedPointer",
+    "scopeInput",
+    "definition",
+    "descriptorSchemaDigest",
+    "referenceRuleDigest",
+    "bindings"
+  ],
+  "additionalProperties": false
+}

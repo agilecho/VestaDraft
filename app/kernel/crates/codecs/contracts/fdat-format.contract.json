@@ -1,0 +1,52 @@
+{
+  "schema": "FC-FDAT-selected-design/1",
+  "routes": [
+    "VM18-I09"
+  ],
+  "primary": "inputs/rpluto.pdf printed37..43, recordtype2fieldtable38 visuallychecked",
+  "witness": "fdat-static-witness.json",
+  "framing": "logical80byte records withdirectoryrecord#; recordtypes1..7 counts/flagsdeterminerecordpresenceandlength. Missingoptionalcell/atomrecordsaremissingdata,notdefaultcell1ororiginatom.",
+  "directory": "(1H#,A8,2I1,I6,6X,11I3,22I1,I2);11I3 mappedNCARDS/NRFAC/NREM/NDIS/NERR/NOPR/NRAD/NAT/NSAT/NBND/NCON. Exactremainingflagsretained,notguessedfromsgname.",
+  "cell": "columns1..36sixI6integers,37..42sixprecisiondigits; value[i]=int[i]*10^-PREC[i]. CESD43..54withsameexponent keptass.u.,notcovariance;DENS/Z/ITOLremainseparatephysicalmetadata.",
+  "coordinates": "Selected RPluto modern record6 is3*(A5+3I7) with separators and raw/100000. Distinct primary PLATON2009 header flag1 uses4*(A5+3F5.0), raw integer/10000; flag2 uses3*(A5+3F7.0+1X), raw integer/100000. Exact selected integer/domain/flag rules in selectedHistoricalSourceConventions; no universal one-layout/scaling claim. NAT and NSAT/source labels remain distinct.",
+  "symmetry": "encodedpositionsR11R12R13T1,R21R22R23T2,R31R32R33T3;centringpositionsincluded,centreinversionseparateCENT. Onlyqualifieddirectoryflag/numericalencodingdecodescanclaimcompleteoperators. Allunresolvedflagsblocksrawpreserved.",
+  "radii": "record5element+integer100*radiusA;sourcebondingradiusnotATOMICnumberormodelionicradius.",
+  "connections": "N=NAT+NSAT; firstNintegers have impliedFROM1..N, zero is a dummy and remaining integers are complete FROM/TO pairs. Published text omitsN100; selected originalCCDC reader/writer now establishesI3 there under an independently registered rule/explicit correction. Keep incomplete published-text policy and old native ignored-table projection distinct. SourceC57NCON0 is absence, not known zero bonds.",
+  "precision": "Retain exact source tokens and selected coordinate quantum1e-4/1e-5 plus independently scaled cellPREC. Neither source quantum nor physical SU is a readback tolerance. No FDAT writer exists in these85 routes; do not invent its rounding behavior. Actual native/reference REAL projection is separately bounded.",
+  "failures": [
+    "count/recordtruncationorbudgetoverflow",
+    "N100connectionwidthunqualified",
+    "invalidatomreference/incompletepair",
+    "unresolvedCENT/translationencoding =>noinventedgroup",
+    "unqualifiedsourcecharacterencodingorfieldoverlap =>rawonly/refuse"
+  ],
+  "completeFlagAndConnectivityDialectQualified": false,
+  "productImplemented": false,
+  "siteIdentity": "Selected47records contain repeatedlabels including H11/H12/H23. Stable identity is original record+slot under source owner, not label; references bind that identity. Rawlabels retained unchanged and never collapsed in a label-keyed map.",
+  "selectedConnectivity": {
+    "binding": "fdat-connectivity-primary-bindings.json",
+    "publishedExample": "Original guide12atom graph/table yields26directedadjacencies/13uniqueedges. Compact representation has first12implied-FROM values including3->0dummy, then6->9 and7->8. The dummy is not atom0 or a physical bond; preserve source encoding separately.",
+    "native": "Selected locked FDAT branch reads coordinate rows then sets spacegroup and goes through common postprocessing; it does not read record7 here. Geometrically generated visual bonds are not proof of importing the original explicit connection table.",
+    "widthBoundary": "Original appendix still prints onlyN<100/I2 andN>100/I3. Selected shipped CCDC code uses both reader/writer N>99 branches, resolving a concrete independently qualifiedI3-at100 convention. No graph fitting, request self-certification, automatic native upgrade or arbitrary historical producer acceptance.",
+    "mapping": "Periodic topology references original NAT+NSAT record/slot identities, including generated symmetry copies; retain exact operator/cell-image provenance. SG model has no independently qualified periodic explicit bond graph, so phase-owned SourceMetadata retains connection relationships until that bridge is qualified. Do not map symmetry-copy IDs to unrelated molecule atoms or silently derive chemical bond order from direction redundancy."
+  },
+  "selectedConnectionRecordPolicy": "fdat-connection.contract.json: exact extent/count/source slots plus selectedCCDCAt100Rule independently fills the existing explicit-I3 qualifier. Active periodic graph is still separate.",
+  "selectedSourceSymmetryPolicy": {
+    "path": "fdat-symmetry.contract.json",
+    "sha256": "8e3af26aac0fcc9ed4777614eec48c704c352711f4b0e1af8fc00d7c04bdc2dd"
+  },
+  "selectedConnectionRecordPolicyBinding": {
+    "path": "fdat-connection.contract.json",
+    "sha256": "6e27e21f644d9b2f686eccae8b65b45d500937d7109d85ea59acb87ad30d1dc5"
+  },
+  "selectedHistoricalSourceConventions": {
+    "path": "fdat-source-convention.contract.json",
+    "sha256": "2f3154b4af79f7c5930b6a892b7061aaa31926b355d349ba8487dd6ae048b467",
+    "scope": "Distinct RPluto2/PLATON2009 flag1-2 integer coordinate and named rational-twelfths rules; not all producer equivalence or native runtime."
+  },
+  "selectedCCDCAt100Rule": {
+    "path": "rpluto-fdat-source.contract.json",
+    "sha256": "5dd085e509c93bc0946e24562d639f1d23266d074f3a7ff0c01b838b94e346ca",
+    "scope": "Independent selected CCDC reader/writer givesI3 atN100; not genuine new output/all historical producer or active graph."
+  }
+}

@@ -1,0 +1,10 @@
+[package]
+name="vesta-source-derive"
+version="0.1.0"
+edition="2024"
+[lib]
+proc-macro=true
+[dependencies]
+proc-macro2={version="=1.0.107",default-features=false,features=["proc-macro"]}
+quote={version="=1.0.47",default-features=false,features=["proc-macro"]}
+syn={version="=3.0.10",default-features=false,features=["clone-impls","derive","parsing","printing","proc-macro"]}

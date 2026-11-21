@@ -1,0 +1,47 @@
+{
+  "schema": "FC-FEFF10-selected-source-coordinates-and-includes/1",
+  "route": "VM18-I11",
+  "primary": {
+    "path": "runs/379-FEFF10-source-reading/source-bindings.json",
+    "sha256": "92bd63cb3d1528c7329e07259c97e9285e27eef6990f8e94b21e3518461df7ce",
+    "commit": "d861cf8b64342e2d63a0aeb62c8b78faca7942c3"
+  },
+  "sourceIdentity": "Eight exact public FEFF-project source/license files, verified against the untruncated pinned Git tree;13 exact ranges. This is the selected FEFF10 source, not proof of identical FEFF9.6 implementation or locked VESTA behavior. No source installed, compiled, imported or executed.",
+  "inputDomain": "Selected reciprocal no-CIF P-lattice input with three finite scaled source basis vectors, actual ATOMS/POTENTIALS/TARGET, and exact source COORDINATES selector1..6 (source10 default3). Other lattice/CIF/simulation controls retain own rules and gates. Geometry import does not generate a real-space cluster, select a spectrum or perform FEFF calculations.",
+  "notation": "A has scaled input basis vectors as columns in the source Angstrom frame; lj=norm(aj), D=diag(l1,l2,l3), q is the raw input triple. Source first normalizes into ppos, then resets local alatt=l1 and reconstructs the central original atom as l1*ppos before final RMULT. Translation replicas and calculation outcomes are outside this finite rule.",
+  "literalSourceLaws": {
+    "1": "r=q",
+    "2": "r=D*q (Cartesian components scaled by respective vector lengths, not fractional A*q)",
+    "3": "r=l1*q",
+    "4": "r=A*q",
+    "5": "r=(l1*l1/l3)*A*D^-1*q",
+    "6": "r=(l1/l3)*A*D^-1*q"
+  },
+  "mode5and6Discrepancy": "The selected source leaves local alatt=l3 at the final xxx/alatt in modes5/6, then resets it to l1 before reconstructing the cluster. Expected unit-axis geometry would instead be l1*A*D^-1*q for5 and A*D^-1*q for6. Keep both named interpretations; an extra l1/l3 factor is a static conditional consequence for unequal lengths, not a measured producer result or published vendor erratum. Equal-length diamond examples cannot distinguish it.",
+  "coordinatePolicy": {
+    "pinned-source-projection": "Use the literal selected source central-atom laws with exact producer/commit context and diagnostic; preserve raw plus derived stages and source/version identity. No claim of correct complete FEFF spectroscopy or native target behavior.",
+    "explicit-unit-axis-geometry": "Explicit Draft mathematical interpretation: modes1..4 same as above;5=l1*A*D^-1*q and6=A*D^-1*q. This changes the selected producer projection for5/6 when l1!=l3; record the transform/provenance and never silently select it."
+  },
+  "RMULT": "Source10 default1 and final ratx*=rmult are explicit atomic-position stages. Preserve original vectors/positions/multiplier and transformed current values separately. Source also scales selected internal radius/volume values; this is not authorization to scale every cell/source setting by analogy or compute a spectrum. Nonfinite/zero/invalid geometry/rules/quantity context refuses scientific projection.",
+  "request": "Old feff-realspace-selected remains its closed existing request. New feff10-pinned-input requires corrected-explicit and explicit coordinatePolicy. Header selector/source defaults remain source-owned, not caller overrides. Exact producer/version/digest must qualify; matching tokens/extensions cannot infer FEFF10 from an old FEFF9 input.",
+  "includeExpansion": {
+    "source": "rdline lowercases the first command word and processes include/load before RDINP card interpretation. It pushes another input stream and resumes the parent on EOF; repeated file invocations retain ordered source effects. Existing source limit10 streams and90-character file fields are source-specific, not universal host quotas.",
+    "pathBase": "getfln strips supported delimiters; openfl passes the literal result to OPEN. This source does not prepend the declaring-file directory. Relative paths therefore depend on the producer-job working directory. Preserve an independently qualified immutable producer-job filename map/base; never use Codex CWD, ambient current files, or an assumed nested-parent base. Missing job context is existing failed-before-apply/source-only outcome with resource-context-required diagnostic.",
+    "graph": "resource-graph.schema.json proposal2 adds producer-include, recursiveDecode=true. Every reachable actual include occurrence has exact raw path span/source-owner/order/rule/context and captured resource bytes. Same bytes referenced twice stay two occurrence/semantic edges. Recursive stack cycles, unresolved aliases/missing/denied files and cumulative work exhaustion refuse complete decode/Save. Include streams share the active card parser state; they are not new independent phases and cannot be reordered or deduplicated.",
+    "lexical": "feff10-lexer.contract.json binds selected primary BWORDS/ISCOMM/GETFLN behavior, exact source span/ignored suffix, fixed-buffer risk, active END and read-error distinction. General other producer lexers/encoding/card domains remain separately qualified; no global comment or quoted-space repair is inferred.",
+    "saveAndReopen": "Capture through existing authorized host capabilities before planning; core never calls OPEN/chdir or executes source. Keep original source virtual names/context/ordered invocation lineage and full transitive blobs separately from actual current typed state. Portable reopen resolves only captured mappings; no ambient producer directory fallback, no re-running simulation/archived source over edited active geometry."
+  },
+  "sourceModelConsumption": "Qualified finite real-space cluster maps to Molecule/Frame/Atom with exact potentialIndex/Z join. Qualified selected reciprocal geometry maps to actual phaseGraph with chosen source policy/basis/site identity. Source COORDINATES, raw triples, both source/derived interpretations, RMULT and include lineage stay owner-bound SourceMetadata/Dependency/RawSpan resources. Unknown chemistry/units/rank/version/card semantics remain document-owned source-only, never fakeP1 or successful empty scientific graph.",
+  "precision": "Source decimal lexemes exact; matrix/norm/normalization/RMULT F64 operations each require prior conversion/conditioning/error budgets, separately from physical convention choice. The authored skew rational-length example proves algebra and a discrete source-policy discrepancy, not runtime IEEE bits, a fitted tolerance or all numerical domains. No FEFF output route/writer or simulation run is introduced.",
+  "remaining": "Actual FEFF9.6 source equivalence, all centred/CIF/general lexer/card/parameter branches and independent producer positives remain unqualified. Source-only preservation cannot fill those scientific/profile gaps. This selected contract narrows specific coordinate/include unknowns without accepting all FEFF inputs.",
+  "feff9SourceEquivalenceQualified": false,
+  "allInputAndComputationBranchesQualified": false,
+  "nativeTargetQualified": false,
+  "newTargetExecuted": false,
+  "producerExecuted": false,
+  "productImplemented": false,
+  "selectedLexer": {
+    "contract": "feff10-lexer.contract.json",
+    "sha256": "db32562fea17cfe68719df00984ede337708fdc02db9c76e3136cc2f8b2f6cbd"
+  }
+}

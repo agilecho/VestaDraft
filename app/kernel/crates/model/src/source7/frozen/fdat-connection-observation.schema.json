@@ -1,0 +1,222 @@
+{
+  "type": "object",
+  "properties": {
+    "schemaVersion": {
+      "const": "FdatConnectionObservation-proposal-1"
+    },
+    "sourceResourceId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sourceResourceSha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "sourceEntryOrdinal": {
+      "type": "string",
+      "pattern": "^(0|[1-9][0-9]*)$"
+    },
+    "NAT": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 999
+    },
+    "NSAT": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 999
+    },
+    "NCON": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 999
+    },
+    "semanticsMode": {
+      "enum": [
+        "legacy-compatibility",
+        "corrected-explicit"
+      ]
+    },
+    "connectionLayout": {
+      "enum": [
+        "native-preserve-uninterpreted",
+        "published-count-rule",
+        "explicit-i2-at-100",
+        "explicit-i3-at-100"
+      ]
+    },
+    "layoutEvidenceDigest": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "observation": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "source-table-absent"
+            },
+            "sourceIntegerCount": {
+              "const": 0
+            },
+            "declaredAtoms": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 1998
+            },
+            "graphKnownEmpty": {
+              "const": false
+            }
+          },
+          "required": [
+            "kind",
+            "sourceIntegerCount",
+            "declaredAtoms",
+            "graphKnownEmpty"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "source-uninterpreted"
+            },
+            "declaredAtoms": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 1998
+            },
+            "sourceIntegerCount": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 1998
+            },
+            "rawPhysicalRows": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "activeGraphEstablished": {
+              "const": false
+            }
+          },
+          "required": [
+            "kind",
+            "declaredAtoms",
+            "sourceIntegerCount",
+            "rawPhysicalRows",
+            "activeGraphEstablished"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "source-parsed"
+            },
+            "declaredAtoms": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 1998
+            },
+            "sourceIntegerCount": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 1998
+            },
+            "sourceWidth": {
+              "enum": [
+                2,
+                3
+              ]
+            },
+            "sourceIntegerTokens": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "sourceIntegers": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 1998
+              }
+            },
+            "directedSourcePairs": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 1998
+                },
+                "minItems": 2,
+                "maxItems": 2
+              }
+            },
+            "sourceDummyOrdinals": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 1998
+              }
+            },
+            "rawPhysicalRows": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "activeGraphEstablished": {
+              "const": false
+            },
+            "chemicalBondOrdersEstablished": {
+              "const": false
+            }
+          },
+          "required": [
+            "kind",
+            "declaredAtoms",
+            "sourceIntegerCount",
+            "sourceWidth",
+            "sourceIntegerTokens",
+            "sourceIntegers",
+            "directedSourcePairs",
+            "sourceDummyOrdinals",
+            "rawPhysicalRows",
+            "activeGraphEstablished",
+            "chemicalBondOrdersEstablished"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "sourceResourceId",
+    "sourceResourceSha256",
+    "sourceEntryOrdinal",
+    "NAT",
+    "NSAT",
+    "NCON",
+    "semanticsMode",
+    "connectionLayout",
+    "layoutEvidenceDigest",
+    "observation"
+  ],
+  "additionalProperties": false,
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:draft:input:FCON1"
+}

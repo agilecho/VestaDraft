@@ -1,0 +1,122 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "urn:draft:fc:native-scalar-grid-frame:1",
+  "type": "object",
+  "properties": {
+    "schemaVersion": {
+      "const": "FC-native-scalar-grid-frame-1"
+    },
+    "scopeInputDigest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "pointShape": {
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "minimum": 2,
+        "maximum": 2147483647
+      },
+      "minItems": 3,
+      "maxItems": 3
+    },
+    "axisOrder": {
+      "const": "x-fastest"
+    },
+    "sourceMarker": {
+      "enum": [
+        "cell",
+        "free"
+      ]
+    },
+    "firstLengthF32Bits": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[0-9a-f]{8}$"
+      },
+      "minItems": 3,
+      "maxItems": 3
+    },
+    "repeatedLengthF32Bits": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[0-9a-f]{8}$"
+      },
+      "minItems": 3,
+      "maxItems": 3
+    },
+    "sourceAngleF32Bits": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[0-9a-f]{8}$"
+      },
+      "minItems": 3,
+      "maxItems": 3
+    },
+    "nativeDisplayLengthF32Bits": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[0-9a-f]{8}$"
+      },
+      "minItems": 3,
+      "maxItems": 3
+    },
+    "nativeDisplayAngleF32Bits": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[0-9a-f]{8}$"
+      },
+      "minItems": 3,
+      "maxItems": 3
+    },
+    "nativeDisplayDivisions": {
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "minimum": 1,
+        "maximum": 2147483646
+      },
+      "minItems": 3,
+      "maxItems": 3
+    },
+    "physicalCoordinateContext": {
+      "const": "source-unresolved"
+    },
+    "sourceEndpointPeriodicity": {
+      "const": "source-unresolved"
+    },
+    "displayCoordinateRole": {
+      "const": "numerical-native-display-only"
+    },
+    "ruleId": {
+      "const": "draft.vend-native-stored-grid"
+    },
+    "ruleVersion": {
+      "const": "1"
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "scopeInputDigest",
+    "pointShape",
+    "axisOrder",
+    "sourceMarker",
+    "firstLengthF32Bits",
+    "repeatedLengthF32Bits",
+    "sourceAngleF32Bits",
+    "nativeDisplayLengthF32Bits",
+    "nativeDisplayAngleF32Bits",
+    "nativeDisplayDivisions",
+    "physicalCoordinateContext",
+    "sourceEndpointPeriodicity",
+    "displayCoordinateRole",
+    "ruleId",
+    "ruleVersion"
+  ],
+  "additionalProperties": false
+}

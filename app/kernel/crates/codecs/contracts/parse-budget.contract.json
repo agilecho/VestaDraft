@@ -1,0 +1,39 @@
+{
+  "schema": "FC-cumulative-parse-budget-contract/1",
+  "requestVersion": "FC-request-proposal-3",
+  "scope": {
+    "counterResetPerChild": false,
+    "request": "The48 decode shapes already require all five ParseLimits fields. This defines their semantic consumption, without adding an original UI option or upgrading product protocol3. Independent candidate/persisted verification also receives a trusted registered parse budget even when an encode request has no ParseLimits field.",
+    "job": "One trusted budget covers the entire top-level parse and transitive resource graph, source archive/metadata and decoded persistent source objects. Keep the budget in owned job state, bound to operation/source/request/rules. A nested parser, alias, retry, optional edge or format dispatch cannot instantiate/reset or widen it. A distinct verification phase uses its own explicitly registered limits bound to the same source/artifact identity; no client self-reported remaining quota."
+  },
+  "limits": {
+    "wire": "All five positive canonical decimal strings must fit u64; reject leading zero, sign, whitespace, zero-as-unlimited, unknown/missing metric and oversized digit strings before arithmetic/allocation. Product/native implementation bounds may be stricter and must be explicit in a qualified profile; do not infer safe usize from u64 on every ABI.",
+    "maxBytes": "Cumulative actual input bytes read plus newly allocated decoded persistent payload/source-tree bytes within the job; count metadata/raw originals and materialized field resources. A zero-copy alias does not allocate those bytes twice, but rereading a resource consumes actual read bytes again. Decompression expansion and canonical/decoded buffers consume their actual sizes before allocation. Do not use compressed header lengths or untrusted declared bytes as proof of budget compliance. Cancellation/releasing a buffer does not refund cumulative parse work.",
+    "maxRecords": "Every consumed source record, including metadata, component records, terminators and rejected/unsupported records inspected before failure. Do not reset for each file/phase or count only successfully projected scientific rows.",
+    "maxNodes": "Every parsed source-tree/AuditNode/container plus every independently created persistent semantic object, including source-only entities and repeated same-bytes owners. Use checked upper bounds before expansion. One binary payload is not charged as a million JSON scalar nodes unless it is actually materialized that way; its bytes and sample count still count.",
+    "maxGridPoints": "Cumulative stored scalar samples over independently required semantic fields/components: product(coreShape+closure)*componentCount. Include closure faces/edges/corners and retained source components, not only core/effective fields or unique byte hashes. No implicit dedup of two field identities. Charge derived materialized fields separately when both source component and derived field objects are retained. Generic image decoding instead uses its qualified checked width*height*channels and maxBytes allocation, not an invented volume field.",
+    "maxReferences": "Every discovered semantic reference edge and optional presence/absence outcome, including aliases and multiple owners sharing one physical resource. Same file SHA/handle does not collapse graph edge count. Cycle detection, authorization and exact resource graph closure are additional checks, never replaced by this bound."
+  },
+  "arithmetic": "Check positive dimensions/component counts, closure additions, every multiplication and cross-file sum before allocation/index/seek. u64 overflow, narrower target ABI overflow, malformed sizes, truncated reads and actual/declaration mismatch fail explicitly. A finite core count does not validate larger closed storage. Multi-counter reservations/debits are atomic; failure cannot partially install source state or allow an undercharged fallback.",
+  "tree": {
+    "iterativeOrExplicitBoundedDepth": true,
+    "rule": "Read primary markers, JSON/canonical source trees and raw block extents incrementally under maxBytes/maxNodes; use iterative traversal or a separately explicit implementation depth bound before recursion. Duplicate JSON keys, invalid UTF8/surrogates, nonfinite active values, unknown schemas and unresolved typed identities remain separate source validation errors. A budget pass is not a valid source/capture proof."
+  },
+  "host": {
+    "actualQuotaPromiseEstablished": false,
+    "rule": "Parse budgets are engine job limits, not filesystem access, durable commit, quota reservation, resource lease or writer fencing. The actual host must additionally enforce its authenticated read/lease/aggregate memory/disk/concurrency limits. Follow existing D2-13 realpath race boundary;04 implementation/qualification is not performed here."
+  },
+  "failure": {
+    "partialDocumentInstallAllowed": false,
+    "rule": "Return a typed E_PARSE_LIMIT/E_PARSE_ARITHMETIC diagnostic with metric, original locator and phase; preserve original bytes/draft. No silently truncated field, guessed zero, dropped owner or source-only fallback that discards required source bytes. Before publication release only owned candidates after readers finish. After possible publication, budget/semantic readback failure is committed-unverified/unknown under save-settlement, not Saved or guaranteed rollback.",
+    "sourceClassification": "failed-before-apply-not-invalid-source",
+    "sourceRetention": "Do not modify the original or existing draft; keep existing input capability and captured bytes/locators. If the budget prevents reading/retaining the complete original, do not claim a complete source-only archive or silently retain just a prefix as the whole source. New source access remains subject to actual host lifetime/realpath rules."
+  },
+  "qualification": {
+    "finiteCounterWitnessOnly": true,
+    "actualDecoderImplemented": false,
+    "newTargetExecuted": false,
+    "productImplemented": false,
+    "independentlyReviewed": false
+  }
+}

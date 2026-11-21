@@ -1,0 +1,23 @@
+{
+  "schema": "FC-FEFF10-selected-input-lexer-and-error-boundary/1",
+  "binding": {
+    "path": "runs/385-FEFF10-lexer-reading/source-bindings.json",
+    "sha256": "89763cc4891d787789e7f466fc995aab7ab92230a3f2405ca76e5f9008c19a07"
+  },
+  "selectedVersion": "Same pinned d861cf8b64342e2d63a0aeb62c8b78faca7942c3 FEFF10 source asfeff10-source.contract.json;3 extra source text files are held, but only named str helpers are used for rdline. No FEFF9 equivalence or universal legacy lexer claimed.",
+  "lineProcessing": "rdline calls UNTAB then TRIML then ISCOMM. Source ISCOMM ignores blank lines and first nonblank ; * % #. Exclamation is not in that particular full-line comment set. Do not borrow fixstr global inline !/#/% comment stripping; it is a different routine. Preserve original bytes/line endings/comments and source spans separately from normalized token views.",
+  "twoWords": "BWORDS uses blanks/tabs and commas; repeated commas can create an empty field. rdline asks for at most2 words and returns after the second token. INCLUDE/LOAD comparison lowercases only command word; filename retains exact bytes/case. A second filename-like trailing word is ignored source text, not a second resource reference.",
+  "filename": "GETFLN recognizes six paired delimiters: doublequote/braces/parentheses/angle/singlequote/brackets. It takes the substring through the first matching closer and may ignore following bytes. No backslash/SQL/C/Python quote escapes or shell evaluation. Original argument span, exact resulting path span, ignored argument suffix and trailing bytes are all retained. Any semantic rewrite audits those dependencies; original filename interpretation is never silently guessed from extension or repaired by joining tokens.",
+  "quotedSpaces": "BWORDS is not quote-aware, so a quoted filename containing a space/tab/comma may lose its closer before GETFLN. Report the exact unqualified/malformed source outcome; do not join later words into an invented successful path or open another guessed prefix.",
+  "bounds": "Selected RDINP line is150 characters; rdline filename/word buffers90. The safe selected capture rejects line/word truncation ambiguity before resource lookup, retains full original bytes and a specific source-bound diagnostic. These source limits do not become universal host quotas or format-invalid scientific verdicts for all FEFF versions/encodings.",
+  "readError": "The selected RDINP code literally maps read_line_error to END and then exits input at itok=-1, potentially continuing with the already-read prefix. This is recorded source behavior, not allowed complete-source evidence. Required include absence/read error/unresolved job context/cycle/partial line/budget failure is failed-before-apply or explicit source-only recovery. A clean EOF and a failed read remain distinct capture outcomes; no completeLoaded/SaveExpectation from the truncated prefix.",
+  "referenceContext": "Each active source include occurrence binds source file SHA/path span/command and occurrence order, producer job-base/name-map context, exact resource bytes, required edge and frozen rule digest. The independently qualified context is persisted as owner-bound SourceMetadata/Dependency plus full immutable resource definitions; context/base strings never grant host access. hostSnapshotId/rule and descriptor commitments must bind the actual observed resolution map. Same bytes/filename at a different context or invocation do not replace these bindings.",
+  "ordinaryRestore": "Capture actual current typed atoms/phase state and original source/include observations separately. A later full-source reopen restores current geometry once and rebinds preserved raw/context resources; it never reruns includes, source coordinate normalization/RMULT or archived simulation controls to overwrite edits. Product loader/host verification remains future implementation under the existing full-source and settlement contracts.",
+  "failureMapping": "Use existing stage failure/source-only outcomes with detailed resource-context-required/read-error/truncation diagnostics. No new public protocol3 error code or accepted transport is introduced. Missing required bytes cannot downgrade to optional; unknown source naming/encoding stays unqualified rather than borrowing current CWD.",
+  "readErrorIsNeverCompleteInput": true,
+  "selectedPrimaryLexerSpecified": true,
+  "allGeneralFEFFLexersQualified": false,
+  "newTargetExecuted": false,
+  "producerExecuted": false,
+  "productImplemented": false
+}

@@ -1,0 +1,2638 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:draft:fc:resource-graph:proposal:2",
+  "title": "Recursive file captures and optional source companion snapshot; internal design, not a host permission",
+  "$defs": {
+    "LossBinding": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.codec.preservation/2-proposal"
+            },
+            "snapshot": {
+              "$ref": "#/$defs/Snapshot"
+            },
+            "profileId": {
+              "const": "vesta.profile.encode.obs_o01.v1"
+            },
+            "purpose": {
+              "enum": [
+                "save",
+                "saveAs"
+              ]
+            },
+            "optionsDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "sourceDescriptorDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "sourceAuditCanonical": {
+              "const": "FC-AuditNode-canonical-1"
+            },
+            "completeSourceLedgerDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "requestDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "protocol",
+            "snapshot",
+            "profileId",
+            "purpose",
+            "optionsDigest",
+            "sourceDescriptorDigest",
+            "sourceAuditCanonical",
+            "completeSourceLedgerDigest",
+            "requestDigest"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.codec.preservation/2-proposal"
+            },
+            "snapshot": {
+              "$ref": "#/$defs/Snapshot"
+            },
+            "profileId": {
+              "const": "vesta.profile.encode.obs_o02.v1"
+            },
+            "purpose": {
+              "enum": [
+                "export"
+              ]
+            },
+            "optionsDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "sourceDescriptorDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "sourceAuditCanonical": {
+              "const": "FC-AuditNode-canonical-1"
+            },
+            "completeSourceLedgerDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "requestDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "protocol",
+            "snapshot",
+            "profileId",
+            "purpose",
+            "optionsDigest",
+            "sourceDescriptorDigest",
+            "sourceAuditCanonical",
+            "completeSourceLedgerDigest",
+            "requestDigest"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.codec.preservation/2-proposal"
+            },
+            "snapshot": {
+              "$ref": "#/$defs/Snapshot"
+            },
+            "profileId": {
+              "const": "vesta.profile.encode.obs_o03.v1"
+            },
+            "purpose": {
+              "enum": [
+                "export"
+              ]
+            },
+            "optionsDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "sourceDescriptorDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "sourceAuditCanonical": {
+              "const": "FC-AuditNode-canonical-1"
+            },
+            "completeSourceLedgerDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "requestDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "protocol",
+            "snapshot",
+            "profileId",
+            "purpose",
+            "optionsDigest",
+            "sourceDescriptorDigest",
+            "sourceAuditCanonical",
+            "completeSourceLedgerDigest",
+            "requestDigest"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.codec.preservation/2-proposal"
+            },
+            "snapshot": {
+              "$ref": "#/$defs/Snapshot"
+            },
+            "profileId": {
+              "const": "vesta.profile.encode.obs_o04.v1"
+            },
+            "purpose": {
+              "enum": [
+                "export"
+              ]
+            },
+            "optionsDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "sourceDescriptorDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "sourceAuditCanonical": {
+              "const": "FC-AuditNode-canonical-1"
+            },
+            "completeSourceLedgerDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "requestDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "protocol",
+            "snapshot",
+            "profileId",
+            "purpose",
+            "optionsDigest",
+            "sourceDescriptorDigest",
+            "sourceAuditCanonical",
+            "completeSourceLedgerDigest",
+            "requestDigest"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.codec.preservation/2-proposal"
+            },
+            "snapshot": {
+              "$ref": "#/$defs/Snapshot"
+            },
+            "profileId": {
+              "const": "vesta.profile.encode.obs_o05.v1"
+            },
+            "purpose": {
+              "enum": [
+                "export"
+              ]
+            },
+            "optionsDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "sourceDescriptorDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "sourceAuditCanonical": {
+              "const": "FC-AuditNode-canonical-1"
+            },
+            "completeSourceLedgerDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "requestDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "protocol",
+            "snapshot",
+            "profileId",
+            "purpose",
+            "optionsDigest",
+            "sourceDescriptorDigest",
+            "sourceAuditCanonical",
+            "completeSourceLedgerDigest",
+            "requestDigest"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.codec.preservation/2-proposal"
+            },
+            "snapshot": {
+              "$ref": "#/$defs/Snapshot"
+            },
+            "profileId": {
+              "const": "vesta.profile.encode.obs_o06.v1"
+            },
+            "purpose": {
+              "enum": [
+                "export"
+              ]
+            },
+            "optionsDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "sourceDescriptorDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "sourceAuditCanonical": {
+              "const": "FC-AuditNode-canonical-1"
+            },
+            "completeSourceLedgerDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "requestDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "protocol",
+            "snapshot",
+            "profileId",
+            "purpose",
+            "optionsDigest",
+            "sourceDescriptorDigest",
+            "sourceAuditCanonical",
+            "completeSourceLedgerDigest",
+            "requestDigest"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.codec.preservation/2-proposal"
+            },
+            "snapshot": {
+              "$ref": "#/$defs/Snapshot"
+            },
+            "profileId": {
+              "const": "vesta.profile.encode.obs_o07.v1"
+            },
+            "purpose": {
+              "enum": [
+                "export"
+              ]
+            },
+            "optionsDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "sourceDescriptorDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "sourceAuditCanonical": {
+              "const": "FC-AuditNode-canonical-1"
+            },
+            "completeSourceLedgerDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "requestDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "protocol",
+            "snapshot",
+            "profileId",
+            "purpose",
+            "optionsDigest",
+            "sourceDescriptorDigest",
+            "sourceAuditCanonical",
+            "completeSourceLedgerDigest",
+            "requestDigest"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.codec.preservation/2-proposal"
+            },
+            "snapshot": {
+              "$ref": "#/$defs/Snapshot"
+            },
+            "profileId": {
+              "const": "vesta.profile.encode.obs_o08.v1"
+            },
+            "purpose": {
+              "enum": [
+                "export"
+              ]
+            },
+            "optionsDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "sourceDescriptorDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "sourceAuditCanonical": {
+              "const": "FC-AuditNode-canonical-1"
+            },
+            "completeSourceLedgerDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "requestDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "protocol",
+            "snapshot",
+            "profileId",
+            "purpose",
+            "optionsDigest",
+            "sourceDescriptorDigest",
+            "sourceAuditCanonical",
+            "completeSourceLedgerDigest",
+            "requestDigest"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.codec.preservation/2-proposal"
+            },
+            "snapshot": {
+              "$ref": "#/$defs/Snapshot"
+            },
+            "profileId": {
+              "const": "vesta.profile.encode.obs_o09.v1"
+            },
+            "purpose": {
+              "enum": [
+                "export"
+              ]
+            },
+            "optionsDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "sourceDescriptorDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "sourceAuditCanonical": {
+              "const": "FC-AuditNode-canonical-1"
+            },
+            "completeSourceLedgerDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "requestDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "protocol",
+            "snapshot",
+            "profileId",
+            "purpose",
+            "optionsDigest",
+            "sourceDescriptorDigest",
+            "sourceAuditCanonical",
+            "completeSourceLedgerDigest",
+            "requestDigest"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.codec.preservation/2-proposal"
+            },
+            "snapshot": {
+              "$ref": "#/$defs/Snapshot"
+            },
+            "profileId": {
+              "const": "vesta.profile.encode.obs_o10.v1"
+            },
+            "purpose": {
+              "enum": [
+                "export"
+              ]
+            },
+            "optionsDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "sourceDescriptorDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "sourceAuditCanonical": {
+              "const": "FC-AuditNode-canonical-1"
+            },
+            "completeSourceLedgerDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "requestDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "protocol",
+            "snapshot",
+            "profileId",
+            "purpose",
+            "optionsDigest",
+            "sourceDescriptorDigest",
+            "sourceAuditCanonical",
+            "completeSourceLedgerDigest",
+            "requestDigest"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.codec.preservation/2-proposal"
+            },
+            "snapshot": {
+              "$ref": "#/$defs/Snapshot"
+            },
+            "profileId": {
+              "const": "vesta.profile.encode.obs_o11.v1"
+            },
+            "purpose": {
+              "enum": [
+                "export"
+              ]
+            },
+            "optionsDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "sourceDescriptorDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "sourceAuditCanonical": {
+              "const": "FC-AuditNode-canonical-1"
+            },
+            "completeSourceLedgerDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "requestDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "protocol",
+            "snapshot",
+            "profileId",
+            "purpose",
+            "optionsDigest",
+            "sourceDescriptorDigest",
+            "sourceAuditCanonical",
+            "completeSourceLedgerDigest",
+            "requestDigest"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.codec.preservation/2-proposal"
+            },
+            "snapshot": {
+              "$ref": "#/$defs/Snapshot"
+            },
+            "profileId": {
+              "const": "vesta.profile.encode.obs_o12.v1"
+            },
+            "purpose": {
+              "enum": [
+                "export"
+              ]
+            },
+            "optionsDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "sourceDescriptorDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "sourceAuditCanonical": {
+              "const": "FC-AuditNode-canonical-1"
+            },
+            "completeSourceLedgerDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "requestDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "protocol",
+            "snapshot",
+            "profileId",
+            "purpose",
+            "optionsDigest",
+            "sourceDescriptorDigest",
+            "sourceAuditCanonical",
+            "completeSourceLedgerDigest",
+            "requestDigest"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.codec.preservation/2-proposal"
+            },
+            "snapshot": {
+              "$ref": "#/$defs/Snapshot"
+            },
+            "profileId": {
+              "const": "vesta.profile.encode.obs_o13.v1"
+            },
+            "purpose": {
+              "enum": [
+                "export"
+              ]
+            },
+            "optionsDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "sourceDescriptorDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "sourceAuditCanonical": {
+              "const": "FC-AuditNode-canonical-1"
+            },
+            "completeSourceLedgerDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "requestDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "protocol",
+            "snapshot",
+            "profileId",
+            "purpose",
+            "optionsDigest",
+            "sourceDescriptorDigest",
+            "sourceAuditCanonical",
+            "completeSourceLedgerDigest",
+            "requestDigest"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.codec.preservation/2-proposal"
+            },
+            "snapshot": {
+              "$ref": "#/$defs/Snapshot"
+            },
+            "profileId": {
+              "const": "vesta.profile.encode.obs_o14.v1"
+            },
+            "purpose": {
+              "enum": [
+                "export"
+              ]
+            },
+            "optionsDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "sourceDescriptorDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "sourceAuditCanonical": {
+              "const": "FC-AuditNode-canonical-1"
+            },
+            "completeSourceLedgerDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "requestDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "protocol",
+            "snapshot",
+            "profileId",
+            "purpose",
+            "optionsDigest",
+            "sourceDescriptorDigest",
+            "sourceAuditCanonical",
+            "completeSourceLedgerDigest",
+            "requestDigest"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.codec.preservation/2-proposal"
+            },
+            "snapshot": {
+              "$ref": "#/$defs/Snapshot"
+            },
+            "profileId": {
+              "const": "vesta.profile.encode.obs_o15.v1"
+            },
+            "purpose": {
+              "enum": [
+                "export"
+              ]
+            },
+            "optionsDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "sourceDescriptorDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "sourceAuditCanonical": {
+              "const": "FC-AuditNode-canonical-1"
+            },
+            "completeSourceLedgerDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "requestDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "protocol",
+            "snapshot",
+            "profileId",
+            "purpose",
+            "optionsDigest",
+            "sourceDescriptorDigest",
+            "sourceAuditCanonical",
+            "completeSourceLedgerDigest",
+            "requestDigest"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.codec.preservation/2-proposal"
+            },
+            "snapshot": {
+              "$ref": "#/$defs/Snapshot"
+            },
+            "profileId": {
+              "const": "vesta.profile.encode.obs_o16.v1"
+            },
+            "purpose": {
+              "enum": [
+                "export"
+              ]
+            },
+            "optionsDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "sourceDescriptorDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "sourceAuditCanonical": {
+              "const": "FC-AuditNode-canonical-1"
+            },
+            "completeSourceLedgerDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "requestDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "protocol",
+            "snapshot",
+            "profileId",
+            "purpose",
+            "optionsDigest",
+            "sourceDescriptorDigest",
+            "sourceAuditCanonical",
+            "completeSourceLedgerDigest",
+            "requestDigest"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.codec.preservation/2-proposal"
+            },
+            "snapshot": {
+              "$ref": "#/$defs/Snapshot"
+            },
+            "profileId": {
+              "const": "vesta.profile.encode.obs_o17.v1"
+            },
+            "purpose": {
+              "enum": [
+                "export"
+              ]
+            },
+            "optionsDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "sourceDescriptorDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "sourceAuditCanonical": {
+              "const": "FC-AuditNode-canonical-1"
+            },
+            "completeSourceLedgerDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "requestDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "protocol",
+            "snapshot",
+            "profileId",
+            "purpose",
+            "optionsDigest",
+            "sourceDescriptorDigest",
+            "sourceAuditCanonical",
+            "completeSourceLedgerDigest",
+            "requestDigest"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.codec.preservation/2-proposal"
+            },
+            "snapshot": {
+              "$ref": "#/$defs/Snapshot"
+            },
+            "profileId": {
+              "const": "vesta.profile.encode.obs_o18.v1"
+            },
+            "purpose": {
+              "enum": [
+                "export"
+              ]
+            },
+            "optionsDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "sourceDescriptorDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "sourceAuditCanonical": {
+              "const": "FC-AuditNode-canonical-1"
+            },
+            "completeSourceLedgerDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "requestDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "protocol",
+            "snapshot",
+            "profileId",
+            "purpose",
+            "optionsDigest",
+            "sourceDescriptorDigest",
+            "sourceAuditCanonical",
+            "completeSourceLedgerDigest",
+            "requestDigest"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.codec.preservation/2-proposal"
+            },
+            "snapshot": {
+              "$ref": "#/$defs/Snapshot"
+            },
+            "profileId": {
+              "const": "vesta.profile.encode.obs_o19.v1"
+            },
+            "purpose": {
+              "enum": [
+                "export"
+              ]
+            },
+            "optionsDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "sourceDescriptorDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "sourceAuditCanonical": {
+              "const": "FC-AuditNode-canonical-1"
+            },
+            "completeSourceLedgerDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "requestDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "protocol",
+            "snapshot",
+            "profileId",
+            "purpose",
+            "optionsDigest",
+            "sourceDescriptorDigest",
+            "sourceAuditCanonical",
+            "completeSourceLedgerDigest",
+            "requestDigest"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.codec.preservation/2-proposal"
+            },
+            "snapshot": {
+              "$ref": "#/$defs/Snapshot"
+            },
+            "profileId": {
+              "const": "vesta.profile.encode.obs_o20.v1"
+            },
+            "purpose": {
+              "enum": [
+                "export"
+              ]
+            },
+            "optionsDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "sourceDescriptorDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "sourceAuditCanonical": {
+              "const": "FC-AuditNode-canonical-1"
+            },
+            "completeSourceLedgerDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "requestDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "protocol",
+            "snapshot",
+            "profileId",
+            "purpose",
+            "optionsDigest",
+            "sourceDescriptorDigest",
+            "sourceAuditCanonical",
+            "completeSourceLedgerDigest",
+            "requestDigest"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.codec.preservation/2-proposal"
+            },
+            "snapshot": {
+              "$ref": "#/$defs/Snapshot"
+            },
+            "profileId": {
+              "const": "vesta.profile.encode.obs_o21.v1"
+            },
+            "purpose": {
+              "enum": [
+                "export"
+              ]
+            },
+            "optionsDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "sourceDescriptorDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "sourceAuditCanonical": {
+              "const": "FC-AuditNode-canonical-1"
+            },
+            "completeSourceLedgerDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "requestDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "protocol",
+            "snapshot",
+            "profileId",
+            "purpose",
+            "optionsDigest",
+            "sourceDescriptorDigest",
+            "sourceAuditCanonical",
+            "completeSourceLedgerDigest",
+            "requestDigest"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.codec.preservation/2-proposal"
+            },
+            "snapshot": {
+              "$ref": "#/$defs/Snapshot"
+            },
+            "profileId": {
+              "const": "vesta.profile.encode.obs_o22.v1"
+            },
+            "purpose": {
+              "enum": [
+                "export"
+              ]
+            },
+            "optionsDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "sourceDescriptorDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "sourceAuditCanonical": {
+              "const": "FC-AuditNode-canonical-1"
+            },
+            "completeSourceLedgerDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "requestDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "protocol",
+            "snapshot",
+            "profileId",
+            "purpose",
+            "optionsDigest",
+            "sourceDescriptorDigest",
+            "sourceAuditCanonical",
+            "completeSourceLedgerDigest",
+            "requestDigest"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.codec.preservation/2-proposal"
+            },
+            "snapshot": {
+              "$ref": "#/$defs/Snapshot"
+            },
+            "profileId": {
+              "const": "vesta.profile.encode.obs_o23.v1"
+            },
+            "purpose": {
+              "enum": [
+                "export"
+              ]
+            },
+            "optionsDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "sourceDescriptorDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "sourceAuditCanonical": {
+              "const": "FC-AuditNode-canonical-1"
+            },
+            "completeSourceLedgerDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "requestDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "protocol",
+            "snapshot",
+            "profileId",
+            "purpose",
+            "optionsDigest",
+            "sourceDescriptorDigest",
+            "sourceAuditCanonical",
+            "completeSourceLedgerDigest",
+            "requestDigest"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.codec.preservation/2-proposal"
+            },
+            "snapshot": {
+              "$ref": "#/$defs/Snapshot"
+            },
+            "profileId": {
+              "const": "vesta.profile.image.raster.bmp.v1"
+            },
+            "purpose": {
+              "enum": [
+                "export"
+              ]
+            },
+            "optionsDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "sourceDescriptorDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "sourceAuditCanonical": {
+              "const": "FC-AuditNode-canonical-1"
+            },
+            "completeSourceLedgerDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "requestDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "protocol",
+            "snapshot",
+            "profileId",
+            "purpose",
+            "optionsDigest",
+            "sourceDescriptorDigest",
+            "sourceAuditCanonical",
+            "completeSourceLedgerDigest",
+            "requestDigest"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.codec.preservation/2-proposal"
+            },
+            "snapshot": {
+              "$ref": "#/$defs/Snapshot"
+            },
+            "profileId": {
+              "const": "vesta.profile.image.raster.eps.v1"
+            },
+            "purpose": {
+              "enum": [
+                "export"
+              ]
+            },
+            "optionsDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "sourceDescriptorDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "sourceAuditCanonical": {
+              "const": "FC-AuditNode-canonical-1"
+            },
+            "completeSourceLedgerDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "requestDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "protocol",
+            "snapshot",
+            "profileId",
+            "purpose",
+            "optionsDigest",
+            "sourceDescriptorDigest",
+            "sourceAuditCanonical",
+            "completeSourceLedgerDigest",
+            "requestDigest"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.codec.preservation/2-proposal"
+            },
+            "snapshot": {
+              "$ref": "#/$defs/Snapshot"
+            },
+            "profileId": {
+              "const": "vesta.profile.image.raster.jpeg.v1"
+            },
+            "purpose": {
+              "enum": [
+                "export"
+              ]
+            },
+            "optionsDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "sourceDescriptorDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "sourceAuditCanonical": {
+              "const": "FC-AuditNode-canonical-1"
+            },
+            "completeSourceLedgerDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "requestDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "protocol",
+            "snapshot",
+            "profileId",
+            "purpose",
+            "optionsDigest",
+            "sourceDescriptorDigest",
+            "sourceAuditCanonical",
+            "completeSourceLedgerDigest",
+            "requestDigest"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.codec.preservation/2-proposal"
+            },
+            "snapshot": {
+              "$ref": "#/$defs/Snapshot"
+            },
+            "profileId": {
+              "const": "vesta.profile.image.raster.jpeg2000.v1"
+            },
+            "purpose": {
+              "enum": [
+                "export"
+              ]
+            },
+            "optionsDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "sourceDescriptorDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "sourceAuditCanonical": {
+              "const": "FC-AuditNode-canonical-1"
+            },
+            "completeSourceLedgerDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "requestDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "protocol",
+            "snapshot",
+            "profileId",
+            "purpose",
+            "optionsDigest",
+            "sourceDescriptorDigest",
+            "sourceAuditCanonical",
+            "completeSourceLedgerDigest",
+            "requestDigest"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.codec.preservation/2-proposal"
+            },
+            "snapshot": {
+              "$ref": "#/$defs/Snapshot"
+            },
+            "profileId": {
+              "const": "vesta.profile.image.raster.png.v1"
+            },
+            "purpose": {
+              "enum": [
+                "export"
+              ]
+            },
+            "optionsDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "sourceDescriptorDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "sourceAuditCanonical": {
+              "const": "FC-AuditNode-canonical-1"
+            },
+            "completeSourceLedgerDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "requestDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "protocol",
+            "snapshot",
+            "profileId",
+            "purpose",
+            "optionsDigest",
+            "sourceDescriptorDigest",
+            "sourceAuditCanonical",
+            "completeSourceLedgerDigest",
+            "requestDigest"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.codec.preservation/2-proposal"
+            },
+            "snapshot": {
+              "$ref": "#/$defs/Snapshot"
+            },
+            "profileId": {
+              "const": "vesta.profile.image.raster.ppm.v1"
+            },
+            "purpose": {
+              "enum": [
+                "export"
+              ]
+            },
+            "optionsDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "sourceDescriptorDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "sourceAuditCanonical": {
+              "const": "FC-AuditNode-canonical-1"
+            },
+            "completeSourceLedgerDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "requestDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "protocol",
+            "snapshot",
+            "profileId",
+            "purpose",
+            "optionsDigest",
+            "sourceDescriptorDigest",
+            "sourceAuditCanonical",
+            "completeSourceLedgerDigest",
+            "requestDigest"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.codec.preservation/2-proposal"
+            },
+            "snapshot": {
+              "$ref": "#/$defs/Snapshot"
+            },
+            "profileId": {
+              "const": "vesta.profile.image.raster.raw.v1"
+            },
+            "purpose": {
+              "enum": [
+                "export"
+              ]
+            },
+            "optionsDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "sourceDescriptorDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "sourceAuditCanonical": {
+              "const": "FC-AuditNode-canonical-1"
+            },
+            "completeSourceLedgerDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "requestDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "protocol",
+            "snapshot",
+            "profileId",
+            "purpose",
+            "optionsDigest",
+            "sourceDescriptorDigest",
+            "sourceAuditCanonical",
+            "completeSourceLedgerDigest",
+            "requestDigest"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.codec.preservation/2-proposal"
+            },
+            "snapshot": {
+              "$ref": "#/$defs/Snapshot"
+            },
+            "profileId": {
+              "const": "vesta.profile.image.raster.rgb.v1"
+            },
+            "purpose": {
+              "enum": [
+                "export"
+              ]
+            },
+            "optionsDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "sourceDescriptorDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "sourceAuditCanonical": {
+              "const": "FC-AuditNode-canonical-1"
+            },
+            "completeSourceLedgerDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "requestDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "protocol",
+            "snapshot",
+            "profileId",
+            "purpose",
+            "optionsDigest",
+            "sourceDescriptorDigest",
+            "sourceAuditCanonical",
+            "completeSourceLedgerDigest",
+            "requestDigest"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.codec.preservation/2-proposal"
+            },
+            "snapshot": {
+              "$ref": "#/$defs/Snapshot"
+            },
+            "profileId": {
+              "const": "vesta.profile.image.raster.tga.v1"
+            },
+            "purpose": {
+              "enum": [
+                "export"
+              ]
+            },
+            "optionsDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "sourceDescriptorDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "sourceAuditCanonical": {
+              "const": "FC-AuditNode-canonical-1"
+            },
+            "completeSourceLedgerDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "requestDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "protocol",
+            "snapshot",
+            "profileId",
+            "purpose",
+            "optionsDigest",
+            "sourceDescriptorDigest",
+            "sourceAuditCanonical",
+            "completeSourceLedgerDigest",
+            "requestDigest"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.codec.preservation/2-proposal"
+            },
+            "snapshot": {
+              "$ref": "#/$defs/Snapshot"
+            },
+            "profileId": {
+              "const": "vesta.profile.image.raster.tiff.v1"
+            },
+            "purpose": {
+              "enum": [
+                "export"
+              ]
+            },
+            "optionsDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "sourceDescriptorDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "sourceAuditCanonical": {
+              "const": "FC-AuditNode-canonical-1"
+            },
+            "completeSourceLedgerDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "requestDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "protocol",
+            "snapshot",
+            "profileId",
+            "purpose",
+            "optionsDigest",
+            "sourceDescriptorDigest",
+            "sourceAuditCanonical",
+            "completeSourceLedgerDigest",
+            "requestDigest"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.codec.preservation/2-proposal"
+            },
+            "snapshot": {
+              "$ref": "#/$defs/Snapshot"
+            },
+            "profileId": {
+              "const": "vesta.profile.image.vector.eps.v1"
+            },
+            "purpose": {
+              "enum": [
+                "export"
+              ]
+            },
+            "optionsDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "sourceDescriptorDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "sourceAuditCanonical": {
+              "const": "FC-AuditNode-canonical-1"
+            },
+            "completeSourceLedgerDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "requestDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "protocol",
+            "snapshot",
+            "profileId",
+            "purpose",
+            "optionsDigest",
+            "sourceDescriptorDigest",
+            "sourceAuditCanonical",
+            "completeSourceLedgerDigest",
+            "requestDigest"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.codec.preservation/2-proposal"
+            },
+            "snapshot": {
+              "$ref": "#/$defs/Snapshot"
+            },
+            "profileId": {
+              "const": "vesta.profile.image.vector.pdf.v1"
+            },
+            "purpose": {
+              "enum": [
+                "export"
+              ]
+            },
+            "optionsDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "sourceDescriptorDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "sourceAuditCanonical": {
+              "const": "FC-AuditNode-canonical-1"
+            },
+            "completeSourceLedgerDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "requestDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "protocol",
+            "snapshot",
+            "profileId",
+            "purpose",
+            "optionsDigest",
+            "sourceDescriptorDigest",
+            "sourceAuditCanonical",
+            "completeSourceLedgerDigest",
+            "requestDigest"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.codec.preservation/2-proposal"
+            },
+            "snapshot": {
+              "$ref": "#/$defs/Snapshot"
+            },
+            "profileId": {
+              "const": "vesta.profile.image.vector.postscript.v1"
+            },
+            "purpose": {
+              "enum": [
+                "export"
+              ]
+            },
+            "optionsDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "sourceDescriptorDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "sourceAuditCanonical": {
+              "const": "FC-AuditNode-canonical-1"
+            },
+            "completeSourceLedgerDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "requestDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "protocol",
+            "snapshot",
+            "profileId",
+            "purpose",
+            "optionsDigest",
+            "sourceDescriptorDigest",
+            "sourceAuditCanonical",
+            "completeSourceLedgerDigest",
+            "requestDigest"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.codec.preservation/2-proposal"
+            },
+            "snapshot": {
+              "$ref": "#/$defs/Snapshot"
+            },
+            "profileId": {
+              "const": "vesta.profile.image.vector.svg.v1"
+            },
+            "purpose": {
+              "enum": [
+                "export"
+              ]
+            },
+            "optionsDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "sourceDescriptorDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "sourceAuditCanonical": {
+              "const": "FC-AuditNode-canonical-1"
+            },
+            "completeSourceLedgerDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "requestDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "protocol",
+            "snapshot",
+            "profileId",
+            "purpose",
+            "optionsDigest",
+            "sourceDescriptorDigest",
+            "sourceAuditCanonical",
+            "completeSourceLedgerDigest",
+            "requestDigest"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "Snapshot": {
+      "type": "object",
+      "properties": {
+        "documentId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "epoch": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)$"
+        },
+        "revision": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)$"
+        },
+        "sourceRootDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "policyDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "resourceGraphDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "sourceTypeDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "required": [
+        "documentId",
+        "epoch",
+        "revision",
+        "sourceRootDigest",
+        "policyDigest",
+        "resourceGraphDigest",
+        "sourceTypeDigest"
+      ],
+      "additionalProperties": false
+    },
+    "File": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "byteLength": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)$"
+        }
+      },
+      "required": [
+        "key",
+        "sha256",
+        "byteLength"
+      ],
+      "additionalProperties": false
+    },
+    "Span": {
+      "type": "object",
+      "properties": {
+        "byteOffset": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)$"
+        },
+        "byteLength": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)$"
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "required": [
+        "byteOffset",
+        "byteLength",
+        "sha256"
+      ],
+      "additionalProperties": false
+    },
+    "CapturedReference": {
+      "type": "object",
+      "properties": {
+        "referenceId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sourcePrimarySha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "pathSpan": {
+          "$ref": "#/$defs/Span"
+        },
+        "literalPathHex": {
+          "type": "string",
+          "pattern": "^(?:[0-9a-f]{2})+$"
+        },
+        "resourceKey": {
+          "type": "string",
+          "minLength": 1
+        },
+        "resourceSha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "resourceByteLength": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)$"
+        },
+        "ownerLocator": {
+          "type": "string",
+          "pattern": "^(|(/([^~]|~[01])*))$"
+        },
+        "ruleId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "ruleDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "edgeKind": {
+          "const": "explicit"
+        }
+      },
+      "required": [
+        "referenceId",
+        "sourcePrimarySha256",
+        "pathSpan",
+        "literalPathHex",
+        "resourceKey",
+        "resourceSha256",
+        "resourceByteLength",
+        "ownerLocator",
+        "ruleId",
+        "ruleDigest",
+        "edgeKind"
+      ],
+      "additionalProperties": false
+    },
+    "ImplicitReference": {
+      "type": "object",
+      "properties": {
+        "edgeKind": {
+          "const": "implicit"
+        },
+        "referenceId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sourcePrimarySha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "seedReferenceId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "derivedNameHex": {
+          "type": "string",
+          "pattern": "^(?:[0-9a-f]{2})+$"
+        },
+        "resourceKey": {
+          "type": "string",
+          "minLength": 1
+        },
+        "resourceSha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "resourceByteLength": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)$"
+        },
+        "ownerLocator": {
+          "type": "string",
+          "pattern": "^(|(/([^~]|~[01])*))$"
+        },
+        "ruleId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "ruleDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "required": [
+        "edgeKind",
+        "referenceId",
+        "sourcePrimarySha256",
+        "seedReferenceId",
+        "derivedNameHex",
+        "resourceKey",
+        "resourceSha256",
+        "resourceByteLength",
+        "ownerLocator",
+        "ruleId",
+        "ruleDigest"
+      ],
+      "additionalProperties": false
+    },
+    "SourceReference": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/CapturedReference"
+        },
+        {
+          "$ref": "#/$defs/ImplicitReference"
+        }
+      ]
+    },
+    "CapturedInput": {
+      "type": "object",
+      "properties": {
+        "primarySha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "primaryNameHex": {
+          "type": "string",
+          "pattern": "^(?:[0-9a-f]{2})+$"
+        },
+        "references": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SourceReference"
+          }
+        },
+        "files": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/File"
+          }
+        }
+      },
+      "required": [
+        "primarySha256",
+        "primaryNameHex",
+        "references",
+        "files"
+      ],
+      "additionalProperties": false
+    },
+    "ExpectedObject": {
+      "type": "object",
+      "properties": {
+        "sourceObjectKey": {
+          "type": "string",
+          "minLength": 1
+        },
+        "ownerLocator": {
+          "type": "string",
+          "pattern": "^(|(/([^~]|~[01])*))$"
+        },
+        "emittedLocator": {
+          "type": "string",
+          "pattern": "^(|(/([^~]|~[01])*))$"
+        },
+        "objectKind": {
+          "enum": [
+            "field",
+            "phase",
+            "molecule",
+            "scene",
+            "source-entity",
+            "image",
+            "mesh",
+            "table",
+            "text",
+            "plot"
+          ]
+        },
+        "qualification": {
+          "enum": [
+            "selected-storage-source",
+            "source-preserved",
+            "scientific-qualified",
+            "explicit-export-projection"
+          ]
+        },
+        "descriptorDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "componentDataDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "preservedSourceDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "comparisonPolicyId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "resourceKeys": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "sourceObjectKey",
+        "ownerLocator",
+        "emittedLocator",
+        "objectKind",
+        "qualification",
+        "descriptorDigest",
+        "componentDataDigest",
+        "preservedSourceDigest",
+        "comparisonPolicyId",
+        "resourceKeys"
+      ],
+      "additionalProperties": false
+    },
+    "ObservedObject": {
+      "type": "object",
+      "properties": {
+        "runtimeObjectId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "ownerLocator": {
+          "type": "string",
+          "pattern": "^(|(/([^~]|~[01])*))$"
+        },
+        "emittedLocator": {
+          "type": "string",
+          "pattern": "^(|(/([^~]|~[01])*))$"
+        },
+        "objectKind": {
+          "enum": [
+            "field",
+            "phase",
+            "molecule",
+            "scene",
+            "source-entity",
+            "image",
+            "mesh",
+            "table",
+            "text",
+            "plot"
+          ]
+        },
+        "qualification": {
+          "enum": [
+            "selected-storage-source",
+            "source-preserved",
+            "scientific-qualified",
+            "explicit-export-projection"
+          ]
+        },
+        "descriptorDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "componentDataDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "preservedSourceDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "comparisonPolicyId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "resourceKeys": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "runtimeObjectId",
+        "ownerLocator",
+        "emittedLocator",
+        "objectKind",
+        "qualification",
+        "descriptorDigest",
+        "componentDataDigest",
+        "preservedSourceDigest",
+        "comparisonPolicyId",
+        "resourceKeys"
+      ],
+      "additionalProperties": false
+    },
+    "SaveExpectation": {
+      "type": "object",
+      "properties": {
+        "binding": {
+          "$ref": "#/$defs/LossBinding"
+        },
+        "planId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "policyDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "primarySha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "files": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/File"
+          }
+        },
+        "referenceGraphDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "requiredObjects": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ExpectedObject"
+          }
+        },
+        "expectedPreservedSourceDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "comparisonRuleDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "required": [
+        "binding",
+        "planId",
+        "policyDigest",
+        "primarySha256",
+        "files",
+        "referenceGraphDigest",
+        "requiredObjects",
+        "expectedPreservedSourceDigest",
+        "comparisonRuleDigest"
+      ],
+      "additionalProperties": false
+    },
+    "ReadbackProof": {
+      "type": "object",
+      "properties": {
+        "planId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "expectationDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "artifactSetDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "primarySha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "verifierRuleDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "verificationContextId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "stage": {
+          "enum": [
+            "candidate",
+            "published",
+            "reopen"
+          ]
+        },
+        "inputScope": {
+          "const": "artifact-set-only"
+        },
+        "files": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/File"
+          }
+        },
+        "objects": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ObservedObject"
+          }
+        },
+        "resolvedReferenceGraphDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "preservedSourceDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "required": [
+        "planId",
+        "expectationDigest",
+        "artifactSetDigest",
+        "primarySha256",
+        "verifierRuleDigest",
+        "verificationContextId",
+        "stage",
+        "inputScope",
+        "files",
+        "objects",
+        "resolvedReferenceGraphDigest",
+        "preservedSourceDigest"
+      ],
+      "additionalProperties": false
+    },
+    "GraphFile": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "byteLength": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)$"
+        },
+        "originalNameHex": {
+          "type": "string",
+          "pattern": "^(?:[0-9a-f]{2})+$"
+        },
+        "referenceRuleDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "required": [
+        "key",
+        "sha256",
+        "byteLength",
+        "originalNameHex",
+        "referenceRuleDigest"
+      ],
+      "additionalProperties": false
+    },
+    "NodeCapture": {
+      "type": "object",
+      "properties": {
+        "primaryKey": {
+          "type": "string",
+          "minLength": 1
+        },
+        "captured": {
+          "$ref": "#/$defs/CapturedInput"
+        }
+      },
+      "required": [
+        "primaryKey",
+        "captured"
+      ],
+      "additionalProperties": false
+    },
+    "GraphEdge": {
+      "type": "object",
+      "properties": {
+        "fromKey": {
+          "type": "string",
+          "minLength": 1
+        },
+        "toKey": {
+          "type": "string",
+          "minLength": 1
+        },
+        "referenceId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "kind": {
+          "enum": [
+            "structure-import",
+            "density-import",
+            "texture-import",
+            "geometry-import",
+            "producer-pair",
+            "producer-include"
+          ]
+        },
+        "recursiveDecode": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "fromKey",
+        "toKey",
+        "referenceId",
+        "kind",
+        "recursiveDecode"
+      ],
+      "additionalProperties": false,
+      "oneOf": [
+        {
+          "properties": {
+            "kind": {
+              "enum": [
+                "structure-import",
+                "density-import",
+                "texture-import",
+                "geometry-import",
+                "producer-pair"
+              ]
+            }
+          }
+        },
+        {
+          "properties": {
+            "kind": {
+              "const": "producer-include"
+            },
+            "recursiveDecode": {
+              "const": true
+            }
+          }
+        }
+      ]
+    },
+    "ProbeResult": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "absent"
+            }
+          },
+          "required": [
+            "kind"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "present"
+            },
+            "toKey": {
+              "type": "string",
+              "minLength": 1
+            },
+            "referenceId": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "kind",
+            "toKey",
+            "referenceId"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "OptionalProbe": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "fromKey": {
+          "type": "string",
+          "minLength": 1
+        },
+        "derivedNameHex": {
+          "type": "string",
+          "pattern": "^(?:[0-9a-f]{2})+$"
+        },
+        "ruleId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "ruleDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "result": {
+          "$ref": "#/$defs/ProbeResult"
+        }
+      },
+      "required": [
+        "id",
+        "fromKey",
+        "derivedNameHex",
+        "ruleId",
+        "ruleDigest",
+        "result"
+      ],
+      "additionalProperties": false
+    },
+    "CapturedGraph": {
+      "type": "object",
+      "properties": {
+        "rootKey": {
+          "type": "string",
+          "minLength": 1
+        },
+        "files": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/GraphFile"
+          }
+        },
+        "captures": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/NodeCapture"
+          }
+        },
+        "edges": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/GraphEdge"
+          }
+        },
+        "optionalProbes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/OptionalProbe"
+          }
+        },
+        "policyDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "hostSnapshotId": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "rootKey",
+        "files",
+        "captures",
+        "edges",
+        "optionalProbes",
+        "policyDigest",
+        "hostSnapshotId"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$ref": "#/$defs/CapturedGraph"
+}

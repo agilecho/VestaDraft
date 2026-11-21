@@ -1,0 +1,145 @@
+{
+  "schema": "FC-grid3-binary-contract-in-progress/2",
+  "formatRefs": [
+    "VM18-I36",
+    "VM18-I37",
+    "OBS-O21",
+    "OBS-O22"
+  ],
+  "source": {
+    "reader": "readGRIDfile0xbd1d8: 4versionints, optionalversionextra bytes,80title, flags/counts/cell; selectedversion3.0 staticpath",
+    "writer": "exportGridFile0xc375c;0xc38bc..0xc39ec commonheader andfull/symmetry branch",
+    "targetSha256": "c2c677facf6c67783cc7bbe64e92b75beb1a567fc373eacabee58b11fb81a77f",
+    "targetExecuted": false
+  },
+  "layout": [
+    {
+      "offset": 0,
+      "type": "4i32LE",
+      "meaning": "3,0,0,0 selectedversion; fourthword extensionlength0"
+    },
+    {
+      "offset": 16,
+      "type": "80bytes",
+      "meaning": "title; displaystopsatNUL, allrawbytespreserved"
+    },
+    {
+      "offset": 96,
+      "type": "i32LE",
+      "meaning": "periodic1 or general0"
+    },
+    {
+      "offset": 100,
+      "type": "i32LE",
+      "meaning": "symmetry-storageflag0 forqualifiedflatprofile"
+    },
+    {
+      "offset": 104,
+      "type": "i32LE",
+      "meaning": "1 scalarcomponent forselectedprofile"
+    },
+    {
+      "offset": 108,
+      "type": "i32LE",
+      "meaning": "rank3"
+    },
+    {
+      "offset": 112,
+      "type": "3i32LE",
+      "meaning": "storedXYZdimensions: periodiccoreN, generalendpointN"
+    },
+    {
+      "offset": 124,
+      "type": "i32LE",
+      "meaning": "numberstoredscalarrecords=productdims forflatstorage"
+    },
+    {
+      "offset": 128,
+      "type": "6f32LE",
+      "meaning": "celllengths/angles"
+    },
+    {
+      "offset": 152,
+      "type": "productdims*f32LE",
+      "meaning": "x-fast scalarsequence, exactfullfilelength"
+    }
+  ],
+  "geometry": {
+    "periodic": "CoreN excludes redundant endpoints; coordinate fractions i/N. Field closure flagged separately.",
+    "general": "StoredN includes explicit endpoints; coordinate fractions i/(N-1) forselected cell-based domain, minN2; not automatically periodic.",
+    "origin": "Selectedcell-based origin0. Arbitraryorigin/axisvectors not represented inthisprofile; report transform/loss or refuse.",
+    "unit": "Scalar kind/unit and vector/tensor semantics are not established by extension; require versioned Field/source descriptor."
+  },
+  "options": {
+    "dialect": {
+      "const": "grid3.0-flat-one-scalar-le32"
+    },
+    "periodic": "Const per ggrid/pgrid route or required matching header on import",
+    "symmetry": {
+      "storagePolicy": [
+        "raw",
+        "auto-exact",
+        "symmetry-indexed"
+      ],
+      "origin": "newexplicitDraftdesignoption; nativeautoindexcompressionobservedstatically, notnewnativeUIparameter"
+    },
+    "components": {
+      "enum": [
+        1,
+        2
+      ],
+      "origin": "sourceheadernValandexplicitField/FieldPairselection;mustmatch,notUIparameterdiscovery"
+    },
+    "byteOrder": {
+      "const": "little"
+    },
+    "precision": "binary32 projection only with full per-field prospective budget; existing f32 bits exact"
+  },
+  "failures": [
+    "unsupportedversion/extraheader/unknownstorageflag/unsupportedcomponentcount orrank",
+    "invalid/overflowing dimensioncount orresourcecaps",
+    "truncated/extra payload",
+    "nonfinitecell/scalars, invalidmetric",
+    "arbitraryorigin/steps/units or source metadata loss without complete audit/consent",
+    "indexedrecordoutsidegeneralstridebounds,duplicateindex,nonintegralgridoperator,missingcoverageorconflictingbits",
+    "symmetry-indexedrequestedwithoutcompletebit-exactsymmetryproof"
+  ],
+  "versionBoundary": "binary-grid-native-group-contract.json: exact selected3.0/3.6 extra-count/rank/cell/data framing is source-bound separately; current functional requests remain version3.0, no genuine3.6/native runtime qualification.",
+  "titleBoundary": "Old outputs contain nonsemantic uninitialized title-tail bytes. Preserve existingraw; new writer must not expose new process memory. Deterministic padding is an explicit encoding policy, not assumed old-byte equality.",
+  "qualification": {
+    "lockedFlatSingleScalarSubsetSpecified": true,
+    "fourExistingFilesIndependentlyRead": true,
+    "asymmetricAxisClosureExact": true,
+    "fullHistoricalGridDialectQualified": false,
+    "productImplemented": false,
+    "independentlyReviewed": false,
+    "threeExistingSymmetryFilesReconstructed": true,
+    "allHistoricalAndMulticomponentLayoutsQualified": false,
+    "sixProducerFilesIncludingTwoPairedComponentsReconstructed": true
+  },
+  "authorPrimary": "vesta-author-formats-primary.json",
+  "symmetryIndexed": {
+    "domain": "version3.0.0/extraLength0,rank3,nVal1,gType0or1,fType1; lockedtargetgeneral-stride dialect qualifiedbythreeexistingrealfiles, notallproducer/ABIvariants",
+    "header": "common152byteheader thenNSYM,NCEN,NSUB int32LE at152/156/160. NSYM matrices12int32each; NSUB lattice translations3int32each. Dataoffset164+48NSYM+12NSUB; nAsym records(int32flatindex,float32bits). Exactextent required.",
+    "rotation": "wire9ints column-major; output_i=sum_j wire[3*j+i]*h_j +wire[9+i]. Translationalreadyintegervoxelunits; do notmultiplybyshapeagain. Matricesmustbijectivelypreservequalifiedintegergrid, nottruncatefractionalrotation.",
+    "gridCounts": "forgType1 wireN=coreN; forgType0 wireN=coreN+1 inthisperiodicindexedsubdomain. GeneralnonperiodicfType1 notinthisqualifieddomain.",
+    "flatIndex": "actualindex=x+(coreX+1)*(y+(coreY+1)*z) forBOTHperiodicandgeneralwire. Decomposebyexpandedgeneralshape, NOTperiodiccorewirecounts. ActualF000112recordfilesggrid7/pgrid6shareindexsequenceandcorevalues.",
+    "expand": "for eachop applyaboveintegeraffine, optionalnegationwhenNCEN1 theneachcenteringtranslation; coordinate_i=(sign*out_i+sub_i) modcore_i usingnonnegativemathematicalmodulo. Populatecorethenexplicitseams. Equal-bitduplicateassignmentsallowed; unequalbitconflictsrefused, notlastwriterwins.",
+    "proof": "runs/17-grid-symmetry/stdout.json:KOD5525records/192ops/1060800assignments→884736completecorevalues,0conflicts. F000ggrid/pgrid112records/2ops→same216core/343expandedvalues. No targetrun.",
+    "negativeControl": "wronglyusingcorestride96onKODleaves398920missingvoxelsand488064conflictingbitassignments. Thisdistinguishesindexsemantics, notjusthashpresence.",
+    "writerPolicy": "raw isalwaysavailableforqualifiedgeometry. symmetry-indexedrequirescompletegridmappingandbit-exactsymmetryforallinputvaluesplusqualifiedoperator/metadata; auto-exactusesindexedonlywiththatproofelseraw. Compressionneverjustifiedbygroupnumberalone.",
+    "manualDifference": "author§18.4publishedmformulausesnVoxindiceswhileactualselectedperiodicwireusesgeneralstride. Keepdistinctversion-bounddialects;publicsnippetassignment/commenttyposnotcopiedasparserrules.",
+    "multicomponent": "Selected3.0 nVal2 storage is bound to real producer files. Default group0 reduction differs from independent source component persistence. Selected indexed nonzero second-group counter now follows2*n0+localOrdinal1; explicit corrected global selector differs. This is static law, not full indexed/symmetry/physical/runtime qualification.3.6 framing remains separately source-bound, not admitted/producer-positive."
+  },
+  "pairedComponents": {
+    "wire": "version3.0nVal2 means eachrawvoxel2consecutivef32 or eachindexedrecordint32+2f32(stride12). NSYM/NCEN/NSUB framingunchanged. Bothchannels sharevoxelindicesandgeometry, distinctdata/semanticidentities.",
+    "evidence": "sixauthorDysnomia0.9filesfullyreconstructed,includingtwo2component128x128x64grids each1048576corevoxels,0conflicts; storedarchiveandmemberSHAsbound.",
+    "model": "Preserve both original component owners/ordinals/bits with shared provenance. Locked default reader may sum components into one effective view; nativeGroupProjection separates source storage from qualified sequential-f32 group projection. Separate active component views are an explicit corrected design, not asserted native default.",
+    "encode": "FieldPairSource hasexactlytwoordereduniqueFieldIdsundersameowner;qualifycore/axis/origin/closure/metric/units/physicalroleandselectionsnapshot. Eachfieldseparatelyauditedevenifbytesaresame.",
+    "physical": "dysnomia-component-qualification.json; selectedneutronpositive/negativeparts, notgenericspin. Fullsourceinputmeaningandnormalizationdiagnosticretained.",
+    "normalization": "L-BFGSsourceintegralresidualexceedsf32serialization-onlybudget,whileZSPAwithinit. Preserveactualsourcevalues; neverrenormalizesilentlyorclaimproducer-sciencevalidatedfrombyteexactdecode."
+  },
+  "nativeGroupProjection": "binary-grid-native-group-contract.json",
+  "additionalPrimaryTutorials": "tutorial-source.contract.json: 5 genuine flat and5 unique indexed3.0 scalar grids plus one duplicate member; complete counts/digests, nonorthogonal/triclinic metrics and independently specified U-D mathematical witness. No genuine3.6 or new native/product positive.",
+  "fixedComponentConsumption": "Decode always preserves every source component with exact actual geometry/owner and complete data. Legacy-compatibility effective native projection uses the locked default group0 sequential-f32 mechanism of binary-grid-native-group-contract.json, including observed packing limitations; not a silently chosen component. Corrected-explicit independently qualifies all complete components or gives source-only diagnostic. Existing encode Field/FieldPair source and components option bind exact one/two actual fields. No ambient component selector."
+}

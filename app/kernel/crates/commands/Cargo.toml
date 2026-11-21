@@ -1,0 +1,8 @@
+[package]
+name="vesta-commands"
+version="0.1.0"
+edition="2024"
+[dependencies]
+vesta-model={path="../model"}
+serde_json="=1.0.145"
+serde={version="=1.0.229",features=["derive"]}

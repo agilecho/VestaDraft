@@ -1,0 +1,87 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "urn:draft:fc:native-fractional-grid-frame:1",
+  "type": "object",
+  "properties": {
+    "schemaVersion": {
+      "const": "FC-native-fractional-grid-frame-1"
+    },
+    "pointShape": {
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "minimum": 2,
+        "maximum": 2147483647
+      },
+      "minItems": 3,
+      "maxItems": 3
+    },
+    "gridDivisions": {
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "minimum": 1,
+        "maximum": 2147483647
+      },
+      "minItems": 3,
+      "maxItems": 3
+    },
+    "axisOrder": {
+      "const": "x-fastest"
+    },
+    "gridToDisplayRowsF64Bits": {
+      "type": "array",
+      "items": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{16}$"
+        },
+        "minItems": 4,
+        "maxItems": 4
+      },
+      "minItems": 3,
+      "maxItems": 3
+    },
+    "coordinateRole": {
+      "const": "native-numerical-display-only"
+    },
+    "coordinatePhysicalUnit": {
+      "const": "source-unresolved"
+    },
+    "scalarRole": {
+      "const": "uninterpreted-stored-scalar"
+    },
+    "scalarPhysicalUnit": {
+      "const": "source-unresolved"
+    },
+    "domainTreatment": {
+      "const": "finite-including-every-stored-point"
+    },
+    "dataEncoding": {
+      "const": "ieee754-little-endian-f32"
+    },
+    "ruleId": {
+      "const": "draft.native-fractional-current-grid"
+    },
+    "ruleVersion": {
+      "const": "1"
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "pointShape",
+    "gridDivisions",
+    "axisOrder",
+    "gridToDisplayRowsF64Bits",
+    "coordinateRole",
+    "coordinatePhysicalUnit",
+    "scalarRole",
+    "scalarPhysicalUnit",
+    "domainTreatment",
+    "dataEncoding",
+    "ruleId",
+    "ruleVersion"
+  ],
+  "additionalProperties": false
+}

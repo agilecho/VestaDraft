@@ -1,0 +1,36 @@
+{
+  "schema": "FC-native-wien-eb-selected-wire/1",
+  "routes": [
+    "VM18-I33",
+    "VM18-I40"
+  ],
+  "binding": {
+    "path": "native-wien-eb-wire-source-bindings.json",
+    "sha256": "ca5ddf5675579ae5ab167685870fc1a1918ccba37cb4763dc8f2070adaa317ee"
+  },
+  "identity": "VM18 route ordinals33/40 are not native enum values. The filename classifier returns47 for exact eb and46 for rho. Actual44-entry U16 density dispatch maps both to bbb64 and the same readWIENfile function.",
+  "framing": "One marker token; three f32 lengths; three f32 angles; three int point counts plus a second f32 length triple; product(N0,N1,N2) f32 scalar tokens. The native %s consumes one token rather than an arbitrary full-line title. All original headers, first/repeated lengths and lexemes remain source observations.",
+  "geometry": "The second length triple overwrites the first before the native f32->f64 multiplication by exact binary64 bits3fe0ef050a9737de (0.5291772086), then narrows to f32. Counts become divisions N-1 after values are read. Source order is i outer/j middle/k inner; native array address is i+N0*(j+N1*k). Preserve original point count, divisions and endpoint/periodicity qualifiers separately.",
+  "marker": "Locked native searches for substring free; if found it forces all three angles to90. The safe selected research grammar recognizes exact cell/free only and rejects an unqualified marker. Explicit corrected mode needs a qualified source frame; it does not guess a reciprocal basis or overwrite source angles silently.",
+  "quantities": "The selected reader performs no scalar energy or density conversion and reads one scalar grid. It does not encode energy units, band identity, padding or a Fermi reference. Preserve the raw scalar domain and plotting geometry separately from any independently qualified physical/reciprocal descriptor. The same extension or nonnegative values cannot supply that descriptor.",
+  "precision": "Keep exact source decimal lexemes and both original header triples. Selected legacy projection includes f32 parse, repeated-length overwrite, the exact native Bohr constant and f32 narrowing; these are different from preserving the high-precision first header or adopting a modern CODATA constant. Predeclare separate per-leaf conversion/printing budgets; scientific missingness and topology are not numerical tolerance. Exact source numeric parsing must not insert an unqualified binary64(text) intermediate before the binary32 round; see exactSourceRounding for the explicit midpoint counterexample and bounded arithmetic oracle.",
+  "bounds": "Selected3Dvolume requires each point count>=2, checked cumulative product, exact finite scalar count, qualified marker/frame and permitted trailing grammar before mutation. A count1 axis remains an explicitly unsupported lower-rank source, not a zero-division3Dvolume. Reject truncation, extra undeclared band blocks and nonfinite/overflow data. Do not emulate unchecked native scans, signed overflow or unsafe allocation.",
+  "sourceAndCurrent": "Capture actual current materialized Field/geometry/owner/mask and immutable original raw header/payload separately. Reopen restores the current field once; it cannot substitute raw historical values, silently choose the first length triple or replay unknown physical conversions. FS canonical ordering requires an explicit permutation and independently established endpoint/closure policy.",
+  "scope": {
+    "selectedNativeWireAndRoutingSpecified": true,
+    "realRhoValues": [
+      343000,
+      1029000
+    ],
+    "realEBProducerPositive": false,
+    "allPhysicalFramesUnitsAndBandVariantsQualified": false,
+    "productImplemented": false,
+    "newTargetExecuted": false
+  },
+  "remaining": "A real EB source with producer/band/unit/padding/Fermi/reciprocal context remains absent; the two original2004 rho grids are not that source and cannot be attributed to the2011 script. Full physical/producer admission stays unfrozen. The selected locked wire itself is no longer an unspecified rho-like layout.",
+  "exactSourceRounding": {
+    "path": "ieee-source-rounding.contract.json",
+    "sha256": "f59f5b773c132662374033100b87e0eebe5ad703ad78b7c6dd081316e4db7b67",
+    "scope": "Strict proposed direct decimal-to-binary32 mathematical rule; process/libc actual conformance is not newly validated. Preserve separately qualified explicit binary64 intermediate stages and constants."
+  }
+}

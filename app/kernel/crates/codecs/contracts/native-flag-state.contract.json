@@ -1,0 +1,31 @@
+{
+  "schema": "FC-native-persistent-flag-state/2-proposal",
+  "wire": "native-flag-state.schema.json",
+  "sourceRecordContract": "native-object-flags.contract.json",
+  "scope": "Current persistent editor state plus immutable original source observations. Same SourceDTO7 metadata carrier, no public SG/protocol3/host implementation.",
+  "current": {
+    "capture": "Capture exactly one complete current set for each of LBLAT/LBLSP/DLATM/DLBND/DLPLY directly from the immutable Engine snapshot, even when empty and even when the import source was not VESTA. Validate actual owner, all persistent target references, activity and complete population mapping. Never derive current sets from original source index records or from only global STYLE/SGDisplay.",
+    "authority": "Current sets express current labels/disabled objects. Source observations express immutable past input facts. After an edit or deletion these may legitimately differ; neither overwrites the other. An original source index is not a dangling current entity reference.",
+    "populations": "Use independently reconstructed complete atom/bond/polyhedron/morphology-face populations with qualified stable target addresses under registered generation rules. Validate source-index resolutions against the actual ordered source population table, not only a claimed digest or the existence of target IDs. For fresh encoding compute current output indices from stable targets and the new output population.",
+    "molecules": "Nonperiodic targets use the real Molecule/MoleculeFrame/Atom/Bond/NativeBondSource identities already present in SourceDTO7. No fabricated periodic cell/Image or SG32 restriction on existing nonperiodic string IDs. A morphology face or other unsupported native molecular population without a qualified identity/mapping remains source-only; this design does not confer missing generation science."
+  },
+  "observations": {
+    "binding": "Each parsed/uninterpreted source observation binds its immutable original resourceSHA, exact byte span, source keyword and captured original owner/entry provenance. Parsed tokens/indices must match the actual bytes. Preserve raw order/repetitions and missing/uninterpreted records. Captured-source parser must bind the original owner/entry; raw-token agreement alone is not ownership proof.",
+    "editing": "Editing current labels/visibility never fabricates a new original source line. Removed current entities need not remain active merely because an old source index selected them; original observations refer to raw-source/resource provenance, not deleted current SG IDs."
+  },
+  "enumeration": "capturedEnumeration is freshly derived from the captured owner geometry/source definitions, native recipes, registered algorithm identity and the complete four ordered typed populations. It is not copied from untrusted metadata. Source object key remapping is explicit; recompute the capture context for new snapshots and compare actual restore under the registered source-to-runtime bijection, never hash fresh runtime IDs as though they were original file IDs.",
+  "latent": "A latent target remains a valid persistent source address outside the current generated view. Its applicability must be independently established by a qualified resolver; a file cannot self-declare an active target latent to avoid a missing-object/flag failure. Preserve latent state in the full-source bundle, emit only active indices in a qualified native projection, and restore/apply it when its independently qualified view becomes active.",
+  "sourceEncoding": "Recognize NVIS2 tag in owner SourceMetadata.tree and validate this closed schema plus semantic owner/reference/capture/population/source-span rules. Map schema-defined current target IDs and owner/resource references to AuditNode EntityRef, ordinals to I64, all other text to Utf8; raw original source ordinals are never current entity references. Original source resource must stay captured/immutable. SourceDTO7 generic roots remain unchanged.",
+  "saveAndReopen": "Plan from complete current capture before encoding, generate body indices from current stable targets, and preserve original observations independently. Candidate/persisted fresh readback must compare source archive AND all five actual applicable current flag sets and latent state. Source-only current sets cannot establish complete full-save/Saved, even when original source bytes and hashes all match. Independent verification and same immutable primary context remain mandatory.",
+  "migration": {
+    "inferCurrentFlagsFromOriginalObservations": false,
+    "oldVersion": "NVIS1 remains selected source-record evidence. Do not relabel it NVIS2 or silently synthesize empty/current lists. Obtain independent actual current state and qualified capture context, else keep explicit source-only/unsafe-save diagnostic."
+  },
+  "qualification": {
+    "designSpecified": true,
+    "fullNativeEnumerationQualified": false,
+    "actualEngineImplemented": false,
+    "newTargetExecuted": false,
+    "independentlyReviewed": false
+  }
+}

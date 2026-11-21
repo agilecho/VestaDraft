@@ -1,0 +1,118 @@
+{
+  "schema": "FC-typed-source-restore-design/1",
+  "sourceSchema": "codec-source-document.schema.json",
+  "archive": "native-source-envelope.contract.json",
+  "authority": "CompleteSourceAudit1 andcurrentSourceDTOproposal7; generatedtypevisitor, notEncodeInventory/clientIDlist/propertynamesearch. Originalproposal4integrationishistorical; currentSource7schema/type-roleclosureisnormative. ExistingupstreamSG/FSpartialboundariesunchanged.",
+  "fullVisitorRules": [
+    "Validate exact pinned source schema plus semantic constraints before capture and after decode. Every required root, present optional value, container, variant and raw span participates; schema/version not qualified => source-only recovery/refusal.",
+    "Derive identity-definition and reference roles from authoritative type annotations. A generated role visitor must fail for any unresolved type/variant/ID role. Generic JSON spelling id or suffix Id is never sufficient.",
+    "Wrapper and inner stable IDs are one definition with a required equality constraint. Repeated same-kind alias is not a second object; duplicate distinct definitions or cross-kind reuse refuse. Owner kind and source node variant determine reference target kinds.",
+    "Identity slots and reference slots must match the rederived complete role traversal exactly, including nullable references, array positions, Image phase/site/operator references, covariance parameter references, table/raw resource bindings, sourceEntryOrder and both native layer references. Unknown caller slots cannot confer authority.",
+    "Preserve semantic source strings and labels even when byte-equal to retired runtime IDs; only typed reference locations participate in renaming. Source record ordinals and external atom labels remain source facts.",
+    "Allocate one fresh ID per bundle object/resource key, same-kind bijection, under a fresh document/epoch. Restore all references simultaneously; reject dangling/cross-kind/duplicate/old-lifetime references before installing candidate. Old selectors, jobs, grants and consents are not reactivated.",
+    "Immutable resource bytes/digest/length and raw source descriptor bytes stay exact. Nested raw descriptor resource IDs are captured aliases, not live handles: bound-descriptor-context.contract.json requires owner/use-scoped typed SourceMetadata contexts, complete resource capture, fresh EntityRef rebind and context-only resolution. Recompute current derived units/frame/closure digests, compare across lifetime only through verified bundle-key normalization. Resource IDs/leases/physical paths are lifetime-local; persisted storageKind/archive hashes grant no reads.",
+    "Restore exact source scientific values/raw observations independently of derived native display projection. Unknown/high-dimensional entities remain source-only; no fabricated SG/FS capability. Recompute derived digests/caches from restored typed state under current pinned rules, retaining captured identities only as provenance.",
+    "Enumerate actual active fields/tables/scene links separately from the archive. All expected objects, kinds, owners, dimensions, axis/basis/units and every numeric bit/value must match independently registered source expectations before completeLoaded/Saved. Valid archive with absent active Field remains E_REOPEN_COVERAGE.",
+    "For ordinary later reopen reconstruct required-object expectations independently from saved typed source/qualified native references, not from objects the loader happened to return. Startup with an empty old cache must be equivalent.",
+    "Field storage consumes the existing pinned FSFieldBinding IEEE754 little-endian convention, never native-endian guess. storedShape=coreShape+closure, closure implies periodic, checked stored bytes and both axis-order formulas must match; every periodic face/edge/corner copy equals its core source value. Validate source before planning and actual persisted data before completeLoaded/Saved. Compare all stored values and count independent core separately. Unbound legacy Field encoding requires qualified explicit adaptation or source-only/refusal. Original source wire bytes remain distinct from typed FS storage."
+  ],
+  "selectedWitness": {
+    "profile": "selected-field-scene-source-proposal1",
+    "sourceValues": "resource-roundtrip-proposal/inputs/source.pgrid",
+    "realSourceValues": 512,
+    "nativeBusinessObservation": "resource-roundtrip-proposal/observations.json",
+    "authored": "The SourceDTO/scene and optional second field are authored design inputs using the exact real source payload, not an original Engine snapshot or product output. A second field is an independent owner identity sharing physical content, not a claim the original UI loaded two fields.",
+    "scope": "Finite full required-root DTO with selected Field/Scene/resource roles only; other nonempty roots refuse in this model, normative complete type visitor remains future implementation.",
+    "model": "typed-source-restore-model.py",
+    "witness": "typed-source-restore-witness.py",
+    "closedStorageCases": "Original512words plus authored closed729stored/512core case, noncubic z-fastest45stored/24core, f6424values and self-consistent-hash badclosure/missingstorage/nonperiodicclosure/nonfinite rejects. These are authored canonical FS snapshots, not actual Engine/native writes."
+  },
+  "qualification": {
+    "designSpecified": true,
+    "actualFullTypeVisitorImplemented": false,
+    "actualEngineLoaderImplemented": false,
+    "actualProductWriterImplemented": false,
+    "nativeResourceReopenPassed": false,
+    "newTargetExecuted": false,
+    "whole03Complete": false,
+    "independentlyReviewed": false
+  },
+  "materializedFieldAndOriginalResourcePolicy": "density-resource-effect.contract.json; capture/restore exact current Field data and complete ordered source operations/resources separately. Reopen does not implicitly replay archived source expressions, depend on live originals, apply operations twice or substitute input bytes for derived Field values. Actual Engine/host implementation is not performed in03.",
+  "nativeCurrentFlagState": "native-flag-state.contract.json NVIS2: restore all five current sets against freshly qualified actual population/owner/reference mappings; compare actual applicable labels/visibility and persistent latent targets. Keep original source observations separately immutable and resource-bound. Never replay original index lists as current state, mistake NVIS1/archive validation for active restoration, or reread an ambient primary pathname. This is a full visitor obligation, not an extension of the existing selected Field/scene toy-restorer implementation.",
+  "nativeSectionDialectPolicy": "native-legacy-section.contract.json: Source7 typed modern18x80/legacy15x69 union; preserve current complete section state separately from immutable original, exact owner/field/basis/style/matrix/dialect and source qualifiers. Never pad or parse legacy rows as modern; require actual fresh restored expected section coverage, not source metadata presence.",
+  "crystalmakerSelectedSourceConvention": "crystalmaker11-selected-model.contract.json: capture actual current qualified symmetry/ADP and original source records/convention/diagnostics separately; request mode/source convention exact pair. Restore current phase operations once, never apply archived OSHF a second time or replace a current ADP with historical input. Every owned value/loss/precision retains its actual source rule; no blanket modern/legacy producer qualification.",
+  "fdatConnectionObservation": "fdat-connection.contract.json +FCON1 observation schema: preserve original absence/uninterpreted/complete parsed integer records and resource provenance independently of actual current graph/rules. Absence is not observed zero bonds; raw source indices are not current object IDs. Capture current topology separately, require complete expected active objects on fresh reopen, and never replay archived table into changed current model.",
+  "fdatSymmetrySourceAndCurrent": "fdat-symmetry.contract.json: immutable original source ops/CENT/codes/label and actual current qualified phase state are distinct. Complete expected operator sets/frame/image addresses must survive fresh readback; same count/closure/group number, name relookup or replay of original source over edited current state is insufficient. Compact registered rule definitions may be preserved, reference executables are construction evidence only.",
+  "selectedPrimaryThermalDefinition": {
+    "path": "primary-thermal-definitions.contract.json",
+    "sha256": "cebe7217b76a2746b4c720937ba181832c8cff8e30752e0d755a596b531fa377",
+    "scope": "Primary documents and selected original2006writer/precision, not blanket all producer/keyword qualification"
+  },
+  "producerInlineIncludePolicy": "feff10-source.contract.json +resource-graph.schema.json proposal2: exact producer-job base/name map and original include/load occurrence order, recursive capture/cycle/work bounds, all referenced immutable bytes and source current-state separation. Preserve into full source envelope, artifact-only reopen without ambient CWD or replay over edited state. This internal successor changes no productprotocol3/host admission.",
+  "boundDescriptorContexts": {
+    "path": "bound-descriptor-context.contract.json",
+    "sha256": "972df77f2885256d3b460c440aba6804befe02c947bc79460207678598e6cf40",
+    "scope": "Exact immutable descriptor bytes plus owner/use-scoped typed fresh reference contexts; complete native-path and typed-resource closure are separate domains, no raw-alias fallback or science admission."
+  },
+  "callerLengthInput": {
+    "path": "caller-length-input.contract.json",
+    "sha256": "352c7b15f612cfad036ac768a6b936f1ba2230be8ba1b8cdc2a1ed5a79dfcf44",
+    "scope": "Explicit corrected-only caller coordinate-length input definition in three existing selected routes; original producer units remain unknown, no species/science authority."
+  },
+  "selectedStoredGridSource": {
+    "path": "native-scalar-grid-source.contract.json",
+    "sha256": "161fbbd0880b35c09d910c90df21de7587789bd84f6221585c5f6efeec1ae968",
+    "scope": "Concrete source-only stored-grid record/typed BytesRef/data inspection boundary, not actual reciprocal Field or a VEND producer positive"
+  },
+  "currentNativeThermalState": {
+    "path": "native-thermal-state.contract.json",
+    "sha256": "b57ff381e7e61c1140341cadd8b437595ded2f95e813781c24e29f5aa8d6d7da",
+    "scope": "Actual current native-compatible selectors/scalar+six-slot state proposal, distinct from original history and canonical-only source; no actual Engine/live restore qualification"
+  },
+  "currentNativeNumericalGrid": {
+    "path": "native-scalar-grid-current.contract.json",
+    "sha256": "3908fb5acb5a8e4f06ef211345c70d9fe7fc015b8c5435d21b5990e0ca251237",
+    "scope": "Registered Source7 actual current numerical SourceEntity/data/mask/geometry distinct from immutable NativeScalarGridSource1 history and active FS/physical Fields. No existing Engine type retagging, import geometry certificate or actual capture implementation."
+  },
+  "selectedNativeNumericalConsumption": {
+    "path": "native-numerical-consumption.contract.json",
+    "sha256": "8b4624433b87f4719a1b5774bad9c5079ea7527d6249729e95073d0846fb3ce3",
+    "scope": "Closed current fractional-native numerical grid, actual effective affine and explicit stored-scalar isoview consumption. Source7 registered types/typed refs/full current state; no active physical reciprocal type, native mesh proof or renderer implementation."
+  },
+  "selectedOriginalGSASSpinChart": {
+    "path": "gsas-original-spin-chart.contract.json",
+    "sha256": "49da20c7bcf6f881aff76e5ded75706278e17370a7312d83335b37f7d4b7d280",
+    "scope": "Original APS revision1253 source-bound SPNFLP generator-mask/centering/timeSign versus axial-factor rule; closed trusted-chart/current-projection roles. No all-historical chart or actual factory/science qualification."
+  },
+  "selectedHistoricalNativeConsumption": {
+    "path": "historical-native-record-consumption.contract.json",
+    "sha256": "d0ef52918c4780870014a6767e91dbb7efda07a908abb6323a97b6ce7d66dcf7",
+    "scope": "Complete selected locked numeric-record dispatch and nativeICS six-value TF paired-line consumption. Source/current native slots separate; no historical1991/1986 or correctedSMAT certificate."
+  },
+  "currentNativeLayerState": {
+    "path": "native-layer-current.contract.json",
+    "sha256": "2520459d4234be0c44d1302adda079386205b655c84c2d2a8c4e96bf8992f52b",
+    "scope": "Complete selected3D actual current layer population, native flags/anchors/effective matrix+translation and typed two-reference roles; immutable Source1 history independent. No actual capture/physics/runtime qualification."
+  },
+  "currentNativeLegacyDisplayState": {
+    "path": "vics-legacy-display.contract.json",
+    "sha256": "c8484e37771dbd3094f37e97fab73e2ace7916b26e80f02216d622a9eb3216d7",
+    "pointer": "/currentStateBinding",
+    "currentSchema": {
+      "path": "vics-legacy-display-current.schema.json",
+      "sha256": "2cd6c594c8fb79b8898dd5f1cf6dd8342751c842d5b8362d9ba2ceba6efb32cf"
+    },
+    "registeredTags": {
+      "NativeLegacyDisplayCurrent1": "Scene.render Map member nativeLegacyDisplayCurrent",
+      "NativeLegacyViewCurrent1": "Scene.cameraRaw Map member nativeLegacyViewCurrent"
+    },
+    "scope": "Complete actual current populations and all schema-declared EntityRef roles/global typed bijection; known original31keywords/history separate. Every native-width bit/unused slot persists. No replay from source or capture from encoded projection. Actual Engine derive visitor/restorer is future; schema mismatch refuses complete save."
+  },
+  "selectedMXDStatisticalObservations": {
+    "path": "mxd-statistic-consumption.contract.json",
+    "sha256": "98fbf4a704e4e71e0b68372d6e287fd653b2b422dcd8f6190e35b2146695ba0b",
+    "pointer": "/observationTree",
+    "registeredTag": "MXDReportBlockObservations1",
+    "roles": "Only actual owner and targetSite EntityRef and actual BytesRef leaves participate in fresh typed mapping; source labels/ordinals/tokens are literals. Full all-block/all-row/all-axis observation/source/control conservation, not current coordinate replay or ADP/SU qualification."
+  }
+}

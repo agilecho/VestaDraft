@@ -1,0 +1,223 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:draft:input:NATIVESECTION1",
+  "$defs": {
+    "F64": {
+      "type": "object",
+      "properties": {
+        "literal": {
+          "type": "string",
+          "minLength": 1
+        },
+        "nativeF64Bits": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{16}$"
+        }
+      },
+      "required": [
+        "literal",
+        "nativeF64Bits"
+      ],
+      "additionalProperties": false
+    },
+    "F32": {
+      "type": "object",
+      "properties": {
+        "literal": {
+          "type": "string",
+          "minLength": 1
+        },
+        "nativeF32Bits": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{8}$"
+        }
+      },
+      "required": [
+        "literal",
+        "nativeF32Bits"
+      ],
+      "additionalProperties": false
+    },
+    "I32": {
+      "type": "object",
+      "properties": {
+        "literal": {
+          "type": "string",
+          "minLength": 1
+        },
+        "nativeI32": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        }
+      },
+      "required": [
+        "literal",
+        "nativeI32"
+      ],
+      "additionalProperties": false
+    },
+    "NativeSectionRecord": {
+      "type": "object",
+      "properties": {
+        "sourceOrdinal": {
+          "$ref": "#/$defs/I32"
+        },
+        "hkl": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/F64"
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "distanceA": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/F64"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "headerFlags": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/I32"
+          },
+          "minItems": 4,
+          "maxItems": 4
+        },
+        "fractionalRanges": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/F32"
+          },
+          "minItems": 6,
+          "maxItems": 6
+        },
+        "centerProjectionFractional": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/F64"
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "ignoredFourthSource": {
+          "$ref": "#/$defs/F32"
+        },
+        "row4Flags": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/I32"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "row4Scalars": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/F32"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "row4FinalFlag": {
+          "$ref": "#/$defs/I32"
+        },
+        "row5Flag": {
+          "$ref": "#/$defs/I32"
+        },
+        "row5Scalars": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/F32"
+          },
+          "minItems": 4,
+          "maxItems": 4
+        },
+        "row6Scalars": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/F32"
+          },
+          "minItems": 5,
+          "maxItems": 5
+        },
+        "row6Integers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/I32"
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "row7Scalars": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/F32"
+          },
+          "minItems": 4,
+          "maxItems": 4
+        },
+        "colorsRGB": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/I32"
+            },
+            "minItems": 3,
+            "maxItems": 3
+          },
+          "minItems": 6,
+          "maxItems": 6
+        },
+        "row14Scalars": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/F32"
+          },
+          "minItems": 4,
+          "maxItems": 4
+        },
+        "matrixRows": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/F64"
+            },
+            "minItems": 4,
+            "maxItems": 4
+          },
+          "minItems": 4,
+          "maxItems": 4
+        }
+      },
+      "required": [
+        "sourceOrdinal",
+        "hkl",
+        "distanceA",
+        "headerFlags",
+        "fractionalRanges",
+        "centerProjectionFractional",
+        "ignoredFourthSource",
+        "row4Flags",
+        "row4Scalars",
+        "row4FinalFlag",
+        "row5Flag",
+        "row5Scalars",
+        "row6Scalars",
+        "row6Integers",
+        "row7Scalars",
+        "colorsRGB",
+        "row14Scalars",
+        "matrixRows"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$ref": "#/$defs/NativeSectionRecord",
+  "title": "Selected locked native PLN2D source records, not new science qualification"
+}

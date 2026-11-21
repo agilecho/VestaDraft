@@ -1,0 +1,24 @@
+Synthetic ORFFE result-reader fixture; not a real ORFFE calculation
+ATOMIC PARAMETERS FOR PHASE 1
+Synthetic atomic header 1
+Synthetic atomic header 2
+1 Si1 1 0 0.5 0 0.5 0 0.5 0 0 0 0 0
+2 O1 1 0 0.3 0 0.5 0 0.5 0 0 0 0 0
+3 O2 1 0 0.7 0 0.5 0 0.5 0 0 0 0 0
+4 O3 1 0 0.5 0 0.3 0 0.5 0 0 0 0 0
+5 O4 1 0 0.5 0 0.7 0 0.5 0 0 0 0 0
+6 O5 1 0 0.5 0 0.5 0 0.3 0 0 0 0 0
+7 O6 1 0 0.5 0 0.5 0 0.7 0 0 0 0 0
+
+SYMMETRY INFORMATION
+Synthetic symmetry header 1
+Synthetic symmetry header 2
+
+INTERATOMIC DISTANCE IN ANGSTROMS
+1 (1, 0 ) (2, 0 ) Si1 (0.5,0.5,0.5 );O1 (0.3,0.5,0.5 )
+9.8765 +OR- 0.0123
+
+BOND ANGLE IN DEGREES.  CENTRAL ATOM IS VERTEX
+2 (2, 0 ) (1, 0 ) (4, 0 ) O1 (0.3,0.5,0.5 );Si1 (0.5,0.5,0.5 );O3 (0.5,0.3,0.5 )
+123.456 +OR- 0.0045
+

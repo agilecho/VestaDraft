@@ -1,0 +1,55 @@
+{
+  "schema": "FC-bound-descriptor-context-design/1",
+  "state": "unadmitted-construction-design",
+  "reason": "SourceDescriptor2 contains nested lifetime-local ResourceRefs, while Quantity retains only an immutable definition digest. Retaining raw bytes alone does not recreate a usable owner-scoped binding after all runtime/resource IDs change.",
+  "wire": "bound-descriptor-context.schema.json",
+  "wireSha256": "27ed10a2fd29892dec4db9bd506cb39c7fd5c709538205600e6a70e5930f9bb3",
+  "sourceDescriptorSchema": {
+    "path": "source-descriptor.schema.json",
+    "sha256": "f79e7d7146cd6326c39c70dd4acb3b55f6cb6c712cdedab7d2eb3b339ead84d2",
+    "version": "FC-source-descriptor-2"
+  },
+  "rawDefinitionBytesUnchanged": true,
+  "noRawAliasFallback": true,
+  "identity": "One context per actual typed descriptor use: (semantic owner kind, actual owner ID, current source typed pointer). Same definition SHA/raw aliases or same target content do not collapse contexts or logical resource ownership. Definition bytes are immutable source provenance, never current grants.",
+  "discovery": [
+    "Rederive every descriptor-use site from the pinned complete SourceDTO7/SG/FS type-role visitor and registered SourceMetadata variant rules, including Quantity.sourceDescriptorDigest. Never search all property names/digest strings or infer references from string equality. Bind actual definition and actual scope input from trusted captured use, not whichever resource first matches SHA.",
+    "Validate strict duplicate-free JSON, exact pinned descriptor schema/version and release reference rule. Recursively follow schema ResourceRef roles: current2 fieldBindings[*].frameResource, fieldBindings[*].evidence[*].evidenceResource and evidence[*].evidenceResource. Context bindings cover every actual occurrence exactly once; pointer/alias/hash/length and owner-specific resolved target must match independent capture. Unknown roles/schema/variant cannot certify reference-free/full save.",
+    "For every resolved target verify owned immutable resource bytes, SHA/length, and for each evidence span its own positive in-bounds length and digest. A valid citation or matching hash is not authority for producer/scientific interpretation. SourceDescriptor.scopeInputDigest must match actual scopeInput bytes and captured use ownership."
+  ],
+  "metadataAdapter": {
+    "location": "Existing SourceDTO7 SourceMetadata.tree, one tagged BoundDescriptorContext1 value per actual use; metadata owner equals context owner. sourceTypedPointer locates the current snapshot typed use and is rederived after edits/reordering.",
+    "encoding": "Use existing closed AuditNode TaggedVariant/Map/Array/Utf8/EntityRef algebra. /owner/id is EntityRef with owner.kind; /definition/resourceId, /scopeInput/resourceId and /bindings/*/target/resourceId are EntityRef(resource). All capturedAlias, sourceTypedPointer, digests, version tags and raw definition producer strings are Utf8 data. Exact typed-role coverage checked on unpack; hidden Utf8 live references and arbitrary strings promoted to EntityRef both reject.",
+    "roleRegistry": "Current sourceRuleSetDigest includes this exact rule contract and context/descriptor schema bytes. Generated full visitor resolves this registered variant or refuses completePlanEncode/full save; selected finite model is not that implementation.",
+    "noWireChurn": "SourceDTO7, SourceDescriptor2, SavedSourceDocument1/native envelope manifest2, native-file ResourceGraph2 and productprotocol3 stay at current versions. This is a concrete new registered metadata variant/rule1 with explicit changed schema/rule/closure digests, not a claim old saved data already contained it."
+  },
+  "captureAndSave": [
+    "Capture contexts from actual trusted live bindings before planning. Persist all context resources into SourceDTO.resources and native envelope resourceBindings/full manifest, including descriptor, input, frame and primary evidence resources not reachable through native filename paths. Recheck every immutable byte through owned reader, limits/cumulative parse budget and source/owner revision. No automatic network or ambient path access.",
+    "After edits derive contexts anew from current typed source; previous source pointer, owner, binding or rule cannot be copied as authority. Unknown or dangling context yields source-only/recovery diagnostics or failed-before-apply/full-save refusal. Do not label an incomplete preserved archive completeLoaded or Saved.",
+    "Each referenced definition resource itself needs a frozen reference-free format rule or registered recursive typed-reference rule with cycle/work/extent limits. This descriptor rule does not declare arbitrary frame/evidence content reference-free. Complete closure is a sum of native-file/producer-include Graph2 and all typed resource-reference domains, not native graph reachability alone."
+  ],
+  "completeResourceClosure": {
+    "domain": "FC-complete-resource-closure-1",
+    "body": "Canonical current-snapshot digest includes native Graph2 digest (or explicit empty native graph), complete deterministic typed resource/use/context ledger, context and descriptor schemas, exact rule-set digests, actual owner/current typed pointers, resource identities, bytes hashes and lengths. Typed context ledger derives from complete independent traversal; client-supplied ledger cannot certify its own completeness.",
+    "composition": "Sort context records by actual owner kind/id/current typed pointer and nested bindings by exact JSON pointer; canonical object keys and string forms follow existing canonical rules. Native filename span edges and JSON typed-ID references are distinct domains. Never fabricate native path/byte spans for a descriptor ID to satisfy native Graph2 schema.",
+    "freshLifetime": "resourceGraphDigest used by current PlanEncode/Consent binds this composite body. New rule/context/owner/bytes/reference set invalidates old plans and consent. On artifact-only reopen compare capture and restored ledgers through the validated bundle-key bijection; recompute live derived digests under fresh IDs. Captured digest remains provenance, not a current capability or direct equality requirement across lifetime."
+  },
+  "restore": [
+    "Read raw definition bytes and every typed resource from the saved manifest only in a fresh document/epoch/cache. Allocate fresh same-kind object/resource IDs and restore only typed EntityRef positions via one bundle-key bijection. Check complete context-use/reference coverage against the independently decoded expected typed source, not loader-returned objects.",
+    "Resolve each raw nested descriptor reference only through its qualified owner/use/definitionSHA/JSONpointer context to the fresh target. Raw inner resourceId remains capturedAlias provenance; never consult it as a current global resource ID even when a same-named current resource has correct bytes. No CWD, original path, old process cache, network or stale grant fallback.",
+    "Raw descriptor bytes and sourceDescriptorDigest remain exact. Current unitsDigest/frameDigest and complete resourceGraphDigest are recomputed from restored bindings/rules. For cross-lifetime semantic equivalence normalize only known typed references through bundle keys; do not rewrite arbitrary source strings, raw JSON aliases, labels or provenance.",
+    "Validate the actual current restored scientific/scene objects separately. Context closure neither activates an unknown scientific frame nor proves actual Engine loader, host persistence or native interoperability. Original 8-cubed resource fresh reopen failure remains failed."
+  ],
+  "migration": "Saved data lacking required contexts or qualified closure rules requires explicit verified migration from independently sufficient source/manifest provenance; SHA/alias matching alone cannot reconstruct logical ownership. Otherwise source-only recovery/full-save refusal. Old selectors/plans/consents stay retired.",
+  "witness": {
+    "model": "bound-descriptor-context-model.py",
+    "controls": "bound-descriptor-context-witness.py",
+    "scope": "Authored valid descriptor2 and two independent atom/use binding oracles, same definition/frame bytes, old-alias decoy, typed metadata roundtrip/fresh rebind and reject controls. Not actual Engine capture, producer definitions, caller unit approval or scientific frame qualification."
+  },
+  "actualEngineImplemented": false,
+  "actualHostQualified": false,
+  "scienceQualified": false,
+  "newTargetExecuted": false,
+  "productProtocol3Changed": false,
+  "whole03Complete": false
+}

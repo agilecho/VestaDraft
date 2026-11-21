@@ -1,0 +1,63 @@
+{
+  "schema": "FC-MXD-selected-FILE06-report-contract/1",
+  "formatRefs": [
+    "VM18-I29"
+  ],
+  "bindings": "mxd-report-source-bindings.json",
+  "domain": "Selected actual serial producer releases already bound by mxd-selected-primary-inputs.json, not every historical MXD report. FILE06 is a multi-section statistics report; it is not FILE07 restart and its three columns are not position/velocity/initial restart fields.",
+  "framing": {
+    "markers": {
+      "ortho": "AVERAGE COORDINATES, (STANDARD DEVIATIONS, A^2) AND EXPERIMENTAL ONES",
+      "tricl": "MD-derived average atomic coordinates in unit cell(s)"
+    },
+    "producer": "COORDN header, one blank record, then groups of up to4sites each emitted in three consecutive x/y/z rows; first row is4(4X,A4,F7.4,literal-space-open-parenthesis,F6.4,literal-close-parenthesis-space,F7.4), following two use8X in place of4X+A4. Exactly32characters per site slot and at most128 per row in these selected formats. Parse original columns; no whitespace-split inference when a negative value touches the4byte label.",
+    "values": "Each axis has derived mean, parenthesized statistic and experimental/reference coordinate; retain all three exact tokens and their source association. Last group can have1..4sites; no stale values on truncated axes. Fortran asterisks, malformed framing, nonfinite source or mixed release are diagnostic and not repaired to zero.",
+    "blocks": "Scan all selected complete blocks with exact source byte ranges/job identity before selecting an explicitly bound reportBlockIndex. Repeated headers denote separate report blocks, not continuation of one site table. Preserve raw rest of report and dependencies; do not treat unrelated report columns as sites."
+  },
+  "statistics": {
+    "producerLaw": "PK is the unwrapped simulation-box fractional component multiplied by NBOX; PPC+=PK and PPS+=PK*PK. PSS=sqrt(abs(PPS-PPC**2*RMR)*RMR), with source RMR=1.0/REAL(NRECRD(2)) in ortho and 1.0/DBLE(NRECRD(2)) in tricl. The general branch accumulates sum(abs(PSS(k,I)*RS(k,j,IS)))/NO; the actual HEX branch instead averages PSS(1,I), PSS(2,I), abs(PSS(3,I)) without the means' shown HEX coordinate transform. Keep the exact release, branch, source control and REAL/DBLE arithmetic law; no universal covariance/standard-deviation interpretation.",
+    "headingDimensionalConflictRetained": true,
+    "automaticADPOrCoordinateSUProjection": false,
+    "policy": "Preserve each exact parenthesized token and its component/source/block identity in SourceMetadata.tree/spans with unit=1 and the complete literal heading. Source algebra establishes a dimensionless source-cell-fractional component amplitude; both ortho and tricl A^2 headings are retained conflicts. It is neither a measured coordinate uncertainty nor a physical ADP/covariance. Squaring cannot recover missing length and cross-covariance information and cannot justify Uij/Bij or an 8*pi^2 conversion. Statistics never populate SGSite.adp or SGCovariance; the pinned SGSite has no coordinateSU field. The historical false automaticADPOrCoordinateSUProjection key records the prohibition, not the existence of such a SG slot.",
+    "quantityKind": "source-cell-fractional-component-amplitude",
+    "unit": "1",
+    "consumptionContract": "mxd-statistic-consumption.contract.json"
+  },
+  "cell": "Bind the independently parsed cell-statistics block/job and COORDN BOX/NBOX context. Ortho has fixed90degree angles; tricl has explicit angle columns. Keep MD-basic-cell versus crystal-unit-cell label, replication factors, mean/spread/min/max and printed precision separate. Use the cell consistent with the selected mean fractional frame under a qualified producer mapping; missing/conflicting frame or cell must refuse active geometry, not guess90 or borrow ambient/previous report state.",
+  "nativeSelected": {
+    "lastMarkerReplacesSiteList": true,
+    "sourceLabelProjection": "Native%5s scan, element%.2s and site%.6s projections differ from producer A4 columns. Corrected parser retains full actual4byte label and source identity; never silently merge two labels or infer a runtime ID.",
+    "experimentalColumnStoredBySelectedBranch": false,
+    "meanAndParenthesizedStatisticsCopiedToNativeSlots": true,
+    "qualification": "Native scans at most4groups and carries conversion counts/temporary buffers across rows; this static path is not a complete safe producer grammar. The experimental third column is parsed into scratch, not stored by this selected site projection. Modern ortho/tricl cell-statistics formats must be parsed by their exact producer law, not declared supported merely because the marker substring matches."
+  },
+  "request": {
+    "reportDialects": [
+      "mxd-report-ortho-20251120",
+      "mxd-report-tricl-20251119"
+    ],
+    "restartDialects": [
+      "mxd-file07-diagnostic",
+      "mxd-file07-ortho-20251120",
+      "mxd-file07-tricl-20251119"
+    ],
+    "reportBlockIndex": "Required zero-based explicit source block selection under corrected-explicit semantics. The request binds its immutable sourceSHA; no native UI option was discovered. Legacy compatibility for unqualified reports remains diagnostics/source-only rather than reproducing unsafe partial scans or silently using this new selection.",
+    "correction": "These are additional selected design domains of the existing VM18-I29 identity, not new format routes or product admissions. Original historical FILE07 failure and modern restart law remain separately governed by mxd-format-contract.json."
+  },
+  "sourceBridge": "Consume exact report observations and actual available producer controls through mxd-statistic-consumption.contract.json#/fieldConsumption. Use owned SourceMetadata.tree/spans and source-only SourceEntity when needed, with typed EntityRef for an actual unambiguous site association. Preserve whole report/job/blocks/other sections and actual BOX/NBOX/RS/IHEX/NRECRD/grouping provenance or explicit unavailable context. Qualified means may map to SGSite.fractional only after source-cell/frame/species/identity qualification. Current edited SG and immutable historical observations remain separate and both require capture/restoration; do not replay source observations as current state. No trajectory, producer execution, uncertainty or ADP capability follows from preservation.",
+  "precision": {
+    "coordinateAndStatisticHalfPrintStep": "0.00005",
+    "rule": "Separate each four-decimal printed token from producer-double arithmetic and future target storage. Statistical spreads are source observations, never comparison error budgets. Nativef32 scanf+f64 storage is a separate legacy projection law.",
+    "statisticUnit": "1"
+  },
+  "qualification": {
+    "selectedProducerCOORDNAndCellFormatSpecified": true,
+    "genuineFILE06Positive": false,
+    "fullStatisticsScienceQualified": false,
+    "fullHistoricalReportGrammarQualified": false,
+    "newTargetExecuted": false,
+    "productImplemented": false,
+    "independentlyReviewed": false,
+    "selectedStatisticDimensionAndConsumptionSpecified": true
+  }
+}

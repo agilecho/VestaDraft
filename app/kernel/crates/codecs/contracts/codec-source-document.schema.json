@@ -1,0 +1,1518 @@
+{
+  "type": "object",
+  "properties": {
+    "schemaVersion": {
+      "const": "CodecSourceDocument-proposal-7"
+    },
+    "identity": {
+      "type": "object",
+      "properties": {
+        "documentId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "epoch": {
+          "type": "string",
+          "minLength": 1
+        },
+        "revision": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sourceTypeDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "sourceRootDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "resourceGraphDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "policyDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "required": [
+        "documentId",
+        "epoch",
+        "revision",
+        "sourceTypeDigest",
+        "sourceRootDigest",
+        "resourceGraphDigest",
+        "policyDigest"
+      ],
+      "additionalProperties": false
+    },
+    "phaseGraph": {
+      "oneOf": [
+        {
+          "$ref": "urn:draft:input:SG1-r2#/$defs/SGPhaseGraph"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "molecules": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Molecule"
+      }
+    },
+    "fields": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/FieldBinding"
+      }
+    },
+    "scenes": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Scene"
+      }
+    },
+    "dependencies": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Dependency"
+      }
+    },
+    "opaqueBlocks": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/OpaqueBlock"
+      }
+    },
+    "resources": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Resource"
+      }
+    },
+    "metadata": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/SourceMetadata"
+      }
+    },
+    "shapes": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/SourcedSGShape"
+      }
+    },
+    "vectors": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/SourcedSGVector"
+      }
+    },
+    "materials": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/SourcedSGMaterial"
+      }
+    },
+    "displays": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/SourcedSGDisplay"
+      }
+    },
+    "cameras": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/SourcedSGCamera"
+      }
+    },
+    "meshes": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/SourcedSGRenderMesh"
+      }
+    },
+    "sourceEntities": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/SourceEntity"
+      }
+    },
+    "sourceEntryOrder": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/SourceEntryRef"
+      },
+      "uniqueItems": true
+    },
+    "sections": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/SectionSource"
+      }
+    },
+    "bondRules": {
+      "type": "array",
+      "items": {
+        "oneOf": [
+          {
+            "$ref": "#/$defs/SourcedSGBondRule"
+          },
+          {
+            "$ref": "#/$defs/NativeBondSource"
+          }
+        ]
+      }
+    },
+    "boundaries": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/SourcedSGBoundary"
+      }
+    },
+    "planes": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/SourcedSGPlane"
+      }
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "identity",
+    "phaseGraph",
+    "molecules",
+    "fields",
+    "scenes",
+    "dependencies",
+    "opaqueBlocks",
+    "resources",
+    "metadata",
+    "shapes",
+    "vectors",
+    "materials",
+    "displays",
+    "cameras",
+    "meshes",
+    "sourceEntities",
+    "sourceEntryOrder",
+    "sections",
+    "bondRules",
+    "boundaries",
+    "planes"
+  ],
+  "additionalProperties": false,
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:draft:fc:codec-source-document:proposal:7",
+  "$defs": {
+    "Owner": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "enum": [
+            "document",
+            "phase",
+            "molecule",
+            "frame",
+            "atom",
+            "bond",
+            "scene",
+            "field",
+            "basis-center",
+            "shape",
+            "vector",
+            "material",
+            "display",
+            "camera",
+            "mesh",
+            "scene-node",
+            "source-entity",
+            "section",
+            "bond-rule",
+            "boundary",
+            "plane"
+          ]
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "kind",
+        "id"
+      ],
+      "additionalProperties": false
+    },
+    "Resource": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "byteLength": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)$"
+        },
+        "storageKind": {
+          "enum": [
+            "owned",
+            "leased",
+            "external-immutable"
+          ]
+        },
+        "sourceDescriptorDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "required": [
+        "id",
+        "sha256",
+        "byteLength",
+        "storageKind",
+        "sourceDescriptorDigest"
+      ],
+      "additionalProperties": false
+    },
+    "RawSpan": {
+      "type": "object",
+      "properties": {
+        "sourceResourceId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "byteOffset": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)$"
+        },
+        "byteLength": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)$"
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "required": [
+        "sourceResourceId",
+        "byteOffset",
+        "byteLength",
+        "sha256"
+      ],
+      "additionalProperties": false
+    },
+    "SourceMetadata": {
+      "type": "object",
+      "properties": {
+        "owner": {
+          "$ref": "#/$defs/Owner"
+        },
+        "producerId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "producerVersion": {
+          "type": "string",
+          "minLength": 1
+        },
+        "formatRef": {
+          "type": "string",
+          "minLength": 1
+        },
+        "dialect": {
+          "type": "string",
+          "minLength": 1
+        },
+        "tree": {
+          "$ref": "urn:draft:input:AUDIT1#/$defs/AuditNode"
+        },
+        "spans": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/RawSpan"
+          }
+        }
+      },
+      "required": [
+        "owner",
+        "producerId",
+        "producerVersion",
+        "formatRef",
+        "dialect",
+        "tree",
+        "spans"
+      ],
+      "additionalProperties": false
+    },
+    "SpeciesBinding": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "qualified"
+            },
+            "symbol": {
+              "type": "string",
+              "minLength": 1
+            },
+            "atomicNumber": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 118
+            },
+            "isotope": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "minimum": 1
+            },
+            "sourceDescriptorDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "effectiveNuclearChargeE": {
+              "type": "number",
+              "minimum": 0
+            }
+          },
+          "required": [
+            "kind",
+            "symbol",
+            "atomicNumber",
+            "isotope",
+            "sourceDescriptorDigest"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "unresolved-source"
+            },
+            "literalLabel": {
+              "type": "string",
+              "minLength": 1
+            },
+            "source": {
+              "$ref": "#/$defs/RawSpan"
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "kind",
+            "literalLabel",
+            "source",
+            "reason"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "Quantity": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "urn:draft:input:AUDIT1#/$defs/AuditNode"
+        },
+        "physicalKind": {
+          "type": "string",
+          "minLength": 1
+        },
+        "unit": {
+          "type": "string",
+          "minLength": 1
+        },
+        "frame": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sourceDescriptorDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "required": [
+        "value",
+        "physicalKind",
+        "unit",
+        "frame",
+        "sourceDescriptorDigest"
+      ],
+      "additionalProperties": false
+    },
+    "Atom": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1
+        },
+        "species": {
+          "$ref": "#/$defs/SpeciesBinding"
+        },
+        "cartesianA": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "occupancy": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "residue": {
+          "$ref": "urn:draft:input:AUDIT1#/$defs/AuditNode"
+        },
+        "altLoc": {
+          "$ref": "urn:draft:input:AUDIT1#/$defs/AuditNode"
+        },
+        "adp": {
+          "$ref": "urn:draft:input:AUDIT1#/$defs/AuditNode"
+        },
+        "velocity": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/Quantity"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "force": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/Quantity"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "metadata": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SourceMetadata"
+          }
+        },
+        "formalChargeE": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "partialCharges": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Quantity"
+          }
+        },
+        "radicalState": {
+          "enum": [
+            "none",
+            "singlet",
+            "doublet",
+            "triplet",
+            "unresolved-source"
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "label",
+        "species",
+        "cartesianA",
+        "occupancy",
+        "residue",
+        "altLoc",
+        "adp",
+        "velocity",
+        "force",
+        "metadata",
+        "formalChargeE",
+        "partialCharges",
+        "radicalState"
+      ],
+      "additionalProperties": false
+    },
+    "Bond": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "atomIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "order": {
+          "enum": [
+            "single",
+            "double",
+            "triple",
+            "aromatic",
+            "unresolved-source"
+          ]
+        },
+        "stereo": {
+          "$ref": "urn:draft:input:AUDIT1#/$defs/AuditNode"
+        },
+        "sourceMultiplicity": {
+          "$ref": "urn:draft:input:AUDIT1#/$defs/AuditNode"
+        },
+        "metadata": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SourceMetadata"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "atomIds",
+        "order",
+        "stereo",
+        "sourceMultiplicity",
+        "metadata"
+      ],
+      "additionalProperties": false
+    },
+    "MoleculeFrame": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sourceModelCode": {
+          "type": "string",
+          "minLength": 1
+        },
+        "atoms": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Atom"
+          }
+        },
+        "bonds": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Bond"
+          }
+        },
+        "metadata": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SourceMetadata"
+          }
+        },
+        "basisCenters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/BasisCenter"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "sourceModelCode",
+        "atoms",
+        "bonds",
+        "metadata",
+        "basisCenters"
+      ],
+      "additionalProperties": false
+    },
+    "Molecule": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1
+        },
+        "frames": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/MoleculeFrame"
+          }
+        },
+        "periodic": {
+          "const": false
+        },
+        "metadata": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SourceMetadata"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "label",
+        "frames",
+        "periodic",
+        "metadata"
+      ],
+      "additionalProperties": false
+    },
+    "FieldBinding": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "owner": {
+          "$ref": "#/$defs/Owner"
+        },
+        "field": {
+          "$ref": "urn:draft:input:FS1-r1#/$defs/Field"
+        },
+        "metadata": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SourceMetadata"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "owner",
+        "field",
+        "metadata"
+      ],
+      "additionalProperties": false
+    },
+    "SceneNode": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "parent": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "kind": {
+          "enum": [
+            "group",
+            "phase-instance",
+            "molecule-instance",
+            "field-instance",
+            "explicit-mesh",
+            "native-opaque",
+            "section-instance",
+            "plane-instance"
+          ]
+        },
+        "sourceObjectId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "affine4": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 16,
+          "maxItems": 16
+        },
+        "display": {
+          "$ref": "urn:draft:input:AUDIT1#/$defs/AuditNode"
+        },
+        "metadata": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SourceMetadata"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "parent",
+        "kind",
+        "sourceObjectId",
+        "affine4",
+        "display",
+        "metadata"
+      ],
+      "additionalProperties": false
+    },
+    "Scene": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "roots": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "nodes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SceneNode"
+          }
+        },
+        "render": {
+          "$ref": "urn:draft:input:AUDIT1#/$defs/AuditNode"
+        },
+        "metadata": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SourceMetadata"
+          }
+        },
+        "cameraId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "renderContext": {
+          "oneOf": [
+            {
+              "$ref": "urn:draft:input:SG1-r2#/$defs/SGRenderContext"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "cameraRaw": {
+          "$ref": "urn:draft:input:AUDIT1#/$defs/AuditNode"
+        }
+      },
+      "required": [
+        "id",
+        "roots",
+        "nodes",
+        "cameraRaw",
+        "render",
+        "metadata",
+        "cameraId",
+        "renderContext"
+      ],
+      "additionalProperties": false
+    },
+    "Dependency": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "owner": {
+          "$ref": "#/$defs/Owner"
+        },
+        "sourcePointer": {
+          "type": "string",
+          "minLength": 1
+        },
+        "literalPath": {
+          "$ref": "#/$defs/RawSpan"
+        },
+        "resolvedResourceId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "required": {
+          "type": "boolean"
+        },
+        "semanticDescriptorDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "metadata": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SourceMetadata"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "owner",
+        "sourcePointer",
+        "literalPath",
+        "resolvedResourceId",
+        "required",
+        "semanticDescriptorDigest",
+        "metadata"
+      ],
+      "additionalProperties": false
+    },
+    "OpaqueBlock": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "owner": {
+          "$ref": "#/$defs/Owner"
+        },
+        "formatRef": {
+          "type": "string",
+          "minLength": 1
+        },
+        "dialect": {
+          "type": "string",
+          "minLength": 1
+        },
+        "extent": {
+          "$ref": "#/$defs/RawSpan"
+        },
+        "editOverlapPolicy": {
+          "const": "refuse-unqualified-overlap"
+        },
+        "metadata": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SourceMetadata"
+          }
+        },
+        "editDependencies": {
+          "$ref": "#/$defs/OpaqueEditDependencies"
+        }
+      },
+      "required": [
+        "id",
+        "owner",
+        "formatRef",
+        "dialect",
+        "extent",
+        "editOverlapPolicy",
+        "metadata",
+        "editDependencies"
+      ],
+      "additionalProperties": false
+    },
+    "SourcedSGShape": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "owner": {
+          "$ref": "#/$defs/Owner"
+        },
+        "value": {
+          "$ref": "urn:draft:input:SG1-r2#/$defs/SGShape"
+        },
+        "metadata": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SourceMetadata"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "owner",
+        "value",
+        "metadata"
+      ],
+      "additionalProperties": false
+    },
+    "SourcedSGVector": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "owner": {
+          "$ref": "#/$defs/Owner"
+        },
+        "value": {
+          "$ref": "urn:draft:input:SG1-r2#/$defs/SGVector"
+        },
+        "metadata": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SourceMetadata"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "owner",
+        "value",
+        "metadata"
+      ],
+      "additionalProperties": false
+    },
+    "SourcedSGMaterial": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "owner": {
+          "$ref": "#/$defs/Owner"
+        },
+        "value": {
+          "$ref": "urn:draft:input:SG1-r2#/$defs/SGMaterial"
+        },
+        "metadata": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SourceMetadata"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "owner",
+        "value",
+        "metadata"
+      ],
+      "additionalProperties": false
+    },
+    "SourcedSGDisplay": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "owner": {
+          "$ref": "#/$defs/Owner"
+        },
+        "value": {
+          "$ref": "urn:draft:input:SG1-r2#/$defs/SGDisplay"
+        },
+        "metadata": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SourceMetadata"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "owner",
+        "value",
+        "metadata"
+      ],
+      "additionalProperties": false
+    },
+    "SourcedSGCamera": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "owner": {
+          "$ref": "#/$defs/Owner"
+        },
+        "value": {
+          "$ref": "urn:draft:input:SG1-r2#/$defs/SGCamera"
+        },
+        "metadata": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SourceMetadata"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "owner",
+        "value",
+        "metadata"
+      ],
+      "additionalProperties": false
+    },
+    "SourcedSGRenderMesh": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "owner": {
+          "$ref": "#/$defs/Owner"
+        },
+        "value": {
+          "$ref": "urn:draft:input:SG1-r2#/$defs/SGRenderMesh"
+        },
+        "metadata": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SourceMetadata"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "owner",
+        "value",
+        "metadata"
+      ],
+      "additionalProperties": false
+    },
+    "BasisCenter": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1
+        },
+        "cartesianA": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "effectiveNuclearChargeE": {
+          "const": 0
+        },
+        "basisElement": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/SpeciesBinding"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "basisSetup": {
+          "$ref": "urn:draft:input:AUDIT1#/$defs/AuditNode"
+        },
+        "metadata": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SourceMetadata"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "label",
+        "cartesianA",
+        "effectiveNuclearChargeE",
+        "basisElement",
+        "basisSetup",
+        "metadata"
+      ],
+      "additionalProperties": false
+    },
+    "OpaqueDependencyBaseline": {
+      "type": "object",
+      "properties": {
+        "persistentSourceDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "sourceTypeDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "policyDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "resourceGraphDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "referenceNamespaceDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "required": [
+        "persistentSourceDigest",
+        "sourceTypeDigest",
+        "policyDigest",
+        "resourceGraphDigest",
+        "referenceNamespaceDigest"
+      ],
+      "additionalProperties": false
+    },
+    "OpaqueFootprintUnit": {
+      "type": "object",
+      "properties": {
+        "owner": {
+          "$ref": "#/$defs/Owner"
+        },
+        "relativePointer": {
+          "type": "string",
+          "pattern": "^(/([^~]|~[01])*)*$"
+        },
+        "sourceNodeDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "required": [
+        "owner",
+        "relativePointer",
+        "sourceNodeDigest"
+      ],
+      "additionalProperties": false
+    },
+    "OpaqueEditDependencies": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "unknown-whole-persistent-source"
+            },
+            "baseline": {
+              "$ref": "#/$defs/OpaqueDependencyBaseline"
+            },
+            "referenceClosure": {
+              "enum": [
+                "complete-no-external-references",
+                "complete-verified-resource-graph",
+                "unknown"
+              ]
+            }
+          },
+          "required": [
+            "kind",
+            "baseline",
+            "referenceClosure"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "qualified-exact-footprint"
+            },
+            "baseline": {
+              "$ref": "#/$defs/OpaqueDependencyBaseline"
+            },
+            "ruleDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "units": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/OpaqueFootprintUnit"
+              },
+              "minItems": 0
+            },
+            "referenceClosure": {
+              "enum": [
+                "complete-no-external-references",
+                "complete-verified-resource-graph"
+              ]
+            }
+          },
+          "required": [
+            "kind",
+            "baseline",
+            "ruleDigest",
+            "units",
+            "referenceClosure"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "SourceEntity": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "nativeKind": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sourceTree": {
+          "$ref": "urn:draft:input:AUDIT1#/$defs/AuditNode"
+        },
+        "sourceRecords": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/RawSpan"
+          },
+          "minItems": 1
+        },
+        "dependencyIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "metadata": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SourceMetadata"
+          }
+        },
+        "scientificProjection": {
+          "const": "not-qualified"
+        }
+      },
+      "required": [
+        "id",
+        "nativeKind",
+        "sourceTree",
+        "sourceRecords",
+        "dependencyIds",
+        "metadata",
+        "scientificProjection"
+      ],
+      "additionalProperties": false
+    },
+    "SourceEntryRef": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "enum": [
+            "phase",
+            "molecule",
+            "source-entity"
+          ]
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "kind",
+        "id"
+      ],
+      "additionalProperties": false
+    },
+    "SectionSource": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "owner": {
+          "$ref": "#/$defs/Owner"
+        },
+        "nativeRecord": {
+          "$ref": "urn:draft:input:NATIVESECTION2#/$defs/SectionRecord"
+        },
+        "fieldIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "projectionDescriptorDigest": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "geometryQualification": {
+          "enum": [
+            "source-only",
+            "qualified-selected"
+          ]
+        },
+        "metadata": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SourceMetadata"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "owner",
+        "nativeRecord",
+        "fieldIds",
+        "projectionDescriptorDigest",
+        "geometryQualification",
+        "metadata"
+      ],
+      "additionalProperties": false
+    },
+    "SourcedSGBondRule": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "owner": {
+          "$ref": "#/$defs/Owner"
+        },
+        "value": {
+          "$ref": "urn:draft:input:SG1-r2#/$defs/SGBondRule"
+        },
+        "metadata": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SourceMetadata"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "owner",
+        "value",
+        "metadata"
+      ],
+      "additionalProperties": false
+    },
+    "SourcedSGBoundary": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "owner": {
+          "$ref": "#/$defs/Owner"
+        },
+        "value": {
+          "$ref": "urn:draft:input:SG1-r2#/$defs/SGBoundary"
+        },
+        "metadata": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SourceMetadata"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "owner",
+        "value",
+        "metadata"
+      ],
+      "additionalProperties": false
+    },
+    "SourcedSGPlane": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "owner": {
+          "$ref": "#/$defs/Owner"
+        },
+        "value": {
+          "$ref": "urn:draft:input:SG1-r2#/$defs/SGPlane"
+        },
+        "metadata": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SourceMetadata"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "owner",
+        "value",
+        "metadata"
+      ],
+      "additionalProperties": false
+    },
+    "NativeBondSource": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "urn:draft:input:SG1-r2#/$defs/Id"
+        },
+        "owner": {
+          "$ref": "#/$defs/Owner"
+        },
+        "nativeRecord": {
+          "$ref": "urn:draft:input:NBOND1#/$defs/NativeBondRecord"
+        },
+        "sgProjectionRuleIds": {
+          "type": "array",
+          "items": {
+            "$ref": "urn:draft:input:SG1-r2#/$defs/Id"
+          }
+        },
+        "metadata": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SourceMetadata"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "owner",
+        "nativeRecord",
+        "sgProjectionRuleIds",
+        "metadata"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "title": "Full codec source preservation proposal; SG/FS capabilities retain their existing qualified scope"
+}

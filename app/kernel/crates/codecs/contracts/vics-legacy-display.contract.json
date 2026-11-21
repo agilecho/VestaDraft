@@ -1,0 +1,446 @@
+{
+  "schema": "FC-vics-legacy-selected-display-contract/2",
+  "routes": [
+    "VM18-I02"
+  ],
+  "sourceBinding": {
+    "path": "runs/572-legacy-source-closure-construction/vics-legacy-source-bindings.json",
+    "sha256": "5a1e3b22d3c7b45f2537344e8388d8053802ecb37ed7366bfcdad28a6bd1015a"
+  },
+  "bondConstructorBinding": {
+    "path": "runs/572-legacy-source-closure-construction/bond-constructor-source-bindings.json",
+    "sha256": "1c3ed8c28315750e7091f4c63ff799b2b0dceb31daa353cdea3ccf90c89583fd"
+  },
+  "actualSampleInventory": {
+    "path": "runs/572-legacy-source-closure-construction/vics-actual-sample-records.json",
+    "sha256": "d41699bbf89cbb25896b7fea9e75a219319a023c85beb20badb10b922f05fee7"
+  },
+  "profileDomain": {
+    "consumer": "VESTA3.90.9a arm64 selected pre2.80/pre2.90 shared-reader branches, actual author-VICS-2004 selected3D domain",
+    "notAdmissionRestriction": "The two actual examples prove concrete old syntax; record clauses describe the real bounded native branch and must not whitelist only sample hashes, labels or numeric values. Unknown field values/native flags remain typed current/source state, not silently omitted.",
+    "historicalQualification": "A locked native legacy parameter/consumption freeze does not require all historical manuals/producers. Corrected physical interpretation remains a separate source-qualified path and may never overwrite real legacy consumption."
+  },
+  "sourceAndCurrentOwnership": {
+    "immutableSource": "Scene-owned SourceMetadata.tree for document-global graphics/material/LIGHT/SCENE; phase-owned metadata for BOUND/SBOND/planes/thermal/site records. Each record retains ordered original fields, assignment mask, exact RawSpan resource refs and missingness. PLANE and explicitly ignored material/DELOB source rows remain distinct source records.",
+    "currentDestination": "Normative currentStateBinding renderPointer and viewPointer plus exact currentRecordSchema. These are actual current maps, independently preserved from SourceMetadata immutable original history.",
+    "proposedCurrentMap": {
+      "variantTag": "NativeLegacyDisplayCurrent1 (normative closed currentRecordSchema)",
+      "owner": "actualSceneId",
+      "fields": "All written/persistent native slots below retain original native width: signed16/I64, int32/I64, u32/fullFlags U64, u8 channel U64, f32 F32Bits, f64 F64Bits; typed owner refs for native phase shapes/polyhedra/bond rules. Named records include all actual current values, including constructor/context-derived fields not assigned by source.",
+      "sceneInt32Offsets": [
+        "0x234",
+        "0x268",
+        "0x26c",
+        "0x270",
+        "0x274",
+        "0x284",
+        "0x288",
+        "0x28c",
+        "0x2a4",
+        "0x2a8",
+        "0x2b8",
+        "0x5b4"
+      ],
+      "sceneSigned16Offsets": [
+        "0x228"
+      ],
+      "sceneFullWordOffsets": [
+        "0x5b0"
+      ],
+      "sceneF32Offsets": [
+        "0x22c",
+        "0x278",
+        "0x298",
+        "0x29c",
+        "0x2ac",
+        "0x2b4",
+        "0x3d0",
+        "0x3d8",
+        "0x3e0",
+        "0x3f8",
+        "0x40c"
+      ],
+      "sceneByteGroups": [
+        "0x230:3",
+        "0x2a0:3",
+        "0x2b0:4",
+        "0x3cc:4",
+        "0x3d4:4",
+        "0x3dc:4",
+        "0x3f4:4",
+        "0x3fc:3"
+      ],
+      "lights": "Full actual current light population, each matrix16f32+direction3f32+position4f32+threeRGBA4u8; preserve native owner/index and actual enable/context flags independently. Do not instantiate missing source lights from guessed defaults.",
+      "otherOwners": "Every affected current phase boundary/rule/full flags, current first shape alpha and every existing polyhedron alpha are preserved with actual typed identity refs; SBOND/ATOMP lack of a source assignment never permits incomplete current capture."
+    },
+    "defaultRule": "Only local initializations proved by bytes or separately constructor-bound actual states may be asserted. Every unassigned current property is actual captured context, not source-measured and not guessed default. This rule is a complete future implementation specification, not a request for new target execution or a blanket block because Engine is not yet implemented."
+  },
+  "colorF32ToByte": "For finite qualified normalized source channel q: f32 multiplication f32(q*255), exact promotion to f64, add exact0.5, floor, native integer narrowing then low8bits. Preserve original exact decimal, parsed f32 bits, native byte and any out-of-range diagnostic separately. Do not use a double-only q*255 calculation, arbitrary epsilon, silent clamp or repair source channels.",
+  "records": {
+    "MODEL": {
+      "sourceBindingPointer": "/rangeSpans/MODEL",
+      "framing": "inline",
+      "nativeScanner": "%5s %d %d",
+      "sourceFieldsInOrder": [
+        "selector:decimal-i32",
+        "optionalFullDisplayFlags:decimal-i32"
+      ],
+      "actualCurrentConsumption": "selector is written to Scene+0x5b4 then decremented by1. The full display word Scene+0x5b0 is replaced only if scanf returns3 (keyword+both ints). Both actual source MODEL3 records therefore assign selector2 and leave the preexisting full display word.",
+      "missingAndDefault": "Unassigned scan arguments retain their actual prior native object or scratch state. Never invent zero, identity, false, or a source observation."
+    },
+    "ATOMS": {
+      "sourceBindingPointer": "/rangeSpans/ATOMS",
+      "framing": "inline",
+      "nativeScanner": "%5s %i",
+      "sourceFieldsInOrder": [
+        "toggle:i32-C-base"
+      ],
+      "actualCurrentConsumption": "nonzero ORs0x20000 into Scene+0x5b0; zero leaves the full word unchanged. This branch is not modern three-int ATOMS.",
+      "missingAndDefault": "Unassigned scan arguments retain their actual prior native object or scratch state. Never invent zero, identity, false, or a source observation."
+    },
+    "BONDS": {
+      "sourceBindingPointer": "/rangeSpans/BONDS",
+      "framing": "inline; shared scanner range inlineIntegerCommon",
+      "nativeScanner": "%5s %i",
+      "sourceFieldsInOrder": [
+        "selector:i32-C-base"
+      ],
+      "actualCurrentConsumption": "writes Scene+0x28c directly.",
+      "missingAndDefault": "Unassigned scan arguments retain their actual prior native object or scratch state. Never invent zero, identity, false, or a source observation."
+    },
+    "POLYS": {
+      "sourceBindingPointer": "/rangeSpans/POLYS",
+      "framing": "inline; shared scanner range inlineIntegerCommon",
+      "nativeScanner": "%5s %i",
+      "sourceFieldsInOrder": [
+        "selector:i32-C-base"
+      ],
+      "actualCurrentConsumption": "writes Scene+0x2a4 directly.",
+      "missingAndDefault": "Unassigned scan arguments retain their actual prior native object or scratch state. Never invent zero, identity, false, or a source observation."
+    },
+    "ATOMP": {
+      "sourceBindingPointer": "/rangeSpans/ATOMP",
+      "framing": "one following physical get_line256 row",
+      "nativeScanner": "%i %i %i %f %f %i",
+      "sourceFieldsInOrder": [
+        "atomSlot0:i32->Scene+0x268",
+        "atomSlot1:i32->Scene+0x26c",
+        "atomSlot2:i32->Scene+0x274",
+        "sizeInput:f32->temporary",
+        "optionalScalar:f32->Scene+0x278",
+        "optionalFlag:i32->temporary"
+      ],
+      "actualCurrentConsumption": "Every actual four-value row15,15,0,0.500 assigns exactly the first4 conversions. The first3 native fields become15,15,0; fourth f32 q maps to Scene+0x270=i32 trunc(q) if q>1, otherwise trunc(f64(q)*100.0), so0.500 becomes50. Only exactly6 assigned arguments and nonzero optionalFlag OR0x800 into full display Scene+0x5b0. A four-value row does not assign Scene+0x278 and does not alter0x800. Original four source positions, optional-field absence and actual current scalar/flag remain separate.",
+      "missingAndDefault": "Unassigned scan arguments retain their actual prior native object or scratch state. Never invent zero, identity, false, or a source observation."
+    },
+    "BONDP": {
+      "sourceBindingPointer": "/rangeSpans/BONDP",
+      "framing": "one following physical get_line256 row",
+      "nativeScanner": "%i %i %f %f %f %f %f %f",
+      "sourceFieldsInOrder": [
+        "slot0:i32->Scene+0x284",
+        "slot1:i32->Scene+0x288",
+        "size0:f32->Scene+0x29c",
+        "overwrittenSize:f32->Scene+0x298",
+        "size1:f32->sameScene+0x298",
+        "R:f32",
+        "G:f32",
+        "B:f32"
+      ],
+      "actualCurrentConsumption": "Argument4 and argument5 alias Scene+0x298, so source5 overwrites source4. Source3 is multiplied by binary32 0.5 and stored at0x29c. Last3 values use colorF32ToByte into Scene+0x2a0..0x2a2. Actual YBa source0.614 becomes binary32(f32(0.614)*0.5), source0.500 is overwritten by1.000, RGB0.8 becomes204. Keep all8 source values, including the overwritten one.",
+      "missingAndDefault": "Unassigned scan arguments retain their actual prior native object or scratch state. Never invent zero, identity, false, or a source observation."
+    },
+    "POLYP": {
+      "sourceBindingPointer": "/rangeSpans/POLYP",
+      "framing": "one following physical get_line256 row",
+      "nativeScanner": "%f %i %f %f %f %f",
+      "sourceFieldsInOrder": [
+        "alpha:f32->scratchA50+12",
+        "slot1:i32->Scene+0x2a8",
+        "slot2:f32->Scene+0x2ac",
+        "R:f32->scratchA50",
+        "G:f32->scratchA50+4",
+        "B:f32->scratchA50+8"
+      ],
+      "actualCurrentConsumption": "colorF32ToByte packs source positions4,5,6,1 as RGBA into Scene+0x2b0..0x2b3. The resulting alpha byte is also copied to+0x8f of every existing polyhedron in Scene+0x5c0 vector. It then sets scratch ordinal sp+0x3e4=-1. No new polyhedron geometry is created by this display record.",
+      "missingAndDefault": "Unassigned scan arguments retain their actual prior native object or scratch state. Never invent zero, identity, false, or a source observation."
+    },
+    "HKLPP": {
+      "sourceBindingPointer": "/rangeSpans/HKLPP",
+      "framing": "one following physical get_line256 row",
+      "nativeScanner": "%f %i %f %f %f %f",
+      "sourceFieldsInOrder": [
+        "alpha:f32->scratch3bc",
+        "slot1:i32->Scene+0x2b8",
+        "slot2:f32->Scene+0x2b4",
+        "R:f32->scratchA50",
+        "G:f32->scratchA50+4",
+        "B:f32->scratchA50+8"
+      ],
+      "actualCurrentConsumption": "First value colorF32ToByte is stored into+0x83 of the first existing phase shape. Last3 values are scanned into scratch only and this branch does not write them into a persistent RGB field. Keep all6 original source fields, actual shape alpha and actual current Scene fields separately.",
+      "missingAndDefault": "Unassigned scan arguments retain their actual prior native object or scratch state. Never invent zero, identity, false, or a source observation."
+    },
+    "UCOLP": {
+      "sourceBindingPointer": "/rangeSpans/UCOLP",
+      "framing": "one following physical get_line256 row",
+      "nativeScanner": "%hd %f %i %i %i",
+      "sourceFieldsInOrder": [
+        "slot0:signed16->Scene+0x228",
+        "width:f32->Scene+0x22c",
+        "R:i32->scratch450",
+        "G:i32->scratch454",
+        "B:i32->scratch458"
+      ],
+      "actualCurrentConsumption": "Copies low bytes of scratch450/454/458 to Scene+0x230..0x232 unconditionally after scanning. In BOTH real samples the third source lexeme1.0000 lets%i assign1 then leaves a dot: the fourth conversion fails, so scan returns3, G/B scratch are not assigned by UCOLP. Preserve all5 source lexemes and exact scan cursor/assignment mask; current low-byte RGB comes from actual scratch state and must never be corrected to255,255,255 by interpreting legacy source as modern float RGB. The source floats are retained as source values with native scan interpretation separately.",
+      "missingAndDefault": "Unassigned scan arguments retain their actual prior native object or scratch state. Never invent zero, identity, false, or a source observation."
+    },
+    "BKGRC": {
+      "sourceBindingPointer": "/rangeSpans/BKGRC",
+      "framing": "one following physical get_line256 row",
+      "nativeScanner": "%f %f %f",
+      "sourceFieldsInOrder": [
+        "R:f32",
+        "G:f32",
+        "B:f32"
+      ],
+      "actualCurrentConsumption": "colorF32ToByte writes Scene+0x3fc..0x3fe. YBa0,0,0.2 ->0,0,51; CaTi0,0.3,0 ->0,77,0.",
+      "missingAndDefault": "Unassigned scan arguments retain their actual prior native object or scratch state. Never invent zero, identity, false, or a source observation."
+    },
+    "PROJT": {
+      "sourceBindingPointer": "/rangeSpans/PROJT",
+      "framing": "inline",
+      "nativeScanner": "%5s %i %f",
+      "sourceFieldsInOrder": [
+        "selector:i32",
+        "optionalScalar:f32->Scene+0x40c"
+      ],
+      "actualCurrentConsumption": "The selector is a temporary; zero ORs0x200000 into Scene+0x5b0. Nonzero takes the no-clear branch. Actual PROJT0 has no optional scalar, so no source observation for0x40c.",
+      "missingAndDefault": "Unassigned scan arguments retain their actual prior native object or scratch state. Never invent zero, identity, false, or a source observation."
+    },
+    "COMPS": {
+      "sourceBindingPointer": "/rangeSpans/COMPS",
+      "framing": "inline",
+      "nativeScanner": "%5s %i",
+      "sourceFieldsInOrder": [
+        "compassFlags:i32->Scene+0x234"
+      ],
+      "actualCurrentConsumption": "Writes full integer directly; retains all native bits.",
+      "missingAndDefault": "Unassigned scan arguments retain their actual prior native object or scratch state. Never invent zero, identity, false, or a source observation."
+    },
+    "LIGHT": {
+      "sourceBindingPointer": "/rangeSpans/LIGHT",
+      "framing": "bare inline header, then fscanf4x4 f32 matrix +position4+direction3+twoRGBA4 groups (whitespace based; not get_line width restricted)",
+      "nativeScanner": "optional header%i; fscanf4x%f then4x%f then3x%f then4x%f twice",
+      "sourceFieldsInOrder": [
+        "optional lightIndex:i32 absent in both real sources",
+        "matrix16:f32 logical row-major; native column-major",
+        "position4:f32",
+        "direction3:f32",
+        "ambientRGBA4:f32",
+        "diffuseRGBA4:f32"
+      ],
+      "actualCurrentConsumption": "Header temporary starts-1; unsigned index compare accepts0..4, other values including bare-1 become0. Light stride0x68 at Scene+0x410. Source matrix writes f32+0x00..0x3f in column-major storage, direction3 at+0x40..0x48, position4 at+0x4c..0x58, two color groups colorF32ToByte at+0x5c/+0x60. If header scanf returns0 (the actual bare LIGHT), it writes0xffffffff to third current color at+0x64 and does not scan a third source RGBA; ATOMM remains the next header.",
+      "missingAndDefault": "Light0 selection and third color0xffffffff are proved local initializations in this branch. Other current light instances retain actual prior state; no source enable flag, frame, unit, specular source tuple or other-light default is fabricated."
+    },
+    "DELOB": {
+      "sourceBindingPointer": "/rangeSpans/DELOB",
+      "framing": "header plus exactly6 following physical get_line256 rows",
+      "nativeScanner": "none",
+      "sourceFieldsInOrder": [],
+      "actualCurrentConsumption": "All6 rows are consumed and discarded without interpreting counts or creating/removing current objects in this reader branch. Actual CaTi source has three0 rows alternating3 empty rows. Preserve all6 exact source rows and bytes, including blank lines.",
+      "missingAndDefault": "Do not reinterpret these zeros as empty lists of scientific objects or claim deletion took place."
+    },
+    "ATOMM": {
+      "sourceBindingPointer": "/rangeSpans/ATOMM",
+      "framing": "four following physical get_line256 rows:3RGBA rows+shininess row",
+      "nativeScanner": "first2 rows no scanner; row3 %f %f %f %f; row4 %f via materialShininessCommon",
+      "sourceFieldsInOrder": [
+        "sourceRGBA0:4f32-source-only",
+        "sourceRGBA1:4f32-source-only",
+        "sourceRGBA2:4f32-consumed",
+        "shininess:f32-consumed"
+      ],
+      "actualCurrentConsumption": "First2 physical rows are discarded in full by the native consumer. Third row colorF32ToByte packs RGBA at Scene+0x3cc..+0x3cf; fourth row assigns binary32 shininess at Scene+0x3d0. Both actual sources have thirdRGBA1,1,1,1 ->255,255,255,255 and shininess128. All3 source RGBA groups, original exact decimals and raw rows persist independently; never collapse historical source into a single active SGMaterial or claim all3 RGBA groups are current.",
+      "missingAndDefault": "The consumed thirdRGBA/shininess are present and assigned in both samples. Missing/failed conversions in other records require actual current state or a diagnostic; no unverified constructor or all-white default is inferred."
+    },
+    "BONDM": {
+      "sourceBindingPointer": "/rangeSpans/BONDM",
+      "framing": "four following physical get_line256 rows:3RGBA rows+shininess row",
+      "nativeScanner": "first2 rows no scanner; row3 %f %f %f %f; row4 %f via materialShininessCommon",
+      "sourceFieldsInOrder": [
+        "sourceRGBA0:4f32-source-only",
+        "sourceRGBA1:4f32-source-only",
+        "sourceRGBA2:4f32-consumed",
+        "shininess:f32-consumed"
+      ],
+      "actualCurrentConsumption": "First2 physical rows are discarded in full by the native consumer. Third row colorF32ToByte packs RGBA at Scene+0x3d4..+0x3d7; fourth row assigns binary32 shininess at Scene+0x3d8. Both actual sources have thirdRGBA1,1,1,1 ->255,255,255,255 and shininess128. All3 source RGBA groups, original exact decimals and raw rows persist independently; never collapse historical source into a single active SGMaterial or claim all3 RGBA groups are current.",
+      "missingAndDefault": "The consumed thirdRGBA/shininess are present and assigned in both samples. Missing/failed conversions in other records require actual current state or a diagnostic; no unverified constructor or all-white default is inferred."
+    },
+    "POLYM": {
+      "sourceBindingPointer": "/rangeSpans/POLYM",
+      "framing": "four following physical get_line256 rows:3RGBA rows+shininess row",
+      "nativeScanner": "first2 rows no scanner; row3 %f %f %f %f; row4 %f via materialShininessCommon",
+      "sourceFieldsInOrder": [
+        "sourceRGBA0:4f32-source-only",
+        "sourceRGBA1:4f32-source-only",
+        "sourceRGBA2:4f32-consumed",
+        "shininess:f32-consumed"
+      ],
+      "actualCurrentConsumption": "First2 physical rows are discarded in full by the native consumer. Third row colorF32ToByte packs RGBA at Scene+0x3dc..+0x3df; fourth row assigns binary32 shininess at Scene+0x3e0. Both actual sources have thirdRGBA1,1,1,1 ->255,255,255,255 and shininess128. All3 source RGBA groups, original exact decimals and raw rows persist independently; never collapse historical source into a single active SGMaterial or claim all3 RGBA groups are current.",
+      "missingAndDefault": "The consumed thirdRGBA/shininess are present and assigned in both samples. Missing/failed conversions in other records require actual current state or a diagnostic; no unverified constructor or all-white default is inferred."
+    },
+    "HKLPM": {
+      "sourceBindingPointer": "/rangeSpans/HKLPM",
+      "framing": "four following physical get_line256 rows:3RGBA rows+shininess row",
+      "nativeScanner": "first2 rows no scanner; row3 %f %f %f %f; row4 %f via materialShininessCommon",
+      "sourceFieldsInOrder": [
+        "sourceRGBA0:4f32-source-only",
+        "sourceRGBA1:4f32-source-only",
+        "sourceRGBA2:4f32-consumed",
+        "shininess:f32-consumed"
+      ],
+      "actualCurrentConsumption": "First2 physical rows are discarded in full by the native consumer. Third row colorF32ToByte packs RGBA at Scene+0x3f4..+0x3f7; fourth row assigns binary32 shininess at Scene+0x3f8. Both actual sources have thirdRGBA1,1,1,1 ->255,255,255,255 and shininess128. All3 source RGBA groups, original exact decimals and raw rows persist independently; never collapse historical source into a single active SGMaterial or claim all3 RGBA groups are current.",
+      "missingAndDefault": "The consumed thirdRGBA/shininess are present and assigned in both samples. Missing/failed conversions in other records require actual current state or a diagnostic; no unverified constructor or all-white default is inferred."
+    },
+    "PLANE": {
+      "framing": "actual source header+one3-integer row",
+      "sourceFieldsInOrder": [
+        "h:i32",
+        "k:i32",
+        "l:i32"
+      ],
+      "nativeScanner": null,
+      "actualCurrentConsumption": "No exact PLANE literal/handler occurs in the complete bound shared reader. The header and numeric row fall through its outer loop. They remain a source-only distinct record; do not create a current SGPlane, PLN2D, SPLAN or camera plane from them.",
+      "negativeEvidencePointer": "/negativeSearch",
+      "missingAndDefault": "No current plane or zero/identity native plane is inferred."
+    },
+    "SBOND": {
+      "sourceBindingPointer": "/rangeSpans/SBOND",
+      "framing": "get_line256 rows to ordinal0; allocates then removes sentinel",
+      "nativeScanner": "%i %10s %10s %f %i %i %i %f %i",
+      "sourceFieldsInOrder": [
+        "ordinal:i32",
+        "from:bytes<=10",
+        "to:bytes<=10",
+        "maxDistance:f32",
+        "optionalKind:i32",
+        "optionalShowPolyhedra:i32",
+        "optionalBoundaryMode:i32",
+        "optionalMinimumDistance:f32",
+        "optionalSearchByLabel:i32"
+      ],
+      "actualCurrentConsumption": "Actual YBa has4 values; CaTi has7. First labels write BondSpec+0x1c/+0x27, max+0x14, optionalKind+0xc, optionalBoundaryMode+0x10, optionalMinimumDistance+0x18. Source ordinal is loop control, not retained native identity. Local optionalSearchByLabel is reset0 each row; optionalShowPolyhedra scratch3d8 is not reset by this branch. Native flags+0x42=u16(1|(scratchShowPolyhedra<<2)|(searchByLabel<<3)). If kind2 and boundaryMode nonzero, native sets boundaryMode2. Preserve actual full rule state, assigned mask and original missingness, not padded modern15-field source. Post-read oldBondPostprocess first calls Scene::UpdateBondsProperties(actual global XStyle), then applies to all current phase rules: kind-1 becomes0 and flagsOR0x5; if both labels contain substringXX sets kind2 and clears mask0x4, else if to-label contains substringXX sets kind1. Exact label equality is not required by native strstr. Source from-label exactlyH orD (firstu16 H-NUL/D-NUL) with native max>exactdouble1.1 sets style byte+0x40=4. Apply only as actual native current compatibility transition; source fields remain unchanged.",
+      "missingAndDefault": "BondSpec constructor binding proves constant bytesffffffff01000000 initialize kind-1/boundaryMode1, minimumDistance+0x18=0 and flags+0x42=1, but geometry/style also reads global configuration. Do not infer the unassigned scratchShowPolyhedra, current style/configuration or any absent source field from these constructor constants. A complete actual current rule contains all flags/fields, irrespective of source missingness."
+    }
+  },
+  "coveredCoreAndThermalRecords": {
+    "TITLE": "Original source next-line text is retained byte exactly. The first physical line is always consumed as version probe at versionProbe; in these files this consumes TITLE, without replay in this function. Actual current title must come from captured native object/call context, not assumed replay. This does not prove that the full caller has no filename/title fallback.",
+    "GROUP": "vics-format-contract.json /framing/GROUP; original number, setting and all HM words remain separate from native generated SG/operators.",
+    "SYMOP": "vics-format-contract.json /framing/SYMOP; old12-value t3+R9 not modern13-value magnetic row; sentinel is not an operator; no observed timeSign source field is invented.",
+    "CELLP": "vics-format-contract.json /framing/CELLP; six source parameters plus independent6 uncertainty lexemes, not covariance or inferred active3D frame.",
+    "STRUC": "vics-format-contract.json /framing/STRUC; old7-value row+3 uncertainty row, original serial/species/label/SOF/xyz and source missingness; not modern9+4 fields.",
+    "ATOMT": "vics-format-contract.json /framing/ATOMT; source ordinal/species/radius and normalized3float color retained independently of actual Scene-global current atom styles, not per-site scientific radii.",
+    "BOUND": "Source6 lower/upper fractional extents in declared source order, phase-owned boundary record; preserve exact bounds independent of actual native current boundary/style. No clipping physical sites to display region.",
+    "SCENE": "native-scene-format-contract.json /matrix /quantities /model; actual old sample4x4 f64 +2f32+1f32+1f32, no following HBOND in these sources. Keep missing HBOND and any actual current HBOND independent; do not fabricate source HBOND.",
+    "THERI": "native-thermal-default.contract.json and native-thermal-state.contract.json; actual source bare firstTHERI freshly selectsB, original4 rows independently retained; absentYBaTHERI not a source observation.",
+    "THERT": "native-thermal-default.contract.json and native-thermal-state.contract.json; CaTi explicit0 selectsnativeUij; no all-historical producer physical certificate implied.",
+    "THERM": "native-thermal-state.contract.json; actual6 coefficients per source row, own source identity/ordinal/label; full actual scalar+six coefficients+global flags captured independently."
+  },
+  "keywordCoverage": {
+    "actualUniqueKeywords": [
+      "ATOMM",
+      "ATOMP",
+      "ATOMS",
+      "ATOMT",
+      "BKGRC",
+      "BONDM",
+      "BONDP",
+      "BONDS",
+      "BOUND",
+      "CELLP",
+      "COMPS",
+      "DELOB",
+      "GROUP",
+      "HKLPM",
+      "HKLPP",
+      "LIGHT",
+      "MODEL",
+      "PLANE",
+      "POLYM",
+      "POLYP",
+      "POLYS",
+      "PROJT",
+      "SBOND",
+      "SCENE",
+      "STRUC",
+      "SYMOP",
+      "THERI",
+      "THERM",
+      "THERT",
+      "TITLE",
+      "UCOLP"
+    ],
+    "count": 31,
+    "unassignedActualKeywords": [],
+    "scope": "Every header in both retained actual old VICS source files is covered by a concrete record clause or named existing core/thermal contract. This is not a full all-version VESTA or all historical producer certificate."
+  },
+  "resourceAndFidelity": [
+    "Every source raw span resolves to a retained immutable Resource content hash/length, not a local machine path or metadata text without bytes; all original physical line endings and unconsumed suffixes are preserved.",
+    "Original source inventory includes discarded materialRGBA0/1, overwritten BONDP value, HKLPP scratch-only RGB, PLANE, DELOB6 rows, missing optional fields and first probeTITLE. They are full source audit units; change/drop/reorder needs explicit loss and cannot be counted as Saved unchanged.",
+    "Current audit includes actual all slots/full bitwords/types/light population/rule and dependent-object identities, not just source-replay output. Typed bytes of material classes stay distinct, alpha is not dropped, source float channels are not relabelled byte-equal.",
+    "Unknown dependency changes invoke existing E_UNSAFE_SOURCE_REWRITE. Immutable byte-preservation does not alone prove editable current state or native render/physical equivalence.",
+    "No graphics value is used to alter scientific site coordinates, thermal tensors, SG operation count, chemistry, or inferred field units."
+  ],
+  "futureReadbackAssertions": [
+    "Decode both actual source resources under locked legacy profile; verify ordered31 unique keyword families including DELOB, exact raw records and source counts/absence. Verify separate current actual fields through the actual Engine owner getters rather than synthesizing them by replay.",
+    "Four-value ATOMP assigns4 conversions, produces15/15/0/50 current ints, keeps source four-value row and captures actual unchanged optional scalar/full flags; material blocks retain3 originalRGBA groups but currentthirdRGBA bytes+shininess128 only.",
+    "Verify BONDP aliased overwrite plus f32halfsize, UCOLP actual assignment mask/cursor and actual current scratch-derived bytes, HKLPP consumed-but-unprojected sourceRGB, bareLIGHT2color groups+currentthird0xffffffff, PLANE no currenthandler, DELOB six discarded lines.",
+    "Save/reopen through a new actual Engine instance, compare full Source7 current render/camera/shape/rule state, exact source tree/resource closure and full audit; native representational losses must be reported prospectively. Unchanged raw bytes or one green scalar test alone cannot pass.",
+    "Add bounded off-sample controls for optional ATOMP fields, nonzeroATOMS flag OR behavior, repeatedMODEL display-word replacement, scalar/colors signedzero/f32rounding, alternate whitespace and line endings/overlong get_line drain, preserving all source tokens. No target execution is claimed by this design."
+  ],
+  "fullAllHistoricalProducerGrammarQualified": false,
+  "newTargetExecuted": false,
+  "productImplemented": false,
+  "whole03Complete": false,
+  "currentRecordSchema": {
+    "path": "vics-legacy-display-current.schema.json",
+    "sha256": "2cd6c594c8fb79b8898dd5f1cf6dd8342751c842d5b8362d9ba2ceba6efb32cf"
+  },
+  "currentStateBinding": {
+    "Source7": "codec-source-document.schema.json#/$defs/Scene",
+    "renderPointer": "/scenes/{actualSceneIndex}/render/members/nativeLegacyDisplayCurrent",
+    "renderNode": "TaggedVariant NativeLegacyDisplayCurrent1; payload is the entire closed ordinary NativeLegacyDisplayCurrent body recursively lowered to AuditNode. Scene.render itself remains an AuditNode Map; retain its other current members.",
+    "viewPointer": "/scenes/{actualSceneIndex}/cameraRaw/members/nativeLegacyViewCurrent",
+    "viewNode": "TaggedVariant NativeLegacyViewCurrent1; payload is the entire closed NativeLegacyViewCurrent body recursively lowered to AuditNode. Scene.cameraRaw remains Map and retains other camera members.",
+    "ownerEquality": "Both scene EntityRefs equal the actual containing Scene.id. Every phase owner equals the actual owner of the target definition. Actual definitions come from Source7 existing typed roots, never an archived ordinal or guessed first phase.",
+    "targetDefinitions": {
+      "scene": "/scenes/*/id",
+      "phase": "/phaseGraph/phases/*/id",
+      "display": "/displays/*/id",
+      "bond-rule": "/bondRules/*/id",
+      "shape": "/shapes/*/id",
+      "mesh": "/meshes/*/id",
+      "boundary": "/boundaries/*/id",
+      "source-entity": "/sourceEntities/*/id"
+    },
+    "sourceEntityFallback": "Use a real distinct SourceEntity definition only when the actual current native subobject has no qualified SG wrapper; nativeKind identifies the actual subobject and its full current sourceTree is captured. Never fabricate an SG shape/mesh/periodic phase or borrow an unrelated definition merely to satisfy a reference. The actual complete Engine source type is authoritative.",
+    "trustedPopulation": "An independent current snapshot supplies exact ordered light indices, atom-type definitions, phase-boundaries, rules, affected first shapes and every current polyhedron. Each expected target appears exactly once in its role, including inactive/default state. No static sample count, source table or caller omission list can establish completeness.",
+    "allCurrentWords": "Native current rules preserve both f32 distances, both i32 modes, fullu16 flags, styleu8, radius/lineWidth f32 and all4 current color bytes. NBOND1 15-token source records or its two decomposed booleans cannot substitute for this current record or pad a legacy4/7-field source row. Original token count/missingness belongs only to immutable metadata.",
+    "view": "Native actual Scene+0x88 matrix16f64 and +0x108/+0x10c/+0x110/+0x120 fourf32 settings live in cameraRaw current view map independently of source SCENE. This conveys no physical camera frame.",
+    "lowering": "Pass EntityRef/F32Bits/F64Bits through unchanged. Ordinary keys become Map; arrays become Array; schema strings Utf8; native integers I64 (schema preserves range/width). Raw source observations lower separately without live EntityRef aliases. Every reference participates in the existing typed global bijection; current literal species/labels/offset keys never rebind.",
+    "migration": "Source7 already has render/cameraRaw/AuditNode and real owner roots; no SourceDTO root or protocol version change. The closed current type and its role schema must be registered in the shared visitor before complete capture can pass. Actual schema mismatch requires versioned extension or refusal, never replay of source."
+  },
+  "finiteDesignWitness": {
+    "model": "vics-legacy-display-model.py",
+    "witness": "vics-legacy-display-witness.py",
+    "scope": "Bounded source-span conservation, selected legacy consumption and full current width/reference lowering/validation; no product codec, actual Engine or target execution."
+  },
+  "qualification": {
+    "selectedLegacyConsumptionAndCurrentParameterDesignSpecified": true,
+    "allHistoricalProducerQualified": false,
+    "actualEngineCaptureImplemented": false,
+    "productCodecImplemented": false,
+    "newTargetExecuted": false,
+    "independentlyReviewed": false
+  }
+}

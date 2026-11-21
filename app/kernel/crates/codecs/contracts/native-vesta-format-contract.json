@@ -1,0 +1,114 @@
+{
+  "schema": "FC-native-vesta/2",
+  "routes": [
+    "VM18-I01",
+    "OBS-O01"
+  ],
+  "inputs": [
+    {
+      "path": "output/vesta-study/20261108-113622/s04/temporary-C1.vesta",
+      "sha256": "2128427f4b5aa7e7dd5bd93ffaa93b90a51fe820538fb6b0f071cd0e9cc3f1b1",
+      "bytes": 3696,
+      "root": "workspace"
+    },
+    {
+      "path": "output/vesta-study/20261108-113622/s04/temporary-C1-hidden.vesta",
+      "sha256": "e6d0b631a2c65aa8fa208279684ca82d2c16cd630c10baf66246b498c101cf22",
+      "bytes": 3698,
+      "root": "workspace"
+    },
+    {
+      "path": "output/vesta-study/20261108-113622/s04/temporary-C1-density.vesta",
+      "sha256": "4e19562240ec86ff2e4a62c2352c189c8e2fd023dfabd5798e832181133b1460",
+      "bytes": 3790,
+      "root": "workspace"
+    }
+  ],
+  "sourceVersion": "selected3.5.4header +locked3.90.9a staticreader/writer; oldVICS separatecontract",
+  "static": [
+    "static/formats/__ZL13readVESTAfileP7__sFILER5Scene.asm",
+    "static/extra-__Z9save_dataRKNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEER5Scene.asm"
+  ],
+  "document": {
+    "identity": "EveryCRYSTAL/MAGNETIC_CRYSTAL/MOLECULE hasownsourceowner; localrecordserialnotglobalSiteId. SCENE/STYLE/ATOMT are Scene-owned global documentstate, not phase-local. Per-entry bonds/shapes/vectors retain distinct owners.",
+    "framing": "Native selectedreaders use substring keyword dispatch, version-dependent paths andline/sentinel records; unsafe ambiguities are preservedasdiagnostic, not generalized validinput. Corrected proposal recognizesexactkeywords, complete records andunambiguousunknownblocks; entirefile source-only ifboundaries/referenceclosure cannotbe established. Preserve originalcomments/lineendings/order.",
+    "versions": "parseexactmajor/minor/patch;newerversions no silentdowngrade. Typedrepresentationandrawrecordprovenance bothrequired"
+  },
+  "fields": {
+    "CELLP": "native-atom-record-contract.json: sixf32length/angle quantities plus sixf32independentSUs, actualtwo source sequences and6place writer. Periodicowner/frame qualification distinct, not covariance or moleculeunitcell fallback.",
+    "STRUC": "native-atom-record-contract.json: selected3D firstline serial/species/label/occupancy/xyz/multiplicity/Wyckoff; secondline3coordinateSUs+independentf32oxidationscalar, no occupancySUslot. Native labelcopy10bytes/row-order identity/writerordinalrenumbering andunconsumedtail explicit; complete source observations/reference closure remain separate.",
+    "SYMOP": "native-symmetry-record-contract.json: selected3D compact13numbers (t3,R9,M33), nativefirsttranslation near-1 terminator versus complete terminalrecord,6significantdigit writer andsource centering distinctions. M33 is not universallyinferredtimeparity; preservequalifiedgroup/basis/origin/owner andraw assertions separately, rejectambiguousprojection.",
+    "TRANM/LTRANSL/LORIENT/LMATRIX/PHASON": "native-model-transform-contract.json: selected compact TRANM13 entries, LTRANSL1+6, LORIENT5+6+6, LMATRIX4x4+3, PHASONDxD; explicit source-owner/storage and scalar printing. TRANMheader is not matrix dimension; LORIENT nativeOR precedence and omitted homogeneous entries retained. Source-only physical/superspace semantics not projected into SG or globalSCENE.",
+    "THERI/THERT/THERM": "native-thermal-contract.json: locked selectors/row associations/constants plus scoped actual A1 tensor omission and A2 tensor retention with isotropic-literal transformation; original tables separately persistent. A1 fresh reopen and complete thermal producer/version grammar remain unqualified. native-thermal-state.contract.json separately captures actual current global selector/enable words and every stored scalar/six-tuple under stable current owners, including disabled or unused values; original source tables remain independent document history. No current state inferred by replay.",
+    "VECTR/VECTT": "native-vector-format-contract.json: selected3D exact components/parity, ordered five-integer associations, vector-owned style/radius/RGB/flags, safe identity rewrite and independent raw source. Sticky legacy type bit and style upper-bit overwrite are static hazards, not corrected grammar or new runtime. Complete vector/restored association coverage mandatory; old second-site moment loss remains failure.",
+    "sceneAndGraphics": "Native SCENE matrix/settings and global STYLE/ATOMT are Scene-owned document state, not phase-local. Per-phase shapes/bonds/ranges/vectors remain separate owners. See native-scene-format-contract.json and native-style-format-contract.json for exact source storage/framing/printing and scoped qualification. Preserve source camera/render metadata rather than fabricating SGRenderContext semantics; encode from complete preservation DTO, never legacy EncodeInventory.; native-bond-format-contract.json gives independent phase-owned15-field search rules, flags/modes/style and typed-native-variant gap. Rendered bonds do not replace source recipes.; native-flag-state.contract.json NVIS2 captures five current label/disabled sets independently from immutable original source observations, with qualified complete population/ref mappings and real restored effects. NVIS1 source records alone are insufficient.",
+    "persistent2DSections": "native-section-format-contract.json: independent section identities/phase owner,18rows80sourcevalues including fractional center/ranges, actualmode, style/colors/matrix and ignored-fourth-source projection loss; SourceDTO4.sections and semantic coverage, not only global SCENE metadata."
+  },
+  "resources": {
+    "IMPORT_DENSITY": "native-resource-syntax-contract.json: mode header is not a reference count; preserve ordered operation/path records and exact owner/grid/frame provenance. Safe consumer isolates pathname before directory resolution; old/new original restore failures remain. Unknown operations/component/version semantics are source-only.",
+    "IMPORT_STRUCTURE/ORFFE/TEXTURE": "resource-graph.contract.json: each explicit IMPORT_STRUCTURE path can recursively decode a referenced primary in its own directory/context; IMPORT_ORFFE single path and IMPORT_TEXTURE ordered operation/path records have distinct owners/effects. Capture exact bytes and all transitive dependencies; cycles/unknown closure reject complete load/save.",
+    "layout": "default.vesta+resources; logicalrelativepath identity distinctfromcontenthash; newhashlayoutnotnativecompatibilityclaim",
+    "host": "resource-host-proposal.json H1–H4 consumptionrequirements; nocurrent04promise/Savedclaim"
+  },
+  "save": {
+    "input": "WholeSource codec-source-document.schema.json, fully capturedbeforeprojection",
+    "unknowns": "opaque-edit-dependency.contract.json: unqualified blocks conservatively depend on the whole persistent source and reference namespace. Every block has closed editDependencies; unknown external-reference closure blocks whole Save, exact raw bytes still required. Qualified footprints come from trusted format rules, never client/codec assertions; unsupported edits return E_UNSAFE_SOURCE_REWRITE.",
+    "scope": "exportpartialstructurenotprojectSave; nativeSave mustpartitioneverypersistentproperty+resourceedge andretainfutureunmodeledrawbytes withbinding",
+    "stages": "codec-stage-results.contract.json; PlanzeroIO, freshconsent,privatecandidate,decodevalidation,hostcommit,matchingSavedAck",
+    "semanticReopen": "A file/reference/hash is not complete state: independent artifact-only readback must reconstruct every registered required object/resource association, including zero-atom field-only projects. Actual native self-save resource reopen failure remains; no native/product/04 qualification inferred."
+  },
+  "precision": {
+    "nativePrinted": "selectedwriterfixeddecimalbudgetsfromactualspecimens ratherthanglobal1e-5; everyf64→f32/byte andtruncatedlabelseparateloss",
+    "rawPreservation": "signedzero/rawfloatbitsandunknownsourcebytes retainedinsourcepreservationenvelope; iftargetnativeformatcannotexpresssidecar/envelope thenreportunsupportedwholeSave, notsilentlydrop"
+  },
+  "fullNativeBlockGrammarAndWriterQualified": false,
+  "productImplemented": false,
+  "selectedThermalRules": "native-thermal-contract.json",
+  "selectedAuthorizedRuntime": "native-thermal-observations.json",
+  "selectedStyleRecordRules": "native-style-format-contract.json",
+  "selectedResourceSyntax": "native-resource-syntax-contract.json",
+  "selectedSceneRecordRules": "native-scene-format-contract.json",
+  "selectedModelTransformRules": "native-model-transform-contract.json",
+  "selectedAtomRecordRules": "native-atom-record-contract.json",
+  "selectedSymmetryRecordRules": "native-symmetry-record-contract.json",
+  "selectedResourceReopenRules": "resource-reopen.contract.json",
+  "selectedResourceGraphRules": "resource-graph.contract.json",
+  "selectedORFFEResourceRules": "orffe-resource.contract.json",
+  "proposedFullSourceEnvelope": "native-source-envelope.contract.json",
+  "selectedSectionRecordRules": "native-section-format-contract.json",
+  "selectedVectorRecordRules": "native-vector-format-contract.json",
+  "selectedResourceEffectRules": "density-resource-effect.contract.json",
+  "selectedBondRecordRules": "native-bond-format-contract.json",
+  "selectedObjectFlagRules": "native-flag-state.contract.json",
+  "selectedObjectFlagSourceRecordRules": "native-object-flags.contract.json",
+  "selectedLegacySectionRecordRules": "native-legacy-section.contract.json",
+  "selectedThermalDefaultState": {
+    "path": "native-thermal-default.contract.json",
+    "sha256": "4450386704d6c4dea74c799ba5ed35084d70e15eebfdda382ef60370a33d9031",
+    "scope": "Selected fresh locked native state/whole-reader w22 proof only; no old-producer or runtime qualification"
+  },
+  "currentNativeThermalState": {
+    "path": "native-thermal-state.contract.json",
+    "sha256": "b57ff381e7e61c1140341cadd8b437595ded2f95e813781c24e29f5aa8d6d7da",
+    "scope": "Actual current native-compatible selectors/scalar+six-slot state proposal, distinct from original history and canonical-only source; no actual Engine/live restore qualification"
+  },
+  "currentNativeLayerState": {
+    "path": "native-layer-current.contract.json",
+    "sha256": "2520459d4234be0c44d1302adda079386205b655c84c2d2a8c4e96bf8992f52b",
+    "scope": "Complete selected3D actual current layer population, native flags/anchors/effective matrix+translation and typed two-reference roles; immutable Source1 history independent. No actual capture/physics/runtime qualification."
+  },
+  "currentNativeLegacyDisplayState": {
+    "path": "vics-legacy-display.contract.json",
+    "sha256": "c8484e37771dbd3094f37e97fab73e2ace7916b26e80f02216d622a9eb3216d7",
+    "pointer": "/currentStateBinding",
+    "currentSchema": {
+      "path": "vics-legacy-display-current.schema.json",
+      "sha256": "2cd6c594c8fb79b8898dd5f1cf6dd8342751c842d5b8362d9ba2ceba6efb32cf"
+    },
+    "registeredTags": {
+      "NativeLegacyDisplayCurrent1": "Scene.render Map member nativeLegacyDisplayCurrent",
+      "NativeLegacyViewCurrent1": "Scene.cameraRaw Map member nativeLegacyViewCurrent"
+    },
+    "scope": "Complete actual current populations and all schema-declared EntityRef roles/global typed bijection; known original31keywords/history separate. Every native-width bit/unused slot persists. No replay from source or capture from encoded projection. Actual Engine derive visitor/restorer is future; schema mismatch refuses complete save."
+  }
+}

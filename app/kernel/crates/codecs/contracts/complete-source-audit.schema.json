@@ -1,0 +1,368 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:draft:fc:complete-source-audit:proposal:1",
+  "title": "CompleteSourceAudit1 proposal, not admitted protocol3",
+  "type": "object",
+  "properties": {
+    "source": {
+      "$ref": "#/$defs/AuditSource"
+    },
+    "claims": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Claim"
+      }
+    }
+  },
+  "required": [
+    "source",
+    "claims"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "AuditNode": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "Null"
+            }
+          },
+          "required": [
+            "kind"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "Bool"
+            },
+            "value": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "kind",
+            "value"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "I64"
+            },
+            "value": {
+              "type": "string",
+              "pattern": "^(0|-[1-9][0-9]*|[1-9][0-9]*)$"
+            }
+          },
+          "required": [
+            "kind",
+            "value"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "U64"
+            },
+            "value": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$"
+            }
+          },
+          "required": [
+            "kind",
+            "value"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "F64Bits"
+            },
+            "ieeeHexBE": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{16}$"
+            }
+          },
+          "required": [
+            "kind",
+            "ieeeHexBE"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "F32Bits"
+            },
+            "ieeeHexBE": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{8}$"
+            }
+          },
+          "required": [
+            "kind",
+            "ieeeHexBE"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "Utf8"
+            },
+            "value": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "kind",
+            "value"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "BytesRef"
+            },
+            "resourceId": {
+              "type": "string"
+            },
+            "sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "byteLength": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$"
+            }
+          },
+          "required": [
+            "kind",
+            "resourceId",
+            "sha256",
+            "byteLength"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "EntityRef"
+            },
+            "objectKind": {
+              "type": "string"
+            },
+            "objectId": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "kind",
+            "objectKind",
+            "objectId"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "Array"
+            },
+            "items": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/AuditNode"
+              }
+            }
+          },
+          "required": [
+            "kind",
+            "items"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "Map"
+            },
+            "members": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/$defs/AuditNode"
+              }
+            }
+          },
+          "required": [
+            "kind",
+            "members"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "TaggedVariant"
+            },
+            "tag": {
+              "type": "string"
+            },
+            "payload": {
+              "$ref": "#/$defs/AuditNode"
+            }
+          },
+          "required": [
+            "kind",
+            "tag",
+            "payload"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "SnapshotIdentity": {
+      "type": "object",
+      "properties": {
+        "documentId": {
+          "type": "string"
+        },
+        "epoch": {
+          "type": "string"
+        },
+        "revision": {
+          "type": "string"
+        },
+        "sourceTypeDigest": {
+          "type": "string"
+        },
+        "sourceRootDigest": {
+          "type": "string"
+        },
+        "policyDigest": {
+          "type": "string"
+        },
+        "resourceGraphDigest": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "documentId",
+        "epoch",
+        "revision",
+        "sourceTypeDigest",
+        "sourceRootDigest",
+        "policyDigest",
+        "resourceGraphDigest"
+      ],
+      "additionalProperties": false
+    },
+    "Owner": {
+      "type": "object",
+      "properties": {
+        "semanticOwnerKind": {
+          "type": "string"
+        },
+        "ownerId": {
+          "type": "string"
+        },
+        "objectKind": {
+          "type": "string"
+        },
+        "objectId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "semanticOwnerKind",
+        "ownerId",
+        "objectKind",
+        "objectId"
+      ],
+      "additionalProperties": false
+    },
+    "AuditSource": {
+      "type": "object",
+      "properties": {
+        "snapshot": {
+          "$ref": "#/$defs/SnapshotIdentity"
+        },
+        "owner": {
+          "$ref": "#/$defs/Owner"
+        },
+        "root": {
+          "$ref": "#/$defs/AuditNode"
+        }
+      },
+      "required": [
+        "snapshot",
+        "owner",
+        "root"
+      ],
+      "additionalProperties": false
+    },
+    "Claim": {
+      "type": "object",
+      "properties": {
+        "relativePointer": {
+          "type": "string"
+        },
+        "sourceNodeDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "disposition": {
+          "enum": [
+            "encoded-exact",
+            "encoded-transform-with-proof",
+            "opaque-preserved",
+            "dropped-with-fresh-consent",
+            "transient-excluded-by-frozen-policy",
+            "refused"
+          ]
+        },
+        "evidenceId": {
+          "type": "string"
+        },
+        "reason": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "relativePointer",
+        "sourceNodeDigest",
+        "disposition",
+        "evidenceId",
+        "reason"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "x-semanticConstraints": [
+    "I64/U64 decimal strings checked against exact signed/unsigned64 bounds",
+    "Empty strings disallowed for all identities; digests validated and rebound to authoritative source",
+    "Pointers unique exact RFC6901 identities from full source traversal; escaped keys and array indices never supplied by codec",
+    "Duplicate JSON keys rejected at parse boundary; no NFC rewriting, NaN literal, floats outside explicit IEEE bit envelope",
+    "Map marker includes sorted exact keys and child node kinds; array marker includes length; variant marker includes tag",
+    "Claim evidence type/ref semantics, source full equality, required flags and policy digest checked by independent audit, not JSON schema alone"
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "schema": "VestaDraft/FEFF10-post-active-END-opaque-footprint/1",
+  "qualification": "Only the selected byte-pinned FEFF10 engineering job verified by native Graph2 discovery. The rule adds no FEFF simulation or scientific eligibility.",
+  "extent": "The literal suffix of the selected child stream after the complete line which terminated the expanded reader. Every suffix byte is preserved. No token, field or further reference is interpreted.",
+  "owner": "The document that owns the captured job, with independent resource identity for the actual child stream.",
+  "footprint": "The complete graph metadata node for this captured job. The node identity uses the actual document-relative pointer and normalization of typed resource IDs to the verified persistent logical resource keys. The rule, graph namespace and complete resource-use closure are fixed across subsequent saves.",
+  "closure": "complete-no-external-references for the suffix. The active source archive still requires its complete verified Graph2.",
+  "failure": "An unverified scope, changed footprint, spoofed rule, incomplete or edited raw extent, graph/context change, missing or unexpected block refuses complete-project save."
+}

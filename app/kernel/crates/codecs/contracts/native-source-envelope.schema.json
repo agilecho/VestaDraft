@@ -1,0 +1,517 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:draft:fc:native-source-envelope:proposal:1",
+  "$defs": {
+    "StoredNode": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "Null"
+            }
+          },
+          "required": [
+            "kind"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "Bool"
+            },
+            "value": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "kind",
+            "value"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "I64"
+            },
+            "value": {
+              "type": "string",
+              "pattern": "^(0|-[1-9][0-9]*|[1-9][0-9]*)$"
+            }
+          },
+          "required": [
+            "kind",
+            "value"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "U64"
+            },
+            "value": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$"
+            }
+          },
+          "required": [
+            "kind",
+            "value"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "F64Bits"
+            },
+            "ieeeHexBE": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{16}$"
+            }
+          },
+          "required": [
+            "kind",
+            "ieeeHexBE"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "F32Bits"
+            },
+            "ieeeHexBE": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{8}$"
+            }
+          },
+          "required": [
+            "kind",
+            "ieeeHexBE"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "Utf8"
+            },
+            "value": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "kind",
+            "value"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "BytesRef"
+            },
+            "sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "byteLength": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)$"
+            },
+            "resourceKey": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "kind",
+            "resourceKey",
+            "sha256",
+            "byteLength"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "EntityRef"
+            },
+            "objectKind": {
+              "type": "string"
+            },
+            "objectKey": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "kind",
+            "objectKind",
+            "objectKey"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "Array"
+            },
+            "items": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/StoredNode"
+              }
+            }
+          },
+          "required": [
+            "kind",
+            "items"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "Map"
+            },
+            "members": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/$defs/StoredNode"
+              }
+            }
+          },
+          "required": [
+            "kind",
+            "members"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "TaggedVariant"
+            },
+            "tag": {
+              "type": "string"
+            },
+            "payload": {
+              "$ref": "#/$defs/StoredNode"
+            }
+          },
+          "required": [
+            "kind",
+            "tag",
+            "payload"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "ObjectDefinition": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string",
+          "minLength": 1
+        },
+        "objectKind": {
+          "type": "string",
+          "minLength": 1
+        },
+        "captureObjectId": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "key",
+        "objectKind",
+        "captureObjectId"
+      ],
+      "additionalProperties": false
+    },
+    "IdentitySlot": {
+      "type": "object",
+      "properties": {
+        "typedSourcePointer": {
+          "type": "string",
+          "pattern": "^(|(/([^~]|~[01])*))$"
+        },
+        "storedNodePointer": {
+          "type": "string",
+          "pattern": "^(|(/([^~]|~[01])*))$"
+        },
+        "objectKind": {
+          "type": "string",
+          "minLength": 1
+        },
+        "objectKey": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "typedSourcePointer",
+        "storedNodePointer",
+        "objectKind",
+        "objectKey"
+      ],
+      "additionalProperties": false
+    },
+    "ResourceBinding": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string",
+          "minLength": 1
+        },
+        "capturedResourceId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "byteLength": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)$"
+        },
+        "relativeBlobPath": {
+          "type": "string",
+          "minLength": 1
+        },
+        "storageFormat": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sourceDescriptorDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "required": [
+        "key",
+        "capturedResourceId",
+        "sha256",
+        "byteLength",
+        "relativeBlobPath",
+        "storageFormat",
+        "sourceDescriptorDigest"
+      ],
+      "additionalProperties": false
+    },
+    "SavedSourceDocument": {
+      "type": "object",
+      "properties": {
+        "schemaVersion": {
+          "const": "FC-native-saved-source-1-proposal"
+        },
+        "sourceTypeDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "sourceDTOSchemaDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "sourceRuleSetDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "capturedSourceLedgerDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "capturedSnapshot": {
+          "type": "object",
+          "properties": {
+            "documentId": {
+              "type": "string",
+              "minLength": 1
+            },
+            "epoch": {
+              "type": "string",
+              "minLength": 1
+            },
+            "revision": {
+              "type": "string",
+              "minLength": 1
+            },
+            "sourceTypeDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "sourceRootDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "resourceGraphDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "policyDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "documentId",
+            "epoch",
+            "revision",
+            "sourceTypeDigest",
+            "sourceRootDigest",
+            "resourceGraphDigest",
+            "policyDigest"
+          ],
+          "additionalProperties": false
+        },
+        "objects": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ObjectDefinition"
+          }
+        },
+        "identitySlots": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/IdentitySlot"
+          }
+        },
+        "referenceSlots": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/IdentitySlot"
+          }
+        },
+        "resources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ResourceBinding"
+          }
+        },
+        "tree": {
+          "$ref": "#/$defs/StoredNode"
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "sourceTypeDigest",
+        "sourceDTOSchemaDigest",
+        "sourceRuleSetDigest",
+        "capturedSourceLedgerDigest",
+        "capturedSnapshot",
+        "objects",
+        "identitySlots",
+        "referenceSlots",
+        "resources",
+        "tree"
+      ],
+      "additionalProperties": false
+    },
+    "Dependency": {
+      "type": "object",
+      "properties": {
+        "relativePath": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "byteLength": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)$"
+        },
+        "role": {
+          "enum": [
+            "source-resource",
+            "native-projection-resource",
+            "context-resource"
+          ]
+        }
+      },
+      "required": [
+        "relativePath",
+        "sha256",
+        "byteLength",
+        "role"
+      ],
+      "additionalProperties": false
+    },
+    "Manifest": {
+      "type": "object",
+      "properties": {
+        "schemaVersion": {
+          "const": "FC-native-source-manifest-2-proposal"
+        },
+        "primarySha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "sourceDocumentRelativePath": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sourceDocumentSha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "sourceDocumentByteLength": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)$"
+        },
+        "sourceDTOSchemaDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "sourceRuleSetDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "dependencies": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/Dependency"
+          }
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "primarySha256",
+        "sourceDocumentRelativePath",
+        "sourceDocumentSha256",
+        "sourceDocumentByteLength",
+        "sourceDTOSchemaDigest",
+        "sourceRuleSetDigest",
+        "dependencies"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "oneOf": [
+    {
+      "$ref": "#/$defs/SavedSourceDocument"
+    },
+    {
+      "$ref": "#/$defs/Manifest"
+    }
+  ],
+  "title": "Explicit proposed native+resources source preservation, not original VESTA metadata or accepted protocol"
+}

@@ -1,0 +1,150 @@
+{
+  "schema": "FC-native-source-envelope-design/1",
+  "wire": "native-source-envelope.schema.json",
+  "authority": "Existing D02/P1design4 native .vesta + <leaf>.resources immutable blobs + manifests/<primarySha>.json; full-source preservation is a versioned successor proposal, not original manifest1 or native/protocol3 admission.",
+  "requiredSourceRoots": [
+    "schemaVersion",
+    "identity",
+    "phaseGraph",
+    "molecules",
+    "fields",
+    "scenes",
+    "dependencies",
+    "opaqueBlocks",
+    "resources",
+    "metadata",
+    "shapes",
+    "vectors",
+    "materials",
+    "displays",
+    "cameras",
+    "meshes",
+    "sourceEntities",
+    "sourceEntryOrder",
+    "sections",
+    "bondRules",
+    "boundaries",
+    "planes"
+  ],
+  "ordering": {
+    "1": "Independently capture/validate full SourceDocument and pre-register SourceExpectation/completeSourceAudit/typed identity and resource graph. Original field data/raw source/thermal tables/scene/source-only entities all persist independently of native projection.",
+    "2": "Encode a canonical SavedSourceDocument with immutable local bundle object/resource keys, complete source tree and qualified source/rule/schema identities. Compute its exact SHA S. Full raw resources and reference contexts are separately immutable blobs. This file is not a list of hashes substituting for source reconstruction.",
+    "3": "Encode the selected qualified native projection with exact original VESTA first header line. Immediately after that header put exactly one reserved line: #DRAFT_SOURCE_MANIFEST_V1 <S> followed by LF, before any domain block. S covers only source document, never full manifest/primary, so there is no content-hash cycle.",
+    "4": "Hash actual full stamped primary P; materialize the already planned manifest role as <leaf>.resources/manifests/<P>.json. Manifest2 binds full actual primary P, source document S, schemas/rules and complete source/native/context dependency set. No timestamp/random nondeterministic metadata. CandidateArtifactBinding now binds all actual bytes and paths.",
+    "5": "Independently restore typed full source plus qualified native projection/resource effects and compare against pre-registered expectation, before and after host primary-last publication. All necessary source blobs/source document/manifest publish before primary. Unknown/unverified state neverSaved."
+  },
+  "collision": {
+    "problem": "Different preserved thermal/source/unsupported data can share one lossy native projection. Reusing only that unstamped nativeSHA can then address different manifests.",
+    "sourceStamp": "The S stamp distinguishes full-source versions even when native projection is identical. S includes source schema/rule versions and all referenced immutable resource digests, not a random revision nonce. Identical completeprimary P must have one identical canonicalmanifest; a different existing manifest at P is a conflict and isnever overwritten.",
+    "nativeCompatibility": "The reserved stamp and manifest2 are explicit product preservation metadata proposals. No new original VESTA save/reopen was run for them. If a profile cannot qualify this metadata or preserve full source, return E_UNSAFE_SOURCE_REWRITE rather than discard data or mislabel plain native projection as full projectSaved.",
+    "reservedMarker": "Recognize the reserved full-line namespace #DRAFT_SOURCE_MANIFEST_ across the entire bounded primary before legacy/profile selection, including indented damaged records. Exactly one canonical V1 record is valid, at second line after exact selected native3.5.4 header, with LF framing. Moved/duplicate/unsupported/malformed reserved records trigger E_SOURCE_STAMP/recovery, never legacy fallback. Similar text inside ordinary nonreserved comments/string values remains raw source. This is proposed Draft recognition, not a universal native lexer."
+  },
+  "sourceEncoding": {
+    "tree": "Serialize every current codec SourceDocument root under its exact sourceDTOSchemaDigest using the closed StoredNode tree. Scalar IEEE bits/decimal lexemes/missing states, unknown tagged nodes and ordered arrays/maps remain losslessly inspectable. Validation of StoredNode shape alone doesnot establish full typed SourceDocument validity.",
+    "typedVisitor": "Identity/reference slots are generated independently from the pinned source type/schema visitor, not by string-key guessing or caller-provided field omission lists. On load rederive/validate exact slot coverage against that schema, resolve all definitions and restore the typed source DTO. Unknown source type/version requires a qualified migration or source-only recovery, not reinterpretation of arbitrary JSON.",
+    "identities": "Bundle objectKey is local serialization identity. Preserve captured IDs only as retired provenance. Fresh load creates a new document/epoch and fresh runtime object/resource IDs through a complete kind-preserving bijection. Old tools/selectors/consents never become current; this adds no public cross-load stable ObjectId guarantee.",
+    "resources": "Replace only typed BytesRef/Resource slots with safe bundle resource keys bound to full immutable bytes. Recreate fresh owned/leased handles at load; persisted storageKind/old ResourceId/permission strings confer no lease or filesystem authority. Plain source strings that resemble IDs remain unchanged source facts.",
+    "sourceRaw": "Original source files and nested raw references remain exact bytes with a captured virtual original-name map/graph. ResourceReader uses validated bindings, not old physical paths/CWD. Paired producer names and optional outcomes remain independently represented.",
+    "reconstruct": "The complete saved tree restores known phase/molecule/field/scene properties and source-only/raw entities without guessing scientific qualification. Every actual active Field/table/owner still must be materialized and compared, including all grid values. A valid archive with a missing Field is still E_REOPEN_COVERAGE.",
+    "digestComparison": "Source ledger/identity comparison normalizes through the verified saved-key-to-fresh-ID bijection. Compare full persisted source tree and raw content, not equality of retired live epoch/ResourceIds. Current Engine sourceRoot digest may change with the new lifetime; old source ledger remains provenance.",
+    "typedRestorationContract": "typed-source-restore.contract.json",
+    "fieldStorage": "Typed Field resources consume confirmed existing FS ieee754-little-endian encoding and storedShape=coreShape+closure, including all periodic face/edge/corner copies and exact source bytes. Unknown legacy encoding is not guessed. Validate actual source before planning and actual restored field/data after load; raw original wire files remain separate immutable source resources."
+  },
+  "paths": {
+    "layout": "Keep existing <primary-leaf>.resources/blobs/<hash>.<qualified suffix> and manifests/<actualPrimarySha>.json. Source document uses blobs/<S>.source.json; known source resources keep their qualified storage suffix or explicit raw.bin storage type. Manifest keys are logical IDs, not paths or grants.",
+    "Unicode": "The resource-root component is derived from the actual user-approved primary leaf, so it may contain Unicode accepted by the existing host filename policy. Descendants generated by this design are validated ASCII components. Core canonical resource keys remain ASCII. Do not reject an approved Chinese work name because the finite ASCII key helper is narrower.",
+    "validation": "Validate the approved root as one exact host component; reject NUL/newline, slash/backslash, dot/dotdot or ambiguous/colliding aliases per actual host policy. Validate every generated descendant separately, never normalize a raw source path into a portable output name. D2-13 check/use race limits remain.",
+    "relativeNative": "Native projection references point to actual qualified native-view blobs. Unknown/unresolved source context must not be disguised as a usable native path. Original VESTA acceptance of specific relative paths/stamp and native projection remains a separate compatibility qualification."
+  },
+  "loading": {
+    "stamped": "Capture actual primary, deterministically located manifest, source document and complete referenced resources under current authorized host root. Verify P/S/length/schema/rule/ref closure, then restore typed source and independently validate native projection and required semantic objects before completeLoaded. Missing/corrupt/unrecognized product metadata refuses complete load; no automatic downgrade that drops source.",
+    "legacy": "No stamp means ordinary original/native input under its own qualified profile. A manifest1 integrity sidecar doesnot certify full-source restoration. It may support selected legacy resource checks, while unpreserved fields/source metadata remain explicit; no fabricated product provenance.",
+    "failures": "Keep current active draft and prior resources on candidate-load failure. Explicit readonly recovery can show raw project/archive/native preview plus diagnostics, with source-only qualifications and no preservingSave/Saved/clean transition. Failed replacement must not clear a previously valid ORFFE/field link."
+  },
+  "reports": {
+    "project": "Full-project source audit maps each persistent source leaf to actual saved source tree/resource targets. It can claim retention only when independent typed reconstruction matches. Raw archiving cannot be called active scientific or native-display support.",
+    "nativeProjection": "A separate explicit compatibility-projection report records native consumer omissions/narrowing/thermal transformations. Original native projection loss doesnot disappear merely because full source is stored elsewhere; users/consumers can inspect the difference. Source changes and real persistent drops still use complete LossReport/Consent, never bypass wholeSave preservation refusal."
+  },
+  "qualification": {
+    "designSpecified": true,
+    "publicCrossLoadObjectIds": false,
+    "actualEngineLoaderImplemented": false,
+    "nativeInteropQualified": false,
+    "productImplemented": false,
+    "newTargetExecuted": false,
+    "whole03Complete": false,
+    "independentlyReviewed": false
+  },
+  "materializedFieldAndOriginalResourcePolicy": "density-resource-effect.contract.json; capture/restore exact current Field data and complete ordered source operations/resources separately. Reopen does not implicitly replay archived source expressions, depend on live originals, apply operations twice or substitute input bytes for derived Field values. Actual Engine/host implementation is not performed in03.",
+  "cumulativeParseBudget": "parse-budget.contract.json: cumulative authenticated per-job limits across all nested resources/source trees/decoded buffers, stored samples and semantic references; checked counts before allocation, no child reset or partial install. Decode budget failure is failed-before-apply, not an invalid scientific source verdict. Candidate/persisted verification uses its own registered limits under the same source/artifact identities; actual04 quotas remain separate.",
+  "sgPersistentRootConservation": "sg-persistent-source.contract.json",
+  "nativeBondSourceVariant": "codec-source-document.schema.json proposal7 +native-bond-format-contract.json: capture/restore all original native recipe identities/full records and separately every qualified SG projection; compare mode1/2/XX/source flags and styles independently. Source recipe presence is not scientific algorithm qualification.",
+  "nativeSectionDialectPolicy": "native-legacy-section.contract.json: Source7 typed modern18x80/legacy15x69 union; preserve current complete section state separately from immutable original, exact owner/field/basis/style/matrix/dialect and source qualifiers. Never pad or parse legacy rows as modern; require actual fresh restored expected section coverage, not source metadata presence.",
+  "selectedNativeStampGrammar": {
+    "contract": "native-stamp-static.contract.json",
+    "sha256": "d7a55610cf5e3fab4c5dc838d86582d329d0e109efcbcf6d7e109219eaecb8f0",
+    "scope": "Canonical V1 second-line marker no-match on exact selected3.5.4header/lockedreader; exhaustive64hex/39-cstring static proof. Native runtime/resource interoperability remains unqualified."
+  },
+  "producerInlineIncludePolicy": "feff10-source.contract.json +resource-graph.schema.json proposal2: exact producer-job base/name map and original include/load occurrence order, recursive capture/cycle/work bounds, all referenced immutable bytes and source current-state separation. Preserve into full source envelope, artifact-only reopen without ambient CWD or replay over edited state. This internal successor changes no productprotocol3/host admission.",
+  "boundDescriptorContexts": {
+    "path": "bound-descriptor-context.contract.json",
+    "sha256": "972df77f2885256d3b460c440aba6804befe02c947bc79460207678598e6cf40",
+    "scope": "Exact immutable descriptor bytes plus owner/use-scoped typed fresh reference contexts; complete native-path and typed-resource closure are separate domains, no raw-alias fallback or science admission."
+  },
+  "selectedStoredGridSource": {
+    "path": "native-scalar-grid-source.contract.json",
+    "sha256": "161fbbd0880b35c09d910c90df21de7587789bd84f6221585c5f6efeec1ae968",
+    "scope": "Concrete source-only stored-grid record/typed BytesRef/data inspection boundary, not actual reciprocal Field or a VEND producer positive"
+  },
+  "currentNativeThermalState": {
+    "path": "native-thermal-state.contract.json",
+    "sha256": "b57ff381e7e61c1140341cadd8b437595ded2f95e813781c24e29f5aa8d6d7da",
+    "scope": "Actual current native-compatible selectors/scalar+six-slot state proposal, distinct from original history and canonical-only source; no actual Engine/live restore qualification"
+  },
+  "currentNativeNumericalGrid": {
+    "path": "native-scalar-grid-current.contract.json",
+    "sha256": "3908fb5acb5a8e4f06ef211345c70d9fe7fc015b8c5435d21b5990e0ca251237",
+    "scope": "Registered Source7 actual current numerical SourceEntity/data/mask/geometry distinct from immutable NativeScalarGridSource1 history and active FS/physical Fields. No existing Engine type retagging, import geometry certificate or actual capture implementation."
+  },
+  "selectedNativeNumericalConsumption": {
+    "path": "native-numerical-consumption.contract.json",
+    "sha256": "8b4624433b87f4719a1b5774bad9c5079ea7527d6249729e95073d0846fb3ce3",
+    "scope": "Closed current fractional-native numerical grid, actual effective affine and explicit stored-scalar isoview consumption. Source7 registered types/typed refs/full current state; no active physical reciprocal type, native mesh proof or renderer implementation."
+  },
+  "selectedOriginalGSASSpinChart": {
+    "path": "gsas-original-spin-chart.contract.json",
+    "sha256": "49da20c7bcf6f881aff76e5ded75706278e17370a7312d83335b37f7d4b7d280",
+    "scope": "Original APS revision1253 source-bound SPNFLP generator-mask/centering/timeSign versus axial-factor rule; closed trusted-chart/current-projection roles. No all-historical chart or actual factory/science qualification."
+  },
+  "selectedHistoricalNativeConsumption": {
+    "path": "historical-native-record-consumption.contract.json",
+    "sha256": "d0ef52918c4780870014a6767e91dbb7efda07a908abb6323a97b6ce7d66dcf7",
+    "scope": "Complete selected locked numeric-record dispatch and nativeICS six-value TF paired-line consumption. Source/current native slots separate; no historical1991/1986 or correctedSMAT certificate."
+  },
+  "currentNativeLayerState": {
+    "path": "native-layer-current.contract.json",
+    "sha256": "2520459d4234be0c44d1302adda079386205b655c84c2d2a8c4e96bf8992f52b",
+    "scope": "Complete selected3D actual current layer population, native flags/anchors/effective matrix+translation and typed two-reference roles; immutable Source1 history independent. No actual capture/physics/runtime qualification."
+  },
+  "currentNativeLegacyDisplayState": {
+    "path": "vics-legacy-display.contract.json",
+    "sha256": "c8484e37771dbd3094f37e97fab73e2ace7916b26e80f02216d622a9eb3216d7",
+    "pointer": "/currentStateBinding",
+    "currentSchema": {
+      "path": "vics-legacy-display-current.schema.json",
+      "sha256": "2cd6c594c8fb79b8898dd5f1cf6dd8342751c842d5b8362d9ba2ceba6efb32cf"
+    },
+    "registeredTags": {
+      "NativeLegacyDisplayCurrent1": "Scene.render Map member nativeLegacyDisplayCurrent",
+      "NativeLegacyViewCurrent1": "Scene.cameraRaw Map member nativeLegacyViewCurrent"
+    },
+    "scope": "Complete actual current populations and all schema-declared EntityRef roles/global typed bijection; known original31keywords/history separate. Every native-width bit/unused slot persists. No replay from source or capture from encoded projection. Actual Engine derive visitor/restorer is future; schema mismatch refuses complete save."
+  },
+  "selectedMXDStatisticalObservations": {
+    "path": "mxd-statistic-consumption.contract.json",
+    "sha256": "98fbf4a704e4e71e0b68372d6e287fd653b2b422dcd8f6190e35b2146695ba0b",
+    "pointer": "/observationTree",
+    "registeredTag": "MXDReportBlockObservations1",
+    "roles": "Only actual owner and targetSite EntityRef and actual BytesRef leaves participate in fresh typed mapping; source labels/ordinals/tokens are literals. Full all-block/all-row/all-axis observation/source/control conservation, not current coordinate replay or ADP/SU qualification."
+  }
+}

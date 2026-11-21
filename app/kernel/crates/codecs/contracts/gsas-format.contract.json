@@ -1,0 +1,35 @@
+{
+  "schema": "FC-GSAS2004-selected-design/1",
+  "routes": [
+    "VM18-I14"
+  ],
+  "primary": "inputs/gsas2004.pdf dated2004-09-26,printed183..186",
+  "witness": "gsas-static-witness.json",
+  "framing": "80characterrecords,12characterkeyincludingphase/recordatomindex;do notsplitkeybywhitespace. Repeatedkeyambiguousunlessrecordversiondefinesreplacementorder;retainallsourcebytes.",
+  "phases": "EXPR NPHAS1nuclear/2nuclear+magnetic/3magneticonly/4macromolecular,0absent. All9declaredphasesindependentnotfirstphaseonly;macroformatdifferentincludinghexatomIDs.",
+  "cell": "ABC3F10.6A,ANGLES3F10.4degree,ABCSIG/ANGSIGseparatestandarduncertainties;SGSYMqualifiedactualsettingoperatorsrequired.",
+  "atomA": "ATYP8,XYZandFRAC4F10.6,label8,MULT4,dampingcodes;atomfractionandmultiplicityremainseparate,ATYPqualifiedagainstmatchingtype recordnotlabelprefix",
+  "atomB": "6F10.6+2X+4A1. CODE1 I=>firstUiso; A=>U11,U22,U33,U12,U13,U23. Producertrainingtable/editorconfirmsorder. ThesearecrystallographicUij with exponent-2pi² sum(Uij h_i h_j a_i* a_j*),unitA²; Ucart=A D*U D*A^T,notanordinaryCartesiantensor. CODE2Foccupancyrefine,CODE3Xpositionrefine,CODE4Uthermalrefine;flagsnotmeasureduncertainties.",
+  "atomM": "gsas-magnetic-consumption.contract.json: exact2004 M record plus named IUCr CMS system4/muB supplemental interpretation, source-linked and corrected-only. Actual SGVector/axial/Cartesian/anchored identities, full source magnitude/angles/refinement/spin-flip data preserved. No invented SGSite moment property or default magnetic operator signs; version-specific source and magnetic symmetry chart remain qualified separately.",
+  "macro": "NPHAS4onlyallowedphase1insource2004. Atomkeyuseshexindex. Payload2X,A8,F6.4,3F8.5,F6.4,A5,A3,A2,I4,6A1 =ATYP,FRAC,XYZ,UISO,NAME,RESNAME,GRP,RES,3refinecodes+3dampingcodes. Correcteddesignmapsresidue/chaintoindependentmolecularidentities,cellrelationexplicit;targetlegacyA/Bparsernotassumedequivalent.",
+  "precision": "sourceXYZ/FRAC/Uisotokens6decimal,ABC6decimal,angles4decimal;futurewriterhalf5e-7correspondingunitandangles5e-5degreeplusconversions. Refinementflags/s.u./conditionskeptasownsourceobjects.",
+  "unknown": "allunusedhistogram/refinement/scattering/experimentrecordsfullsourcepreserved,notmodelprojectTitle. Editingfieldswithunknownrelationshipsrefusesdestructiveresave.",
+  "fullMagneticMacroAndAdpOrderQualified": false,
+  "productImplemented": false,
+  "spaceGroup": "CRSn SG SYM payload belongs to phase n and carries source HM setting text. Match quoted spacing/convention to qualified GSAS manual; phase atom records do not independently establish a group. Explicit symmetry/centering and setting changes must agree with source cell and site representation, not inferred from a P1 test record.",
+  "additionalPrimaryReading": "same2004-09-26primaryPDF:printed85Uij*100trainingtable,112editorlabels,123thermalexponent,183ATYP/phaseconstraints,184nuclear/magnetic/macrorecordlayouts; typedorder now sourcebound, magneticorthogonalframe still unresolved.",
+  "species": "EXPR ATYPnn TYPE grammar aasv_nnn:upper-casechemicalsymbol,optionalvalencesign/valueandisotopemass. Sourceformalvalenceannotationnotunconditionallynetcharge:retainchemicaltypeandchargesqualificationseparately. DecodeatomATYPbyjoin,notgenericlabelprefix.",
+  "phaseConstraint": "all9phaseflagsreadindependently;phase4onlyphase1perproducer2004,notsilentlyacceptmacroinanyphase",
+  "knownAdpOrderAndExponentSourceQualified": true,
+  "adpMathCase": "cases/gsas-uij-equations.json",
+  "selectedMagneticConsumption": {
+    "path": "gsas-magnetic-consumption.contract.json",
+    "sha256": "b43989abd282a33623e9d8ace8b2ab4112291619b1448391d164edba33b3e947",
+    "scope": "Named corrected-explicit CMS-system4 supplemental source interpretation and actual SGVector destinations; source/version/magnetic operator chart and upstream partial remain independently qualified"
+  },
+  "selectedOriginalSpinChart": {
+    "path": "gsas-original-spin-chart.contract.json",
+    "sha256": "49da20c7bcf6f881aff76e5ded75706278e17370a7312d83335b37f7d4b7d280",
+    "scope": "Original APS revision1253 source-bound SPNFLP generator-mask/centering/timeSign versus axial-factor rule; closed trusted-chart/current-projection roles. No all-historical chart or actual factory/science qualification."
+  }
+}

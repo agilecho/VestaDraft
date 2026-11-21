@@ -1,0 +1,49 @@
+{
+  "schema": "FC-resource-graph-design/2",
+  "wire": "resource-graph.schema.json",
+  "singleFileCapture": "resource-reopen.schema.json",
+  "sourceBindings": "resource-graph-source-bindings.json",
+  "domain": "Each primary or resource that can contain references gets its own primary-key/name/SHA capture. A single main-file binding list cannot establish transitive closure.",
+  "recursive": {
+    "enumeration": "Independently discover every node from captured immutable bytes under a frozen reference rule. Each file has exactly one byte identity and parsed/reference-free rule digest. Every file reachable from the root, no orphan or invented referenced node, and every required reference has exactly one typed graph edge.",
+    "context": "A nested IMPORT_STRUCTURE resolves relative to the nested file directory under the existing authenticated root; never reuse the outer directory as its base. Logical keys retain each spelling/owner edge even when hashes match. Source-pair files can be shared without deduplicating semantic owners.",
+    "cycles": "Cycle detection applies to recursive decoder invocations, not every source association. Recursive structure-import cycles reject completeLoaded/Save with E_GRAPH_CYCLE, retain raw graph for readonly recovery. Finite GAMESS pair back-links are nonrecursive associations and do not by themselves imply an infinite decoder call.",
+    "limits": "Use captured host/model limits for node count, bytes, nesting and work before allocation. Exhaustion is a diagnostic failure preserving old draft, not partial success. No fixed research example cap is a promised native limit.",
+    "referenceFree": "Only a trusted independently selected format rule can mark a resource reference-free. Client flags, file extension alone, empty supplied references, and opaque bytes cannot certify closure."
+  },
+  "optional": {
+    "probe": "An applicable exact optional-name rule must appear once even when absent. The authenticated host capture snapshot binds the attempted logical sibling name and outcome. Presence requires the actual bytes/SHA/length, derived reference and effect; absence is a snapshot fact, not a permanent filesystem promise or client boolean.",
+    "changed": "Present-to-absent, absent-to-present, changed source bytes or rules require a new capture/baseline and plan. This is an explicit refresh/import, not hidden live data replacement on unrelated edit or Saved acknowledgment.",
+    "reopen": "Artifact-only portable reopen uses the captured optional outcome and explicit graph, never ambient CWD/sibling/cache fallback. An absent optional companion contributes no invented object; a present one must satisfy its own content/owner expectation. Existing D2-13 filesystem check/use limitation remains.",
+    "failure": "Required explicit references cannot downgrade to optional. A malformed/unreadable/denied existing companion is diagnostic, not certified absent. Recovery may expose raw resources without claiming full reconstructed geometry."
+  },
+  "rietan": {
+    "ffeSameStemOptionalEstablished": true,
+    "vestaInsAutoscanEstablished": false,
+    "selectedNames": "For selected .ins/.lst source names, replace the last extension with literal .ffe in the same captured directory; preserve case and all prefix bytes. Lowercase suffix subset is selected in finite model; no arbitrary encoding/path normalization.",
+    "native": "Locked RIETAN input and LST readers construct a phase-owned path at +0x830 by copying the primary path through its last dot and appending .ffe. Manual17.6.1 confirms optional load and its geometrical-parameter table effect.",
+    "producer": "Manual16.2/cooperation2.9 describe RIETAN-FP writing updated .vesta/Cycle/Iter files. This is producer filesystem activity, not evidence of VESTA scanning .ins on ordinary .vesta reopen. Preserve such bytes as captured source; do not create an unproved implicit input edge.",
+    "effect": "Present .ffe binds source-ordered distance/angle rows, pair/triplet symmetry/site identities and units/SU where qualified. It does not run ORFFE, recompute geometry, or grant unqualified site association; missing identity stays source-table/diagnostic. Explicit IMPORT_ORFFE is required once recorded and cannot be silently ignored."
+  },
+  "integration": {
+    "save": "Register full transitive reference graph and optional outcomes with the immutable SaveExpectation. Build candidate/persisted artifact-only contexts from this graph; missing a nested node or a present optional table is E_REOPEN_REFERENCE/COVERAGE even if every listed SHA matches.",
+    "sourceAndActive": "Resource capture/source preservation and active semantic reconstruction remain distinct. A preserved but unqualified table does not count as reconstructed geometry, just as byte-correct pgrid does not count as a Field.",
+    "protocol": "New standalone internal graph proposal extends existing single-file capture by composition; original capture URI/protocol3 remain unchanged. Any transported graph requires separately versioned admission."
+  },
+  "qualification": {
+    "designSpecified": true,
+    "actualDiscoveryImplemented": false,
+    "hostImplemented": false,
+    "newTargetExecuted": false,
+    "whole03Complete": false,
+    "independentlyReviewed": false
+  },
+  "cumulativeParseBudget": "parse-budget.contract.json: cumulative authenticated per-job limits across all nested resources/source trees/decoded buffers, stored samples and semantic references; checked counts before allocation, no child reset or partial install. Decode budget failure is failed-before-apply, not an invalid scientific source verdict. Candidate/persisted verification uses its own registered limits under the same source/artifact identities; actual04 quotas remain separate.",
+  "producerIncludes": "feff10-source.contract.json: selected producer include/load are recursive inline source expansion, distinct from structure-import and nonrecursive producer-pair. Exact source job-base/captured virtual name map and invocation order must qualify; no ambient CWD or assumed declaring-file-parent fallback.",
+  "migration": "Internal graph1->graph2 successor adds producer-include with mandatory recursiveDecode=true. Exact schema/rule/source context digests and a fresh authenticated complete capture are required; never silently reuse old policyDigest/plan/consent or infer graph2 semantics from a client edge. Productprotocol3 and old graph1 snapshots remain unchanged; transport admission remains separately versioned.",
+  "boundDescriptorContexts": {
+    "path": "bound-descriptor-context.contract.json",
+    "sha256": "972df77f2885256d3b460c440aba6804befe02c947bc79460207678598e6cf40",
+    "scope": "Exact immutable descriptor bytes plus owner/use-scoped typed fresh reference contexts; complete native-path and typed-resource closure are separate domains, no raw-alias fallback or science admission."
+  }
+}

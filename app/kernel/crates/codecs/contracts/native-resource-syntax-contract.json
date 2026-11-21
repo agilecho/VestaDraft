@@ -1,0 +1,26 @@
+{
+  "schema": "FC-native-density-reference-syntax/1",
+  "routes": [
+    "VM18-I01",
+    "OBS-O01"
+  ],
+  "bindings": "native-resource-syntax-bindings.json",
+  "header": "IMPORT_DENSITY optional-int is a native phase storage/mode selector, not the number of following resource lines. Selected writer emits phase+0x80c and separately iterates vector+0x848..0x850. Selected reader stores the optional integer only when>=2; lower/default meanings remain native-context-dependent, not an inferred missing-resource count.",
+  "framing": "The selected reader consumes reference lines until its line-length/end/read failure branch; selected writer emits every stored reference line then a blank line. Product proposal requires an explicit blank-line delimiter or EOF only where grammar permits. Never consume a following keyword as another filename after a missing delimiter.",
+  "reference": "Current selected positive source syntax is operation-token + ASCII space + remaining literal pathname; pathname may contain spaces and is not split into arbitrary whitespace tokens. Preserve exact original bytes/encoding and offsets. Author-created R1/R2 are explicit +1.000000 with adjacent/nested relative pgrid paths, not successful restoration positives.",
+  "operation": "read_density_data additionally recognizes leading x or /, signed coefficient/exponent (%f^%f) and bracket component selector. Preserve those source tokens separately; do not apply an unqualified field calculation, infer units or remove a component selector. Only the selected simple signed-scalar lexical subset is checked by this research witness; all other operation variants remain source-only until separately qualified.",
+  "version": "Native reader selects get_line versus get_line_mb around CheckVersion(2,90,0). This establishes helper choice only, not arbitrary Unicode encoding compatibility. Source encoding is explicit; new proposed portable names are ASCII while original Unicode/raw spelling is preserved in metadata.",
+  "pathResolution": "Safe design resolves the isolated immutable literal path through captured primary-directory capabilities. Exact native append helper and aliased caller are now bound: conditional static result duplicates a path/coefficient mixture; it is not the runtime opened-path trace. Use distinct empty record destination or typed operation/handle operands. Actual native failed restoration remains a failure; see native-resource-path-assembly.contract.json.",
+  "portableNames": "For new writes use validated ASCII companion names; preserve coupling of derived same-stem pairs. Reject NUL/newline, absolute/drive/UNC forms, backslashes and lexical .. escape in portable paths. Resolve symlink/case/Unicode-normalization collision with actual host handle/path rules. Do not normalize/casefold source identities or use content hash to merge semantic owners.",
+  "sourcePreservation": "Scene/phase SourceMetadata.tree retains mode selector, ordered reference records, operation bytes and raw path bytes. Resource graph has one edge per semantic reference, even when bytes are shared. Arbitrary raw operations or unresolved encoding/layout/edit dependencies forbid destructive rewrite.",
+  "nativeAttempts": "native-thermal-observations.json: R1/R2 have no positive volume-load and no dependent save/reopen; new record parsing proof does not reverse that result.",
+  "selectedNativeSelfSaveObservation": "resource-roundtrip-proposal/observations.json",
+  "selectedNativeSelfSave": "Additional explicit authorization:2processes/181.202699seconds. Original2200byte8cubedpgrid directload positive; actual3515byte nativeproject writes+1.000000 ../../inputs/source.pgrid. Logicalreference resolves to unchanged originalprivatebytes, butfresh originalprocess hasnovolume/dimensions anddisabledvolumecontrols. Dependentexport/512valueroundtrip notexecuted. Noactualopenedpathname/fopenfailurecause trace, nointeroperability/hostpass.",
+  "nativeInteropQualified": false,
+  "productWriterImplemented": false,
+  "hostQualified": false,
+  "wholeReferenceGrammarQualified": false,
+  "resourceCaptureAndSemanticReadback": "resource-reopen.contract.json",
+  "sourceEffectContract": "density-resource-effect.contract.json",
+  "selectedPathAssemblyContract": "native-resource-path-assembly.contract.json"
+}

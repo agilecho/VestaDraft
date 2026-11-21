@@ -1,0 +1,117 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:draft:input:NBOND1",
+  "$defs": {
+    "F32SourceScalar": {
+      "type": "object",
+      "properties": {
+        "literal": {
+          "type": "string",
+          "minLength": 1
+        },
+        "nativeF32Bits": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{8}$"
+        }
+      },
+      "required": [
+        "literal",
+        "nativeF32Bits"
+      ],
+      "additionalProperties": false
+    },
+    "NativeBondRecord": {
+      "type": "object",
+      "properties": {
+        "sourceOrdinal": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 2147483647
+        },
+        "selectorA": {
+          "type": "string",
+          "pattern": "^[!-~]{1,10}$"
+        },
+        "selectorB": {
+          "type": "string",
+          "pattern": "^[!-~]{1,10}$"
+        },
+        "minimumA": {
+          "$ref": "#/$defs/F32SourceScalar"
+        },
+        "maximumA": {
+          "$ref": "#/$defs/F32SourceScalar"
+        },
+        "searchMode": {
+          "enum": [
+            0,
+            1,
+            2
+          ]
+        },
+        "boundaryMode": {
+          "enum": [
+            0,
+            1,
+            2
+          ]
+        },
+        "showPolyhedra": {
+          "type": "boolean"
+        },
+        "searchByLabel": {
+          "type": "boolean"
+        },
+        "nativeStyleCode": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 255
+        },
+        "nativeRenderScalars": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/F32SourceScalar"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "rgb": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 255
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "sourceTokens": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 15,
+          "maxItems": 15
+        }
+      },
+      "required": [
+        "sourceOrdinal",
+        "selectorA",
+        "selectorB",
+        "minimumA",
+        "maximumA",
+        "searchMode",
+        "boundaryMode",
+        "showPolyhedra",
+        "searchByLabel",
+        "nativeStyleCode",
+        "nativeRenderScalars",
+        "rgb",
+        "sourceTokens"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$ref": "#/$defs/NativeBondRecord"
+}

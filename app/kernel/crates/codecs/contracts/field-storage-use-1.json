@@ -1,0 +1,16 @@
+{
+  "schema": "vestacraft.native-field-storage-use/1",
+  "tag": "FieldStorageUse1",
+  "location": "Typed FieldBinding.metadata, owned by that Field definition",
+  "members": {
+    "field": "EntityRef(Field) to FieldBinding.id",
+    "owner": "EntityRef(Phase|Molecule|Scene) to FieldBinding.owner",
+    "usePointer": "Utf8 absolute JSON pointer to this FieldBinding's /field/resource",
+    "bytes": "BytesRef to the actual logical resource in the engine capture",
+    "encoding": "Utf8 ieee754-little-endian",
+    "descriptorDigest": "Utf8 SHA-256 of canonical FS1 Field descriptor"
+  },
+  "identity": "Each active field has one associated use. Equal digests do not merge distinct logical resources.",
+  "installedUse": "The native installer reserves field-data/<field ordinal>/<owner kind>/<owner ordinal> in its resource table. These logical keys survive fresh IDs and are independent of the metadata BytesRef. The reader requires a bijection between slots and typed uses.",
+  "validation": "Compare the installed slot and exact logical Resource ID, then owner, encoding, descriptor, immutable scoped bytes and storage shape/closure before activation. An editable phase cannot silently change the basis of one of its periodic Fields."
+}

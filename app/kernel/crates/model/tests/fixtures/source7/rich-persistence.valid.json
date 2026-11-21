@@ -1,0 +1,1739 @@
+{
+  "schemaVersion": "CodecSourceDocument-proposal-7",
+  "identity": {
+    "documentId": "00000000000000000000000000000001",
+    "epoch": "00000000000000000000000000000002",
+    "revision": "r",
+    "sourceTypeDigest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "sourceRootDigest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "resourceGraphDigest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "policyDigest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  },
+  "phaseGraph": {
+    "root": "11111111111111111111111111111111",
+    "phases": [
+      {
+        "id": "11111111111111111111111111111111",
+        "label": "authored",
+        "parent": null,
+        "rotation": [
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            1
+          ]
+        ],
+        "translationA": [
+          0,
+          0,
+          0
+        ],
+        "structure": {
+          "cell": {
+            "lengthA": [
+              4,
+              4,
+              4
+            ],
+            "anglesDeg": [
+              90,
+              90,
+              90
+            ]
+          },
+          "group": {
+            "kind": "ordinary",
+            "symbol": "P1",
+            "hallSymbol": "P 1",
+            "bnsNumber": null,
+            "ogNumber": null,
+            "settingName": "authored-P1",
+            "originChoice": "1",
+            "changeOfBasis": [
+              [
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                1
+              ]
+            ],
+            "originFractional": [
+              0,
+              0,
+              0
+            ],
+            "table": null,
+            "operators": [
+              {
+                "id": "55555555555555555555555555555555",
+                "fractionalMatrix": [
+                  [
+                    {
+                      "numerator": 1,
+                      "denominator": 1
+                    },
+                    {
+                      "numerator": 0,
+                      "denominator": 1
+                    },
+                    {
+                      "numerator": 0,
+                      "denominator": 1
+                    }
+                  ],
+                  [
+                    {
+                      "numerator": 0,
+                      "denominator": 1
+                    },
+                    {
+                      "numerator": 1,
+                      "denominator": 1
+                    },
+                    {
+                      "numerator": 0,
+                      "denominator": 1
+                    }
+                  ],
+                  [
+                    {
+                      "numerator": 0,
+                      "denominator": 1
+                    },
+                    {
+                      "numerator": 0,
+                      "denominator": 1
+                    },
+                    {
+                      "numerator": 1,
+                      "denominator": 1
+                    }
+                  ]
+                ],
+                "fractionalTranslation": [
+                  {
+                    "numerator": 0,
+                    "denominator": 1
+                  },
+                  {
+                    "numerator": 0,
+                    "denominator": 1
+                  },
+                  {
+                    "numerator": 0,
+                    "denominator": 1
+                  }
+                ],
+                "timeSign": 1
+              }
+            ],
+            "sourceSpans": []
+          },
+          "sites": [
+            {
+              "id": "00000000000000000000000000000003",
+              "label": "C1",
+              "species": {
+                "element": "C",
+                "charge": null,
+                "massNumber": null,
+                "rawToken": "C"
+              },
+              "fractional": [
+                0.25,
+                0.0,
+                0.5
+              ],
+              "occupancy": 0.75,
+              "adp": null,
+              "sourceSpans": []
+            }
+          ],
+          "covariance": {
+            "parameters": [
+              {
+                "kind": "site-fractional",
+                "phaseId": "11111111111111111111111111111111",
+                "siteId": "00000000000000000000000000000003",
+                "axis": 0
+              },
+              {
+                "kind": "cell-length",
+                "phaseId": "11111111111111111111111111111111",
+                "axis": 1
+              },
+              {
+                "kind": "cell-angle-degree",
+                "phaseId": "11111111111111111111111111111111",
+                "angle": "gamma"
+              },
+              {
+                "kind": "occupancy",
+                "phaseId": "11111111111111111111111111111111",
+                "siteId": "00000000000000000000000000000003"
+              }
+            ],
+            "matrix": [
+              [
+                0.0001,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0.001,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0.01,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0.04
+              ]
+            ],
+            "provenance": "explicit-independent-diagonal",
+            "sourceSpans": []
+          }
+        },
+        "fieldIds": [
+          "00000000000000000000000000000008"
+        ],
+        "shapeId": "00000000000000000000000000000014"
+      }
+    ]
+  },
+  "molecules": [
+    {
+      "id": "0000000000000000000000000000002d",
+      "label": "nonperiodic-source",
+      "frames": [
+        {
+          "id": "0000000000000000000000000000002e",
+          "sourceModelCode": "MODEL1",
+          "atoms": [
+            {
+              "id": "0000000000000000000000000000002f",
+              "label": "C1",
+              "species": {
+                "kind": "qualified",
+                "symbol": "C",
+                "atomicNumber": 6,
+                "isotope": 13,
+                "sourceDescriptorDigest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+              },
+              "cartesianA": [
+                0,
+                0,
+                0
+              ],
+              "occupancy": null,
+              "residue": {
+                "kind": "Null"
+              },
+              "altLoc": {
+                "kind": "Null"
+              },
+              "adp": {
+                "kind": "Null"
+              },
+              "velocity": null,
+              "force": null,
+              "metadata": [],
+              "formalChargeE": 1,
+              "partialCharges": [
+                {
+                  "value": {
+                    "kind": "F64Bits",
+                    "ieeeHexBE": "3fd0000000000000"
+                  },
+                  "physicalKind": "partial-charge",
+                  "unit": "e",
+                  "frame": "scalar",
+                  "sourceDescriptorDigest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+                }
+              ],
+              "radicalState": "unresolved-source"
+            }
+          ],
+          "bonds": [],
+          "basisCenters": [
+            {
+              "id": "00000000000000000000000000000030",
+              "label": "ghost-O",
+              "cartesianA": [
+                1,
+                0,
+                0
+              ],
+              "effectiveNuclearChargeE": 0,
+              "basisElement": {
+                "kind": "qualified",
+                "symbol": "O",
+                "atomicNumber": 8,
+                "isotope": null,
+                "sourceDescriptorDigest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+              },
+              "basisSetup": {
+                "kind": "Utf8",
+                "value": "source negative ZNUC=-8.0"
+              },
+              "metadata": []
+            }
+          ],
+          "metadata": []
+        }
+      ],
+      "periodic": false,
+      "metadata": []
+    }
+  ],
+  "fields": [
+    {
+      "id": "00000000000000000000000000000008",
+      "owner": {
+        "kind": "phase",
+        "id": "11111111111111111111111111111111"
+      },
+      "field": {
+        "resource": {
+          "digest": "46fbfbb27395b0451ed9378100857a1a8f1a1e1a34621b16f10f492c059e38e0",
+          "bytes": 48
+        },
+        "kind": "generic",
+        "unit": "declared",
+        "declaredUnit": "arb",
+        "coreShape": [
+          2,
+          2,
+          2
+        ],
+        "closure": [
+          true,
+          false,
+          false
+        ],
+        "periodic": [
+          true,
+          false,
+          false
+        ],
+        "axisOrder": "x-fastest",
+        "originA": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "dtype": "f32",
+        "stepBasisA": [
+          [
+            2.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "metadata": [
+        {
+          "owner": {
+            "kind": "field",
+            "id": "00000000000000000000000000000008"
+          },
+          "producerId": "Draft-C8-authored-fixture",
+          "producerVersion": "1",
+          "formatRef": "FS1-r1",
+          "dialect": "ieee754-little-endian",
+          "spans": [],
+          "tree": {
+            "kind": "TaggedVariant",
+            "tag": "FieldStorageUse1",
+            "payload": {
+              "kind": "Map",
+              "members": {
+                "field": {
+                  "kind": "EntityRef",
+                  "objectKind": "Field",
+                  "objectId": "00000000000000000000000000000008"
+                },
+                "owner": {
+                  "kind": "EntityRef",
+                  "objectKind": "Phase",
+                  "objectId": "11111111111111111111111111111111"
+                },
+                "usePointer": {
+                  "kind": "Utf8",
+                  "value": "/fields/0/field/resource"
+                },
+                "bytes": {
+                  "kind": "BytesRef",
+                  "resourceId": "0000000000000000000000000000000a",
+                  "sha256": "46fbfbb27395b0451ed9378100857a1a8f1a1e1a34621b16f10f492c059e38e0",
+                  "byteLength": "48"
+                },
+                "encoding": {
+                  "kind": "Utf8",
+                  "value": "ieee754-little-endian"
+                },
+                "descriptorDigest": {
+                  "kind": "Utf8",
+                  "value": "4f51f748b9b214927cfdcf6ffa2b3ecce90b223d39cb1b2c68f6201b4f9aa1b8"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "00000000000000000000000000000009",
+      "owner": {
+        "kind": "scene",
+        "id": "00000000000000000000000000000004"
+      },
+      "field": {
+        "resource": {
+          "digest": "46fbfbb27395b0451ed9378100857a1a8f1a1e1a34621b16f10f492c059e38e0",
+          "bytes": 48
+        },
+        "kind": "generic",
+        "unit": "declared",
+        "declaredUnit": "arb",
+        "coreShape": [
+          2,
+          2,
+          2
+        ],
+        "closure": [
+          true,
+          false,
+          false
+        ],
+        "periodic": [
+          true,
+          false,
+          false
+        ],
+        "axisOrder": "x-fastest",
+        "originA": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "dtype": "f32",
+        "stepBasisA": [
+          [
+            2.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "metadata": [
+        {
+          "owner": {
+            "kind": "field",
+            "id": "00000000000000000000000000000009"
+          },
+          "producerId": "Draft-C8-authored-fixture",
+          "producerVersion": "1",
+          "formatRef": "FS1-r1",
+          "dialect": "ieee754-little-endian",
+          "spans": [],
+          "tree": {
+            "kind": "TaggedVariant",
+            "tag": "FieldStorageUse1",
+            "payload": {
+              "kind": "Map",
+              "members": {
+                "field": {
+                  "kind": "EntityRef",
+                  "objectKind": "Field",
+                  "objectId": "00000000000000000000000000000009"
+                },
+                "owner": {
+                  "kind": "EntityRef",
+                  "objectKind": "Scene",
+                  "objectId": "00000000000000000000000000000004"
+                },
+                "usePointer": {
+                  "kind": "Utf8",
+                  "value": "/fields/1/field/resource"
+                },
+                "bytes": {
+                  "kind": "BytesRef",
+                  "resourceId": "0000000000000000000000000000000b",
+                  "sha256": "46fbfbb27395b0451ed9378100857a1a8f1a1e1a34621b16f10f492c059e38e0",
+                  "byteLength": "48"
+                },
+                "encoding": {
+                  "kind": "Utf8",
+                  "value": "ieee754-little-endian"
+                },
+                "descriptorDigest": {
+                  "kind": "Utf8",
+                  "value": "4f51f748b9b214927cfdcf6ffa2b3ecce90b223d39cb1b2c68f6201b4f9aa1b8"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "scenes": [
+    {
+      "id": "00000000000000000000000000000004",
+      "roots": [
+        "00000000000000000000000000000005",
+        "00000000000000000000000000000006",
+        "00000000000000000000000000000007",
+        "00000000000000000000000000000024"
+      ],
+      "nodes": [
+        {
+          "id": "00000000000000000000000000000005",
+          "parent": null,
+          "kind": "phase-instance",
+          "sourceObjectId": "11111111111111111111111111111111",
+          "affine4": [
+            1,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            1
+          ],
+          "display": {
+            "kind": "Null"
+          },
+          "metadata": []
+        },
+        {
+          "id": "00000000000000000000000000000006",
+          "parent": null,
+          "kind": "field-instance",
+          "sourceObjectId": "00000000000000000000000000000008",
+          "affine4": [
+            1,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            1
+          ],
+          "display": {
+            "kind": "Null"
+          },
+          "metadata": []
+        },
+        {
+          "id": "00000000000000000000000000000007",
+          "parent": null,
+          "kind": "field-instance",
+          "sourceObjectId": "00000000000000000000000000000009",
+          "affine4": [
+            1,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            1
+          ],
+          "display": {
+            "kind": "Null"
+          },
+          "metadata": []
+        },
+        {
+          "id": "00000000000000000000000000000024",
+          "parent": null,
+          "kind": "explicit-mesh",
+          "sourceObjectId": "00000000000000000000000000000023",
+          "affine4": [
+            1,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            1
+          ],
+          "display": {
+            "kind": "Null"
+          },
+          "metadata": []
+        }
+      ],
+      "cameraId": "00000000000000000000000000000022",
+      "renderContext": null,
+      "cameraRaw": {
+        "kind": "Null"
+      },
+      "render": {
+        "kind": "Null"
+      },
+      "metadata": []
+    }
+  ],
+  "dependencies": [
+    {
+      "id": "0000000000000000000000000000002a",
+      "owner": {
+        "kind": "source-entity",
+        "id": "00000000000000000000000000000027"
+      },
+      "sourcePointer": "/sourceEntities/0/sourceRecords/1",
+      "literalPath": {
+        "sourceResourceId": "00000000000000000000000000000029",
+        "byteOffset": "10",
+        "byteLength": "26",
+        "sha256": "00a65bcd7ac9fe830e4b574a8fa0ddb0bb80748687ec1b3b52cf89c7b4392676"
+      },
+      "resolvedResourceId": "0000000000000000000000000000000a",
+      "required": true,
+      "semanticDescriptorDigest": "4f51f748b9b214927cfdcf6ffa2b3ecce90b223d39cb1b2c68f6201b4f9aa1b8",
+      "metadata": []
+    }
+  ],
+  "opaqueBlocks": [
+    {
+      "id": "0000000000000000000000000000002c",
+      "owner": {
+        "kind": "source-entity",
+        "id": "00000000000000000000000000000027"
+      },
+      "formatRef": "VM18-I01",
+      "dialect": "authored-source-only",
+      "extent": {
+        "sourceResourceId": "0000000000000000000000000000002b",
+        "byteOffset": "0",
+        "byteLength": "49",
+        "sha256": "b3fadfc6b31afd3e868489535164a3492ba6868b7c8f4a263fc400e5b0fa0fa5"
+      },
+      "editOverlapPolicy": "refuse-unqualified-overlap",
+      "metadata": [],
+      "editDependencies": {
+        "kind": "unknown-whole-persistent-source",
+        "baseline": {
+          "persistentSourceDigest": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "sourceTypeDigest": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "policyDigest": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "resourceGraphDigest": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "referenceNamespaceDigest": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+        },
+        "referenceClosure": "unknown"
+      }
+    }
+  ],
+  "resources": [
+    {
+      "id": "0000000000000000000000000000000a",
+      "sha256": "46fbfbb27395b0451ed9378100857a1a8f1a1e1a34621b16f10f492c059e38e0",
+      "byteLength": "48",
+      "storageKind": "owned",
+      "sourceDescriptorDigest": "4f51f748b9b214927cfdcf6ffa2b3ecce90b223d39cb1b2c68f6201b4f9aa1b8"
+    },
+    {
+      "id": "0000000000000000000000000000000b",
+      "sha256": "46fbfbb27395b0451ed9378100857a1a8f1a1e1a34621b16f10f492c059e38e0",
+      "byteLength": "48",
+      "storageKind": "owned",
+      "sourceDescriptorDigest": "4f51f748b9b214927cfdcf6ffa2b3ecce90b223d39cb1b2c68f6201b4f9aa1b8"
+    },
+    {
+      "id": "00000000000000000000000000000026",
+      "sha256": "e35e540d1534029728b81c6ab8563451a481a70c3b7b2db51dd8557593ac598a",
+      "byteLength": "4989",
+      "storageKind": "owned",
+      "sourceDescriptorDigest": "d27da3c74bcc36442f554175b061a964859afb09cbad344fc32193ea517cf7bb"
+    },
+    {
+      "id": "00000000000000000000000000000029",
+      "sha256": "a48138d2abe699f8c7e9c74839d80db743515bf44ab4d5b1e6f9f0ec171aa6c6",
+      "byteLength": "37",
+      "storageKind": "owned",
+      "sourceDescriptorDigest": "e024e133d21fd9a5e38077e131a5086d638f97048e80beabaef07bc65db70ad6"
+    },
+    {
+      "id": "0000000000000000000000000000002b",
+      "sha256": "b3fadfc6b31afd3e868489535164a3492ba6868b7c8f4a263fc400e5b0fa0fa5",
+      "byteLength": "49",
+      "storageKind": "owned",
+      "sourceDescriptorDigest": "d3f7fe3bd9840782699bea4573661117a1d6e01cade6368c4abb880577f73f21"
+    }
+  ],
+  "metadata": [
+    {
+      "owner": {
+        "kind": "document",
+        "id": "00000000000000000000000000000001"
+      },
+      "producerId": "Draft-C8-authored-fixture",
+      "producerVersion": "1",
+      "formatRef": "VM18-I01",
+      "dialect": "authored-rich-structure",
+      "tree": {
+        "kind": "Map",
+        "members": {
+          "literalIdRetained": {
+            "kind": "Utf8",
+            "value": "00000000000000000000000000000023"
+          },
+          "typedRemapMesh": {
+            "kind": "EntityRef",
+            "objectKind": "Mesh",
+            "objectId": "00000000000000000000000000000023"
+          }
+        }
+      },
+      "spans": []
+    }
+  ],
+  "shapes": [
+    {
+      "id": "00000000000000000000000000000014",
+      "owner": {
+        "kind": "phase",
+        "id": "11111111111111111111111111111111"
+      },
+      "value": {
+        "id": "00000000000000000000000000000014",
+        "phaseId": "11111111111111111111111111111111",
+        "halfspaces": [
+          {
+            "id": "00000000000000000000000000000015",
+            "normal": [
+              1,
+              0,
+              0
+            ],
+            "offsetA": 2.0
+          },
+          {
+            "id": "00000000000000000000000000000016",
+            "normal": [
+              -1,
+              0,
+              0
+            ],
+            "offsetA": 2.0
+          },
+          {
+            "id": "00000000000000000000000000000017",
+            "normal": [
+              0,
+              1,
+              0
+            ],
+            "offsetA": 2.0
+          },
+          {
+            "id": "00000000000000000000000000000018",
+            "normal": [
+              0,
+              -1,
+              0
+            ],
+            "offsetA": 2.0
+          },
+          {
+            "id": "00000000000000000000000000000019",
+            "normal": [
+              0,
+              0,
+              1
+            ],
+            "offsetA": 2.0
+          },
+          {
+            "id": "0000000000000000000000000000001a",
+            "normal": [
+              0,
+              0,
+              -1
+            ],
+            "offsetA": 2.0
+          }
+        ]
+      },
+      "metadata": []
+    }
+  ],
+  "vectors": [
+    {
+      "id": "0000000000000000000000000000001b",
+      "owner": {
+        "kind": "phase",
+        "id": "11111111111111111111111111111111"
+      },
+      "value": {
+        "id": "0000000000000000000000000000001b",
+        "anchor": {
+          "phase": "11111111111111111111111111111111",
+          "site": "00000000000000000000000000000003",
+          "operation": "55555555555555555555555555555555",
+          "shift": [
+            0,
+            0,
+            0
+          ]
+        },
+        "components": [
+          1.0,
+          -0.5,
+          0.25
+        ],
+        "basis": "cartesian",
+        "kind": "axial",
+        "unit": "muB",
+        "displayScale": 1.25
+      },
+      "metadata": []
+    }
+  ],
+  "materials": [
+    {
+      "id": "0000000000000000000000000000001c",
+      "owner": {
+        "kind": "scene",
+        "id": "00000000000000000000000000000004"
+      },
+      "value": {
+        "rgba": [
+          0.125,
+          0.5,
+          0.75,
+          0.625
+        ],
+        "ambient": [
+          0.1,
+          0.1,
+          0.1
+        ],
+        "diffuse": [
+          0.5,
+          0.4,
+          0.3
+        ],
+        "specular": [
+          0.1,
+          0.2,
+          0.3
+        ],
+        "shininess": 25.5
+      },
+      "metadata": []
+    }
+  ],
+  "displays": [
+    {
+      "id": "0000000000000000000000000000001d",
+      "owner": {
+        "kind": "scene",
+        "id": "00000000000000000000000000000004"
+      },
+      "value": {
+        "showModels": true,
+        "asymmetricOnly": false,
+        "dotSurface": false,
+        "style": "ball-and-stick",
+        "hiddenImages": [
+          {
+            "phase": "11111111111111111111111111111111",
+            "site": "00000000000000000000000000000003",
+            "operation": "55555555555555555555555555555555",
+            "shift": [
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "atomStyle": {
+          "mode": "sphere",
+          "radiusA": 0.625,
+          "radiusTable": null,
+          "material": {
+            "rgba": [
+              0.125,
+              0.5,
+              0.75,
+              0.625
+            ],
+            "ambient": [
+              0.1,
+              0.1,
+              0.1
+            ],
+            "diffuse": [
+              0.5,
+              0.4,
+              0.3
+            ],
+            "specular": [
+              0.1,
+              0.2,
+              0.3
+            ],
+            "shininess": 25.5
+          },
+          "probabilityPercent": 50,
+          "principalEllipse": false,
+          "outlineWidth": {
+            "unit": "device-pixel",
+            "value": 1.5
+          },
+          "slices": 24,
+          "stacks": 24
+        }
+      },
+      "metadata": []
+    }
+  ],
+  "cameras": [
+    {
+      "id": "00000000000000000000000000000022",
+      "owner": {
+        "kind": "scene",
+        "id": "00000000000000000000000000000004"
+      },
+      "value": {
+        "rotation": [
+          [
+            0,
+            -1,
+            0
+          ],
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            1
+          ]
+        ],
+        "panWorldA": [
+          0.25,
+          0.5,
+          0.0
+        ],
+        "zoom": 1.5,
+        "projection": "parallel",
+        "widthA": 4.0,
+        "perspectiveVerticalFovDeg": 45.0,
+        "nearA": 0.1,
+        "farA": 20.0
+      },
+      "metadata": []
+    }
+  ],
+  "meshes": [
+    {
+      "id": "00000000000000000000000000000023",
+      "owner": {
+        "kind": "phase",
+        "id": "11111111111111111111111111111111"
+      },
+      "value": {
+        "objectId": "00000000000000000000000000000023",
+        "phaseId": "11111111111111111111111111111111",
+        "space": "world-cartesian-A",
+        "geometry": {
+          "verticesA": [
+            [
+              1.0,
+              0.0,
+              2.0
+            ],
+            [
+              5.0,
+              0.0,
+              2.0
+            ],
+            [
+              1.0,
+              4.0,
+              2.0
+            ]
+          ],
+          "triangles": [
+            [
+              0,
+              1,
+              2
+            ]
+          ],
+          "normals": [
+            [
+              0,
+              0,
+              1
+            ],
+            [
+              0,
+              0,
+              1
+            ],
+            [
+              0,
+              0,
+              1
+            ]
+          ]
+        },
+        "material": {
+          "rgba": [
+            0.125,
+            0.5,
+            0.75,
+            0.625
+          ],
+          "ambient": [
+            0.1,
+            0.1,
+            0.1
+          ],
+          "diffuse": [
+            0.5,
+            0.4,
+            0.3
+          ],
+          "specular": [
+            0.1,
+            0.2,
+            0.3
+          ],
+          "shininess": 25.5
+        }
+      },
+      "metadata": []
+    }
+  ],
+  "sourceEntities": [
+    {
+      "id": "00000000000000000000000000000027",
+      "nativeKind": "author-native-phase",
+      "sourceTree": {
+        "kind": "Map",
+        "members": {}
+      },
+      "sourceRecords": [
+        {
+          "sourceResourceId": "00000000000000000000000000000026",
+          "byteOffset": "2178",
+          "byteLength": "478",
+          "sha256": "237f948a832924d7148da1ea8ff9c600573113fa14822bc756d4a2a8bdd09d61"
+        },
+        {
+          "sourceResourceId": "00000000000000000000000000000029",
+          "byteOffset": "0",
+          "byteLength": "37",
+          "sha256": "a48138d2abe699f8c7e9c74839d80db743515bf44ab4d5b1e6f9f0ec171aa6c6"
+        }
+      ],
+      "dependencyIds": [
+        "0000000000000000000000000000002a"
+      ],
+      "metadata": [],
+      "scientificProjection": "not-qualified"
+    }
+  ],
+  "sourceEntryOrder": [
+    {
+      "kind": "phase",
+      "id": "11111111111111111111111111111111"
+    },
+    {
+      "kind": "source-entity",
+      "id": "00000000000000000000000000000027"
+    },
+    {
+      "kind": "molecule",
+      "id": "0000000000000000000000000000002d"
+    }
+  ],
+  "sections": [
+    {
+      "id": "00000000000000000000000000000028",
+      "owner": {
+        "kind": "source-entity",
+        "id": "00000000000000000000000000000027"
+      },
+      "nativeRecord": {
+        "dialect": "vesta-linux-3.1.0-pln2d-15x69",
+        "sourceOrdinal": {
+          "literal": "1",
+          "nativeI32": 1
+        },
+        "hkl": [
+          {
+            "literal": "6.785172E-001",
+            "nativeF64Bits": "3fe5b669b3f8c071"
+          },
+          {
+            "literal": "6.785508E-001",
+            "nativeF64Bits": "3fe5b6b02ad596a0"
+          },
+          {
+            "literal": "-2.813952E-001",
+            "nativeF64Bits": "bfd2026103501699"
+          }
+        ],
+        "legacyHeaderScalars": [
+          {
+            "literal": "0",
+            "nativeF64Bits": "0000000000000000"
+          },
+          {
+            "literal": "4.72909",
+            "nativeF64Bits": "4012ea9691a75cd1"
+          }
+        ],
+        "headerFlags": [
+          {
+            "literal": "255",
+            "nativeI32": 255
+          },
+          {
+            "literal": "255",
+            "nativeI32": 255
+          },
+          {
+            "literal": "255",
+            "nativeI32": 255
+          },
+          {
+            "literal": "255",
+            "nativeI32": 255
+          }
+        ],
+        "row2Flags": [
+          {
+            "literal": "1",
+            "nativeI32": 1
+          },
+          {
+            "literal": "32",
+            "nativeI32": 32
+          },
+          {
+            "literal": "4",
+            "nativeI32": 4
+          }
+        ],
+        "row2Scalars": [
+          {
+            "literal": "0.00899623",
+            "nativeF32Bits": "3c1364ec"
+          },
+          {
+            "literal": "28.875",
+            "nativeF32Bits": "41e70000"
+          }
+        ],
+        "row3Scalars": [
+          {
+            "literal": "0.5",
+            "nativeF32Bits": "3f000000"
+          },
+          {
+            "literal": "0",
+            "nativeF32Bits": "00000000"
+          },
+          {
+            "literal": "1",
+            "nativeF32Bits": "3f800000"
+          },
+          {
+            "literal": "1",
+            "nativeF32Bits": "3f800000"
+          },
+          {
+            "literal": "10",
+            "nativeF32Bits": "41200000"
+          }
+        ],
+        "row3Integers": [
+          {
+            "literal": "-1",
+            "nativeI32": -1
+          },
+          {
+            "literal": "2",
+            "nativeI32": 2
+          },
+          {
+            "literal": "5",
+            "nativeI32": 5
+          }
+        ],
+        "row4Scalars": [
+          {
+            "literal": "1",
+            "nativeF32Bits": "3f800000"
+          },
+          {
+            "literal": "1",
+            "nativeF32Bits": "3f800000"
+          },
+          {
+            "literal": "1",
+            "nativeF32Bits": "3f800000"
+          },
+          {
+            "literal": "1",
+            "nativeF32Bits": "3f800000"
+          }
+        ],
+        "legacyBasisScalars": [
+          {
+            "literal": "-0.198082",
+            "nativeF32Bits": "be4ad602"
+          },
+          {
+            "literal": "-0.199869",
+            "nativeF32Bits": "be4caa76"
+          },
+          {
+            "literal": "-0.959592",
+            "nativeF32Bits": "bf75a7d2"
+          },
+          {
+            "literal": "-0.707664",
+            "nativeF32Bits": "bf352978"
+          },
+          {
+            "literal": "0.706544",
+            "nativeF32Bits": "3f34e011"
+          },
+          {
+            "literal": "-0.002616",
+            "nativeF32Bits": "bb2b7132"
+          }
+        ],
+        "legacyCenter": [
+          {
+            "literal": "0.500000",
+            "nativeF64Bits": "3fe0000000000000"
+          },
+          {
+            "literal": "0.500000",
+            "nativeF64Bits": "3fe0000000000000"
+          },
+          {
+            "literal": "0.500000",
+            "nativeF64Bits": "3fe0000000000000"
+          }
+        ],
+        "ignoredFourthSource": {
+          "literal": "1.000000",
+          "nativeF32Bits": "3f800000"
+        },
+        "row7Scalars": [
+          {
+            "literal": "0",
+            "nativeF32Bits": "00000000"
+          },
+          {
+            "literal": "0",
+            "nativeF32Bits": "00000000"
+          },
+          {
+            "literal": "0",
+            "nativeF32Bits": "00000000"
+          },
+          {
+            "literal": "0.822706",
+            "nativeF32Bits": "3f529cdc"
+          }
+        ],
+        "colorsRGB": [
+          [
+            {
+              "literal": "255",
+              "nativeI32": 255
+            },
+            {
+              "literal": "255",
+              "nativeI32": 255
+            },
+            {
+              "literal": "255",
+              "nativeI32": 255
+            }
+          ],
+          [
+            {
+              "literal": "1",
+              "nativeI32": 1
+            },
+            {
+              "literal": "1",
+              "nativeI32": 1
+            },
+            {
+              "literal": "42",
+              "nativeI32": 42
+            }
+          ],
+          [
+            {
+              "literal": "0",
+              "nativeI32": 0
+            },
+            {
+              "literal": "0",
+              "nativeI32": 0
+            },
+            {
+              "literal": "0",
+              "nativeI32": 0
+            }
+          ],
+          [
+            {
+              "literal": "0",
+              "nativeI32": 0
+            },
+            {
+              "literal": "0",
+              "nativeI32": 0
+            },
+            {
+              "literal": "0",
+              "nativeI32": 0
+            }
+          ]
+        ],
+        "matrixRows": [
+          [
+            {
+              "literal": "1.000000",
+              "nativeF64Bits": "3ff0000000000000"
+            },
+            {
+              "literal": "0.000000",
+              "nativeF64Bits": "0000000000000000"
+            },
+            {
+              "literal": "0.000000",
+              "nativeF64Bits": "0000000000000000"
+            },
+            {
+              "literal": "0.000000",
+              "nativeF64Bits": "0000000000000000"
+            }
+          ],
+          [
+            {
+              "literal": "0.000000",
+              "nativeF64Bits": "0000000000000000"
+            },
+            {
+              "literal": "1.000000",
+              "nativeF64Bits": "3ff0000000000000"
+            },
+            {
+              "literal": "0.000000",
+              "nativeF64Bits": "0000000000000000"
+            },
+            {
+              "literal": "0.000000",
+              "nativeF64Bits": "0000000000000000"
+            }
+          ],
+          [
+            {
+              "literal": "0.000000",
+              "nativeF64Bits": "0000000000000000"
+            },
+            {
+              "literal": "0.000000",
+              "nativeF64Bits": "0000000000000000"
+            },
+            {
+              "literal": "1.000000",
+              "nativeF64Bits": "3ff0000000000000"
+            },
+            {
+              "literal": "0.000000",
+              "nativeF64Bits": "0000000000000000"
+            }
+          ],
+          [
+            {
+              "literal": "0.000000",
+              "nativeF64Bits": "0000000000000000"
+            },
+            {
+              "literal": "0.000000",
+              "nativeF64Bits": "0000000000000000"
+            },
+            {
+              "literal": "0.000000",
+              "nativeF64Bits": "0000000000000000"
+            },
+            {
+              "literal": "1.000000",
+              "nativeF64Bits": "3ff0000000000000"
+            }
+          ]
+        ]
+      },
+      "fieldIds": [],
+      "projectionDescriptorDigest": null,
+      "geometryQualification": "source-only",
+      "metadata": []
+    }
+  ],
+  "bondRules": [
+    {
+      "id": "22222222222222222222222222222222",
+      "owner": {
+        "kind": "phase",
+        "id": "11111111111111111111111111111111"
+      },
+      "value": {
+        "id": "22222222222222222222222222222222",
+        "fromSelector": {
+          "kind": "element",
+          "element": "C"
+        },
+        "toSelector": {
+          "kind": "element",
+          "element": "O"
+        },
+        "minimumA": 0,
+        "maximumA": 2.5,
+        "thresholdMode": "legacy-f32-square",
+        "extraAtoms": "recursive",
+        "maxDepth": 2,
+        "maxImages": 128,
+        "bondValenceTable": null
+      },
+      "metadata": []
+    },
+    {
+      "id": "00000000000000000000000000000025",
+      "owner": {
+        "kind": "phase",
+        "id": "11111111111111111111111111111111"
+      },
+      "nativeRecord": {
+        "sourceOrdinal": 1,
+        "selectorA": "C",
+        "selectorB": "O",
+        "minimumA": {
+          "literal": "0.00000",
+          "nativeF32Bits": "00000000"
+        },
+        "maximumA": {
+          "literal": "1.97249",
+          "nativeF32Bits": "3ffc7a8d"
+        },
+        "searchMode": 0,
+        "boundaryMode": 2,
+        "showPolyhedra": true,
+        "searchByLabel": false,
+        "nativeStyleCode": 1,
+        "nativeRenderScalars": [
+          {
+            "literal": "0.250",
+            "nativeF32Bits": "3e800000"
+          },
+          {
+            "literal": "2.000",
+            "nativeF32Bits": "40000000"
+          }
+        ],
+        "rgb": [
+          127,
+          127,
+          127
+        ],
+        "sourceTokens": [
+          "1",
+          "C",
+          "O",
+          "0.00000",
+          "1.97249",
+          "0",
+          "2",
+          "1",
+          "0",
+          "1",
+          "0.250",
+          "2.000",
+          "127",
+          "127",
+          "127"
+        ]
+      },
+      "sgProjectionRuleIds": [],
+      "metadata": []
+    }
+  ],
+  "boundaries": [
+    {
+      "id": "33333333333333333333333333333333",
+      "owner": {
+        "kind": "phase",
+        "id": "11111111111111111111111111111111"
+      },
+      "value": {
+        "phaseId": "11111111111111111111111111111111",
+        "minimumFractional": [
+          0,
+          0,
+          0
+        ],
+        "maximumFractional": [
+          1,
+          1,
+          1
+        ],
+        "endpoints": "closed",
+        "includeBondExtensions": true,
+        "ruleIds": [
+          "22222222222222222222222222222222"
+        ]
+      },
+      "metadata": []
+    }
+  ],
+  "planes": [
+    {
+      "id": "44444444444444444444444444444444",
+      "owner": {
+        "kind": "phase",
+        "id": "11111111111111111111111111111111"
+      },
+      "value": {
+        "id": "44444444444444444444444444444444",
+        "localUnitNormal": [
+          1,
+          0,
+          0
+        ],
+        "localOffsetA": 0,
+        "worldUnitNormal": [
+          1,
+          0,
+          0
+        ],
+        "worldOffsetA": 0,
+        "source": {
+          "kind": "miller",
+          "phaseId": "11111111111111111111111111111111",
+          "hkl": [
+            1,
+            0,
+            0
+          ],
+          "order": 0
+        }
+      },
+      "metadata": []
+    },
+    {
+      "id": "00000000000000000000000000000021",
+      "owner": {
+        "kind": "phase",
+        "id": "11111111111111111111111111111111"
+      },
+      "value": {
+        "id": "00000000000000000000000000000021",
+        "localUnitNormal": [
+          0,
+          0,
+          1
+        ],
+        "localOffsetA": 2,
+        "worldUnitNormal": [
+          0,
+          0,
+          1
+        ],
+        "worldOffsetA": 2,
+        "source": {
+          "kind": "three-selected-points",
+          "points": [
+            {
+              "key": {
+                "phase": "11111111111111111111111111111111",
+                "site": "00000000000000000000000000000003",
+                "operation": "55555555555555555555555555555555",
+                "shift": [
+                  0,
+                  0,
+                  0
+                ]
+              },
+              "fractional": [
+                0.25,
+                0.0,
+                0.5
+              ],
+              "localCartesianA": [
+                1.0,
+                0.0,
+                2.0
+              ],
+              "worldCartesianA": [
+                1.0,
+                0.0,
+                2.0
+              ],
+              "pointId": "0000000000000000000000000000001e"
+            },
+            {
+              "key": {
+                "phase": "11111111111111111111111111111111",
+                "site": "00000000000000000000000000000003",
+                "operation": "55555555555555555555555555555555",
+                "shift": [
+                  1,
+                  0,
+                  0
+                ]
+              },
+              "fractional": [
+                1.25,
+                0.0,
+                0.5
+              ],
+              "localCartesianA": [
+                5.0,
+                0.0,
+                2.0
+              ],
+              "worldCartesianA": [
+                5.0,
+                0.0,
+                2.0
+              ],
+              "pointId": "0000000000000000000000000000001f"
+            },
+            {
+              "key": {
+                "phase": "11111111111111111111111111111111",
+                "site": "00000000000000000000000000000003",
+                "operation": "55555555555555555555555555555555",
+                "shift": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              "fractional": [
+                0.25,
+                1.0,
+                0.5
+              ],
+              "localCartesianA": [
+                1.0,
+                4.0,
+                2.0
+              ],
+              "worldCartesianA": [
+                1.0,
+                4.0,
+                2.0
+              ],
+              "pointId": "00000000000000000000000000000020"
+            }
+          ]
+        }
+      },
+      "metadata": []
+    }
+  ]
+}

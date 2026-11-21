@@ -1,0 +1,129 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {
+      "const": "FC-GSAS-spin-projection-1"
+    },
+    "captureRole": {
+      "const": "actual-current-qualified-spin-projection"
+    },
+    "owner": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "const": "EntityRef"
+        },
+        "objectKind": {
+          "const": "phase"
+        },
+        "objectId": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "kind",
+        "objectKind",
+        "objectId"
+      ],
+      "additionalProperties": false
+    },
+    "chartResource": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "const": "BytesRef"
+        },
+        "resourceId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "byteLength": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)$"
+        }
+      },
+      "required": [
+        "kind",
+        "resourceId",
+        "sha256",
+        "byteLength"
+      ],
+      "additionalProperties": false
+    },
+    "sourceFlagF32Bits": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[0-9a-f]{8}$"
+      },
+      "minItems": 12,
+      "maxItems": 12
+    },
+    "operationAssignments": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 192,
+      "items": {
+        "type": "object",
+        "properties": {
+          "operation": {
+            "type": "object",
+            "properties": {
+              "kind": {
+                "const": "EntityRef"
+              },
+              "objectKind": {
+                "const": "symmetry-operation"
+              },
+              "objectId": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "kind",
+              "objectKind",
+              "objectId"
+            ],
+            "additionalProperties": false
+          },
+          "timeSign": {
+            "enum": [
+              -1,
+              1
+            ]
+          }
+        },
+        "required": [
+          "operation",
+          "timeSign"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "ruleId": {
+      "const": "draft.gsas-original-r1253-spin-chart"
+    },
+    "ruleVersion": {
+      "const": "1"
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "captureRole",
+    "owner",
+    "chartResource",
+    "sourceFlagF32Bits",
+    "operationAssignments",
+    "ruleId",
+    "ruleVersion"
+  ],
+  "$id": "urn:draft:fc:gsas-spin-projection:1"
+}

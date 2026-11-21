@@ -1,3 +1,11 @@
 [workspace]
-members = ["crates/bindings"]
+members = ["crates/source-derive", "crates/bindings", "crates/model", "crates/commands", "crates/codecs", "crates/cli"]
 resolver = "2"
+
+[workspace.dependencies]
+craft = { git = "https://github.com/storytold/craft-libs", rev = "243d68e12d05e89122db6d154924bf1992e10d38", version = "=0.1.0", default-features = false }
+craft-testkit = { git = "https://github.com/storytold/craft-libs", rev = "243d68e12d05e89122db6d154924bf1992e10d38", version = "=0.1.0" }
+
+[patch.crates-io]
+ecolor = { git = "https://github.com/storytold/egui.git", rev = "7e1c30d142bc7879d043e74b5ceb3ecfe7f51329" }
+emath = { git = "https://github.com/storytold/egui.git", rev = "7e1c30d142bc7879d043e74b5ceb3ecfe7f51329" }

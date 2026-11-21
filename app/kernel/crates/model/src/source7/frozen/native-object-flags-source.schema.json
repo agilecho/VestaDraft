@@ -1,0 +1,264 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:draft:input:NVIS1",
+  "$defs": {
+    "Target": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "atom-image"
+            },
+            "image": {
+              "$ref": "urn:draft:input:SG1-r2#/$defs/Image"
+            }
+          },
+          "required": [
+            "kind",
+            "image"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "bond"
+            },
+            "ruleId": {
+              "$ref": "urn:draft:input:SG1-r2#/$defs/Id"
+            },
+            "images": {
+              "type": "array",
+              "items": {
+                "$ref": "urn:draft:input:SG1-r2#/$defs/Image"
+              },
+              "minItems": 2,
+              "maxItems": 2
+            }
+          },
+          "required": [
+            "kind",
+            "ruleId",
+            "images"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "polyhedron"
+            },
+            "boundaryRuleId": {
+              "$ref": "urn:draft:input:SG1-r2#/$defs/Id"
+            },
+            "center": {
+              "$ref": "urn:draft:input:SG1-r2#/$defs/Image"
+            },
+            "vertices": {
+              "type": "array",
+              "items": {
+                "$ref": "urn:draft:input:SG1-r2#/$defs/Image"
+              },
+              "minItems": 3
+            }
+          },
+          "required": [
+            "kind",
+            "boundaryRuleId",
+            "center",
+            "vertices"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "morphology-face"
+            },
+            "shapeId": {
+              "$ref": "urn:draft:input:SG1-r2#/$defs/Id"
+            },
+            "halfspaceId": {
+              "$ref": "urn:draft:input:SG1-r2#/$defs/Id"
+            },
+            "operationId": {
+              "$ref": "urn:draft:input:SG1-r2#/$defs/Id"
+            },
+            "orientedFaceSignature": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "kind",
+            "shapeId",
+            "halfspaceId",
+            "operationId",
+            "orientedFaceSignature"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "ResolvedEntry": {
+      "type": "object",
+      "properties": {
+        "sourceIndex": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 2147483647
+        },
+        "target": {
+          "$ref": "#/$defs/Target"
+        }
+      },
+      "required": [
+        "sourceIndex",
+        "target"
+      ],
+      "additionalProperties": false
+    },
+    "Resolution": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "source-only"
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "kind",
+            "reason"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "qualified"
+            },
+            "entries": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/ResolvedEntry"
+              }
+            }
+          },
+          "required": [
+            "kind",
+            "entries"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "Record": {
+      "type": "object",
+      "properties": {
+        "keyword": {
+          "enum": [
+            "LBLAT",
+            "LBLSP",
+            "DLATM",
+            "DLBND",
+            "DLPLY"
+          ]
+        },
+        "sourceTokens": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^(-1|0|[1-9][0-9]{0,9})$"
+          },
+          "minItems": 1
+        },
+        "sourceIndices": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 2147483647
+          }
+        },
+        "resolution": {
+          "$ref": "#/$defs/Resolution"
+        }
+      },
+      "required": [
+        "keyword",
+        "sourceTokens",
+        "sourceIndices",
+        "resolution"
+      ],
+      "additionalProperties": false
+    },
+    "NativeObjectFlagSource": {
+      "type": "object",
+      "properties": {
+        "schemaVersion": {
+          "const": "NativeObjectFlags-proposal-1"
+        },
+        "phaseId": {
+          "$ref": "urn:draft:input:SG1-r2#/$defs/Id"
+        },
+        "enumeration": {
+          "type": "object",
+          "properties": {
+            "sourceGraphDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "recipeDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "algorithmId": {
+              "type": "string",
+              "minLength": 1
+            },
+            "algorithmVersion": {
+              "type": "string",
+              "minLength": 1
+            },
+            "populationDigest": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "sourceGraphDigest",
+            "recipeDigest",
+            "algorithmId",
+            "algorithmVersion",
+            "populationDigest"
+          ],
+          "additionalProperties": false
+        },
+        "records": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Record"
+          }
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "phaseId",
+        "enumeration",
+        "records"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$ref": "#/$defs/NativeObjectFlagSource"
+}

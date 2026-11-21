@@ -1,0 +1,75 @@
+{
+  "schema": "FC-EB-native-stored-grid-source-design/1",
+  "route": "VM18-I33",
+  "recordSchema": {
+    "path": "native-scalar-grid-source.schema.json",
+    "sha256": "e2ab493c02d8775b81ebbc8b89862cb2f9249bd76231a1cd03e8ba46829a69d6"
+  },
+  "inputDomain": "Only explicitly selected safe locked single-scalar cell/free wire in native-wien-eb-wire.contract.json, complete3D counts>=2, exact finite scalar extent and cumulative budgets. Held316byte producer-layout.eb is an authored historical diagnostic, not a VEND producer positive. Extra undeclared bands/unknown markers/lower rank are not silently flattened or relabelled invalid science.",
+  "purpose": "Concretize the fully retained stored-grid source representation and its finite numerical inspection boundary. Source-only preservation/inspection is not qualified reciprocal-energy Field support or whole03 readiness. This closes a concrete typed source-data/identity/precision specification; it does not manufacture missing producer physics or an upstream active reciprocal model.",
+  "fieldConsumption": {
+    "header": {
+      "source": "Both original length triples, angles/marker, full raw source and actual point counts; preserve every observation.",
+      "qualifiedTargets": [
+        "/properties/sourceEntities",
+        "/$defs/SourceEntity/properties/id",
+        "/$defs/SourceEntity/properties/nativeKind",
+        "/$defs/SourceEntity/properties/sourceTree",
+        "/$defs/SourceEntity/properties/sourceRecords",
+        "/properties/sourceEntryOrder",
+        "/$defs/SceneNode/properties/kind",
+        "/$defs/SceneNode/properties/sourceObjectId",
+        "/$defs/SceneNode/properties/display"
+      ],
+      "disposition": "New imported-source representation is actual SourceEntity nativeKind=vend-native-stored-grid, scientificProjection=not-qualified, and exact once-only sourceEntryOrder entry. NativeGridSource1 is the sourceTree payload, not a fake FS real-space Field/SG cell. Native-opaque SceneNode can reference its actual source owner. Every actual current object still has its own correct type; an existing Engine Field or unknown persistent type must not be retagged as a SourceEntity to evade full capture."
+    },
+    "values": {
+      "source": "All native-selected binary32 samples in explicit canonical x-fast storage plus original source decimals/raw extent.",
+      "qualifiedTargets": [
+        "/$defs/SourceEntity/properties/sourceTree",
+        "/$defs/Resource/properties/id",
+        "/$defs/Resource/properties/sha256",
+        "/$defs/Resource/properties/byteLength"
+      ],
+      "disposition": "The actual owned immutable dataResource BytesRef binds exact resource ID, SHA, byte length and complete shape/encoding. Do not find it by first matching SHA or depend on original path/cache. Read all N0*N1*N2 source values and retain original raw independently. No implicit closure strip/dedup/downsampling or stored-source substitution over edited materialized data."
+    },
+    "energyContext": {
+      "source": "Missing energy unit/padding/Fermi/band and actual reciprocal coordinate/endpoint meaning remain explicitly unresolved, never0 or a fake eV/Angstrom frame.",
+      "qualifiedTargets": [
+        "/$defs/SourceEntity/properties/sourceTree",
+        "/$defs/SourceMetadata/properties/tree"
+      ],
+      "disposition": "This record cannot enter FS real-space/reciprocal science, density normalization, physical Fermi/energy export or numeric unit conversion. A future qualified physical projection needs actual source/band/unit/offset/reference/reciprocal descriptor and suitable upstream type. It is explicit, provenance-bound and retains this original source object under a distinct ID."
+    }
+  },
+  "lowering": "Validate the closed ordinary record, then lower its whole body to TaggedVariant(tag=NativeScalarGridSource1,payload=Map). Plain scalar strings/integers/arrays become the existing exact AuditNode kinds; F32 source and projection words stay literal eight-hex source facts. The two explicitly typed sourceResource/dataResource objects remain actual AuditNode BytesRef leaves, never generic Maps of live ID strings. A resource ID byte-equal to marker cell does not turn that marker into a reference. The rule/schema digests and complete typed-reference graph join the existing full-source/consent policy; this reference-bearing definition is never registered as reference-free.",
+  "validation": "Require sourceResource actual full bytes/SHA/length equal scopeInputDigest and original observations; dataResource is an actual owned full canonical buffer with exact4*product(pointShape) bytes under checked arithmetic and all finite f32 values. Divisions equal pointShape-1 solely as selected native display metadata. Native display lengths are repeated source f32 lengths multiplied in binary64 by the pinned native0.5291772086 then explicitly narrowed to f32; nativeDisplayAngle is sourcef32 for cell and90 for free. This is numerical emulation metadata, not evidence the real source axis unit is Bohr, physical real space or a reciprocal basis. Unknown physical endpoint meaning never permits deleting mismatching last planes. A numerical3D display additionally requires a finite nonsingular metric and separately qualified native-display geometry; bad/unknown geometry can retain table/raw inspection but cannot manufacture a valid 3D or physical frame.",
+  "inspection": "A future separately qualified numerical inspection consumer can display actual stored samples/indices and a user-specified finite stored-scalar isovalue under an explicitly labelled native display-coordinate projection. It cannot call that level a physical Fermi energy, assume shift0, make it eV/Ry, install an FSFieldHandle or grant a scientific computation. All actual view settings/affine/style/selection are persistent SceneNode AuditNode state, initialized only from an independently frozen UI policy or an explicit user choice, never guessed source data. No renderer, iso-surface algorithm or new product operation is implemented in03.",
+  "resourceAndRestore": "Native Source7 source-entity/raw/data resources and native-opaque view use existing explicit typed roles. Ordinary whole-source save captures actual current source object/view and original bytes separately; artifact-only fresh restoration creates the exact expected source-entity plus SceneNode/refs with a new lifetime, validates the entire buffer/header/meaning/view, and never reparses archived input over edited state. A byte-only archive cannot pass a claimed active FSField/reciprocal Field expectation. Current finite selected-Field restorer still deliberately refuses nonempty sourceEntities; future complete Engine visitor/restore must implement these registered roles before a positive runtime/Saved claim.",
+  "precision": "Direct strict source decimal-to-f32 uses ieee-source-rounding.contract.json single-round math, with original tokens retained exactly. Native length scaling has its explicit f64 then f32 rounds. Missing energy units have no fabricated physical precision budget; raw/source/current stored scalar bits and all discrete domain/shape/order/owner relations are exact. Future physical transforms need independently qualified prior unit/frame/offset budgets.",
+  "protocol": "SourceDTO7/Descriptor2/request3/Graph2/resource3/manifest2/loss2/productprotocol3 shapes unchanged. New registered sourceTree payload/rule/schema changes the complete source/policy/closure digests and invalidates old plans/consent. It is an explicit new imported-source representation under the already open nativeKind/AuditNode model, not automatic migration of an unrepresented actual Engine type or a general complete-source visitor.",
+  "actualEBProducerPositive": false,
+  "physicalEnergyAndReciprocalContextQualified": false,
+  "activeFSReciprocalTypeQualified": false,
+  "actualEngineImplemented": false,
+  "newTargetExecuted": false,
+  "whole03Complete": false,
+  "descriptorResources": {
+    "frameSchema": "native-scalar-grid-frame.schema.json",
+    "frameSchemaSha256": "8bdf065145b8e0f6f06bea3664b2c31594e4eda601db0b1c861f1f50f944d2f5",
+    "rule": "Capture an actual complete Descriptor2 for the data resource with producer identity explicitly denoting the locked native-reader interpretation, not a claimed original EB producer. physicalKind=uninterpreted-stored-scalar, unit=source-unresolved, basis=source-unresolved and exact draft.vend-native-stored-grid/version1; frameResource points to actual closed NativeScalarGridFrame1 bytes and evidence points to actual held input extents. The frame contains the same declared scalar/header/shape facts, no live references and no physical basis/unit certificate. Its actual source/record equality is validated independently.",
+    "closure": "Source7 Resource.sourceDescriptorDigest is the SHA of that actual descriptor definition, never an invented constant or the data hash. Actual descriptor and frame/evidence resources are owned/captured in the full manifest. Owner/use-scoped BoundDescriptorContext1 binds the exact native-grid dataResource typed-use pointer via the registered grid rule, actual selected resource row and its descriptor digest. Fresh resources/context use exact typed roles; raw descriptor aliases and literal source strings stay immutable. SourceDescriptor2 has no scientific admission for this unresolved raw kind. This addition adds no arbitrary frame or resource-id fallback.",
+    "scope": "The14-control finite witness below checks the selected core sourceTree/data-ref shape and content; it does not construct/qualify a full Engine descriptor/resource capture or a complete active restore. Existing descriptor-context/full-source gates remain mandatory future integration checks, not evidence supplied by a placeholder SHA."
+  },
+  "sourceDataImmutability": "This registered record represents immutable imported source observations and their named native stored-scalar projection. It is not an arbitrary editable/materialized Field container. A qualified promotion/edit transaction has its own actual type and provenance/current values; full capture must never recompute or retag that edited object from original source merely to satisfy this source-only rule.",
+  "currentNativeNumericalGrid": {
+    "path": "native-scalar-grid-current.contract.json",
+    "sha256": "3908fb5acb5a8e4f06ef211345c70d9fe7fc015b8c5435d21b5990e0ca251237",
+    "scope": "Registered Source7 actual current numerical SourceEntity/data/mask/geometry distinct from immutable NativeScalarGridSource1 history and active FS/physical Fields. No existing Engine type retagging, import geometry certificate or actual capture implementation."
+  },
+  "selectedNativeNumericalConsumption": {
+    "path": "native-numerical-consumption.contract.json",
+    "sha256": "8b4624433b87f4719a1b5774bad9c5079ea7527d6249729e95073d0846fb3ce3",
+    "scope": "Closed current fractional-native numerical grid, actual effective affine and explicit stored-scalar isoview consumption. Source7 registered types/typed refs/full current state; no active physical reciprocal type, native mesh proof or renderer implementation."
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "schema": "FC-FDAT-connection-record-selected-design/1",
+  "route": "VM18-I09",
+  "model": "fdat-connection-model.py",
+  "source": "fdat-connectivity-primary-bindings.json + existing primaryRPluto PDF and named actual C57 source",
+  "additionalPrimaryVisualPages": [
+    {
+      "path": "runs/316-fdat-primary-linked-records/guide-page-47.png",
+      "sha256": "c1c4b828c610be8f6cbcb1966d463ccb9baa24a6e5544e4e9953a781966ce57a",
+      "physicalPage": 47,
+      "role": "Rendered existing primary PDF; printed38 framing/cell and printed41 actual directory example. Images visually read, not original FDAT wire."
+    },
+    {
+      "path": "runs/316-fdat-primary-linked-records/guide-page-50.png",
+      "sha256": "3391f882521c075cabc1199712a610cfc1eb0917d6e0b4edd260233fd1589979",
+      "physicalPage": 50,
+      "role": "Rendered existing primary PDF; printed38 framing/cell and printed41 actual directory example. Images visually read, not original FDAT wire."
+    }
+  ],
+  "publishedExampleTranscription": {
+    "refcode": "AABHTZ",
+    "NAT": 35,
+    "NSAT": 0,
+    "NCON": 37,
+    "additionalPairs": 1
+  },
+  "counts": "N=NAT+NSAT. Selected published example has NCON37 total integers for N35:35 implied-FROM slots plus one complete explicit pair. NCON0 is source table absence, not observed zero chemical bonds. A nonempty table requires M>=N and even(M-N). Exact declared physical/logical extent and all integer slots are required.",
+  "layout": "Published text gives N<10040I2 and N>10026I3,2X but omits100. Original CCDC shipped reader and writer now independently supply a selected N<=99/I2 versus N>=100/I3 rule (selectedCCDCAt100Rule). Existing explicit-i3-at-100 uses that trusted rule qualification bound to actual source/entry/descriptor, not a self-certified request or graph fit. Generic published-count-rule retains its documentary gap; explicit-I2 at100 needs a different independently trusted rule.",
+  "parameters": {
+    "name": "connectionLayout",
+    "legacy": "native-preserve-uninterpreted",
+    "corrected": [
+      "published-count-rule",
+      "explicit-i2-at-100",
+      "explicit-i3-at-100"
+    ],
+    "consumer": "Selected FDAT source record7 grammar/SourceDescriptor qualifier before model projection; original VESTA never consumed the connection table here.",
+    "missingEvidenceResult": "failed-before-apply/E_FDAT_SOURCE_LAYOUT_REQUIRED or E_FDAT_SOURCE_LAYOUT_UNQUALIFIED; preserve original full input, no false invalid-source or invented active graph."
+  },
+  "framing": "Logical records at most80ASCII bytes excluding separately preserved LF/CRLF.40I2 or26I3 plus2pad; all declared active numeric fields must exist and have safe bounded decimal spelling. Remaining line bytes must be padding; physical trailing padding may be absent only after every required value. Exact ceil(M/perRecord) rows, no next-entry consumption, cross-row numeric scan or inferred zero for a missing field.",
+  "topology": "FirstN integers have implied FROM1..N;zero is a source dummy and may mean that atom connection was already represented elsewhere, not an atom0/no-bonds assertion. Remaining integer pairs must be complete and resolve to actual ordered record6 slots, including NSAT copies. Preserve raw token/order/dummies/repeated or reversed source relations independently of any normalized undirected graph; do not infer chemical bond order, unique site labels or an active SG periodic graph.",
+  "sourceIdentity": "Capture actual primary resource SHA/span and source entry/ordered record6 slot identities. Record labels may repeat; use source slot identities and separately qualified Image/operator/shift mappings, not generated molecule IDs, inferred element-prefix identity or a naked new-lifecycle ordinal. Full SourceDTO7 typed metadata must encode actual current target IDs as EntityRef and raw source ordinals as I64; unresolved source record relationships stay explicit source facts.",
+  "currentAndOriginal": "Source table observations and actual current model topology are separate. Locked legacy VESTA import may generate geometry-derived bonds but does not prove source record7 consumption. Full save captures current actual bond recipes/rules plus immutable complete source graph records/meaning/diagnostics; ordinary fresh reopen must restore each expected current object and source relation without rerunning the original table into a different edited model. Source-only archive or a matching rendered bond count is insufficient.",
+  "loss": "Original topology/source records and edited current topology have distinct audited leaves/dependencies. Unknown periodic mapping or changed source atom/order dependencies block destructive native projection until qualified transform or explicit supported complete loss policy; no ad-hoc all-molecule lowering or synthesized connectivity. Missing original table is not loss of an observed empty graph.",
+  "qualification": {
+    "fullN100ProducerDialectQualified": false,
+    "genuineN100ArtifactAcquired": false,
+    "allRowsInWitnessAuthoredDiagnostic": true,
+    "newTargetExecuted": false,
+    "activeSGPeriodicGraphQualified": false,
+    "actualEngineImplemented": false,
+    "whole03Complete": false,
+    "selectedCCDCN100WireRuleEstablished": true
+  },
+  "immutableObservationSchema": "fdat-connection-observation.schema.json FCON1, document-owned original source fact, not current graph; no SourceDTO7 root/product protocol change.",
+  "selectedCCDCAt100Rule": {
+    "path": "rpluto-fdat-source.contract.json",
+    "sha256": "5dd085e509c93bc0946e24562d639f1d23266d074f3a7ff0c01b838b94e346ca",
+    "scope": "Independent selected CCDC reader/writer givesI3 atN100; not genuine new output/all historical producer or active graph."
+  }
+}

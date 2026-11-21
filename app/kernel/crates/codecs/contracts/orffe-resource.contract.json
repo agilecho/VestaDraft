@@ -1,0 +1,50 @@
+{
+  "schema": "FC-ORFFE-result-resource/1",
+  "bindings": "orffe-resource-source-bindings.json",
+  "sourceSchema": "orffe-resource.schema.json",
+  "features": [
+    "VF-0064",
+    "VF-0231"
+  ],
+  "role": "Existing geometrical-parameter .ffe result reader/resource, not a new original FormatRef, exporter or external ORFFE calculation.",
+  "grammar": {
+    "atomic": "ATOMIC PARAMETERS FOR PHASE marker, two header lines, selected rows with14scanf fields: ordinal,label<=6sourcebytes and six alternating float/int pairs. Native uses successfully parsed row count for compatibility; annotations are not a replacement crystal structure.",
+    "symmetry": "SYMMETRY INFORMATION, two header lines, optional indexed three affine-expression tokens; native separately prepends identity. Source empty extra-operation section yields one internal identity. Do not silently add another identity or require source operation code1 for identity.",
+    "distance": "INTERATOMIC DISTANCE IN ANGSTROMS; serial, two(siteOrdinal,encodedSymmetryCode) operands, two label/fractional-coordinate annotations; next line value +OR- SU. Preserve source order, original decimals and implicit f32 narrowing separately.",
+    "angle": "BOND ANGLE IN DEGREES. CENTRAL ATOM IS VERTEX marker spelling follows locked original; analogous three operands and annotations, middle operand is vertex; next line value +OR- SU.",
+    "other": "CELL PARAMETERS/native skip states and unrecognized original text remain exact source. Unsupported result/header forms are source-only with diagnostics, not invented complete active tables."
+  },
+  "identity": {
+    "owner": "Source table binds captured phase source/root/basis and resource digest before association. Every pair/triplet ordinal maps through the exact source site table to stable SiteId; ordinal/label alone isnot a global ID.",
+    "native": "Read result site ordinal becomes ordinal-1. Encoded symmetry code is split with C++ signed quotient/remainder by1000; remainder selects the separately identity-prefixed operator vector, quotient indexes a native translation table. It isnot universally a positive1-based operation ID.",
+    "selectedActive": "Current old positive has code0 and no extra symmetry rows. Broader code/translation interpretation requires a qualified full table/basis rule and bounds; preserve original code/expression bytes and refuse active mapping otherwise. Never reinterpret an invalid code by modulo wrapping.",
+    "sourceConsistency": "Counts alone are insufficient. Bind labels/source coordinates/qualified operation/basis/image mapping and immutable phase source digest. Swapped or edited site tables cannot borrow old resource identity; use versioned revalidation and preserve original raw table.",
+    "values": "These are external source results. The authored9.8765/.0123 and123.456/.0045 deliberately differ from model2angstrom/90degrees; do not recompute and overwrite them or call sourceSU a numerical error allowance. ScalarSU isnot full covariance."
+  },
+  "numeric": {
+    "units": "Distanceangstrom, angledegree from explicit section headings. Unknown section/kind stays source-only. SU same unit, finite nonnegative for active table; original signed spelling remains source.",
+    "precision": "Keep each original decimal token exactly; selected native presentation parses%f and storesbinary32 for value/SU. Prospective decimal->f32 plus explicit display rule must be separate from raw preservation. Do not use displayed9.877(13) as full-precision source.",
+    "rejection": "Missing next line, malformed value/SU, nonfinite active results, negativeSU, out-of-range site/operator/translation, duplicate ambiguous identity or count mismatch cannot materialize a new active table from stale locals."
+  },
+  "failure": {
+    "preservePreviousValidBinding": true,
+    "clearReferenceOnBadRead": false,
+    "original": "R80 bad-count read produces empty lists/stale old detail and SaveAs removes IMPORT_ORFFE; recorded as actual failure, not future preserving behavior.",
+    "proposed": "Parse/capture/reconcile into a private candidate. A failed read keeps previous valid project/table/resource binding and reports which new input failed; no replacing old data, clearing reference, or displaying stale detail as a result from the failed source. On success replace atomically and reset selection/details to the new table.",
+    "wholeSave": "Existing explicit IMPORT_ORFFE is a required dependency/effect. Wrongcount/unknownmapping/ignored present table is E_REOPEN_COVERAGE or diagnostic recovery, never a validSaved just because its fileSHA matches. Original safe raw table/source observations remain independently retained.",
+    "optional": "Initial .ins/.lst same-stem discovery may be absent per resource-graph.contract; once present or explicitly linked it cannot downgrade to absent to mask failure."
+  },
+  "expectedReopen": {
+    "table": "Full source row count/order, row serial/kind, pair/triplet source IDs/images, value/SU original tokens, printed/native projection and owner/resource relation. Candidate decode must reconstruct the table or retain explicitly source-only qualification; rawbyte presence doesnot grant active geometry.",
+    "future": "Use actual product write, independent source-table read and fresh-instance reopen; test failed replacement after valid linkage, same-count wrong identity and no oldcache fallback. Historical scoped positive .ffe reopen doesnot reverse actual pgrid reopen failure.",
+    "sourceModel": "Use phase-owned SourceMetadata.tree map/array nodes and raw resource spans with completeSourceLedger; active projected table consumes existing source/SG identity qualifications. No new covariance/scientific operator capability."
+  },
+  "qualification": {
+    "selectedReaderAndResultDesignSpecified": true,
+    "genuineORFFEProducerFixture": false,
+    "fullCovarianceScienceQualified": false,
+    "newTargetExecuted": false,
+    "productImplemented": false,
+    "independentlyReviewed": false
+  }
+}

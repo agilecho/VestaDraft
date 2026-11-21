@@ -1,0 +1,85 @@
+{
+  "schema": "FC-GAMESS2016-MMP-selected-design/2",
+  "routes": [
+    "VM18-I44"
+  ],
+  "sources": [
+    {
+      "path": "output/vesta-study/20261108-113622/reviews/20261115-092025-p1-03-completion/inputs/gamess-input-20160701.pdf",
+      "sha256": "1440acd7946c230d2e8402a581b0bf2217831c2eda9bf8ead374e3ef5296213f",
+      "bytes": 1624368
+    },
+    {
+      "path": "output/vesta-study/20261108-113622/reviews/20261115-092025-p1-03-completion/inputs/MacMolPlt_Files.html",
+      "sha256": "434c63ab55cfb8958548fd5571f8bf305be044ab7d7f2d03a7d407c154f89813",
+      "bytes": 20856
+    }
+  ],
+  "primaryReading": {
+    "gamessVersion": "1 July2016",
+    "pages": "printed2-16 CONTRL,2-40..2-46 DATA selected title/symmetry/Cartesian/basis cards; no wholemanual claim",
+    "macmolplt": "author guide Files 3D Surface section, normally Angstrom, explicit source descriptor required"
+  },
+  "groups": "retain exact ordered $GROUP..$END spans; parse case-insensitive identifiers only through selected syntax; no execution of includes, computation directives or expressions",
+  "data": {
+    "header": "$DATA newline title newline pointgroup [order]; C1 does not require blank line after symmetry whereas non-C1 symmetry has additional setup cards",
+    "identity": "NAME label printout only; ZNUC authoritative. Positive integer nuclear charge => bound element; negative => ghost/basis center with effective zero nuclear charge, not atom of abs(ZNUC); preserve raw nonintegral cases unresolved",
+    "coordinateModes": {
+      "UNIQUE": "Cartesian symmetry-unique atom rows NAME ZNUC X Y Z, pinned pointgroup/operators generate full molecule only if qualified; C1 is identity",
+      "CART/PRINAXIS": "all Cartesian input atoms, producer may reorient and reorder during computation. Codec imports supplied frame, does not simulate producer principal-axis transformation",
+      "HINT": "internal connection type R/alpha/beta/sign and preceding atom/standard point references. Preserve complete source relations; scientific evaluation requires separate qualified geometry law",
+      "ZMT/ZMTMPC": "internal-coordinate syntax and variables; preserve relation tree, no pretending tokens are Cartesian",
+      "FRAGONLY": "no DATA molecule; EFRAG ownership/setup retained, no fake atom"
+    },
+    "units": "ANGS default or BOHR declared, degrees for angles; source default is documented, never inferred from numeric magnitude",
+    "basis": "global BASIS => consecutive atom rows; absent BASIS => per-atom shell headers, optional NGAUSS primitive records and blank basis terminator; distinguish shell lines from atom rows using state, no element prefix shortcut",
+    "unsupportedScientificGeometry": "HINT/internal-variable/unknown symmetry stays explicitly unqualified for Cartesian decode until its geometry law is supplied; raw-only does not count complete profile"
+  },
+  "pairedMMP": {
+    "identity": "exact owner+declared pair, relative literal path/digest; same basename convenience is not proof of association",
+    "layout": "title;3 positive integer nx ny nz;3 origin components;3 diagonal increment components;exact nx*ny*nz scalar tokens, then explicitly qualified source extensions or retained opaque trailing source. Selected original ED atom tail is separate from scalar payload; unexplained trailing source cannot be silently discarded.",
+    "order": "x outer,y middle,z fastest (author grid(x(y(z))))",
+    "coordinate": "sample r(i,j,k)=origin+(i*dx,j*dy,k*dz), endpoint span=(n-1)*d; counts are points, never n intervals",
+    "units": "coordinates normally Angstrom in author guide, bind exact source descriptor; scalar physicalKind/unit independently required, not auto electronic density",
+    "periodicity": "finite general molecular field; no periodic cell1 or inferred atom-host phase",
+    "negativeIncrement": "allow signed increments if explicit oriented frame nonsingular; counts>=2 for3D volume (lower rank must be separate typed field)",
+    "missingPair": "surface not semantically joined to molecule; preserve diagnosis/sourcebytes, refuse joined decode",
+    "nativeFilenameRule": {
+      "binding": "gamess-author-pair-inputs.json",
+      "inpOpened": "readGAM_MMPfile strips suffix from its passed input path and appends .mmp, calls read_density_data for that resource, then opens the passed input path for $DATA.",
+      "mmpOpened": "Selected readdata branch derives .inp from selected surface path then calls the same pair reader, which re-derives .mmp. Thus an explicit source dependency exists even when surface bytes do not contain a filename token.",
+      "relocation": "Qualified legacy layout requires co-located exact same-stem .inp/.mmp pair, with the native derived spelling. Do not separately hash-name or move only one member. A relocated paired group needs both actual content digests and the derived reference edge in addition to any .vesta literal reference.",
+      "identity": "Filename derivation proves discovery behavior, not scientific association of arbitrary same-named files. Bind captured pair identities/producer state and field frame; mismatched/absent pair remains an explicit conflict/unjoined source, not a valid empty structure.",
+      "caseAndPaths": "Exact case/Unicode/platform and paths without normal suffix remain separately unqualified. No basename/canonicalization assumption repairs source ambiguities."
+    },
+    "selectedAuthorExamples": {
+      "bindings": "gamess-author-pair-inputs.json",
+      "role": "Three actual2004 published CH2 input/surface pairs, with original MacMolPlt4 identification. Inputs are byte-identical417byte structures; fields have different shapes and quantity titles. They are not the old artificial C1/sentinel files.",
+      "quantity": "Title says total electron density, molecular orbital MO7 or molecular electrostatic potential. Signed orbital amplitude and signed potential must not be clipped as electron number density. Exact scalar physical units/calculation settings are not supplied by the surface header; source unit remains unresolved unless producer context is additionally qualified.",
+      "geometry": "Use printed origin plus (n-1)*increment; rounded asymmetrical extents retained. Common origin/pair name does not prove grid/molecule optimized-frame lineage or identical resampling.",
+      "symmetry": "Original $DATA has CNV2 and all three C/H rows, not C1. Preserve point-group/card context and source rows; no unqualified re-expansion or target first-atom correction applied.",
+      "notExecuted": "RUNTYP=OPTIMIZE/EXETYP=RUN are original source text only; no electronic calculation or target run.",
+      "EDAtomTail": "Only CH2_ed.mmp has three original NAME/ZNUC/XYZ rows after exactly1288701 scalar values; orbit/potential files have none. Tail coordinates carry10 decimals and agree with the paired5-decimal input within its printing halfstep; not byte-identical positions or proof of producer calculation lineage. Preserve this selected extension separately; native grid reader closes after required voxels and does not consume this tail. Do not discard it, parse it as more scalars, replace the input coordinates by higher precision silently, or infer this is a universal documented atom-tail grammar."
+    }
+  },
+  "nativeObserved": {
+    "firstAtom": "static aadc8 title, aade0 symmetry, aadf0 first atom consumed; aae88 consumes next line before parsing; selected C omitted in old output",
+    "extent": "static bf23c..bf268 and ab104..ab134 multiply counts by increments; preserves old n*d mismatch",
+    "default": "expose proven legacy result and warning, corrected coordinate/endpoint interpretation only on explicit selection; no new target run"
+  },
+  "precision": "retain decimal and source IEEE bits; source conversion error has prospective bound from pinned unit constant and operation rounding, no new target writer qualification",
+  "inputs": [
+    {
+      "path": "output/vesta-study/20261108-113622/reviews/20261110-104021-s05-completion/input-sources/VS-0095/sentinel.inp",
+      "sha256": "a7704f0791aa50984f063548503249fa608faab9c5c4bd866b1468310a1b500a",
+      "bytes": 125
+    },
+    {
+      "path": "output/vesta-study/20261108-113622/reviews/20261110-104021-s05-completion/input-sources/VS-0096/sentinel.mmp",
+      "sha256": "defb934081934469755f086b90eba52c3daf2fb2d08131771c811885f38ed978",
+      "bytes": 261
+    }
+  ],
+  "fullGAMESSGeometryGrammarQualified": false,
+  "productImplemented": false
+}

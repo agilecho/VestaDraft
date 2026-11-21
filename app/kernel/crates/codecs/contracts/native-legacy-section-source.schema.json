@@ -1,0 +1,220 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:draft:input:NATIVESECTION2",
+  "$defs": {
+    "F64": {
+      "type": "object",
+      "properties": {
+        "literal": {
+          "type": "string",
+          "minLength": 1
+        },
+        "nativeF64Bits": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{16}$"
+        }
+      },
+      "required": [
+        "literal",
+        "nativeF64Bits"
+      ],
+      "additionalProperties": false
+    },
+    "F32": {
+      "type": "object",
+      "properties": {
+        "literal": {
+          "type": "string",
+          "minLength": 1
+        },
+        "nativeF32Bits": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{8}$"
+        }
+      },
+      "required": [
+        "literal",
+        "nativeF32Bits"
+      ],
+      "additionalProperties": false
+    },
+    "I32": {
+      "type": "object",
+      "properties": {
+        "literal": {
+          "type": "string",
+          "minLength": 1
+        },
+        "nativeI32": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        }
+      },
+      "required": [
+        "literal",
+        "nativeI32"
+      ],
+      "additionalProperties": false
+    },
+    "LegacySectionRecord": {
+      "type": "object",
+      "properties": {
+        "dialect": {
+          "const": "vesta-linux-3.1.0-pln2d-15x69"
+        },
+        "sourceOrdinal": {
+          "$ref": "#/$defs/I32"
+        },
+        "hkl": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/F64"
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "headerFlags": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/I32"
+          },
+          "minItems": 4,
+          "maxItems": 4
+        },
+        "row2Flags": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/I32"
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "row2Scalars": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/F32"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "row3Scalars": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/F32"
+          },
+          "minItems": 5,
+          "maxItems": 5
+        },
+        "row3Integers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/I32"
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "row4Scalars": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/F32"
+          },
+          "minItems": 4,
+          "maxItems": 4
+        },
+        "legacyBasisScalars": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/F32"
+          },
+          "minItems": 6,
+          "maxItems": 6
+        },
+        "legacyCenter": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/F64"
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "ignoredFourthSource": {
+          "$ref": "#/$defs/F32"
+        },
+        "row7Scalars": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/F32"
+          },
+          "minItems": 4,
+          "maxItems": 4
+        },
+        "colorsRGB": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/I32"
+            },
+            "minItems": 3,
+            "maxItems": 3
+          },
+          "minItems": 4,
+          "maxItems": 4
+        },
+        "matrixRows": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/F64"
+            },
+            "minItems": 4,
+            "maxItems": 4
+          },
+          "minItems": 4,
+          "maxItems": 4
+        },
+        "legacyHeaderScalars": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/F64"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        }
+      },
+      "required": [
+        "dialect",
+        "sourceOrdinal",
+        "hkl",
+        "legacyHeaderScalars",
+        "headerFlags",
+        "row2Flags",
+        "row2Scalars",
+        "row3Scalars",
+        "row3Integers",
+        "row4Scalars",
+        "legacyBasisScalars",
+        "legacyCenter",
+        "ignoredFourthSource",
+        "row7Scalars",
+        "colorsRGB",
+        "matrixRows"
+      ],
+      "additionalProperties": false
+    },
+    "SectionRecord": {
+      "oneOf": [
+        {
+          "$ref": "urn:draft:input:NATIVESECTION1#/$defs/NativeSectionRecord"
+        },
+        {
+          "$ref": "#/$defs/LegacySectionRecord"
+        }
+      ]
+    }
+  },
+  "$ref": "#/$defs/SectionRecord",
+  "title": "Explicit modern18x80 or selected legacy15x69 source record; not runtime qualification"
+}

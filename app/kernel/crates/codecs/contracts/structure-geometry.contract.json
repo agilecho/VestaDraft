@@ -1,0 +1,5621 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "P1-01 SG/1 proposed canonical design subset",
+  "$defs": {
+    "Id": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{32}$",
+      "title": "Id"
+    },
+    "Digest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Digest"
+    },
+    "Vec3": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "minItems": 3,
+      "maxItems": 3,
+      "title": "Vec3"
+    },
+    "Int3": {
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "minimum": -2147483648,
+        "maximum": 2147483647
+      },
+      "minItems": 3,
+      "maxItems": 3,
+      "title": "Int3"
+    },
+    "Mat3": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Vec3"
+      },
+      "minItems": 3,
+      "maxItems": 3,
+      "title": "Mat3"
+    },
+    "Resource": {
+      "type": "object",
+      "properties": {
+        "digest": {
+          "$ref": "#/$defs/Digest"
+        },
+        "bytes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        }
+      },
+      "required": [
+        "digest",
+        "bytes"
+      ],
+      "additionalProperties": false,
+      "title": "Resource"
+    },
+    "Species": {
+      "type": "object",
+      "properties": {
+        "element": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "charge": {
+          "oneOf": [
+            {
+              "type": "integer",
+              "minimum": -128,
+              "maximum": 127
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "massNumber": {
+          "oneOf": [
+            {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 65535
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "rawToken": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "element",
+        "charge",
+        "massNumber",
+        "rawToken"
+      ],
+      "additionalProperties": false,
+      "title": "Species"
+    },
+    "Cell": {
+      "type": "object",
+      "properties": {
+        "lengthA": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "exclusiveMinimum": 0
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "anglesDeg": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "exclusiveMinimum": 0,
+            "exclusiveMaximum": 180
+          },
+          "minItems": 3,
+          "maxItems": 3
+        }
+      },
+      "required": [
+        "lengthA",
+        "anglesDeg"
+      ],
+      "additionalProperties": false,
+      "title": "Cell"
+    },
+    "Adp": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "iso-U"
+            },
+            "uA2": {
+              "type": "number"
+            }
+          },
+          "required": [
+            "kind",
+            "uA2"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "tensor"
+            },
+            "basis": {
+              "enum": [
+                "cif-U-A2",
+                "cartesian-U-A2",
+                "beta-dimensionless"
+              ]
+            },
+            "six": {
+              "type": "array",
+              "items": {
+                "type": "number"
+              },
+              "minItems": 6,
+              "maxItems": 6
+            }
+          },
+          "required": [
+            "kind",
+            "basis",
+            "six"
+          ],
+          "additionalProperties": false
+        }
+      ],
+      "title": "Adp"
+    },
+    "Parameter": {
+      "type": "object",
+      "properties": {
+        "object": {
+          "$ref": "#/$defs/Id"
+        },
+        "field": {
+          "enum": [
+            "fractional.x",
+            "fractional.y",
+            "fractional.z",
+            "cell.a",
+            "cell.b",
+            "cell.c",
+            "cell.alpha",
+            "cell.beta",
+            "cell.gamma",
+            "occupancy",
+            "U11",
+            "U22",
+            "U33",
+            "U12",
+            "U13",
+            "U23"
+          ]
+        },
+        "unit": {
+          "enum": [
+            "one",
+            "A",
+            "degree",
+            "A2"
+          ]
+        }
+      },
+      "required": [
+        "object",
+        "field",
+        "unit"
+      ],
+      "additionalProperties": false,
+      "title": "Parameter"
+    },
+    "Covariance": {
+      "type": "object",
+      "properties": {
+        "parameters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Parameter"
+          }
+        },
+        "matrix": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            }
+          }
+        },
+        "source": {
+          "enum": [
+            "supplied-full",
+            "supplied-diagonal"
+          ]
+        },
+        "sourceDigest": {
+          "$ref": "#/$defs/Digest"
+        }
+      },
+      "required": [
+        "parameters",
+        "matrix",
+        "source",
+        "sourceDigest"
+      ],
+      "additionalProperties": false,
+      "title": "Covariance"
+    },
+    "Site": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/Id"
+        },
+        "label": {
+          "type": "string"
+        },
+        "species": {
+          "$ref": "#/$defs/Species"
+        },
+        "fractional": {
+          "$ref": "#/$defs/Vec3"
+        },
+        "occupancy": {
+          "type": "number"
+        },
+        "adp": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/Adp"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "label",
+        "species",
+        "fractional",
+        "occupancy",
+        "adp"
+      ],
+      "additionalProperties": false,
+      "title": "Site"
+    },
+    "SymmetryOp": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/Id"
+        },
+        "matrix": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Int3"
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "translation": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "numerator": {
+                "type": "integer"
+              },
+              "denominator": {
+                "type": "integer",
+                "minimum": 1
+              }
+            },
+            "required": [
+              "numerator",
+              "denominator"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "timeReversal": {
+          "enum": [
+            -1,
+            1
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "matrix",
+        "translation",
+        "timeReversal"
+      ],
+      "additionalProperties": false,
+      "title": "SymmetryOp"
+    },
+    "Structure": {
+      "type": "object",
+      "properties": {
+        "cell": {
+          "$ref": "#/$defs/Cell"
+        },
+        "sites": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Site"
+          }
+        },
+        "operations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SymmetryOp"
+          }
+        },
+        "covariance": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/Covariance"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "cell",
+        "sites",
+        "operations",
+        "covariance"
+      ],
+      "additionalProperties": false,
+      "title": "Structure"
+    },
+    "Placement": {
+      "type": "object",
+      "properties": {
+        "phase": {
+          "$ref": "#/$defs/Id"
+        },
+        "parent": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/Id"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "rotation": {
+          "$ref": "#/$defs/Mat3"
+        },
+        "translationA": {
+          "$ref": "#/$defs/Vec3"
+        }
+      },
+      "required": [
+        "phase",
+        "parent",
+        "rotation",
+        "translationA"
+      ],
+      "additionalProperties": false,
+      "title": "Placement"
+    },
+    "Image": {
+      "type": "object",
+      "properties": {
+        "phase": {
+          "$ref": "#/$defs/Id"
+        },
+        "site": {
+          "$ref": "#/$defs/Id"
+        },
+        "operation": {
+          "$ref": "#/$defs/Id"
+        },
+        "shift": {
+          "$ref": "#/$defs/Int3"
+        }
+      },
+      "required": [
+        "phase",
+        "site",
+        "operation",
+        "shift"
+      ],
+      "additionalProperties": false,
+      "title": "Image"
+    },
+    "ImagePoint": {
+      "type": "object",
+      "properties": {
+        "image": {
+          "$ref": "#/$defs/Image"
+        },
+        "cartesianA": {
+          "$ref": "#/$defs/Vec3"
+        }
+      },
+      "required": [
+        "image",
+        "cartesianA"
+      ],
+      "additionalProperties": false,
+      "title": "ImagePoint"
+    },
+    "Field": {
+      "type": "object",
+      "properties": {
+        "resource": {
+          "$ref": "#/$defs/Resource"
+        },
+        "kind": {
+          "enum": [
+            "electronDensity",
+            "nuclearDensity",
+            "electronPatterson",
+            "nuclearPatterson",
+            "generic"
+          ]
+        },
+        "unit": {
+          "enum": [
+            "ePerA3",
+            "fmPerA3",
+            "e2PerA3",
+            "fm2PerA3",
+            "declared"
+          ]
+        },
+        "declaredUnit": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "coreShape": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "closure": {
+          "type": "array",
+          "items": {
+            "type": "boolean"
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "periodic": {
+          "type": "array",
+          "items": {
+            "type": "boolean"
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "axisOrder": {
+          "enum": [
+            "x-fastest",
+            "z-fastest"
+          ]
+        },
+        "originA": {
+          "$ref": "#/$defs/Vec3"
+        },
+        "dtype": {
+          "enum": [
+            "f32",
+            "f64"
+          ]
+        },
+        "stepBasisA": {
+          "$ref": "#/$defs/Mat3"
+        }
+      },
+      "required": [
+        "resource",
+        "kind",
+        "unit",
+        "declaredUnit",
+        "coreShape",
+        "closure",
+        "periodic",
+        "axisOrder",
+        "originA",
+        "stepBasisA",
+        "dtype"
+      ],
+      "additionalProperties": false,
+      "title": "Field"
+    },
+    "Reflection": {
+      "type": "object",
+      "properties": {
+        "hkl": {
+          "$ref": "#/$defs/Int3"
+        },
+        "real": {
+          "type": "number"
+        },
+        "imaginary": {
+          "type": "number"
+        },
+        "unit": {
+          "enum": [
+            "electron",
+            "fm"
+          ]
+        },
+        "source": {
+          "enum": [
+            "Fc",
+            "Fo",
+            "difference"
+          ]
+        }
+      },
+      "required": [
+        "hkl",
+        "real",
+        "imaginary",
+        "unit",
+        "source"
+      ],
+      "additionalProperties": false,
+      "title": "Reflection"
+    },
+    "Mesh": {
+      "type": "object",
+      "properties": {
+        "verticesA": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Vec3"
+          }
+        },
+        "triangles": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 4294967295
+            },
+            "minItems": 3,
+            "maxItems": 3
+          }
+        },
+        "normals": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/Vec3"
+              }
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "verticesA",
+        "triangles",
+        "normals"
+      ],
+      "additionalProperties": false,
+      "title": "Mesh"
+    },
+    "Camera": {
+      "type": "object",
+      "properties": {
+        "rotation": {
+          "$ref": "#/$defs/Mat3"
+        },
+        "projection": {
+          "enum": [
+            "parallel",
+            "perspective"
+          ]
+        },
+        "zoom": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "widthA": {
+          "oneOf": [
+            {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "rotation",
+        "projection",
+        "zoom",
+        "widthA"
+      ],
+      "additionalProperties": false,
+      "title": "Camera"
+    },
+    "Diagnostic": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "object": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/Id"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "field": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "message": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "code",
+        "object",
+        "field",
+        "message"
+      ],
+      "additionalProperties": false,
+      "title": "Diagnostic"
+    },
+    "Plane": {
+      "type": "object",
+      "properties": {
+        "unitNormalCartesian": {
+          "$ref": "#/$defs/Vec3"
+        },
+        "offsetA": {
+          "type": "number"
+        },
+        "spacingA": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        }
+      },
+      "required": [
+        "unitNormalCartesian",
+        "offsetA",
+        "spacingA"
+      ],
+      "additionalProperties": false,
+      "title": "Plane"
+    },
+    "Metric": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "value": {
+          "type": "number"
+        },
+        "unit": {
+          "enum": [
+            "A",
+            "A2",
+            "A3",
+            "degree",
+            "one",
+            "e",
+            "fm"
+          ]
+        }
+      },
+      "required": [
+        "name",
+        "value",
+        "unit"
+      ],
+      "additionalProperties": false,
+      "title": "Metric"
+    },
+    "Peak": {
+      "type": "object",
+      "properties": {
+        "fractional": {
+          "$ref": "#/$defs/Vec3"
+        },
+        "value": {
+          "type": "number"
+        },
+        "kind": {
+          "enum": [
+            "maximum",
+            "minimum"
+          ]
+        }
+      },
+      "required": [
+        "fractional",
+        "value",
+        "kind"
+      ],
+      "additionalProperties": false,
+      "title": "Peak"
+    },
+    "Line": {
+      "type": "object",
+      "properties": {
+        "distanceA": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        },
+        "fieldUnit": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "distanceA",
+        "values",
+        "fieldUnit"
+      ],
+      "additionalProperties": false,
+      "title": "Line"
+    },
+    "Slice": {
+      "type": "object",
+      "properties": {
+        "width": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4294967295
+        },
+        "height": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4294967295
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        },
+        "originA": {
+          "$ref": "#/$defs/Vec3"
+        },
+        "uA": {
+          "$ref": "#/$defs/Vec3"
+        },
+        "vA": {
+          "$ref": "#/$defs/Vec3"
+        },
+        "unit": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "width",
+        "height",
+        "values",
+        "originA",
+        "uA",
+        "vA",
+        "unit"
+      ],
+      "additionalProperties": false,
+      "title": "Slice"
+    },
+    "Bundle": {
+      "type": "object",
+      "properties": {
+        "primary": {
+          "$ref": "#/$defs/Resource"
+        },
+        "dependencies": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "logicalPath": {
+                "type": "string"
+              },
+              "resource": {
+                "$ref": "#/$defs/Resource"
+              }
+            },
+            "required": [
+              "logicalPath",
+              "resource"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "losses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Diagnostic"
+          }
+        },
+        "sourceDigest": {
+          "$ref": "#/$defs/Digest"
+        },
+        "profileId": {
+          "type": "string"
+        },
+        "lossReportSha256": {
+          "$ref": "#/$defs/Digest"
+        }
+      },
+      "required": [
+        "primary",
+        "dependencies",
+        "losses",
+        "sourceDigest",
+        "profileId",
+        "lossReportSha256"
+      ],
+      "additionalProperties": false,
+      "title": "Bundle"
+    },
+    "AtomInstance": {
+      "type": "object",
+      "properties": {
+        "image": {
+          "$ref": "#/$defs/Image"
+        },
+        "centerA": {
+          "$ref": "#/$defs/Vec3"
+        },
+        "radiusA": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "colorRGBA": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "minItems": 4,
+          "maxItems": 4
+        }
+      },
+      "required": [
+        "image",
+        "centerA",
+        "radiusA",
+        "colorRGBA"
+      ],
+      "additionalProperties": false,
+      "title": "AtomInstance"
+    },
+    "TransformResult": {
+      "type": "object",
+      "properties": {
+        "structure": {
+          "$ref": "#/$defs/Structure"
+        },
+        "oldToNew": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "old": {
+                "$ref": "#/$defs/Id"
+              },
+              "new": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/Id"
+                }
+              }
+            },
+            "required": [
+              "old",
+              "new"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "structure",
+        "oldToNew"
+      ],
+      "additionalProperties": false,
+      "title": "TransformResult"
+    },
+    "Curve": {
+      "type": "object",
+      "properties": {
+        "x": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        },
+        "y": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        },
+        "xUnit": {
+          "enum": [
+            "degree",
+            "A"
+          ]
+        },
+        "yUnit": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "x",
+        "y",
+        "xUnit",
+        "yUnit"
+      ],
+      "additionalProperties": false,
+      "title": "Curve"
+    },
+    "Capability": {
+      "type": "object",
+      "properties": {
+        "action": {
+          "enum": [
+            "no-action"
+          ]
+        },
+        "referenceVersion": {
+          "const": "3.90.9a-macos-arm64"
+        },
+        "menuId": {
+          "const": 185
+        }
+      },
+      "required": [
+        "action",
+        "referenceVersion",
+        "menuId"
+      ],
+      "additionalProperties": false,
+      "title": "Capability"
+    },
+    "ExternalFiles": {
+      "type": "object",
+      "properties": {
+        "files": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "logicalPath": {
+                "type": "string"
+              },
+              "resource": {
+                "$ref": "#/$defs/Resource"
+              }
+            },
+            "required": [
+              "logicalPath",
+              "resource"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "runAuthorized": {
+          "const": false
+        }
+      },
+      "required": [
+        "files",
+        "runAuthorized"
+      ],
+      "additionalProperties": false,
+      "title": "ExternalFiles"
+    },
+    "PattersonCoefficient": {
+      "type": "object",
+      "properties": {
+        "hkl": {
+          "$ref": "#/$defs/Int3"
+        },
+        "value": {
+          "type": "number"
+        },
+        "unit": {
+          "enum": [
+            "electron2",
+            "fm2"
+          ]
+        }
+      },
+      "required": [
+        "hkl",
+        "value",
+        "unit"
+      ],
+      "additionalProperties": false,
+      "title": "PattersonCoefficient"
+    },
+    "ResolvePlacementsInput": {
+      "type": "object",
+      "properties": {
+        "placements": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Placement"
+          }
+        },
+        "root": {
+          "$ref": "#/$defs/Id"
+        }
+      },
+      "required": [
+        "placements",
+        "root"
+      ],
+      "additionalProperties": false,
+      "title": "ResolvePlacementsInput"
+    },
+    "ResolvePlacementsOutput": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/ResolvedPlacement"
+      },
+      "title": "ResolvePlacementsOutput"
+    },
+    "ExpandImagesInput": {
+      "type": "object",
+      "properties": {
+        "phase": {
+          "$ref": "#/$defs/Id"
+        },
+        "structure": {
+          "$ref": "#/$defs/Structure"
+        },
+        "shifts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Int3"
+          }
+        }
+      },
+      "required": [
+        "phase",
+        "structure",
+        "shifts"
+      ],
+      "additionalProperties": false,
+      "title": "ExpandImagesInput"
+    },
+    "ExpandImagesOutput": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/ImagePoint"
+      },
+      "title": "ExpandImagesOutput"
+    },
+    "ChangeBasisInput": {
+      "type": "object",
+      "properties": {
+        "structure": {
+          "$ref": "#/$defs/Structure"
+        },
+        "basisP": {
+          "$ref": "#/$defs/Mat3"
+        },
+        "originFractional": {
+          "$ref": "#/$defs/Vec3"
+        },
+        "mode": {
+          "enum": [
+            "keep-listed-sites",
+            "enumerated-supercell"
+          ]
+        },
+        "translations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Int3"
+          }
+        }
+      },
+      "required": [
+        "structure",
+        "basisP",
+        "originFractional",
+        "mode",
+        "translations"
+      ],
+      "additionalProperties": false,
+      "title": "ChangeBasisInput"
+    },
+    "ChangeBasisOutput": {
+      "$ref": "#/$defs/TransformResult",
+      "title": "ChangeBasisOutput"
+    },
+    "TransportAdpInput": {
+      "type": "object",
+      "properties": {
+        "cell": {
+          "$ref": "#/$defs/Cell"
+        },
+        "adp": {
+          "$ref": "#/$defs/Adp"
+        }
+      },
+      "required": [
+        "cell",
+        "adp"
+      ],
+      "additionalProperties": false,
+      "title": "TransportAdpInput"
+    },
+    "TransportAdpOutput": {
+      "type": "object",
+      "properties": {
+        "cartesianUA2": {
+          "$ref": "#/$defs/Mat3"
+        },
+        "uEquivalentA2": {
+          "type": "number"
+        },
+        "classification": {
+          "enum": [
+            "positive-definite",
+            "positive-semidefinite",
+            "negative-definite",
+            "negative-semidefinite",
+            "indefinite",
+            "zero"
+          ]
+        },
+        "inertia": {
+          "type": "object",
+          "properties": {
+            "positive": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 3
+            },
+            "zero": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 3
+            },
+            "negative": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 3
+            }
+          },
+          "required": [
+            "positive",
+            "zero",
+            "negative"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "cartesianUA2",
+        "uEquivalentA2",
+        "classification",
+        "inertia"
+      ],
+      "additionalProperties": false,
+      "title": "TransportAdpOutput"
+    },
+    "FindDuplicatesInput": {
+      "type": "object",
+      "properties": {
+        "points": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ImagePoint"
+          }
+        },
+        "thresholdA": {
+          "type": "number",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "points",
+        "thresholdA"
+      ],
+      "additionalProperties": false,
+      "title": "FindDuplicatesInput"
+    },
+    "FindDuplicatesOutput": {
+      "type": "array",
+      "items": {
+        "type": "array",
+        "items": {
+          "$ref": "#/$defs/Id"
+        }
+      },
+      "title": "FindDuplicatesOutput"
+    },
+    "SelectBondPairsInput": {
+      "type": "object",
+      "properties": {
+        "points": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ImagePoint"
+          }
+        },
+        "minimumA": {
+          "type": "number",
+          "minimum": 0
+        },
+        "maximumA": {
+          "type": "number",
+          "minimum": 0
+        },
+        "thresholdMode": {
+          "enum": [
+            "legacy-f32-square",
+            "explicit-f64-square"
+          ]
+        }
+      },
+      "required": [
+        "points",
+        "minimumA",
+        "maximumA",
+        "thresholdMode"
+      ],
+      "additionalProperties": false,
+      "title": "SelectBondPairsInput"
+    },
+    "SelectBondPairsOutput": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "a": {
+            "$ref": "#/$defs/Image"
+          },
+          "b": {
+            "$ref": "#/$defs/Image"
+          },
+          "distanceA": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "a",
+          "b",
+          "distanceA"
+        ],
+        "additionalProperties": false
+      },
+      "title": "SelectBondPairsOutput"
+    },
+    "MeasurePolyhedronInput": {
+      "type": "object",
+      "properties": {
+        "centerA": {
+          "$ref": "#/$defs/Vec3"
+        },
+        "mesh": {
+          "$ref": "#/$defs/Mesh"
+        }
+      },
+      "required": [
+        "centerA",
+        "mesh"
+      ],
+      "additionalProperties": false,
+      "title": "MeasurePolyhedronInput"
+    },
+    "MeasurePolyhedronOutput": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Metric"
+      },
+      "title": "MeasurePolyhedronOutput"
+    },
+    "TransformVectorInput": {
+      "type": "object",
+      "properties": {
+        "vector": {
+          "$ref": "#/$defs/Vec3"
+        },
+        "cartesianOrthogonal": {
+          "$ref": "#/$defs/Mat3"
+        },
+        "kind": {
+          "enum": [
+            "polar",
+            "axial"
+          ]
+        },
+        "timeReversal": {
+          "enum": [
+            -1,
+            1
+          ]
+        }
+      },
+      "required": [
+        "vector",
+        "cartesianOrthogonal",
+        "kind",
+        "timeReversal"
+      ],
+      "additionalProperties": false,
+      "title": "TransformVectorInput"
+    },
+    "TransformVectorOutput": {
+      "$ref": "#/$defs/Vec3",
+      "title": "TransformVectorOutput"
+    },
+    "MillerPlaneInput": {
+      "type": "object",
+      "properties": {
+        "cell": {
+          "$ref": "#/$defs/Cell"
+        },
+        "hkl": {
+          "$ref": "#/$defs/Int3"
+        },
+        "order": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "cell",
+        "hkl",
+        "order"
+      ],
+      "additionalProperties": false,
+      "title": "MillerPlaneInput"
+    },
+    "MillerPlaneOutput": {
+      "$ref": "#/$defs/Plane",
+      "title": "MillerPlaneOutput"
+    },
+    "ClipExplicitImagesInput": {
+      "type": "object",
+      "properties": {
+        "points": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ImagePoint"
+          }
+        },
+        "cell": {
+          "$ref": "#/$defs/Cell"
+        },
+        "minimumFractional": {
+          "$ref": "#/$defs/Vec3"
+        },
+        "maximumFractional": {
+          "$ref": "#/$defs/Vec3"
+        }
+      },
+      "required": [
+        "points",
+        "cell",
+        "minimumFractional",
+        "maximumFractional"
+      ],
+      "additionalProperties": false,
+      "title": "ClipExplicitImagesInput"
+    },
+    "ClipExplicitImagesOutput": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/ImagePoint"
+      },
+      "title": "ClipExplicitImagesOutput"
+    },
+    "ComposeCameraInput": {
+      "type": "object",
+      "properties": {
+        "camera": {
+          "$ref": "#/$defs/Camera"
+        },
+        "xDeg": {
+          "type": "number"
+        },
+        "yDeg": {
+          "type": "number"
+        },
+        "zDeg": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "camera",
+        "xDeg",
+        "yDeg",
+        "zDeg"
+      ],
+      "additionalProperties": false,
+      "title": "ComposeCameraInput"
+    },
+    "ComposeCameraOutput": {
+      "$ref": "#/$defs/Camera",
+      "title": "ComposeCameraOutput"
+    },
+    "MeasureImagesInput": {
+      "type": "object",
+      "properties": {
+        "points": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/MeasurementPoint"
+          }
+        },
+        "kind": {
+          "enum": [
+            "distance",
+            "angle",
+            "unsigned-dihedral"
+          ]
+        },
+        "covariance": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/CartesianPointCovariance"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "points",
+        "kind",
+        "covariance"
+      ],
+      "additionalProperties": false,
+      "title": "MeasureImagesInput"
+    },
+    "MeasureImagesOutput": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "number"
+        },
+        "unit": {
+          "enum": [
+            "A",
+            "degree"
+          ]
+        },
+        "variance": {
+          "oneOf": [
+            {
+              "type": "number",
+              "minimum": 0
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "sigma": {
+          "oneOf": [
+            {
+              "type": "number",
+              "minimum": 0
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "value",
+        "unit",
+        "variance",
+        "sigma"
+      ],
+      "additionalProperties": false,
+      "title": "MeasureImagesOutput"
+    },
+    "ProposeTidyResultInput": {
+      "type": "object",
+      "properties": {
+        "source": {
+          "$ref": "#/$defs/Structure"
+        },
+        "candidate": {
+          "$ref": "#/$defs/Structure"
+        },
+        "inputDigest": {
+          "$ref": "#/$defs/Digest"
+        },
+        "toolOutput": {
+          "$ref": "#/$defs/Resource"
+        }
+      },
+      "required": [
+        "source",
+        "candidate",
+        "inputDigest",
+        "toolOutput"
+      ],
+      "additionalProperties": false,
+      "title": "ProposeTidyResultInput"
+    },
+    "ProposeTidyResultOutput": {
+      "type": "object",
+      "properties": {
+        "candidate": {
+          "$ref": "#/$defs/Structure"
+        },
+        "inputDigest": {
+          "$ref": "#/$defs/Digest"
+        }
+      },
+      "required": [
+        "candidate",
+        "inputDigest"
+      ],
+      "additionalProperties": false,
+      "title": "ProposeTidyResultOutput"
+    },
+    "PrepareMadelInputInput": {
+      "type": "object",
+      "properties": {
+        "structure": {
+          "$ref": "#/$defs/Structure"
+        },
+        "charges": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "site": {
+                "$ref": "#/$defs/Id"
+              },
+              "chargeElectron": {
+                "type": "number"
+              }
+            },
+            "required": [
+              "site",
+              "chargeElectron"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "radiusA": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        }
+      },
+      "required": [
+        "structure",
+        "charges",
+        "radiusA"
+      ],
+      "additionalProperties": false,
+      "title": "PrepareMadelInputInput"
+    },
+    "PrepareMadelInputOutput": {
+      "$ref": "#/$defs/ExternalFiles",
+      "title": "PrepareMadelInputOutput"
+    },
+    "ConvolvePowderLinesInput": {
+      "type": "object",
+      "properties": {
+        "positionsDeg": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        },
+        "intensities": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        },
+        "sampleDeg": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        },
+        "fwhmDeg": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "mixing": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "compatibilityFirstPointZero": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "positionsDeg",
+        "intensities",
+        "sampleDeg",
+        "fwhmDeg",
+        "mixing",
+        "compatibilityFirstPointZero"
+      ],
+      "additionalProperties": false,
+      "title": "ConvolvePowderLinesInput"
+    },
+    "ConvolvePowderLinesOutput": {
+      "$ref": "#/$defs/Curve",
+      "title": "ConvolvePowderLinesOutput"
+    },
+    "SumStructureFactorsInput": {
+      "type": "object",
+      "properties": {
+        "structure": {
+          "$ref": "#/$defs/Structure"
+        },
+        "hkl": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Int3"
+          }
+        },
+        "siteAmplitudes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "site": {
+                "$ref": "#/$defs/Id"
+              },
+              "values": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                }
+              }
+            },
+            "required": [
+              "site",
+              "values"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "unit": {
+          "enum": [
+            "electron",
+            "fm"
+          ]
+        }
+      },
+      "required": [
+        "structure",
+        "hkl",
+        "siteAmplitudes",
+        "unit"
+      ],
+      "additionalProperties": false,
+      "title": "SumStructureFactorsInput"
+    },
+    "SumStructureFactorsOutput": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Reflection"
+      },
+      "title": "SumStructureFactorsOutput"
+    },
+    "SynthesizeFourierInput": {
+      "type": "object",
+      "properties": {
+        "cell": {
+          "$ref": "#/$defs/Cell"
+        },
+        "reflections": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Reflection"
+          }
+        },
+        "coreShape": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "mode": {
+          "enum": [
+            "Fc",
+            "Fo",
+            "difference"
+          ]
+        },
+        "includeConjugates": {
+          "type": "boolean"
+        },
+        "dcReal": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "cell",
+        "reflections",
+        "coreShape",
+        "mode",
+        "includeConjugates",
+        "dcReal"
+      ],
+      "additionalProperties": false,
+      "title": "SynthesizeFourierInput"
+    },
+    "SynthesizeFourierOutput": {
+      "$ref": "#/$defs/Field",
+      "title": "SynthesizeFourierOutput"
+    },
+    "ElectronDcInput": {
+      "type": "object",
+      "properties": {
+        "cell": {
+          "$ref": "#/$defs/Cell"
+        },
+        "electronCount": {
+          "type": "number"
+        },
+        "coreShape": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "minItems": 3,
+          "maxItems": 3
+        }
+      },
+      "required": [
+        "cell",
+        "electronCount",
+        "coreShape"
+      ],
+      "additionalProperties": false,
+      "title": "ElectronDcInput"
+    },
+    "ElectronDcOutput": {
+      "$ref": "#/$defs/Field",
+      "title": "ElectronDcOutput"
+    },
+    "NuclearDcInput": {
+      "type": "object",
+      "properties": {
+        "cell": {
+          "$ref": "#/$defs/Cell"
+        },
+        "signedScatteringSumFm": {
+          "type": "number"
+        },
+        "coreShape": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "minItems": 3,
+          "maxItems": 3
+        }
+      },
+      "required": [
+        "cell",
+        "signedScatteringSumFm",
+        "coreShape"
+      ],
+      "additionalProperties": false,
+      "title": "NuclearDcInput"
+    },
+    "NuclearDcOutput": {
+      "$ref": "#/$defs/Field",
+      "title": "NuclearDcOutput"
+    },
+    "ModelPattersonCoefficientsInput": {
+      "type": "object",
+      "properties": {
+        "reflections": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Reflection"
+          }
+        }
+      },
+      "required": [
+        "reflections"
+      ],
+      "additionalProperties": false,
+      "title": "ModelPattersonCoefficientsInput"
+    },
+    "ModelPattersonCoefficientsOutput": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/PattersonCoefficient"
+      },
+      "title": "ModelPattersonCoefficientsOutput"
+    },
+    "VolumePattersonInput": {
+      "type": "object",
+      "properties": {
+        "field": {
+          "$ref": "#/$defs/Field"
+        }
+      },
+      "required": [
+        "field"
+      ],
+      "additionalProperties": false,
+      "title": "VolumePattersonInput"
+    },
+    "VolumePattersonOutput": {
+      "$ref": "#/$defs/Field",
+      "title": "VolumePattersonOutput"
+    },
+    "NormalizeGridLayoutInput": {
+      "type": "object",
+      "properties": {
+        "field": {
+          "$ref": "#/$defs/Field"
+        },
+        "targetAxisOrder": {
+          "enum": [
+            "x-fastest",
+            "z-fastest"
+          ]
+        },
+        "targetClosure": {
+          "type": "array",
+          "items": {
+            "type": "boolean"
+          },
+          "minItems": 3,
+          "maxItems": 3
+        }
+      },
+      "required": [
+        "field",
+        "targetAxisOrder",
+        "targetClosure"
+      ],
+      "additionalProperties": false,
+      "title": "NormalizeGridLayoutInput"
+    },
+    "NormalizeGridLayoutOutput": {
+      "$ref": "#/$defs/Field",
+      "title": "NormalizeGridLayoutOutput"
+    },
+    "IntersectHalfspacesInput": {
+      "type": "object",
+      "properties": {
+        "normalsCartesian": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Vec3"
+          },
+          "minItems": 4
+        },
+        "offsetsA": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 4
+        }
+      },
+      "required": [
+        "normalsCartesian",
+        "offsetsA"
+      ],
+      "additionalProperties": false,
+      "title": "IntersectHalfspacesInput"
+    },
+    "IntersectHalfspacesOutput": {
+      "$ref": "#/$defs/Mesh",
+      "title": "IntersectHalfspacesOutput"
+    },
+    "SelectIsoEdgesInput": {
+      "type": "object",
+      "properties": {
+        "field": {
+          "$ref": "#/$defs/Field"
+        },
+        "level": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "field",
+        "level"
+      ],
+      "additionalProperties": false,
+      "title": "SelectIsoEdgesInput"
+    },
+    "SelectIsoEdgesOutput": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Vec3"
+      },
+      "title": "SelectIsoEdgesOutput"
+    },
+    "BuildAtomInstancesInput": {
+      "type": "object",
+      "properties": {
+        "points": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ImagePoint"
+          }
+        },
+        "radiusA": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "colorRGBA": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "minItems": 4,
+          "maxItems": 4
+        }
+      },
+      "required": [
+        "points",
+        "radiusA",
+        "colorRGBA"
+      ],
+      "additionalProperties": false,
+      "title": "BuildAtomInstancesInput"
+    },
+    "BuildAtomInstancesOutput": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/AtomInstance"
+      },
+      "title": "BuildAtomInstancesOutput"
+    },
+    "SliceTrilinearInput": {
+      "type": "object",
+      "properties": {
+        "field": {
+          "$ref": "#/$defs/Field"
+        },
+        "originA": {
+          "$ref": "#/$defs/Vec3"
+        },
+        "uA": {
+          "$ref": "#/$defs/Vec3"
+        },
+        "vA": {
+          "$ref": "#/$defs/Vec3"
+        },
+        "width": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "height": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "required": [
+        "field",
+        "originA",
+        "uA",
+        "vA",
+        "width",
+        "height"
+      ],
+      "additionalProperties": false,
+      "title": "SliceTrilinearInput"
+    },
+    "SliceTrilinearOutput": {
+      "$ref": "#/$defs/Slice",
+      "title": "SliceTrilinearOutput"
+    },
+    "SampleLineInput": {
+      "type": "object",
+      "properties": {
+        "field": {
+          "$ref": "#/$defs/Field"
+        },
+        "startFractional": {
+          "$ref": "#/$defs/Vec3"
+        },
+        "endFractional": {
+          "$ref": "#/$defs/Vec3"
+        },
+        "count": {
+          "type": "integer",
+          "minimum": 2
+        }
+      },
+      "required": [
+        "field",
+        "startFractional",
+        "endFractional",
+        "count"
+      ],
+      "additionalProperties": false,
+      "title": "SampleLineInput"
+    },
+    "SampleLineOutput": {
+      "$ref": "#/$defs/Line",
+      "title": "SampleLineOutput"
+    },
+    "FindLocalExtremaInput": {
+      "type": "object",
+      "properties": {
+        "field": {
+          "$ref": "#/$defs/Field"
+        },
+        "kind": {
+          "enum": [
+            "maximum",
+            "minimum"
+          ]
+        },
+        "limit": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "required": [
+        "field",
+        "kind",
+        "limit"
+      ],
+      "additionalProperties": false,
+      "title": "FindLocalExtremaInput"
+    },
+    "FindLocalExtremaOutput": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Peak"
+      },
+      "title": "FindLocalExtremaOutput"
+    },
+    "QueryPolyIntegralCapabilityInput": {
+      "type": "object",
+      "properties": {
+        "referenceVersion": {
+          "const": "3.90.9a-macos-arm64"
+        }
+      },
+      "required": [
+        "referenceVersion"
+      ],
+      "additionalProperties": false,
+      "title": "QueryPolyIntegralCapabilityInput"
+    },
+    "QueryPolyIntegralCapabilityOutput": {
+      "$ref": "#/$defs/Capability",
+      "title": "QueryPolyIntegralCapabilityOutput"
+    },
+    "ConvertDensityInput": {
+      "type": "object",
+      "properties": {
+        "field": {
+          "$ref": "#/$defs/Field"
+        },
+        "mode": {
+          "enum": [
+            "lnAbs",
+            "legacyLaplacian26",
+            "legacyG",
+            "legacyV",
+            "legacyHe"
+          ]
+        },
+        "lengthUnit": {
+          "enum": [
+            "angstrom",
+            "bohr"
+          ]
+        }
+      },
+      "required": [
+        "field",
+        "mode",
+        "lengthUnit"
+      ],
+      "additionalProperties": false,
+      "title": "ConvertDensityInput"
+    },
+    "ConvertDensityOutput": {
+      "$ref": "#/$defs/Field",
+      "title": "ConvertDensityOutput"
+    },
+    "PlanEncodeInput": {
+      "type": "object",
+      "properties": {
+        "profileId": {
+          "type": "string"
+        },
+        "source": {
+          "$ref": "#/$defs/EncodeSource"
+        },
+        "purpose": {
+          "enum": [
+            "save",
+            "saveAs",
+            "export"
+          ]
+        }
+      },
+      "required": [
+        "profileId",
+        "source",
+        "purpose"
+      ],
+      "additionalProperties": false,
+      "title": "PlanEncodeInput"
+    },
+    "PlanEncodeOutput": {
+      "$ref": "#/$defs/EncodePlan",
+      "title": "PlanEncodeOutput"
+    },
+    "Context": {
+      "type": "object",
+      "properties": {
+        "document": {
+          "$ref": "#/$defs/Id"
+        },
+        "epoch": {
+          "$ref": "#/$defs/Id"
+        },
+        "baseRevision": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)$"
+        },
+        "maxResidentBytes": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "maxOutputBytes": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "workUnits": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 4294967295
+        }
+      },
+      "required": [
+        "document",
+        "epoch",
+        "baseRevision",
+        "maxResidentBytes",
+        "maxOutputBytes",
+        "workUnits"
+      ],
+      "additionalProperties": false,
+      "title": "Context"
+    },
+    "Request": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.scientific.bounded/3"
+            },
+            "operation": {
+              "const": "ResolvePlacements"
+            },
+            "context": {
+              "$ref": "#/$defs/Context"
+            },
+            "input": {
+              "$ref": "#/$defs/ResolvePlacementsInput"
+            }
+          },
+          "required": [
+            "protocol",
+            "operation",
+            "context",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.scientific.bounded/3"
+            },
+            "operation": {
+              "const": "ExpandImages"
+            },
+            "context": {
+              "$ref": "#/$defs/Context"
+            },
+            "input": {
+              "$ref": "#/$defs/ExpandImagesInput"
+            }
+          },
+          "required": [
+            "protocol",
+            "operation",
+            "context",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.scientific.bounded/3"
+            },
+            "operation": {
+              "const": "ChangeBasis"
+            },
+            "context": {
+              "$ref": "#/$defs/Context"
+            },
+            "input": {
+              "$ref": "#/$defs/ChangeBasisInput"
+            }
+          },
+          "required": [
+            "protocol",
+            "operation",
+            "context",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.scientific.bounded/3"
+            },
+            "operation": {
+              "const": "TransportAdp"
+            },
+            "context": {
+              "$ref": "#/$defs/Context"
+            },
+            "input": {
+              "$ref": "#/$defs/TransportAdpInput"
+            }
+          },
+          "required": [
+            "protocol",
+            "operation",
+            "context",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.scientific.bounded/3"
+            },
+            "operation": {
+              "const": "FindDuplicates"
+            },
+            "context": {
+              "$ref": "#/$defs/Context"
+            },
+            "input": {
+              "$ref": "#/$defs/FindDuplicatesInput"
+            }
+          },
+          "required": [
+            "protocol",
+            "operation",
+            "context",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.scientific.bounded/3"
+            },
+            "operation": {
+              "const": "SelectBondPairs"
+            },
+            "context": {
+              "$ref": "#/$defs/Context"
+            },
+            "input": {
+              "$ref": "#/$defs/SelectBondPairsInput"
+            }
+          },
+          "required": [
+            "protocol",
+            "operation",
+            "context",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.scientific.bounded/3"
+            },
+            "operation": {
+              "const": "MeasurePolyhedron"
+            },
+            "context": {
+              "$ref": "#/$defs/Context"
+            },
+            "input": {
+              "$ref": "#/$defs/MeasurePolyhedronInput"
+            }
+          },
+          "required": [
+            "protocol",
+            "operation",
+            "context",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.scientific.bounded/3"
+            },
+            "operation": {
+              "const": "TransformVector"
+            },
+            "context": {
+              "$ref": "#/$defs/Context"
+            },
+            "input": {
+              "$ref": "#/$defs/TransformVectorInput"
+            }
+          },
+          "required": [
+            "protocol",
+            "operation",
+            "context",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.scientific.bounded/3"
+            },
+            "operation": {
+              "const": "MillerPlane"
+            },
+            "context": {
+              "$ref": "#/$defs/Context"
+            },
+            "input": {
+              "$ref": "#/$defs/MillerPlaneInput"
+            }
+          },
+          "required": [
+            "protocol",
+            "operation",
+            "context",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.scientific.bounded/3"
+            },
+            "operation": {
+              "const": "ClipExplicitImages"
+            },
+            "context": {
+              "$ref": "#/$defs/Context"
+            },
+            "input": {
+              "$ref": "#/$defs/ClipExplicitImagesInput"
+            }
+          },
+          "required": [
+            "protocol",
+            "operation",
+            "context",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.scientific.bounded/3"
+            },
+            "operation": {
+              "const": "ComposeCamera"
+            },
+            "context": {
+              "$ref": "#/$defs/Context"
+            },
+            "input": {
+              "$ref": "#/$defs/ComposeCameraInput"
+            }
+          },
+          "required": [
+            "protocol",
+            "operation",
+            "context",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.scientific.bounded/3"
+            },
+            "operation": {
+              "const": "MeasureImages"
+            },
+            "context": {
+              "$ref": "#/$defs/Context"
+            },
+            "input": {
+              "$ref": "#/$defs/MeasureImagesInput"
+            }
+          },
+          "required": [
+            "protocol",
+            "operation",
+            "context",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.scientific.bounded/3"
+            },
+            "operation": {
+              "const": "ProposeTidyResult"
+            },
+            "context": {
+              "$ref": "#/$defs/Context"
+            },
+            "input": {
+              "$ref": "#/$defs/ProposeTidyResultInput"
+            }
+          },
+          "required": [
+            "protocol",
+            "operation",
+            "context",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.scientific.bounded/3"
+            },
+            "operation": {
+              "const": "PrepareMadelInput"
+            },
+            "context": {
+              "$ref": "#/$defs/Context"
+            },
+            "input": {
+              "$ref": "#/$defs/PrepareMadelInputInput"
+            }
+          },
+          "required": [
+            "protocol",
+            "operation",
+            "context",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.scientific.bounded/3"
+            },
+            "operation": {
+              "const": "ConvolvePowderLines"
+            },
+            "context": {
+              "$ref": "#/$defs/Context"
+            },
+            "input": {
+              "$ref": "#/$defs/ConvolvePowderLinesInput"
+            }
+          },
+          "required": [
+            "protocol",
+            "operation",
+            "context",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.scientific.bounded/3"
+            },
+            "operation": {
+              "const": "SumStructureFactors"
+            },
+            "context": {
+              "$ref": "#/$defs/Context"
+            },
+            "input": {
+              "$ref": "#/$defs/SumStructureFactorsInput"
+            }
+          },
+          "required": [
+            "protocol",
+            "operation",
+            "context",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.scientific.bounded/3"
+            },
+            "operation": {
+              "const": "SynthesizeFourier"
+            },
+            "context": {
+              "$ref": "#/$defs/Context"
+            },
+            "input": {
+              "$ref": "#/$defs/SynthesizeFourierInput"
+            }
+          },
+          "required": [
+            "protocol",
+            "operation",
+            "context",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.scientific.bounded/3"
+            },
+            "operation": {
+              "const": "ElectronDc"
+            },
+            "context": {
+              "$ref": "#/$defs/Context"
+            },
+            "input": {
+              "$ref": "#/$defs/ElectronDcInput"
+            }
+          },
+          "required": [
+            "protocol",
+            "operation",
+            "context",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.scientific.bounded/3"
+            },
+            "operation": {
+              "const": "NuclearDc"
+            },
+            "context": {
+              "$ref": "#/$defs/Context"
+            },
+            "input": {
+              "$ref": "#/$defs/NuclearDcInput"
+            }
+          },
+          "required": [
+            "protocol",
+            "operation",
+            "context",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.scientific.bounded/3"
+            },
+            "operation": {
+              "const": "ModelPattersonCoefficients"
+            },
+            "context": {
+              "$ref": "#/$defs/Context"
+            },
+            "input": {
+              "$ref": "#/$defs/ModelPattersonCoefficientsInput"
+            }
+          },
+          "required": [
+            "protocol",
+            "operation",
+            "context",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.scientific.bounded/3"
+            },
+            "operation": {
+              "const": "VolumePatterson"
+            },
+            "context": {
+              "$ref": "#/$defs/Context"
+            },
+            "input": {
+              "$ref": "#/$defs/VolumePattersonInput"
+            }
+          },
+          "required": [
+            "protocol",
+            "operation",
+            "context",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.scientific.bounded/3"
+            },
+            "operation": {
+              "const": "NormalizeGridLayout"
+            },
+            "context": {
+              "$ref": "#/$defs/Context"
+            },
+            "input": {
+              "$ref": "#/$defs/NormalizeGridLayoutInput"
+            }
+          },
+          "required": [
+            "protocol",
+            "operation",
+            "context",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.scientific.bounded/3"
+            },
+            "operation": {
+              "const": "IntersectHalfspaces"
+            },
+            "context": {
+              "$ref": "#/$defs/Context"
+            },
+            "input": {
+              "$ref": "#/$defs/IntersectHalfspacesInput"
+            }
+          },
+          "required": [
+            "protocol",
+            "operation",
+            "context",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.scientific.bounded/3"
+            },
+            "operation": {
+              "const": "SelectIsoEdges"
+            },
+            "context": {
+              "$ref": "#/$defs/Context"
+            },
+            "input": {
+              "$ref": "#/$defs/SelectIsoEdgesInput"
+            }
+          },
+          "required": [
+            "protocol",
+            "operation",
+            "context",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.scientific.bounded/3"
+            },
+            "operation": {
+              "const": "BuildAtomInstances"
+            },
+            "context": {
+              "$ref": "#/$defs/Context"
+            },
+            "input": {
+              "$ref": "#/$defs/BuildAtomInstancesInput"
+            }
+          },
+          "required": [
+            "protocol",
+            "operation",
+            "context",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.scientific.bounded/3"
+            },
+            "operation": {
+              "const": "SliceTrilinear"
+            },
+            "context": {
+              "$ref": "#/$defs/Context"
+            },
+            "input": {
+              "$ref": "#/$defs/SliceTrilinearInput"
+            }
+          },
+          "required": [
+            "protocol",
+            "operation",
+            "context",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.scientific.bounded/3"
+            },
+            "operation": {
+              "const": "SampleLine"
+            },
+            "context": {
+              "$ref": "#/$defs/Context"
+            },
+            "input": {
+              "$ref": "#/$defs/SampleLineInput"
+            }
+          },
+          "required": [
+            "protocol",
+            "operation",
+            "context",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.scientific.bounded/3"
+            },
+            "operation": {
+              "const": "FindLocalExtrema"
+            },
+            "context": {
+              "$ref": "#/$defs/Context"
+            },
+            "input": {
+              "$ref": "#/$defs/FindLocalExtremaInput"
+            }
+          },
+          "required": [
+            "protocol",
+            "operation",
+            "context",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.scientific.bounded/3"
+            },
+            "operation": {
+              "const": "QueryPolyIntegralCapability"
+            },
+            "context": {
+              "$ref": "#/$defs/Context"
+            },
+            "input": {
+              "$ref": "#/$defs/QueryPolyIntegralCapabilityInput"
+            }
+          },
+          "required": [
+            "protocol",
+            "operation",
+            "context",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.scientific.bounded/3"
+            },
+            "operation": {
+              "const": "ConvertDensity"
+            },
+            "context": {
+              "$ref": "#/$defs/Context"
+            },
+            "input": {
+              "$ref": "#/$defs/ConvertDensityInput"
+            }
+          },
+          "required": [
+            "protocol",
+            "operation",
+            "context",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.scientific.bounded/3"
+            },
+            "operation": {
+              "const": "PlanEncode"
+            },
+            "context": {
+              "$ref": "#/$defs/Context"
+            },
+            "input": {
+              "$ref": "#/$defs/PlanEncodeInput"
+            }
+          },
+          "required": [
+            "protocol",
+            "operation",
+            "context",
+            "input"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "const": "vestacraft.scientific.bounded/3"
+            },
+            "operation": {
+              "const": "EncodeApproved"
+            },
+            "context": {
+              "$ref": "#/$defs/Context"
+            },
+            "input": {
+              "$ref": "#/$defs/EncodeApprovedInput"
+            }
+          },
+          "required": [
+            "protocol",
+            "operation",
+            "context",
+            "input"
+          ],
+          "additionalProperties": false
+        }
+      ],
+      "title": "Request"
+    },
+    "ResolvedPlacement": {
+      "type": "object",
+      "properties": {
+        "phase": {
+          "$ref": "#/$defs/Id"
+        },
+        "rotation": {
+          "$ref": "#/$defs/Mat3"
+        },
+        "translationA": {
+          "$ref": "#/$defs/Vec3"
+        }
+      },
+      "required": [
+        "phase",
+        "rotation",
+        "translationA"
+      ],
+      "additionalProperties": false,
+      "title": "ResolvedPlacement"
+    },
+    "MeasurementPoint": {
+      "type": "object",
+      "properties": {
+        "pointId": {
+          "$ref": "#/$defs/Id"
+        },
+        "cartesianA": {
+          "$ref": "#/$defs/Vec3"
+        }
+      },
+      "required": [
+        "pointId",
+        "cartesianA"
+      ],
+      "additionalProperties": false,
+      "title": "MeasurementPoint"
+    },
+    "CartesianPointParameter": {
+      "type": "object",
+      "properties": {
+        "pointId": {
+          "$ref": "#/$defs/Id"
+        },
+        "axis": {
+          "enum": [
+            "x",
+            "y",
+            "z"
+          ]
+        },
+        "unit": {
+          "const": "A"
+        }
+      },
+      "required": [
+        "pointId",
+        "axis",
+        "unit"
+      ],
+      "additionalProperties": false,
+      "title": "CartesianPointParameter"
+    },
+    "CartesianPointCovariance": {
+      "type": "object",
+      "properties": {
+        "parameters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/CartesianPointParameter"
+          }
+        },
+        "matrixA2": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            }
+          }
+        },
+        "source": {
+          "enum": [
+            "supplied-full",
+            "supplied-diagonal"
+          ]
+        },
+        "sourceDigest": {
+          "$ref": "#/$defs/Digest"
+        }
+      },
+      "required": [
+        "parameters",
+        "matrixA2",
+        "source",
+        "sourceDigest"
+      ],
+      "additionalProperties": false,
+      "title": "CartesianPointCovariance"
+    },
+    "RawBlockForEncode": {
+      "type": "object",
+      "properties": {
+        "source": {
+          "$ref": "#/$defs/Resource"
+        },
+        "byteStart": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "byteLength": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "formatRef": {
+          "type": "string"
+        },
+        "dependentFields": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "invalidated": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "source",
+        "byteStart",
+        "byteLength",
+        "formatRef",
+        "dependentFields",
+        "invalidated"
+      ],
+      "additionalProperties": false,
+      "title": "RawBlockForEncode"
+    },
+    "EncodeIdentity": {
+      "type": "object",
+      "properties": {
+        "documentId": {
+          "$ref": "#/$defs/Id"
+        },
+        "epoch": {
+          "$ref": "#/$defs/Id"
+        },
+        "revision": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)$"
+        },
+        "stateDigest": {
+          "$ref": "#/$defs/Digest"
+        }
+      },
+      "required": [
+        "documentId",
+        "epoch",
+        "revision",
+        "stateDigest"
+      ],
+      "additionalProperties": false,
+      "title": "EncodeIdentity"
+    },
+    "EncodeInventory": {
+      "type": "object",
+      "properties": {
+        "structures": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "phaseId": {
+                "$ref": "#/$defs/Id"
+              },
+              "structure": {
+                "$ref": "#/$defs/Structure"
+              }
+            },
+            "required": [
+              "phaseId",
+              "structure"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "fields": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/FieldHandle"
+          }
+        },
+        "placements": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Placement"
+          }
+        },
+        "scene": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/Resource"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "comment": {
+          "type": "string"
+        },
+        "opaqueBlocks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/RawBlockForEncode"
+          }
+        }
+      },
+      "required": [
+        "structures",
+        "fields",
+        "placements",
+        "scene",
+        "comment",
+        "opaqueBlocks"
+      ],
+      "additionalProperties": false,
+      "title": "EncodeInventory"
+    },
+    "EncodeSource": {
+      "type": "object",
+      "properties": {
+        "identity": {
+          "$ref": "#/$defs/EncodeIdentity"
+        },
+        "inventory": {
+          "$ref": "#/$defs/EncodeInventory"
+        }
+      },
+      "required": [
+        "identity",
+        "inventory"
+      ],
+      "additionalProperties": false,
+      "title": "EncodeSource"
+    },
+    "LossField": {
+      "type": "object",
+      "properties": {
+        "objectId": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/Id"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "fieldPath": {
+          "type": "string"
+        },
+        "reason": {
+          "enum": [
+            "unsupported-field",
+            "unsupported-block",
+            "invalidated-opaque",
+            "unit-convention",
+            "missing-resource"
+          ]
+        },
+        "objectKind": {
+          "enum": [
+            "project",
+            "phase",
+            "site",
+            "scene",
+            "field"
+          ]
+        }
+      },
+      "required": [
+        "objectId",
+        "fieldPath",
+        "reason",
+        "objectKind"
+      ],
+      "additionalProperties": false,
+      "title": "LossField"
+    },
+    "LossReport1": {
+      "type": "object",
+      "properties": {
+        "sourceDigest": {
+          "$ref": "#/$defs/Digest"
+        },
+        "profileId": {
+          "type": "string"
+        },
+        "droppedFields": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/LossField"
+          }
+        },
+        "unsupportedBlocks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/RawBlockForEncode"
+          }
+        },
+        "requiredResources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Digest"
+          }
+        },
+        "purpose": {
+          "enum": [
+            "save",
+            "saveAs",
+            "export"
+          ]
+        }
+      },
+      "required": [
+        "sourceDigest",
+        "profileId",
+        "droppedFields",
+        "unsupportedBlocks",
+        "requiredResources",
+        "purpose"
+      ],
+      "additionalProperties": false,
+      "title": "LossReport1"
+    },
+    "LossConsent1": {
+      "type": "object",
+      "properties": {
+        "sourceDigest": {
+          "$ref": "#/$defs/Digest"
+        },
+        "profileId": {
+          "type": "string"
+        },
+        "lossReportSha256": {
+          "$ref": "#/$defs/Digest"
+        },
+        "explicit": {
+          "const": true
+        }
+      },
+      "required": [
+        "sourceDigest",
+        "profileId",
+        "lossReportSha256",
+        "explicit"
+      ],
+      "additionalProperties": false,
+      "title": "LossConsent1"
+    },
+    "EncodePlan": {
+      "type": "object",
+      "properties": {
+        "sourceDigest": {
+          "$ref": "#/$defs/Digest"
+        },
+        "profileId": {
+          "type": "string"
+        },
+        "lossReport": {
+          "$ref": "#/$defs/LossReport1"
+        },
+        "lossReportSha256": {
+          "$ref": "#/$defs/Digest"
+        },
+        "requiresConsent": {
+          "type": "boolean"
+        },
+        "purpose": {
+          "enum": [
+            "save",
+            "saveAs",
+            "export"
+          ]
+        }
+      },
+      "required": [
+        "sourceDigest",
+        "profileId",
+        "lossReport",
+        "lossReportSha256",
+        "requiresConsent",
+        "purpose"
+      ],
+      "additionalProperties": false,
+      "title": "EncodePlan"
+    },
+    "EncodeApprovedInput": {
+      "type": "object",
+      "properties": {
+        "source": {
+          "$ref": "#/$defs/EncodeSource"
+        },
+        "plan": {
+          "$ref": "#/$defs/EncodePlan"
+        },
+        "lossConsent": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/LossConsent1"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "source",
+        "plan",
+        "lossConsent"
+      ],
+      "additionalProperties": false,
+      "title": "EncodeApprovedInput"
+    },
+    "EncodeApprovedOutput": {
+      "$ref": "#/$defs/Bundle",
+      "title": "EncodeApprovedOutput"
+    },
+    "FieldHandle": {
+      "type": "object",
+      "properties": {
+        "fieldId": {
+          "$ref": "#/$defs/Id"
+        },
+        "phaseId": {
+          "$ref": "#/$defs/Id"
+        },
+        "field": {
+          "$ref": "#/$defs/Field"
+        }
+      },
+      "required": [
+        "fieldId",
+        "phaseId",
+        "field"
+      ],
+      "additionalProperties": false,
+      "title": "FieldHandle"
+    },
+    "SGSourceSpan": {
+      "type": "object",
+      "properties": {
+        "resource": {
+          "$ref": "#/$defs/Digest"
+        },
+        "byteOffset": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "byteLength": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "fieldPath": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "resource",
+        "byteOffset",
+        "byteLength",
+        "fieldPath"
+      ],
+      "additionalProperties": false,
+      "title": "SGSourceSpan"
+    },
+    "SGTableIdentity": {
+      "type": "object",
+      "properties": {
+        "resource": {
+          "$ref": "#/$defs/Digest"
+        },
+        "sourceId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sourceVersion": {
+          "type": "string",
+          "minLength": 1
+        },
+        "edition": {
+          "type": "string",
+          "minLength": 1
+        },
+        "licenseResource": {
+          "$ref": "#/$defs/Digest"
+        },
+        "tableKey": {
+          "type": "string",
+          "minLength": 1
+        },
+        "tableContentDigest": {
+          "$ref": "#/$defs/Digest"
+        }
+      },
+      "required": [
+        "resource",
+        "sourceId",
+        "sourceVersion",
+        "edition",
+        "licenseResource",
+        "tableKey",
+        "tableContentDigest"
+      ],
+      "additionalProperties": false,
+      "title": "SGTableIdentity"
+    },
+    "SGRational": {
+      "type": "object",
+      "properties": {
+        "numerator": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "denominator": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        }
+      },
+      "required": [
+        "numerator",
+        "denominator"
+      ],
+      "additionalProperties": false,
+      "title": "SGRational"
+    },
+    "SGSymmetryOperator3": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/Id"
+        },
+        "fractionalMatrix": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/SGRational"
+            },
+            "minItems": 3,
+            "maxItems": 3
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "fractionalTranslation": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SGRational"
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "timeSign": {
+          "enum": [
+            -1,
+            1
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "fractionalMatrix",
+        "fractionalTranslation",
+        "timeSign"
+      ],
+      "additionalProperties": false,
+      "title": "SGSymmetryOperator3"
+    },
+    "SGGroupSetting3": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "enum": [
+            "ordinary",
+            "magnetic"
+          ]
+        },
+        "symbol": {
+          "type": "string",
+          "minLength": 1
+        },
+        "hallSymbol": {
+          "oneOf": [
+            {
+              "type": "string",
+              "minLength": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "bnsNumber": {
+          "oneOf": [
+            {
+              "type": "string",
+              "minLength": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "ogNumber": {
+          "oneOf": [
+            {
+              "type": "string",
+              "minLength": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "settingName": {
+          "type": "string",
+          "minLength": 1
+        },
+        "originChoice": {
+          "type": "string",
+          "minLength": 1
+        },
+        "changeOfBasis": {
+          "$ref": "#/$defs/Mat3"
+        },
+        "originFractional": {
+          "$ref": "#/$defs/Vec3"
+        },
+        "table": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/SGTableIdentity"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "operators": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SGSymmetryOperator3"
+          }
+        },
+        "sourceSpans": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SGSourceSpan"
+          }
+        }
+      },
+      "required": [
+        "kind",
+        "symbol",
+        "hallSymbol",
+        "bnsNumber",
+        "ogNumber",
+        "settingName",
+        "originChoice",
+        "changeOfBasis",
+        "originFractional",
+        "table",
+        "operators",
+        "sourceSpans"
+      ],
+      "additionalProperties": false,
+      "title": "SGGroupSetting3"
+    },
+    "SGAdp": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "iso-U"
+            },
+            "uA2": {
+              "type": "number"
+            }
+          },
+          "required": [
+            "kind",
+            "uA2"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "iso-B"
+            },
+            "bA2": {
+              "type": "number"
+            }
+          },
+          "required": [
+            "kind",
+            "bA2"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "cif-U"
+            },
+            "sixA2": {
+              "type": "array",
+              "items": {
+                "type": "number"
+              },
+              "minItems": 6,
+              "maxItems": 6
+            }
+          },
+          "required": [
+            "kind",
+            "sixA2"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "beta"
+            },
+            "six": {
+              "type": "array",
+              "items": {
+                "type": "number"
+              },
+              "minItems": 6,
+              "maxItems": 6
+            }
+          },
+          "required": [
+            "kind",
+            "six"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "cartesian-U"
+            },
+            "sixA2": {
+              "type": "array",
+              "items": {
+                "type": "number"
+              },
+              "minItems": 6,
+              "maxItems": 6
+            }
+          },
+          "required": [
+            "kind",
+            "sixA2"
+          ],
+          "additionalProperties": false
+        }
+      ],
+      "title": "SGAdp"
+    },
+    "SGParameter": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "site-fractional"
+            },
+            "phaseId": {
+              "$ref": "#/$defs/Id"
+            },
+            "siteId": {
+              "$ref": "#/$defs/Id"
+            },
+            "axis": {
+              "enum": [
+                0,
+                1,
+                2
+              ]
+            }
+          },
+          "required": [
+            "kind",
+            "phaseId",
+            "siteId",
+            "axis"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "site-cartesian"
+            },
+            "pointId": {
+              "$ref": "#/$defs/Id"
+            },
+            "axis": {
+              "enum": [
+                0,
+                1,
+                2
+              ]
+            }
+          },
+          "required": [
+            "kind",
+            "pointId",
+            "axis"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "cell-length"
+            },
+            "phaseId": {
+              "$ref": "#/$defs/Id"
+            },
+            "axis": {
+              "enum": [
+                0,
+                1,
+                2
+              ]
+            }
+          },
+          "required": [
+            "kind",
+            "phaseId",
+            "axis"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "cell-angle-degree"
+            },
+            "phaseId": {
+              "$ref": "#/$defs/Id"
+            },
+            "angle": {
+              "enum": [
+                "alpha",
+                "beta",
+                "gamma"
+              ]
+            }
+          },
+          "required": [
+            "kind",
+            "phaseId",
+            "angle"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "occupancy"
+            },
+            "phaseId": {
+              "$ref": "#/$defs/Id"
+            },
+            "siteId": {
+              "$ref": "#/$defs/Id"
+            }
+          },
+          "required": [
+            "kind",
+            "phaseId",
+            "siteId"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "adp-component"
+            },
+            "phaseId": {
+              "$ref": "#/$defs/Id"
+            },
+            "siteId": {
+              "$ref": "#/$defs/Id"
+            },
+            "component": {
+              "enum": [
+                "11",
+                "22",
+                "33",
+                "12",
+                "13",
+                "23",
+                "iso"
+              ]
+            }
+          },
+          "required": [
+            "kind",
+            "phaseId",
+            "siteId",
+            "component"
+          ],
+          "additionalProperties": false
+        }
+      ],
+      "title": "SGParameter"
+    },
+    "SGCovariance": {
+      "type": "object",
+      "properties": {
+        "parameters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SGParameter"
+          },
+          "minItems": 1
+        },
+        "matrix": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            },
+            "minItems": 1
+          },
+          "minItems": 1
+        },
+        "provenance": {
+          "enum": [
+            "supplied-full",
+            "explicit-independent-diagonal"
+          ]
+        },
+        "sourceSpans": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SGSourceSpan"
+          }
+        }
+      },
+      "required": [
+        "parameters",
+        "matrix",
+        "provenance",
+        "sourceSpans"
+      ],
+      "additionalProperties": false,
+      "title": "SGCovariance"
+    },
+    "SGSite": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/Id"
+        },
+        "label": {
+          "type": "string"
+        },
+        "species": {
+          "$ref": "#/$defs/Species"
+        },
+        "fractional": {
+          "$ref": "#/$defs/Vec3"
+        },
+        "occupancy": {
+          "type": "number"
+        },
+        "adp": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/SGAdp"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "sourceSpans": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SGSourceSpan"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "label",
+        "species",
+        "fractional",
+        "occupancy",
+        "adp",
+        "sourceSpans"
+      ],
+      "additionalProperties": false,
+      "title": "SGSite"
+    },
+    "SGPeriodic3": {
+      "type": "object",
+      "properties": {
+        "cell": {
+          "$ref": "#/$defs/Cell"
+        },
+        "group": {
+          "$ref": "#/$defs/SGGroupSetting3"
+        },
+        "sites": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SGSite"
+          }
+        },
+        "covariance": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/SGCovariance"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "cell",
+        "group",
+        "sites",
+        "covariance"
+      ],
+      "additionalProperties": false,
+      "title": "SGPeriodic3"
+    },
+    "SGPhaseNode": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/Id"
+        },
+        "label": {
+          "type": "string"
+        },
+        "parent": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/Id"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "rotation": {
+          "$ref": "#/$defs/Mat3"
+        },
+        "translationA": {
+          "$ref": "#/$defs/Vec3"
+        },
+        "structure": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/SGPeriodic3"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "fieldIds": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Id"
+          }
+        },
+        "shapeId": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/Id"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "label",
+        "parent",
+        "rotation",
+        "translationA",
+        "structure",
+        "fieldIds",
+        "shapeId"
+      ],
+      "additionalProperties": false,
+      "title": "SGPhaseNode"
+    },
+    "SGPhaseGraph": {
+      "type": "object",
+      "properties": {
+        "root": {
+          "$ref": "#/$defs/Id"
+        },
+        "phases": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SGPhaseNode"
+          }
+        }
+      },
+      "required": [
+        "root",
+        "phases"
+      ],
+      "additionalProperties": false,
+      "title": "SGPhaseGraph"
+    },
+    "SGSelectedImage": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/$defs/Image"
+        },
+        "fractional": {
+          "$ref": "#/$defs/Vec3"
+        },
+        "localCartesianA": {
+          "$ref": "#/$defs/Vec3"
+        },
+        "worldCartesianA": {
+          "$ref": "#/$defs/Vec3"
+        },
+        "pointId": {
+          "$ref": "#/$defs/Id"
+        }
+      },
+      "required": [
+        "key",
+        "fractional",
+        "localCartesianA",
+        "worldCartesianA",
+        "pointId"
+      ],
+      "additionalProperties": false,
+      "title": "SGSelectedImage"
+    },
+    "SGVector": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/Id"
+        },
+        "anchor": {
+          "$ref": "#/$defs/Image"
+        },
+        "components": {
+          "$ref": "#/$defs/Vec3"
+        },
+        "basis": {
+          "enum": [
+            "cartesian",
+            "fractional",
+            "normalized-crystal-axes"
+          ]
+        },
+        "kind": {
+          "enum": [
+            "polar",
+            "axial"
+          ]
+        },
+        "unit": {
+          "enum": [
+            "muB",
+            "A",
+            "dimensionless"
+          ]
+        },
+        "displayScale": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        }
+      },
+      "required": [
+        "id",
+        "anchor",
+        "components",
+        "basis",
+        "kind",
+        "unit",
+        "displayScale"
+      ],
+      "additionalProperties": false,
+      "title": "SGVector"
+    },
+    "SGDuplicateQuery": {
+      "type": "object",
+      "properties": {
+        "images": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SGSelectedImage"
+          }
+        },
+        "thresholdA": {
+          "type": "number",
+          "minimum": 0
+        },
+        "grouping": {
+          "const": "connected-components-explicit-images"
+        },
+        "merge": {
+          "const": false
+        }
+      },
+      "required": [
+        "images",
+        "thresholdA",
+        "grouping",
+        "merge"
+      ],
+      "additionalProperties": false,
+      "title": "SGDuplicateQuery"
+    },
+    "SGSiteSelector": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "site"
+            },
+            "siteId": {
+              "$ref": "#/$defs/Id"
+            }
+          },
+          "required": [
+            "kind",
+            "siteId"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "element"
+            },
+            "element": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "kind",
+            "element"
+          ],
+          "additionalProperties": false
+        }
+      ],
+      "title": "SGSiteSelector"
+    },
+    "SGBondRule": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/Id"
+        },
+        "fromSelector": {
+          "$ref": "#/$defs/SGSiteSelector"
+        },
+        "toSelector": {
+          "$ref": "#/$defs/SGSiteSelector"
+        },
+        "minimumA": {
+          "type": "number",
+          "minimum": 0
+        },
+        "maximumA": {
+          "type": "number",
+          "minimum": 0
+        },
+        "thresholdMode": {
+          "enum": [
+            "legacy-f32-square",
+            "explicit-f64"
+          ]
+        },
+        "extraAtoms": {
+          "enum": [
+            "none",
+            "one-endpoint-inside",
+            "recursive"
+          ]
+        },
+        "maxDepth": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "maxImages": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "bondValenceTable": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/SGTableIdentity"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "fromSelector",
+        "toSelector",
+        "minimumA",
+        "maximumA",
+        "thresholdMode",
+        "extraAtoms",
+        "maxDepth",
+        "maxImages",
+        "bondValenceTable"
+      ],
+      "additionalProperties": false,
+      "title": "SGBondRule"
+    },
+    "SGBoundary": {
+      "type": "object",
+      "properties": {
+        "phaseId": {
+          "$ref": "#/$defs/Id"
+        },
+        "minimumFractional": {
+          "$ref": "#/$defs/Vec3"
+        },
+        "maximumFractional": {
+          "$ref": "#/$defs/Vec3"
+        },
+        "endpoints": {
+          "enum": [
+            "closed",
+            "half-open"
+          ]
+        },
+        "includeBondExtensions": {
+          "type": "boolean"
+        },
+        "ruleIds": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Id"
+          }
+        }
+      },
+      "required": [
+        "phaseId",
+        "minimumFractional",
+        "maximumFractional",
+        "endpoints",
+        "includeBondExtensions",
+        "ruleIds"
+      ],
+      "additionalProperties": false,
+      "title": "SGBoundary"
+    },
+    "SGPolyhedron": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/Id"
+        },
+        "center": {
+          "$ref": "#/$defs/Image"
+        },
+        "vertices": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Image"
+          }
+        },
+        "mesh": {
+          "$ref": "#/$defs/Mesh"
+        },
+        "boundaryRule": {
+          "$ref": "#/$defs/Id"
+        },
+        "valenceTable": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/SGTableIdentity"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "center",
+        "vertices",
+        "mesh",
+        "boundaryRule",
+        "valenceTable"
+      ],
+      "additionalProperties": false,
+      "title": "SGPolyhedron"
+    },
+    "SGPlaneSpec": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "miller"
+            },
+            "phaseId": {
+              "$ref": "#/$defs/Id"
+            },
+            "hkl": {
+              "$ref": "#/$defs/Int3"
+            },
+            "order": {
+              "type": "number"
+            }
+          },
+          "required": [
+            "kind",
+            "phaseId",
+            "hkl",
+            "order"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "three-selected-points"
+            },
+            "points": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/SGSelectedImage"
+              },
+              "minItems": 3,
+              "maxItems": 3
+            }
+          },
+          "required": [
+            "kind",
+            "points"
+          ],
+          "additionalProperties": false
+        }
+      ],
+      "title": "SGPlaneSpec"
+    },
+    "SGPlane": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/Id"
+        },
+        "localUnitNormal": {
+          "$ref": "#/$defs/Vec3"
+        },
+        "localOffsetA": {
+          "type": "number"
+        },
+        "worldUnitNormal": {
+          "$ref": "#/$defs/Vec3"
+        },
+        "worldOffsetA": {
+          "type": "number"
+        },
+        "source": {
+          "$ref": "#/$defs/SGPlaneSpec"
+        }
+      },
+      "required": [
+        "id",
+        "localUnitNormal",
+        "localOffsetA",
+        "worldUnitNormal",
+        "worldOffsetA",
+        "source"
+      ],
+      "additionalProperties": false,
+      "title": "SGPlane"
+    },
+    "SGHalfspace": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/Id"
+        },
+        "normal": {
+          "$ref": "#/$defs/Vec3"
+        },
+        "offsetA": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "id",
+        "normal",
+        "offsetA"
+      ],
+      "additionalProperties": false,
+      "title": "SGHalfspace"
+    },
+    "SGShape": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/Id"
+        },
+        "phaseId": {
+          "$ref": "#/$defs/Id"
+        },
+        "halfspaces": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SGHalfspace"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "phaseId",
+        "halfspaces"
+      ],
+      "additionalProperties": false,
+      "title": "SGShape"
+    },
+    "SGHalfspaceCertificate": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "empty"
+            },
+            "nonnegativeWeights": {
+              "type": "array",
+              "items": {
+                "type": "number",
+                "minimum": 0
+              }
+            },
+            "contradictionMarginA": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            }
+          },
+          "required": [
+            "kind",
+            "nonnegativeWeights",
+            "contradictionMarginA"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "unbounded"
+            },
+            "feasiblePointA": {
+              "$ref": "#/$defs/Vec3"
+            },
+            "recessionDirection": {
+              "$ref": "#/$defs/Vec3"
+            }
+          },
+          "required": [
+            "kind",
+            "feasiblePointA",
+            "recessionDirection"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "lower-dimensional"
+            },
+            "feasiblePointA": {
+              "$ref": "#/$defs/Vec3"
+            },
+            "affineDimension": {
+              "enum": [
+                0,
+                1,
+                2
+              ]
+            },
+            "supportingEqualities": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/Id"
+              }
+            }
+          },
+          "required": [
+            "kind",
+            "feasiblePointA",
+            "affineDimension",
+            "supportingEqualities"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "bounded-full-dimensional"
+            },
+            "interiorPointA": {
+              "$ref": "#/$defs/Vec3"
+            },
+            "mesh": {
+              "$ref": "#/$defs/Mesh"
+            }
+          },
+          "required": [
+            "kind",
+            "interiorPointA",
+            "mesh"
+          ],
+          "additionalProperties": false
+        }
+      ],
+      "title": "SGHalfspaceCertificate"
+    },
+    "SGLineWidth": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "unit": {
+              "const": "device-pixel"
+            },
+            "value": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            }
+          },
+          "required": [
+            "unit",
+            "value"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "unit": {
+              "const": "A"
+            },
+            "value": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            }
+          },
+          "required": [
+            "unit",
+            "value"
+          ],
+          "additionalProperties": false
+        }
+      ],
+      "title": "SGLineWidth"
+    },
+    "SGMaterial": {
+      "type": "object",
+      "properties": {
+        "rgba": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "minItems": 4,
+          "maxItems": 4
+        },
+        "ambient": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "diffuse": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "specular": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "shininess": {
+          "type": "number",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "rgba",
+        "ambient",
+        "diffuse",
+        "specular",
+        "shininess"
+      ],
+      "additionalProperties": false,
+      "title": "SGMaterial"
+    },
+    "SGAtomStyle": {
+      "type": "object",
+      "properties": {
+        "mode": {
+          "enum": [
+            "sphere",
+            "ellipsoid"
+          ]
+        },
+        "radiusA": {
+          "type": "number",
+          "minimum": 0
+        },
+        "radiusTable": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/SGTableIdentity"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "material": {
+          "$ref": "#/$defs/SGMaterial"
+        },
+        "probabilityPercent": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 99
+        },
+        "principalEllipse": {
+          "type": "boolean"
+        },
+        "outlineWidth": {
+          "$ref": "#/$defs/SGLineWidth"
+        },
+        "slices": {
+          "type": "integer",
+          "minimum": 3
+        },
+        "stacks": {
+          "type": "integer",
+          "minimum": 2
+        }
+      },
+      "required": [
+        "mode",
+        "radiusA",
+        "radiusTable",
+        "material",
+        "probabilityPercent",
+        "principalEllipse",
+        "outlineWidth",
+        "slices",
+        "stacks"
+      ],
+      "additionalProperties": false,
+      "title": "SGAtomStyle"
+    },
+    "SGCamera": {
+      "type": "object",
+      "properties": {
+        "rotation": {
+          "$ref": "#/$defs/Mat3"
+        },
+        "panWorldA": {
+          "$ref": "#/$defs/Vec3"
+        },
+        "zoom": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "projection": {
+          "enum": [
+            "parallel",
+            "perspective"
+          ]
+        },
+        "widthA": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "perspectiveVerticalFovDeg": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "exclusiveMaximum": 180
+        },
+        "nearA": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "farA": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        }
+      },
+      "required": [
+        "rotation",
+        "panWorldA",
+        "zoom",
+        "projection",
+        "widthA",
+        "perspectiveVerticalFovDeg",
+        "nearA",
+        "farA"
+      ],
+      "additionalProperties": false,
+      "title": "SGCamera"
+    },
+    "SGNativeCameraFields": {
+      "type": "object",
+      "properties": {
+        "sceneMatrix4": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            },
+            "minItems": 4,
+            "maxItems": 4
+          },
+          "minItems": 4,
+          "maxItems": 4
+        },
+        "sceneShift": {
+          "$ref": "#/$defs/Vec3"
+        },
+        "zoom": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "dispf": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "projt": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "sourceSpan": {
+          "$ref": "#/$defs/SGSourceSpan"
+        }
+      },
+      "required": [
+        "sceneMatrix4",
+        "sceneShift",
+        "zoom",
+        "dispf",
+        "projt",
+        "sourceSpan"
+      ],
+      "additionalProperties": false,
+      "title": "SGNativeCameraFields"
+    },
+    "SGDisplay": {
+      "type": "object",
+      "properties": {
+        "showModels": {
+          "type": "boolean"
+        },
+        "asymmetricOnly": {
+          "type": "boolean"
+        },
+        "dotSurface": {
+          "type": "boolean"
+        },
+        "style": {
+          "enum": [
+            "ball-and-stick",
+            "space-filling",
+            "polyhedral",
+            "wireframe",
+            "stick"
+          ]
+        },
+        "hiddenImages": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Image"
+          }
+        },
+        "atomStyle": {
+          "$ref": "#/$defs/SGAtomStyle"
+        }
+      },
+      "required": [
+        "showModels",
+        "asymmetricOnly",
+        "dotSurface",
+        "style",
+        "hiddenImages",
+        "atomStyle"
+      ],
+      "additionalProperties": false,
+      "title": "SGDisplay"
+    },
+    "SGMeasurement": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/Id"
+        },
+        "kind": {
+          "enum": [
+            "distance",
+            "angle",
+            "unsigned-dihedral"
+          ]
+        },
+        "images": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Image"
+          }
+        },
+        "value": {
+          "type": "number"
+        },
+        "unit": {
+          "enum": [
+            "A",
+            "degree"
+          ]
+        },
+        "variance": {
+          "oneOf": [
+            {
+              "type": "number",
+              "minimum": 0
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "sigma": {
+          "oneOf": [
+            {
+              "type": "number",
+              "minimum": 0
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "covariance": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/SGCovariance"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "kind",
+        "images",
+        "value",
+        "unit",
+        "variance",
+        "sigma",
+        "covariance"
+      ],
+      "additionalProperties": false,
+      "title": "SGMeasurement"
+    },
+    "SGRenderContext": {
+      "type": "object",
+      "properties": {
+        "documentId": {
+          "$ref": "#/$defs/Id"
+        },
+        "epoch": {
+          "$ref": "#/$defs/Id"
+        },
+        "revision": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)$"
+        },
+        "sceneDigest": {
+          "$ref": "#/$defs/Digest"
+        },
+        "geometryDigest": {
+          "$ref": "#/$defs/Digest"
+        },
+        "widthPx": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "heightPx": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "dpr": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        }
+      },
+      "required": [
+        "documentId",
+        "epoch",
+        "revision",
+        "sceneDigest",
+        "geometryDigest",
+        "widthPx",
+        "heightPx",
+        "dpr"
+      ],
+      "additionalProperties": false,
+      "title": "SGRenderContext"
+    },
+    "SGRenderSphere": {
+      "type": "object",
+      "properties": {
+        "image": {
+          "$ref": "#/$defs/Image"
+        },
+        "centerWorldA": {
+          "$ref": "#/$defs/Vec3"
+        },
+        "radiusA": {
+          "type": "number",
+          "minimum": 0
+        },
+        "material": {
+          "$ref": "#/$defs/SGMaterial"
+        }
+      },
+      "required": [
+        "image",
+        "centerWorldA",
+        "radiusA",
+        "material"
+      ],
+      "additionalProperties": false,
+      "title": "SGRenderSphere"
+    },
+    "SGRenderEllipsoid": {
+      "type": "object",
+      "properties": {
+        "image": {
+          "$ref": "#/$defs/Image"
+        },
+        "centerWorldA": {
+          "$ref": "#/$defs/Vec3"
+        },
+        "axesWorld": {
+          "$ref": "#/$defs/Mat3"
+        },
+        "semiaxesA": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "minimum": 0
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "probabilityPercent": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 99
+        },
+        "material": {
+          "$ref": "#/$defs/SGMaterial"
+        }
+      },
+      "required": [
+        "image",
+        "centerWorldA",
+        "axesWorld",
+        "semiaxesA",
+        "probabilityPercent",
+        "material"
+      ],
+      "additionalProperties": false,
+      "title": "SGRenderEllipsoid"
+    },
+    "SGRenderBond": {
+      "type": "object",
+      "properties": {
+        "ruleId": {
+          "$ref": "#/$defs/Id"
+        },
+        "images": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Image"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "endpointsWorldA": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Vec3"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "radiusA": {
+          "type": "number",
+          "minimum": 0
+        },
+        "material": {
+          "$ref": "#/$defs/SGMaterial"
+        }
+      },
+      "required": [
+        "ruleId",
+        "images",
+        "endpointsWorldA",
+        "radiusA",
+        "material"
+      ],
+      "additionalProperties": false,
+      "title": "SGRenderBond"
+    },
+    "SGRenderLabel": {
+      "type": "object",
+      "properties": {
+        "image": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/Image"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "positionWorldA": {
+          "$ref": "#/$defs/Vec3"
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "font": {
+          "$ref": "#/$defs/SGTableIdentity"
+        },
+        "sizePx": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "rgba": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "minItems": 4,
+          "maxItems": 4
+        }
+      },
+      "required": [
+        "image",
+        "positionWorldA",
+        "text",
+        "font",
+        "sizePx",
+        "rgba"
+      ],
+      "additionalProperties": false,
+      "title": "SGRenderLabel"
+    },
+    "SGRenderPacket": {
+      "type": "object",
+      "properties": {
+        "context": {
+          "$ref": "#/$defs/SGRenderContext"
+        },
+        "spheres": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SGRenderSphere"
+          }
+        },
+        "ellipsoids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SGRenderEllipsoid"
+          }
+        },
+        "bonds": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SGRenderBond"
+          }
+        },
+        "meshes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SGRenderMesh"
+          }
+        },
+        "labels": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SGRenderLabel"
+          }
+        },
+        "camera": {
+          "$ref": "#/$defs/SGCamera"
+        },
+        "retainedResources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Digest"
+          }
+        }
+      },
+      "required": [
+        "context",
+        "spheres",
+        "ellipsoids",
+        "bonds",
+        "meshes",
+        "labels",
+        "camera",
+        "retainedResources"
+      ],
+      "additionalProperties": false,
+      "title": "SGRenderPacket"
+    },
+    "SGReviewBundle": {
+      "type": "object",
+      "properties": {
+        "graph": {
+          "$ref": "#/$defs/SGPhaseGraph"
+        },
+        "vectors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SGVector"
+          }
+        },
+        "bondRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SGBondRule"
+          }
+        },
+        "boundaries": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SGBoundary"
+          }
+        },
+        "planes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SGPlane"
+          }
+        },
+        "shapes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SGShape"
+          }
+        },
+        "display": {
+          "$ref": "#/$defs/SGDisplay"
+        },
+        "camera": {
+          "$ref": "#/$defs/SGCamera"
+        }
+      },
+      "required": [
+        "graph",
+        "vectors",
+        "bondRules",
+        "boundaries",
+        "planes",
+        "shapes",
+        "display",
+        "camera"
+      ],
+      "additionalProperties": false,
+      "title": "SGReviewBundle"
+    },
+    "SGRenderMesh": {
+      "type": "object",
+      "properties": {
+        "objectId": {
+          "$ref": "#/$defs/Id"
+        },
+        "phaseId": {
+          "$ref": "#/$defs/Id"
+        },
+        "space": {
+          "const": "world-cartesian-A"
+        },
+        "geometry": {
+          "$ref": "#/$defs/Mesh"
+        },
+        "material": {
+          "$ref": "#/$defs/SGMaterial"
+        }
+      },
+      "required": [
+        "objectId",
+        "phaseId",
+        "space",
+        "geometry",
+        "material"
+      ],
+      "additionalProperties": false,
+      "title": "SGRenderMesh"
+    }
+  },
+  "$ref": "#/$defs/SGReviewBundle",
+  "profile": "vestacraft.structure-geometry.design/1",
+  "scope": "Design-only subset, partial. No registered/executable commands. Modulation/superspace public DTOs remain unresolved, not represented by a fake generic/rejection type.",
+  "inherited": {
+    "path": "output/vesta-study/20261108-113622/reviews/20261114-163802-p1-design-r9-doc-state/contracts/scientific-operations.contract.json",
+    "sha256": "961d2ca2700ddae04359bcaa454495205b0c63d7dd180e17c0f372bf17cbcf66",
+    "definitions": [
+      "Id",
+      "Digest",
+      "Vec3",
+      "Int3",
+      "Mat3",
+      "Resource",
+      "Species",
+      "Cell",
+      "Adp",
+      "Parameter",
+      "Covariance",
+      "Site",
+      "SymmetryOp",
+      "Structure",
+      "Placement",
+      "Image",
+      "ImagePoint",
+      "Field",
+      "Reflection",
+      "Mesh",
+      "Camera",
+      "Diagnostic",
+      "Plane",
+      "Metric",
+      "Peak",
+      "Line",
+      "Slice",
+      "Bundle",
+      "AtomInstance",
+      "TransformResult",
+      "Curve",
+      "Capability",
+      "ExternalFiles",
+      "PattersonCoefficient",
+      "ResolvePlacementsInput",
+      "ResolvePlacementsOutput",
+      "ExpandImagesInput",
+      "ExpandImagesOutput",
+      "ChangeBasisInput",
+      "ChangeBasisOutput",
+      "TransportAdpInput",
+      "TransportAdpOutput",
+      "FindDuplicatesInput",
+      "FindDuplicatesOutput",
+      "SelectBondPairsInput",
+      "SelectBondPairsOutput",
+      "MeasurePolyhedronInput",
+      "MeasurePolyhedronOutput",
+      "TransformVectorInput",
+      "TransformVectorOutput",
+      "MillerPlaneInput",
+      "MillerPlaneOutput",
+      "ClipExplicitImagesInput",
+      "ClipExplicitImagesOutput",
+      "ComposeCameraInput",
+      "ComposeCameraOutput",
+      "MeasureImagesInput",
+      "MeasureImagesOutput",
+      "ProposeTidyResultInput",
+      "ProposeTidyResultOutput",
+      "PrepareMadelInputInput",
+      "PrepareMadelInputOutput",
+      "ConvolvePowderLinesInput",
+      "ConvolvePowderLinesOutput",
+      "SumStructureFactorsInput",
+      "SumStructureFactorsOutput",
+      "SynthesizeFourierInput",
+      "SynthesizeFourierOutput",
+      "ElectronDcInput",
+      "ElectronDcOutput",
+      "NuclearDcInput",
+      "NuclearDcOutput",
+      "ModelPattersonCoefficientsInput",
+      "ModelPattersonCoefficientsOutput",
+      "VolumePattersonInput",
+      "VolumePattersonOutput",
+      "NormalizeGridLayoutInput",
+      "NormalizeGridLayoutOutput",
+      "IntersectHalfspacesInput",
+      "IntersectHalfspacesOutput",
+      "SelectIsoEdgesInput",
+      "SelectIsoEdgesOutput",
+      "BuildAtomInstancesInput",
+      "BuildAtomInstancesOutput",
+      "SliceTrilinearInput",
+      "SliceTrilinearOutput",
+      "SampleLineInput",
+      "SampleLineOutput",
+      "FindLocalExtremaInput",
+      "FindLocalExtremaOutput",
+      "QueryPolyIntegralCapabilityInput",
+      "QueryPolyIntegralCapabilityOutput",
+      "ConvertDensityInput",
+      "ConvertDensityOutput",
+      "PlanEncodeInput",
+      "PlanEncodeOutput",
+      "Context",
+      "Request",
+      "ResolvedPlacement",
+      "MeasurementPoint",
+      "CartesianPointParameter",
+      "CartesianPointCovariance",
+      "RawBlockForEncode",
+      "EncodeIdentity",
+      "EncodeInventory",
+      "EncodeSource",
+      "LossField",
+      "LossReport1",
+      "LossConsent1",
+      "EncodePlan",
+      "EncodeApprovedInput",
+      "EncodeApprovedOutput",
+      "FieldHandle"
+    ],
+    "protocol": "vestacraft.scientific.bounded/3",
+    "modified": false
+  },
+  "newDefinitions": [
+    "SGSourceSpan",
+    "SGTableIdentity",
+    "SGRational",
+    "SGSymmetryOperator3",
+    "SGGroupSetting3",
+    "SGAdp",
+    "SGParameter",
+    "SGCovariance",
+    "SGSite",
+    "SGPeriodic3",
+    "SGPhaseNode",
+    "SGPhaseGraph",
+    "SGSelectedImage",
+    "SGVector",
+    "SGDuplicateQuery",
+    "SGSiteSelector",
+    "SGBondRule",
+    "SGBoundary",
+    "SGPolyhedron",
+    "SGPlaneSpec",
+    "SGPlane",
+    "SGHalfspace",
+    "SGShape",
+    "SGHalfspaceCertificate",
+    "SGLineWidth",
+    "SGMaterial",
+    "SGAtomStyle",
+    "SGCamera",
+    "SGNativeCameraFields",
+    "SGDisplay",
+    "SGMeasurement",
+    "SGRenderContext",
+    "SGRenderSphere",
+    "SGRenderEllipsoid",
+    "SGRenderBond",
+    "SGRenderLabel",
+    "SGRenderPacket",
+    "SGReviewBundle",
+    "SGRenderMesh"
+  ],
+  "fullDomainFrozen": false,
+  "productImplemented": false,
+  "revision": "SG/1-r2-F1-F6",
+  "requiredSemanticValidation": {
+    "required": true,
+    "spec": "structure-geometry.semantics.json",
+    "relativeBase": "contract-directory",
+    "rule": "Schema admission is necessary but insufficient. Resolve identities/units/resources and run applicable domain predicates before calculation or Engine candidate delivery. Selected design predicates in this package are not a complete production DTO validator."
+  }
+}

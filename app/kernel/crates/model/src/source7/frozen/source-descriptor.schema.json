@@ -1,0 +1,205 @@
+{
+  "type": "object",
+  "properties": {
+    "schemaVersion": {
+      "const": "FC-source-descriptor-2"
+    },
+    "producerId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "producerVersion": {
+      "type": "string",
+      "minLength": 1
+    },
+    "dialect": {
+      "type": "string",
+      "minLength": 1
+    },
+    "scopeInputDigest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "fieldBindings": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/FieldBinding"
+      }
+    },
+    "unknownSourceFields": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/EvidenceSpan"
+      }
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "producerId",
+    "producerVersion",
+    "dialect",
+    "scopeInputDigest",
+    "fieldBindings",
+    "unknownSourceFields",
+    "evidence"
+  ],
+  "additionalProperties": false,
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:draft:fc:source-descriptor:proposal:2",
+  "$defs": {
+    "ResourceRef": {
+      "type": "object",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "byteLength": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)$"
+        }
+      },
+      "required": [
+        "resourceId",
+        "sha256",
+        "byteLength"
+      ],
+      "additionalProperties": false
+    },
+    "EvidenceSpan": {
+      "type": "object",
+      "properties": {
+        "evidenceResource": {
+          "$ref": "#/$defs/ResourceRef"
+        },
+        "byteOffset": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)$"
+        },
+        "byteLength": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)$"
+        },
+        "sourceSpanDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "sourceVersion": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "evidenceResource",
+        "byteOffset",
+        "byteLength",
+        "sourceSpanDigest",
+        "sourceVersion"
+      ],
+      "additionalProperties": false
+    },
+    "FieldBinding": {
+      "type": "object",
+      "properties": {
+        "sourcePointer": {
+          "type": "string",
+          "pattern": "^(|(/([^~]|~[01])*))$"
+        },
+        "physicalKind": {
+          "type": "string",
+          "minLength": 1
+        },
+        "unit": {
+          "enum": [
+            "angstrom",
+            "bohr",
+            "metre",
+            "degree",
+            "radian",
+            "dimensionless",
+            "e",
+            "e/angstrom^3",
+            "e/bohr^3",
+            "bohr^-3/2",
+            "angstrom^-3/2",
+            "eV",
+            "Ry",
+            "hartree",
+            "muB",
+            "tesla",
+            "source-unresolved",
+            "angstrom/ps",
+            "angstrom*Da/ps^2",
+            "hartree/angstrom",
+            "angstrom^-5",
+            "bohr^-5",
+            "hartree/bohr^3",
+            "angstrom^-3",
+            "bohr^-3",
+            "angstrom^2",
+            "angstrom^3",
+            "bohr^2",
+            "bohr^3",
+            "fm",
+            "fm/angstrom^3",
+            "e^2/angstrom^3",
+            "fm^2/angstrom^3",
+            "angstrom^-1",
+            "bohr^-1"
+          ]
+        },
+        "basis": {
+          "enum": [
+            "scalar",
+            "Cartesian",
+            "fractional-conventional",
+            "fractional-primitive",
+            "normalized-crystalaxis",
+            "producer-explicit",
+            "source-unresolved"
+          ]
+        },
+        "frameResource": {
+          "$ref": "#/$defs/ResourceRef"
+        },
+        "conversionRuleId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "conversionRuleVersion": {
+          "type": "string",
+          "minLength": 1
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/EvidenceSpan"
+          },
+          "minItems": 1
+        }
+      },
+      "required": [
+        "sourcePointer",
+        "physicalKind",
+        "unit",
+        "basis",
+        "frameResource",
+        "conversionRuleId",
+        "conversionRuleVersion",
+        "evidence"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "title": "Concrete source units/frames/provenance input; qualification comes from trusted profile policy, never this input alone"
+}

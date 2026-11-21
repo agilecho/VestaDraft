@@ -1,0 +1,69 @@
+{
+  "schema": "FC-vics-selected/1",
+  "routes": [
+    "VM18-I02"
+  ],
+  "input": {
+    "path": "output/vesta-study/20261108-113622/reviews/20261110-104021-s05-completion/input-sources/VS-0080/YBa2Cu4O8.vcs",
+    "sha256": "674ea1de5a9404baeeb96028047646abe401afee09390499ab0f16c654d90d9f",
+    "bytes": 3547,
+    "root": "workspace"
+  },
+  "identity": "VENUS/VICS author example; no VESTA_FORMAT_VERSION. Do not parse as current VESTA merely because keywords overlap.",
+  "framing": {
+    "TITLE": "next line text",
+    "GROUP": "number setting HM text; selected65/1/Cmmm must agree with explicit ops",
+    "SYMOP": "3 translation tokens then9 row-major integer rotation entries; sentinel negative translations+zero matrix, not a physical operation",
+    "CELLP": "six lengthsA/anglesDeg then six printed uncertainty tokens, not covariance",
+    "STRUC": "serial species label occupancy fractional3 followed by uncertainty3; zero record ends list",
+    "ATOMT": "per-species radius/color records; zero sentinel",
+    "THERI": "OriginalYBa2Cu4O8hasnoTHERI; actualCaTiO3has4serial/label/scalars, bareTHERI, THERT0 and4six-componentTHERM rows. Manual20060130explicitlystates.vcs save-to-B; separately bound actual2006PE writer emitsbareTHERI, f32scalediso/3places andf32tensor/5places. Apply this namedproducer convention only withqualifiedsourcebinding; source2004producer convention is not silentlyequated; fresh locked readdefault now has separate static proof (bare first THERI selectsB, repetition toggles)."
+  },
+  "mapping": {
+    "sites": "8 asymmetric sites with stable serial and independent labels; no merging Cu1/Cu2",
+    "operators": "16 affine operations including C-centering; preserve multiplicity/order/raw rationals",
+    "scene": "vics-legacy-display.contract.json#/currentStateBinding: all31legacy keywords/order/original records preserved independently; actual current Scene.render/cameraRaw and phase typed rule/boundary/display/polyhedra targets captured with full widths/refs. Old sources are not replayed to recover edited state."
+  },
+  "precision": {
+    "fractional": "selected5 decimal: scalar halfstep5e-6, Cartesian bound sum(abs(axis_component)*5e-6); initial source decimals exact",
+    "translation": "selected4decimal -> rational1/2 or0 only with exact lexical match; no fitted tolerance",
+    "scene": "3decimal matrix is source representation, not an exact rotation; no unrequested orthogonalization"
+  },
+  "futureAcceptance": [
+    "independent16 affine ops, metric,8 site identities and expansion; exclude sentinel",
+    "display/bond/material values compared separately from structure",
+    "new-instance reopen checks model+scene, not just first phase"
+  ],
+  "fullLegacyKeywordGrammarQualified": false,
+  "productImplemented": false,
+  "selectedThermal": {
+    "inputBindings": "venus-molecular-grid-example-inputs.json",
+    "siteJoin": "Four original STRUC IDs1..4 bind exact labels Ti1/Ca1/O1/O2 in bothTHERI andTHERM. Preserve source record identity, not a label-only dictionary.",
+    "model": "Keep original both tables/selector/row identities separatelyfromactualcurrentmodel/derivedequivalent. Named20060130producer U/B/beta definitions andactualwriter are nowboundinselectedPrimaryThermalDefinition; originalhistoricalproducer version/physicalconvention andcompletekeywordgrammar remainseparate; selected fresh locked default is now separatelyproved.",
+    "nativeReader": "Locked readVESTA shared reader0xa5110..0xa5350 parses selector and per-site records, but this selected static path alone is not a new VICS runtime/physical-frame acceptance.",
+    "lockedConsumerRules": "native-thermal-contract.json plusprimary-thermal-definitions.contract.json: selectedlockednativeTHERT0Uij andseparateoriginalvendorU/beta definitions; namedoldsaveB andactualf32K resolved. No neworiginalexecution orautomaticallhistoricalVICSqualification."
+  },
+  "selectedPrimaryThermalDefinition": {
+    "path": "primary-thermal-definitions.contract.json",
+    "sha256": "cebe7217b76a2746b4c720937ba181832c8cff8e30752e0d755a596b531fa377",
+    "scope": "Primary documents and selected original2006writer/precision, not blanket all producer/keyword qualification"
+  },
+  "selectedLockedDefaultState": {
+    "path": "native-thermal-default.contract.json",
+    "sha256": "4450386704d6c4dea74c799ba5ed35084d70e15eebfdda382ef60370a33d9031",
+    "scope": "Selected fresh locked native state/whole-reader w22 proof only; no old-producer or runtime qualification"
+  },
+  "selectedNativeLineConsumption": {
+    "path": "native-get-line.contract.json",
+    "sha256": "3765e68a2182f940ffe7998b55e449750de47e3a1da7ed26b4747bab76e7c39e",
+    "pointer": "/scopeByCall/VICS"
+  },
+  "selectedLegacyDisplay": {
+    "path": "vics-legacy-display.contract.json",
+    "sha256": "c8484e37771dbd3094f37e97fab73e2ace7916b26e80f02216d622a9eb3216d7",
+    "pointer": "/records",
+    "currentStatePointer": "/currentStateBinding"
+  },
+  "selectedLockedLegacyParameterDomainSpecified": true,
+  "fullLegacyKeywordGrammarQualificationScope": "All31 actual selected old keyword families and real locked-consumer branches specified by successor contract; this is not all-version producer qualification or actual Engine/runtime acceptance."
+}

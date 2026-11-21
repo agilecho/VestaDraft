@@ -1,0 +1,507 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:draft:input:NVIS2",
+  "$defs": {
+    "Target": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "atom-image"
+            },
+            "image": {
+              "$ref": "urn:draft:input:SG1-r2#/$defs/Image"
+            }
+          },
+          "required": [
+            "kind",
+            "image"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "bond"
+            },
+            "ruleId": {
+              "$ref": "urn:draft:input:SG1-r2#/$defs/Id"
+            },
+            "images": {
+              "type": "array",
+              "items": {
+                "$ref": "urn:draft:input:SG1-r2#/$defs/Image"
+              },
+              "minItems": 2,
+              "maxItems": 2
+            }
+          },
+          "required": [
+            "kind",
+            "ruleId",
+            "images"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "polyhedron"
+            },
+            "boundaryRuleId": {
+              "$ref": "urn:draft:input:SG1-r2#/$defs/Id"
+            },
+            "center": {
+              "$ref": "urn:draft:input:SG1-r2#/$defs/Image"
+            },
+            "vertices": {
+              "type": "array",
+              "items": {
+                "$ref": "urn:draft:input:SG1-r2#/$defs/Image"
+              },
+              "minItems": 3
+            }
+          },
+          "required": [
+            "kind",
+            "boundaryRuleId",
+            "center",
+            "vertices"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "morphology-face"
+            },
+            "shapeId": {
+              "$ref": "urn:draft:input:SG1-r2#/$defs/Id"
+            },
+            "halfspaceId": {
+              "$ref": "urn:draft:input:SG1-r2#/$defs/Id"
+            },
+            "operationId": {
+              "$ref": "urn:draft:input:SG1-r2#/$defs/Id"
+            },
+            "orientedFaceSignature": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "kind",
+            "shapeId",
+            "halfspaceId",
+            "operationId",
+            "orientedFaceSignature"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "molecule-atom"
+            },
+            "moleculeId": {
+              "type": "string",
+              "minLength": 1
+            },
+            "frameId": {
+              "type": "string",
+              "minLength": 1
+            },
+            "atomId": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "kind",
+            "moleculeId",
+            "frameId",
+            "atomId"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "molecule-bond"
+            },
+            "moleculeId": {
+              "type": "string",
+              "minLength": 1
+            },
+            "frameId": {
+              "type": "string",
+              "minLength": 1
+            },
+            "bondId": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "kind",
+            "moleculeId",
+            "frameId",
+            "bondId"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "molecule-polyhedron"
+            },
+            "moleculeId": {
+              "type": "string",
+              "minLength": 1
+            },
+            "frameId": {
+              "type": "string",
+              "minLength": 1
+            },
+            "ruleId": {
+              "type": "string",
+              "minLength": 1
+            },
+            "centerAtomId": {
+              "type": "string",
+              "minLength": 1
+            },
+            "vertexAtomIds": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              },
+              "minItems": 3
+            }
+          },
+          "required": [
+            "kind",
+            "moleculeId",
+            "frameId",
+            "ruleId",
+            "centerAtomId",
+            "vertexAtomIds"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "SourceSpan": {
+      "type": "object",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "byteOffset": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)$"
+        },
+        "byteLength": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)$"
+        }
+      },
+      "required": [
+        "resourceId",
+        "sha256",
+        "byteOffset",
+        "byteLength"
+      ],
+      "additionalProperties": false
+    },
+    "Observation": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "parsed-source"
+            },
+            "keyword": {
+              "enum": [
+                "LBLAT",
+                "LBLSP",
+                "DLATM",
+                "DLBND",
+                "DLPLY"
+              ]
+            },
+            "sourceTokens": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "^(-1|0|[1-9][0-9]{0,9})$"
+              },
+              "minItems": 1
+            },
+            "sourceIndices": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 2147483647
+              }
+            },
+            "sourceSpan": {
+              "$ref": "#/$defs/SourceSpan"
+            }
+          },
+          "required": [
+            "kind",
+            "keyword",
+            "sourceTokens",
+            "sourceIndices",
+            "sourceSpan"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "uninterpreted-source"
+            },
+            "keyword": {
+              "enum": [
+                "LBLAT",
+                "LBLSP",
+                "DLATM",
+                "DLBND",
+                "DLPLY"
+              ]
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1
+            },
+            "sourceSpan": {
+              "$ref": "#/$defs/SourceSpan"
+            }
+          },
+          "required": [
+            "kind",
+            "keyword",
+            "reason",
+            "sourceSpan"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "Selection": {
+      "type": "object",
+      "properties": {
+        "target": {
+          "$ref": "#/$defs/Target"
+        },
+        "applicability": {
+          "enum": [
+            "active",
+            "latent"
+          ]
+        }
+      },
+      "required": [
+        "target",
+        "applicability"
+      ],
+      "additionalProperties": false
+    },
+    "CurrentResolution": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "qualified"
+            },
+            "selections": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/Selection"
+              }
+            }
+          },
+          "required": [
+            "kind",
+            "selections"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "source-only"
+            },
+            "nativeIndices": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 2147483647
+              }
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "kind",
+            "nativeIndices",
+            "reason"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "CurrentFlagSet": {
+      "type": "object",
+      "properties": {
+        "keyword": {
+          "enum": [
+            "LBLAT",
+            "LBLSP",
+            "DLATM",
+            "DLBND",
+            "DLPLY"
+          ]
+        },
+        "resolution": {
+          "$ref": "#/$defs/CurrentResolution"
+        }
+      },
+      "required": [
+        "keyword",
+        "resolution"
+      ],
+      "additionalProperties": false
+    },
+    "Owner": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "phase"
+            },
+            "id": {
+              "$ref": "urn:draft:input:SG1-r2#/$defs/Id"
+            }
+          },
+          "required": [
+            "kind",
+            "id"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "molecule"
+            },
+            "id": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "kind",
+            "id"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "Enumeration": {
+      "type": "object",
+      "properties": {
+        "sourceGraphDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "recipeDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "algorithmId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "algorithmVersion": {
+          "type": "string",
+          "minLength": 1
+        },
+        "populationDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "required": [
+        "sourceGraphDigest",
+        "recipeDigest",
+        "algorithmId",
+        "algorithmVersion",
+        "populationDigest"
+      ],
+      "additionalProperties": false
+    },
+    "NativeFlagState": {
+      "type": "object",
+      "properties": {
+        "schemaVersion": {
+          "const": "NativeFlagState-proposal-2"
+        },
+        "owner": {
+          "$ref": "#/$defs/Owner"
+        },
+        "capturedEnumeration": {
+          "$ref": "#/$defs/Enumeration"
+        },
+        "observations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Observation"
+          }
+        },
+        "currentFlagSets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/CurrentFlagSet"
+          },
+          "minItems": 5,
+          "maxItems": 5
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "owner",
+        "capturedEnumeration",
+        "observations",
+        "currentFlagSets"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$ref": "#/$defs/NativeFlagState"
+}

@@ -1,0 +1,189 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "urn:draft:fc:native-thermal-state:1",
+  "title": "Actual current native compatibility thermal state, separate from source tables",
+  "type": "object",
+  "properties": {
+    "schemaVersion": {
+      "const": "FC-native-thermal-state-1"
+    },
+    "captureRole": {
+      "const": "actual-current-native-compatibility-state"
+    },
+    "owner": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "EntityRef"
+            },
+            "objectKind": {
+              "const": "phase"
+            },
+            "objectId": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "kind",
+            "objectKind",
+            "objectId"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "EntityRef"
+            },
+            "objectKind": {
+              "const": "frame"
+            },
+            "objectId": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "kind",
+            "objectKind",
+            "objectId"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "nativeIsoFlagBits": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{8}$"
+    },
+    "nativeAnisoSelectorBits": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{8}$"
+    },
+    "nativeAnisoTableStateBits": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{8}$"
+    },
+    "orderedSlots": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "target": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "kind": {
+                    "const": "EntityRef"
+                  },
+                  "objectKind": {
+                    "const": "site"
+                  },
+                  "objectId": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "required": [
+                  "kind",
+                  "objectKind",
+                  "objectId"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "kind": {
+                    "const": "EntityRef"
+                  },
+                  "objectKind": {
+                    "const": "atom"
+                  },
+                  "objectId": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "required": [
+                  "kind",
+                  "objectKind",
+                  "objectId"
+                ],
+                "additionalProperties": false
+              }
+            ]
+          },
+          "isotropicSlot": {
+            "type": "object",
+            "properties": {
+              "kind": {
+                "const": "F64Bits"
+              },
+              "ieeeHexBE": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{16}$"
+              }
+            },
+            "required": [
+              "kind",
+              "ieeeHexBE"
+            ],
+            "additionalProperties": false
+          },
+          "anisotropicSlots": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "kind": {
+                  "const": "F64Bits"
+                },
+                "ieeeHexBE": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{16}$"
+                }
+              },
+              "required": [
+                "kind",
+                "ieeeHexBE"
+              ],
+              "additionalProperties": false
+            },
+            "minItems": 6,
+            "maxItems": 6
+          }
+        },
+        "required": [
+          "target",
+          "isotropicSlot",
+          "anisotropicSlots"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "ruleId": {
+      "const": "draft.native-current-thermal-slots"
+    },
+    "ruleVersion": {
+      "const": "1"
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "captureRole",
+    "owner",
+    "nativeIsoFlagBits",
+    "nativeAnisoSelectorBits",
+    "nativeAnisoTableStateBits",
+    "orderedSlots",
+    "ruleId",
+    "ruleVersion"
+  ],
+  "additionalProperties": false
+}
