@@ -1,0 +1,41 @@
+name: Engineering CI (independent checks)
+
+# First remote validation is opt-in. See docs/开发与构建.md for the branch and runner prerequisites.
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, reopened, synchronize, converted_to_draft]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: vestadraft-engineering-ci
+  cancel-in-progress: false
+
+jobs:
+  independent:
+    if: >-
+      ${{ vars.VESTA_CI_VALIDATION_REF != '' &&
+          ((github.event_name == 'workflow_dispatch' && github.ref_type == 'branch' &&
+            github.ref_name == vars.VESTA_CI_VALIDATION_REF) ||
+           (github.event_name == 'pull_request' && github.event.pull_request.draft &&
+            github.event.pull_request.head.repo.full_name == github.repository &&
+            github.head_ref == vars.VESTA_CI_VALIDATION_REF)) }}
+    uses: storytold/craft-common-actions/.github/workflows/gate.yml@0bef64f155fcea81edbd9542381777358bfbdcf4
+    with:
+      os: '["ubuntu-24.04"]'
+      command: cargo xtask ci --independent
+      setup-command: bash .github/ci/verify-runner-inputs.sh
+      timeout-minutes: 20
+      toolchain: '1.99.1'
+      targets: wasm32-unknown-unknown
+      tools: ''
+      craft-fonts-ref: ''
+      free-disk-space: false
+      cache-save-on-dispatch: false
+      sccache: false
+      env: |
+        CARGO_BUILD_JOBS=2
+        CARGO_NET_OFFLINE=true
