@@ -212,6 +212,7 @@ fn self_consistent_hashes_do_not_admit_missing_roots_or_wrong_active_state() {
         "tree":{"kind":"Map","members":{"nestedProjection":projection}}
     }));
     candidate.source = Some(source7::SourceDocument::decode(source).unwrap());
+    candidate.state_digest = Capture::digest_state(&candidate.content, candidate.source.as_ref()).unwrap();
     let error = encode(&candidate, "projection.vesta").unwrap_err();
     assert_eq!(error.code, "E_REOPEN_COVERAGE");
     assert_eq!(error.message, "GSAS current projection requires a qualified original chart provider");

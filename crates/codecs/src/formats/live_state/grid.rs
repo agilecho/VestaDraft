@@ -227,6 +227,18 @@ fn materialize_frame(input: &GridInput) -> Result<(&'static Format, Value)> {
     Ok((format, frame))
 }
 
+// The current numerical buffer is the actual source record. Bind its entire
+// immutable byte range, including a separately supplied mask, by logical ID.
+fn source_records(body: &Value) -> Value {
+    Value::Array(["dataResource", "maskResource"].into_iter().filter_map(|role| {
+        let resource = &body[role];
+        (!resource.is_null()).then(|| json!({
+            "sourceResourceId":resource["resourceId"], "byteOffset":"0",
+            "byteLength":resource["byteLength"], "sha256":resource["sha256"]
+        }))
+    }).collect())
+}
+
 fn native_ref(resource: &PersistentResource) -> Value {
     json!({"kind":"BytesRef","resourceId":resource.id,"sha256":resource.sha256,"byteLength":resource.byte_length})
 }
@@ -434,7 +446,7 @@ pub(super) fn install(
     let tree = tagged(format.tag, &body)?;
     source["sourceEntities"].as_array_mut().unwrap().push(json!({
         "id":owner,"nativeKind":format.native_kind,"sourceTree":tree,
-        "sourceRecords":[],"dependencyIds":[],"scientificProjection":"not-qualified","metadata":metadata
+        "sourceRecords":source_records(&body),"dependencyIds":[],"scientificProjection":"not-qualified","metadata":metadata
     }));
     source["sourceEntryOrder"]
         .as_array_mut()
@@ -569,7 +581,7 @@ fn with_current_grids(
             .ok_or_else(|| invalid("current-grid owner"))?;
         let body = payload(&row["sourceTree"])?;
         if body["owner"] != entity("source-entity", owner)
-            || row["sourceRecords"] != json!([])
+            || row["sourceRecords"] != source_records(&body)
             || row["dependencyIds"] != json!([])
             || row["scientificProjection"] != "not-qualified"
         {

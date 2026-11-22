@@ -375,7 +375,14 @@ pub(super) fn projection_count(source: &Node) -> usize {
             usize::from(tag == magnetic::TAG) + projection_count(payload)
         }
         Node::Array(items) => items.iter().map(projection_count).sum(),
-        Node::Map(members) => members.values().map(projection_count).sum(),
+        // AuditTree preserves the registered wire shape as a generated Map.
+        // Its kind and tag are plain Text fields, while a raw TaggedVariant
+        // still takes the branch above. Count both forms across nested trees.
+        Node::Map(members) => {
+            let tagged = matches!(members.get("kind"), Some(Node::Text(kind)) if kind == "TaggedVariant")
+                && matches!(members.get("tag"), Some(Node::Text(tag)) if tag == magnetic::TAG);
+            usize::from(tagged) + members.values().map(projection_count).sum::<usize>()
+        }
         _ => 0,
     }
 }
