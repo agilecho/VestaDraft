@@ -497,7 +497,7 @@ pub(super) fn install(
     Ok(())
 }
 
-pub(super) fn refresh(capture: &Capture, source: &mut Value) -> Result<()> {
+pub(in crate::formats) fn refresh(capture: &Capture, source: &mut Value) -> Result<()> {
     let rows = source["metadata"]
         .as_array()
         .ok_or_else(|| invalid("NVIS source metadata"))?;

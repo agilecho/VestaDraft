@@ -2,7 +2,7 @@
 use super::{full_source7, native_vesta_v2::source_only_capture, retained_source as retained};
 use serde_json::{Value, json};
 use std::collections::BTreeMap;
-use vesta_model::source_audit::Node;
+use vesta_model::source_audit::{AuditSource, Node};
 use vesta_model::source7::SourceDocument;
 use vesta_model::{
     Capture, Cell3, Error, Ids, PersistentResource, RestoredProject, Result, digest,
