@@ -343,3 +343,9 @@ CaTi 保持停报，YBa、Anatase 各保留一次。原 3000 秒未动。P2-03 p
 - 在独立分支 `codex/artcraft-directory-alignment` 完成迁移，仓库根为产品 Cargo workspace，`apps/`、`crates/`、`xtask/` 分别承接应用、内核和工程任务，`assets/` 集中许可材料，`packaging/ca/` 提供 CA 安装副本 npm 入口。当前入口和冻结路径换算见 [施工卡](docs/任务卡/ArtCraft目录对齐.md#施工登记)。
 - P2-03 partial，7 项真实资格仍待补，C8、G29、G30 未启动。产品 Rust 未重编，完整 Web 制品、正式 CA 安装、worker 与 Check 仍按原卡。目录施工自验和手动 dsh 材料见本卡回执。
 - 上游 CA 源树从固定提交或原 P2-02 包在临时目录复原。自有工具源码和派生锁继续在本项目维护，现行入口见 [packaging/ca/bootstrap](packaging/ca/bootstrap/README.md)。历史回执按原路径读取。
+
+## 2026-11-22 P2-03 C12 / G31 有限控制复验交回
+
+- 用户已批准先用现有控制样本实跑、C9，以及原 3000 秒内累计 1783 秒的持续修复/增量构建窗口，取消该窗口硬轮数；后又批准 G31 一组≤600 秒，测试上限 30→31。七项真实资格不因顺序调整获豁免。
+- 同卡独立工作树为 `/Users/agilecho/.codex/worktrees/p2-03-c8-continuation/VestaDraft`，源码候选 `8512162`，本轮 main `773d2b9` 未合入或推送。C12 编译通过，G31 35/35 Rust 与五条原中断往返已完成；原 G29 81/85、G30 13/18 及全部编译失败保留。G31 原监管中断首因未保留，分段续完未重复已执行 CLI，原段退出124及续办证据交 dsh 核实。
+- 当前全卡 1308.876137004/14400 秒、续办 1170.848808837/10800 秒、3000 秒包络已用 651.699882710 秒，构建实际12次、获准窗口19.823152167/1783秒，测试31/31、获取/解析各6/6、网络97,135,307字节，无新增。七项生产者资格、旧 full 迁移仍待验，P2-03 partial/未接受，P2-04未准入。最新材料见 [续办登记](docs/任务卡/阶段2-首条完整链/P2-03-C8现有材料补齐续办.md)、[回执](/Users/agilecho/code/VestaDraft/output/vesta-p2-03/20261122-build-window/RECEIPT.md)和[手动dsh材料](/Users/agilecho/code/VestaDraft/output/vesta-p2-03/20261122-build-window/DSH-REVIEW-HANDOFF.md)。

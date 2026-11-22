@@ -2,18 +2,13 @@
 
 ## P2-03 当前状态
 
-**2026-11-22 C8 已实跑。** 用户批准先用现有控制样本编译和实跑，七项真实原件资格继续待验。C8 在 `cb570ad` 上启动，Source7 生成检查通过，随后编译在 MXD 模块的两处 `json!` 宏表达式退出 101，耗 12.826154417 秒。源码已改为先计算数组表达式再交给宏，等待重新编译。构建 8/8，测试 28/30，G29/G30 未启动。 [执行回执](/Users/agilecho/code/VestaDraft/output/vesta-p2-03/20261122-c8-controlled-execution/RECEIPT.md)
+**2026-11-22 P2-03 控制范围实跑与修复复验。** C12 源码候选 `8512162` 已编译封存；G29/G30 原失败保留，G31 在修复后完成 35/35 Rust 和五条往返驱动。G31 原监管中断及无重复 CLI 的分段续完一并待 dsh 核实。七项真实生产者资格和旧 full 迁移仍未验证，P2-03 `partial`、未接受，P2-04 未准入。 [施工回执](/Users/agilecho/code/VestaDraft/output/vesta-p2-03/20261122-build-window/RECEIPT.md) · [手动 dsh 材料](/Users/agilecho/code/VestaDraft/output/vesta-p2-03/20261122-build-window/DSH-REVIEW-HANDOFF.md)
 
-**2026-11-22 C8 布局续办。** 独立施工分支已将 GSAS 的 11 件自编控制数据逐字节纳入测试目录，8 个编译期引用可在干净检出解析。原 747 项输入已对应到新目录及副本，当前固定 761 项输入，85 个具名用例逐项对应源码，GSAS 下限已按 4 个既定用例修正。七项真实资格仍待补齐，C8、G29、G30 均未启动，原 3000 秒保持可用。 [本轮施工回执](/Users/agilecho/code/VestaDraft/output/vesta-p2-03/20261122-c8-layout-continuation/RECEIPT.md)
+源码在独立工作树 `/Users/agilecho/.codex/worktrees/p2-03-c8-continuation/VestaDraft`，分支 `codex/p2-03-c8-continuation`，Cargo 入口为仓库根，CLI 在 `apps/vestacraft-cli/`、库在 `crates/`。main `773d2b9` 未合入本轮提交，未推送。GSAS 11 件自编控制夹具已纳入源码测试目录；正式资格表保持为空。
 
-**ArtCraft 布局接续。** 在已迁移的分支上，C8 的 Cargo 入口在仓库根，CLI 在 `apps/vestacraft-cli/`，产品库在 `crates/`。按新旧路径及摘要对照复核原 747 项输入，再为获准的 C8→G29→G30 锁定实际 cwd、入口、夹具和工具。历史固定路径及 C7 制品继续按原封存使用。后续 P2-04 的 Web 入口为 `apps/vestacraft-web/`，CA 安装副本走独立 npm 适配入口。 [目录施工登记](../ArtCraft目录对齐.md#施工登记) · [CA 打包入口](../../../packaging/ca/README.md)
+G29 原为 C11 的 81/85 Rust、16/16 门禁；G30 原为 13/18 命令，包含旧工程与 OpenBundle、真实到期和伪确认拒绝、生命周期及 NS2 14/14。C12 仅重跑修复相关 35 项及五条原中断往返，未登记为 C12 85 项全跑。G31 原段退出 124、原始监管首因未被旧收尾保留；续办从已落盘退出记录恢复，仅执行未启动动作，分段累计 247.561449875/600 秒。原失败和证据保留，接受判断由 dsh 独立承担。
 
-
-**2026-11-22 P2-03 进度。** C8 静态后继候选已提交到本地 `main`（`d82fd97`）。仍缺 7 项真实验收资格，C8、G29、G30 均未启动。P2-03 保持 `partial`、未接受，P2-04 未准入。
-
-C5 有限原生首链已获独审，G26 补齐 C6 已选旧工程、保存确认及生命周期的实跑证据，C7 已自验选定 VESTA 嵌套结构的保存、脱离源目录重开及续改。dsh 对原 C8 候选的结论限于静态，57 项是修改前的独立脚本复跑结果。当前后继已补 GSAS 多相活动安装拒绝和原件归档用例。旧 full 迁移、全类型 Source7、Field 恢复与剩余 Graph2 仍待实际验收。 [后继回执](../../../output/vesta-p2-03/20261122-c8-dsh-followup/RECEIPT.md) · [旧件兼容边界](../../../output/vesta-p2-03/20261122-c8-dsh-followup/COMPATIBILITY.md)
-
-C8 待首次 Rust 类型检查和构建，G29/G30 待同源制品执行。获批的 3000 秒全数保留。全卡累计 657.176254294/14400 秒，公共框架续办 519.148926127/10800 秒，构建 7/8，测试 28/30，获取和锁解析各 6/6。待用户手动转交 dsh，后续任务由用户另行安排。 [最小补件清单](../../../output/vesta-p2-03/20261122-c8-consolidated-admission/INPUTS-NEEDED.md) · [手动 dsh 转交材料](../../../output/vesta-p2-03/20261122-c8-dsh-followup/DSH-REVIEW-HANDOFF.md)
+C8 起原 3000 秒包络已用 651.699882710 秒；全卡 1308.876137004/14400 秒，续办 1170.848808837/10800 秒。累计构建 12 次，本次获准窗口累计 19.823152167/1783 秒并取消该窗口的硬轮数；测试 31/31，获取/锁解析各 6/6，网络累计 97,135,307 字节，本轮新增均为 0。七项资格仍按 [最小补件](/Users/agilecho/code/VestaDraft/output/vesta-p2-03/20261122-build-window/INPUTS-NEEDED.md)办理，旧 full 迁移按 [兼容边界](/Users/agilecho/code/VestaDraft/output/vesta-p2-03/20261122-c8-dsh-followup/COMPATIBILITY.md)继续溯源。原 C5 有限独审、C6/G26 和 C7 范围保留，不据控制结果扩大为整卡接受。
 
 以下日期条目保留各轮当时的证据和状态。
 

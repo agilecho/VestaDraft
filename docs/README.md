@@ -1,6 +1,6 @@
 # Craft 软件方法与接入指南
 
-**2026-11-22 P2-03 进度。** C8 静态后继候选已提交到本地 `main`（`d82fd97`）。仍缺 7 项真实验收资格，C8、G29、G30 均未启动。P2-03 保持 `partial`、未接受，P2-04 未准入。 [阶段 2 当前状态](任务卡/阶段2-首条完整链/README.md)
+**2026-11-22 P2-03 控制范围实跑与修复复验。** C12 源码候选 `8512162` 已编译封存；G29/G30 原失败保留，G31 在修复后完成 35/35 Rust 和五条往返驱动。G31 原监管中断及无重复 CLI 的分段续完一并待 dsh 核实。七项真实生产者资格和旧 full 迁移仍未验证，P2-03 `partial`、未接受，P2-04 未准入。 [施工回执](/Users/agilecho/code/VestaDraft/output/vesta-p2-03/20261122-build-window/RECEIPT.md) · [手动 dsh 材料](/Users/agilecho/code/VestaDraft/output/vesta-p2-03/20261122-build-window/DSH-REVIEW-HANDOFF.md)
 
 以下日期条目保留各轮当时的证据和状态。
 
@@ -30,7 +30,7 @@
 [06接受登记回执](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-160449-rev66-acceptance-registration/RECEIPT.md) / [设计接受记录](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-160449-rev66-acceptance-registration/accepted-design.json) / [复审原文](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-160449-rev66-acceptance-registration/inbound/dsh-rev66-review.md) / [过程及统计勘误](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-160449-rev66-acceptance-registration/REVIEW-PROCESS-ERRATA.md) / [已接受的rev66技术封存](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-134209-two-residuals/final-seal.json)。
 <!-- P1-CURRENT-STATUS END -->
 
-**当前任务组织（2026-11-22）**。P0 研究与 P1 当前设计已收口，现行 25 卡及共同约定保留原有独立审卡范围。P2-01 整改后继已自验，待手动 dsh 复审。P2-02 独立工具子结果已获 dsh 复核，整卡仍 `partial`，正式工作区创建和已审源码安装未完成。P2-03 当前停在 C8 构建准入，阶段 2 的整体界面 E2E 未执行。 [任务总览](任务卡/README.md)
+**当前任务组织（2026-11-22）**。P0 研究与 P1 当前设计已收口，现行 25 卡及共同约定保留原有独立审卡范围。P2-01 整改后继已自验，待手动 dsh 复审。P2-02 独立工具子结果已获 dsh 复核，整卡仍 `partial`，正式工作区创建和已审源码安装未完成。P2-03 已完成本轮 C12/G31 有限控制复验，真实资格和旧 full 迁移继续待验，待手动 dsh 复审；阶段 2 的整体界面 E2E 未执行。 [任务总览](任务卡/README.md)
 
 **本机存储（2026-11-19更新）**：Craft Anything参考源码为`/Volumes/T9/Development/Sources/Artcraft/craft-anything`；用户明确指定本项目的源码和文档均在`/Users/agilecho/code/Draft`维护。`output/`及原封存继续保留，旧证据原路径不改，当前源码按[目录裁定](任务卡/源码项目目录调整.md)在本仓库维护。
 

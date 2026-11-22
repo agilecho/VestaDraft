@@ -1,8 +1,8 @@
 # 任务卡
 
-**2026-11-22 工程任务。** 用户已批准 VestaDraft 按 ArtCraft 自研应用的共同目录迁移，待独立施工会话接手。当前源码仍位于 `app/`，P2-03 的 C8 准入停点按原卡办理。 [ArtCraft 目录对齐施工卡](ArtCraft目录对齐.md)
+**2026-11-22 工程任务。** VestaDraft 已按 ArtCraft 自研应用的共同目录迁至 `apps/`、`crates/` 等入口。P2-03 的有限控制实跑和真实资格边界按下述当前登记与原卡办理。 [ArtCraft 目录对齐施工卡](ArtCraft目录对齐.md)
 
-**2026-11-22 P2-03 进度。** C8 静态后继候选已提交到本地 `main`（`d82fd97`）。仍缺 7 项真实验收资格，C8、G29、G30 均未启动。P2-03 保持 `partial`、未接受，P2-04 未准入。 [阶段 2 当前状态](阶段2-首条完整链/README.md)
+**2026-11-22 P2-03 控制范围实跑与修复复验。** C12 源码候选 `8512162` 已编译封存；G29/G30 原失败保留，G31 在修复后完成 35/35 Rust 和五条往返驱动。G31 原监管中断及无重复 CLI 的分段续完一并待 dsh 核实。七项真实生产者资格和旧 full 迁移仍未验证，P2-03 `partial`、未接受，P2-04 未准入。 [施工回执](/Users/agilecho/code/VestaDraft/output/vesta-p2-03/20261122-build-window/RECEIPT.md) · [手动 dsh 材料](/Users/agilecho/code/VestaDraft/output/vesta-p2-03/20261122-build-window/DSH-REVIEW-HANDOFF.md)
 
 以下日期条目保留各轮当时的证据和状态。
 
