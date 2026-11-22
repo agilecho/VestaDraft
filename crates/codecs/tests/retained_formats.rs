@@ -74,7 +74,7 @@ fn mxd_file06_all_groups_reopen_from_exact_report_bytes() {
     let raw = fixtures("output/vesta-p2-03/20261121-c8-retained-formats/fixtures/ortho.file06");
     let open = vesta_codecs::formats::mxd_report::open(&raw, Ids::new([179; 16])).unwrap();
     let after = save_and_reopen(&open.capture, "mxd.vesta");
-    let source = after.source.unwrap().to_value().unwrap();
+    let source = after.source.as_ref().unwrap().to_value().unwrap();
     let reports = source["metadata"]
         .as_array()
         .unwrap()
