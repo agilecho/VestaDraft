@@ -46,6 +46,12 @@ R8／rev33历史摘要（当时待独审；现已收到dsh R8，当前入口见�
 - 后续设计需给出上述职责与 VESTA 科学内核、Web、CLI、Agent 及平台宿主的对应关系和差异理由。现有 Rust/WASM 单 Worker＋TS/React/Three.js、同内核 CLI 的路线级接受继续保留；本要求没有指定改用 WordCraft 的 egui 界面栈或照搬文稿业务模块。若结构适配确需改变已接受路线，先交具体影响及待裁定问题。
 - 本次只登记新增结构约束和只读来源；结构对照尚待后续设计，未修改被审设计快照、接受状态或产品代码。来源版本、文件摘要和本机入口见[资料索引的 WordCraft 结构参考](VESTA资料索引.md#wordcraft-structure)。
 
+### ArtCraft 产品目录一致性（2026-11-22 用户确认）
+
+VestaDraft 的产品目录须与 ArtCraft 自研应用的共同结构保持一致。仓库根管理产品 Cargo workspace，`apps/` 放应用入口，`crates/` 放产品库，`xtask/` 放工程任务，`assets/`、`packaging/`、`docs/` 分别放资源、打包和文档。按职责迁移已有源码，新增应用入口和交付材料按相应目录落位。七个本地参考项目及路径映射见 [ArtCraft 目录对齐施工卡](任务卡/ArtCraft目录对齐.md)。
+
+现行 Rust/WASM 单 Worker、TS/React/Three.js 和同内核 CLI 路线继续适用。源码与文档继续用 VestaDraft 的同一 Git 仓库，`output/` 继续保存历史证据，正式 CA 工作区及安装按相应任务的现行准入办理。迁移完成前，旧路径仍用于定位现行源码及封存输入。
+
 ## 3. 必须遵循的方法和步骤
 
 用户阶段为 **Study → Build → Check → Ready**；检查发现差异时反复修改、构建与检查。

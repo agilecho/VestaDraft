@@ -8,6 +8,8 @@
 
 ## 开发前阅读与参考
 
+- 2026-11-22 用户明确要求 VestaDraft 的目录结构与 ArtCraft 自研应用保持一致。以 [重写要求](docs/VESTA全功能重写要求.md) 中的共同产品目录为目标，具体迁移按 [独立施工卡](docs/任务卡/ArtCraft目录对齐.md) 办理。开工前按实测 checkout 和封存输入定位。
+
 - 涉及开发或编写代码前，先读取当前任务卡、最新续办及相关权威文档，并参考 `/Volumes/T9/Development/Sources/Artcraft/wordcraft`（用户于2026-11-14确认）。
 - 按任务选择 wordcraft 的 `AGENTS.md`、`README.md`、`docs/architecture.md`、`docs/testing.md`、`docs/recovery.md`、`docs/control-protocol.md` 等相关文档及对应源码；记录实际参考文件、HEAD及必要SHA，区分工作区改动与提交版本。
 - 参考结论按 Draft 已确认的路线、接口与宿主约束取舍；具体编码仍由对应独立施工卡授权。
