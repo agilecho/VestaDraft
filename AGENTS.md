@@ -342,3 +342,4 @@ CaTi 保持停报，YBa、Anatase 各保留一次。原 3000 秒未动。P2-03 p
 
 - 在独立分支 `codex/artcraft-directory-alignment` 完成迁移，仓库根为产品 Cargo workspace，`apps/`、`crates/`、`xtask/` 分别承接应用、内核和工程任务，`assets/` 集中许可材料，`packaging/ca/` 提供 CA 安装副本 npm 入口。当前入口和冻结路径换算见 [施工卡](docs/任务卡/ArtCraft目录对齐.md#施工登记)。
 - P2-03 partial，7 项真实资格仍待补，C8、G29、G30 未启动。产品 Rust 未重编，完整 Web 制品、正式 CA 安装、worker 与 Check 仍按原卡。目录施工自验和手动 dsh 材料见本卡回执。
+- 上游 CA 源树从固定提交或原 P2-02 包在临时目录复原。自有工具源码和派生锁继续在本项目维护，现行入口见 [packaging/ca/bootstrap](packaging/ca/bootstrap/README.md)。历史回执按原路径读取。

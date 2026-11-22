@@ -1,6 +1,6 @@
 # Craft Anything 应用打包入口
 
-本目录的 `package.json` 安装到 Craft Anything 工作区的 `app/package.json`。同版产品源树放在 `app/source/`，包含根 Cargo workspace 和产品自己的 `package.json`。正式创建和已审源码安装按 P2-02 办理；新布局的双端构建和制品验收归 P2-04，worker 与 Check 按各自卡片执行。
+本目录的 `package.json` 安装到 Craft Anything 工作区的 `app/package.json`。同版产品源树放在 `app/source/`，包含根 Cargo workspace 和产品自己的 `package.json`。正式创建和已审源码安装按 P2-02 办理，引导工具见 [bootstrap](bootstrap/README.md)；新布局的双端构建和制品验收归 P2-04，worker 与 Check 按各自卡片执行。
 
 锁定的 Craft Anything 提交为 `1f8508a104134c436cbba5ea2f675619ef47702f`。其 `crates/ai/src/rebuild/check.rs` 中的 `build_check` 在普通应用上按以下入口选择：
 

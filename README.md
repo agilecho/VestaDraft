@@ -56,7 +56,7 @@
 
 **P2-03有界整改后仍partial（2026-11-21）**：已批准追加6组，26项Rust、16个编译门禁和14项NS2合同通过；实际非默认状态及fresh双逻辑资源的跨进程文件独立读回通过。但两条CLI驱动未完成，四旧件迁移及完整生命周期矩阵缺证据，cardComplete=false/accepted=false。测试14/14、冷3/3、受控138.027328167/14400秒，无新获取，产品运行停止。旧有限首链dsh接受和P2-02未闭合范围保持，不进入P2-04。[本轮整改回执](/Users/agilecho/code/VestaDraft/output/vesta-p2-03/20261121-review-corrections/RECEIPT.md)。
 
-**源码入口（2026-11-20实测位置，沿用同仓库决定）**：代码直接放在本项目 `/Users/agilecho/code/VestaDraft`，与文档使用同一 Git 仓库。应用见[源码与原生 CLI](docs/应用源码.md)，构建和合同检查从[仓库根](docs/开发与构建.md)运行，引导工具在 [tools/ca-bootstrap/crates/p1-ca-bootstrap/](tools/ca-bootstrap/crates/p1-ca-bootstrap/src/lib.rs)。[开发与构建](docs/开发与构建.md) / [目录裁定与迁入核验](docs/任务卡/源码项目目录调整.md)。
+**源码入口（2026-11-20实测位置，沿用同仓库决定）**：代码直接放在本项目 `/Users/agilecho/code/VestaDraft`，与文档使用同一 Git 仓库。应用见[源码与原生 CLI](docs/应用源码.md)，构建和合同检查从[仓库根](docs/开发与构建.md)运行，引导工具见 [packaging/ca/bootstrap](packaging/ca/bootstrap/README.md)。[开发与构建](docs/开发与构建.md) / [目录裁定与迁入核验](docs/任务卡/源码项目目录调整.md)。
 
 <!-- P1-CURRENT-STATUS BEGIN -->
 当前状态：rev66 已由用户带回 dsh 独审通过，F5-r／F3-r及回归闭合；用户已确认 P1.2／P1.4设计级接受，P1四项设计接受为[true,true,true,true,true]（依次为P1.1、P1.2、P1.3、P1.4、整体），P1设计阶段收口。资料基线rev67仅登记；被审技术交付仍为rev66 / D35-I33-r1-C6 / IP6，wire/profile代际I33，九摘要不变。P1.1及P1.3 C4既有接受保持，C5条件／C6未审及03rev48、04rev57/58历史范围不追认。该接受仅属P1设计交付。用户随后已授权按独立任务卡继续施工与验证；当前实现状态见下方任务组织，P1接受范围不扩大。
@@ -80,7 +80,7 @@ Craft 软件研究、重写与接入方法，以及 VESTA 全功能重写项目�
 
 ## 仓库范围
 
-本仓库同时保存项目源码、文档和仓库配置。应用代码在 `app/`，引导工具及其锁定构建来源在 `tools/ca-bootstrap/`，均纳入本项目 Git 管理。研究原始证据、截图、复审材料及编译缓存所在的 `output/` 按用户选择保留在本机，不纳入 Git；其中旧封存源码和归档继续作为历史证据保留。
+本仓库同时保存项目源码、文档和仓库配置。产品代码在 `apps/` 和 `crates/`，引导工具源码与派生锁在 `packaging/ca/bootstrap/`，均纳入本项目 Git 管理。引导工具的上游源码按固定提交离线准备。研究原始证据、截图、复审材料及编译缓存所在的 `output/` 按用户选择保留在本机，不纳入 Git；其中旧封存源码和归档继续作为历史证据保留。
 
 文档中指向 `output/` 或本机其他目录的链接依赖本机资料，单独克隆本仓库无法访问这些内容。项目当前状态、已接受范围及后续任务以文档内的权威入口为准。
 

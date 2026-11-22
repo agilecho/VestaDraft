@@ -18,3 +18,6 @@
 /docs/CPJ-NUMBERS.md -text
 /docs/P2-01封存复验.md -text
 /docs/应用源码.md -text
+
+# Preserve the archived bootstrap source and derived lock bytes.
+/packaging/ca/bootstrap/** -text
