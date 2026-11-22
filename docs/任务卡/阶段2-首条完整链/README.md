@@ -1,5 +1,25 @@
 # 阶段2 · 首条完整链
 
+## P2-03 当前状态
+
+**2026-11-22 P2-03 进度。** C8 静态后继候选已提交到本地 `main`（`d82fd97`）。仍缺 7 项真实验收资格，C8、G29、G30 均未启动。P2-03 保持 `partial`、未接受，P2-04 未准入。
+
+C5 有限原生首链已获独审，G26 补齐 C6 已选旧工程、保存确认及生命周期的实跑证据，C7 已自验选定 VESTA 嵌套结构的保存、脱离源目录重开及续改。dsh 对原 C8 候选的结论限于静态，57 项是修改前的独立脚本复跑结果。当前后继已补 GSAS 多相活动安装拒绝和原件归档用例。旧 full 迁移、全类型 Source7、Field 恢复与剩余 Graph2 仍待实际验收。 [后继回执](../../../output/vesta-p2-03/20261122-c8-dsh-followup/RECEIPT.md) · [旧件兼容边界](../../../output/vesta-p2-03/20261122-c8-dsh-followup/COMPATIBILITY.md)
+
+C8 待首次 Rust 类型检查和构建，G29/G30 待同源制品执行。获批的 3000 秒全数保留。全卡累计 657.176254294/14400 秒，公共框架续办 519.148926127/10800 秒，构建 7/8，测试 28/30，获取和锁解析各 6/6。待用户手动转交 dsh，后续任务由用户另行安排。 [最小补件清单](../../../output/vesta-p2-03/20261122-c8-consolidated-admission/INPUTS-NEEDED.md) · [手动 dsh 转交材料](../../../output/vesta-p2-03/20261122-c8-dsh-followup/DSH-REVIEW-HANDOFF.md)
+
+以下日期条目保留各轮当时的证据和状态。
+
+**2026-11-22 P2-03 C8 候选收口。** GSAS、VICS／NVIS 和 MXD 已收为一份工作树候选，监管、用例和证据指向同一矩阵。730 项固定输入和 334 件 C7 封存复算通过。全量准入仍缺原件、原版轨迹及同版报表，三关未启动，原 3000 秒未用。P2-03 partial、未接受，P2-04 未准入。 [回执](/Users/agilecho/code/VestaDraft/output/vesta-p2-03/20261122-c8-consolidated-admission/RECEIPT.md) · [最小补件](/Users/agilecho/code/VestaDraft/output/vesta-p2-03/20261122-c8-consolidated-admission/INPUTS-NEEDED.md) · [手动独审](/Users/agilecho/code/VestaDraft/output/vesta-p2-03/20261122-c8-consolidated-admission/DSH-REVIEW-HANDOFF.md)
+
+**2026-11-22 P2-03 VICS／NVIS／MXD 续办。** 已补显式当前 VICS 显示／视图、R80 工程控制边界切换、MXD 报表逐轴证据和检查入口。候选未编译，缺原版轨迹、实际同版报表及其余联合准入输入。C8、G29/G30 未启动，3000 秒未用，P2-03 partial、未接受，P2-04 未准入。 [回执](/Users/agilecho/code/VestaDraft/output/vesta-p2-03/20261122-c8-vics-nvis-mxd-wiring/RECEIPT.md)
+
+**2026-11-22 P2-03 GSAS 活动磁性接线。** 已补 Source7 群、磁矩、资源安装与制品重开核验，正式资格表为空。静态候选未编译，C8、G29/G30 等全量准入，3000 秒未用。P2-03 partial、未接受，P2-04 未准入。 [本轮回执](/Users/agilecho/code/VestaDraft/output/vesta-p2-03/20261122-c8-gsas-active-wiring/RECEIPT.md)
+
+**2026-11-22 P2-03 C8 现有材料续办。** 补 GSAS 活动状态资格、Field 相用途和 RIETAN 伴生表来源接线及本地读回判据。候选未编译，C8、G29/G30 等全量准入，已批 3000 秒未用。构建 7/8、测试 28/30，P2-03 partial、未接受，P2-04 未准入。 [回执](/Users/agilecho/code/VestaDraft/output/vesta-p2-03/20261122-c8-local-materials-resume/RECEIPT.md) · [最小交件清单](/Users/agilecho/code/VestaDraft/output/vesta-p2-03/20261122-c8-local-materials-resume/INPUTS-NEEDED.md)
+
+**2026-11-22接收P2-03接续交回**：三类准入已增加本地候选、静态验收及矩阵，均未取得C8同源运行闭环；可信原件/生产轨迹、完整注册范围及部分磁性群/矢量生产接线仍缺。C8、G29/G30均未启动、C8制品不存在，已批3000秒未用。全卡657.176254294/14400秒、续办519.148926127/10800秒，构建7/8、测试28/30。整卡partial、未接受，P2-04未准入。 [逐项接收核对](/Users/agilecho/code/VestaDraft/output/vesta-execution/20261122-p2-03-c8-session-result-intake/RECEIPT.md)。
+
 **2026-11-22 P2-03 C8 GSAS 同相操作表静态接线。** 原生捕获将可信生产者门禁覆盖到完整 Source7 类型树。已备同相 EXP／操作表只读核验和反例；活动磁性群、矢量与原件往返仍待可信生产者和真实材料。C8、G29/G30 未启动，原预算与停报不变。 [静态回执与缺项](/Users/agilecho/code/VestaDraft/output/vesta-p2-03/20261122-c8-gsas-chart-static/RECEIPT.md)
 
 **2026-11-21 P2-03 C8 静态断言独审与后继。** 原静态准备获 dsh 通过，登记前复跑 66/66、11 个独立反例。后继已补摘要复算、三种模拟诊断、空目录、CaTi／YBa 合成控制及 MXD 中段缺轴用例。保留暂存差异，后继待用户手动转 dsh。C8、G29/G30 等全量准入，P2-03 partial、未接受，P2-04 未准入。 [回执](/Users/agilecho/code/VestaDraft/output/vesta-p2-03/20261121-c8-assertions-review-followup/RECEIPT.md) · [先前裁定](/Users/agilecho/code/VestaDraft/output/vesta-dsh-reviews/20261121-231500-p2-03-c8-assertions-review/verdict.json)
@@ -72,14 +92,14 @@
 
 第一条可编辑、保存、导出、关页CLI续改及全新页面重开的晶体工程链，并有真实CA检查。
 
-当前：现行卡面已获dsh独立审卡通过。**P2-01已在main完成整改，双目录各25/25自验通过，待用户手动dsh复审。P2-02本轮独立工具验证已获dsh复核通过，整卡仍partial。正式创建、已审安装及阶段整体UI E2E尚未执行。P2-03 F6/L6最终施工已获dsh独立复审：有限原生结果通过，F1/F2在本卡26个类型与扁平资源集内闭合。G26 补齐封存 C6 的保存确认和旧工程回归。T66 全类型与递归图仍未完成，整卡 partial，测试 26/26。** 既有P0/P1接受、失败记录和累计资源按原账继承。
+现行卡面已获 dsh 独立审卡。P2-01 在 main 的整改后继双目录各 25/25 自验通过，待手动复审。P2-02 本轮独立工具验证已获 dsh 复核，整卡仍 partial，正式工作区创建和已审安装尚未执行。P2-03 的当前停点见页首。阶段整体界面 E2E 未执行，阶段未结束。
 
 | 编号 | 任务名称 | 一句话说明 | 当前状态 | 卡面入口 |
 |---|---|---|---|---|
 | P2-01 | I33共享合同生成与可复验源码包 | 交出可离线独立复验的I33共享合同源码包，供后续实现接入。 | main整改提交0818939；双目录各25/25自验完成，待后继独审 | [卡面](01-I33共享合同生成与可复验源码包.md) |
 | P2-02 | 原生工作区与研究输入迁入 | 由正式API创建、输入逐字节可核的原生工作区，并把已审源码包迁入真正的产品实现区。 | 独立工具验证已获dsh复核通过。整卡仍partial，正式创建前有验证与留证缺口 | [卡面](02-原生工作区与研究输入迁入.md) |
-| P2-03 | 晶体命令内核与原生保存基础 | 拿到能真实创建晶胞、编辑位点、撤销并输出可独立读回工程字节的同内核原生程序。 | C5 有限结果独审通过，C7 有限递归图已自验，C8 候选续办后仍停在全量构建前，整卡 partial | [原卡](03-晶体命令内核与原生保存基础.md) / [独审复核登记](P2-03-独审复核登记.md) / [本轮回执](/Users/agilecho/code/VestaDraft/output/vesta-p2-03/20261121-c8-v2-v3-diagnostic/RECEIPT.md) |
-| P2-04 | 当前Web编辑与锁定双端交付 | 用户和正式页面工具能在同一个Web工程里连续修改晶胞，看到实时变化，并得到可重建的Web与Linux CLI制品。 | v3卡面独审可发放；未施工，待会话安排 | [卡面](04-当前Web编辑与锁定双端交付.md) |
+| P2-03 | 晶体命令内核与原生保存基础 | 拿到能真实创建晶胞、编辑位点、撤销并输出可独立读回工程字节的同内核原生程序。 | 有限原生范围获复核。C8 静态后继已提交，待全量准入，整卡 partial、未接受 | [原卡](03-晶体命令内核与原生保存基础.md) / [独审复核登记](P2-03-独审复核登记.md) / [当前状态](#p2-03-当前状态) |
+| P2-04 | 当前Web编辑与锁定双端交付 | 用户和正式页面工具能在同一个Web工程里连续修改晶胞，看到实时变化。 | v3 卡面已审。施工未准入，待用户安排 | [卡面](04-当前Web编辑与锁定双端交付.md) |
 | P2-05 | 个人空间保存重开与CLI续作 | 在隔离宿主中把实际晶体工程保存到本人空间，导出、关闭，再由CLI续改并在全新页面重开继续编辑。 | v3卡面独审可发放；未施工，待会话安排 | [卡面](05-个人空间保存重开与CLI续作.md) |
 | P2-06 | 首链CA检查与故障恢复 | 让已经可用的首链在真正的Craft Anything worker中接受检查，保留差异、故意失败和恢复证据。 | v3卡面独审可发放；未施工，待会话安排 | [卡面](06-首链CA检查与故障恢复.md) |
 
@@ -87,7 +107,7 @@
 
 用户已批准[有界续办方案](P2-03-独审整改续办方案.md)的6组追加（8→14），其余原上限保持，覆盖F1/F2/关键F3及F4–F6；该6组及随后的公共框架F6/L6施工均已执行并结账（22/22），最终施工已由dsh复审。整卡仍partial，有限原生结果接受范围与未闭合项见下方最新登记。
 
-F6/L6 复审依据：[P2-03原生续办](P2-03-原生实现续办.md)、[独审复核登记](P2-03-独审复核登记.md)及2026-11-21最终复审。最新 F6/L6 施工经 dsh 独立复核：有限原生结果通过；F1 在本卡26个持久类型上由 `source_model!` 生成并有16编译门禁，F2 在扁平资源集上证明同 blob 双逻辑 ID 与跨生命期 fresh；但 T66 全域生成式访问、22 根外层全类型、FC 递归资源图及最终 CLI 的伪 HostAck/authority/owner/lease 证据未闭合，整卡仍 partial/cardComplete=false/accepted=false，不进入 P2-04。F6/L6 复审时测试22/22、构建5/5、419.741879500/14400秒。最新续办见页首，原封存保持。精确结论见[最终复审](/Users/agilecho/code/VestaDraft/output/vesta-dsh-reviews/20261121-143500-p2-03-final-native-review/REVIEW.md)与[登记](P2-03-独审复核登记.md)。
+F6/L6 当轮复审依据：[P2-03原生续办](P2-03-原生实现续办.md)、[独审复核登记](P2-03-独审复核登记.md)及2026-11-21最终复审。当轮 F6/L6 施工经 dsh 独立复核：有限原生结果通过；F1 在本卡26个持久类型上由 `source_model!` 生成并有16编译门禁，F2 在扁平资源集上证明同 blob 双逻辑 ID 与跨生命期 fresh；但 T66 全域生成式访问、22 根外层全类型、FC 递归资源图及最终 CLI 的伪 HostAck/authority/owner/lease 证据未闭合，整卡仍 partial/cardComplete=false/accepted=false，不进入 P2-04。F6/L6 复审时测试22/22、构建5/5、419.741879500/14400秒。最新续办见页首，原封存保持。精确结论见[最终复审](/Users/agilecho/code/VestaDraft/output/vesta-dsh-reviews/20261121-143500-p2-03-final-native-review/REVIEW.md)与[登记](P2-03-独审复核登记.md)。
 
 2026-11-20预检历史（不再作为当前原生准入停点）：
 

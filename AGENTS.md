@@ -330,3 +330,8 @@ CaTi 保持停报，YBa、Anatase 各保留一次。原 3000 秒未动。P2-03 p
 **2026-11-21 P2-03 C8 静态断言独审与后继。** 原静态准备获 dsh 通过，登记前复跑 66/66、11 个独立反例。后继已补摘要复算、三种模拟诊断、空目录、CaTi／YBa 合成控制及 MXD 中段缺轴用例。保留暂存差异，后继待用户手动转 dsh。C8、G29/G30 等全量准入，P2-03 partial、未接受，P2-04 未准入。 [回执](/Users/agilecho/code/VestaDraft/output/vesta-p2-03/20261121-c8-assertions-review-followup/RECEIPT.md) · [先前裁定](/Users/agilecho/code/VestaDraft/output/vesta-dsh-reviews/20261121-231500-p2-03-c8-assertions-review/verdict.json)
 
 构建 7/8，测试 28/30，3000 秒原额度未动。CaTi 不重试，YBa 和 Anatase 各留一次。未执行产品、编译、测试组和提交。
+
+## 2026-11-22 P2-03 主分支收拢和交接
+
+- 用户要求对齐现有进度、将候选代码收拢到 main 并清理其他分支，随后由用户另行安排新任务。已将现有 C8 静态后继以原补丁字节提交到本地 main（`d82fd97`），本地只有 main。
+- P2-03 保持 partial、未接受，P2-04 未准入。7 项真实资格待补，原 3000 秒未用，C8、G29/G30 均未启动，dsh 仍由用户手动发起。最新停点和证据入口见 [阶段 2 当前状态](docs/任务卡/阶段2-首条完整链/README.md#p2-03-当前状态)。

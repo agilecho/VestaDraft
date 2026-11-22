@@ -1,5 +1,7 @@
 # Offline source verification
 
+The commands below reproduce the frozen P2-01 package. For the P2-03 candidate now on main, see the [current stage status](../docs/任务卡/阶段2-首条完整链/README.md) and [C8 admission inputs](../output/vesta-p2-03/20261122-c8-consolidated-admission/INPUTS-NEEDED.md). C8, G29 and G30 await full admission.
+
 The review-corrected package pins Python invocation/runtime bytes, TypeScript entry/native compiler bytes and SRI, and observed cc/clang/linker/SDK metadata in `toolchain.inputs.json /observedTools`. These are current observations; historical missing execution identities are disclosed under `/observationScope`, rather than backdated. Set `VESTA_PYTHON` to the recorded absolute interpreter when reproducing the current oracle run. No dependency or compiler acquisition is performed by these checks.
 
 `scripts/test-contracts.mjs` now delegates to `scripts/run-contract-tests.mjs`, which consumes structured Node test events and the versioned required-leaf inventory in `tests/contracts/suite.json`. Empty files, missing/extra/duplicate cases, skips, todo, cancellation or failure make the command nonzero. The current inventory contains 25 cases in five files, including the original three NS2 contract files. `source-package-manifest.json /toolchain` explicitly binds the tool input/source documents and versions, and its verifier rejects tampered references. Numeric boundary interpretation and complete expected strings are documented in `CPJ-NUMBERS.md` for independent review.

@@ -373,3 +373,47 @@ CaTi 保持停报，YBa、Anatase 各保留一次。原 3000 秒未动。P2-03 p
 **2026-11-21 P2-03 C8 静态断言独审与后继。** 原静态准备获 dsh 通过，登记前复跑 66/66、11 个独立反例。后继已补摘要复算、三种模拟诊断、空目录、CaTi／YBa 合成控制及 MXD 中段缺轴用例。保留暂存差异，后继待用户手动转 dsh。C8、G29/G30 等全量准入，P2-03 partial、未接受，P2-04 未准入。 [回执](/Users/agilecho/code/VestaDraft/output/vesta-p2-03/20261121-c8-assertions-review-followup/RECEIPT.md) · [先前裁定](/Users/agilecho/code/VestaDraft/output/vesta-dsh-reviews/20261121-231500-p2-03-c8-assertions-review/verdict.json)
 
 构建 7/8，测试 28/30，3000 秒原额度未动。CaTi 不重试，YBa 和 Anatase 各留一次。未执行产品、编译、测试组和提交。
+
+
+## 2026-11-22统筹接收C8准入接续结果（三关未启动）
+
+已读新会话01a1fd89-35eb-7b62-ac7d-7a191f230448最新completed交回，当前notLoaded。app候选提交15f382a，当前HEAD384cc0c；源码提交不代表编译、运行或独审接受。Source7描述器/opaque和注册族、Field当前缓冲/掩码/帧/用途、RIETAN等图候选与验收准备已增加，但可信原件/生产者及部分活动磁性群/矢量接线仍未齐。C8/G29/G30均未启动，矩阵runAllowed=false，C8制品及runtime缺席；80项Rust、16门禁、17条驱动是继承计划数，磁性活动正例另待固定。
+
+只读复算690项候选输入、24项磁矩静态输入、C7封存334件匹配，8条静态复跑stdout与归档逐字节一致。合成chart/moment保持qualification=pending。旧矩阵校验含施工前index等值断言；现行app已提交，旧index前像不等于当前。本次不修改旧脚本或回退index，不报告旧全量脚本通过，分别核原件、摘要、输出及停报。累计657.176254294/14400秒、续办519.148926127/10800秒，构建7/8、测试28/30、获取及锁各6/6，C8三关3000秒未用。比上次增加13.671858167秒为被系统策略拒绝的CaTi诊断采集。CaTi不重试，YBa/Anatase各留一次并受环境资格约束。整卡partial、未接受，P2-04未准入。
+
+接收证据在output/vesta-execution/20261122-p2-03-c8-session-result-intake/，含管理前像与原只读输出。本次无产品编译/CLI/NS2、新测试组、原件启动、dsh联系、新会话或Git写操作。原RUN/源码/锁/制品/index保留。
+
+
+## 2026-11-22 P2-03 C8 现有材料续办
+
+**2026-11-22 P2-03 C8 现有材料续办。** 补 GSAS 活动状态资格、Field 相用途和 RIETAN 伴生表来源接线及本地读回判据。候选未编译，C8、G29/G30 等全量准入，已批 3000 秒未用。构建 7/8、测试 28/30，P2-03 partial、未接受，P2-04 未准入。 [回执](/Users/agilecho/code/VestaDraft/output/vesta-p2-03/20261122-c8-local-materials-resume/RECEIPT.md) · [最小交件清单](/Users/agilecho/code/VestaDraft/output/vesta-p2-03/20261122-c8-local-materials-resume/INPUTS-NEEDED.md)
+
+后继 694 项候选摘要，C7 封存 334 件复算相符。11 项独立读回静态检查保留首轮前像选择错误与修正。原 GSAS 真原件、旧 VICS／NVIS 活态、MXD COORDN 缺项继续停报。全卡 657.176254294／14400 秒，续办 519.148926127／10800 秒，取源和锁各 6/6。CaTi 不重试，YBa 和 Anatase 各留一次，dsh 由用户手动转交。 [待审材料](/Users/agilecho/code/VestaDraft/output/vesta-p2-03/20261122-c8-local-materials-resume/DSH-REVIEW-HANDOFF.md)
+
+
+## 2026-11-22 P2-03 GSAS 活动磁性接线
+
+**2026-11-22 P2-03 GSAS 活动磁性接线。** 已补 Source7 群、磁矩、资源安装与制品重开核验，正式资格表为空。静态候选未编译，C8、G29/G30 等全量准入，3000 秒未用。P2-03 partial、未接受，P2-04 未准入。 [本轮回执](/Users/agilecho/code/VestaDraft/output/vesta-p2-03/20261122-c8-gsas-active-wiring/RECEIPT.md)
+
+7 条独立对照复算，334 件 C7 保全。合成组拟覆盖有序群、坐标系、锚点、矢量持久化和资源 fresh；真实 EXP、同相 producer、frame／锚点仍缺。全卡 657.176254294／14400 秒，续办 519.148926127／10800 秒，构建 7/8、测试 28/30、取源与锁解析各 6/6。CaTi 不重试，YBa 与 Anatase 各留一次。[手动复审](/Users/agilecho/code/VestaDraft/output/vesta-p2-03/20261122-c8-gsas-active-wiring/DSH-REVIEW-HANDOFF.md)
+
+
+## 2026-11-22 P2-03 VICS／NVIS／MXD 续办
+
+**2026-11-22 P2-03 VICS／NVIS／MXD 续办。** 已补显式当前 VICS 显示／视图、R80 工程控制边界切换、MXD 报表逐轴证据和检查入口。候选未编译，缺原版轨迹、实际同版报表及其余联合准入输入。C8、G29/G30 未启动，3000 秒未用，P2-03 partial、未接受，P2-04 未准入。 [回执](/Users/agilecho/code/VestaDraft/output/vesta-p2-03/20261122-c8-vics-nvis-mxd-wiring/RECEIPT.md)
+
+静态复算 180 项，C7 封存 334 件。YBa 旧原字与锁定版实际序列化视图不同。全卡 657.176254294／14400 秒，续办 519.148926127／10800 秒，构建 7/8、测试 28/30、取源及锁各 6/6。CaTi 照旧零重试，YBa、Anatase 各留一次。用户手动转交 dsh。 [复审入口](/Users/agilecho/code/VestaDraft/output/vesta-p2-03/20261122-c8-vics-nvis-mxd-wiring/DSH-REVIEW-HANDOFF.md)
+
+## 2026-11-22 P2-03 C8 候选收口与静态准入
+
+**2026-11-22 P2-03 C8 候选收口。** GSAS、VICS／NVIS 和 MXD 已收为一份工作树候选，监管、用例和证据指向同一矩阵。730 项固定输入和 334 件 C7 封存复算通过。全量准入仍缺原件、原版轨迹及同版报表，三关未启动，原 3000 秒未用。P2-03 partial、未接受，P2-04 未准入。 [回执](/Users/agilecho/code/VestaDraft/output/vesta-p2-03/20261122-c8-consolidated-admission/RECEIPT.md) · [最小补件](/Users/agilecho/code/VestaDraft/output/vesta-p2-03/20261122-c8-consolidated-admission/INPUTS-NEEDED.md) · [手动独审](/Users/agilecho/code/VestaDraft/output/vesta-p2-03/20261122-c8-consolidated-admission/DSH-REVIEW-HANDOFF.md)
+
+静态核对 24 件工作树差异、21 件 Rust 语法、180 项夹具断言、84 条待跑 Rust、16 项待跑编译门禁、18 条已登记 G30 命令。全卡 657.176254294／14400 秒，续办 519.148926127／10800 秒，构建 7／8、测试 28／30，获取与锁解析各 6／6。用户手动转 dsh。
+
+## 2026-11-22 P2-03 C8 复审登记与后继
+
+**2026-11-22 P2-03 C8 独审登记与后继。** 原候选仅静态通过。后继补 GSAS 单相安装门禁、多相原件归档及拒绝用例，限定旧件兼容声明，分开保留源码与工作树文档。三关未启动，3000 秒未用。P2-03 partial、未接受，P2-04 未准入。 [后继回执](/Users/agilecho/code/VestaDraft/output/vesta-p2-03/20261122-c8-dsh-followup/RECEIPT.md) · [手动 dsh](/Users/agilecho/code/VestaDraft/output/vesta-p2-03/20261122-c8-dsh-followup/DSH-REVIEW-HANDOFF.md)
+
+## 2026-11-22 P2-03 主分支收拢
+
+按用户要求将现有 C8 静态后继候选提交到本地 main（`d82fd97`），同步项目与施工入口。提交源码与封存候选补丁逐字节一致，本地仅有 main。7 项真实资格及 C8、G29/G30 原停点维持，整卡仍 partial、未接受，P2-04 未准入。后续任务由用户另行安排。 [裁定](决策确认单.md) · [当前状态](README.md#p2-03-当前状态)
