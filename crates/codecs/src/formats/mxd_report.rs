@@ -73,7 +73,8 @@ fn read_group(rows: [&str; 3], start: usize) -> Result<Vec<Value>> {
             fixed_number(mean, 4, false)?;
             fixed_number(stat, 4, true)?;
             fixed_number(reference, 4, false)?;
-            axes.push(json!({"axis":["x","y","z"][j],"meanToken":mean,"statisticToken":stat,"referenceToken":reference}));
+            let axis = ["x", "y", "z"][j];
+            axes.push(json!({"axis":axis,"meanToken":mean,"statisticToken":stat,"referenceToken":reference}));
         }
         Ok(json!({"sourceOrdinal":start+i,"sourceLabel4":label,"axes":axes}))
     }).collect()
@@ -318,10 +319,10 @@ pub fn inspect(capture: &Capture) -> Result<Option<Value>> {
         let sites = observation["sites"].as_array().ok_or_else(|| invalid("MXD report sites"))?;
         let spans = report["spans"].as_array().ok_or_else(|| invalid("MXD report spans"))?;
         let groups = spans[1..].chunks_exact(3).zip(sites.chunks(4)).map(|(rows, sites)| {
-            json!({"firstSiteOrdinal":sites[0]["sourceOrdinal"],"siteCount":sites.len(),
-                "axes":["x", "y", "z"].into_iter().zip(rows).map(|(axis, span)| {
-                    json!({"axis":axis,"span":span})
-                }).collect::<Vec<_>>()})
+            let axes = ["x", "y", "z"].into_iter().zip(rows).map(|(axis, span)| {
+                json!({"axis":axis,"span":span})
+            }).collect::<Vec<_>>();
+            json!({"firstSiteOrdinal":sites[0]["sourceOrdinal"],"siteCount":sites.len(),"axes":axes})
         }).collect::<Vec<_>>();
         Ok(json!({"owner":report["owner"],"blockSpan":spans[0],"observation":observation,"groups":groups}))
     }).collect::<Result<Vec<_>>>()?;
