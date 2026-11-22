@@ -2,6 +2,8 @@
 
 ## P2-03 当前状态
 
+**2026-11-22 C8 布局续办。** 独立施工分支已将 GSAS 的 11 件自编控制数据逐字节纳入测试目录，8 个编译期引用可在干净检出解析。原 747 项输入已对应到新目录及副本，当前固定 761 项输入，85 个具名用例逐项对应源码，GSAS 下限已按 4 个既定用例修正。七项真实资格仍待补齐，C8、G29、G30 均未启动，原 3000 秒保持可用。 [本轮施工回执](/Users/agilecho/code/VestaDraft/output/vesta-p2-03/20261122-c8-layout-continuation/RECEIPT.md)
+
 **ArtCraft 布局接续。** 在已迁移的分支上，C8 的 Cargo 入口在仓库根，CLI 在 `apps/vestacraft-cli/`，产品库在 `crates/`。按新旧路径及摘要对照复核原 747 项输入，再为获准的 C8→G29→G30 锁定实际 cwd、入口、夹具和工具。历史固定路径及 C7 制品继续按原封存使用。后续 P2-04 的 Web 入口为 `apps/vestacraft-web/`，CA 安装副本走独立 npm 适配入口。 [目录施工登记](../ArtCraft目录对齐.md#施工登记) · [CA 打包入口](../../../packaging/ca/README.md)
 
 
