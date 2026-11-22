@@ -1,7 +1,7 @@
 * text=auto eol=lf
 
 # Preserve pinned product, contract, fixture and license bytes across checkouts.
-/app/source-package-manifest.json -text
+/packaging/p2-01/source-package-manifest.json -text
 /apps/** -text
 /assets/** -text
 /contracts/** -text

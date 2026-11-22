@@ -90,6 +90,7 @@
 | `kernel/crates/cli/`、`kernel/crates/<产品库>/` | `apps/vestacraft-cli/`、`crates/<产品库>/` |
 | `web/src/`、`tools/generate-source7.py` | `apps/vestacraft-web/src/`、`scripts/generate-source7.py` |
 | `BUILDING.md`、`licenses/` | `docs/开发与构建.md`、`assets/licenses/` |
+| `app/source-package-manifest.json` | [P2-01 封存清单副本](../../packaging/p2-01/source-package-manifest.json)，原包内仍按原路径复验 |
 | CA 工作区 `app/` 的源码与构建 | `app/source/` 为完整开发源树，`app/package.json` 为独立 npm 构建适配入口 |
 
 P2-03 仍缺 7 项真实资格，保留 C8、G29、G30 的原 3000 秒和全部原停点。C8 工程入口从仓库根运行，产品锁保持原外部依赖。P2-04 消费 [CA 适配入口](../../packaging/ca/README.md) 及其制品约定。
