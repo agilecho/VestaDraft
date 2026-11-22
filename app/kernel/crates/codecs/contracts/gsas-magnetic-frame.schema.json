@@ -1,0 +1,54 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "urn:draft:fc:gsas-magnetic-frame:1",
+  "title": "Selected GSAS CMS-system4 magnetic frame definition",
+  "type": "object",
+  "properties": {
+    "schemaVersion": {
+      "const": "FC-GSAS-magnetic-frame-1"
+    },
+    "scopeInputDigest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "convention": {
+      "const": "CMS2015-GSAS-system4"
+    },
+    "sourceCellBasisA": {
+      "type": "array",
+      "items": {
+        "type": "array",
+        "items": {
+          "type": "number"
+        },
+        "minItems": 3,
+        "maxItems": 3
+      },
+      "minItems": 3,
+      "maxItems": 3
+    },
+    "quantity": {
+      "const": "magnetic-moment"
+    },
+    "unit": {
+      "const": "muB"
+    },
+    "conversionRuleId": {
+      "const": "draft.gsas-cms4-moment"
+    },
+    "conversionRuleVersion": {
+      "const": "1"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "scopeInputDigest",
+    "convention",
+    "sourceCellBasisA",
+    "quantity",
+    "unit",
+    "conversionRuleId",
+    "conversionRuleVersion"
+  ]
+}

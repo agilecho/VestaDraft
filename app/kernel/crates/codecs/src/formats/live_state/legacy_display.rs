@@ -26,6 +26,8 @@ pub(super) fn rule_digest() -> String {
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub(super) struct DisplayInput {
     legacy_source: String,
+    #[serde(default)]
+    current_values: bool,
     scene_slots: Map<String, Value>,
     lights: Vec<Value>,
     atom_types: Vec<Value>,
@@ -436,6 +438,7 @@ fn lights_check(lights: &[Value]) -> Result<()> {
 
 pub(super) fn install(
     mut input: DisplayInput,
+    current_view: Option<view::ViewInput>,
     source: &mut Value,
     capture: &mut Capture,
     read: &mut impl FnMut(&str) -> Result<Vec<u8>>,
@@ -443,14 +446,21 @@ pub(super) fn install(
 ) -> Result<()> {
     let scene = capture.content.scene_id.as_str().to_owned();
     let raw = read(&input.legacy_source)?;
+    let archived_view = source_view(&raw)?;
     lights_check(&input.lights)?;
-    apply_scene(
-        &raw,
-        &mut input.scene_slots,
-        &mut input.lights,
-        &mut input.polyhedron_alpha,
-        &mut input.shape_alpha,
-    )?;
+    if input.current_values {
+        if current_view.is_none() {
+            return Err(invalid("VICS current display requires an explicit current view"));
+        }
+    } else {
+        apply_scene(
+            &raw,
+            &mut input.scene_slots,
+            &mut input.lights,
+            &mut input.polyhedron_alpha,
+            &mut input.shape_alpha,
+        )?;
+    }
     let mut body = json!({"schemaVersion":"FC-vics-legacy-display-current-1","captureRole":"actual-current-native-display",
         "scene":entity("scene",&scene),"sceneSlots":input.scene_slots,"lights":input.lights});
     for (pop, values) in populations(source, &scene).into_iter().zip([
@@ -501,7 +511,21 @@ pub(super) fn install(
         return Err(invalid("legacy display already installed"));
     }
     members.insert(FIELD.into(), tagged(TAG, &body)?);
-    let groups = sections(&raw)?;
+    view::install(current_view.unwrap_or(archived_view), &scene, source)?;
+    let resource = retained::install(capture, ids, KEY, raw)?;
+    let row = history(&json!(scene), &resource, retained::raw(capture, &resource)?)?;
+    source["metadata"]
+        .as_array_mut()
+        .ok_or_else(|| invalid("VICS document metadata"))?
+        .push(row);
+    source["resources"].as_array_mut().ok_or_else(|| invalid("VICS resource inventory"))?
+        .push(json!({"id":resource.id,"sha256":resource.sha256,"byteLength":resource.byte_length,"storageKind":"owned",
+            "sourceDescriptorDigest":current_source7::descriptor_digest(&resource)}));
+    Ok(())
+}
+
+fn source_view(raw: &[u8]) -> Result<view::ViewInput> {
+    let groups = sections(raw)?;
     let mut scenes = groups.iter().filter(|s| s.keyword == "SCENE");
     let scene_section = scenes
         .next()
@@ -533,26 +557,25 @@ pub(super) fn install(
         .flatten()
         .map(|v| float(v).map(|n| format!("{:08x}", n.to_bits())))
         .collect::<Result<Vec<_>>>()?;
-    view::install(
-        view::ViewInput {
-            matrix_bits: matrix.map(|n| format!("{:016x}", n.to_bits())),
-            settings_bits: settings
-                .try_into()
-                .map_err(|_| invalid("legacy VICS SCENE four settings"))?,
-        },
-        &scene,
-        source,
-    )?;
-    let resource = retained::install(capture, ids, KEY, raw)?;
-    let row = history(&json!(scene), &resource, retained::raw(capture, &resource)?)?;
-    source["metadata"]
-        .as_array_mut()
-        .ok_or_else(|| invalid("VICS document metadata"))?
-        .push(row);
-    source["resources"].as_array_mut().ok_or_else(|| invalid("VICS resource inventory"))?
-        .push(json!({"id":resource.id,"sha256":resource.sha256,"byteLength":resource.byte_length,"storageKind":"owned",
-            "sourceDescriptorDigest":current_source7::descriptor_digest(&resource)}));
-    Ok(())
+    Ok(view::ViewInput {
+        matrix_bits: matrix.map(|n| format!("{:016x}", n.to_bits())),
+        settings_bits: settings
+            .try_into()
+            .map_err(|_| invalid("legacy VICS SCENE four settings"))?,
+    })
+}
+
+pub(super) fn inspect_source_views(capture: &Capture) -> Result<Vec<Value>> {
+    capture.content.resources.iter()
+        .filter(|row| matches!(row.logical_key.as_str(), KEY | super::vics_history::KEY))
+        .map(|row| {
+            let view = source_view(retained::raw(capture, row)?)?;
+            Ok(json!({
+                "role":"original-scene-record",
+                "sourceResourceId":row.id,"sha256":row.sha256,"byteLength":row.byte_length,
+                "matrix16":words(view.matrix_bits,"F64Bits"),"settings4":words(view.settings_bits,"F32Bits"),
+            }))
+        }).collect()
 }
 
 pub(super) fn inspect(source: &Value) -> Result<Vec<Value>> {
@@ -606,6 +629,9 @@ pub(super) fn verify(capture: &Capture, source: &Value) -> Result<()> {
     match (rows.next(), resource, views.len()) {
         (None, None, 0) => Ok(()),
         (Some(row), Some(res), 1) if rows.next().is_none() => {
+            if !view::inspect(source)?.iter().any(|camera| camera["scene"] == views[0]["scene"]) {
+                return Err(invalid("VICS current display has no matching current scene view"));
+            }
             if *row
                 != history(
                     &views[0]["scene"]["objectId"],

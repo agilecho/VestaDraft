@@ -92,6 +92,39 @@ fn mxd_file06_all_groups_reopen_from_exact_report_bytes() {
     assert_eq!(groups[4]["members"]["sourceOrdinal"]["value"], "4");
     assert_eq!(after.resources[&after.content.resources[0].sha256], raw);
     assert!(after.content.phases.is_empty());
+    let inspected = vesta_codecs::formats::mxd_report::inspect(&after).unwrap().unwrap();
+    assert_eq!(inspected["reports"][0]["groups"][1]["firstSiteOrdinal"], 4);
+    let span = &inspected["reports"][0]["groups"][1]["axes"][2]["span"];
+    let start: usize = span["byteOffset"].as_str().unwrap().parse().unwrap();
+    let length: usize = span["byteLength"].as_str().unwrap().parse().unwrap();
+    assert_eq!(span["sourceResourceId"], after.content.resources[0].id.as_str());
+    assert_eq!(vesta_model::digest(&raw[start..start + length]), span["sha256"]);
+    assert_eq!(inspected["reports"][0]["observation"]["sites"][4]["axes"][2]["axis"], "z");
+    let mut misplaced = open.capture.clone();
+    let mut doc = misplaced.source.as_ref().unwrap().to_value().unwrap();
+    let row = &mut doc["metadata"][0];
+    row["tree"] = serde_json::json!({"kind":"Map","members":{"nested":row["tree"]}});
+    row["dialect"] = serde_json::json!("unqualified-placement-control");
+    misplaced.source = Some(vesta_model::source7::SourceDocument::decode(doc).unwrap());
+    misplaced.state_digest = Capture::digest_state(&misplaced.content, misplaced.source.as_ref()).unwrap();
+    let wrong = encode_verified(&misplaced, "wrong-mxd-location.vesta", Ids::new([175; 16])).unwrap_err();
+    assert_eq!(wrong.message, "MXD COORDN observations must be top-level owned report blocks");
+    let mut copied_resource = open.capture.clone();
+    let mut doc = copied_resource.source.as_ref().unwrap().to_value().unwrap();
+    let mut other = copied_resource.content.resources[0].clone();
+    other.id = Ids::new([165; 16]).next_id().into();
+    other.logical_key = "test/duplicate-report".into();
+    let mut typed_resource = doc["resources"][0].clone();
+    typed_resource["id"] = serde_json::json!(other.id);
+    doc["resources"].as_array_mut().unwrap().push(typed_resource);
+    doc["metadata"][0]["tree"]["payload"]["members"]["producerContext"]["members"]["originalReport"]
+        ["resourceId"] = serde_json::json!(other.id);
+    copied_resource.content.resources.push(other);
+    copied_resource.source = Some(vesta_model::source7::SourceDocument::decode(doc).unwrap());
+    copied_resource.state_digest =
+        Capture::digest_state(&copied_resource.content, copied_resource.source.as_ref()).unwrap();
+    let wrong = encode_verified(&copied_resource, "wrong-mxd-resource.vesta", Ids::new([166; 16])).unwrap_err();
+    assert_eq!(wrong.message, "MXD COORDN source blocks or spans differ");
     let mut corrupt = raw;
     let at = corrupt.windows(7).position(|w| w == b"-1.2345").unwrap();
     corrupt[at] = b'*';
@@ -135,6 +168,48 @@ fn vics_retains_exact_legacy_archive_and_installs_current_display() {
     let last = history["spans"].as_array().unwrap().last().unwrap();
     let at: usize = last["byteOffset"].as_str().unwrap().parse().unwrap();
     assert!(raw[at..].starts_with(b"DELOB\r\n"));
+}
+
+#[test]
+fn vics_explicit_current_words_and_old_source_view_survive_separately() {
+    use serde_json::json;
+    use vesta_codecs::formats::live_state::{
+        NativeStateInput, inspect_native_state, open_legacy_vics, open_native_state,
+    };
+    let raw = fixtures(
+        "output/vesta-study/20261108-113622/reviews/20261110-104021-s05-completion/input-sources/VS-0080/YBa2Cu4O8.vcs",
+    );
+    let historical = open_legacy_vics(&raw, Ids::new([171; 16])).unwrap().capture;
+    let archive = inspect_native_state(&historical).unwrap().unwrap();
+    assert_eq!(archive["legacySourceViews"][0]["settings4"][2]["ieeeHexBE"], "c00b851f");
+    assert_eq!(archive["legacyViews"], json!([]));
+
+    let mut manifest: Value = serde_json::from_slice(&fixtures(
+        "output/vesta-p2-03/20261121-c8-retained-formats/fixtures/legacy.vstate",
+    )).unwrap();
+    manifest["legacyDisplay"]["currentValues"] = json!(true);
+    manifest["legacyDisplay"]["sceneSlots"]["0x270"] = json!(91);
+    let make = |wire: &Value| NativeStateInput::parse(&serde_json::to_vec(wire).unwrap()).unwrap();
+    assert!(open_native_state(make(&manifest), None, |_| Ok(raw.clone()), Ids::new([172; 16])).is_err());
+    manifest["legacyView"] = json!({"matrixBits":std::array::from_fn::<_, 16, _>(|i|
+        if i % 5 == 0 { "3ff0000000000000" } else { "0000000000000000" }),
+        "settingsBits":["80000000","00000000","00000000","3fa00000"]});
+    let first = open_native_state(make(&manifest), None, |_| Ok(raw.clone()), Ids::new([173;16])).unwrap().capture;
+    let after = save_and_reopen(&first, "separate-legacy-view.vesta");
+    let observed = inspect_native_state(&after).unwrap().unwrap();
+    assert_eq!(observed["legacySourceViews"][0]["settings4"][2]["ieeeHexBE"], "c00b851f");
+    assert_eq!(observed["legacyViews"][0]["settings4"][0]["ieeeHexBE"], "80000000");
+    assert_eq!(observed["legacyViews"][0]["settings4"][3]["ieeeHexBE"], "3fa00000");
+    assert_eq!(observed["legacyDisplays"][0]["sceneSlots"]["0x270"], 91);
+    assert_eq!(observed["legacyViews"][0]["scene"]["objectId"], after.content.scene_id.as_str());
+    assert_ne!(observed["legacyViews"][0]["scene"]["objectId"], first.content.scene_id.as_str());
+    let mut wrong = after;
+    let mut doc = wrong.source.as_ref().unwrap().to_value().unwrap();
+    doc["scenes"][0]["cameraRaw"] = json!({"kind":"Null"});
+    wrong.source = Some(vesta_model::source7::SourceDocument::decode(doc).unwrap());
+    wrong.state_digest = Capture::digest_state(&wrong.content, wrong.source.as_ref()).unwrap();
+    let error = encode_verified(&wrong, "missing-current-view.vesta", Ids::new([174;16])).unwrap_err();
+    assert_eq!(error.message, "VICS current display has no matching current scene view");
 }
 
 #[test]
@@ -250,6 +325,32 @@ fn nvis_reopens_nonempty_face_bond_and_polyhedron_selections() {
         slots[4]["resolution"]["selections"][0]["applicability"],
         "active"
     );
+    use serde_json::json;
+    use vesta_commands::{EngineV2, Limits};
+    use vesta_model::RestoredProject;
+    let transition = |capture: Capture, min, max| {
+        let project = RestoredProject::new(capture, Ids::new([167; 16])).unwrap();
+        let mut engine = EngineV2::loaded(project, Ids::new([168; 16]), Limits::default()).unwrap();
+        let phase = engine.content().phases[0].id.clone();
+        engine.execute(&engine.document(), &json!({"command":"boundary.set",
+            "params":{"phaseId":phase,"min":min,"max":max}})).unwrap();
+        save_and_reopen(&engine.capture().unwrap(), "nvis-boundary-edit.vesta")
+    };
+    let shrunk = transition(reopened, [0.4, 0., 0.], [1.; 3]);
+    let checked = inspect_native_state(&shrunk).unwrap().unwrap();
+    let sets = &checked["nativeFlags"][0]["currentFlagSets"];
+    assert_eq!(sets[3]["resolution"]["selections"][0]["applicability"], "latent");
+    assert_eq!(sets[3]["resolution"]["selections"][1]["applicability"], "active");
+    assert_eq!(sets[4]["resolution"]["selections"][0]["applicability"], "latent");
+    let shrunk_source = shrunk.source.as_ref().unwrap().to_value().unwrap();
+    assert_eq!(shrunk_source["boundaries"][0]["value"]["minimumFractional"], json!([0.4, 0., 0.]));
+    assert_eq!(sets[4]["resolution"]["selections"][0]["target"]["boundaryRuleId"]["objectId"],
+        shrunk_source["boundaries"][0]["id"]);
+    let expanded = transition(shrunk, [0.; 3], [1.; 3]);
+    let checked = inspect_native_state(&expanded).unwrap().unwrap();
+    let sets = &checked["nativeFlags"][0]["currentFlagSets"];
+    assert_eq!(sets[3]["resolution"]["selections"][0]["applicability"], "active");
+    assert_eq!(sets[4]["resolution"]["selections"][0]["applicability"], "active");
 }
 
 #[test]
@@ -420,6 +521,7 @@ fn gsas_fixed_column_history_reopens_without_promoting_magnetic_ops() {
 
 #[test]
 fn gsas_rejects_missing_wrong_phase_duplicate_and_changed_persisted_words() {
+    use serde_json::json;
     use vesta_codecs::formats::gsas_exp;
     use vesta_model::source7::SourceDocument;
     let raw = fixtures("output/vesta-p2-03/20261121-c8-frozen-format-static/gsas-wire-control.exp");
@@ -446,6 +548,27 @@ fn gsas_rejects_missing_wrong_phase_duplicate_and_changed_persisted_words() {
             "E_REOPEN_COVERAGE"
         );
     }
+    let mut unqualified = gsas_exp::open(&raw, Ids::new([196; 16])).unwrap().capture;
+    let mut source = unqualified.source.as_ref().unwrap().to_value().unwrap();
+    let original = fixtures("app/kernel/crates/model/tests/fixtures/source7/rich-persistence.valid.json");
+    let current: Value = serde_json::from_slice(&original).unwrap();
+    let mut phase = current["phaseGraph"]["phases"][0].clone();
+    phase["fieldIds"] = json!([]);
+    phase["shapeId"] = Value::Null;
+    source["phaseGraph"] = json!({"root":phase["id"],"phases":[phase]});
+    source["sourceEntryOrder"] = json!([{"kind":"phase","id":source["phaseGraph"]["root"]}]);
+    let mut magnetic_group = source.clone();
+    magnetic_group["phaseGraph"]["phases"][0]["structure"]["group"]["kind"] = json!("magnetic");
+    source["vectors"] = current["vectors"].clone();
+    for promoted in [magnetic_group, source] {
+        unqualified.source = Some(SourceDocument::decode(promoted).unwrap());
+        let rejected = encode_verified(
+            &unqualified, "unqualified-gsas-group.vesta", Ids::new([197; 16]),
+        ).unwrap_err();
+        assert_eq!(rejected.code, "E_REOPEN_COVERAGE");
+        assert_eq!(rejected.message, "GSAS current magnetic state requires a qualified original chart provider");
+    }
+
     let mut capture = gsas_exp::open(&raw, Ids::new([193; 16])).unwrap().capture;
     let mut source = capture.source.as_ref().unwrap().to_value().unwrap();
     source["metadata"][0]["tree"]["members"]["phases"]["items"][1]["members"]["spinFlipWords"]["items"]

@@ -23,7 +23,7 @@ const ANATASE_PRODUCER: &str = "draft.native-anatase-source-reader";
 pub(super) fn rule_digest() -> String {
     digest(&canonical(&json!([
         include_str!("../../../contracts/native-flag-state.contract.json"),
-        "draft.explicit-r80-p1-box-neighbor-population-1",
+        "draft.explicit-r80-p1-box-neighbor-population-2",
         super::nvis_molecule::DIALECT
     ])))
 }
@@ -320,7 +320,7 @@ fn image(owner: &Phase, index: usize) -> Result<Value> {
     Ok(json!({"kind":"atom-image","image":image_ref(owner,index)?}))
 }
 
-fn active(owner: &Phase, index: usize) -> bool {
+pub(super) fn active(owner: &Phase, index: usize) -> bool {
     let frac = owner.sites[index].frac;
     (0..3).all(|a| owner.boundary_min[a] <= frac[a] && frac[a] <= owner.boundary_max[a])
 }
@@ -362,7 +362,7 @@ fn enumeration(
 
 type SelectedObjects<'a> = [&'a [usize]; 3];
 
-fn object_selection(pop: &[Value], indices: &[usize]) -> Result<Value> {
+fn object_selection(pop: &[nvis_objects::Target], indices: &[usize]) -> Result<Value> {
     let mut seen = BTreeSet::new();
     let selected = indices
         .iter()
@@ -373,7 +373,7 @@ fn object_selection(pop: &[Value], indices: &[usize]) -> Result<Value> {
             let target = pop.get(i).ok_or_else(|| {
                 invalid("NVIS current object index outside the actual population")
             })?;
-            Ok(json!({"target":target,"applicability":"active"}))
+            Ok(json!({"target":target.address,"applicability":if target.active {"active"} else {"latent"}}))
         })
         .collect::<Result<Vec<_>>>()?;
     Ok(json!({"kind":"qualified","selections":selected}))
@@ -569,11 +569,11 @@ pub(super) fn refresh(capture: &Capture, source: &mut Value) -> Result<()> {
                 let at = pop
                     .for_key(key)
                     .iter()
-                    .position(|target| row["target"] == *target)
+                    .position(|target| row["target"] == target.address)
                     .ok_or_else(|| {
                         invalid("NVIS selected face, bond or polyhedron has no current target")
                     })?;
-                if row["applicability"] != "active" {
+                if !matches!(row["applicability"].as_str(), Some("active" | "latent")) {
                     return Err(invalid("NVIS selected object applicability"));
                 }
                 slots.push(at);
@@ -597,6 +597,9 @@ pub(super) fn refresh(capture: &Capture, source: &mut Value) -> Result<()> {
         ));
     }
     source["metadata"][*active_pos] = updated;
+    if let Some(objects) = &objects {
+        objects.sync_boundary(c.owner, source)?;
+    }
     Ok(())
 }
 

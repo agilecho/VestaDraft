@@ -13,24 +13,38 @@ source_model! {
 }
 
 pub const ACTIVE_TABLE_TAG: &str = "R80GeometryTable1";
+pub const R80_TABLE_DIALECT: &str = "native-r80-orffe-1";
 pub const RIETAN_OWNER_DIALECT: &str = "native-rietan-phase-1";
 pub const RIETAN_TABLE_DIALECT: &str = "native-rietan-orffe-1";
+pub const TABLE_PRODUCER_VERSION: &str = "P2-03/full-source7";
 
 pub fn active_tables(source: &Value) -> Result<Vec<R80GeometryTable>> {
     let mut results = Vec::new();
     for row in source["metadata"].as_array().into_iter().flatten() {
-        if row["tree"]["tag"] != ACTIVE_TABLE_TAG {
+        let format = match row["dialect"].as_str() {
+            Some(R80_TABLE_DIALECT) => Some("VM18-I01"),
+            Some(RIETAN_TABLE_DIALECT) => Some("RIETAN"),
+            _ => None,
+        };
+        let has_active_table = row["tree"]["tag"] == ACTIVE_TABLE_TAG;
+        if !has_active_table && format.is_none() {
             continue;
         }
         let invalid = || Error::new("E_REOPEN_OWNER", "ORFFE table metadata owner or producer");
+        if !has_active_table
+            || format.is_none_or(|format| row["formatRef"] != format)
+            || row["producerId"] != "VestaDraft"
+            || row["producerVersion"] != TABLE_PRODUCER_VERSION
+            || !row["spans"].as_array().is_some_and(Vec::is_empty)
+        {
+            return Err(invalid());
+        }
         let node = sa::Node::from_wire(&row["tree"]["payload"])?;
         let value = node.data()?;
         let table: R80GeometryTable =
             serde_json::from_value(value).map_err(|e| Error::new("E_SCHEMA", e.to_string()))?;
         if row["owner"]["kind"] != "phase"
             || row["owner"]["id"] != table.owner.as_str()
-            || row["producerId"] != "VestaDraft"
-            || !matches!(row["dialect"].as_str(), Some("native-r80-orffe-1" | RIETAN_TABLE_DIALECT))
             || results
                 .iter()
                 .any(|previous: &R80GeometryTable| previous.owner == table.owner)

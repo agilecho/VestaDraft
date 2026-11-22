@@ -288,8 +288,15 @@ fn run() -> Result<()> {
                 }
                 inspection["fields"] = json!(rows);
             }
-            if let Some(native) = inspect_native_state(&e.capture()?)? {
+            let captured = e.capture()?;
+            if let Some(native) = inspect_native_state(&captured)? {
                 inspection["nativeCurrentState"] = native;
+            }
+            if let Some(magnetic) = vesta_codecs::formats::gsas_exp::inspect_magnetic(&captured)? {
+                inspection["gsasMagneticState"] = magnetic;
+            }
+            if let Some(report) = vesta_codecs::formats::mxd_report::inspect(&captured)? {
+                inspection["mxdReport"] = report;
             }
             let tables = e.active_orffe()?;
             if !tables.is_empty() {

@@ -15,10 +15,16 @@ pub(super) struct ObjectInput {
 }
 
 pub(super) struct Populations {
-    pub faces: Vec<Value>,
-    pub bonds: Vec<Value>,
-    pub polyhedra: Vec<Value>,
+    faces: Vec<Target>,
+    bonds: Vec<Target>,
+    polyhedra: Vec<Target>,
+    boundary_id: String,
     geometry: Value,
+}
+
+pub(super) struct Target {
+    pub(super) address: Value,
+    pub(super) active: bool,
 }
 
 const AXES: [[i32; 3]; 6] = [
@@ -71,17 +77,17 @@ fn check_recipe(phase: &Phase, raw: &[u8]) -> Result<Vec<usize>> {
         "127", "127",
     ]) || phase.cell.length_a != [10.; 3]
         || phase.cell.angles_deg != [90.; 3]
-        || phase.boundary_min != [0.; 3]
-        || phase.boundary_max != [1.; 3]
+        || phase.boundary_min.iter().any(|&v| v < 0.)
+        || phase.boundary_max.iter().any(|&v| v > 1.)
         || phase.sites.len() != 7
         || phase.sites[0].element != "Si"
         || phase.sites[0].frac != [0.5; 3]
     {
         return Err(invalid("NVIS selected P1 bond and boundary recipe"));
     }
-    // All phase images in the closed unit boundary are their origin instances.
-    // The six nearest O offsets form the complete octahedral vertex list in
-    // source order. No ORFFE reported value or archived flag defines a bond.
+    // All eligible images in the supported boundary remain origin instances.
+    // The full octahedral addresses survive even when the current boundary
+    // clips members. Neither ORFFE values nor archived ordinals define a bond.
     let mut signs = Vec::new();
     for site in &phase.sites[1..] {
         let delta = site.frac.map(|value| (value - 0.5) * 10.0);
@@ -190,9 +196,9 @@ pub(super) fn capture(phase: &Phase, raw: &[u8], source: &Value) -> Result<Optio
         let signature = digest(&canonical(
             &json!({"normal":normal,"offsetA":offset,"operation":"identity-P1"}),
         ));
-        faces.push(json!({"kind":"morphology-face","shapeId":entity("shape",shape_id),
+        faces.push(Target { address: json!({"kind":"morphology-face","shapeId":entity("shape",shape_id),
             "halfspaceId":entity("shape-halfspace",id),"operationId":entity("symmetry-operation",phase.symmetry_op_id.as_str()),
-            "orientedFaceSignature":signature}));
+            "orientedFaceSignature":signature}), active: true });
     }
     checked_bounds(bounds)?;
     let rules = rows(&source["bondRules"])
@@ -216,7 +222,13 @@ pub(super) fn capture(phase: &Phase, raw: &[u8], source: &Value) -> Result<Optio
     let boundary_id = extent["id"]
         .as_str()
         .ok_or_else(|| invalid("NVIS boundary id"))?;
-    if **extent != boundary(phase, boundary_id, rule_id) {
+    let mut expected = boundary(phase, boundary_id, rule_id);
+    // The previous typed boundary can precede an actual Engine boundary edit.
+    // Its identity and recipe must still agree with the installed definitions.
+    for key in ["minimumFractional", "maximumFractional"] {
+        expected["value"][key] = extent["value"][key].clone();
+    }
+    if **extent != expected {
         return Err(invalid("NVIS actual boundary recipe differs"));
     }
     let origin = |i: usize| super::native_flags::image_ref(phase, i);
@@ -225,29 +237,47 @@ pub(super) fn capture(phase: &Phase, raw: &[u8], source: &Value) -> Result<Optio
         .iter()
         .map(|&i| origin(i))
         .collect::<Result<Vec<_>>>()?;
+    let visible = |index| super::native_flags::active(phase, index);
     let bonds = corner
         .iter()
-        .map(|to| json!({"kind":"bond","ruleId":entity("bond-rule",rule_id),"images":[from,to]}))
+        .zip(&vertices)
+        .map(|(to, &i)| Target {
+            address: json!({"kind":"bond","ruleId":entity("bond-rule",rule_id),"images":[from,to]}),
+            active: visible(0) && visible(i),
+        })
         .collect();
     let polyhedra = vec![
-        json!({"kind":"polyhedron","boundaryRuleId":entity("boundary",boundary_id),
-        "center":from,"vertices":corner}),
+        Target {
+            address: json!({"kind":"polyhedron","boundaryRuleId":entity("boundary",boundary_id),
+                "center":from,"vertices":corner}),
+            active: visible(0) && vertices.iter().copied().all(visible),
+        },
     ];
     Ok(Some(Populations {
         faces,
         bonds,
         polyhedra,
+        boundary_id: boundary_id.into(),
         geometry: json!({"box":bounds,"bondEndpoints":vertices,
         "center":0,"shapeOperations":"identity-P1"}),
     }))
 }
 
 impl Populations {
+    pub(super) fn sync_boundary(&self, phase: &Phase, source: &mut Value) -> Result<()> {
+        let row = source["boundaries"].as_array_mut()
+            .and_then(|rows| rows.iter_mut().find(|row| row["id"] == self.boundary_id))
+            .ok_or_else(|| invalid("NVIS installed boundary lost its identity"))?;
+        row["value"]["minimumFractional"] = json!(phase.boundary_min);
+        row["value"]["maximumFractional"] = json!(phase.boundary_max);
+        Ok(())
+    }
+
     pub(super) fn geometry(&self) -> &Value {
         &self.geometry
     }
 
-    pub(super) fn for_key(&self, key: &str) -> &[Value] {
+    pub(super) fn for_key(&self, key: &str) -> &[Target] {
         match key {
             "LBLSP" => &self.faces,
             "DLBND" => &self.bonds,

@@ -451,6 +451,19 @@ pub(super) fn verify_spans(
                 ("source-entity", entry.id.as_str(), resource.source_descriptor_digest.clone()));
         }
     }
+    for (index, vector) in typed.vectors.iter().enumerate() {
+        for row in source["vectors"][index]["metadata"].as_array().into_iter().flatten()
+            .filter(|row| row["dialect"] == super::GSAS_MOMENT_QUANTITY_DIALECT)
+        {
+            let expected_digest = row["tree"]["members"]["sourceDescriptorDigest"]["value"]
+                .as_str().ok_or_else(|| source_error("GSAS source moment descriptor digest"))?;
+            if expected_descriptors.insert(
+                super::gsas_moment_use(index), ("vector", vector.id.as_str(), expected_digest.into()),
+            ).is_some() {
+                return Err(source_error("GSAS source moment repeats its descriptor use"));
+            }
+        }
+    }
     let mut visitor = Spans {
         schemas,
         resources,

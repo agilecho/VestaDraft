@@ -14,7 +14,7 @@ use vesta_model::{
     source7::SourceDocument,
 };
 
-const KEY: &str = "vics/historical-source";
+pub(super) const KEY: &str = "vics/historical-source";
 const DIALECT: &str = "vics-historical-phase-1";
 const YBA: &str = "674ea1de5a9404baeeb96028047646abe401afee09390499ab0f16c654d90d9f";
 const CATI: &str = "135f3d2a41f7df73fbc4b5aaf4fbafb1354918c94350483cb746962cf861cba2";

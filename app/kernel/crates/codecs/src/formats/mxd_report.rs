@@ -5,7 +5,7 @@ use super::{
     retained_source as retained,
 };
 use serde_json::{Value, json};
-use vesta_model::source7::SourceDocument;
+use vesta_model::{source7::SourceDocument, source_audit::Node};
 use vesta_model::{Capture, Error, Ids, PersistentResource, RestoredProject, Result, digest};
 
 const ORTHO: &str = "AVERAGE COORDINATES, (STANDARD DEVIATIONS, A^2) AND EXPERIMENTAL ONES";
@@ -22,7 +22,7 @@ const DIALECT: &str = "mxd-file06-coordn-observations-1";
 pub(super) fn rule_digest() -> String {
     digest(&vesta_model::source_audit::canonical(&json!([
         include_str!("../../contracts/mxd-report-format.contract.json"),
-        "file06-selected-fixed-headings-and-declared-version-1"
+        "file06-selected-fixed-headings-declared-version-and-axis-spans-2"
     ])))
 }
 
@@ -205,6 +205,7 @@ fn metadata(document: &Value, res: &PersistentResource, raw: &[u8]) -> Result<Ve
             .collect::<Vec<_>>();
         i += 1;
         let mut sites = Vec::new();
+        let mut axis_spans = Vec::new();
         let mut last_width = 128;
         while let Some(first) = lines.get(i).filter(|row| !row.text.trim().is_empty()) {
             if last_width != 128 {
@@ -217,6 +218,7 @@ fn metadata(document: &Value, res: &PersistentResource, raw: &[u8]) -> Result<Ve
                 [first.text, rows[1].text, rows[2].text],
                 sites.len(),
             )?);
+            axis_spans.extend(rows.iter().map(|row| retained::span(res, raw, row.start, row.end)));
             last_width = first.text.len();
             i += 3;
             if sites.len() > 1024 {
@@ -232,9 +234,10 @@ fn metadata(document: &Value, res: &PersistentResource, raw: &[u8]) -> Result<Ve
                 "originalReport":{"kind":"BytesRef","resourceId":res.id,"sha256":res.sha256,"byteLength":res.byte_length},
                 "frameAndControls":"unavailable-for-active-geometry"},"sites":sites});
         let extent = retained::span(res, raw, lines[start].start, lines[i - 1].end);
+        axis_spans.insert(0, extent);
         records.push(json!({"owner":{"kind":"document","id":document},"producerId":"draft.mxd-file06-reader",
             "producerVersion":"1","formatRef":"VM18-I29","dialect":DIALECT,"tree":tagged(TAG,&body)?,
-            "spans":[extent]}));
+            "spans":axis_spans}));
     }
     if records.is_empty() {
         return Err(invalid("no selected MXD COORDN block"));
@@ -256,12 +259,29 @@ pub fn open(raw: &[u8], mut ids: Ids) -> Result<RestoredProject> {
 }
 
 pub(super) fn verify(capture: &Capture, source: &Value) -> Result<()> {
+    verified_reports(capture, source).map(|_| ())
+}
+
+fn verified_reports<'a>(capture: &Capture, source: &'a Value) -> Result<Vec<&'a Value>> {
+    fn report_tags(node: &Value) -> usize {
+        match node {
+            Value::Object(fields) => {
+                usize::from(node["kind"] == "TaggedVariant" && node["tag"] == TAG)
+                    + fields.values().map(report_tags).sum::<usize>()
+            }
+            Value::Array(rows) => rows.iter().map(report_tags).sum(),
+            _ => 0,
+        }
+    }
     let actual = source["metadata"]
         .as_array()
         .into_iter()
         .flatten()
         .filter(|row| row["tree"]["tag"] == TAG || row["dialect"] == DIALECT)
         .collect::<Vec<_>>();
+    if report_tags(source) != actual.len() {
+        return Err(invalid("MXD COORDN observations must be top-level owned report blocks"));
+    }
     let slot = capture
         .content
         .resources
@@ -269,7 +289,7 @@ pub(super) fn verify(capture: &Capture, source: &Value) -> Result<()> {
         .find(|r| r.logical_key == KEY);
     let Some(row) = slot else {
         return if actual.is_empty() {
-            Ok(())
+            Ok(actual)
         } else {
             Err(invalid("MXD retained report has no independent source use"))
         };
@@ -279,8 +299,31 @@ pub(super) fn verify(capture: &Capture, source: &Value) -> Result<()> {
         row,
         retained::raw(capture, row)?,
     )?;
-    if !actual.into_iter().eq(expected.iter()) {
+    if !actual.iter().copied().eq(expected.iter()) {
         return Err(invalid("MXD COORDN source blocks or spans differ"));
     }
-    Ok(())
+    Ok(actual)
+}
+
+/// Inspect the retained COORDN blocks and exact physical input rows.
+pub fn inspect(capture: &Capture) -> Result<Option<Value>> {
+    let Some(source) = &capture.source else { return Ok(None); };
+    let doc = source.to_value()?;
+    let reports = verified_reports(capture, &doc)?;
+    if reports.is_empty() {
+        return Ok(None);
+    }
+    let reports = reports.into_iter().map(|report| {
+        let observation = Node::from_wire(&report["tree"]["payload"])?.data()?;
+        let sites = observation["sites"].as_array().ok_or_else(|| invalid("MXD report sites"))?;
+        let spans = report["spans"].as_array().ok_or_else(|| invalid("MXD report spans"))?;
+        let groups = spans[1..].chunks_exact(3).zip(sites.chunks(4)).map(|(rows, sites)| {
+            json!({"firstSiteOrdinal":sites[0]["sourceOrdinal"],"siteCount":sites.len(),
+                "axes":["x", "y", "z"].into_iter().zip(rows).map(|(axis, span)| {
+                    json!({"axis":axis,"span":span})
+                }).collect::<Vec<_>>()})
+        }).collect::<Vec<_>>();
+        Ok(json!({"owner":report["owner"],"blockSpan":spans[0],"observation":observation,"groups":groups}))
+    }).collect::<Result<Vec<_>>>()?;
+    Ok(Some(json!({"reports":reports})))
 }

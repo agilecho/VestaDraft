@@ -426,14 +426,17 @@ fn selected_rietan_tables_rebind_real_site_ordinals_and_survive_view_edit() {
     use serde_json::json;
     use std::{fs, path::Path};
     use vesta_commands::{EngineV2, Limits};
-    use vesta_model::{Error, Ids, source7::resource_graph::orffe::R80GeometryMeasurement};
+    use vesta_model::{Error, Ids, source7::{
+        SourceDocument,
+        resource_graph::orffe::{R80GeometryMeasurement, RIETAN_OWNER_DIALECT, RIETAN_TABLE_DIALECT},
+    }};
 
     let inputs = Path::new(env!("CARGO_MANIFEST_DIR"))
         .ancestors().nth(4).unwrap()
         .join("output/vesta-p2-03/20261121-c8-closure-execution/inputs/graph2");
-    for (extension, filename, group, count, ordinals) in [
-        ("ins", "Fapatite.ins", "P 63/m", 12, [3usize, 0]),
-        ("lst", "AgI.lst", "I m -3 m", 96, [0usize, 1]),
+    for (extension, filename, group, count, distance_sites, angle_sites) in [
+        ("ins", "Fapatite.ins", "P 63/m", 12, [3usize, 0], [0usize, 3, 1]),
+        ("lst", "AgI.lst", "I m -3 m", 96, [0usize, 1], [0usize, 1, 0]),
     ] {
         for present in [true, false] {
             let folder = if present { "present" } else { "absent" };
@@ -459,6 +462,33 @@ fn selected_rietan_tables_rebind_real_site_ordinals_and_survive_view_edit() {
             let candidate = &value["phaseGraph"]["phases"][0];
             assert_eq!(candidate["structure"]["cell"], cell);
             assert_ne!(candidate["id"], phase["id"]);
+            let row_index = |dialect: &str| {
+                value["metadata"].as_array().unwrap().iter()
+                    .position(|row| row["dialect"] == dialect).unwrap()
+            };
+            let mut counterfeit = vec![
+                (row_index(RIETAN_OWNER_DIALECT), vec![("producerVersion", "unregistered")]),
+            ];
+            if present {
+                counterfeit.extend([
+                    (row_index(RIETAN_TABLE_DIALECT), vec![
+                        ("dialect", "native-r80-orffe-1"), ("formatRef", "VM18-I01"),
+                    ]),
+                    (row_index(RIETAN_TABLE_DIALECT), vec![("formatRef", "VM18-I01")]),
+                ]);
+            }
+            for (index, replacements) in counterfeit {
+                let mut altered = value.clone();
+                for (property, replacement) in replacements {
+                    altered["metadata"][index][property] = json!(replacement);
+                }
+                let mut forged = reopened.capture.clone();
+                forged.source = Some(SourceDocument::decode(altered).unwrap());
+                let error = vesta_codecs::encode_verified(
+                    &forged, "wrong-producer.vesta", Ids::new([116; 16]),
+                ).unwrap_err();
+                assert_eq!(error.code, "E_REOPEN_OWNER");
+            }
             let mut engine = EngineV2::loaded(reopened, Ids::new([115; 16]), Limits::default()).unwrap();
             engine.execute(&engine.document(), &json!({"command":"view.setCamera","params":{
                 "rotation":[[1,0,0],[0,1,0],[0,0,1]],"projection":"parallel","zoom":2.5
@@ -467,11 +497,16 @@ fn selected_rietan_tables_rebind_real_site_ordinals_and_survive_view_edit() {
             assert_eq!(tables.len(), present as usize);
             if let [table] = &tables[..] {
                 assert_eq!(table.owner.as_str(), candidate["id"].as_str().unwrap());
-                let R80GeometryMeasurement::Distance { images, .. } = &table.rows[0] else {
-                    panic!("first source row must be a distance");
+                let [R80GeometryMeasurement::Distance { images: distance, .. },
+                     R80GeometryMeasurement::Angle { images: angle, .. }] = table.rows.as_slice() else {
+                    panic!("expected the ordered distance and angle rows");
                 };
-                for (image, ordinal) in images.iter().zip(ordinals) {
+                let identity = candidate["structure"]["group"]["operators"][0]["id"].as_str().unwrap();
+                for (image, ordinal) in distance.iter().zip(distance_sites).chain(angle.iter().zip(angle_sites)) {
+                    assert_eq!(image.phase, table.owner);
                     assert_eq!(image.site.as_str(), candidate["structure"]["sites"][ordinal]["id"].as_str().unwrap());
+                    assert_eq!(image.op.as_str(), identity);
+                    assert_eq!(image.shift, [0; 3]);
                 }
             }
             assert_eq!(engine.content().camera.zoom, 2.5);

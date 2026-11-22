@@ -265,17 +265,27 @@ impl FieldOwner {
         }
     }
 
-    fn use_key(&self, source: &serde_json::Value, ordinal: usize) -> Result<String> {
+    fn use_key(&self, source: &serde_json::Value, ordinal: usize, field_id: &str) -> Result<String> {
         let (_, id) = self.entity();
         let (kind, owners) = match self {
             Self::Phase(_) => ("phase", &source["phaseGraph"]["phases"]),
             Self::Molecule(_) => ("molecule", &source["molecules"]),
             Self::Scene(_) => ("scene", &source["scenes"]),
         };
-        let index = owners
+        let (index, owner) = owners
             .as_array()
-            .and_then(|rows| rows.iter().position(|row| row["id"] == id))
+            .and_then(|rows| rows.iter().enumerate().find(|(_, row)| row["id"] == id))
             .ok_or_else(|| coverage("field owner is missing from typed state"))?;
+        if matches!(self, Self::Phase(_))
+            && owner["fieldIds"]
+                .as_array()
+                .is_none_or(|uses| uses.iter().filter(|use_id| *use_id == field_id).count() != 1)
+        {
+            return Err(Error::new(
+                "E_REOPEN_OWNER",
+                "phase must list its installed Field exactly once",
+            ));
+        }
         Ok(format!("field-data/{ordinal}/{kind}/{index}"))
     }
 }
@@ -339,7 +349,7 @@ pub fn restore_fields(
         let owner: FieldOwner = serde_json::from_value(row["owner"].clone())
             .map_err(|_| coverage("field owner kind is not qualified"))?;
         let (kind, owner_id) = owner.entity();
-        let use_key = owner.use_key(source, ordinal)?;
+        let use_key = owner.use_key(source, ordinal, id)?;
         let descriptor: FieldDescriptor = serde_json::from_value(row["field"].clone())
             .map_err(|e| coverage(format!("field descriptor: {e}")))?;
         let mut bindings = row["metadata"]

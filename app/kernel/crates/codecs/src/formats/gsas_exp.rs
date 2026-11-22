@@ -8,6 +8,11 @@ use vesta_model::{
     Capture, Cell3, Error, Ids, PersistentResource, RestoredProject, Result, digest,
 };
 
+mod chart;
+mod magnetic;
+#[cfg(test)]
+mod tests;
+
 const KEY: &str = "gsas-exp/primary";
 const DIALECT: &str = "gsas-exp-observations-1";
 const PRODUCER: &str = "draft.gsas-exp-reader";
@@ -15,6 +20,15 @@ const MAX: usize = 512 * 1024;
 
 pub(super) fn rule_digest() -> String {
     digest(include_bytes!("../../contracts/gsas-format.contract.json"))
+}
+
+pub(super) fn magnetic_rule_digest() -> String {
+    digest(&vesta_model::source_audit::canonical(&json!({
+        "chartSchema":digest(chart::CHART.as_bytes()),
+        "frameSchema":digest(chart::FRAME.as_bytes()),
+        "spinRule":chart::SPIN_RULE,"momentRule":chart::MOMENT_RULE,
+        "installation":"gsas-active-magnetic-1/independently-qualified-single-phase-exp"
+    })))
 }
 
 fn invalid(message: &str) -> Error {
@@ -333,35 +347,42 @@ pub fn open(raw: &[u8], mut ids: Ids) -> Result<RestoredProject> {
     let mut capture = source_only_capture(&mut ids);
     let res = retained::install(&mut capture, &mut ids, KEY, raw.to_vec())?;
     let mut source = full_source7::source_only_base(&capture);
-    source["metadata"] = json!([metadata(&source["identity"]["documentId"], &res, raw)?]);
+    let history = metadata(&source["identity"]["documentId"], &res, raw)?;
+    source["metadata"] = json!([history]);
+    if let Some(approval) = magnetic::qualified(&res.sha256) {
+        magnetic::Prepared::new(approval, raw, &history)?.install(&mut capture, &mut source, &mut ids)?;
+    }
     capture.source = Some(SourceDocument::decode(source)?);
     full_source7::capture(&capture)?;
     RestoredProject::new(capture, ids)
 }
 
-pub(super) fn require_qualified_projection(source: &Node) -> Result<()> {
-    fn has_projection(node: &Node) -> bool {
-        match node {
-            Node::Owned { node, .. } => has_projection(node),
-            Node::TaggedVariant { tag, payload } => {
-                tag == "GSASSpinProjection1" || has_projection(payload)
-            }
-            Node::Array(items) => items.iter().any(has_projection),
-            Node::Map(members) => members.values().any(has_projection),
-            _ => false,
-        }
+/// Current magnetic state for engineering inspection of an installed EXP.
+pub fn inspect_magnetic(capture: &Capture) -> Result<Option<Value>> {
+    if !capture.content.resources.iter().any(|row| row.logical_key == magnetic::CHART_KEY) {
+        return Ok(None);
     }
-
-    // The typed shape and a chart byte reference cannot certify a producer.
-    if has_projection(source) {
-        return Err(invalid(
-            "GSAS current projection requires a qualified original chart provider",
-        ));
-    }
-    Ok(())
+    let full = capture.source.as_ref().ok_or_else(|| invalid("GSAS magnetic source is missing"))?;
+    let source = full.to_value()?;
+    verify(capture, &source, projection_count(&full.audit()?))?;
+    Ok(Some(json!({"phaseGraph":source["phaseGraph"],"vectors":source["vectors"]})))
 }
 
-pub(super) fn verify(capture: &Capture, source: &Value) -> Result<()> {
+pub(super) fn projection_count(source: &Node) -> usize {
+    match source {
+        Node::Owned { node, .. } => projection_count(node),
+        Node::TaggedVariant { tag, payload } => {
+            usize::from(tag == magnetic::TAG) + projection_count(payload)
+        }
+        Node::Array(items) => items.iter().map(projection_count).sum(),
+        Node::Map(members) => members.values().map(projection_count).sum(),
+        _ => 0,
+    }
+}
+
+pub(super) fn verify(
+    capture: &Capture, source: &Value, projections: usize,
+) -> Result<std::collections::BTreeSet<String>> {
     let mut observed = source["metadata"]
         .as_array()
         .into_iter()
@@ -372,21 +393,57 @@ pub(super) fn verify(capture: &Capture, source: &Value) -> Result<()> {
         .resources
         .iter()
         .find(|row| row.logical_key == KEY);
+    let approved = resource.and_then(|row| magnetic::qualified(&row.sha256));
+    if (approved.is_none() && projections != 0) || projections > 1 {
+        return Err(invalid("GSAS current projection requires a qualified original chart provider"));
+    }
+    if capture.content.resources.iter().any(|row| {
+        row.logical_key.starts_with("gsas-exp/active/")
+            && (approved.is_none() || row.logical_key != magnetic::CHART_KEY)
+    }) {
+        return Err(invalid("GSAS active chart does not have a registered logical resource use"));
+    }
     match (observed.next(), resource) {
-        (None, None) => Ok(()),
+        (None, None) => Ok(Default::default()),
         (Some(row), Some(res)) if observed.next().is_none() => {
-            if *row
-                != metadata(
-                    &source["identity"]["documentId"],
-                    res,
-                    retained::raw(capture, res)?,
-                )?
-            {
+            let raw = retained::raw(capture, res)?;
+            if *row != metadata(&source["identity"]["documentId"], res, raw)? {
                 return Err(invalid(
                     "restored GSAS source observations or exact spans differ",
                 ));
             }
-            Ok(())
+            if let Some(approval) = approved {
+                if projections != 1 {
+                    return Err(invalid("GSAS qualified phase is missing the active projection"));
+                }
+                return magnetic::Prepared::new(approval, raw, row)?.verify(capture, source);
+            }
+            // EXP observations qualify only the archive. A current group or
+            // magnetic moment needs the same producer evidence as a projection tag.
+            let magnetic_group = source["phaseGraph"]["phases"]
+                .as_array()
+                .into_iter()
+                .flatten()
+                .any(|phase| {
+                    let group = &phase["structure"]["group"];
+                    group["kind"] == "magnetic"
+                        || group["operators"]
+                            .as_array()
+                            .into_iter()
+                            .flatten()
+                            .any(|operation| operation["timeSign"].as_i64() == Some(-1))
+                });
+            let magnetic_vector = source["vectors"]
+                .as_array()
+                .into_iter()
+                .flatten()
+                .any(|row| row["value"]["unit"] == "muB");
+            if magnetic_group || magnetic_vector {
+                return Err(invalid(
+                    "GSAS current magnetic state requires a qualified original chart provider",
+                ));
+            }
+            Ok(Default::default())
         }
         _ => Err(invalid(
             "GSAS source observations require their one owned primary",

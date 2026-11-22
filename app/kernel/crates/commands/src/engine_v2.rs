@@ -232,19 +232,21 @@ impl EngineV2 {
         for table in self.active_orffe()? {
             let old = self.content.phases.iter().find(|phase| phase.id == table.owner);
             let updated = next.phases.iter().find(|phase| phase.id == table.owner);
-            let source_bound = if old.is_none() {
-                self.source.as_ref().map(SourceDocument::to_value).transpose()?
+            let source_bound = match (old, updated) {
+                (Some(old), Some(updated)) => old.cell == updated.cell &&
+                    old.label == updated.label && old.sites == updated.sites &&
+                    old.symmetry_op_id == updated.symmetry_op_id,
+                (None, None) => self.source.as_ref().map(SourceDocument::to_value).transpose()?
                     .is_some_and(|source| source["metadata"].as_array().into_iter().flatten().any(|row| {
                         row["dialect"] == RIETAN_OWNER_DIALECT
                             && row["owner"]["id"] == table.owner.as_str()
-                    }))
-            } else {
-                true
+                    })),
+                _ => false,
             };
             let resource = |project: &ProjectContent| {
                 project.resources.iter().any(|r| r.id == table.resource && r.sha256 == table.table_sha256)
             };
-            if !source_bound || old != updated || !resource(&next) {
+            if !source_bound || !resource(&next) {
                 return Err(err("E_REOPEN_OWNER", "edit invalidates the selected ORFFE phase or table binding"));
             }
         }

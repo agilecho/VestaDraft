@@ -7,7 +7,8 @@ use vesta_model::field::{ActiveField, FieldDescriptor, FieldOwner, restore_field
 use vesta_model::source_audit::{AuditSource, Node, canonical};
 use vesta_model::source7::SourceDocument;
 use vesta_model::source7::resource_graph::orffe::{
-    ACTIVE_TABLE_TAG, R80GeometryTable, RIETAN_OWNER_DIALECT, RIETAN_TABLE_DIALECT, active_tables,
+    ACTIVE_TABLE_TAG, R80_TABLE_DIALECT, R80GeometryTable, RIETAN_OWNER_DIALECT,
+    RIETAN_TABLE_DIALECT, TABLE_PRODUCER_VERSION, active_tables,
 };
 use vesta_model::{Capture, Error, PersistentResource, ProjectContent, Result, digest};
 
@@ -21,14 +22,33 @@ fn verify_orffe(
     value: &Value,
     graphs: &[graph_provenance::VerifiedGraph<'_>],
 ) -> Result<()> {
+    let wrong_producer = || {
+        Error::new("E_REOPEN_OWNER", "ORFFE table does not belong to its installed producer")
+    };
     let mut tables = active_tables(value)?;
+    let metadata = value["metadata"]
+        .as_array()
+        .ok_or_else(|| invalid("missing metadata"))?;
+    let table_has_dialect = |table: &R80GeometryTable, dialect: &str| {
+        metadata.iter().any(|row| {
+            row["owner"]["id"] == table.owner.as_str()
+                && row["tree"]["tag"] == ACTIVE_TABLE_TAG
+                && row["dialect"] == dialect
+        })
+    };
     let mut seen = BTreeSet::new();
-    for owner in value["metadata"].as_array().into_iter().flatten()
+    for owner in metadata.iter()
         .filter(|row| row["dialect"] == RIETAN_OWNER_DIALECT)
     {
         let id = owner["owner"]["id"].as_str().ok_or_else(|| invalid("RIETAN owner identity"))?;
-        if owner["producerId"] != AUTHOR || owner["owner"]["kind"] != "phase" || !seen.insert(id) {
-            return Err(invalid("ambiguous RIETAN owner"));
+        if owner["producerId"] != AUTHOR
+            || owner["owner"]["kind"] != "phase"
+            || owner["producerVersion"] != TABLE_PRODUCER_VERSION
+            || owner["formatRef"] != "RIETAN"
+            || !owner["spans"].as_array().is_some_and(Vec::is_empty)
+            || !seen.insert(id)
+        {
+            return Err(wrong_producer());
         }
         let phase = value["phaseGraph"]["phases"].as_array().into_iter().flatten()
             .find(|phase| phase["id"] == id)
@@ -48,11 +68,17 @@ fn verify_orffe(
         let expected = super::resource_graph::rietan_binding(&archive, phase, &source.content.resources)?;
         let observed = tables.iter().position(|table| table.owner.as_str() == id)
             .map(|index| tables.remove(index));
+        if observed.as_ref().is_some_and(|table| !table_has_dialect(table, RIETAN_TABLE_DIALECT)) {
+            return Err(wrong_producer());
+        }
         if expected != observed {
             return Err(invalid("RIETAN table differs from its qualified source phase and bytes"));
         }
     }
     for table in tables {
+        if !table_has_dialect(&table, R80_TABLE_DIALECT) {
+            return Err(wrong_producer());
+        }
         let phase = source
             .content
             .phases
@@ -88,7 +114,7 @@ pub(super) fn with_rietan(
     let phase_id = phase["id"].clone();
     let owner = json!({"kind":"phase","id":phase_id});
     let row = |dialect, tree| json!({"owner":owner,"producerId":AUTHOR,
-        "producerVersion":"P2-03/full-source7","formatRef":"RIETAN","dialect":dialect,
+        "producerVersion":TABLE_PRODUCER_VERSION,"formatRef":"RIETAN","dialect":dialect,
         "tree":tree,"spans":[]});
     let mut metadata = vec![row(RIETAN_OWNER_DIALECT, raw_ref(primary))];
     if let Some(table) = table {
@@ -134,7 +160,7 @@ pub(super) fn with_orffe(source: &Capture, table: &R80GeometryTable) -> Result<S
     let metadata = value["metadata"]
         .as_array_mut()
         .ok_or_else(|| invalid("ORFFE metadata list"))?;
-    let mut row = editor_metadata(source, "VM18-I01", "native-r80-orffe-1", tree);
+    let mut row = editor_metadata(source, "VM18-I01", R80_TABLE_DIALECT, tree);
     row["owner"] = json!({"kind":"phase","id":table.owner});
     metadata.push(row);
     SourceDocument::decode(value)
@@ -235,6 +261,7 @@ pub(super) fn rule_digest() -> String {
         "fdatConnections":super::fdat_source::rule_digest(),
         "mxdFile06":super::mxd_report::rule_digest(),
         "gsasExpSourceObservations":super::gsas_exp::rule_digest(),
+        "gsasMagneticState":super::gsas_exp::magnetic_rule_digest(),
         "graphRules":super::resource_graph::expanded_rule_digest(),
         "selectedNativeImports":[C1_DENSITY,RIETAN_OWNER_DIALECT,RIETAN_TABLE_DIALECT],
         "editor":EDITOR,
@@ -406,17 +433,17 @@ fn resource_uses(node: &Node, document: &str) -> Vec<Value> {
 }
 
 pub(super) fn capture(source: &Capture) -> Result<(Value, Node)> {
-    let mut value = if let Some(full) = &source.source {
-        super::gsas_exp::require_qualified_projection(&full.audit()?)?;
-        full.to_value()?
+    let (mut value, projections) = if let Some(full) = &source.source {
+        (full.to_value()?, super::gsas_exp::projection_count(&full.audit()?))
     } else {
-        current_source7::capture(source)?.0
+        (current_source7::capture(source)?.0, 0)
     };
     update_editable_phases(&mut value, &source.content)?;
     actual_resource_rows(&mut value, source)?;
     super::live_state::native_flags::refresh(source,&mut value)?;
     let mut qualified = super::scalar_grid_source::verify(source, &value)?;
     qualified.extend(super::live_state::verify(source, &value)?);
+    qualified.extend(super::gsas_exp::verify(source, &value, projections)?);
     if source.content.resources.iter().any(|row| {
         let key = row.logical_key.as_str();
         ["descriptor-data/", "native-current-grid/", "native-scalar-grid/"]
@@ -426,7 +453,6 @@ pub(super) fn capture(source: &Capture) -> Result<(Value, Node)> {
     }
     super::fdat_source::verify(source, &value)?;
     super::mxd_report::verify(source, &value)?;
-    super::gsas_exp::verify(source, &value)?;
     let editor = editor_projection(source, &value)?;
     let graphs = graph_provenance::verify(source)?;
     verify_orffe(source, &value, &graphs)?;

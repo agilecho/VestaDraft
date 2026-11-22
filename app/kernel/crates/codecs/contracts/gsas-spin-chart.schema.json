@@ -1,0 +1,156 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {
+      "const": "FC-GSAS-spin-chart-1"
+    },
+    "ruleId": {
+      "const": "draft.gsas-original-r1253-spin-chart"
+    },
+    "ruleVersion": {
+      "const": "1"
+    },
+    "producerArtifactSha256": {
+      "const": "7fc974497855ff344b66c38e4222959c7dfc8f35773d2aa3a4eb44760fdeeeba"
+    },
+    "sourceInputSha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "sourcePhaseNumber": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 9
+    },
+    "sourceGroupSymbol": {
+      "type": "string",
+      "minLength": 1
+    },
+    "settingName": {
+      "type": "string",
+      "minLength": 1
+    },
+    "originChoice": {
+      "type": "string",
+      "minLength": 1
+    },
+    "baseOperators": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 48,
+      "items": {
+        "type": "object",
+        "properties": {
+          "rotation": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "minimum": -2147483648,
+                "maximum": 2147483647
+              },
+              "minItems": 3,
+              "maxItems": 3
+            },
+            "minItems": 3,
+            "maxItems": 3
+          },
+          "translation": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "numerator": {
+                  "type": "integer",
+                  "minimum": -9007199254740991,
+                  "maximum": 9007199254740991
+                },
+                "denominator": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 9007199254740991
+                }
+              },
+              "required": [
+                "numerator",
+                "denominator"
+              ],
+              "additionalProperties": false
+            },
+            "minItems": 3,
+            "maxItems": 3
+          },
+          "generatorCodeMask": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 2147483647
+          }
+        },
+        "required": [
+          "rotation",
+          "translation",
+          "generatorCodeMask"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "centeringTranslations": {
+      "type": "array",
+      "items": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "numerator": {
+              "type": "integer",
+              "minimum": -9007199254740991,
+              "maximum": 9007199254740991
+            },
+            "denominator": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 9007199254740991
+            }
+          },
+          "required": [
+            "numerator",
+            "denominator"
+          ],
+          "additionalProperties": false
+        },
+        "minItems": 3,
+        "maxItems": 3
+      },
+      "minItems": 1,
+      "maxItems": 4
+    },
+    "generatorFlags": {
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "minimum": 1,
+        "maximum": 2147483647
+      },
+      "minItems": 1,
+      "maxItems": 12
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "ruleId",
+    "ruleVersion",
+    "producerArtifactSha256",
+    "sourceInputSha256",
+    "sourcePhaseNumber",
+    "sourceGroupSymbol",
+    "settingName",
+    "originChoice",
+    "baseOperators",
+    "centeringTranslations",
+    "generatorFlags"
+  ],
+  "$id": "urn:draft:fc:gsas-spin-chart:1"
+}

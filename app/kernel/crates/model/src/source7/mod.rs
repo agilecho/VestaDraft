@@ -35,6 +35,12 @@ pub fn native_grid_resource_use(source_index: usize, role: &str) -> String {
     format!("/sourceEntities/{source_index}/sourceTree/payload/members/{role}")
 }
 
+pub const GSAS_MOMENT_QUANTITY_DIALECT: &str = "gsas-moment-source-quantity-1";
+
+pub fn gsas_moment_use(vector_index: usize) -> String {
+    format!("/vectors/{vector_index}/value/components")
+}
+
 fn source_error(detail: impl Into<String>) -> Error {
     Error::new("E_SCHEMA", detail)
 }

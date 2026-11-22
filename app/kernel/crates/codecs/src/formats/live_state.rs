@@ -151,7 +151,7 @@ fn payload(wire: &Value) -> Result<Value> {
 
 /// Install all resolved state in a private candidate before changing the engine.
 pub fn open_native_state(
-    input: NativeStateInput,
+    mut input: NativeStateInput,
     base: Option<Capture>,
     mut read: impl FnMut(&str) -> Result<Vec<u8>>,
     mut ids: Ids,
@@ -185,7 +185,9 @@ pub fn open_native_state(
         native_flags::install(flags, &mut capture, &mut value, &mut ids)?;
     }
     if let Some(display) = input.legacy_display {
-        legacy_display::install(display, &mut value, &mut capture, &mut read, &mut ids)?;
+        legacy_display::install(
+            display, input.legacy_view.take(), &mut value, &mut capture, &mut read, &mut ids,
+        )?;
     }
     if let Some(view) = input.legacy_view {
         view::install(view, capture.content.scene_id.as_str(), &mut value)?;
@@ -220,10 +222,13 @@ pub fn inspect_native_state(capture: &Capture) -> Result<Option<Value>> {
     let layers = layer::inspect(&value)?;
     let legacy_views = view::inspect(&value)?;
     let legacy_displays = legacy_display::inspect(&value)?;
+    let legacy_source_views = legacy_display::inspect_source_views(capture)?;
     let thermal = thermal::inspect(&value)?;
     let mut flags = native_flags::inspect(capture, &value)?;
     flags.extend(nvis_molecule::inspect(&value)?);
-    Ok((!grids.is_empty() || layers.is_some() || !legacy_views.is_empty() || !legacy_displays.is_empty() || !thermal.is_empty() || !flags.is_empty()).then(|| json!({
-        "document":capture.document,"grids":grids,"layers":layers,"legacyViews":legacy_views,"legacyDisplays":legacy_displays,"thermal":thermal,"nativeFlags":flags
+    Ok((!grids.is_empty() || layers.is_some() || !legacy_views.is_empty() || !legacy_displays.is_empty()
+        || !legacy_source_views.is_empty() || !thermal.is_empty() || !flags.is_empty()).then(|| json!({
+        "document":capture.document,"grids":grids,"layers":layers,"legacyViews":legacy_views,
+        "legacyDisplays":legacy_displays,"legacySourceViews":legacy_source_views,"thermal":thermal,"nativeFlags":flags
     })))
 }

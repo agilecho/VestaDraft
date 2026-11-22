@@ -386,6 +386,23 @@ fn field_missing_registration_and_wrong_semantic_owner_refuse_by_identity() {
         .code,
         "E_REOPEN_COVERAGE"
     );
+    let mut detached = source.clone();
+    detached["phaseGraph"]["phases"][0]["fieldIds"] = json!([]);
+    let mut repeated = source.clone();
+    let field = repeated["fields"][0]["id"].clone();
+    repeated["phaseGraph"]["phases"][0]["fieldIds"] = json!([field, field]);
+    for invalid in [detached, repeated] {
+        assert_eq!(
+            violation(restore_fields(
+                &invalid,
+                &capture.content.resources,
+                &capture.resources,
+                100_000
+            ))
+            .code,
+            "E_REOPEN_OWNER"
+        );
+    }
     let mut wrong = source;
     let b = wrong["fields"][1]["metadata"][0]["tree"]["payload"]["members"]["owner"].clone();
     wrong["fields"][0]["metadata"][0]["tree"]["payload"]["members"]["owner"] = b;

@@ -293,6 +293,10 @@ pub(crate) fn verify_r80_binding(
     }
     import.phase.id = phase.id.clone();
     import.phase.symmetry_op_id = phase.symmetry_op_id.clone();
+    // The source table binds phase geometry and stable images. A later view
+    // boundary can hide those images without changing the recorded geometry.
+    import.phase.boundary_min = phase.boundary_min;
+    import.phase.boundary_max = phase.boundary_max;
     for (preserved, live) in import.phase.sites.iter_mut().zip(&phase.sites) {
         preserved.id = live.id.clone();
     }
