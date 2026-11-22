@@ -1,0 +1,306 @@
+{
+  "evidenceClass": "authored-static-controls-only",
+  "producerArtifactSha256": "7fc974497855ff344b66c38e4222959c7dfc8f35773d2aa3a4eb44760fdeeeba",
+  "sourceInputSha256": "4e1bd6b751a9bff478eac115dcfb780cb3c9972c3c5a1f61b0f60e99abb8930f",
+  "sourcePhaseNumber": 3,
+  "sourceGroupSymbol": "C 2/m",
+  "settingName": "authored-b-unique-fixture",
+  "originChoice": "authored-zero",
+  "chartSHA256": "0617ee12980e46669a1b48db88efdc26b9b20cb4f2a13f862b8f7e9b894d5755",
+  "sourceFlagF32Bits": [
+    "bf800000",
+    "3f800000",
+    "bf800000",
+    "80000000",
+    "3f800000",
+    "3f800000",
+    "3f800000",
+    "3f800000",
+    "3f800000",
+    "3f800000",
+    "3f800000",
+    "3f800000"
+  ],
+  "orderedOperations": [
+    {
+      "rotation": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "translation": [
+        {
+          "numerator": 0,
+          "denominator": 1
+        },
+        {
+          "numerator": 0,
+          "denominator": 1
+        },
+        {
+          "numerator": 0,
+          "denominator": 1
+        }
+      ],
+      "timeSign": 1,
+      "axialCoefficient": 1
+    },
+    {
+      "rotation": [
+        [
+          -1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          -1
+        ]
+      ],
+      "translation": [
+        {
+          "numerator": 0,
+          "denominator": 1
+        },
+        {
+          "numerator": 0,
+          "denominator": 1
+        },
+        {
+          "numerator": 0,
+          "denominator": 1
+        }
+      ],
+      "timeSign": -1,
+      "axialCoefficient": -1
+    },
+    {
+      "rotation": [
+        [
+          -1,
+          0,
+          0
+        ],
+        [
+          0,
+          -1,
+          0
+        ],
+        [
+          0,
+          0,
+          -1
+        ]
+      ],
+      "translation": [
+        {
+          "numerator": 0,
+          "denominator": 1
+        },
+        {
+          "numerator": 0,
+          "denominator": 1
+        },
+        {
+          "numerator": 0,
+          "denominator": 1
+        }
+      ],
+      "timeSign": 1,
+      "axialCoefficient": -1
+    },
+    {
+      "rotation": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          -1,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "translation": [
+        {
+          "numerator": 0,
+          "denominator": 1
+        },
+        {
+          "numerator": 0,
+          "denominator": 1
+        },
+        {
+          "numerator": 0,
+          "denominator": 1
+        }
+      ],
+      "timeSign": -1,
+      "axialCoefficient": 1
+    },
+    {
+      "rotation": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "translation": [
+        {
+          "numerator": 1,
+          "denominator": 2
+        },
+        {
+          "numerator": 1,
+          "denominator": 2
+        },
+        {
+          "numerator": 0,
+          "denominator": 1
+        }
+      ],
+      "timeSign": -1,
+      "axialCoefficient": -1
+    },
+    {
+      "rotation": [
+        [
+          -1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          -1
+        ]
+      ],
+      "translation": [
+        {
+          "numerator": 1,
+          "denominator": 2
+        },
+        {
+          "numerator": 1,
+          "denominator": 2
+        },
+        {
+          "numerator": 0,
+          "denominator": 1
+        }
+      ],
+      "timeSign": 1,
+      "axialCoefficient": 1
+    },
+    {
+      "rotation": [
+        [
+          -1,
+          0,
+          0
+        ],
+        [
+          0,
+          -1,
+          0
+        ],
+        [
+          0,
+          0,
+          -1
+        ]
+      ],
+      "translation": [
+        {
+          "numerator": 1,
+          "denominator": 2
+        },
+        {
+          "numerator": 1,
+          "denominator": 2
+        },
+        {
+          "numerator": 0,
+          "denominator": 1
+        }
+      ],
+      "timeSign": -1,
+      "axialCoefficient": 1
+    },
+    {
+      "rotation": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          -1,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "translation": [
+        {
+          "numerator": 1,
+          "denominator": 2
+        },
+        {
+          "numerator": 1,
+          "denominator": 2
+        },
+        {
+          "numerator": 0,
+          "denominator": 1
+        }
+      ],
+      "timeSign": 1,
+      "axialCoefficient": -1
+    }
+  ]
+}

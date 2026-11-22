@@ -1,0 +1,64 @@
+{
+  "evidenceClass": "authored-static-controls-only",
+  "sourcePhaseNumber": 3,
+  "sourceInputSha256": "1747820c4887c0a18ce77b11f39af950425a2a93ecc949e799ef7594516b01f9",
+  "chartSHA256": "46b3e9289cabfea01a23e1dc308e0c0ae64fd3c170fff5ff401ca68c013cc749",
+  "frameSHA256": "d860987e1389f70255e6fb8f9a6e786e08f7ce76264d239c576e4345779b8773",
+  "numericalPolicy": {
+    "origin": "authored rounded EXP fixture only",
+    "maxFrobeniusCondition": 6,
+    "lengthA": 5.1e-07,
+    "angleDeg": 5.1e-05,
+    "orthonormal": 1e-12,
+    "momentMuB": 1e-12
+  },
+  "phaseId": "11111111111111111111111111111111",
+  "orderedOperationIds": [
+    "22222222222222222222222222222222",
+    "33333333333333333333333333333333"
+  ],
+  "atomBindings": [
+    {
+      "sourceAtomNumber": 1,
+      "siteId": "44444444444444444444444444444444",
+      "vectorId": "66666666666666666666666666666666",
+      "operationOrdinal": 0,
+      "shift": [
+        0,
+        0,
+        0
+      ],
+      "imageFractional": [
+        "1/8",
+        "1/5",
+        "3/10"
+      ],
+      "cartesianMuB": [
+        -2,
+        1,
+        3
+      ]
+    },
+    {
+      "sourceAtomNumber": 2,
+      "siteId": "55555555555555555555555555555555",
+      "vectorId": "77777777777777777777777777777777",
+      "operationOrdinal": 0,
+      "shift": [
+        1,
+        -1,
+        0
+      ],
+      "imageFractional": [
+        "11/8",
+        "-3/5",
+        "3/4"
+      ],
+      "cartesianMuB": [
+        -3,
+        -2,
+        1
+      ]
+    }
+  ]
+}

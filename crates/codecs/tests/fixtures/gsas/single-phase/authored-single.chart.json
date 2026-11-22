@@ -1,0 +1,100 @@
+{
+  "schemaVersion": "FC-GSAS-spin-chart-1",
+  "ruleId": "draft.gsas-original-r1253-spin-chart",
+  "ruleVersion": "1",
+  "producerArtifactSha256": "7fc974497855ff344b66c38e4222959c7dfc8f35773d2aa3a4eb44760fdeeeba",
+  "sourceInputSha256": "1747820c4887c0a18ce77b11f39af950425a2a93ecc949e799ef7594516b01f9",
+  "sourcePhaseNumber": 3,
+  "sourceGroupSymbol": "P -1",
+  "settingName": "authored-triclinic-control",
+  "originChoice": "authored-zero",
+  "baseOperators": [
+    {
+      "rotation": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "translation": [
+        {
+          "numerator": 0,
+          "denominator": 1
+        },
+        {
+          "numerator": 0,
+          "denominator": 1
+        },
+        {
+          "numerator": 0,
+          "denominator": 1
+        }
+      ],
+      "generatorCodeMask": 0
+    },
+    {
+      "rotation": [
+        [
+          -1,
+          0,
+          0
+        ],
+        [
+          0,
+          -1,
+          0
+        ],
+        [
+          0,
+          0,
+          -1
+        ]
+      ],
+      "translation": [
+        {
+          "numerator": 0,
+          "denominator": 1
+        },
+        {
+          "numerator": 0,
+          "denominator": 1
+        },
+        {
+          "numerator": 0,
+          "denominator": 1
+        }
+      ],
+      "generatorCodeMask": 1
+    }
+  ],
+  "centeringTranslations": [
+    [
+      {
+        "numerator": 0,
+        "denominator": 1
+      },
+      {
+        "numerator": 0,
+        "denominator": 1
+      },
+      {
+        "numerator": 0,
+        "denominator": 1
+      }
+    ]
+  ],
+  "generatorFlags": [
+    1
+  ]
+}

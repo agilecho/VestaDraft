@@ -5,7 +5,7 @@ use vesta_commands::{EngineV2, Limits};
 #[test]
 fn gsas_original_chart_keeps_center_first_order_and_magnetic_character() {
     let data = std::path::Path::new(env!("CARGO_MANIFEST_DIR"))
-        .join("../../output/vesta-p2-03/20261122-c8-gsas-chart-static/fixtures");
+        .join("tests/fixtures/gsas/spin-chart");
     let raw = std::fs::read(data.join("authored.spin-chart.json")).unwrap();
     let exp = std::fs::read(data.join("authored.exp")).unwrap();
     let expected: Value =

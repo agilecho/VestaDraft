@@ -521,15 +521,15 @@ const AUTHORED: Qualification = Qualification {
     hall_symbol: "-P 1",
     chart: include_bytes!(concat!(
         env!("CARGO_MANIFEST_DIR"),
-        "/../../output/vesta-p2-03/20261122-c8-dsh-followup/fixtures/authored-single.chart.json"
+        "/tests/fixtures/gsas/single-phase/authored-single.chart.json"
     )),
     frame: include_bytes!(concat!(
         env!("CARGO_MANIFEST_DIR"),
-        "/../../output/vesta-p2-03/20261122-c8-dsh-followup/fixtures/authored-single.frame.json"
+        "/tests/fixtures/gsas/single-phase/authored-single.frame.json"
     )),
     producer_evidence: include_bytes!(concat!(
         env!("CARGO_MANIFEST_DIR"),
-        "/../../output/vesta-p2-03/20261122-c8-dsh-followup/fixtures/authored-single.expected.json"
+        "/tests/fixtures/gsas/single-phase/authored-single.expected.json"
     )),
     producer_version: "authored-test-control",
     numerics: NumericalPolicy {
@@ -564,7 +564,7 @@ const AUTHORED: Qualification = Qualification {
 pub(super) fn control_exp() -> &'static [u8] {
     include_bytes!(concat!(
         env!("CARGO_MANIFEST_DIR"),
-        "/../../output/vesta-p2-03/20261122-c8-dsh-followup/fixtures/authored-single.exp"
+        "/tests/fixtures/gsas/single-phase/authored-single.exp"
     ))
 }
 
@@ -573,15 +573,15 @@ const MULTIPHASE_CONTROL: Qualification = Qualification {
     exp_sha256: "8e68fe41bc66a292dbabb4e5f596130b5442fd215e55f0a688204d4e202def72",
     chart: include_bytes!(concat!(
         env!("CARGO_MANIFEST_DIR"),
-        "/../../output/vesta-p2-03/20261122-c8-gsas-moment-intake/fixtures/authored.chart.json"
+        "/tests/fixtures/gsas/multiphase/authored.chart.json"
     )),
     frame: include_bytes!(concat!(
         env!("CARGO_MANIFEST_DIR"),
-        "/../../output/vesta-p2-03/20261122-c8-gsas-moment-intake/fixtures/authored.frame.json"
+        "/tests/fixtures/gsas/multiphase/authored.frame.json"
     )),
     producer_evidence: include_bytes!(concat!(
         env!("CARGO_MANIFEST_DIR"),
-        "/../../output/vesta-p2-03/20261122-c8-gsas-moment-intake/fixtures/authored.expected.json"
+        "/tests/fixtures/gsas/multiphase/authored.expected.json"
     )),
     ..AUTHORED
 };
@@ -590,6 +590,6 @@ const MULTIPHASE_CONTROL: Qualification = Qualification {
 pub(super) fn multiphase_control_exp() -> &'static [u8] {
     include_bytes!(concat!(
         env!("CARGO_MANIFEST_DIR"),
-        "/../../output/vesta-p2-03/20261122-c8-gsas-moment-intake/fixtures/authored.exp"
+        "/tests/fixtures/gsas/multiphase/authored.exp"
     ))
 }
