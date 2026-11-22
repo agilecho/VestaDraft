@@ -18,6 +18,7 @@ import tempfile
 ROOT = Path(__file__).resolve().parents[1]
 CARGO = (os.environ.get("CARGO", "cargo"),)
 LOCKED = ("--offline", "--locked")
+OFFLINE_ERROR = re.compile(rb"(?i)(offline mode|--offline was specified|failed to download)")
 WASM = "wasm32-unknown-unknown"
 BINDINGS = "vesta-bindings"
 LAYER_MEMBERS = {
@@ -117,9 +118,7 @@ def run(argv, cwd=ROOT, capture=False, quiet=False, cargo_inputs=False, env=None
         sys.stderr.buffer.write(result.stderr)
         sys.stderr.flush()
     if result.returncode:
-        if cargo_inputs and re.search(
-            rb"(?i)(offline mode|--offline was specified|failed to download)", result.stderr
-        ):
+        if cargo_inputs and OFFLINE_ERROR.search(result.stderr):
             raise Blocked("locked Cargo inputs missing from the offline cache")
         raise Failed(f"{shlex.join(argv)} exited {result.returncode}")
     return result.stdout
@@ -302,8 +301,8 @@ def contracts():
     print("all nine CPJ files and protected generated outputs match Git bytes")
 
 
-def tool_version(tool, flag, expected):
-    version = run((tool, flag), capture=True).decode().strip()
+def tool_version(tool, flag, expected, *subcommands):
+    version = run((tool, *subcommands, flag), capture=True).decode().strip()
     if version != expected:
         raise Blocked(f"{tool} requires {expected}, found {version}")
 
@@ -361,6 +360,74 @@ def native_lint(package):
     input_check(package, rust_version(), edges="normal,build,dev")
     run(CARGO + ("clippy", *LOCKED, "-p", package, "--all-targets", "--", "-D", "warnings"),
         cargo_inputs=True)
+
+
+def verify_binding_clippy_baseline(result, package_id, baseline):
+    if result.returncode != 101:
+        raise Failed(f"unexpected bindings Clippy exit {result.returncode}")
+    for file, digest in baseline["sourceSHA256"].items():
+        if hashlib.sha256((ROOT / file).read_bytes()).hexdigest() != digest:
+            raise Failed(f"bindings Clippy baseline source changed: {file}")
+
+    expected = {
+        (entry["lint"], entry["file"], entry["line"], entry["column"])
+        for entry in baseline["diagnostics"]
+    }
+    errors = [line for line in result.stderr.decode().splitlines()
+              if line.lstrip().startswith(("error", "fatal"))]
+    summary = re.compile(r"error: could not compile `vesta-bindings` \(lib(?: test)?\)"
+                         rf" due to {len(expected)} previous errors")
+    if not errors or any(not summary.fullmatch(line) for line in errors):
+        raise Failed("bindings Clippy reported an additional or unrecognized build error")
+
+    actual = set()
+    build_finished = []
+    for line in result.stdout.splitlines():
+        event = json.loads(line)
+        if event["reason"] == "build-finished":
+            build_finished.append(event["success"])
+        if event["reason"] != "compiler-message":
+            continue
+        message = event["message"]
+        if message["level"] not in ("error", "warning"):
+            continue
+        spans = [span for span in message["spans"] if span["is_primary"]]
+        if (event["package_id"] != package_id or message["level"] != "error"
+                or not message.get("code") or len(spans) != 1):
+            raise Failed("bindings Clippy emitted an unexpected compiler diagnostic")
+        span = spans[0]
+        path = Path(span["file_name"])
+        if path.is_absolute():
+            path = path.resolve().relative_to(ROOT)
+        actual.add((message["code"]["code"], path.as_posix(),
+                    span["line_start"], span["column_start"]))
+    if build_finished != [False] or actual != expected:
+        raise Failed(f"bindings Clippy baseline differs: extra {sorted(actual - expected)}, "
+                     f"missing {sorted(expected - actual)}, build-finished {build_finished}")
+
+
+def independent_bindings_lint():
+    require_files(ROOT, BINDINGS_FIXTURES)
+    input_check(BINDINGS, rust_version(), edges="normal,build,dev")
+    baseline = json.loads((ROOT / "xtask/bindings-clippy-baseline.json").read_text())
+    tool_version(CARGO[0], "--version", baseline["clippyVersion"], "clippy")
+    package_id = next(package["id"] for package in metadata() if package["name"] == BINDINGS)
+    argv = CARGO + ("clippy", *LOCKED, "-p", BINDINGS, "--all-targets",
+                    "--message-format=json", "--", "-D", "warnings")
+    print(f"+ (cd {shlex.quote(str(ROOT))} && {shlex.join(argv)})", flush=True)
+    result = subprocess.run(argv, cwd=ROOT, capture_output=True, check=False)
+    print(f"exit {result.returncode}", flush=True)
+    sys.stdout.buffer.write(result.stdout)
+    sys.stdout.flush()
+    sys.stderr.buffer.write(result.stderr)
+    sys.stderr.flush()
+    if result.returncode == 0:
+        return
+    if OFFLINE_ERROR.search(result.stderr):
+        raise Blocked("locked Cargo inputs missing from the offline cache")
+    verify_binding_clippy_baseline(result, package_id, baseline)
+    print(f"KNOWN BASELINE Clippy/bindings: {len(baseline['diagnostics'])} exact diagnostics "
+          f"(Clippy exit {result.returncode})", flush=True)
 
 
 def native_test():
@@ -436,7 +503,7 @@ def ci(independent):
             ("fmt/xtask" if independent else "fmt/workspace",
              lambda: run(CARGO + ("fmt", *fmt_scope, "--", "--check"))),
             ("Clippy/xtask", lambda: native_lint("xtask")),
-            ("Clippy/bindings", lambda: native_lint(BINDINGS)),
+            ("Clippy/bindings", independent_bindings_lint if independent else lambda: native_lint(BINDINGS)),
             ("Rust tests/bindings", native_test),
         )
         results.extend(checked(name, action) for name, action in checks)
@@ -452,11 +519,39 @@ def ci(independent):
     return outcome
 
 
+def runner_inputs():
+    host = rust_version()
+    expected_host = os.environ.get("VESTA_CI_EXPECTED_HOST")
+    if expected_host and host != expected_host:
+        raise Blocked(f"runner Rust host requires {expected_host}, found {host}")
+    print(f"runner Rust host: {host}", flush=True)
+    require_files(ROOT, LOCKS + BINDINGS_FIXTURES)
+    for name, data in tree_bytes(ROOT, LOCKS).items():
+        pinned = run(("git", "show", f"HEAD:{name}"), capture=True, quiet=True)
+        if data != pinned:
+            raise Blocked(f"locked input differs from candidate: {name}")
+        print(f"{name} SHA-256 {hashlib.sha256(data).hexdigest()}", flush=True)
+    tool_version("node", "--version", "v22.23.2")
+    tool_version("npm", "--version", "12.0.2")
+    python_version()
+    typescript_packages()
+    clippy = json.loads((ROOT / "xtask/bindings-clippy-baseline.json").read_text())["clippyVersion"]
+    tool_version(CARGO[0], "--version", clippy, "clippy")
+    run((CARGO[0], "fmt", "--version"), capture=True)
+    try:
+        input_check("xtask", host, edges="normal,build")
+        input_check(BINDINGS, host, edges="normal,build,dev")
+        input_check(BINDINGS, WASM)
+    except Failed as error:
+        raise Blocked(f"runner locked Cargo closure: {error}") from error
+
+
 def main():
     parser = argparse.ArgumentParser(prog="cargo xtask")
     sub = parser.add_subparsers(dest="command", required=True)
     sub.add_parser("contracts-check")
     sub.add_parser("layers")
+    sub.add_parser("runner-inputs")
     sub.add_parser("wasm")
     sub.add_parser("ci").add_argument("--independent", action="store_true")
     args = parser.parse_args()
@@ -464,6 +559,8 @@ def main():
     os.environ["CARGO_BUILD_JOBS"] = "2"
     os.environ["CARGO_TERM_COLOR"] = "never"
     os.environ["VESTA_PYTHON"] = sys.executable
+    if args.command == "runner-inputs":
+        return checked("runner inputs", runner_inputs)
     if args.command == "ci":
         try:
             return ci(args.independent)
