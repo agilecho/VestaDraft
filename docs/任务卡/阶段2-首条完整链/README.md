@@ -2,6 +2,9 @@
 
 ## P2-03 当前状态
 
+**ArtCraft 布局接续。** 在已迁移的分支上，C8 的 Cargo 入口在仓库根，CLI 在 `apps/vestacraft-cli/`，产品库在 `crates/`。按新旧路径及摘要对照复核原 747 项输入，再为获准的 C8→G29→G30 锁定实际 cwd、入口、夹具和工具。历史固定路径及 C7 制品继续按原封存使用。后续 P2-04 的 Web 入口为 `apps/vestacraft-web/`，CA 安装副本走独立 npm 适配入口。 [目录施工登记](../ArtCraft目录对齐.md#施工登记) · [CA 打包入口](../../../packaging/ca/README.md)
+
+
 **2026-11-22 P2-03 进度。** C8 静态后继候选已提交到本地 `main`（`d82fd97`）。仍缺 7 项真实验收资格，C8、G29、G30 均未启动。P2-03 保持 `partial`、未接受，P2-04 未准入。
 
 C5 有限原生首链已获独审，G26 补齐 C6 已选旧工程、保存确认及生命周期的实跑证据，C7 已自验选定 VESTA 嵌套结构的保存、脱离源目录重开及续改。dsh 对原 C8 候选的结论限于静态，57 项是修改前的独立脚本复跑结果。当前后继已补 GSAS 多相活动安装拒绝和原件归档用例。旧 full 迁移、全类型 Source7、Field 恢复与剩余 Graph2 仍待实际验收。 [后继回执](../../../output/vesta-p2-03/20261122-c8-dsh-followup/RECEIPT.md) · [旧件兼容边界](../../../output/vesta-p2-03/20261122-c8-dsh-followup/COMPATIBILITY.md)

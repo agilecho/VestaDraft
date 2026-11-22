@@ -76,3 +76,25 @@
 
 - [ ] 以 Craft Anything 提交 `1f8508a104134c436cbba5ea2f675619ef47702f` 的 `crates/ai/src/rebuild/check.rs` 的 `build_check` 为选择依据，核对适配目录。普通分支在检测到 Cargo.toml 时实际执行 `cargo build --quiet`，否则在检测到 package.json 时执行 `npm run build`。沿用原 Node 构建入口时，给 CA 单独准备适配的安装目录。将实际 CA 入口和产物约定放在 `packaging/`。完整 Web 应用尚待功能卡时，保留选择矩阵、入口设计与真实证据缺口。在后续适用授权下，从安装副本核对同版 CLI、WASM 与前端文件的实际清单。
 - [ ] 更新根项目入口、现行构建文档和活跃任务所用路径，冻结材料引用照原路径解释。保存文件移动差异、路径及摘要核对、锁和生成验证原始输出、CA 选路结论、未测项及手动 dsh 复审材料。单独记账，本卡运行与 P2-03 C8/G29/G30 分别登记。
+
+### 施工登记
+
+迁移结果在隔离分支 `codex/artcraft-directory-alignment`。上面的原施工检查表保留发卡时的判据。文件迁移、依赖图、生成物、源码封存复验及 CA 适配副本选路已自验，待用户手动转交 dsh。Rust 产品构建、CLI 往返、真实双端制品和正式 CA 运行继续按各卡准入办理。
+
+**从新布局续办。** 原任务卡及其封存以旧物理路径记录；在已迁移的 checkout 用下表定位实际文件。P2-03 的旧执行矩阵和 747 项 pin 继续作为迁移前证据。C8 准入时从实际 checkout 读取路径与 SHA 对照、为原卡另录新输入清单、更新原 RUN 派生驱动和监管的工作目录、源路径与二进制位置。隔离 checkout 中需要的 `output/` 夹具按各自固定摘要提供，原证据留在主工作区。
+
+| 历史物理入口 | 现行入口 |
+|---|---|
+| `APP=<repo>/app` | `APP=<repo>`（开发与合同验证） |
+| `kernel/Cargo.toml`、`kernel/Cargo.lock` | `Cargo.toml`、`Cargo.lock` |
+| `kernel/crates/cli/`、`kernel/crates/<产品库>/` | `apps/vestacraft-cli/`、`crates/<产品库>/` |
+| `web/src/`、`tools/generate-source7.py` | `apps/vestacraft-web/src/`、`scripts/generate-source7.py` |
+| `BUILDING.md`、`licenses/` | `docs/开发与构建.md`、`assets/licenses/` |
+| CA 工作区 `app/` 的源码与构建 | `app/source/` 为完整开发源树，`app/package.json` 为独立 npm 构建适配入口 |
+
+P2-03 仍缺 7 项真实资格，保留 C8、G29、G30 的原 3000 秒和全部原停点。C8 工程入口从仓库根运行，产品锁保持原外部依赖。P2-04 消费 [CA 适配入口](../../packaging/ca/README.md) 及其制品约定。
+
+- [施工回执](../../output/vesta-artcraft-layout/20261122-directory-alignment/RECEIPT.md)
+- [旧新路径、Git blob 与 SHA-256 对照](../../output/vesta-artcraft-layout/20261122-directory-alignment/path-and-sha256.json)
+- [C8 747 项对照](../../output/vesta-artcraft-layout/20261122-directory-alignment/c8-747-pin-crosswalk.json)
+- [手动独审材料](../../output/vesta-artcraft-layout/20261122-directory-alignment/DSH-REVIEW-HANDOFF.md)

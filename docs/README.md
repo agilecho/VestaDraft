@@ -22,7 +22,7 @@
 
 **2026-11-21 P2-03有限原生结果独审通过，整卡partial**：P2-02独立工具编译、16项正常测试和临时迁入验证已获用户手动带回的dsh独审通过；整卡仍partial，拒绝验证与中断留证、正式工作区创建和P2-01已审安装尚未闭合。P2-03的F6/L6最终施工已获dsh独立复审：有限原生结果通过，F1/F2在本卡26个类型与扁平资源集内闭合；T66全域生成式访问、FC递归资源图及最终CLI的HostAck证据未闭合，整卡仍partial、cardComplete=false，不进入P2-04。测试22/22及原账保持。[最终复审](/Users/agilecho/code/VestaDraft/output/vesta-dsh-reviews/20261121-143500-p2-03-final-native-review/REVIEW.md)。实际仓库根为 `/Users/agilecho/code/VestaDraft`，历史旧路径与封存保留。 [本卡原生续办](任务卡/阶段2-首条完整链/P2-03-原生实现续办.md)。
 
-**当前源码入口（2026-11-20实测位置）**：沿用用户同仓库决定，代码直接放在本项目 `/Users/agilecho/code/VestaDraft`；应用在 [app/](../app/README.md)、引导工具在 `tools/ca-bootstrap/`，与文档使用同一 Git 仓库。`output/` 保留原证据。[开发与构建](开发与构建.md) / [用户目录裁定](任务卡/源码项目目录调整.md)。
+**当前源码入口（2026-11-20实测位置）**：沿用用户同仓库决定，代码直接放在本项目 `/Users/agilecho/code/VestaDraft`；产品从[仓库根构建](开发与构建.md)，入口在 [apps/](../apps/)、引导工具在 `tools/ca-bootstrap/`，与文档使用同一 Git 仓库。`output/` 保留原证据。[开发与构建](开发与构建.md) / [用户目录裁定](任务卡/源码项目目录调整.md)。
 
 <!-- P1-CURRENT-STATUS BEGIN -->
 当前状态：rev66 已由用户带回 dsh 独审通过，F5-r／F3-r及回归闭合；用户已确认 P1.2／P1.4设计级接受，P1四项设计接受为[true,true,true,true,true]（依次为P1.1、P1.2、P1.3、P1.4、整体），P1设计阶段收口。资料基线rev67仅登记；被审技术交付仍为rev66 / D35-I33-r1-C6 / IP6，wire/profile代际I33，九摘要不变。P1.1及P1.3 C4既有接受保持，C5条件／C6未审及03rev48、04rev57/58历史范围不追认。该接受仅属P1设计交付。用户随后已授权按独立任务卡继续施工与验证；当前实现状态见下方任务组织，P1接受范围不扩大。

@@ -1,5 +1,20 @@
 * text=auto eol=lf
 
-# The imported app source manifest pins original bytes, including licence line endings.
-# Preserve those bytes in Git so a fresh checkout can verify the same source identity.
-/app/** -text
+# Preserve pinned product, contract, fixture and license bytes across checkouts.
+/app/source-package-manifest.json -text
+/apps/** -text
+/assets/** -text
+/contracts/** -text
+/crates/** -text
+/scripts/** -text
+/tests/** -text
+/Cargo.toml -text
+/Cargo.lock -text
+/package.json -text
+/package-lock.json -text
+/rust-toolchain.toml -text
+/toolchain.*.json -text
+/tsconfig.contracts.json -text
+/docs/CPJ-NUMBERS.md -text
+/docs/P2-01封存复验.md -text
+/docs/应用源码.md -text

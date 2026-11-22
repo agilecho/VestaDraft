@@ -8,7 +8,7 @@
 
 ## 开发前阅读与参考
 
-- 2026-11-22 用户明确要求 VestaDraft 的目录结构与 ArtCraft 自研应用保持一致。以 [重写要求](docs/VESTA全功能重写要求.md) 中的共同产品目录为目标，具体迁移按 [独立施工卡](docs/任务卡/ArtCraft目录对齐.md) 办理。开工前按实测 checkout 和封存输入定位。
+- 2026-11-22 用户明确要求 VestaDraft 的目录结构与 ArtCraft 自研应用保持一致。以 [重写要求](docs/VESTA全功能重写要求.md) 中的共同产品目录为目标，具体迁移与当前入口按 [施工登记](docs/任务卡/ArtCraft目录对齐.md#施工登记) 办理。开工前按实测 checkout 和封存输入定位。
 
 - 涉及开发或编写代码前，先读取当前任务卡、最新续办及相关权威文档，并参考 `/Volumes/T9/Development/Sources/Artcraft/wordcraft`（用户于2026-11-14确认）。
 - 按任务选择 wordcraft 的 `AGENTS.md`、`README.md`、`docs/architecture.md`、`docs/testing.md`、`docs/recovery.md`、`docs/control-protocol.md` 等相关文档及对应源码；记录实际参考文件、HEAD及必要SHA，区分工作区改动与提交版本。
@@ -337,3 +337,8 @@ CaTi 保持停报，YBa、Anatase 各保留一次。原 3000 秒未动。P2-03 p
 
 - 用户要求对齐现有进度、将候选代码收拢到 main 并清理其他分支，随后由用户另行安排新任务。已将现有 C8 静态后继以原补丁字节提交到本地 main（`d82fd97`），本地只有 main。
 - P2-03 保持 partial、未接受，P2-04 未准入。7 项真实资格待补，原 3000 秒未用，C8、G29/G30 均未启动，dsh 仍由用户手动发起。最新停点和证据入口见 [阶段 2 当前状态](docs/任务卡/阶段2-首条完整链/README.md#p2-03-当前状态)。
+
+## 2026-11-22 ArtCraft 目录对齐施工自验
+
+- 在独立分支 `codex/artcraft-directory-alignment` 完成迁移，仓库根为产品 Cargo workspace，`apps/`、`crates/`、`xtask/` 分别承接应用、内核和工程任务，`assets/` 集中许可材料，`packaging/ca/` 提供 CA 安装副本 npm 入口。当前入口和冻结路径换算见 [施工卡](docs/任务卡/ArtCraft目录对齐.md#施工登记)。
+- P2-03 partial，7 项真实资格仍待补，C8、G29、G30 未启动。产品 Rust 未重编，完整 Web 制品、正式 CA 安装、worker 与 Check 仍按原卡。目录施工自验和手动 dsh 材料见本卡回执。
