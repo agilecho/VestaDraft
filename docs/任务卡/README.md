@@ -1,8 +1,24 @@
 # 任务卡
 
+**2026-11-23 F10**：51包已完整核大小/SHA；更新中断未重启取件，外层回执限制及保守62秒记账已留证。E1仅私有静态准备待批，尚未解包/运行。[当前入口](阶段2-首条完整链/P2-03-F10取齐与E1私有静态工具链准备提案.md)
+
+**2026-11-22 F9 stopped**:3packages verified,cpp-12 partial after timeout,47URLs unattempted; no retries/install. F10 exact remaining48-package proposal pending. [Current receipt](阶段2-首条完整链/P2-03-F9中止与F10剩余包取件提案.md)
+
+**2026-11-22 F8**: official Debian12 signature/index hashes verified;51compiler/dependency packages pinned,not downloaded. F9 data-only download proposed. [Current receipt](阶段2-首条完整链/P2-03-F8签名索引与F9编译器取件提案.md)
+
+**2026-11-22 F7**: 9 requests,613992 bytes,22.084826667 seconds; no qualifying original or installation. F8 pinned Debian metadata only proposed. [Current receipt](阶段2-首条完整链/P2-03-F7取件结果与后继准入.md)
+
+2026-11-22 最新：用户确认暂无现成材料，F7限量取件/环境资料提案已备、尚未批准。补方案核实POLYP实际目标为Scene元素样式表，旧归属文字/后继映射须纠正；C20/G35工程证据保留，整卡仍partial、未接受，未取源/安装/启动或转审。[解阻方案与事实勘误](阶段2-首条完整链/P2-03-真实资格取件与环境准备提案.md)
+
+2026-11-22 当前后继：C20/G35有界原生自验已收口，93项Rust、16门禁、22项往返/合同具有同字节或当前制品证据；67份工程/402条实际跨度独立复核。G34的2个夹具失败和空批次驱动失败原样保留。测试35/35，真实七项资格仍开放，整卡partial、未接受；不交局部dsh。[当前精确状态](阶段2-首条完整链/P2-03-G34与G35自验登记.md)
+
+2026-11-22 最新后继：已按用户批准完成私有副本解阻及 YBa/Anatase 原留采集，真实显示字和 16 面旗标已取证。C19 原生子对象身份承载禁网编译通过；G34 的 93 个 Rust 用例、16 门禁和 22 条往返/合同命令已固定，测试追加 33→34 尚待批准。整卡仍 partial、未接受，完成整体自验后统一手动提审。[当前精确状态](阶段2-首条完整链/P2-03-真实轨迹接入与C19候选.md)
+
+**2026-11-22 C18 / G33同源自验交回。** 已补简单系数资源引用、多相GSAS资格相选择。90个具名Rust、16门禁、NS2 14项及39项逻辑验收完成；独立核63份工程与294条跨度。两处驱动失败保留，显式接续三段累计537.155706708/600秒，产品CLI无重复调用。全卡2408.774422046秒，包络1751.598167752秒，测试33/33，获取/锁6/6。七项真实资格仍pending，整卡partial、未接受、P2-04未准入，尚不请求局部或整卡独审。 [当前精确状态](阶段2-首条完整链/P2-03-G33同源自验登记.md)
+
 **2026-11-22 工程任务。** VestaDraft 已按 ArtCraft 自研应用的共同目录迁至 `apps/`、`crates/` 等入口。P2-03 的有限控制实跑和真实资格边界按下述当前登记与原卡办理。 [ArtCraft 目录对齐施工卡](ArtCraft目录对齐.md)
 
-**2026-11-22 P2-03 控制范围实跑与修复复验。** C12 源码候选 `8512162` 已编译封存；G29/G30 原失败保留，G31 在修复后完成 35/35 Rust 和五条往返驱动。G31 原监管中断及无重复 CLI 的分段续完一并待 dsh 核实。七项真实生产者资格和旧 full 迁移仍未验证，P2-03 `partial`、未接受，P2-04 未准入。 [施工回执](/Users/agilecho/code/VestaDraft/output/vesta-p2-03/20261122-build-window/RECEIPT.md) · [手动 dsh 材料](/Users/agilecho/code/VestaDraft/output/vesta-p2-03/20261122-build-window/DSH-REVIEW-HANDOFF.md)
+2026-11-22 **支持主裁定：C12/G31 有限控制结果通过；G31 只按累计执行 247.561449875/600 秒有条件接受；P2-03 仍 partial、未接受，P2-04 未准入。** 登记前原样复跑 dsh 脚本，96/96 通过；另做 43 项只读核对，确认 16 个封存可执行文件与 Cargo 原始产物一致、六份保存/重开制品的 30 条 sourceRecords 都指向真实字节。没有产品 CLI、Cargo、测试二进制或 NS2 运行。 35/35 是 **35 个选定 C12 用例**；G29 原 81/85 绑定 C11，C12 未重跑 85 项。准确的驱动表述为 **Graph2 分段续完，其余四条驱动完成**。 [独审裁定](/Users/agilecho/code/VestaDraft/output/vesta-dsh-reviews/20261122-150956-p2-03-c12-g31-review/verdict.json) [复核及校正](/Users/agilecho/code/VestaDraft/output/vesta-execution/20261122-p2-03-c12-g31-dsh-recheck/RECHECK.md)
 
 以下日期条目保留各轮当时的证据和状态。
 
@@ -34,13 +50,13 @@
 
 ## 给你看的
 
-阶段 0 研究与阶段 1 设计已按原范围收口。P1.1–P1.4 及整体保留现有接受范围，C4 设计、C5 条件、C6 增量及 03/04 历史范围的未审部分保留原状态。原 25 张 v2/v3 卡面的独立接受仍绑定原 SHA，后续 P2-01 v4、其余 24 卡 v3 及共同约定 v3 的审卡结论保留。当前已执行到 P2-03 的 C8 构建准入停点，下一项工作由用户另行安排。
+阶段 0 研究与阶段 1 设计已按原范围收口。P1.1–P1.4 及整体保留现有接受范围，C4 设计、C5 条件、C6 增量及 03/04 历史范围的未审部分保留原状态。原 25 张 v2/v3 卡面的独立接受仍绑定原 SHA，后续 P2-01 v4、其余 24 卡 v3 及共同约定 v3 的审卡结论保留。当前执行到P2-03 C18/G33原生工程自验；七项真实来源资格待闭合，整体尚未提审。
 
 | 阶段 | 用户或工程结果 | 当前状态 |
 |---|---|---|
 | [阶段0](/Users/agilecho/code/Draft/docs/任务卡/阶段0-原件研究与设计输入/README.md) | 功能/行为/格式/领域/CLI研究交接 | 原研究范围完成，Study29/29，非产品全通过 |
 | [阶段1](/Users/agilecho/code/Draft/docs/任务卡/阶段1-架构与施工设计/README.md) | 架构、接口、保存、应用、构建与实施计划 | rev66独审、rev67登记设计级接受，已收口 |
-| [阶段2](阶段2-首条完整链/README.md) | 第一条可编辑、保存、导出、关页 CLI 续改及全新页面重开的晶体工程链，并有真实 CA 检查。 | P2-01 整改后继自验完成，待独审。P2-02 有限工具结果独审通过，整卡 partial。P2-03 C8 候选已提交，构建准入未满足。P2-04 未准入，整体界面 E2E 未执行。 |
+| [阶段2](阶段2-首条完整链/README.md) | 第一条可编辑、保存、导出、关页 CLI 续改及全新页面重开的晶体工程链，并有真实 CA 检查。 | P2-01 整改后继自验完成，待独审。P2-02 有限工具结果独审通过，整卡 partial。P2-03 C18/G33原生工程自验完成，七项真实资格pending，整卡partial。P2-04 未准入，整体界面 E2E 未执行。 |
 | [阶段3](/Users/agilecho/code/Draft/docs/任务卡/阶段3-全功能实现/README.md) | 全部结构、几何、视图、体数据、科学、外算、应用与格式功能在同一版本真实贯通。 | 12卡后继独审可发放；未施工，整体UI E2E未执行，阶段未结束 |
 | [阶段4](/Users/agilecho/code/Draft/docs/任务卡/阶段4-平台正式接入/README.md) | 在现有平台上正式加载、两布局连续使用、工具与本人空间保存、隔离治理和目标环境可用。 | 4卡后继独审可发放；未施工，整体UI E2E未执行，阶段未结束 |
 | [阶段5](/Users/agilecho/code/Draft/docs/任务卡/阶段5-整链验收与交付/README.md) | 最终同版全功能与真实平台用户整链通过，交出可复现源码、制品和独立接手资料。 | 3卡后继独审可发放；未施工，整体UI E2E未执行，阶段未结束 |
@@ -49,7 +65,7 @@
 
 ## 给执行者看的
 
-P2-03 的可用运行证据来自已验证的有限原生范围。当前 C8 后继只完成静态准备，待手动 dsh 复审、7 项资格补齐及同源实际验证。原预算、停报和前卡正式创建与已审安装资格按原约定执行。 [独审复核登记](阶段2-首条完整链/P2-03-独审复核登记.md) · [最小补件清单](../../output/vesta-p2-03/20261122-c8-consolidated-admission/INPUTS-NEEDED.md)
+P2-03 的可用运行证据来自已验证的有限原生范围。当前C18/G33已完成90具名Rust、16门禁和完整计划的原生工程往返，7项真实资格仍待补齐，整体完成后统一由用户手动提审。原预算、停报和前卡正式创建与已审安装资格按原约定执行。 [独审复核登记](阶段2-首条完整链/P2-03-独审复核登记.md) · [最小补件清单](../../output/vesta-p2-03/20261122-c8-consolidated-admission/INPUTS-NEEDED.md)
 
 当前P2-01[最终回执](/Users/agilecho/code/VestaDraft/output/vesta-p2-01/20261118-132952-attempt3/RECEIPT.md)已核：两新目录禁网合同各20/20，完整依赖及19生成输出逐字节一致；原生/TS证据属于同一冻结包。现已收到用户手动带回的dsh复核：技术结果通过，正式接受暂不通过；Codex已在临时副本确认B2/B3门禁缺口，并对B1/B4/B5给出精确区分，见[再复核记录](/Users/agilecho/code/VestaDraft/output/vesta-p2-01/20261119-dsh-report-recheck/RECHECK.md)。原[首次独审材料](/Users/agilecho/code/VestaDraft/output/vesta-p2-01/20261118-132952-attempt3/DSH-REVIEW-HANDOFF.md)保留；本轮整改已在main提交，后继包双目录各25/25自验通过，待用户手动dsh复审；本卡未正式接受、阶段未结束。P2-02独立工具子结果已获dsh复核；剩余拒绝验证与中断留证、正式创建和已审安装仍属原卡，P2-03不代办。原两次partial、失败及全部资源消耗见阶段HISTORY，不改写旧结果。
 

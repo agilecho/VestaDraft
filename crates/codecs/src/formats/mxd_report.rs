@@ -22,7 +22,7 @@ const DIALECT: &str = "mxd-file06-coordn-observations-1";
 pub(super) fn rule_digest() -> String {
     digest(&vesta_model::source_audit::canonical(&json!([
         include_str!("../../contracts/mxd-report-format.contract.json"),
-        "file06-selected-fixed-headings-declared-version-and-axis-spans-2"
+        "file06-selected-fixed-headings-declared-version-and-axis-spans-3"
     ])))
 }
 
@@ -111,12 +111,24 @@ fn box_lengths(box_words: &str) -> Result<()> {
     Ok(())
 }
 
-fn tricl_angles(angles: &str) -> Result<()> {
+fn tricl_cell_words(angles: &str) -> Result<()> {
     if !(44..=48).contains(&angles.len()) || &angles[..9] != "         " {
         return Err(invalid("MXD COORDN triclinic angle header width"));
     }
+    let mut negative = false;
+    let mut cosine_range = true;
     for at in [9, 22, 35] {
-        fixed_number(&angles[at..at + 9], 5, true)?;
+        let field = &angles[at..at + 9];
+        fixed_number(field, 5, false)?;
+        let value: f64 = field.trim_start().parse()
+            .map_err(|_| invalid("malformed MXD triclinic cell word"))?;
+        negative |= value < 0.0;
+        cosine_range &= (-1.0..=1.0).contains(&value);
+    }
+    // TMATRX stores cosines in BOX(4:6). COORDN prints these words directly.
+    // Previously stored nonnegative headers still carry their original words.
+    if negative && !cosine_range {
+        return Err(invalid("MXD COORDN triclinic signed cell word outside cosine range"));
     }
     // The final 4X can be omitted at the end of a formatted sequential record.
     if &angles[18..22] != "    "
@@ -176,7 +188,7 @@ fn metadata(document: &Value, res: &PersistentResource, raw: &[u8]) -> Result<Ve
                 .get(i + 1)
                 .and_then(|row| row.text.strip_prefix(TRICL_SYMMETRY))
                 .ok_or_else(|| invalid("MXD triclinic COORDN symmetry heading context"))?;
-            tricl_angles(symmetry_tail(tail)?)?;
+            tricl_cell_words(symmetry_tail(tail)?)?;
             ("tricl-20251119", TRICL_VERSION, 2)
         } else if heading.trim_start().starts_with(ORTHO)
             || heading.trim_start().starts_with(TRICL.trim_start())

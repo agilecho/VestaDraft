@@ -1,0 +1,1374 @@
+{
+  "schema": "P2-03-recorded-native-scene-global-witness-1",
+  "sourceSHA256": "674ea1de5a9404baeeb96028047646abe401afee09390499ab0f16c654d90d9f",
+  "librarySHA256": "c2c677facf6c67783cc7bbe64e92b75beb1a567fc373eacabee58b11fb81a77f",
+  "traceSHA256": "2d1c5e659c6c90a210d2396a888c1c73148f6fae8ab15367e6e599d15de9dac6",
+  "pid": 95201,
+  "snapshots": [
+    {
+      "event": "legacy-return",
+      "rawFile": "legacy-return.bin",
+      "rawSHA256": "6b79458f0a0022e5828bec7246ec3447d301f72d31fd3dca1fca2153c354c771",
+      "sceneSlots": {
+        "0x234": 1,
+        "0x268": 15,
+        "0x26c": 15,
+        "0x270": 50,
+        "0x274": 0,
+        "0x284": 1,
+        "0x288": 11,
+        "0x28c": 0,
+        "0x2a4": 1,
+        "0x2a8": 1,
+        "0x2b8": 1,
+        "0x5b4": 2,
+        "0x228": 0,
+        "0x5b0": 39850946,
+        "0x22c": {
+          "kind": "F32Bits",
+          "ieeeHexBE": "3f800000"
+        },
+        "0x278": {
+          "kind": "F32Bits",
+          "ieeeHexBE": "40000000"
+        },
+        "0x298": {
+          "kind": "F32Bits",
+          "ieeeHexBE": "3f800000"
+        },
+        "0x29c": {
+          "kind": "F32Bits",
+          "ieeeHexBE": "3e9d2f1b"
+        },
+        "0x2ac": {
+          "kind": "F32Bits",
+          "ieeeHexBE": "3f800000"
+        },
+        "0x2b4": {
+          "kind": "F32Bits",
+          "ieeeHexBE": "3f800000"
+        },
+        "0x3d0": {
+          "kind": "F32Bits",
+          "ieeeHexBE": "43000000"
+        },
+        "0x3d8": {
+          "kind": "F32Bits",
+          "ieeeHexBE": "43000000"
+        },
+        "0x3e0": {
+          "kind": "F32Bits",
+          "ieeeHexBE": "43000000"
+        },
+        "0x3f8": {
+          "kind": "F32Bits",
+          "ieeeHexBE": "43000000"
+        },
+        "0x40c": {
+          "kind": "F32Bits",
+          "ieeeHexBE": "3f7645a2"
+        },
+        "0x230:3": [
+          1,
+          123,
+          0
+        ],
+        "0x2a0:3": [
+          204,
+          204,
+          204
+        ],
+        "0x2b0:4": [
+          179,
+          179,
+          179,
+          179
+        ],
+        "0x3cc:4": [
+          255,
+          255,
+          255,
+          255
+        ],
+        "0x3d4:4": [
+          255,
+          255,
+          255,
+          255
+        ],
+        "0x3dc:4": [
+          255,
+          255,
+          255,
+          255
+        ],
+        "0x3f4:4": [
+          255,
+          255,
+          255,
+          255
+        ],
+        "0x3fc:3": [
+          0,
+          0,
+          51
+        ]
+      },
+      "lights": [
+        {
+          "index": 0,
+          "matrix16": [
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "3f800000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "3f800000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "3f800000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "3f800000"
+            }
+          ],
+          "direction3": [
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "bf800000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "bf800000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "bf800000"
+            }
+          ],
+          "position4": [
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "be4ccccd"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "be4ccccd"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "41a00000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            }
+          ],
+          "rgba": [
+            [
+              0,
+              0,
+              0,
+              255
+            ],
+            [
+              179,
+              179,
+              179,
+              255
+            ],
+            [
+              179,
+              179,
+              179,
+              255
+            ]
+          ]
+        },
+        {
+          "index": 1,
+          "matrix16": [
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "3f800000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "3f800000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "3f800000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "3f800000"
+            }
+          ],
+          "direction3": [
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "bf800000"
+            }
+          ],
+          "position4": [
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "41a00000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            }
+          ],
+          "rgba": [
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ]
+        },
+        {
+          "index": 2,
+          "matrix16": [
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "3f800000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "3f800000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "3f800000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "3f800000"
+            }
+          ],
+          "direction3": [
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "bf800000"
+            }
+          ],
+          "position4": [
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "41a00000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            }
+          ],
+          "rgba": [
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ]
+        },
+        {
+          "index": 3,
+          "matrix16": [
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "3f800000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "3f800000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "3f800000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "3f800000"
+            }
+          ],
+          "direction3": [
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "bf800000"
+            }
+          ],
+          "position4": [
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "41a00000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            }
+          ],
+          "rgba": [
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ]
+        }
+      ],
+      "view": {
+        "matrix16": [
+          {
+            "kind": "F64Bits",
+            "ieeeHexBE": "3feef1a9fbe76c8b"
+          },
+          {
+            "kind": "F64Bits",
+            "ieeeHexBE": "bfa6872b020c49ba"
+          },
+          {
+            "kind": "F64Bits",
+            "ieeeHexBE": "3fd010624dd2f1aa"
+          },
+          {
+            "kind": "F64Bits",
+            "ieeeHexBE": "0000000000000000"
+          },
+          {
+            "kind": "F64Bits",
+            "ieeeHexBE": "bf847ae147ae147b"
+          },
+          {
+            "kind": "F64Bits",
+            "ieeeHexBE": "3fef4395810624dd"
+          },
+          {
+            "kind": "F64Bits",
+            "ieeeHexBE": "3fcb020c49ba5e35"
+          },
+          {
+            "kind": "F64Bits",
+            "ieeeHexBE": "0000000000000000"
+          },
+          {
+            "kind": "F64Bits",
+            "ieeeHexBE": "bfd051eb851eb852"
+          },
+          {
+            "kind": "F64Bits",
+            "ieeeHexBE": "bfca5e353f7ced91"
+          },
+          {
+            "kind": "F64Bits",
+            "ieeeHexBE": "3fee3d70a3d70a3d"
+          },
+          {
+            "kind": "F64Bits",
+            "ieeeHexBE": "0000000000000000"
+          },
+          {
+            "kind": "F64Bits",
+            "ieeeHexBE": "0000000000000000"
+          },
+          {
+            "kind": "F64Bits",
+            "ieeeHexBE": "0000000000000000"
+          },
+          {
+            "kind": "F64Bits",
+            "ieeeHexBE": "0000000000000000"
+          },
+          {
+            "kind": "F64Bits",
+            "ieeeHexBE": "3ff0000000000000"
+          }
+        ],
+        "settings4": [
+          {
+            "kind": "F32Bits",
+            "ieeeHexBE": "00000000"
+          },
+          {
+            "kind": "F32Bits",
+            "ieeeHexBE": "00000000"
+          },
+          {
+            "kind": "F32Bits",
+            "ieeeHexBE": "c00b851f"
+          },
+          {
+            "kind": "F32Bits",
+            "ieeeHexBE": "3f800000"
+          }
+        ]
+      }
+    },
+    {
+      "event": "save-entry",
+      "rawFile": "save-entry.bin",
+      "rawSHA256": "57dafc23582ee818e26f9b4037387dbd5ff5420ff8e904b4e4b2b9c7ca4220f0",
+      "sceneSlots": {
+        "0x234": 1,
+        "0x268": 24,
+        "0x26c": 24,
+        "0x270": 50,
+        "0x274": 0,
+        "0x284": 1,
+        "0x288": 16,
+        "0x28c": 1,
+        "0x2a4": 1,
+        "0x2a8": 1,
+        "0x2b8": 1,
+        "0x5b4": 0,
+        "0x228": 1,
+        "0x5b0": 37753794,
+        "0x22c": {
+          "kind": "F32Bits",
+          "ieeeHexBE": "3f800000"
+        },
+        "0x278": {
+          "kind": "F32Bits",
+          "ieeeHexBE": "40000000"
+        },
+        "0x298": {
+          "kind": "F32Bits",
+          "ieeeHexBE": "40000000"
+        },
+        "0x29c": {
+          "kind": "F32Bits",
+          "ieeeHexBE": "3e800000"
+        },
+        "0x2ac": {
+          "kind": "F32Bits",
+          "ieeeHexBE": "3f800000"
+        },
+        "0x2b4": {
+          "kind": "F32Bits",
+          "ieeeHexBE": "3f800000"
+        },
+        "0x3d0": {
+          "kind": "F32Bits",
+          "ieeeHexBE": "41cccccd"
+        },
+        "0x3d8": {
+          "kind": "F32Bits",
+          "ieeeHexBE": "43000000"
+        },
+        "0x3e0": {
+          "kind": "F32Bits",
+          "ieeeHexBE": "43000000"
+        },
+        "0x3f8": {
+          "kind": "F32Bits",
+          "ieeeHexBE": "43000000"
+        },
+        "0x40c": {
+          "kind": "F32Bits",
+          "ieeeHexBE": "3f7645a2"
+        },
+        "0x230:3": [
+          0,
+          0,
+          0
+        ],
+        "0x2a0:3": [
+          127,
+          127,
+          127
+        ],
+        "0x2b0:4": [
+          180,
+          180,
+          180,
+          204
+        ],
+        "0x3cc:4": [
+          204,
+          204,
+          204,
+          255
+        ],
+        "0x3d4:4": [
+          255,
+          255,
+          255,
+          255
+        ],
+        "0x3dc:4": [
+          255,
+          255,
+          255,
+          255
+        ],
+        "0x3f4:4": [
+          255,
+          255,
+          255,
+          255
+        ],
+        "0x3fc:3": [
+          255,
+          255,
+          255
+        ]
+      },
+      "lights": [
+        {
+          "index": 0,
+          "matrix16": [
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "3f800000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "3f800000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "3f800000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "3f800000"
+            }
+          ],
+          "direction3": [
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "bf800000"
+            }
+          ],
+          "position4": [
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "41a00000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            }
+          ],
+          "rgba": [
+            [
+              26,
+              26,
+              26,
+              255
+            ],
+            [
+              179,
+              179,
+              179,
+              255
+            ],
+            [
+              255,
+              255,
+              255,
+              255
+            ]
+          ]
+        },
+        {
+          "index": 1,
+          "matrix16": [
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "3f800000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "3f800000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "3f800000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "3f800000"
+            }
+          ],
+          "direction3": [
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "bf800000"
+            }
+          ],
+          "position4": [
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "41a00000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            }
+          ],
+          "rgba": [
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ]
+        },
+        {
+          "index": 2,
+          "matrix16": [
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "3f800000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "3f800000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "3f800000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "3f800000"
+            }
+          ],
+          "direction3": [
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "bf800000"
+            }
+          ],
+          "position4": [
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "41a00000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            }
+          ],
+          "rgba": [
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ]
+        },
+        {
+          "index": 3,
+          "matrix16": [
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "3f800000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "3f800000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "3f800000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "3f800000"
+            }
+          ],
+          "direction3": [
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "bf800000"
+            }
+          ],
+          "position4": [
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "41a00000"
+            },
+            {
+              "kind": "F32Bits",
+              "ieeeHexBE": "00000000"
+            }
+          ],
+          "rgba": [
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0
+            ]
+          ]
+        }
+      ],
+      "view": {
+        "matrix16": [
+          {
+            "kind": "F64Bits",
+            "ieeeHexBE": "3ff0000000000000"
+          },
+          {
+            "kind": "F64Bits",
+            "ieeeHexBE": "0000000000000000"
+          },
+          {
+            "kind": "F64Bits",
+            "ieeeHexBE": "0000000000000000"
+          },
+          {
+            "kind": "F64Bits",
+            "ieeeHexBE": "0000000000000000"
+          },
+          {
+            "kind": "F64Bits",
+            "ieeeHexBE": "0000000000000000"
+          },
+          {
+            "kind": "F64Bits",
+            "ieeeHexBE": "3ff0000000000000"
+          },
+          {
+            "kind": "F64Bits",
+            "ieeeHexBE": "0000000000000000"
+          },
+          {
+            "kind": "F64Bits",
+            "ieeeHexBE": "0000000000000000"
+          },
+          {
+            "kind": "F64Bits",
+            "ieeeHexBE": "0000000000000000"
+          },
+          {
+            "kind": "F64Bits",
+            "ieeeHexBE": "0000000000000000"
+          },
+          {
+            "kind": "F64Bits",
+            "ieeeHexBE": "3ff0000000000000"
+          },
+          {
+            "kind": "F64Bits",
+            "ieeeHexBE": "0000000000000000"
+          },
+          {
+            "kind": "F64Bits",
+            "ieeeHexBE": "0000000000000000"
+          },
+          {
+            "kind": "F64Bits",
+            "ieeeHexBE": "0000000000000000"
+          },
+          {
+            "kind": "F64Bits",
+            "ieeeHexBE": "0000000000000000"
+          },
+          {
+            "kind": "F64Bits",
+            "ieeeHexBE": "3ff0000000000000"
+          }
+        ],
+        "settings4": [
+          {
+            "kind": "F32Bits",
+            "ieeeHexBE": "00000000"
+          },
+          {
+            "kind": "F32Bits",
+            "ieeeHexBE": "00000000"
+          },
+          {
+            "kind": "F32Bits",
+            "ieeeHexBE": "00000000"
+          },
+          {
+            "kind": "F32Bits",
+            "ieeeHexBE": "3f800000"
+          }
+        ]
+      }
+    }
+  ],
+  "qualification": "Actual recorded global values only; does not qualify complete native target or historical import populations."
+}

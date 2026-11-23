@@ -1,20 +1,29 @@
-//! Single qualified migration from the pinned Core1 engineering artifact.
+//! Qualified migrations from the two archived CoreContent engineering formats.
 use super::*;
 #[path = "native_core1_types.rs"]
 mod legacy_types;
 #[path = "native_core1_reader.rs"]
 mod reader;
-pub(super) fn qualifies(saved: &Value) -> bool {
-    saved["sourceTypeDigest"] == reader::type_digest()
-        && saved["sourceRuleSetDigest"] == reader::rule_digest()
+pub(super) use reader::Version;
+
+pub(super) fn qualified_version(saved: &Value) -> Option<Version> {
+    [Version::CoreContent, Version::CoreSource7].into_iter().find(|version| {
+        let (types, rules, schema) = version.digests();
+        saved["sourceTypeDigest"] == types
+            && saved["sourceRuleSetDigest"] == rules
+            && saved["sourceDTOSchemaDigest"] == schema
+    })
 }
+
 pub(super) fn migrate(
     primary: &[u8],
     deps: &BTreeMap<String, Vec<u8>>,
     source: &[u8],
     ids: Ids,
+    version: Version,
 ) -> Result<RestoredProject> {
-    let old = reader::decode(primary, deps)?;
+    let old = reader::decode(primary, deps, version)?;
+    let (source_type, source_rule, _) = version.digests();
     let mut raw =
         serde_json::to_value(&old.content).map_err(|e| Error::new("E_SCHEMA", e.to_string()))?;
     let mut bytes = old.resources;
@@ -47,7 +56,7 @@ pub(super) fn migrate(
         key.push('_');
     }
     raw["resources"].as_array_mut().ok_or_else(||error("legacy resources"))?.push(json!({"id":source_id,"logicalKey":key,"sha256":original,"byteLength":source.len().to_string(),"mediaType":"application/octet-stream"}));
-    raw.as_object_mut().ok_or_else(||error("legacy core"))?.insert("legacySource".into(),json!({"sourceTypeDigest":reader::type_digest(),"sourceRuleDigest":reader::rule_digest(),"originalSourceDocument":source_id,"originalResources":bindings}));
+    raw.as_object_mut().ok_or_else(||error("legacy core"))?.insert("legacySource".into(),json!({"sourceTypeDigest":source_type,"sourceRuleDigest":source_rule,"originalSourceDocument":source_id,"originalResources":bindings}));
     let content: ProjectContent = serde_json::from_value(raw)
         .map_err(|e| Error::new("E_SCHEMA", format!("qualified Core1 migration: {e}")))?;
     content.validate()?;

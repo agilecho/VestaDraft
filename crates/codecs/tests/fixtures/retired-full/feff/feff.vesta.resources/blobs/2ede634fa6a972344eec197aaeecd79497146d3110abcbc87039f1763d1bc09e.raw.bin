@@ -1,0 +1,11 @@
+# include inactive-comment.inc
+POTENTIALS
+0 6 C
+1 8 O
+load shared.inc
+LOAD [shared.inc] retained-ignored.inc
+ATOMS
+0 0 0 0 C
+0.5 1.25 2.5 1 O
+END
+load after-child-end.inc

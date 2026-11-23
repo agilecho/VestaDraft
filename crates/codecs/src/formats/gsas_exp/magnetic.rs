@@ -122,15 +122,23 @@ pub(super) struct Prepared<'a> {
 
 impl<'a> Prepared<'a> {
     pub(super) fn new(approval: &'a Qualification, raw: &'a [u8], history: &Value) -> Result<Self> {
-        let [phase] = history["tree"]["members"]["phases"]["items"]
+        // The qualification binds an original phase number, not its position
+        // among declared phases. Other original phases remain archival facts.
+        let mut selected = history["tree"]["members"]["phases"]["items"]
             .as_array()
-            .map(Vec::as_slice)
-            .unwrap_or_default()
-        else {
-            return Err(invalid(
-                "GSAS active installation requires exactly one declared phase",
-            ));
-        };
+            .into_iter()
+            .flatten()
+            .filter(|phase| {
+                text(&phase["members"], "phaseNumber")
+                    .ok()
+                    .and_then(|word| word.parse::<u8>().ok()) == Some(approval.phase)
+            });
+        let phase = selected.next().ok_or_else(|| {
+            invalid("GSAS approved phase is missing or repeated")
+        })?;
+        if selected.next().is_some() {
+            return Err(invalid("GSAS approved phase is missing or repeated"));
+        }
         let phase = &phase["members"];
         let chart = Chart::parse(approval.chart)?;
         let frame = Frame::parse(approval.frame)?;

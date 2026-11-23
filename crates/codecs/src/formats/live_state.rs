@@ -202,10 +202,18 @@ pub fn open_native_state(
     RestoredProject::new(capture, ids)
 }
 
-pub(super) fn verify(capture: &Capture, value: &Value) -> Result<BTreeSet<String>> {
+pub(super) fn migrate_verified_legacy_display(value: &mut Value) -> Result<()> {
+    legacy_display::migrate_verified_current(value)
+}
+
+pub(super) fn verify(
+    capture: &Capture,
+    value: &Value,
+    retired_display: bool,
+) -> Result<BTreeSet<String>> {
     layer::verify(value)?;
     view::inspect(value)?;
-    legacy_display::verify(capture, value)?;
+    legacy_display::verify(capture, value, retired_display)?;
     vics_history::verify(capture, value)?;
     native_flags::verify_historical_anatase(capture, value)?;
     nvis_molecule::inspect(value)?;

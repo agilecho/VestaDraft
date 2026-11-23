@@ -241,16 +241,50 @@ fn invalid(message: &str) -> Error {
     Error::new("E_REOPEN_COVERAGE", message)
 }
 
-pub(super) fn type_digest() -> String {
+// Exact tuple emitted by the retired full writer (including the C11 and
+// C20 artifacts). Keep the old schema/rule pair together during validation.
+const RETIRED_TYPE: &str = "f8aed2eca193acdc3c2b40abafb3b04b316f42509481e9005a5c74dc8828f996";
+const RETIRED_RULE: &str = "0de0c6961d53d00843a92eb6cc3d2d172dc434c7f512501331db5846ac9c0150";
+const RETIRED_SCHEMA: &str = "666ba0fa0135f6956bcbf2a4ca49650ce0a3de82c4d01cb1c07f86d7eb9f9bef";
+
+#[derive(Clone, Copy, PartialEq, Eq)]
+pub(super) enum Version {
+    Current,
+    LegacyDisplay1,
+}
+
+impl Version {
+    pub(super) fn qualified(saved: &Value) -> Option<Self> {
+        [Self::Current, Self::LegacyDisplay1].into_iter().find(|version| {
+            let (types, rules) = version.digests();
+            let schema = match version {
+                Self::Current => digest(current_source7::SOURCE_SCHEMA.as_bytes()),
+                Self::LegacyDisplay1 => RETIRED_SCHEMA.to_owned(),
+            };
+            saved["sourceTypeDigest"] == types
+                && saved["sourceRuleSetDigest"] == rules
+                && saved["sourceDTOSchemaDigest"] == schema
+        })
+    }
+
+    fn digests(self) -> (String, String) {
+        match self {
+            Self::Current => (type_digest(), rule_digest()),
+            Self::LegacyDisplay1 => (RETIRED_TYPE.into(), RETIRED_RULE.into()),
+        }
+    }
+}
+
+fn type_digest() -> String {
     digest(&canonical(&json!({
-        "version":"VestaDraft/Source7/typed-project-1",
+        "version":"VestaDraft/Source7/typed-project-2",
         "wire":digest(current_source7::SOURCE_SCHEMA.as_bytes()),
         "editor":ProjectContent::descriptor(),
         "types":SourceDocument::descriptor(),
     })))
 }
 
-pub(super) fn rule_digest() -> String {
+fn rule_digest() -> String {
     digest(&canonical(&json!({
         "sourceRules":current_source7::rule_digest(),
         "fieldStorage":include_str!("../../contracts/field-storage-use-1.json"),
@@ -433,6 +467,10 @@ fn resource_uses(node: &Node, document: &str) -> Vec<Value> {
 }
 
 pub(super) fn capture(source: &Capture) -> Result<(Value, Node)> {
+    capture_version(source, Version::Current)
+}
+
+pub(super) fn capture_version(source: &Capture, version: Version) -> Result<(Value, Node)> {
     let (mut value, projections) = if let Some(full) = &source.source {
         (full.to_value()?, super::gsas_exp::projection_count(&full.audit()?))
     } else {
@@ -442,7 +480,9 @@ pub(super) fn capture(source: &Capture) -> Result<(Value, Node)> {
     actual_resource_rows(&mut value, source)?;
     super::live_state::native_flags::refresh(source,&mut value)?;
     let mut qualified = super::scalar_grid_source::verify(source, &value)?;
-    qualified.extend(super::live_state::verify(source, &value)?);
+    qualified.extend(super::live_state::verify(
+        source, &value, version == Version::LegacyDisplay1,
+    )?);
     qualified.extend(super::gsas_exp::verify(source, &value, projections)?);
     if source.content.resources.iter().any(|row| {
         let key = row.logical_key.as_str();
@@ -493,10 +533,11 @@ pub(super) fn capture(source: &Capture) -> Result<(Value, Node)> {
             }
         }
     }
+    let (types, rules) = version.digests();
     value["identity"] = json!({"documentId":source.document.document_id,
         "epoch":source.document.epoch,"revision":source.document.revision,
-        "sourceTypeDigest":type_digest(),"sourceRootDigest":"0".repeat(64),
-        "resourceGraphDigest":"0".repeat(64),"policyDigest":rule_digest()});
+        "sourceTypeDigest":types,"sourceRootDigest":"0".repeat(64),
+        "resourceGraphDigest":"0".repeat(64),"policyDigest":rules});
     super::opaque_tail::bind(source, &mut value, &graphs)?;
     let identity = std::mem::replace(&mut value["identity"], Value::Null);
     let source_root = digest(&canonical(&value));
@@ -534,6 +575,28 @@ pub(super) fn capture(source: &Capture) -> Result<(Value, Node)> {
     let mut node = doc.audit()?;
     node.bind_resources(&resources)?;
     Ok((value, node))
+}
+
+pub(super) fn migrate_verified_legacy_display(
+    mut capture: Capture,
+    mut restored: Value,
+) -> Result<Capture> {
+    super::live_state::migrate_verified_legacy_display(&mut restored)?;
+    let (types, rules) = Version::Current.digests();
+    // The old capture has already reproduced its complete opaque footprints.
+    // Rebind their version pins before independently validating the new capture.
+    let opaque = restored["opaqueBlocks"]
+        .as_array_mut()
+        .ok_or_else(|| invalid("legacy full opaque population"))?;
+    for row in opaque {
+        let baseline = &mut row["editDependencies"]["baseline"];
+        baseline["sourceTypeDigest"] = json!(types);
+        baseline["policyDigest"] = json!(rules);
+    }
+    capture.source = Some(SourceDocument::decode(restored)?);
+    let (current, _) = self::capture(&capture)?;
+    capture.source = Some(SourceDocument::decode(current)?);
+    Ok(capture)
 }
 
 pub(super) fn restore_core(value: &Value) -> Result<ProjectContent> {

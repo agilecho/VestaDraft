@@ -23,6 +23,9 @@ pub(super) fn rule_digest() -> String {
 }
 
 pub(super) fn magnetic_rule_digest() -> String {
+    // This stable identifier denotes one installed active phase. The EXP may
+    // declare other independent archived phases; its chart still binds exactly
+    // one source phase number. No Source7 roles or archived rules changed.
     digest(&vesta_model::source_audit::canonical(&json!({
         "chartSchema":digest(chart::CHART.as_bytes()),
         "frameSchema":digest(chart::FRAME.as_bytes()),

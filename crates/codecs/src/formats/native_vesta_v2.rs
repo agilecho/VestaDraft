@@ -554,7 +554,6 @@ fn decode_checked(
         || manifest["schemaVersion"] != "FC-native-source-manifest-2-proposal"
         || manifest["primarySha256"] != p_hash
         || manifest["sourceDocumentSha256"] != stamp
-        || manifest["sourceDTOSchemaDigest"] != schema_digest()
     {
         return Err(error("native manifest binding/schema"));
     }
@@ -605,20 +604,25 @@ fn decode_checked(
     }
     let saved = vesta_model::json::parse(source, MAX)?;
     current_source7::envelope(&saved, "SavedSourceDocument")?;
-    if native_core1_migration::qualifies(&saved) {
+    if let Some(version) = native_core1_migration::qualified_version(&saved) {
         if registered_source.is_some() {
             return Err(error("candidate writer emitted retired Core1 rules"));
         }
-        return native_core1_migration::migrate(primary, deps, source, ids);
+        return native_core1_migration::migrate(primary, deps, source, ids, version);
     }
     let old_rule = rule_digest();
     let old_type = type_digest();
     let graph_rule = graph_provenance::rule_digest(&old_rule);
     let graph_type = graph_provenance::type_digest(&old_type);
     let (expanded_type, expanded_rule) = graph_provenance::expanded_digests(&old_type, &old_rule);
-    let full = saved["sourceTypeDigest"] == full_source7::type_digest()
-        && saved["sourceRuleSetDigest"] == full_source7::rule_digest();
-    if manifest["sourceRuleSetDigest"] != saved["sourceRuleSetDigest"] {
+    let full_version = full_source7::Version::qualified(&saved);
+    let full = full_version.is_some();
+    if registered_source.is_some() && full_version == Some(full_source7::Version::LegacyDisplay1) {
+        return Err(error("candidate writer emitted retired full source rules"));
+    }
+    if manifest["sourceRuleSetDigest"] != saved["sourceRuleSetDigest"]
+        || manifest["sourceDTOSchemaDigest"] != schema_digest()
+    {
         return Err(error("manifest rules not qualified"));
     }
     let required = [
@@ -755,19 +759,17 @@ fn decode_checked(
     {
         return Err(error("source graph type does not match capture"));
     }
-    if graph_provenance::has_graph(&capture) {
-        let mut contexts = BTreeSet::from([source_path.to_owned()]);
-        contexts.extend(content.resources.iter().filter(|r| r.media_type == CAPTURE_MEDIA)
-            .map(|r| format!("{root}/blobs/{}.raw.bin", r.sha256)));
-        for (key, row) in entries {
-            let role = if contexts.contains(key) { "context-resource" } else { "source-resource" };
-            if row["role"] != role {
-                return Err(error("graph artifact context role differs"));
-            }
+    let mut contexts = BTreeSet::from([source_path.to_owned()]);
+    contexts.extend(content.resources.iter().filter(|r| r.media_type == CAPTURE_MEDIA)
+        .map(|r| format!("{root}/blobs/{}.raw.bin", r.sha256)));
+    for (key, row) in entries {
+        let role = if contexts.contains(key) { "context-resource" } else { "source-resource" };
+        if row["role"] != role {
+            return Err(error("artifact dependency role differs"));
         }
     }
-    let (actual, node) = if full {
-        capture_for_save(&capture)?
+    let (actual, node) = if let Some(version) = full_version {
+        full_source7::capture_version(&capture, version)?
     } else {
         current_source7::capture(&capture)?
     };
@@ -811,6 +813,11 @@ fn decode_checked(
     if content.resources.len() != resources.len() {
         return Err(error("unexpected source resource"));
     }
+    let capture = if full_version == Some(full_source7::Version::LegacyDisplay1) {
+        full_source7::migrate_verified_legacy_display(capture, restored)?
+    } else {
+        capture
+    };
     RestoredProject::new(capture, ids)
 }
 

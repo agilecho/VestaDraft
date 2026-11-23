@@ -1,0 +1,10 @@
+TITLE C8 finite FEFF10 engineering graph
+RECIPROCAL
+LATTICE P 1.0
+2 0 0
+0 5 0
+0 0 10
+COORDINATES 1
+TARGET 1
+InClUdE "sub/atoms.inc" ignored-tail.inc
+include after-parent-end.inc

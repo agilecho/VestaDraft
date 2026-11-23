@@ -271,6 +271,74 @@ fn density_and_texture_discover_distinct_ordered_path_spans_and_validate_grid_by
 }
 
 #[test]
+fn scalar_reference_coefficients_keep_occurrences_spans_and_fresh_resource_owners() {
+    use vesta_codecs::{decode, encode_verified};
+    use vesta_commands::{EngineV2, Limits};
+    use vesta_model::{Cell3, Ids};
+    let source = format!(
+        "{HEADER}IMPORT_DENSITY 3\n-0.500000 data grid.pgrid\n+2.5E-1 data grid.pgrid\n\nIMPORT_TEXTURE\n1.25e+00 texture.ggrid\n\nGROUP\n1 1 P 1\nCOMMENT\n"
+    );
+    let fixture = BTreeMap::from([
+        ("sample/root.vesta".into(), source.as_bytes().to_vec()),
+        ("sample/data grid.pgrid".into(), flat_grid(true)),
+        ("sample/texture.ggrid".into(), flat_grid(false)),
+    ]);
+    let limits = CaptureLimits::default();
+    let archive = capture(&fixture, limits).unwrap();
+    assert_eq!(archive.graph.edges.len(), 3);
+    assert_eq!(archive.files.len(), 3);
+    assert_eq!(archive.graph.edges[0].to_key, archive.graph.edges[1].to_key);
+    assert_ne!(archive.graph.edges[0].reference_id, archive.graph.edges[1].reference_id);
+    let root = archive.graph.captures.iter().find(|c| c.primary_key == "sample/root.vesta").unwrap();
+    let offsets = source.match_indices("data grid.pgrid").map(|(i, _)| i).chain([source.find("texture.ggrid").unwrap()]);
+    for (reference, offset) in root.captured.references.iter().zip(offsets) {
+        let SourceReference::Explicit(reference) = reference else { panic!("exact source span"); };
+        assert_eq!(reference.path_span.byte_offset, offset.to_string());
+        let length = reference.path_span.byte_length.parse::<usize>().unwrap();
+        assert_eq!(reference.path_span.sha256, digest(&source.as_bytes()[offset..offset + length]));
+    }
+    verify_artifact_graph(&archive.graph, &archive.files, limits).unwrap();
+    let mut engine = EngineV2::new(Cell3 { length_a: [4.; 3], angles_deg: [90.; 3] },
+        "coefficient closure", Ids::new([181; 16]), Limits::default()).unwrap();
+    let graph = vesta_model::source_audit::canonical(&serde_json::to_value(&archive.graph).unwrap());
+    let prefix = format!("source-graph/{}", digest(&graph));
+    let mut attachments = vec![vesta_commands::SourceAttachment {
+        logical_key: format!("{prefix}/capture"), bytes: graph,
+        media_type: vesta_model::source7::resource_graph::CAPTURE_MEDIA.into(),
+    }];
+    for (i, file) in archive.graph.files.iter().enumerate() {
+        attachments.push(vesta_commands::SourceAttachment {
+            logical_key: format!("{prefix}/file/{i}"), bytes: archive.files[&file.key].clone(),
+            media_type: "application/octet-stream".into(),
+        });
+    }
+    engine.attach_resources(attachments).unwrap();
+    let before = engine.capture().unwrap();
+    let saved = encode_verified(&before, "coefficients.vesta", Ids::new([182; 16])).unwrap();
+    let fresh = decode(&saved.primary, &saved.dependencies, Ids::new([183; 16])).unwrap();
+    for old in &before.content.resources {
+        let new = fresh.content.resources.iter().find(|r| r.logical_key == old.logical_key).unwrap();
+        assert_ne!(new.id, old.id);
+        assert_eq!(new.sha256, old.sha256);
+        assert_eq!(fresh.resources[&new.sha256], before.resources[&old.sha256]);
+    }
+}
+
+#[test]
+fn invalid_scalar_reference_operations_refuse_before_any_companion_read() {
+    for operation in ["NaN", "+inf", "1e100", "1e-100", "x2", "/2", "+1^2", "+1[0]", "+", "1e", "0x1", "1d0"] {
+        let source = format!("{HEADER}IMPORT_DENSITY\n{operation} required.pgrid\n\nCOMMENT\n");
+        let mut reads = Vec::new();
+        let result = discover_graph("root.vesta", |key, _| {
+            reads.push(key.to_owned());
+            Ok((key == "root.vesta").then(|| source.as_bytes().to_vec()))
+        }, CaptureLimits::default());
+        assert!(result.is_err(), "operation {operation}");
+        assert_eq!(reads, ["root.vesta"], "operation {operation}");
+    }
+}
+
+#[test]
 fn explicit_geometry_missing_file_cannot_be_recorded_absent() {
     let source = format!("{HEADER}IMPORT_ORFFE\nrequired.ffe\n\nGROUP\n1 1 P 1\nCOMMENT\n");
     let fixture = BTreeMap::from([("sample/root.vesta".into(), source.into_bytes())]);

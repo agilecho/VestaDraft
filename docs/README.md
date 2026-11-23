@@ -1,6 +1,22 @@
 # Craft 软件方法与接入指南
 
-**2026-11-22 P2-03 控制范围实跑与修复复验。** C12 源码候选 `8512162` 已编译封存；G29/G30 原失败保留，G31 在修复后完成 35/35 Rust 和五条往返驱动。G31 原监管中断及无重复 CLI 的分段续完一并待 dsh 核实。七项真实生产者资格和旧 full 迁移仍未验证，P2-03 `partial`、未接受，P2-04 未准入。 [施工回执](/Users/agilecho/code/VestaDraft/output/vesta-p2-03/20261122-build-window/RECEIPT.md) · [手动 dsh 材料](/Users/agilecho/code/VestaDraft/output/vesta-p2-03/20261122-build-window/DSH-REVIEW-HANDOFF.md)
+**2026-11-23 F10**：51包已完整核大小/SHA；更新中断未重启取件，外层回执限制及保守62秒记账已留证。E1仅私有静态准备待批，尚未解包/运行。[当前入口](任务卡/阶段2-首条完整链/P2-03-F10取齐与E1私有静态工具链准备提案.md)
+
+**2026-11-22 F9 stopped**:3packages verified,cpp-12 partial after timeout,47URLs unattempted; no retries/install. F10 exact remaining48-package proposal pending. [Current receipt](任务卡/阶段2-首条完整链/P2-03-F9中止与F10剩余包取件提案.md)
+
+**2026-11-22 F8**: official Debian12 signature/index hashes verified;51compiler/dependency packages pinned,not downloaded. F9 data-only download proposed. [Current receipt](任务卡/阶段2-首条完整链/P2-03-F8签名索引与F9编译器取件提案.md)
+
+**2026-11-22 F7**: 9 requests,613992 bytes,22.084826667 seconds; no qualifying original or installation. F8 pinned Debian metadata only proposed. [Current receipt](任务卡/阶段2-首条完整链/P2-03-F7取件结果与后继准入.md)
+
+2026-11-22 最新：用户确认暂无现成材料，F7限量取件/环境资料提案已备、尚未批准。补方案核实POLYP实际目标为Scene元素样式表，旧归属文字/后继映射须纠正；C20/G35工程证据保留，整卡仍partial、未接受，未取源/安装/启动或转审。[解阻方案与事实勘误](任务卡/阶段2-首条完整链/P2-03-真实资格取件与环境准备提案.md)
+
+2026-11-22 当前后继：C20/G35有界原生自验已收口，93项Rust、16门禁、22项往返/合同具有同字节或当前制品证据；67份工程/402条实际跨度独立复核。G34的2个夹具失败和空批次驱动失败原样保留。测试35/35，真实七项资格仍开放，整卡partial、未接受；不交局部dsh。[当前精确状态](任务卡/阶段2-首条完整链/P2-03-G34与G35自验登记.md)
+
+2026-11-22 最新后继：已按用户批准完成私有副本解阻及 YBa/Anatase 原留采集，真实显示字和 16 面旗标已取证。C19 原生子对象身份承载禁网编译通过；G34 的 93 个 Rust 用例、16 门禁和 22 条往返/合同命令已固定，测试追加 33→34 尚待批准。整卡仍 partial、未接受，完成整体自验后统一手动提审。[当前精确状态](任务卡/阶段2-首条完整链/P2-03-真实轨迹接入与C19候选.md)
+
+**2026-11-22 C18 / G33同源自验交回。** 已补简单系数资源引用、多相GSAS资格相选择。90个具名Rust、16门禁、NS2 14项及39项逻辑验收完成；独立核63份工程与294条跨度。两处驱动失败保留，显式接续三段累计537.155706708/600秒，产品CLI无重复调用。全卡2408.774422046秒，包络1751.598167752秒，测试33/33，获取/锁6/6。七项真实资格仍pending，整卡partial、未接受、P2-04未准入，尚不请求局部或整卡独审。 [当前精确状态](任务卡/阶段2-首条完整链/P2-03-G33同源自验登记.md)
+
+2026-11-22 **支持主裁定：C12/G31 有限控制结果通过；G31 只按累计执行 247.561449875/600 秒有条件接受；P2-03 仍 partial、未接受，P2-04 未准入。** 登记前原样复跑 dsh 脚本，96/96 通过；另做 43 项只读核对，确认 16 个封存可执行文件与 Cargo 原始产物一致、六份保存/重开制品的 30 条 sourceRecords 都指向真实字节。没有产品 CLI、Cargo、测试二进制或 NS2 运行。 35/35 是 **35 个选定 C12 用例**；G29 原 81/85 绑定 C11，C12 未重跑 85 项。准确的驱动表述为 **Graph2 分段续完，其余四条驱动完成**。 [独审裁定](/Users/agilecho/code/VestaDraft/output/vesta-dsh-reviews/20261122-150956-p2-03-c12-g31-review/verdict.json) [复核及校正](/Users/agilecho/code/VestaDraft/output/vesta-execution/20261122-p2-03-c12-g31-dsh-recheck/RECHECK.md)
 
 以下日期条目保留各轮当时的证据和状态。
 
@@ -30,7 +46,7 @@
 [06接受登记回执](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-160449-rev66-acceptance-registration/RECEIPT.md) / [设计接受记录](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-160449-rev66-acceptance-registration/accepted-design.json) / [复审原文](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-160449-rev66-acceptance-registration/inbound/dsh-rev66-review.md) / [过程及统计勘误](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-160449-rev66-acceptance-registration/REVIEW-PROCESS-ERRATA.md) / [已接受的rev66技术封存](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-134209-two-residuals/final-seal.json)。
 <!-- P1-CURRENT-STATUS END -->
 
-**当前任务组织（2026-11-22）**。P0 研究与 P1 当前设计已收口，现行 25 卡及共同约定保留原有独立审卡范围。P2-01 整改后继已自验，待手动 dsh 复审。P2-02 独立工具子结果已获 dsh 复核，整卡仍 `partial`，正式工作区创建和已审源码安装未完成。P2-03 已完成本轮 C12/G31 有限控制复验，真实资格和旧 full 迁移继续待验，待手动 dsh 复审；阶段 2 的整体界面 E2E 未执行。 [任务总览](任务卡/README.md)
+**当前任务组织（2026-11-22）**。P0 研究与 P1 当前设计已收口，现行 25 卡及共同约定保留原有独立审卡范围。P2-01 整改后继已自验，待手动 dsh 复审。P2-02 独立工具子结果已获 dsh 复核，整卡仍 `partial`，正式工作区创建和已审源码安装未完成。P2-03 已完成本轮 C12/G31 有限控制复验，真实资格和旧 full 迁移继续待验，C12/G31 有限复审已登记；阶段 2 的整体界面 E2E 未执行。 [任务总览](任务卡/README.md)
 
 **本机存储（2026-11-19更新）**：Craft Anything参考源码为`/Volumes/T9/Development/Sources/Artcraft/craft-anything`；用户明确指定本项目的源码和文档均在`/Users/agilecho/code/Draft`维护。`output/`及原封存继续保留，旧证据原路径不改，当前源码按[目录裁定](任务卡/源码项目目录调整.md)在本仓库维护。
 
