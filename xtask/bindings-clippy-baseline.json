@@ -1,0 +1,147 @@
+{
+  "clippyVersion": "clippy 0.1.99 (58cf8f9c35 2026-10-13)",
+  "sourceSHA256": {
+    "crates/bindings/src/decoder.rs": "7e403ce96c7ed5da66b8ce13f6add9b2f8171dfcd670862b56b9ea42de3557fd",
+    "crates/bindings/src/generated.rs": "a4fa10171e46c501b8d940a53a202bb9bf9d6c6a6d377b4a7a1c2bd63dd301b7"
+  },
+  "diagnostics": [
+    {
+      "lint": "clippy::possible_missing_else",
+      "file": "crates/bindings/src/decoder.rs",
+      "line": 32,
+      "column": 123
+    },
+    {
+      "lint": "clippy::possible_missing_else",
+      "file": "crates/bindings/src/decoder.rs",
+      "line": 32,
+      "column": 163
+    },
+    {
+      "lint": "clippy::possible_missing_else",
+      "file": "crates/bindings/src/decoder.rs",
+      "line": 40,
+      "column": 238
+    },
+    {
+      "lint": "clippy::possible_missing_else",
+      "file": "crates/bindings/src/decoder.rs",
+      "line": 40,
+      "column": 341
+    },
+    {
+      "lint": "clippy::large_enum_variant",
+      "file": "crates/bindings/src/generated.rs",
+      "line": 1232,
+      "column": 1
+    },
+    {
+      "lint": "clippy::large_enum_variant",
+      "file": "crates/bindings/src/generated.rs",
+      "line": 3081,
+      "column": 1
+    },
+    {
+      "lint": "clippy::large_enum_variant",
+      "file": "crates/bindings/src/generated.rs",
+      "line": 3723,
+      "column": 1
+    },
+    {
+      "lint": "clippy::large_enum_variant",
+      "file": "crates/bindings/src/generated.rs",
+      "line": 3871,
+      "column": 1
+    },
+    {
+      "lint": "clippy::large_enum_variant",
+      "file": "crates/bindings/src/generated.rs",
+      "line": 3875,
+      "column": 1
+    },
+    {
+      "lint": "clippy::large_enum_variant",
+      "file": "crates/bindings/src/generated.rs",
+      "line": 3879,
+      "column": 1
+    },
+    {
+      "lint": "clippy::large_enum_variant",
+      "file": "crates/bindings/src/generated.rs",
+      "line": 3887,
+      "column": 1
+    },
+    {
+      "lint": "clippy::large_enum_variant",
+      "file": "crates/bindings/src/generated.rs",
+      "line": 4015,
+      "column": 1
+    },
+    {
+      "lint": "clippy::large_enum_variant",
+      "file": "crates/bindings/src/generated.rs",
+      "line": 4026,
+      "column": 1
+    },
+    {
+      "lint": "clippy::large_enum_variant",
+      "file": "crates/bindings/src/generated.rs",
+      "line": 4074,
+      "column": 1
+    },
+    {
+      "lint": "clippy::large_enum_variant",
+      "file": "crates/bindings/src/generated.rs",
+      "line": 4130,
+      "column": 1
+    },
+    {
+      "lint": "clippy::large_enum_variant",
+      "file": "crates/bindings/src/generated.rs",
+      "line": 4156,
+      "column": 1
+    },
+    {
+      "lint": "clippy::large_enum_variant",
+      "file": "crates/bindings/src/generated.rs",
+      "line": 4712,
+      "column": 1
+    },
+    {
+      "lint": "clippy::large_enum_variant",
+      "file": "crates/bindings/src/generated.rs",
+      "line": 4772,
+      "column": 1
+    },
+    {
+      "lint": "clippy::large_enum_variant",
+      "file": "crates/bindings/src/generated.rs",
+      "line": 4785,
+      "column": 1
+    },
+    {
+      "lint": "clippy::large_enum_variant",
+      "file": "crates/bindings/src/generated.rs",
+      "line": 4789,
+      "column": 1
+    },
+    {
+      "lint": "clippy::large_enum_variant",
+      "file": "crates/bindings/src/generated.rs",
+      "line": 6365,
+      "column": 1
+    },
+    {
+      "lint": "clippy::large_enum_variant",
+      "file": "crates/bindings/src/generated.rs",
+      "line": 6941,
+      "column": 1
+    },
+    {
+      "lint": "clippy::collapsible_if",
+      "file": "crates/bindings/src/decoder.rs",
+      "line": 41,
+      "column": 116
+    }
+  ]
+}
