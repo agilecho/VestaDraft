@@ -1,5 +1,12 @@
 # Craft 软件方法与接入指南
 
+**当前产品施工状态（2026-11-28）**：P2-03原卡v3原生范围、两项审计优化、源码集成与合并态封存均已获dsh接受，`cardComplete=true/accepted=true`，本卡收口。已接受main基线e3e6001，未推送，P2-04未启动；阶段及整产品未结束。
+
+阅读实际实现先看[原生内核与工程保存](原生内核与工程保存.md)，核任务范围和独审结果看[P2-03完成登记](任务卡/阶段2-首条完整链/P2-03-完成与接受登记.md)。下方通用方法说明最终目标，不代表Web/宿主/平台链已经实现。
+
+<details>
+<summary>历史执行记录（保留当时状态）</summary>
+
 **2026-11-23 F10**：51包已完整核大小/SHA；更新中断未重启取件，外层回执限制及保守62秒记账已留证。E1仅私有静态准备待批，尚未解包/运行。[当前入口](任务卡/阶段2-首条完整链/P2-03-F10取齐与E1私有静态工具链准备提案.md)
 
 **2026-11-22 F9 stopped**:3packages verified,cpp-12 partial after timeout,47URLs unattempted; no retries/install. F10 exact remaining48-package proposal pending. [Current receipt](任务卡/阶段2-首条完整链/P2-03-F9中止与F10剩余包取件提案.md)
@@ -58,13 +65,15 @@
 
 这里的方法和评估资料不替代具体任务卡。当前 VESTA 范围、状态和接续点以专用要求、Study 计划及 HANDOFF 为准；角色与独立复审按根目录 [AGENTS.md](../AGENTS.md) 的最新用户裁定执行。
 
+</details>
+
 ## 当前目标软件
 
 [VESTA 全功能重写要求](VESTA全功能重写要求.md)记录 2026-11-08 用户确认的目标：严格按照 Craft Anything 的方法和步骤，1:1 重写本地 VESTA 的全部功能，并满足[接入技术要求](接入技术要求.md)。该项目的已确认范围以专用文档为准，阶段切片只安排施工顺序。
 
 执行资料：[总体实施计划](superpowers/plans/2026-11-08-vesta-full-rewrite.md)、[Study 阶段执行计划](superpowers/plans/2026-11-08-vesta-study.md)、[逐步引用的资料索引](VESTA资料索引.md)。每步注明现有资料和前置产物，按计划顺序接续。
 
-研究进度与下一动作见 [HANDOFF](VESTA研究/HANDOFF.md)；已取得的 [功能目录](VESTA研究/FUNCTIONS.md)、[格式研究](VESTA研究/FORMATS.md)、[样本身份](VESTA研究/SAMPLES.md)、[原生未知项](VESTA研究/UNKNOWNS.md) 均链接到本轮证据，未验证项保持明确。
+研究封存与研究接手见 [HANDOFF](VESTA研究/HANDOFF.md)；已取得的 [功能目录](VESTA研究/FUNCTIONS.md)、[格式研究](VESTA研究/FORMATS.md)、[样本身份](VESTA研究/SAMPLES.md)、[原生未知项](VESTA研究/UNKNOWNS.md) 均链接到本轮证据，未验证项保持明确。
 
 历史R5状态（rev30时点，当前见文首）：2026-11-14 R5：P1.1继承接受、P1.3 C4设计级接受保持，2接受/2未接受；P1.2、P1.4和整体P1仍partial。D7/I9补31个有界领域操作的数据边界、逐单元交接、85格式入口的字段政策及15项具体补证阻塞；不是完整功能冻结或产品实现。C6保持R4原字节、其增量仍待独立复核。资料基线rev30；真实worker／Check／launcher未授权、未验证，不进入P2–P5、产品实现、部署或模型builder。
 
@@ -77,6 +86,8 @@
 | 学会了哪些技能，如何检验有没有遗漏 | [技能覆盖与练习](技能覆盖与练习.md) | 通用/领域技能的产出和练习通过条件 |
 | 一款软件做到什么才算 Craft 成功 | [目标与端到端路线](方法/01-目标与端到端路线.md) | 用户结果、边界、交付链与分阶段关口 |
 | 怎样研究目标软件，决定先做哪些功能 | [软件研究与功能边界](方法/02-软件研究与功能边界.md) | 证据、核心用户链、领域差异和可实现范围 |
+| P2-03已经交付什么、是否接受 | [完成与接受登记](任务卡/阶段2-首条完整链/P2-03-完成与接受登记.md) | 原卡及后继已接受范围、源码基线与实际证据 |
+| 当前原生代码、保存链和大变更怎么读 | [原生内核与工程保存](原生内核与工程保存.md) | 实现入口、完整状态/资源、CLI及分代验证 |
 | 内核、命令、UI、CLI、MCP 怎么分层 | [命令内核与多端架构](方法/03-命令内核与多端架构.md) | 同一业务逻辑、命令契约和状态归属 |
 | Agent 怎么改到用户眼前的页面 | [Web 化与实时交互](方法/04-Web化与实时交互.md) | 页面接口、命令往返、就绪与渲染确认 |
 | 怎么让 Agent 会开发、会使用、会自纠 | [Agent 工具与开发协作](方法/05-Agent工具与开发协作.md) | 软件使用工具、开发资料和工作交接方式 |
@@ -130,6 +141,9 @@ flowchart LR
 旧索引曾记载 `历史分析/2026-10-ArtCraft/README.md`，但本次核验在当前工作区未找到该目录，暂不把它作为可访问资料入口。旧文中的版本、软件数量、页面接口缺口、通道设想和验收状态只代表当时事实；当前差异以现存的[依据与差异登记](参考/依据与差异登记.md)为入口。
 
 例如，旧文说只有 EffectCraft、FilmCraft 有页面 API；当前 WordCraft 等已具备平台接缝。旧文设想用新事件通道，当前生产代码已使用认证 Fetch 路由与页面队列往返。实际接入沿用现有实现，见 [差异登记](参考/依据与差异登记.md)。旧文中的 09 篇在整理开始时就不存在，本次未补造。
+
+<details>
+<summary>历史设计与研究记录</summary>
 
 ## 本轮范围
 
@@ -260,3 +274,5 @@ rev66 已由用户带回 dsh 独审通过，F5-r／F3-r及回归闭合；用户�
 [06接受登记回执](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-160449-rev66-acceptance-registration/RECEIPT.md) / [设计接受记录](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-160449-rev66-acceptance-registration/accepted-design.json) / [复审原文](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-160449-rev66-acceptance-registration/inbound/dsh-rev66-review.md) / [过程及统计勘误](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-160449-rev66-acceptance-registration/REVIEW-PROCESS-ERRATA.md) / [已接受的rev66技术封存](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-134209-two-residuals/final-seal.json)。
 
 这是接受状态后继，不改rev64／rev65／rev66封存。上文带历史版本号的partial、待审和未完成段落保留其当时范围；现行接受状态以文首登记和本节为准。未来实际构建、宿主及数值资格仍按获授权步骤验证，不反向变成本次设计接受前置。原累计预算／费用／次数和停报规则继承，不归零。
+
+</details>

@@ -1,7 +1,9 @@
 # VESTA 全功能 1:1 重写要求
 
+**当前实现进度（2026-11-28）**：P2-03原卡v3原生范围及审计/集成/封存后继已接受并收口；已接受main基线e3e6001，未推送，P2-04未启动。当前结果见[完成登记](任务卡/阶段2-首条完整链/P2-03-完成与接受登记.md)，实现说明见[原生内核与工程保存](原生内核与工程保存.md)。本文全功能目标、最终平台要求和其它阶段边界不缩减。
+
 <!-- P1-CURRENT-STATUS BEGIN -->
-当前状态：rev66 已由用户带回 dsh 独审通过，F5-r／F3-r及回归闭合；用户已确认 P1.2／P1.4设计级接受，P1四项设计接受为[true,true,true,true,true]（依次为P1.1、P1.2、P1.3、P1.4、整体），P1设计阶段收口。资料基线rev67仅登记；被审技术交付仍为rev66 / D35-I33-r1-C6 / IP6，wire/profile代际I33，九摘要不变。P1.1及P1.3 C4既有接受保持，C5条件／C6未审及03rev48、04rev57/58历史范围不追认。仍停在设计阶段，不进入产品实现或真实运行。
+当前状态：rev66 已由用户带回 dsh 独审通过，F5-r／F3-r及回归闭合；用户已确认 P1.2／P1.4设计级接受，P1四项设计接受为[true,true,true,true,true]（依次为P1.1、P1.2、P1.3、P1.4、整体），P1设计阶段收口。资料基线rev67仅登记；被审技术交付仍为rev66 / D35-I33-r1-C6 / IP6，wire/profile代际I33，九摘要不变。P1.1及P1.3 C4既有接受保持，C5条件／C6未审及03rev48、04rev57/58历史范围不追认。该段仅记录P1设计收口时的准入；后续另获授权的P2-03原生实现已接受，当前施工状态见文首。
 
 [06接受登记回执](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-160449-rev66-acceptance-registration/RECEIPT.md) / [设计接受记录](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-160449-rev66-acceptance-registration/accepted-design.json) / [复审原文](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-160449-rev66-acceptance-registration/inbound/dsh-rev66-review.md) / [过程及统计勘误](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-160449-rev66-acceptance-registration/REVIEW-PROCESS-ERRATA.md) / [已接受的rev66技术封存](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-134209-two-residuals/final-seal.json)。
 <!-- P1-CURRENT-STATUS END -->
@@ -118,7 +120,7 @@ VestaDraft 的产品目录须与 ArtCraft 自研应用的共同结构保持一�
 
 - 已确认：全部功能 1:1 重写、严格采用 Craft Anything 方法、同时满足平台接入要求。
 - 已核实：本轮方法源码、VESTA 包元数据、主要二进制身份及本地许可文本。
-- S01–S08按原研究判据完成，Study29/29与P0研究交付保持。rev66设计独审通过、rev67接受登记后，P1.2/P1.4设计级接受，P1四项及整体设计阶段收口；P1.1和P1.3 C4既有接受保持，C5条件/C6未审及03/04历史范围不追认。用户默认复现已证原件行为并提示风险、修正显式选择，默认.vesta加资源保存的裁定已回写。已停在P1，不进入P2–P5/产品施工/部署/模型builder；研究完成不代表全部科学/格式/平台通过。当前入口为HANDOFF及P1设计。 详见 [Study 计划](superpowers/plans/2026-11-08-vesta-study.md)、[总体计划 P1](superpowers/plans/2026-11-08-vesta-full-rewrite.md)及 [HANDOFF](VESTA研究/HANDOFF.md)。
+- S01–S08按原研究判据完成，Study29/29与P0研究交付保持。rev66设计独审通过、rev67接受登记后，P1.2/P1.4设计级接受，P1四项及整体设计阶段收口；P1.1和P1.3 C4既有接受保持，C5条件/C6未审及03/04历史范围不追认。用户默认复现已证原件行为并提示风险、修正显式选择，默认.vesta加资源保存的裁定已回写。P1设计接受不替代产品接受；后续P2-03原生及审计/集成封存结果已获独审接受，P2-04未启动，正式CA/宿主/Web及阶段整体结果仍沿各自任务。研究封存入口为HANDOFF，当前产品进度见完成登记。 详见 [Study 计划](superpowers/plans/2026-11-08-vesta-study.md)、[总体计划 P1](superpowers/plans/2026-11-08-vesta-full-rewrite.md)及 [HANDOFF](VESTA研究/HANDOFF.md)。
 - 当前 254 个稳定功能 ID、104 个稳定样本、84 条入口级待核；2037 条原生记录为逐文件哈希核对的磁盘派生索引，不是全量 raw 导出。24 个原生问题头为 10 resolved/3 investigating/11 open，即14个未解决；来源 revision10、数据库 revision4 保持。本次状态对齐没有新增目标证据或产品代码。 历史 R132 的1640条核验派生快照（raw1288+按ID补读352）单独保留。
 - S02.3 曾因五个入口不足撤销勾选；R134 补齐 22 项指定来源范围（19 条本地原字节身份、3 条无 raw 摘要的网页正文），经 dsh 及收尾验收后恢复完成。本会话再次 [dsh 复核通过](../output/vesta-study/20261108-113622/reviews/20261110-051231-s02-delivery-audit/dsh-review.stdout)，没有硬阻断；阅读及目标绑定边界见 [SOURCE_NOTES](VESTA研究/SOURCE_NOTES.md)。
 - S08具体交付及实际dsh裁定见 [STUDY-REPORT](VESTA研究/STUDY-REPORT.md)，已按原研究判据验收。已登记的行为/科学/格式/外部程序及目标环境前置补证保留；技术栈与实现计划留后续设计，本卡不自动接续。
@@ -129,7 +131,7 @@ VestaDraft 的产品目录须与 ArtCraft 自研应用的共同结构保持一�
 - [Study 阶段执行计划](superpowers/plans/2026-11-08-vesta-study.md)：S01–S08 的具体动作、前置产物、逐步引用、检查和失败处理。
 - [资料索引](VESTA资料索引.md)：固定资料 ID、实际本机源码入口、官方手册章节、平台复用样例及已知旧口径。
 
-2026-11-08 用户要求每一步列明引用资料，并已要求从 S01 执行 Study。状态以 Study 计划与 HANDOFF 为准；产品施工未开始。
+2026-11-08 用户要求每一步列明引用资料，并已要求从 S01 执行 Study。这是Study启动时点记录；研究状态以Study计划/HANDOFF为准，后续产品施工状态以文首完成登记及阶段任务为准。
 
 历史S04触发补证状态：本轮仅接续S04触发补证：新增90条原生至1740磁盘派生索引；254稳定ID/78样本，90条入口级待核。S04.2仍partial-unchecked，S04.3/.4既有接受保持；13完成/16未完成。dsh本轮独立复审partial、无硬阻断；S04整卡未完成，未进入S05或产品实现。 旧手册修饰键/最佳平面启用条件已按实测登记差异；未答入口与失败不删，仍保持全功能最终范围。
 
@@ -177,7 +179,7 @@ P1.3 C4设计级接受仍由用户授权记录承载；真实dsh R3机器结果�
 R8／rev33历史摘要（当时待独审；现已收到dsh R8，当前入口见文首）：2026-11-14 R8：D9/I11交接勘误，修正R7-R1–R3并补跨材料一致性检查；沿用R6-R5证明边界。Codex自验待用户手动转dsh。P1.1继承接受，P1.3 C4设计级接受保持、C6原字节且增量未审；P1.2/P1.4/整体P1仍partial，2接受/2未接受。资料基线rev33；不进入P2–P5、产品实现或运行验证，真实worker／Check／launcher另行授权。 [回执/复审入口](../output/vesta-study/20261108-113622/reviews/20261114-161832-p1-design-r8-consistency/README.md)。
 
 
-## 当前续办：P1-01 F1–F6独审结论登记（rev39）
+## 历史续办：P1-01 F1–F6独审结论登记（rev39）
 
 2026-11-14 P1-01同卡独审结论登记：追加资料rev39，技术版本仍D11/I13/C6；dsh已独立复审通过rev38的F1–F6证据/边界修补，最新独审指针指向该被审包及真实JSON/SHA。本次rev39仅回写结论并Codex自验，O1登记为非阻断报告导航说明，不改旧封存或AGENTS。P1.1及P1.3 C4接受保持，C5条件复审/C6增量未审；P1.2/P1.4/整体仍partial，2接受/2未接受，SG-01…SG-06六项科学缺口不变。02–06未启动，产品和运行验证未授权。
 

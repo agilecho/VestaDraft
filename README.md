@@ -1,5 +1,18 @@
 # VestaDraft
 
+**P2-03 已完成并获 dsh 独立接受（2026-11-28）。** 原生程序已能真实编辑晶胞/位点、撤销重做，保存完整工程与资源，独立读回并在新进程重开续改；完整Source7、Field、Graph2及指定真实生产者补证已在原卡范围接受。审计回执、完整差异统计、集成和合并态封存后继也已接受，F1/F2关闭。
+
+已接受源码基线为本地main `e3e6001`，未推送。P2-04未启动；本卡完成不代表阶段、整产品、正式CA、真实宿主Saved或Web/GPU已完成。
+
+- [P2-03 完成与接受登记](docs/任务卡/阶段2-首条完整链/P2-03-完成与接受登记.md)：任务状态、两次独审、证据入口和边界。
+- [原生内核与工程保存](docs/原生内核与工程保存.md)：大变更的代码分工、编辑/保存链、Source7/Field/Graph2及验证代际。
+- [开发与构建](docs/开发与构建.md)：当前workspace、工程门禁和CI。
+
+本轮只对齐当前文档，保留已审封存的历史身份；未改产品代码或冻结卡面。
+
+<details>
+<summary>历史执行记录（保留当时状态）</summary>
+
 **2026-11-22 P2-03 进度。** C8 静态后继候选已提交到本地 `main`（`d82fd97`）。仍缺 7 项真实验收资格，C8、G29、G30 均未启动。P2-03 保持 `partial`、未接受，P2-04 未准入。 [阶段 2 当前状态](docs/任务卡/阶段2-首条完整链/README.md)
 
 以下日期条目保留各轮当时的证据和状态。
@@ -68,6 +81,8 @@
 
 Craft 软件研究、重写与接入方法，以及 VESTA 全功能重写项目的源码、研究和设计文档。
 
+</details>
+
 ## 阅读入口
 
 - [VESTA 阶段1已收口设计与历史任务卡](docs/任务卡/阶段1-架构与施工设计/README.md)
@@ -84,6 +99,9 @@ Craft 软件研究、重写与接入方法，以及 VESTA 全功能重写项目�
 
 文档中指向 `output/` 或本机其他目录的链接依赖本机资料，单独克隆本仓库无法访问这些内容。项目当前状态、已接受范围及后续任务以文档内的权威入口为准。
 
+
+<details>
+<summary>历史设计与研究记录</summary>
 
 历史rev40设计交回（已由下方rev41登记接续）：P1-05 partial，D12/I14/C6。入口：[05回执](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261114-205326-p1-05-assets-build-external/RECEIPT.md)与[当前任务状态](docs/任务卡/阶段1-架构与施工设计/README.md#current-task-state)。
 
@@ -219,3 +237,5 @@ rev66 已由用户带回 dsh 独审通过，F5-r／F3-r及回归闭合；用户�
 [06接受登记回执](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-160449-rev66-acceptance-registration/RECEIPT.md) / [设计接受记录](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-160449-rev66-acceptance-registration/accepted-design.json) / [复审原文](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-160449-rev66-acceptance-registration/inbound/dsh-rev66-review.md) / [过程及统计勘误](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-160449-rev66-acceptance-registration/REVIEW-PROCESS-ERRATA.md) / [已接受的rev66技术封存](/Users/agilecho/code/Draft/output/vesta-study/20261108-113622/reviews/20261118-055835-p1-06-implementation-readiness/attempts/20261118-134209-two-residuals/final-seal.json)。
 
 这是接受状态后继，不改rev64／rev65／rev66封存。上文带历史版本号的partial、待审和未完成段落保留其当时范围；现行接受状态以文首登记和本节为准。未来实际构建、宿主及数值资格仍按获授权步骤验证，不反向变成本次设计接受前置。原累计预算／费用／次数和停报规则继承，不归零。
+
+</details>
