@@ -126,14 +126,19 @@ fn phase_records<'a>(records: &Records<'a>, phase: usize, kind: u8) -> Result<No
         (true, Some(row)) => {
             let payload = &row.text[12..];
             let slots = words(payload, 4, 12)?;
-            if !payload[48..].trim_matches(' ').is_empty()
-                || slots.iter().any(|word| {
+            let populated = slots.iter().position(|word| *word == "    ").unwrap_or(slots.len());
+            if populated == 0
+                || !payload[48..].trim_matches(' ').is_empty()
+                || slots[populated..].iter().any(|word| *word != "    ")
+                || slots[..populated].iter().any(|word| {
                     let field = word.trim_start_matches(' ');
                     let unsigned = field.strip_prefix(['-', '+']).unwrap_or(field);
                     !matches!(unsigned, "0" | "0." | "0.0" | "1" | "1." | "1.0")
                 })
             {
-                return Err(invalid("GSAS SPNFLP requires twelve fixed sign words"));
+                return Err(invalid(
+                    "GSAS SPNFLP requires fixed sign words followed by optional empty slots",
+                ));
             }
             tokens(slots)
         }
@@ -205,11 +210,23 @@ fn phase_records<'a>(records: &Records<'a>, phase: usize, kind: u8) -> Result<No
                 .get(58..62)
                 .filter(|s| s.trim().parse::<u32>().is_ok_and(|n| n > 0))
                 .ok_or_else(|| invalid("GSAS atom multiplicity field"))?;
-            numbers(b, 10, 6, 6)?;
             let code = b
                 .get(62..63)
                 .filter(|s| matches!(*s, "I" | "A"))
                 .ok_or_else(|| invalid("GSAS B record thermal code"))?;
+            let thermal_words = words(b, 10, 6)?;
+            // EXPEDT writes F10.6,50X for isotropic sites. Preserve the
+            // inactive spaces and continue accepting the older numeric form.
+            let used_thermal_words = if code == "I"
+                && thermal_words[1..].iter().all(|word| word.trim_matches(' ').is_empty())
+            {
+                &thermal_words[..1]
+            } else {
+                thermal_words.as_slice()
+            };
+            for token in used_thermal_words {
+                decimal(token, 6)?;
+            }
             let moment_words = if let Some(row) = moment {
                 let m = &row.text[12..];
                 numbers(m, 10, 3, 5)?;
@@ -243,7 +260,7 @@ fn phase_records<'a>(records: &Records<'a>, phase: usize, kind: u8) -> Result<No
                 ),
                 ("multiplicityWord".into(), text(multiplicity)),
                 ("thermalCode".into(), text(code)),
-                ("thermalWords".into(), tokens(words(b, 10, 6)?)),
+                ("thermalWords".into(), tokens(thermal_words)),
                 ("atomARawPayload".into(), text(a)),
                 ("atomBRawPayload".into(), text(b)),
                 ("momentTokens".into(), moment_words),
@@ -288,23 +305,28 @@ fn metadata(document: &Value, res: &PersistentResource, raw: &[u8]) -> Result<Va
             if nphas.replace(row).is_some() {
                 return Err(invalid("duplicate GSAS phase table"));
             }
-        } else {
-            if !key.starts_with("CRS")
-                || !matches!(
-                    &key[4..],
-                    "    ABC " | "  ANGLES" | "  SG SYM" | "  SPNFLP" | "   NATOM"
-                ) && !atom_key(key)
+        } else if key.starts_with("CRS") {
+            // The Fedora EXPEDT writer places ABC two columns earlier in
+            // the key. Both forms denote the same cell record for a phase.
+            let field = match &key[4..] {
+                "  ABC   " => "    ABC ",
+                field => field,
+            };
+            if !matches!(field, "    ABC " | "  ANGLES" | "  SG SYM" | "  SPNFLP" | "   NATOM")
+                && !atom_key(key)
             {
                 continue;
             }
             let phase = key.as_bytes()[3];
             if !matches!(phase, b'1'..=b'9')
                 || phases[usize::from(phase - b'1')]
-                    .insert(&key[4..], row)
+                    .insert(field, row)
                     .is_some()
             {
                 return Err(invalid("invalid or duplicate GSAS phase record key"));
             }
+        } else {
+            continue;
         }
         spans.push(retained::span(res, raw, row.start, row.end));
     }
@@ -360,6 +382,30 @@ pub fn open(raw: &[u8], mut ids: Ids) -> Result<RestoredProject> {
     RestoredProject::new(capture, ids)
 }
 
+/// Inspect the retained fixed-column phase and atom observations, with their original byte spans.
+pub fn inspect_observations(capture: &Capture) -> Result<Option<Value>> {
+    let Some(primary) = capture.content.resources.iter().find(|row| row.logical_key == KEY) else {
+        return Ok(None);
+    };
+    let full = capture.source.as_ref().ok_or_else(|| invalid("GSAS source is missing"))?;
+    let source = full.to_value()?;
+    verify(capture, &source, projection_count(&full.audit()?))?;
+    let row = observed_metadata(&source)
+        .next()
+        .ok_or_else(|| invalid("GSAS source observations are missing"))?;
+    let data = Node::from_wire(&row["tree"])?.data()?;
+    Ok(Some(json!({
+        "primary": {
+            "resourceId": primary.id,
+            "sha256": primary.sha256,
+            "byteLength": primary.byte_length,
+        },
+        "phaseWords": data["phaseWords"],
+        "phases": data["phases"],
+        "sourceSpans": row["spans"],
+    })))
+}
+
 /// Current magnetic state for engineering inspection of an installed EXP.
 pub fn inspect_magnetic(capture: &Capture) -> Result<Option<Value>> {
     if !capture.content.resources.iter().any(|row| row.logical_key == magnetic::CHART_KEY) {
@@ -390,14 +436,18 @@ pub(super) fn projection_count(source: &Node) -> usize {
     }
 }
 
-pub(super) fn verify(
-    capture: &Capture, source: &Value, projections: usize,
-) -> Result<std::collections::BTreeSet<String>> {
-    let mut observed = source["metadata"]
+fn observed_metadata(source: &Value) -> impl Iterator<Item = &Value> {
+    source["metadata"]
         .as_array()
         .into_iter()
         .flatten()
-        .filter(|row| row["dialect"] == DIALECT || row["producerId"] == PRODUCER);
+        .filter(|row| row["dialect"] == DIALECT || row["producerId"] == PRODUCER)
+}
+
+pub(super) fn verify(
+    capture: &Capture, source: &Value, projections: usize,
+) -> Result<std::collections::BTreeSet<String>> {
+    let mut observed = observed_metadata(source);
     let resource = capture
         .content
         .resources

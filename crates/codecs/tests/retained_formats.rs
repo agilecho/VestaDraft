@@ -1069,8 +1069,9 @@ fn vics_yba_preserves_the_four_saved_element_styles_and_separate_reader_alpha() 
     display["sceneSlots"] = saved["sceneSlots"].clone();
     display["lights"] = saved["lights"].clone();
     display["atomTypes"] = json!(styles);
-    display["phaseBoundaries"] = json!([{"bounds6":[0.0_f32, 2.0, 0.0, 1.0, -0.5, 1.0].map(|n|
-        json!({"kind":"F32Bits","ieeeHexBE":format!("{:08x}",n.to_bits())}))}]);
+    let bounds = [0.0_f32, 2.0, 0.0, 1.0, -0.5, 1.0]
+        .map(|value| json!({"kind": "F32Bits", "ieeeHexBE": format!("{:08x}", value.to_bits())}));
+    display["phaseBoundaries"] = json!([{"bounds6": bounds}]);
     let words_at = |field: &str| saved["view"][field].as_array().unwrap().iter()
         .map(|value| value["ieeeHexBE"].clone()).collect::<Vec<_>>();
     manifest["legacyView"] = json!({"matrixBits":words_at("matrix16"),"settingsBits":words_at("settings4")});

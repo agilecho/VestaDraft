@@ -1,5 +1,5 @@
 //! NS2 transport owner. No public resource, digest or role confers host Saved authority.
-use crate::paths::Paths;
+use crate::paths::{Paths, PublishError};
 use serde_json::{Value, json};
 use std::collections::BTreeMap;
 use std::time::Instant;
@@ -49,6 +49,7 @@ struct Target {
     token: String,
     expected: Option<String>,
     expires: u64,
+    commit_unknown: bool,
 }
 pub struct Session {
     paths: Paths,
@@ -93,6 +94,7 @@ impl Session {
                 token,
                 expected,
                 expires: 60000,
+                commit_unknown: false,
             })
         } else {
             None
@@ -755,6 +757,9 @@ impl Session {
         if self.now() >= target.expires {
             return Err(err("E_TARGET_TOKEN_EXPIRED", "engineering target expired"));
         }
+        if target.commit_unknown {
+            return Err(err("E_EXTERNAL_CHANGE", "previous publication outcome is unknown"));
+        }
         if body["options"]["format"] != "vesta" || body["options"]["purpose"] == "export" {
             return Err(err(
                 "E_FORMAT_UNSUPPORTED",
@@ -785,6 +790,12 @@ impl Session {
         if total > self.max_output {
             return Err(err("E_RESOURCE_LIMIT", "snapshot output"));
         }
+        let until = self
+            .now()
+            .checked_add(60000)
+            .ok_or_else(|| err("E_RESOURCE_LIMIT", "snapshot lifetime"))?;
+        let owner = self.owner().to_owned();
+        let snapshot_owner = format!("snapshot:{id}");
         let old_store = self.store.clone();
         let result = (|| {
             let primary = self.put(bundle.primary.clone(), "application/vnd.vesta.project")?;
@@ -798,10 +809,17 @@ impl Session {
                 );
             }
             let descriptor = json!({"snapshotId":id,"sessionId":self.id,"documentId":at.document_id,"epoch":at.epoch,"revision":at.revision,"stateDigest":capture.state_digest,"purpose":body["options"]["purpose"],"targetToken":token,"expectedPrimarySha256":baseline,"primary":{"bytesResource":primary["sha256"],"sha256":primary["sha256"],"byteLength":primary["byteLength"],"format":"vesta"},"dependencies":dependencies,"manifest":{"primarySha256":primary["sha256"],"dependencies":manifest_deps}});
-            self.put(
-                bytes(&descriptor)?,
-                "application/vnd.vestacraft.save-bundle+json",
-            )
+            let data = bytes(&descriptor)?;
+            let descriptor_hash = digest(&data);
+            let descriptor = self.put(data, "application/vnd.vestacraft.save-bundle+json")?;
+            for blob in std::iter::once(&bundle.primary).chain(bundle.dependencies.values()) {
+                self.store.retain(&digest(blob), &owner, &snapshot_owner)?;
+            }
+            self.store.retain(&descriptor_hash, &owner, &snapshot_owner)?;
+            self.snapshots.record(
+                &id, capture.clone(), &owner, &token, until,
+            )?;
+            Ok(descriptor)
         })();
         let descriptor = match result {
             Ok(d) => d,
@@ -810,30 +828,22 @@ impl Session {
                 return Err(e);
             }
         };
-        let until = self
-            .now()
-            .checked_add(60000)
-            .ok_or_else(|| err("E_RESOURCE_LIMIT", "snapshot lifetime"))?;
-        let owner = self.owner().to_owned();
-        self.snapshots
-            .record(&id, capture.clone(), &owner, &token, until)?;
-        let owner = self.owner().to_owned();
-        let snapshot_owner = format!("snapshot:{id}");
-        for blob in std::iter::once(&bundle.primary).chain(bundle.dependencies.values()) {
-            self.store.retain(&digest(blob), &owner, &snapshot_owner)?;
-        }
-        self.store.retain(
-            descriptor["sha256"]
-                .as_str()
-                .ok_or_else(|| err("N_INTERNAL", "snapshot bundle"))?,
-            &owner,
-            &snapshot_owner,
-        )?;
         // Explicit engineering mode materializes candidate artifacts under the operator's --root.
         // This does not run HS4, issue HostAck, rebind a WorkRef or clear dirty.
-        let hash =
-            self.paths
-                .publish(&output, &bundle, baseline.as_deref(), &self.ids.next_id())?;
+        let hash = match self.paths.publish(&output, &bundle, baseline.as_deref(), &self.ids.next_id()) {
+            Ok(hash) => hash,
+            Err(PublishError::NotPublished(error)) => {
+                self.snapshots.discard_unpublished(&id);
+                self.store = old_store;
+                return Err(error);
+            }
+            Err(PublishError::CommitUnknown(error)) => {
+                if let Some(target) = self.target.as_mut() {
+                    target.commit_unknown = true;
+                }
+                return Err(error);
+            }
+        };
         if let Some(t) = self.target.as_mut() {
             t.expected = Some(hash)
         }

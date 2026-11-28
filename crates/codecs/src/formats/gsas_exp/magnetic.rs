@@ -51,7 +51,61 @@ pub(super) struct Qualification {
 
 // Only independently qualified, source-bound producer observations belong in
 // this table. A portable artifact or client cannot add a qualification.
-const QUALIFIED: &[Qualification] = &[];
+const QUALIFIED: &[Qualification] = &[Qualification {
+    exp_sha256: "a16f9edf3aec9f3eff4623cbd58afd9bff767d4bb856c69f56ed1f7ba3a933c3",
+    phase: 2,
+    setting: "Fmmm in the stored EXP axes",
+    origin: "stored EXP origin",
+    hall_symbol: "-F 2 2",
+    chart: include_bytes!("../../../contracts/gsas-qualifications/aps-ybafeo-chart.json"),
+    frame: include_bytes!("../../../contracts/gsas-qualifications/aps-ybafeo-frame.json"),
+    producer_evidence: include_bytes!("../../../contracts/gsas-qualifications/aps-ybafeo-evidence.json"),
+    producer_version: "GSAS-r1253",
+    numerics: NumericalPolicy {
+        max_condition: 6.,
+        length_a: 5.1e-7,
+        angle_deg: 5.1e-5,
+        orthonormal: 1e-12,
+    },
+    sites: &[
+        SiteRule {
+            serial: 1,
+            type_token: "FE+3",
+            element: "Fe",
+            operation: 0,
+            shift: [0, 0, 0],
+            image_millionths: [0, 0, 0],
+            display_scale: 1.,
+        },
+        SiteRule {
+            serial: 2,
+            type_token: "FE+3",
+            element: "Fe",
+            operation: 0,
+            shift: [0, 0, 0],
+            image_millionths: [0, 0, 500_000],
+            display_scale: 1.,
+        },
+        SiteRule {
+            serial: 3,
+            type_token: "FE+3",
+            element: "Fe",
+            operation: 0,
+            shift: [0, 0, 0],
+            image_millionths: [0, 0, 170_000],
+            display_scale: 1.,
+        },
+        SiteRule {
+            serial: 4,
+            type_token: "FE+3",
+            element: "Fe",
+            operation: 0,
+            shift: [0, 0, 0],
+            image_millionths: [0, 0, 330_000],
+            display_scale: 1.,
+        },
+    ],
+}];
 
 pub(super) fn qualified(sha: &str) -> Option<&'static Qualification> {
     #[cfg(test)]
@@ -168,7 +222,12 @@ impl<'a> Prepared<'a> {
             .as_array()
             .filter(|rows| rows.len() == flags.len())
             .ok_or_else(|| invalid("GSAS spin slots"))?;
-        for (out, word) in flags.iter_mut().zip(slots) {
+        for (index, (out, word)) in flags.iter_mut().zip(slots).enumerate() {
+            if word["value"].as_str() == Some("    ") && index >= chart.used_spin_slots() {
+                // The original reads blank fields as zero. Only the unused
+                // suffix may omit values when activating an approved chart.
+                continue;
+            }
             *out = word["value"]
                 .as_str()
                 .and_then(|s| s.trim_start().parse::<f32>().ok())
@@ -200,7 +259,12 @@ impl<'a> Prepared<'a> {
                 ));
             }
             let [x, y, z, occupancy] = words(atom, "fractionalAndOccupancyWords", 6)?;
-            let [u, ..] = words::<6>(atom, "thermalWords", 6)?;
+            let u = decimal(
+                atom["thermalWords"]["items"][0]["value"]
+                    .as_str()
+                    .ok_or_else(|| invalid("GSAS isotropic displacement word is missing"))?,
+                6,
+            )?;
             // ATMON4–6 carry different lexical precision and remain archival.
             let rows = atom["momentTokens"]["items"]
                 .as_array()
@@ -578,7 +642,7 @@ pub(super) fn control_exp() -> &'static [u8] {
 
 #[cfg(test)]
 const MULTIPHASE_CONTROL: Qualification = Qualification {
-    exp_sha256: "8e68fe41bc66a292dbabb4e5f596130b5442fd215e55f0a688204d4e202def72",
+    exp_sha256: "8336542af0c66f83018661970a51e511245c98341e297472c383fb72ec7c3901",
     chart: include_bytes!(concat!(
         env!("CARGO_MANIFEST_DIR"),
         "/tests/fixtures/gsas/multiphase/authored.chart.json"

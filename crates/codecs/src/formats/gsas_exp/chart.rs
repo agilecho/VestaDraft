@@ -140,10 +140,14 @@ impl Chart {
         validate(raw, CHART)
     }
 
+    pub(super) fn used_spin_slots(&self) -> usize {
+        self.generator_flags.len() + self.centering_translations.len() - 1
+    }
+
     pub(super) fn expand(&self, signs: [i8; 12]) -> Result<Vec<(Operation, i8)>> {
         let generators = &self.generator_flags;
         let centers = &self.centering_translations;
-        if generators.len() + centers.len() - 1 > signs.len()
+        if self.used_spin_slots() > signs.len()
             || generators.iter().collect::<BTreeSet<_>>().len() != generators.len()
             || centers[0].iter().any(|x| x.numerator != 0)
         {

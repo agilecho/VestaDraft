@@ -1,23 +1,11 @@
 use serde_json::json;
 use vesta_commands::*;
 pub fn engine() -> EngineV2 {
-    EngineV2::new(
-        Cell3 {
-            length_a: [4.; 3],
-            angles_deg: [90.; 3],
-        },
-        "晶体",
-        Ids::new([1; 16]),
-        Limits::default(),
-    )
-    .unwrap()
+    engine_with_limits(Limits::default())
 }
-#[test]
-fn noop_does_not_reserve_a_second_history_entry_at_memory_limit() {
-    let size = serde_json::to_vec(engine().content()).unwrap().len();
-    let mut limits = Limits::default();
-    limits.resident_bytes = 2 * size;
-    let mut e = EngineV2::new(
+
+fn engine_with_limits(limits: Limits) -> EngineV2 {
+    EngineV2::new(
         Cell3 {
             length_a: [4.; 3],
             angles_deg: [90.; 3],
@@ -26,12 +14,48 @@ fn noop_does_not_reserve_a_second_history_entry_at_memory_limit() {
         Ids::new([1; 16]),
         limits,
     )
-    .unwrap();
+    .unwrap()
+}
+#[test]
+fn noop_does_not_reserve_a_second_history_entry_at_memory_limit() {
+    let size = serde_json::to_vec(engine().content()).unwrap().len();
+    let mut limits = Limits::default();
+    limits.resident_bytes = 2 * size;
+    let mut e = engine_with_limits(limits);
     assert_eq!(e.resident_bytes(), 2 * size);
     let before = e.document();
     let phase = e.content().phases[0].id.clone();
     e.execute(&before,&json!({"command":"cell.set","params":{"phaseId":phase,"cell":{"lengthA":[4,4,4],"anglesDeg":[90,90,90]}}})).unwrap();
     assert_eq!(e.document(), before);
+}
+
+#[test]
+fn attachment_that_exceeds_combined_resident_budget_is_atomic() {
+    let key = "source/observations.bin";
+    let data = vec![0x5a; 4096];
+    let mut reference = engine();
+    reference.attach_resource(key, data.clone()).unwrap();
+    let mut limited = engine_with_limits(Limits {
+        resident_bytes: reference.resident_bytes() - 1,
+        ..Limits::default()
+    });
+    let before = limited.capture().unwrap();
+    let bytes = limited.resident_bytes();
+    let history = limited.history_summary("unchanged");
+    assert_eq!(
+        limited.attach_resource(key, data).unwrap_err().code,
+        "E_RESOURCE_LIMIT"
+    );
+    let after = limited.capture().unwrap();
+    assert_eq!(before.document, after.document);
+    assert_eq!(before.content, after.content);
+    assert_eq!(before.resources, after.resources);
+    assert_eq!(limited.history_summary("unchanged"), history);
+    assert_eq!(limited.resident_bytes(), bytes);
+    limited.attach_resource(key, vec![0x5a]).unwrap();
+    let recovered = limited.capture().unwrap().resources;
+    assert_eq!(recovered.len(), 1);
+    assert_eq!(recovered[&digest(&[0x5a])].as_slice(), &[0x5a]);
 }
 #[test]
 fn real_edit_history_and_noop() {
@@ -82,15 +106,20 @@ fn batch_failure_is_zero_net_change_and_stale_refuses() {
     );
 }
 
+fn camera_edit(e: &EngineV2) -> serde_json::Value {
+    let scene = e.content().scene_id.clone();
+    let camera = json!({"sceneMatrixLogicalRows":[[1,0,0,0],[0,1,0,0],[0,0,1,0],[0,0,0,1]],"shiftViewX":0,"shiftViewY":0,"thirdSceneStoredF32":0,"zoomF32":2,"projectionSelectorBit21":0,"projectionZScaleF32":1,"localTranslationA":[0,0,0],"normalizationF64":1,"viewportLogicalWidth":100,"viewportLogicalHeight":100,"deviceScaleF64":1,"aspectF32":1,"aspectScaleF32":1,"projectionContext":"explicit-canonical-camera","nearView":1,"farView":10});
+    json!({"component":"native-camera","targetSceneId":scene,"state":camera})
+}
+
 #[test]
 fn typed_candidate_is_pure_owned_and_expires() {
     let mut e = engine();
     let at = e.document();
     let before = e.content().clone();
-    let scene = e.content().scene_id.clone();
-    let camera = json!({"sceneMatrixLogicalRows":[[1,0,0,0],[0,1,0,0],[0,0,1,0],[0,0,0,1]],"shiftViewX":0,"shiftViewY":0,"thirdSceneStoredF32":0,"zoomF32":2,"projectionSelectorBit21":0,"projectionZScaleF32":1,"localTranslationA":[0,0,0],"normalizationF64":1,"viewportLogicalWidth":100,"viewportLogicalHeight":100,"deviceScaleF64":1,"aspectF32":1,"aspectScaleF32":1,"projectionContext":"explicit-canonical-camera","nearView":1,"farView":10});
-    let edit = json!({"component":"native-camera","targetSceneId":scene,"state":camera});
+    let edit = camera_edit(&e);
     let c = e.prepare_state(&at, &edit, 0).unwrap();
+    let other = e.prepare_state(&at, &edit, 0).unwrap();
     assert_eq!(e.content(), &before);
     assert_eq!(e.document(), at);
     assert!(
@@ -100,6 +129,10 @@ fn typed_candidate_is_pure_owned_and_expires() {
     e.apply_domain(&at, &c.candidate_id, &c.candidate_digest, 2)
         .unwrap();
     assert_eq!(e.content().camera.zoom, 2.);
+    assert_eq!(
+        e.candidate_bytes(&other.candidate_id).unwrap_err().code,
+        "E_OBJECT_NOT_FOUND"
+    );
     assert!(
         e.apply_domain(&at, &c.candidate_id, &c.candidate_digest, 3)
             .is_err()
@@ -110,6 +143,30 @@ fn typed_candidate_is_pure_owned_and_expires() {
         e.apply_domain(&at, &c.candidate_id, &c.candidate_digest, 70000)
             .is_err()
     );
+}
+
+#[test]
+fn attachment_releases_stale_candidate_bytes_and_invalid_deadline_keeps_valid_lease() {
+    let mut e = engine();
+    let mut reference = e.clone();
+    let at = e.document();
+    let edit = camera_edit(&e);
+    let pending = e.prepare_state(&at, &edit, 0).unwrap();
+    let resident = e.resident_bytes();
+    assert_eq!(
+        e.prepare_state(&at, &edit, u64::MAX).unwrap_err().code,
+        "E_RESOURCE_LIMIT"
+    );
+    assert!(e.candidate_bytes(&pending.candidate_id).is_ok());
+    assert_eq!(e.resident_bytes(), resident);
+    let key = "source/observation.bin";
+    e.attach_resource(key, vec![0x5a]).unwrap();
+    reference.attach_resource(key, vec![0x5a]).unwrap();
+    assert_eq!(
+        e.candidate_bytes(&pending.candidate_id).unwrap_err().code,
+        "E_OBJECT_NOT_FOUND"
+    );
+    assert_eq!(e.resident_bytes(), reference.resident_bytes());
 }
 fn assert_snapshot_confirmation_refused(owner: &str, token: &str, now: u64, code: &str, message: &str) {
     let mut e = engine();

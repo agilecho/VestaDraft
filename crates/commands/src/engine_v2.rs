@@ -215,7 +215,7 @@ impl EngineV2 {
         }
         Ok(())
     }
-    fn install(&mut self, next: ProjectContent) -> Result<bool> {
+    fn install(&mut self, next: ProjectContent, resource_bytes: usize) -> Result<bool> {
         next.validate()?;
         if next == self.content {
             return Ok(false);
@@ -268,7 +268,7 @@ impl EngineV2 {
             .checked_mul(2)
             .and_then(|n| n.checked_add(retained_history))
             .and_then(|n| n.checked_add(self.source_bytes))
-            .and_then(|n| n.checked_add(self.resources.bytes()))
+            .and_then(|n| n.checked_add(resource_bytes))
             .is_none_or(|n| n > self.limits.resident_bytes)
         {
             return Err(err("E_RESOURCE_LIMIT", "current model budget"));
@@ -283,6 +283,9 @@ impl EngineV2 {
     }
     fn completion(&mut self, command: &str, before: u64, result: Value, effect: &str) -> Value {
         let changed = self.revision != before;
+        if changed {
+            self.expire_candidates(self.now_ms());
+        }
         json!({"command":command,"requestId":self.ids.next_id(),"documentId":self.document_id,"epoch":self.epoch,"revision":self.revision.to_string(),"stateDigest":self.state_digest(),"changeSet":{"before":before.to_string(),"after":self.revision.to_string(),"digest":self.state_digest(),"changedObjects":if changed{self.content.phases.iter().map(|phase|phase.id.to_string()).chain(std::iter::once(self.content.scene_id.to_string())).collect::<Vec<_>>()}else{vec![]},"invalidated":if changed{vec!["domain","scene","field","render"]}else{vec![]}},"result":result,"warnings":[],"history":self.history_summary(if changed{effect}else{"unchanged"})})
     }
     pub fn execute(&mut self, at: &DocumentAt, inv: &Value) -> Result<Value> {
@@ -351,7 +354,7 @@ impl EngineV2 {
                 let mut next = self.content.clone();
                 let mut ids = self.ids.clone();
                 let result = apply_basic(&mut next, &mut ids, command, &inv["params"])?;
-                self.install(next)?;
+                self.install(next, self.resources.bytes())?;
                 self.ids = ids;
                 Ok(self.completion(command, before, result, "record"))
             }
@@ -382,7 +385,7 @@ impl EngineV2 {
             ));
         }
         let before = self.revision;
-        self.install(content)?;
+        self.install(content, self.resources.bytes())?;
         self.ids = ids;
         Ok(results
             .into_iter()
@@ -416,6 +419,9 @@ impl EngineV2 {
             "scientific-composition.schema.json",
             "ScientificStateEdit2",
         )?;
+        let until = now
+            .checked_add(self.limits.retention_ms)
+            .ok_or_else(|| err("E_RESOURCE_LIMIT", "candidate expiry"))?;
         self.expire_candidates(now);
         if self.candidates.len() >= self.limits.candidate_count {
             return Err(err("E_RESOURCE_LIMIT", "candidate population"));
@@ -479,19 +485,18 @@ impl EngineV2 {
                 at: at.clone(),
                 digest,
                 content: next,
-                until: now
-                    .checked_add(self.limits.retention_ms)
-                    .ok_or_else(|| err("E_RESOURCE_LIMIT", "candidate expiry"))?,
+                until,
                 resource,
             },
         );
         Ok(prepared)
     }
     fn expire_candidates(&mut self, now: u64) {
+        let current = self.document();
         let ids: Vec<_> = self
             .candidates
             .iter()
-            .filter(|(_, c)| now >= c.until || c.at != self.document())
+            .filter(|(_, c)| now >= c.until || c.at != current)
             .map(|(id, _)| id.clone())
             .collect();
         for id in ids {
@@ -530,7 +535,7 @@ impl EngineV2 {
             ));
         }
         let before = self.revision;
-        let changed = self.install(c.content)?;
+        let changed = self.install(c.content, self.resources.bytes())?;
         self.candidates.remove(id);
         self.resources
             .release(&c.resource, &format!("candidate:{id}"))?;
@@ -682,18 +687,12 @@ impl EngineV2 {
                 media_type: attachment.media_type,
             });
         }
-        next.validate()?;
-        if serde_json::to_vec(&next)
-            .map_err(|e| Error::new("E_SCHEMA", e.to_string()))?
-            .len()
-            .checked_add(store.bytes())
-            .is_none_or(|n| n > self.limits.resident_bytes)
-        {
-            return Err(err("E_RESOURCE_LIMIT", "full model/resource budget"));
-        }
-        self.install(next)?;
+        let changed = self.install(next, store.bytes())?;
         self.resources = store;
         self.ids = ids;
+        if changed {
+            self.expire_candidates(self.now_ms());
+        }
         Ok(())
     }
 }
