@@ -5,6 +5,7 @@ fn policy() -> Value {
 struct Harness {
     s: Session,
     trace: Vec<Value>,
+    record_failure_trace: bool,
 }
 impl Harness {
     fn new() -> Self {
@@ -15,9 +16,14 @@ impl Harness {
                 .into_owned()
         });
         std::fs::create_dir_all(&root).unwrap();
+        let session = Session::new(Paths::new(&root).unwrap(), Ids::new([77; 16]), None, None).unwrap();
+        Self::attach(session, true)
+    }
+    fn attach(s: Session, record_failure_trace: bool) -> Self {
         let mut h = Self {
-            s: Session::new(Paths::new(&root).unwrap(), Ids::new([77; 16]), None, None).unwrap(),
+            s,
             trace: vec![],
+            record_failure_trace,
         };
         let r=h.raw(json!({"protocol":PROTOCOL,"op":"hello","policy":policy(),"expectedProfiles":profiles()}));
         assert_eq!(r[0]["kind"], "ok");
@@ -49,6 +55,51 @@ impl Harness {
         self.s.highest
     }
 }
+
+#[test]
+fn failed_prepublication_releases_snapshot_and_candidate_resources() {
+    let nonce = std::time::SystemTime::now()
+        .duration_since(std::time::UNIX_EPOCH).unwrap().as_nanos();
+    let root = std::env::temp_dir().join(format!("vesta-snapshot-{}-{nonce}", std::process::id()));
+    std::fs::create_dir(&root).unwrap();
+    let paths = Paths::new(root.to_str().unwrap()).unwrap();
+    let leaf = "output.vesta";
+    let session = Session::new(paths.clone(), Ids::new([79; 16]), None, Some(leaf.into())).unwrap();
+    let mut h = Harness::attach(session, false);
+    h.s.max_snapshots = 1;
+    let engine = h.s.engine().unwrap();
+    let before = engine.context();
+    let at = engine.document();
+    let expected = vesta_codecs::encode(&engine.capture().unwrap(), leaf).unwrap();
+    let target = root.join(leaf);
+    let token = h.s.target.as_ref().unwrap().token.clone();
+    let request = json!({"document":at,"options":{"purpose":"saveAs","format":"vesta","targetToken":token}});
+
+    std::fs::write(&target, b"an external writer owns the changed baseline").unwrap();
+    assert_eq!(h.send("snapshot", request.clone())[0]["kind"], "accepted");
+    let failed = h.s.advance();
+    assert_eq!(failed[0]["kind"], "failed", "{failed:?}");
+    assert_eq!(failed[0]["code"], "E_EXTERNAL_CHANGE");
+    assert_eq!(h.s.status(&json!({"targetSeq":null})).unwrap()["result"]["pendingSnapshots"], "0");
+    assert_eq!(h.s.engine().unwrap().context(), before);
+    for blob in std::iter::once(&expected.primary).chain(expected.dependencies.values()) {
+        assert!(h.s.store.read(&digest(blob), h.s.owner()).is_err());
+    }
+    assert_eq!(std::fs::read(&target).unwrap(), b"an external writer owns the changed baseline");
+
+    std::fs::remove_file(&target).unwrap();
+    assert_eq!(h.send("snapshot", request)[0]["kind"], "accepted");
+    let retried = h.s.advance();
+    assert_eq!(retried[0]["kind"], "ok", "{retried:?}");
+    let primary = std::fs::read(&target).unwrap();
+    let dependencies = paths.bundle(leaf, &primary).unwrap();
+    let restored = vesta_codecs::decode(&primary, &dependencies, h.s.ids.fork()).unwrap();
+    assert_eq!(restored.content.phases[0].cell.length_a, [4.; 3]);
+    assert_eq!(h.s.engine().unwrap().context(), before);
+    assert_eq!(h.s.snapshots.count(), 1);
+    std::fs::remove_dir_all(root).unwrap();
+}
+
 #[test]
 fn cancel_before_commit_and_too_late_are_deterministic() {
     let mut h = Harness::new();
@@ -93,7 +144,7 @@ fn cancel_before_commit_and_too_late_are_deterministic() {
 
 impl Drop for Harness {
     fn drop(&mut self) {
-        if let Ok(root) = std::env::var("VESTA_LIFECYCLE_ROOT") {
+        if self.record_failure_trace && let Ok(root) = std::env::var("VESTA_LIFECYCLE_ROOT") {
             let _ = std::fs::write(
                 std::path::Path::new(&root).join("deterministic-trace.json"),
                 serde_json::to_vec_pretty(&self.trace).unwrap(),

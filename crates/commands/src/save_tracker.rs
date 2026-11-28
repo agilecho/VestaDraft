@@ -32,6 +32,10 @@ impl SaveTracker {
             .insert(id.into(), (owner.into(), token.into(), expires));
         Ok(())
     }
+    pub fn discard_unpublished(&mut self, id: &str) {
+        self.pending.remove(id);
+        self.leases.remove(id);
+    }
     pub fn confirm_untrusted(
         &mut self,
         id: &str,

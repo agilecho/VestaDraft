@@ -1,0 +1,114 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:vesta-draft:source7:vics-legacy-display-current:2",
+  "type": "object",
+  "$defs": {
+    "ColorByte": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 255
+    }
+  },
+  "properties": {
+    "schemaVersion": {
+      "const": "FC-vics-legacy-display-current-2"
+    },
+    "captureRole": {
+      "enum": [
+        "actual-current-native-display",
+        "legacy-reader-replay"
+      ]
+    },
+    "scene": {
+      "$ref": "NativeLegacyDisplayCurrent1.json#/$defs/NativeLegacyDisplayCurrent/properties/scene"
+    },
+    "sceneSlots": {
+      "$ref": "NativeLegacyDisplayCurrent1.json#/$defs/NativeLegacyDisplayCurrent/properties/sceneSlots"
+    },
+    "lights": {
+      "$ref": "NativeLegacyDisplayCurrent1.json#/$defs/NativeLegacyDisplayCurrent/properties/lights"
+    },
+    "atomTypes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "target": {
+            "$ref": "NativeLegacyDisplayCurrent1.json#/$defs/NativeLegacyDisplayCurrent/properties/atomTypes/items/properties/target"
+          },
+          "speciesHex": {
+            "$ref": "NativeLegacyDisplayCurrent1.json#/$defs/NativeLegacyDisplayCurrent/properties/atomTypes/items/properties/speciesHex"
+          },
+          "radius": {
+            "$ref": "NativeLegacyDisplayCurrent1.json#/$defs/NativeLegacyDisplayCurrent/properties/atomTypes/items/properties/radius"
+          },
+          "rgba": {
+            "$ref": "NativeLegacyDisplayCurrent1.json#/$defs/NativeLegacyDisplayCurrent/properties/atomTypes/items/properties/rgba"
+          },
+          "polyhedronColor": {
+            "type": "object",
+            "properties": {
+              "alpha": {
+                "$ref": "#/$defs/ColorByte"
+              },
+              "rgb": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/ColorByte"
+                },
+                "minItems": 3,
+                "maxItems": 3
+              }
+            },
+            "required": [
+              "alpha"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "target",
+          "speciesHex",
+          "radius",
+          "rgba"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "phaseBoundaries": {
+      "$ref": "NativeLegacyDisplayCurrent1.json#/$defs/NativeLegacyDisplayCurrent/properties/phaseBoundaries"
+    },
+    "bondRules": {
+      "$ref": "NativeLegacyDisplayCurrent1.json#/$defs/NativeLegacyDisplayCurrent/properties/bondRules"
+    },
+    "shapeAlpha": {
+      "$ref": "NativeLegacyDisplayCurrent1.json#/$defs/NativeLegacyDisplayCurrent/properties/shapeAlpha"
+    },
+    "polyhedronAlpha": {
+      "$ref": "NativeLegacyDisplayCurrent1.json#/$defs/NativeLegacyDisplayCurrent/properties/polyhedronAlpha"
+    },
+    "polyhedronAlphaOrigin": {
+      "enum": [
+        "supplied-current",
+        "legacy-current-1"
+      ]
+    },
+    "legacyReaderElementAlpha": {
+      "$ref": "#/$defs/ColorByte"
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "captureRole",
+    "scene",
+    "sceneSlots",
+    "lights",
+    "atomTypes",
+    "phaseBoundaries",
+    "bondRules",
+    "shapeAlpha",
+    "polyhedronAlpha",
+    "polyhedronAlphaOrigin"
+  ],
+  "additionalProperties": false
+}

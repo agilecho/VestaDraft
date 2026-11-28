@@ -351,7 +351,7 @@ fn occurrences(bytes: &[u8], key: &str, budget: &mut CaptureLimits) -> Result<Ve
                     let (operation, path) = row
                         .split_once(' ')
                         .ok_or_else(|| rule("resource operation and literal path required"))?;
-                    if !matches!(operation, "+1.000000" | "+1.000000E+00") || path.is_empty() {
+                    if !selected::scalar_reference_operation(operation) || path.is_empty() {
                         return Err(rule("unqualified resource operation or empty path"));
                     }
                     consume(&mut budget.references, 1, "references", key)?;

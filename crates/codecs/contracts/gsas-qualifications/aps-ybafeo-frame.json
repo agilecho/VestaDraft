@@ -1,0 +1,26 @@
+{
+  "schemaVersion": "FC-GSAS-magnetic-frame-1",
+  "scopeInputDigest": "a16f9edf3aec9f3eff4623cbd58afd9bff767d4bb856c69f56ed1f7ba3a933c3",
+  "convention": "CMS2015-GSAS-system4",
+  "sourceCellBasisA": [
+    [
+      7.85,
+      0,
+      0
+    ],
+    [
+      0,
+      7.814,
+      0
+    ],
+    [
+      0,
+      0,
+      23.572001
+    ]
+  ],
+  "quantity": "magnetic-moment",
+  "unit": "muB",
+  "conversionRuleId": "draft.gsas-cms4-moment",
+  "conversionRuleVersion": "1"
+}

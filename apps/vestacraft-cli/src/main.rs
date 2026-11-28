@@ -292,6 +292,9 @@ fn run() -> Result<()> {
             if let Some(native) = inspect_native_state(&captured)? {
                 inspection["nativeCurrentState"] = native;
             }
+            if let Some(observations) = vesta_codecs::formats::gsas_exp::inspect_observations(&captured)? {
+                inspection["gsasObservations"] = observations;
+            }
             if let Some(magnetic) = vesta_codecs::formats::gsas_exp::inspect_magnetic(&captured)? {
                 inspection["gsasMagneticState"] = magnetic;
             }

@@ -209,53 +209,169 @@ fn gsas_unregistered_exp_cannot_select_the_active_route() {
 }
 
 #[test]
-fn gsas_multiphase_exp_is_retained_but_refuses_single_phase_installation() {
+fn gsas_multiphase_exp_selects_qualified_phase_and_preserves_all_original_phases() {
     let raw = magnetic::multiphase_control_exp();
-    let error = open(raw, Ids::new([80; 16])).err().unwrap();
-    assert_eq!(error.code, "E_REOPEN_COVERAGE");
-    assert_eq!(
-        error.message,
-        "GSAS active installation requires exactly one declared phase"
-    );
+    let project = open(raw, Ids::new([80; 16])).unwrap();
+    let before = project.capture.source.as_ref().unwrap().to_value().unwrap();
+    let phase = &before["phaseGraph"]["phases"][0];
+    assert_eq!(phase["label"], "GSAS phase 3");
+    assert_eq!(before["phaseGraph"]["phases"].as_array().unwrap().len(), 1);
+    assert_eq!(before["vectors"].as_array().unwrap().len(), 2);
+    let phases = |wire: &Value| wire["metadata"].as_array().unwrap().iter()
+        .find(|row| row["dialect"] == DIALECT).unwrap()["tree"]["members"]["phases"].clone();
+    let old_phases = phases(&before);
+    assert_eq!(old_phases["items"][0]["members"]["phaseNumber"]["value"], "1");
+    assert_eq!(old_phases["items"][1]["members"]["phaseNumber"]["value"], "3");
+    let retained_atom = &old_phases["items"][1]["members"]["atoms"]["items"][0]["members"];
+    let thermal = &retained_atom["thermalWords"]["items"];
+    assert_eq!(thermal[0]["value"], "  0.010000");
+    assert_eq!(thermal[1]["value"], "          ");
+    assert_eq!(phase["structure"]["sites"][0]["adp"]["uA2"], 0.01);
+    let mut engine = EngineV2::loaded(project, Ids::new([81; 16]), Limits::default()).unwrap();
+    engine.execute(&engine.document(), &json!({"command":"view.setCamera","params":{
+        "rotation":[[1,0,0],[0,1,0],[0,0,1]],"projection":"parallel","zoom":2.75
+    }})).unwrap();
+    let saved = encode_verified(&engine.capture().unwrap(), "multiphase.vesta", Ids::new([82; 16])).unwrap();
+    let reopened = decode(&saved.primary, &saved.dependencies, Ids::new([83; 16])).unwrap();
+    let wire = reopened.capture.source.as_ref().unwrap().to_value().unwrap();
+    assert_eq!(reopened.content.camera.zoom, 2.75);
+    assert_eq!(phases(&wire), old_phases);
+    assert_ne!(wire["phaseGraph"]["root"], before["phaseGraph"]["root"]);
+    assert_eq!(wire["phaseGraph"]["phases"][0]["label"], "GSAS phase 3");
+    assert_eq!(wire["vectors"][0]["value"]["components"], json!([-2., 1., 3.]));
+    assert_eq!(reopened.resources[&digest(raw)].as_slice(), raw);
+    assert!(inspect_magnetic(&reopened.capture).unwrap().is_some());
 
-    // A byte-distinct, unregistered copy follows the ordinary archive path.
+    // A byte-distinct unregistered original remains archive-only.
     let mut archived = raw.to_vec();
     archived.extend_from_slice(b"\r\n");
-    let project = open(&archived, Ids::new([81; 16])).unwrap();
-    let saved = encode_verified(
-        &project.capture,
-        "multiphase-archive.vesta",
-        Ids::new([82; 16]),
-    )
-    .unwrap();
-    let capture = decode(&saved.primary, &saved.dependencies, Ids::new([83; 16]))
-        .unwrap()
-        .capture;
-    assert!(inspect_magnetic(&capture).unwrap().is_none());
-    let wire = capture.source.as_ref().unwrap().to_value().unwrap();
-    assert!(wire["phaseGraph"].is_null());
-    let archive = wire["metadata"]
-        .as_array()
-        .unwrap()
-        .iter()
-        .find(|row| row["dialect"] == DIALECT)
+    let source_only = open(&archived, Ids::new([84; 16])).unwrap();
+    assert!(inspect_magnetic(&source_only.capture).unwrap().is_none());
+    assert!(source_only.capture.source.unwrap().to_value().unwrap()["phaseGraph"].is_null());
+
+    let start = raw
+        .windows(12)
+        .position(|key| key == b"CRS3  AT  1B")
         .unwrap();
-    let phases = archive["tree"]["members"]["phases"]["items"]
-        .as_array()
-        .unwrap();
-    let phase_numbers = phases
-        .iter()
-        .map(|phase| phase["members"]["phaseNumber"]["value"].as_str().unwrap())
-        .collect::<Vec<_>>();
-    assert_eq!(phase_numbers, ["1", "3"]);
-    let primary = capture
-        .content
-        .resources
-        .iter()
-        .find(|row| row.logical_key == KEY)
-        .unwrap();
+    let mut missing_anisotropic = raw.to_vec();
+    missing_anisotropic[start + 74] = b'A';
     assert_eq!(
-        retained::raw(&capture, primary).unwrap(),
-        archived.as_slice()
+        open(&missing_anisotropic, Ids::new([85; 16])).unwrap_err().code,
+        "E_REOPEN_COVERAGE"
     );
+    let mut bad_isotropic = raw.to_vec();
+    bad_isotropic[start + 12..start + 22].fill(b' ');
+    assert_eq!(
+        open(&bad_isotropic, Ids::new([85; 16])).unwrap_err().code,
+        "E_REOPEN_COVERAGE"
+    );
+}
+
+#[test]
+fn gsas_archived_observations_are_inspectable_after_engineering_reopen() {
+    let mut raw = magnetic::multiphase_control_exp().to_vec();
+    raw.extend_from_slice(b"\r\n");
+    let original = open(&raw, Ids::new([86; 16])).unwrap().capture;
+    let before = inspect_observations(&original).unwrap().unwrap();
+    assert_eq!(before["primary"]["sha256"], digest(&raw));
+    assert_eq!(before["phases"][0]["phaseNumber"], 1);
+    assert_eq!(before["phases"][0]["atoms"][1]["labelWord"], "O2      ");
+    assert_eq!(before["phases"][1]["phaseNumber"], 3);
+    assert_eq!(before["phases"][1]["spinFlipWords"][3], " -0.");
+    assert!(inspect_magnetic(&original).unwrap().is_none());
+
+    let bundle = encode_verified(&original, "observations.vesta", Ids::new([87; 16])).unwrap();
+    let reopened = decode(&bundle.primary, &bundle.dependencies, Ids::new([88; 16])).unwrap();
+    let after = inspect_observations(&reopened.capture).unwrap().unwrap();
+    assert_eq!(before["phases"], after["phases"]);
+    assert_eq!(before["phaseWords"], after["phaseWords"]);
+    assert_ne!(before["primary"]["resourceId"], after["primary"]["resourceId"]);
+    assert_eq!(before["primary"]["sha256"], after["primary"]["sha256"]);
+    let mut saw_spin_flip = false;
+    for span in after["sourceSpans"].as_array().unwrap() {
+        let offset: usize = span["byteOffset"].as_str().unwrap().parse().unwrap();
+        let length: usize = span["byteLength"].as_str().unwrap().parse().unwrap();
+        let line = &raw[offset..offset + length];
+        assert_eq!(span["sourceResourceId"], after["primary"]["resourceId"]);
+        assert_eq!(span["sha256"], digest(line));
+        saw_spin_flip |= line.starts_with(b"CRS3  SPNFLP") && line.ends_with(b"\r\n");
+    }
+    assert!(saw_spin_flip);
+    assert!(inspect_magnetic(&reopened.capture).unwrap().is_none());
+}
+
+#[test]
+fn gsas_expedt_spin_slots_keep_inactive_space_bytes() {
+    let mut raw = magnetic::multiphase_control_exp().to_vec();
+    let start = raw
+        .windows(12)
+        .position(|key| key == b"CRS3  SPNFLP")
+        .unwrap()
+        + 12;
+    let spin = b"   1  -1  -1   1   1   1                        ";
+    raw[start..start + 48].copy_from_slice(spin);
+    let opened = open(&raw, Ids::new([94; 16])).unwrap();
+    let observation = inspect_observations(&opened.capture).unwrap().unwrap();
+    assert_eq!(
+        observation["phases"][1]["spinFlipWords"],
+        json!(["   1", "  -1", "  -1", "   1", "   1", "   1",
+               "    ", "    ", "    ", "    ", "    ", "    "])
+    );
+
+    raw[start + 4..start + 8].fill(b' ');
+    assert_eq!(
+        open(&raw, Ids::new([94; 16])).unwrap_err().code,
+        "E_REOPEN_COVERAGE"
+    );
+}
+
+#[test]
+fn gsas_fedora_abc_spelling_preserves_exact_bytes_and_rejects_duplicate_cells() {
+    let raw = std::str::from_utf8(magnetic::multiphase_control_exp()).unwrap();
+    let legacy = raw
+        .lines()
+        .find(|line| line.starts_with("CRS3    ABC "))
+        .unwrap();
+    let fedora = "CRS3  ABC     7.850000  7.814000 23.572001    N    0";
+    let raw = raw.replacen(legacy, fedora, 1);
+    let project = open(raw.as_bytes(), Ids::new([90; 16])).unwrap();
+    let saved = encode_verified(&project.capture, "fedora-cell.vesta", Ids::new([91; 16])).unwrap();
+    let reopened = decode(&saved.primary, &saved.dependencies, Ids::new([92; 16])).unwrap();
+    let observed = inspect_observations(&reopened.capture).unwrap().unwrap();
+    assert_eq!(
+        observed["phases"][1]["cellLengthWords"],
+        json!(["  7.850000", "  7.814000", " 23.572001"])
+    );
+    let start = raw.find(fedora).unwrap();
+    let record = &raw.as_bytes()[start..start + fedora.len() + 2];
+    assert!(observed["sourceSpans"].as_array().unwrap().iter().any(|span| {
+        span["byteOffset"] == start.to_string() && span["sha256"] == digest(record)
+    }));
+    assert_eq!(
+        reopened.resources[&digest(raw.as_bytes())].as_slice(),
+        raw.as_bytes()
+    );
+    let duplicate = format!("{raw}{legacy}\r\n");
+    assert_eq!(
+        open(duplicate.as_bytes(), Ids::new([93; 16])).unwrap_err().message,
+        "invalid or duplicate GSAS phase record key"
+    );
+}
+
+#[test]
+fn gsas_qualified_phase_selection_rejects_missing_and_repeated_phase_numbers() {
+    let raw = magnetic::multiphase_control_exp();
+    let mut archived = raw.to_vec();
+    archived.extend_from_slice(b"\r\n");
+    let source = open(&archived, Ids::new([85; 16])).unwrap().capture.source.unwrap().to_value().unwrap();
+    let history = source["metadata"][0].clone();
+    let approval = magnetic::qualified(&digest(raw)).unwrap();
+    let phase3 = history["tree"]["members"]["phases"]["items"][1].clone();
+    for phases in [json!([history["tree"]["members"]["phases"]["items"][0]]), json!([phase3, phase3])] {
+        let mut wrong = history.clone();
+        wrong["tree"]["members"]["phases"]["items"] = phases;
+        let failure = magnetic::Prepared::new(approval, raw, &wrong).err().unwrap();
+        assert_eq!(failure.code, "E_REOPEN_COVERAGE");
+        assert_eq!(failure.message, "GSAS approved phase is missing or repeated");
+    }
 }

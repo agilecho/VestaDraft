@@ -56,6 +56,40 @@ fn finite(token: &str) -> Option<f64> {
     number.is_finite().then_some(number)
 }
 
+/// The frozen native reference subset is one C-style finite scalar token.
+/// Resource discovery retains the token in the original source and does not
+/// evaluate it as a Field operation. Other expression forms need their own rule.
+pub(super) fn scalar_reference_operation(token: &str) -> bool {
+    let unsigned = token.strip_prefix(['+', '-']).unwrap_or(token);
+    let mut exponent = unsigned.split(['e', 'E']);
+    let mantissa = exponent.next().unwrap_or("");
+    if let Some(power) = exponent.next() {
+        let power = power.strip_prefix(['+', '-']).unwrap_or(power);
+        if power.is_empty() || !power.bytes().all(|b| b.is_ascii_digit()) {
+            return false;
+        }
+    }
+    if exponent.next().is_some() {
+        return false;
+    }
+    let mut dot = false;
+    let mut digit = false;
+    let mut nonzero = false;
+    for byte in mantissa.bytes() {
+        if byte == b'.' && !dot {
+            dot = true;
+        } else if byte.is_ascii_digit() {
+            digit = true;
+            nonzero |= byte != b'0';
+        } else {
+            return false;
+        }
+    }
+    digit && token.parse::<f32>().is_ok_and(|value| {
+        value.is_finite() && (!nonzero || value != 0.)
+    })
+}
+
 fn tuple<const N: usize>(tokens: impl Iterator<Item = Option<f64>>) -> Option<[f64; N]> {
     let mut tokens = tokens;
     let mut parsed = [0.; N];

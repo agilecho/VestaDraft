@@ -14,15 +14,30 @@ fn error(s: &str) -> Error {
 fn ser(v: &Value) -> Result<Vec<u8>> {
     serde_json::to_vec(v).map_err(|e| Error::new("E_SCHEMA", e.to_string()))
 }
-pub(super) fn type_digest() -> String {
-    current_source7::type_digest()
+/// Two archived writers share the envelope and have distinct versioned roots.
+#[derive(Clone, Copy)]
+pub(crate) enum Version {
+    CoreContent,
+    CoreSource7,
 }
-fn schema_digest() -> String {
-    digest(current_source7::SOURCE_SCHEMA.as_bytes())
+
+impl Version {
+    pub(super) fn digests(self) -> (String, String, String) {
+        match self {
+            Self::CoreContent => (
+                digest(b"I33/CoreContent/P2-03/1"),
+                digest(b"P2-03/core-vesta-3.5.4/source-envelope-1/typed-identity-visitor-1"),
+                digest(include_bytes!("../../legacy-core-content.schema.json")),
+            ),
+            Self::CoreSource7 => (
+                current_source7::type_digest(),
+                current_source7::rule_digest(),
+                digest(current_source7::SOURCE_SCHEMA.as_bytes()),
+            ),
+        }
+    }
 }
-pub(super) fn rule_digest() -> String {
-    current_source7::rule_digest()
-}
+
 fn leaf_ok(s: &str) -> bool {
     !s.is_empty()
         && s != "."
@@ -338,7 +353,12 @@ fn restore_node(
         _ => return Err(error("node")),
     })
 }
-pub(super) fn decode(primary: &[u8], deps: &BTreeMap<String, Vec<u8>>) -> Result<Capture> {
+pub(super) fn decode(
+    primary: &[u8],
+    deps: &BTreeMap<String, Vec<u8>>,
+    version: Version,
+) -> Result<Capture> {
+    let (type_digest, rule_digest, schema_digest) = version.digests();
     let total = deps
         .values()
         .try_fold(primary.len(), |n, b| n.checked_add(b.len()))
@@ -399,8 +419,8 @@ pub(super) fn decode(primary: &[u8], deps: &BTreeMap<String, Vec<u8>>) -> Result
         || manifest["schemaVersion"] != "FC-native-source-manifest-2-proposal"
         || manifest["primarySha256"] != p_hash
         || manifest["sourceDocumentSha256"] != stamp
-        || manifest["sourceDTOSchemaDigest"] != schema_digest()
-        || manifest["sourceRuleSetDigest"] != rule_digest()
+        || manifest["sourceDTOSchemaDigest"] != schema_digest
+        || manifest["sourceRuleSetDigest"] != rule_digest
     {
         return Err(error("native manifest binding/schema"));
     }
@@ -467,9 +487,9 @@ pub(super) fn decode(primary: &[u8], deps: &BTreeMap<String, Vec<u8>>) -> Result
         .as_object()
         .is_none_or(|o| o.len() != required.len() || required.iter().any(|k| !o.contains_key(*k)))
         || saved["schemaVersion"] != "FC-native-saved-source-1-proposal"
-        || saved["sourceTypeDigest"] != type_digest()
-        || saved["sourceDTOSchemaDigest"] != schema_digest()
-        || saved["sourceRuleSetDigest"] != rule_digest()
+        || saved["sourceTypeDigest"] != type_digest
+        || saved["sourceDTOSchemaDigest"] != schema_digest
+        || saved["sourceRuleSetDigest"] != rule_digest
     {
         return Err(Error::new(
             "E_FORMAT_UNSUPPORTED",
@@ -548,16 +568,38 @@ pub(super) fn decode(primary: &[u8], deps: &BTreeMap<String, Vec<u8>>) -> Result
     {
         return Err(error("capture lifetime identity"));
     }
-    if *captured != restored["identity"] {
-        return Err(error("Source7 capture identity differs"));
-    }
-    let content = current_source7::restore(&restored, &old_doc)?;
+    let content = match version {
+        Version::CoreContent => {
+            let content: ProjectContent = serde_json::from_value(restored.clone())
+                .map_err(|e| Error::new("E_SCHEMA", e.to_string()))?;
+            content.validate()?;
+            let expected_snapshot = json!({
+                "documentId": old_doc.document_id, "epoch": old_doc.epoch,
+                "revision": old_doc.revision, "sourceTypeDigest": type_digest,
+                "sourceRootDigest": content.digest(), "policyDigest": rule_digest,
+                "resourceGraphDigest": digest(&ser(&json!(content.resources))?),
+            });
+            if *captured != expected_snapshot {
+                return Err(error("CoreContent capture identity or resource graph differs"));
+            }
+            content
+        }
+        Version::CoreSource7 => {
+            if *captured != restored["identity"] {
+                return Err(error("Source7 capture identity differs"));
+            }
+            current_source7::restore(&restored, &old_doc)?
+        }
+    };
     if saved["capturedSourceLedgerDigest"] != content.digest()
         || saved["capturedSnapshot"]["sourceRootDigest"] != content.digest()
     {
         return Err(error("complete source content differs from capture"));
     }
-    let (own, refs, expected_objects) = current_source7::roles(&content)?;
+    let (own, refs, expected_objects) = match version {
+        Version::CoreContent => core_slots(&content)?,
+        Version::CoreSource7 => current_source7::roles(&content)?,
+    };
     if saved["objects"] != json!(expected_objects)
         || saved["identitySlots"] != json!(slot_rows(&own, &restored)?)
         || saved["referenceSlots"] != json!(slot_rows(&refs, &restored)?)
@@ -566,7 +608,22 @@ pub(super) fn decode(primary: &[u8], deps: &BTreeMap<String, Vec<u8>>) -> Result
     }
     let mut combined = own;
     combined.extend(refs);
-    let rs = current_source7::resource_slots(&content)?;
+    let rs = match version {
+        Version::CoreContent => content.resources.iter().enumerate().map(|(i, r)| (
+            format!("/resources/{i}/sha256"),
+            json!({
+                "kind": "BytesRef", "sha256": r.sha256, "byteLength": r.byte_length,
+                "resourceKey": format!("resource/{i}"),
+            }),
+        )).collect(),
+        Version::CoreSource7 => current_source7::resource_slots(&content)?,
+    };
+    for (path, entry) in entries {
+        let role = if path == source_path { "context-resource" } else { "source-resource" };
+        if entry["role"] != role {
+            return Err(error("artifact dependency role differs"));
+        }
+    }
     for (i, r) in content.resources.iter().enumerate() {
         let expected_binding = json!({"key":format!("resource/{i}"),"capturedResourceId":r.sha256,"sha256":r.sha256,"byteLength":r.byte_length,"relativeBlobPath":format!("{root}/blobs/{}.raw.bin",r.sha256),"storageFormat":"raw.bin","sourceDescriptorDigest":digest(&ser(&serde_json::to_value(r).map_err(|e|Error::new("E_SCHEMA",e.to_string()))?)?)});
         if saved["resources"].get(i) != Some(&expected_binding) {

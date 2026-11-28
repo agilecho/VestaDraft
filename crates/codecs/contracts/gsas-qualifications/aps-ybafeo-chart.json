@@ -1,0 +1,348 @@
+{
+  "schemaVersion": "FC-GSAS-spin-chart-1",
+  "ruleId": "draft.gsas-original-r1253-spin-chart",
+  "ruleVersion": "1",
+  "producerArtifactSha256": "7fc974497855ff344b66c38e4222959c7dfc8f35773d2aa3a4eb44760fdeeeba",
+  "sourceInputSha256": "a16f9edf3aec9f3eff4623cbd58afd9bff767d4bb856c69f56ed1f7ba3a933c3",
+  "sourcePhaseNumber": 2,
+  "sourceGroupSymbol": "F m m m",
+  "settingName": "Fmmm in the stored EXP axes",
+  "originChoice": "stored EXP origin",
+  "baseOperators": [
+    {
+      "rotation": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "translation": [
+        {
+          "numerator": 0,
+          "denominator": 1
+        },
+        {
+          "numerator": 0,
+          "denominator": 1
+        },
+        {
+          "numerator": 0,
+          "denominator": 1
+        }
+      ],
+      "generatorCodeMask": 0
+    },
+    {
+      "rotation": [
+        [
+          -1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "translation": [
+        {
+          "numerator": 0,
+          "denominator": 1
+        },
+        {
+          "numerator": 0,
+          "denominator": 1
+        },
+        {
+          "numerator": 0,
+          "denominator": 1
+        }
+      ],
+      "generatorCodeMask": 4
+    },
+    {
+      "rotation": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          -1,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "translation": [
+        {
+          "numerator": 0,
+          "denominator": 1
+        },
+        {
+          "numerator": 0,
+          "denominator": 1
+        },
+        {
+          "numerator": 0,
+          "denominator": 1
+        }
+      ],
+      "generatorCodeMask": 2
+    },
+    {
+      "rotation": [
+        [
+          -1,
+          0,
+          0
+        ],
+        [
+          0,
+          -1,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "translation": [
+        {
+          "numerator": 0,
+          "denominator": 1
+        },
+        {
+          "numerator": 0,
+          "denominator": 1
+        },
+        {
+          "numerator": 0,
+          "denominator": 1
+        }
+      ],
+      "generatorCodeMask": 6
+    },
+    {
+      "rotation": [
+        [
+          -1,
+          0,
+          0
+        ],
+        [
+          0,
+          -1,
+          0
+        ],
+        [
+          0,
+          0,
+          -1
+        ]
+      ],
+      "translation": [
+        {
+          "numerator": 0,
+          "denominator": 1
+        },
+        {
+          "numerator": 0,
+          "denominator": 1
+        },
+        {
+          "numerator": 0,
+          "denominator": 1
+        }
+      ],
+      "generatorCodeMask": 7
+    },
+    {
+      "rotation": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          -1,
+          0
+        ],
+        [
+          0,
+          0,
+          -1
+        ]
+      ],
+      "translation": [
+        {
+          "numerator": 0,
+          "denominator": 1
+        },
+        {
+          "numerator": 0,
+          "denominator": 1
+        },
+        {
+          "numerator": 0,
+          "denominator": 1
+        }
+      ],
+      "generatorCodeMask": 3
+    },
+    {
+      "rotation": [
+        [
+          -1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          -1
+        ]
+      ],
+      "translation": [
+        {
+          "numerator": 0,
+          "denominator": 1
+        },
+        {
+          "numerator": 0,
+          "denominator": 1
+        },
+        {
+          "numerator": 0,
+          "denominator": 1
+        }
+      ],
+      "generatorCodeMask": 5
+    },
+    {
+      "rotation": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          -1
+        ]
+      ],
+      "translation": [
+        {
+          "numerator": 0,
+          "denominator": 1
+        },
+        {
+          "numerator": 0,
+          "denominator": 1
+        },
+        {
+          "numerator": 0,
+          "denominator": 1
+        }
+      ],
+      "generatorCodeMask": 1
+    }
+  ],
+  "centeringTranslations": [
+    [
+      {
+        "numerator": 0,
+        "denominator": 1
+      },
+      {
+        "numerator": 0,
+        "denominator": 1
+      },
+      {
+        "numerator": 0,
+        "denominator": 1
+      }
+    ],
+    [
+      {
+        "numerator": 0,
+        "denominator": 1
+      },
+      {
+        "numerator": 1,
+        "denominator": 2
+      },
+      {
+        "numerator": 1,
+        "denominator": 2
+      }
+    ],
+    [
+      {
+        "numerator": 1,
+        "denominator": 2
+      },
+      {
+        "numerator": 0,
+        "denominator": 1
+      },
+      {
+        "numerator": 1,
+        "denominator": 2
+      }
+    ],
+    [
+      {
+        "numerator": 1,
+        "denominator": 2
+      },
+      {
+        "numerator": 1,
+        "denominator": 2
+      },
+      {
+        "numerator": 0,
+        "denominator": 1
+      }
+    ]
+  ],
+  "generatorFlags": [
+    4,
+    2,
+    1
+  ]
+}

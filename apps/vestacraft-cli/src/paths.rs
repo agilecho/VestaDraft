@@ -10,6 +10,26 @@ const MAX: usize = 16 * 1024 * 1024;
 pub struct Paths {
     root: PathBuf,
 }
+
+pub enum PublishError {
+    NotPublished(Error),
+    CommitUnknown(Error),
+}
+
+impl From<Error> for PublishError {
+    fn from(error: Error) -> Self {
+        Self::NotPublished(error)
+    }
+}
+
+impl From<PublishError> for Error {
+    fn from(error: PublishError) -> Self {
+        match error {
+            PublishError::NotPublished(error) | PublishError::CommitUnknown(error) => error,
+        }
+    }
+}
+
 impl Paths {
     pub fn new(root: &str) -> Result<Self> {
         let p = Path::new(root);
@@ -190,7 +210,7 @@ impl Paths {
         bundle: &SaveBundle,
         expected: Option<&str>,
         nonce: &str,
-    ) -> Result<String> {
+    ) -> std::result::Result<String, PublishError> {
         let target = self.resolve(output, true)?;
         let parent = target
             .parent()
@@ -203,11 +223,11 @@ impl Paths {
             return Err(Error::new(
                 "E_EXTERNAL_CHANGE",
                 "engineering target baseline changed",
-            ));
+            ).into());
         }
         for (key, bytes) in &bundle.dependencies {
             if !key.starts_with(&format!("{leaf}.resources/")) {
-                return Err(Error::new("E_READ_ONLY", "bundle output root"));
+                return Err(Error::new("E_READ_ONLY", "bundle output root").into());
             }
             let path = parent.join(key);
             let p = self.resolve(
@@ -220,7 +240,7 @@ impl Paths {
                         return Err(Error::new(
                             "E_EXTERNAL_CHANGE",
                             "immutable resource collision",
-                        ));
+                        ).into());
                     }
                 }
                 Err(e) if e.kind() == std::io::ErrorKind::NotFound => {
@@ -232,10 +252,10 @@ impl Paths {
                     f.write_all(bytes).map_err(io)?;
                     f.sync_all().map_err(io)?;
                     if fs::read(&p).map_err(io)? != *bytes {
-                        return Err(Error::new("E_IO", "resource readback differs"));
+                        return Err(Error::new("E_IO", "resource readback differs").into());
                     }
                 }
-                Err(e) => return Err(io(e)),
+                Err(e) => return Err(io(e).into()),
             }
         }
         let temp = parent.join(format!(".p203-{nonce}.tmp"));
@@ -244,22 +264,29 @@ impl Paths {
             .create_new(true)
             .open(&temp)
             .map_err(io)?;
-        let operation = (|| {
+        let operation = (|| -> std::result::Result<_, PublishError> {
             f.write_all(&bundle.primary).map_err(io)?;
             f.sync_all().map_err(io)?;
+            if fs::read(&temp).map_err(io)? != bundle.primary {
+                return Err(Error::new("E_IO", "staged primary readback differs").into());
+            }
             if self.baseline(output)?.as_deref() != expected {
                 return Err(Error::new(
                     "E_EXTERNAL_CHANGE",
                     "primary changed before rename",
-                ));
+                ).into());
             }
             self.resolve(output, false)?;
-            fs::rename(&temp, &target).map_err(io)?;
-            fs::File::open(parent).map_err(io)?.sync_all().map_err(io)?;
-            if fs::read(&target).map_err(io)? != bundle.primary {
-                return Err(Error::new("E_IO", "primary actual readback differs"));
-            }
-            Ok(digest(&bundle.primary))
+
+            let commit = (|| {
+                fs::rename(&temp, &target).map_err(io)?;
+                fs::File::open(parent).map_err(io)?.sync_all().map_err(io)?;
+                if fs::read(&target).map_err(io)? != bundle.primary {
+                    return Err(Error::new("E_IO", "primary actual readback differs"));
+                }
+                Ok(digest(&bundle.primary))
+            })();
+            commit.map_err(PublishError::CommitUnknown)
         })();
         if temp.exists() {
             let _ = fs::remove_file(&temp);

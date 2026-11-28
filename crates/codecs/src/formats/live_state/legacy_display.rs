@@ -8,7 +8,12 @@ use vesta_model::{Capture, Ids, PersistentResource, Result, digest};
 const KEY: &str = "vics/legacy-primary";
 const HISTORY: &str = "vics-legacy-archive-1";
 const FIELD: &str = "nativeLegacyDisplayCurrent";
-const TAG: &str = "NativeLegacyDisplayCurrent1";
+const RETIRED_TAG: &str = "NativeLegacyDisplayCurrent1";
+const TAG: &str = "NativeLegacyDisplayCurrent2";
+const VERSION: &str = "FC-vics-legacy-display-current-2";
+const RETIRED_ORIGIN: &str = "legacy-current-1";
+const CURRENT_ROLE: &str = "actual-current-native-display";
+const REPLAY_ROLE: &str = "legacy-reader-replay";
 const HEADERS: &[&str] = &[
     "TITLE", "GROUP", "SYMOP", "CELLP", "STRUC", "THERI", "THERT", "THERM", "ATOMT", "MODEL",
     "BOUND", "SBOND", "PLANE", "ATOMS", "BONDS", "POLYS", "ATOMP", "BONDP", "POLYP", "HKLPP",
@@ -18,7 +23,7 @@ const HEADERS: &[&str] = &[
 
 pub(super) fn rule_digest() -> String {
     digest(include_bytes!(
-        "../../../contracts/vics-legacy-display.contract.json"
+        "../../../contracts/vics-legacy-display-current-2.contract.json"
     ))
 }
 
@@ -151,19 +156,43 @@ fn f32_word(n: f32) -> Value {
     json!({"kind":"F32Bits","ieeeHexBE":format!("{:08x}",n.to_bits())})
 }
 
+fn polyhedron_words(fields: &[&str]) -> Result<([u8; 4], i32, f32)> {
+    let [alpha, mode, scale, r, g, b] = fields else {
+        return Err(invalid("unsupported selected VICS POLYP record"));
+    };
+    Ok((
+        color(&[float(r)?, float(g)?, float(b)?, float(alpha)?])?
+            .try_into()
+            .map_err(|_| invalid("VICS POLYP RGBA width"))?,
+        integer(mode)?,
+        float(scale)?,
+    ))
+}
+
+fn reader_polyhedron_alpha(raw: &[u8]) -> Result<Option<u8>> {
+    sections(raw)?
+        .into_iter()
+        .filter(|section| section.keyword == "POLYP")
+        .try_fold(None, |_, record| {
+            let text = std::str::from_utf8(record.bytes).expect("checked ASCII");
+            let fields: Vec<_> = text.split_ascii_whitespace().skip(1).collect();
+            polyhedron_words(&fields).map(|(rgba, _, _)| Some(rgba[3]))
+        })
+}
+
 fn apply_scene(
     raw: &[u8],
     slots: &mut Map<String, Value>,
     lights: &mut [Value],
-    polyhedra: &mut [Value],
     shapes: &mut [Value],
-) -> Result<()> {
+) -> Result<Option<u8>> {
     // The supplied snapshot provides slots that old records leave untouched.
     let mut flags = slots
         .get("0x5b0")
         .and_then(Value::as_u64)
         .and_then(|v| u32::try_from(v).ok())
         .ok_or_else(|| invalid("legacy VICS full prior display word"))?;
+    let mut reader_element_alpha = None;
     for record in sections(raw)? {
         let text = std::str::from_utf8(record.bytes).expect("checked ASCII");
         let t: Vec<_> = text.split_ascii_whitespace().skip(1).collect();
@@ -235,17 +264,12 @@ fn apply_scene(
                     json!(color(&[float(r)?, float(g)?, float(bcol)?])?),
                 );
             }
-            ("POLYP", [alpha, mode, scale, r, g, b]) => {
-                let rgba = color(&[float(r)?, float(g)?, float(b)?, float(alpha)?])?;
-                for object in polyhedra.iter_mut() {
-                    let value = object
-                        .as_object_mut()
-                        .ok_or_else(|| invalid("current VICS polyhedron row"))?;
-                    value.insert("alpha".into(), json!(rgba[3]));
-                }
+            ("POLYP", fields) => {
+                let (rgba, mode, scale) = polyhedron_words(fields)?;
+                reader_element_alpha = Some(rgba[3]);
                 slots.insert("0x2b0:4".into(), json!(rgba));
-                slots.insert("0x2a8".into(), json!(integer(mode)?));
-                slots.insert("0x2ac".into(), f32_word(float(scale)?));
+                slots.insert("0x2a8".into(), json!(mode));
+                slots.insert("0x2ac".into(), f32_word(scale));
             }
             ("HKLPP", [alpha, mode, scale, r, g, b]) => {
                 let _ = [float(r)?, float(g)?, float(b)?];
@@ -320,7 +344,7 @@ fn apply_scene(
             }
             (
                 "MODEL" | "BONDS" | "POLYS" | "COMPS" | "PROJT" | "ATOMS" | "ATOMP" | "BKGRC"
-                | "BONDP" | "POLYP" | "HKLPP" | "UCOLP" | "LIGHT" | "ATOMM" | "BONDM" | "POLYM"
+                | "BONDP" | "HKLPP" | "UCOLP" | "LIGHT" | "ATOMM" | "BONDM" | "POLYM"
                 | "HKLPM",
                 _,
             ) => return Err(invalid("unsupported selected VICS display record")),
@@ -328,7 +352,7 @@ fn apply_scene(
         }
     }
     slots.insert("0x5b0".into(), json!(flags));
-    Ok(())
+    Ok(reader_element_alpha)
 }
 
 fn rows(value: &Value) -> impl Iterator<Item = &Value> {
@@ -366,9 +390,36 @@ struct Population<'a> {
     objects: Vec<&'a Value>,
 }
 
-fn populations<'a>(source: &'a Value, scene: &str) -> [Population<'a>; 5] {
+const NATIVE_ROLES: [&str; 5] = [
+    "atom-type", "phase-boundary", "bond-rule", "first-shape", "polyhedron",
+];
+
+// A native object without a scientific wrapper retains its own Engine
+// SourceEntity. The owner is a typed live reference, never an archived ordinal.
+fn native_owner(object: &Value, role: usize, source: &Value) -> Result<Value> {
+    let members = &object["sourceTree"]["members"];
+    let owner = &members["owner"];
+    let kind = if role == 0 { "scene" } else { "phase" };
+    let valid_id = if role == 0 {
+        rows(&source["scenes"]).any(|s| s["id"] == owner["objectId"])
+    } else {
+        rows(&source["phaseGraph"]["phases"]).any(|p| p["id"] == owner["objectId"])
+    };
+    if object["sourceTree"]["kind"] != "Map"
+        || owner["kind"] != "EntityRef"
+        || owner["objectKind"] != kind
+        || !valid_id
+        || members["nativeState"]["kind"] != "Map"
+        || members["nativeState"]["members"].as_object().is_none_or(|m| m.is_empty())
+    {
+        return Err(invalid("VICS native subobject needs its actual owner and current native tree"));
+    }
+    Ok(owner.clone())
+}
+
+fn populations<'a>(source: &'a Value, scene: &str) -> Result<Vec<Population<'a>>> {
     let owns_phase = |row: &&Value| row["owner"]["kind"] == "phase";
-    [
+    let mut populations = vec![
         Population {
             field: "atomTypes",
             kind: "display",
@@ -406,7 +457,29 @@ fn populations<'a>(source: &'a Value, scene: &str) -> [Population<'a>; 5] {
                 .filter(|r| closed_mesh(r))
                 .collect(),
         },
-    ]
+    ];
+    let mut native: [Vec<&Value>; 5] = std::array::from_fn(|_| Vec::new());
+    for row in rows(&source["sourceEntities"]) {
+        let Some(role) = row["nativeKind"].as_str().and_then(|s| s.strip_prefix("vics-native-display/")) else {
+            continue;
+        };
+        let index = NATIVE_ROLES.iter().position(|name| *name == role)
+            .ok_or_else(|| invalid("unknown reserved VICS native display role"))?;
+        let owner = native_owner(row, index, source)?;
+        if index != 0 || owner["objectId"] == scene {
+            native[index].push(row);
+        }
+    }
+    // Keep each role's established typed population followed by native
+    // definitions in Engine source order. Each entry resolves independently.
+    for (index, objects) in native.into_iter().enumerate() {
+        populations.insert(index * 2 + 1, Population {
+            field: populations[index * 2].field,
+            kind: "source-entity",
+            objects,
+        });
+    }
+    Ok(populations)
 }
 
 fn role_ref(pop: &Population<'_>, item: &Value) -> Result<Value> {
@@ -416,7 +489,10 @@ fn role_ref(pop: &Population<'_>, item: &Value) -> Result<Value> {
     Ok(entity(pop.kind, id))
 }
 
-fn owner_ref(item: &Value) -> Result<Value> {
+fn owner_ref(pop: &Population<'_>, item: &Value) -> Result<Value> {
+    if pop.kind == "source-entity" {
+        return Ok(item["sourceTree"]["members"]["owner"].clone());
+    }
     let id = item["owner"]["id"]
         .as_str()
         .ok_or_else(|| invalid("legacy display phase owner id"))?;
@@ -448,38 +524,48 @@ pub(super) fn install(
     let raw = read(&input.legacy_source)?;
     let archived_view = source_view(&raw)?;
     lights_check(&input.lights)?;
-    if input.current_values {
+    let (capture_role, reader_element_alpha) = if input.current_values {
         if current_view.is_none() {
             return Err(invalid("VICS current display requires an explicit current view"));
         }
+        (CURRENT_ROLE, None)
     } else {
-        apply_scene(
+        let alpha = apply_scene(
             &raw,
             &mut input.scene_slots,
             &mut input.lights,
-            &mut input.polyhedron_alpha,
             &mut input.shape_alpha,
         )?;
+        (REPLAY_ROLE, alpha)
+    };
+    let mut body = json!({
+        "schemaVersion":VERSION,"captureRole":capture_role,
+        "scene":entity("scene",&scene),"sceneSlots":input.scene_slots,"lights":input.lights,
+        "polyhedronAlphaOrigin":"supplied-current"
+    });
+    if let Some(alpha) = reader_element_alpha {
+        body["legacyReaderElementAlpha"] = json!(alpha);
     }
-    let mut body = json!({"schemaVersion":"FC-vics-legacy-display-current-1","captureRole":"actual-current-native-display",
-        "scene":entity("scene",&scene),"sceneSlots":input.scene_slots,"lights":input.lights});
-    for (pop, values) in populations(source, &scene).into_iter().zip([
+    let values = [
         input.atom_types,
         input.phase_boundaries,
         input.bond_rules,
         input.shape_alpha,
         input.polyhedron_alpha,
-    ]) {
-        if values.len() != pop.objects.len() {
+    ];
+    let populations = populations(source, &scene)?;
+    for (role, values) in values.into_iter().enumerate() {
+        let pair = &populations[role * 2..role * 2 + 2];
+        if values.len() != pair.iter().map(|p| p.objects.len()).sum::<usize>() {
             return Err(invalid(format!(
                 "legacy display {} population differs",
-                pop.field
+                pair[0].field
             )));
         }
         let items = values
             .into_iter()
-            .zip(&pop.objects)
-            .map(|(mut row, object)| {
+            .zip(pair.iter().flat_map(|pop| pop.objects.iter().map(move |o| (pop, *o))))
+            .map(|(mut row, (pop, object))| {
                 let m = row
                     .as_object_mut()
                     .ok_or_else(|| invalid("VICS display population row"))?;
@@ -488,14 +574,14 @@ pub(super) fn install(
                         "VICS display cannot supply raw target or owner IDs",
                     ));
                 }
-                m.insert("target".into(), role_ref(&pop, object)?);
-                if pop.kind != "display" {
-                    m.insert("owner".into(), owner_ref(object)?);
+                m.insert("target".into(), role_ref(pop, object)?);
+                if role != 0 {
+                    m.insert("owner".into(), owner_ref(pop, object)?);
                 }
                 Ok(row)
             })
             .collect::<Result<Vec<_>>>()?;
-        body[pop.field] = json!(items);
+        body[pair[0].field] = json!(items);
     }
     let target = source["scenes"]
         .as_array_mut()
@@ -579,6 +665,10 @@ pub(super) fn inspect_source_views(capture: &Capture) -> Result<Vec<Value>> {
 }
 
 pub(super) fn inspect(source: &Value) -> Result<Vec<Value>> {
+    inspect_version(source, TAG)
+}
+
+fn inspect_version(source: &Value, expected_tag: &str) -> Result<Vec<Value>> {
     let mut result = Vec::new();
     for scene in rows(&source["scenes"]) {
         let Some(node) = scene["render"]["members"].get(FIELD) else {
@@ -588,7 +678,7 @@ pub(super) fn inspect(source: &Value) -> Result<Vec<Value>> {
             .as_str()
             .ok_or_else(|| invalid("VICS actual scene id"))?;
         let body = payload(node)?;
-        if node["tag"] != TAG || body["scene"] != entity("scene", id) {
+        if node["tag"] != expected_tag || body["scene"] != entity("scene", id) {
             return Err(invalid("VICS legacy display scene owner differs"));
         }
         lights_check(
@@ -596,18 +686,21 @@ pub(super) fn inspect(source: &Value) -> Result<Vec<Value>> {
                 .as_array()
                 .ok_or_else(|| invalid("VICS light collection"))?,
         )?;
-        for pop in populations(source, id) {
-            let entries = body[pop.field]
+        let populations = populations(source, id)?;
+        for (role, pair) in populations.chunks_exact(2).enumerate() {
+            let entries = body[pair[0].field]
                 .as_array()
                 .ok_or_else(|| invalid("VICS display population"))?;
             let mut seen = BTreeSet::new();
-            if entries.len() != pop.objects.len() {
+            if entries.len() != pair.iter().map(|p| p.objects.len()).sum::<usize>() {
                 return Err(invalid("VICS display population coverage"));
             }
-            for (entry, object) in entries.iter().zip(&pop.objects) {
-                if entry["target"] != role_ref(&pop, object)?
+            for (entry, (pop, object)) in entries.iter().zip(
+                pair.iter().flat_map(|pop| pop.objects.iter().map(move |o| (pop, *o)))
+            ) {
+                if entry["target"] != role_ref(pop, object)?
                     || !seen.insert(object["id"].as_str())
-                    || pop.kind != "display" && entry["owner"] != owner_ref(object)?
+                    || role != 0 && entry["owner"] != owner_ref(pop, object)?
                 {
                     return Err(invalid("VICS display target, order or owner differs"));
                 }
@@ -618,8 +711,55 @@ pub(super) fn inspect(source: &Value) -> Result<Vec<Value>> {
     Ok(result)
 }
 
-pub(super) fn verify(capture: &Capture, source: &Value) -> Result<()> {
-    let views = inspect(source)?;
+pub(super) fn migrate_verified_current(source: &mut Value) -> Result<()> {
+    let scenes = source["scenes"]
+        .as_array_mut()
+        .ok_or_else(|| invalid("VICS display migration scene population"))?;
+    for scene in scenes {
+        let Some(node) = scene
+            .get_mut("render")
+            .and_then(|render| render.get_mut("members"))
+            .and_then(|members| members.get_mut(FIELD))
+        else {
+            continue;
+        };
+        // The original source record is history. The prior writer did not
+        // record whether geometry alpha was observed or assigned by replay.
+        if node["tag"] != RETIRED_TAG {
+            return Err(invalid("legacy full contains a non-retired VICS display"));
+        }
+        let members = node["payload"]["members"]
+            .as_object_mut()
+            .ok_or_else(|| invalid("retired VICS display payload"))?;
+        members.insert("schemaVersion".into(), json!({"kind":"Utf8","value":VERSION}));
+        members.insert(
+            "polyhedronAlphaOrigin".into(),
+            json!({"kind":"Utf8","value":RETIRED_ORIGIN}),
+        );
+        node["tag"] = json!(TAG);
+    }
+    Ok(())
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn display_migration_keeps_other_scene_render_variants() {
+        let unchanged = json!([
+            {"render":{"kind":"Null"}},
+            {"render":{"kind":"Array","items":[]}},
+            {"render":{"kind":"Map","members":{"other":{"kind":"Null"}}}}
+        ]);
+        let mut source = json!({"scenes": unchanged.clone()});
+        migrate_verified_current(&mut source).unwrap();
+        assert_eq!(source["scenes"], unchanged);
+    }
+}
+
+pub(super) fn verify(capture: &Capture, source: &Value, retired: bool) -> Result<()> {
+    let views = inspect_version(source, if retired { RETIRED_TAG } else { TAG })?;
     let mut rows = rows(&source["metadata"]).filter(|r| r["dialect"] == HISTORY);
     let resource = capture
         .content
@@ -629,19 +769,25 @@ pub(super) fn verify(capture: &Capture, source: &Value) -> Result<()> {
     match (rows.next(), resource, views.len()) {
         (None, None, 0) => Ok(()),
         (Some(row), Some(res), 1) if rows.next().is_none() => {
-            if !view::inspect(source)?.iter().any(|camera| camera["scene"] == views[0]["scene"]) {
+            let display = &views[0];
+            if !view::inspect(source)?.iter().any(|camera| camera["scene"] == display["scene"]) {
                 return Err(invalid("VICS current display has no matching current scene view"));
             }
-            if *row
-                != history(
-                    &views[0]["scene"]["objectId"],
-                    res,
-                    retained::raw(capture, res)?,
-                )?
-            {
+            let raw = retained::raw(capture, res)?;
+            if *row != history(&display["scene"]["objectId"], res, raw)? {
                 return Err(invalid(
                     "VICS original record spans differ from retained bytes",
                 ));
+            }
+            if !retired {
+                let replay = display["captureRole"] == REPLAY_ROLE;
+                let observed = display.get("legacyReaderElementAlpha").and_then(Value::as_u64);
+                let expected = if replay { reader_polyhedron_alpha(raw)?.map(u64::from) } else { None };
+                if observed != expected
+                    || replay && observed.is_some() && display["sceneSlots"]["0x2b0:4"][3].as_u64() != observed
+                {
+                    return Err(invalid("VICS POLYP reader alpha differs from the original record"));
+                }
             }
             Ok(())
         }

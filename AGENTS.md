@@ -347,5 +347,155 @@ CaTi 保持停报，YBa、Anatase 各保留一次。原 3000 秒未动。P2-03 p
 ## 2026-11-22 P2-03 C12 / G31 有限控制复验交回
 
 - 用户已批准先用现有控制样本实跑、C9，以及原 3000 秒内累计 1783 秒的持续修复/增量构建窗口，取消该窗口硬轮数；后又批准 G31 一组≤600 秒，测试上限 30→31。七项真实资格不因顺序调整获豁免。
-- 同卡独立工作树为 `/Users/agilecho/.codex/worktrees/p2-03-c8-continuation/VestaDraft`，源码候选 `8512162`，本轮 main `773d2b9` 未合入或推送。C12 编译通过，G31 35/35 Rust 与五条原中断往返已完成；原 G29 81/85、G30 13/18 及全部编译失败保留。G31 原监管中断首因未保留，分段续完未重复已执行 CLI，原段退出124及续办证据交 dsh 核实。
+- 同卡独立工作树为 `/Users/agilecho/.codex/worktrees/p2-03-c8-continuation/VestaDraft`，源码候选 `8512162`，本轮 main `773d2b9` 未合入或推送。C12 编译通过，G31 完成35个选定C12用例，Graph2分段续完及其余四条驱动完成；原 G29 81/85、G30 13/18 及全部编译失败保留。G31 原监管中断首因未保留，分段续完未重复已执行 CLI，原段退出124及续办证据交 dsh 核实。
 - 当前全卡 1308.876137004/14400 秒、续办 1170.848808837/10800 秒、3000 秒包络已用 651.699882710 秒，构建实际12次、获准窗口19.823152167/1783秒，测试31/31、获取/解析各6/6、网络97,135,307字节，无新增。七项生产者资格、旧 full 迁移仍待验，P2-03 partial/未接受，P2-04未准入。最新材料见 [续办登记](docs/任务卡/阶段2-首条完整链/P2-03-C8现有材料补齐续办.md)、[回执](/Users/agilecho/code/VestaDraft/output/vesta-p2-03/20261122-build-window/RECEIPT.md)和[手动dsh材料](/Users/agilecho/code/VestaDraft/output/vesta-p2-03/20261122-build-window/DSH-REVIEW-HANDOFF.md)。
+
+## 2026-11-22 C12/G31 独审复核后继
+
+2026-11-22 **支持主裁定：C12/G31 有限控制结果通过；G31 只按累计执行 247.561449875/600 秒有条件接受；P2-03 仍 partial、未接受，P2-04 未准入。** 登记前原样复跑 dsh 脚本，96/96 通过；另做 43 项只读核对，确认 16 个封存可执行文件与 Cargo 原始产物一致、六份保存/重开制品的 30 条 sourceRecords 都指向真实字节。没有产品 CLI、Cargo、测试二进制或 NS2 运行。 35/35 是 **35 个选定 C12 用例**；G29 原 81/85 绑定 C11，C12 未重跑 85 项。准确的驱动表述为 **Graph2 分段续完，其余四条驱动完成**。 [独审裁定](/Users/agilecho/code/VestaDraft/output/vesta-dsh-reviews/20261122-150956-p2-03-c12-g31-review/verdict.json) [复核及校正](/Users/agilecho/code/VestaDraft/output/vesta-execution/20261122-p2-03-c12-g31-dsh-recheck/RECHECK.md)
+
+预算全部保持：原包络 651.699882710/3000 秒，全卡 1308.876137004/14400 秒，续办 1170.848808837/10800 秒，构建窗口 19.823152167/1783 秒，测试 31/31，获取/锁 6/6，网络 97,135,307 字节。35/35 是 **35 个选定 C12 用例**；G29 原 81/85 绑定 C11，C12 未重跑 85 项。准确的驱动表述为 **Graph2 分段续完，其余四条驱动完成**。
+
+七项真实资格、旧 full 迁移及本卡 T66/FC/Graph2 全域义务仍开放。宿主 Saved、正式 CA 按各自原卡分工处理，不由本轮扩大本卡或解除前卡依赖。下一轮产品执行前需处理监督器首因记录、授权字段规范、后继 argv 替换绑定和校验覆盖/措辞；本次只登记，不施工这些工具整改。
+
+F1–F7 及三项表述校正以本次复核为准；历史封存不改。 [既有授权原话](/Users/agilecho/code/VestaDraft/output/vesta-execution/20261122-p2-03-c12-g31-dsh-recheck/authorization-clarification.json) [逐项复核](/Users/agilecho/code/VestaDraft/output/vesta-execution/20261122-p2-03-c12-g31-dsh-recheck/RECHECK.md)
+
+
+## 2026-11-22 P2-03 原工作树恢复与最终候选待验
+
+- 用户明确授权恢复原独立工作树和开工文档，继续本卡可做项。原分支及六份文档WIP已恢复，526件缺失辅助输入从C12归档找回，233件原有输入相符。main/index及其原WIP已核保持开工状态。
+- 新增早期CoreContent精确兼容与普通工程依赖角色校验，监督器已落实际入口。C13/C14编译失败和C15封存错误保留，C16四条禁网构建命令通过并封存19个可执行文件。工具八项通过，产品测试零新增。
+- 最终候选和完整命令已固定，申请仅增加G32一组≤600秒，测试31→32。全卡1335.362076796/14400秒、续办1197.334748629/10800秒、原包络678.185822502/3000秒，累计构建16次、窗口46.309091959/1783秒，获取/锁6/6、网络97,135,307字节。尚未批准或启动G32。
+- 真实七项资格、最终完整内容验收及整卡接受继续待闭合。整体施工、自验齐备后统一由用户手动转dsh。精确接手见 [恢复后候选与G32申请](docs/任务卡/阶段2-首条完整链/P2-03-恢复后最终候选与G32申请.md)，证据为主仓output/vesta-p2-03/20261122-final-closure-restored。
+
+
+## 2026-11-22 P2-03 G32 同源自验交回
+
+- 用户批准G32后续办。C16同源87个具名Rust用例、16门禁、NS2 14/14和38条逻辑验收完成，独立读取61份成功CLI输出工程及288条实际跨度。早期CoreContent迁移、原目录移开后新进程续改，以及实际C11 full全内容重开续改均有实证。
+- G32原段在第32条驱动的mkdir处退出，产品尚未启动。原失败保留，显式绑定后继目录准备与第32–38步argv，续段完成。两段363.166042917+161.015564250=524.181607167/600秒，产品CLI无重试。不同full版本组合迁移未验，七项真实生产者资格仍pending，整卡partial/未接受、P2-04未准入。
+- 全卡1859.543683963/14400秒、续办1721.516355796/10800秒、包络1202.367429669/3000秒，构建16次、窗口46.309091959/1783秒，测试32/32、获取/锁6/6、网络97,135,307字节。原始失败和前段封存保持。最新依据为 [G32登记](docs/任务卡/阶段2-首条完整链/P2-03-G32同源自验登记.md)。
+- 用户要求整体施工和自验齐备后统一提审，本轮仅整理当前回执和最小补件。没有自动联系dsh，main的HEAD、index及原WIP已核与开工相同。
+
+
+## 2026-11-22 P2-03 功能优先与C18候选
+
+用户答复“先完成功能”后继续源码施工。C18 已补简单有符号标量资源引用及多相 GSAS 按资格相号选择，其他相保留原始观察，生产资格表未加入控制样本。C17 测试导入错误保留，C18 四条禁网构建/封存命令通过。新增产品测试尚未运行，最终候选和39条逻辑验收已固定，申请G33一组≤600秒、32→33。
+
+全卡1871.618715338/14400秒，续办1733.591387171/10800秒，包络1214.442461044/3000秒，构建累计18次、窗口58.384123334/1783秒，测试32/32、获取/锁6/6、网络97,135,307字节。main与原WIP保持，无提交/推送或自动联系dsh；七项真实资格仍pending，整卡partial/未接受。最新入口为 [功能优先续办与G33申请](docs/任务卡/阶段2-首条完整链/P2-03-功能优先续办与G33申请.md)。
+
+
+## 2026-11-22 P2-03 G33同源自验完成，整卡仍partial
+
+**2026-11-22 C18 / G33同源自验交回。** 已补简单系数资源引用、多相GSAS资格相选择。90个具名Rust、16门禁、NS2 14项及39项逻辑验收完成；独立核63份工程与294条跨度。两处驱动失败保留，显式接续三段累计537.155706708/600秒，产品CLI无重复调用。全卡2408.774422046秒，包络1751.598167752秒，测试33/33，获取/锁6/6。七项真实资格仍pending，整卡partial、未接受、P2-04未准入，尚不请求局部或整卡独审。 当前依据：[G33登记](docs/任务卡/阶段2-首条完整链/P2-03-G33同源自验登记.md)。源码仍在原独立工作树，main/原WIP保持，未提交推送或自动联系dsh。
+
+## 2026-11-22 P2-03 真实轨迹接入与 C19 待验
+
+用户批准私有副本最小隔离解阻后，271 路径属性清除及原留 YBa/Anatase 各一次采集已完成；原版、签名、文件字节和其他属性保持，CaTi 未重试。YBa 读后/保存场景的实际显示值不同，四灯均从场景内联记录完整取回；Anatase 实测完整 16 面，0、8 的旗标 4→260，其余不变。完整原生对象及部分边界/身份资格仍不齐，不凭成功启动或保存登记整卡通过。
+
+C19 实现冻结 FC 原生 SourceEntity 五类显示目标承载，259 件候选已禁网编译封存；新增三项产品测试未运行。G34 已固定为 93 具名 Rust、16 门禁、22 往返/合同命令、≤600 秒，申请测试 33→34，尚待明确批准。全卡 2437.412369462/14400、续办 2299.385041295/10800、产品包络 1760.723066502/3000 秒；构建 19 次、窗口 67.509022084/1783 秒；原生生产者包络 33.184906833/900 秒；测试 33/33、取源/锁 6/6、网络 97,135,307 字节。main 不操作，整卡 partial、未接受；整体自验齐备后用户手动 dsh。精确后继见[真实轨迹与 C19](docs/任务卡/阶段2-首条完整链/P2-03-真实轨迹接入与C19候选.md)。
+
+## 2026-11-22 P2-03 C20 / G35 有界自验收口，真实资格仍开放
+
+用户先后批准G34（33→34、≤600秒）和G35（34→35、≤120秒）。G34累计550.035518833秒，93项中91通过、2个新增控制因sourceRecords缺项失败；16门禁、NS2 14/14和21项既有往返通过。新驱动因空批次被正确拒绝、未产出工程；原失败保留，未借同组余秒重试。
+
+C20只修正测试控制的独立字节/RawSpan，生产源码及schema不变，19份制品中18份含CLI与C19逐字相同。G35实耗47.151732208秒，17/17及修正驱动4次真实CLI调用通过。当前93项证据由76个G34同字节用例和17个G35当前用例组成，16门禁/21项旧验收沿用相同生产字节，第22项真实场景往返已闭合；独立读67份工程/402跨度。不把G34原失败写成通过，不声称C20重跑93项。
+
+全卡3038.390623378/14400、续办2900.363295211/10800、产品包络2361.701320418/3000秒；构建20次、窗口71.300024959/1783秒，测试35/35、获取/锁6/6、网络97,135,307字节。原生生产者包络33.184906833/900秒，CaTi/YBa/Anatase启动均1/1、CaTi不重试，未扩其它权限。真实七项资格仍需原件/完整身份/环境，整卡partial、未接受，P2-04未准入；整卡自验齐备后统一由用户手动dsh，当前不转局部复审。最新依据见[G34/G35登记](docs/任务卡/阶段2-首条完整链/P2-03-G34与G35自验登记.md)。
+
+## 2026-11-22 P2-03 暂无现成材料与取件提案（未执行）
+
+用户明确答复“暂无现成材料”，未批准新的获取、安装或启动。最新同卡方案为[真实资格取件与环境准备提案](docs/任务卡/阶段2-首条完整链/P2-03-真实资格取件与环境准备提案.md)，代码和C20/G35证据不改。
+
+补方案的静态调查核实旧POLYP字段误归属：Scene+0x5c0为Element样式表，UpdateElementPColor写+0x8c、旧POLYP写同表+0x8f；实际YBa表长4、Anatase表长2，不是40/115个几何多面体。原冻结文字/重放映射需后继纠正，暂停依赖旧归属的生产准入；C20显式当前字值往返及旧原件结论保持，不宣称原生消费语义全闭合。事实证据在 `output/vesta-p2-03/20261122-qualification-unblock-proposal/native-layout/`，未改冻结原文或产品。
+
+仅准备F7取件/环境元数据探路：拟取源6→7一次≤300秒、实际入站≤32MiB、最多20HTTP请求；原时间/2GiB总额保持，锁6/6、测试35/35、安装/冷构建/原生启动不扩，CaTi不重试。脚本、矩阵、9个种子URL和域名/拒绝规则已固定，4项离线工具守卫及无外网UDS mock通过。F7尚未批准/运行，网络仍97,135,307字节；不从“暂无”或“继续”推导增额。整卡partial、未接受，原账3038.390623378秒及产品包络2361.701320418秒保持，dsh仍待整卡齐备后用户手动发起。
+
+- F7最终可执行提案收在主仓output/vesta-p2-03/20261122-qualification-unblock-proposal/f7-ready，v2补重定向安装器/压缩包拒绝及中继清场后结账。旧提案封存保持；本轮外网、产品、原生启动均0，仍待明确取源6→7授权。
+
+## 2026-11-22 P2-03 F7 execution / F8 metadata proposal
+
+F7 explicitly approved and completed: 9 requests,613992 received TLS bytes,22.084826667 seconds including outer startup/cleanup. No qualifying originals, installs or producer starts. Search responses had no results; Wine403 was not bypassed. Debian arm64 Packages.xz exact size/SHA obtained as unverified signed-release metadata. Docker socket unavailable; Docker not started. Cumulative card3060.475450045/14400,continuation2922.448121878/10800,tests35/35,fetch7/7,lock6/6,network97749299; product3000 envelope and CaTi prohibition unchanged. F8 is only a prepared4-URL Debian metadata request (fetch7->8,180seconds,6HTTP,16MiB); no grant yet. Current receipt: docs/任务卡/阶段2-首条完整链/P2-03-F7取件结果与后继准入.md. Whole card remains partial; no local dsh handoff.
+
+## 2026-11-22 P2-03 F8 completed / F9 pending
+
+F8 explicitly approved and completed. Four requests,8754591 received TLS bytes;15.486840542 fetch seconds plus5seconds conservative offline verification charge. Official Debian12 archive signature and both package-index hashes verified; additional unknown signature not claimed passed. Original gpgv overall-exit2 guard failure preserved, GPG not rerun. All mandatory dependencies pinned:51packages,60792536bytes; no compiler packages downloaded,installs,Docker starts,product or producer runs. Cumulative card3080.962290587/14400,continuation2942.934962420/10800,fetch8/8,lock6/6,tests35/35,network106503890. Product/native envelopes and CaTi prohibition unchanged. F9 is only a prepared exact51-package fetch request(8->9,300seconds,51HTTP,96MiB); it does not allow extraction or execution. Current document: docs/任务卡/阶段2-首条完整链/P2-03-F8签名索引与F9编译器取件提案.md. Whole card remains partial and no local dsh handoff.
+
+## 2026-11-22 P2-03 F9 stopped / F10 pending
+
+F9 explicitly approved.3packages(5188772bytes) matched pinned length/SHA; request4 cpp-12 timed out after12seconds with2832904/8228384bytes,curl28.47URLs unattempted,no retries. Raw failure retained; process group empty and lock free. Charged24.999976292seconds,8080063TLSbytes. Cumulative card3105.962266879/14400,continuation2967.934938712/10800,fetch9/9,lock6/6,tests35/35,network114583953. F10 only proposed:reuse3verified objects,48remaining including one explicit cpp reattempt,480seconds/48HTTP/96MiB,60seconds perrequest. No extraction,install,Docker,product or producer starts. CaTi restriction and product/native envelopes unchanged. Current document: docs/任务卡/阶段2-首条完整链/P2-03-F9中止与F10剩余包取件提案.md. Whole card remains partial.
+
+- Additional static ARM64 evidence:Crystal::GetCellParam(0x35914) returns Crystal+0x450,outside the previously captured0x360phasePrefix. Actual native cell words remain uncollected; source-f32 matching cannot be called a heap capture. First default-x86_64 inspection and corrected explicit-arm64 listing both retained in output/vesta-p2-03/20261122-qualification-unblock-proposal/native-layout-followup. No target/product start or quota change.
+
+## 2026-11-23 P2-03 F10已批取齐，E1静态准备待批
+
+F10剩余48包及cpp-12重取一次已完成，连原3包共51包60792536字节，逐包实际大小/SHA独立复算相符；新增48请求、56017209入站TLS字节。桌面更新后原子进程续完，未重启；原外层wait回执不可获得，内层60.889223667秒，结合原生文件时戳跨度保守计62秒，进程组/单锁清场已核。全卡3167.962266879/14400、续办3029.934938712/10800秒；测试35/35、取源10/10、锁6/6、网络170601162字节，产品/原生/MXD包络和CaTi禁止重试保持。
+
+仅准备E1一次≤180秒的私有静态解包/清单核验，不增加获取、安装系统、运行下载物、Docker、编译器或生产者权限。19项工具自验及策略模板实测通过，实际51包仍未解包，E1未批准/运行。main及C20保持，整卡partial，整体齐备后用户手动dsh。最新入口：docs/任务卡/阶段2-首条完整链/P2-03-F10取齐与E1私有静态工具链准备提案.md。
+
+## 2026-11-23 P2-03 E1 实跑停在磁盘采样
+
+用户批准 E1 固定一次，监督器在 staging 正迁移到 sysroot 时观察到磁盘采样非零，终止 worker，原失败采样 stderr 未留。原包、E1 部分目录与账目封存，进程组及单验证锁清场。耗 4.309040541 秒，全卡 3172.271307420/14400、续办 3034.243979253/10800 秒；取源 10/10、解析 6/6、测试 35/35。环境未合格，MXD M1/M2 未启动。 [E1 回执](/Users/agilecho/code/VestaDraft/output/vesta-p2-03/20261123-private-toolchain-preparation-proposal/e1-closeout/RECEIPT.md)
+
+E2 只准备同包集、独立新根内一次≤180秒的静态续办，稳定目录采样与原始诊断留证已通过合成对照；待用户具体批准。本轮 POLYP 后继及旧 full 迁移源码候选待产品验证，整卡 partial、未接受。 [E2 提案](/Users/agilecho/code/VestaDraft/output/vesta-p2-03/20261123-e2-stable-disk-preparation/PROPOSAL.md)
+
+## 2026-11-23 P2-03 E2 稳定采样通过，宿主大小写冲突停报
+
+用户明确批准 E2 一次。两次暂停写入后的磁盘采样成功，逐文件验证拒绝八组仅大小写不同、字节不同的 Linux 头文件。E1 留下被覆盖内容，E2 留下同 inode 证据，两个现场已封存。耗 4.974671125 秒，全卡 3177.245978545/14400、续办 3039.218650378/10800 秒，静态准备 2/2、测试 35/35、取源 10/10、解析 6/6。环境仍未合格，M1/M2 未启动。 [E2 回执](/Users/agilecho/code/VestaDraft/output/vesta-p2-03/20261123-e2-stable-disk-preparation/e2-closeout/RECEIPT.md)
+
+同会话 POLYP 后继和精确旧 full 迁移源码候选已完成静态核查，独立验两套实际旧工程 15 件输入，新增产品测试未运行。整卡 partial。 [施工回执](/Users/agilecho/code/VestaDraft/output/vesta-p2-03/20261123-polyp-migration-candidate/RECEIPT.md)
+
+## 2026-11-23 P2-03 E3 私有静态工具链完成
+
+用户明确批准 E3 一次。E3 在区分大小写的私有 APFS 镜像完成 51 包、3258 条目及八组冲突路径逐字核对，五项关键 ELF 元数据及后继 20 个动态 ELF 的静态依赖已核。镜像卸载并重新复算 SHA，验证锁和进程组清场。E1/E2 失败与部分树保留。耗 6.240617875 秒，全卡 3183.486596420/14400、续办 3045.459268253/10800 秒，静态准备 3/3、测试 35/35、取源 10/10、解析 6/6。MXD M1/M2 未启动，客体运行与真实资格未验，P2-03 partial。 [E3 回执](/Users/agilecho/code/VestaDraft/output/vesta-p2-03/20261123-e3-case-sensitive-preparation/e3-closeout/RECEIPT.md)
+
+## 2026-11-23 P2-03 E4 环境探针预启动停止
+
+用户明确批准 E4 一批。禁网沙箱拒绝带 setuid 的 /bin/ps，已独立复现。首个 clang 进程在监测异常后清场，客体启动 0，无根盘或探针制品。耗 1.874305375 秒，全卡 3185.360901795/14400、续办 3047.333573628/10800 秒。E4 批次 1/1，已有 M1/M2 额度未用。 [E4 回执](/Users/agilecho/code/VestaDraft/output/vesta-p2-03/20261123-e4-offline-fortran-probe/closeout/RECEIPT.md)
+
+E5 采用同一禁网策略、相同原包/内核/Fortran 探针，监测改用 Darwin libproc，同策略双进程对照已通过。完整矩阵已固定，尚待具体批准。产品测试 35/35、取源 10/10、解析 6/6，POLYP 与旧 full 仍仅源码与静态核对，整卡 partial。 [E5 提案](/Users/agilecho/code/VestaDraft/output/vesta-p2-03/20261123-e5-offline-fortran-probe/PROPOSAL.md)
+
+### E5 许可协调期间的独立验收补证
+
+已从旧封存两份原版保存文件逐记录核 YBa/Anatase 的 ATOMT 元素 PColor、SITET 位点 PColor、BOUND 和 CELLP。YBa 存盘元素 alpha 都是 204，存盘位点 alpha 都是 179。真实读入堆对象、原精度晶胞、操作身份和边界潜态仍待证。另已落 MXD ortho 的独立 32 标签、96 轴和真实样本数检查器，4 项合成对照通过。E5 等原会话明确授权，产品及生产者启动为 0。 [原版存盘补证](/Users/agilecho/code/VestaDraft/output/vesta-p2-03/20261123-native-save-readback/RECEIPT.md) · [MXD 判据](/Users/agilecho/code/VestaDraft/output/vesta-p2-03/20261123-mxd-ortho-coordn-independent/RECEIPT.md)
+
+## 2026-11-23 P2-03 E5、M1/M2 ortho 真实补证
+
+用户经原会话批准固定 E5。固定无 NIC ARM64 Linux 环境已编译、链接并运行独立探针，真实输出 29、152，串口和关停后根盘读回的 71744 字节 ELF 一致，E5 耗 16.114956917 秒。沿原 M1/M2 条件额度，按原件源码完成 GNU Fortran 编译和原 32 粒子 XD 作业，真实 FILE06 写出。M2 客体退出 0、原监督退出 1，首个验收器漏原源码明确使用的连字符，后继只读检查原制品/根盘及全部 96 轴、24 轴行和实际 10 样本，原失败保留，生产仅 1 次。 [真实生产回执](/Users/agilecho/code/VestaDraft/output/vesta-p2-03/20261123-mxd-ortho-m1-m2/closeout/RECEIPT.md)
+
+M1、M2 均 1/1，实际 11.573330500/6.606745792 秒。全卡 3219.655935004/14400、续办 3081.628606837/10800 秒。取源 10/10、解析 6/6、产品测试 35/35。实物已接到产品源测试候选，未编译和产品重开。POLYP/旧 full 产品验证、其它六项真实资格和整卡自验仍开放。整卡 partial、未接受，dsh 仍待整体验收后用户手动。
+
+## 2026-11-23 P2-03 tricl 与 YBa 实物及候选后继
+
+用户分别批准一批 tricl 和一次 YBa 补采。tricl 实际编译并运行一次，从停机磁盘核 21,133 字节 FILE06、32 标签、96 轴、10 步、晶胞有符号余弦及相应 ELF。封存监督器因原版 A11 截短版头退出 1，真实生产退出 0，原失败和浮点告警保留。完整版本由原发行源码和实际 ELF 关联，无重跑。
+
+YBa 最新补采已用，累计 2/2。实证同一 Crystal 所属的读取和保存 Scene 不同。读取阶段 POLYP 将四个 Element alpha 204 改为 179，保存时四个 Element 为 204、八个 XSite 为 179。晶胞六个 F32 字和八个实读原生旋转已收，完整变换堆与逐个生成对象身份仍待证。原监督器错误期望退出 0，锁定版实际保存且退出 255；新旧保存件逐字相同。保留原判据与失败。
+
+后继源码分开读取阶段 POLYP 和实际当前样式，修复旧 full 空 render 被改写，保留旧值和 opaque 足迹，支持真实 tricl 负余弦列。两套旧工程和双 FILE06 的产品验收驱动已静态核对，产品制品和实跑仍待。全卡 3242.655935004/14400 秒、续办 3104.628606837/10800 秒、原生 44.184906833/900 秒。测试 35/35、取源 10/10、锁 6/6，CaTi 禁止重试，Anatase 原次数已用，Win32 条件次数保留。整卡 partial、未接受。完整输入和最终命令齐备后统一申请产品组，dsh 由用户在整卡自验齐备后手动发起。 [最新施工回执](/Users/agilecho/code/VestaDraft/output/vesta-p2-03/20261123-continuation-acceptance-preparation/RECEIPT.md) · [剩余准入](/Users/agilecho/code/VestaDraft/output/vesta-p2-03/20261123-continuation-acceptance-preparation/REMAINDER.md)
+
+## 2026-11-23 P2-03 深层采集和 GSAS F11 待批
+
+从锁定版实际坐标重算指令及既有保存轨迹复核 YBa、Anatase 原子使用的真实对称操作序号，并交叉绑定键的实存规则、配位体中心及面指针范围。YBa 额外一次 180 秒、Anatase 额外一次 300 秒的完整仿射/顶点和实际边界续采已封存。LLDB 仅静态解析全部观察点，Anatase 主机显示和无提示 AX 准入通过，实际 GUI 布局和藏显还待批次实证。另已封存 GSAS F11 取源 10→11、180 秒/12 请求/24 MiB，并核 Win32 本地条件环境缺 x86 OS 和已合格调试器。三个新批次均未执行，原账目继续沿用，CaTi 禁止重试、整卡 partial。 [续办提案](/Users/agilecho/code/VestaDraft/output/vesta-p2-03/20261123-native-and-material-proposals/RECEIPT.md)
+
+## 2026-11-23 P2-03 原生深层补采与 F11 执行
+
+用户明确批准上述三批。YBa 保存的完整仿射、原子、键、配位体及实际顶点已独立核原始字节，保存元素和位点样式分别绑定前次 POLYP 当前结果。Anatase 已取得加载期完整场景、变换、面构造及旗标，AX 未确认唯一私有窗，未执行两次边界应用或保存。F11 实跑四请求，未获完整 GSAS 磁性 EXP 及同相操作表。YBa 已 3/3，Anatase 已 2/2，检测锁清场。
+
+全卡 3288.655935004/14400 秒，续办 3150.628606837/10800 秒，VICS/NVIS 83.184906833/900 秒，测试 35/35、取源 11/11、锁解析 6/6，实收累计 170765969 字节。POLYP/旧 full 和双真实 FILE06 当前产品仍待验，P2-03 部分完成，未接受。已准备一次真实 GUI File → Open 续采及 Win32 i386 签名索引的精确缺件。CaTi 禁止重试原样保留。整卡自验齐备后用户手动发 dsh。 [执行回执](/Users/agilecho/code/VestaDraft/output/vesta-p2-03/20261123-native-and-material-proposals/execution-closeout/RECEIPT.md) · [Anatase 后继](/Users/agilecho/code/VestaDraft/output/vesta-p2-03/20261123-native-and-material-proposals/anatase-file-open-proposal/PROPOSAL.md) · [Win32 新准入记录](/Users/agilecho/code/VestaDraft/output/vesta-p2-03/20261123-native-and-material-proposals/WIN32-WINE-TCG-PREP.md)
+
+## 2026-11-23 P2-03 Anatase 守卫停报与 F12 待批
+
+用户批准 Anatase 单次 File/Open 矩阵。原生目标启动共 3/3，本次在 AppKit 可执行路径取值出错，早于 AX 窗口查询。File/Open、读取、Boundary 应用及保存均未发生。原清场列出 PID，独立检查确认其已退出且锁释放。宿主只读对照确认旧 JXA 的 AX 数组取值另有缺陷，已备原生进程、注册和 AX 状态探针。尚无新的目标启动提案。[回执](/Users/agilecho/code/VestaDraft/output/vesta-p2-03/20261123-native-and-material-proposals/anatase-file-open-closeout/RECEIPT.md)
+
+F12 已封存监督器、授权拒绝门、纯索引解析及固定矩阵。只拟追加取源 11→12，一次签名 i386 索引 GET，≤90 秒、≤12 MiB TLS，核 8,681,800 字节压缩正文和已签原文。21 项封存输入和 8 项离线控制通过，缺授权实证提前拒绝，无网络或产品运行。全卡 3303.655935004/14400 秒，续办 3165.628606837/10800 秒，VICS/NVIS 98.184906833/900 秒。取源 11/11、产品 35/35、锁解析 6/6，P2-03 部分完成、未接受。[F12 精确提案](/Users/agilecho/code/VestaDraft/output/vesta-p2-03/20261123-win32-f12-index-proposal/PROPOSAL.md)
+
+## 2026-11-23 P2-03 F12 索引通过，F13 材料待批
+
+用户批准 F12，唯一 HTTPS GET 获签名 i386 索引。实际压缩 8,681,800 字节、展开 49,325,351 字节，二者按签名独立复算。原始索引、221 个候选记录和实收 8,699,058 字节封存，未取包或启动环境。实际全卡 3306.655935004/14400 秒、续办 3168.628606837/10800 秒、取源 12/12、入站 179465027 字节。产品 35/35、解析 6/6、CaTi 禁止重试和 main 保护沿用。[F12 回执](/Users/agilecho/code/VestaDraft/output/vesta-p2-03/20261123-win32-f12-index-proposal/closeout/RECEIPT.md)
+
+Win32 后继 F13 拟只取精确 97 包，整批最多 480 秒计原包络，128 MiB TLS，未批准或执行。9 个已有包摘要可复用。真实 i386 启动见证和后续 Wine/Win32 资格分开，原目标条件次数保留。Anatase 进程和窗体读法已有原生 AX 宿主对照，另从旧真实 Face 头定位形貌数值取证，等待实际边界事务；当前没有新启动。P2-03 部分完成、未独立接受。[F13 提案](/Users/agilecho/code/VestaDraft/output/vesta-p2-03/20261123-win32-x86-boot-preparation/PROPOSAL.md) · [Anatase 后继只读回执](/Users/agilecho/code/VestaDraft/output/vesta-p2-03/20261123-native-and-material-proposals/anatase-native-ax-preparation/RECEIPT.md)
+
+## 2026-11-23 阶段结版与全项目开发暂停
+
+用户裁定本会话收尾后暂停 VestaDraft 全部开发，先结阶段版本，后续另行安排。旧继续指令由本裁定覆盖，恢复须用户新安排。P2-03 部分完成、整卡自验未完成、未独立接受，P2-04 未准入。原会话统一办理本地阶段检查点，本施工会话保持 main、施工 HEAD 和用户暂存。
+
+已批准的 F12、F13 均已执行并独立复算，实际取源 13/13、产品测试 35/35、锁解析 6/6、累计入站 265288082 字节。全卡 3415.655935004/14400 秒、续办 3277.628606837/10800 秒。F13 取得 97 件新包并绑定 9 件旧包；未解包。W0 静态准备和 Anatase A12 均未批准或启动。POLYP、旧 full 与双 FILE06 当前产品验证、各真实资格及剩余整卡自验见收尾登记。CaTi 禁止重试，暂停期间未发起 dsh 或新任务。[收尾及恢复入口](/Users/agilecho/code/VestaDraft/output/vesta-p2-03/20261123-development-pause-closeout/RECEIPT.md)

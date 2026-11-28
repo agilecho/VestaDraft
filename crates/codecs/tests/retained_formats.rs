@@ -132,6 +132,97 @@ fn mxd_file06_all_groups_reopen_from_exact_report_bytes() {
 }
 
 #[test]
+fn actual_mxd_ortho_file06_roundtrips_every_site_and_axis() {
+    check_actual_mxd_file06(
+        include_bytes!("fixtures/mxd/ortho-20251120-xd32.file06"),
+        "27f690917a2e16ae380e695a12aaaeff2d04469d3efadc2879b42f9a6334743a",
+        "ba74cde127477789dc9b796a8928175cec9593eee6a01b452141c7e9a30d518f",
+        "ortho-20251120",
+        Some("2025-11-20-00"),
+    );
+}
+
+#[test]
+fn actual_mxd_tricl_file06_preserves_signed_cell_words_and_all_axes() {
+    let raw = include_bytes!("fixtures/mxd/tricl-20251119-xd32.file06");
+    check_actual_mxd_file06(
+        raw,
+        "4f1e33174781c14f574c3eacbbab49e88e102603c8e3a440811ffc533d47a821",
+        "4d645badbfd87bbc1d54fe03d950bebe545fb7eba73e91c237cf847b576c40bb",
+        "tricl-20251119",
+        None,
+    );
+    let text = std::str::from_utf8(raw).unwrap();
+    let mixed_words = text.replace(" -0.02618", " -2.02618");
+    assert_ne!(mixed_words, text);
+    let error = vesta_codecs::formats::mxd_report::open(mixed_words.as_bytes(), Ids::new([202; 16]))
+        .unwrap_err();
+    assert_eq!(error.message, "MXD COORDN triclinic signed cell word outside cosine range");
+}
+
+fn check_actual_mxd_file06(
+    raw: &[u8],
+    original_sha: &str,
+    token_sha: &str,
+    dialect: &str,
+    exact_printed_release: Option<&str>,
+) {
+    use vesta_codecs::formats::mxd_report::{inspect, open};
+    use vesta_model::digest;
+
+    assert_eq!(digest(raw), original_sha);
+    let original = open(raw, Ids::new([201; 16])).unwrap();
+    let after = save_and_reopen(&original.capture, "actual-xd32.vesta");
+    assert!(after.content.phases.is_empty());
+    assert_ne!(after.content.resources[0].id, original.content.resources[0].id);
+    let resource = &after.content.resources[0];
+    assert_eq!(after.resources[original_sha].as_slice(), raw);
+    assert_eq!(resource.sha256, original_sha);
+
+    let readback = inspect(&after).unwrap().unwrap();
+    let [report] = readback["reports"].as_array().unwrap().as_slice()
+        else { panic!("expected the single actual COORDN block") };
+    let observed = &report["observation"];
+    assert_eq!(observed["unit"], "1");
+    assert_eq!(observed["producerContext"]["wireDialect"], dialect);
+    assert_eq!(observed["producerContext"]["reportedRelease"].as_str(), exact_printed_release);
+    assert_eq!(observed["producerContext"]["originalReport"], resource.id.as_str());
+    if dialect == "tricl-20251119" {
+        let heading = observed["rawHeading"].as_str().unwrap();
+        assert!(heading.ends_with("  0.00873     -0.02618      0.05234"));
+    }
+    let sites = observed["sites"].as_array().unwrap();
+    assert_eq!(sites.len(), 32);
+    let mut exact_tokens = Vec::new();
+    for (index, site) in sites.iter().enumerate() {
+        assert_eq!(site["sourceOrdinal"], index as u64);
+        exact_tokens.extend(site["sourceLabel4"].as_str().unwrap().as_bytes());
+        let axes = site["axes"].as_array().unwrap();
+        assert_eq!(axes.len(), 3);
+        for axis in axes {
+            for key in ["axis", "meanToken", "statisticToken", "referenceToken"] {
+                exact_tokens.extend(axis[key].as_str().unwrap().as_bytes());
+            }
+        }
+    }
+    // The independent reader computed this over the real output, before product verification.
+    assert_eq!(digest(&exact_tokens), token_sha);
+    let groups = report["groups"].as_array().unwrap();
+    assert_eq!(groups.len(), 8);
+    for (index, group) in groups.iter().enumerate() {
+        assert_eq!(group["firstSiteOrdinal"], (4 * index) as u64);
+        assert_eq!(group["siteCount"], 4);
+        for axis in group["axes"].as_array().unwrap() {
+            let span = &axis["span"];
+            let start: usize = span["byteOffset"].as_str().unwrap().parse().unwrap();
+            let length: usize = span["byteLength"].as_str().unwrap().parse().unwrap();
+            assert_eq!(span["sourceResourceId"], resource.id.as_str());
+            assert_eq!(digest(&raw[start..start + length]), span["sha256"]);
+        }
+    }
+}
+
+#[test]
 fn vics_retains_exact_legacy_archive_and_installs_current_display() {
     use vesta_codecs::formats::live_state::{
         NativeStateInput, inspect_native_state, open_native_state,
@@ -734,5 +825,386 @@ fn mxd_tricl_crlf_roundtrip_and_rejects_conflicting_or_malformed_header() {
                 .code,
             "E_REOPEN_COVERAGE"
         );
+    }
+}
+
+// Authored Engine controls for FC's native SourceEntity fallback, not vendor captures.
+fn vics_fallback_control() -> (Capture, Value, Vec<u8>) {
+    use serde_json::json;
+    use vesta_codecs::formats::live_state::open_legacy_vics;
+    let raw = fixtures("output/vesta-study/20261108-113622/reviews/20261110-104021-s05-completion/input-sources/VS-0080/YBa2Cu4O8.vcs");
+    let mut capture = open_legacy_vics(&raw, Ids::new([183; 16])).unwrap().capture;
+    let mut source = capture.source.as_ref().unwrap().to_value().unwrap();
+    let phase = source["phaseGraph"]["phases"][0]["id"].clone();
+    let f = json!({"kind":"F32Bits","ieeeHexBE":"80000000"});
+    let b = json!({"bounds6":vec![f.clone();6]});
+    let current = [
+        ("atom-type", "atomTypes", json!({"speciesHex":"4375","radius":f,"rgba":[1,2,3,4]})),
+        ("phase-boundary", "phaseBoundaries", b.clone()),
+        ("bond-rule", "bondRules", json!({"selectorAHex":"4375","selectorBHex":"4f",
+            "minimum":f,"maximum":f,"searchMode":-2,"boundaryMode":3,"fullFlags":65535,"style":255,
+            "radius":f,"lineWidth":f,"rgba":[4,3,2,1]})),
+        ("first-shape", "shapeAlpha", json!({"alpha":17})),
+        ("polyhedron", "polyhedronAlpha", json!({"alpha":19})),
+    ];
+    let mut manifest: Value = serde_json::from_slice(&fixtures(
+        "output/vesta-p2-03/20261121-c8-retained-formats/fixtures/legacy.vstate")).unwrap();
+    manifest["legacyDisplay"]["currentValues"] = json!(true);
+    manifest["legacyView"] = json!({"matrixBits":vec!["8000000000000000";16],
+        "settingsBits":vec!["80000000";4]});
+    for (n, (role, field, value)) in current.into_iter().enumerate() {
+        let id = format!("{:032x}", 900 + n);
+        let (kind, owner) = if role == "atom-type" {
+            ("scene", source["scenes"][0]["id"].clone())
+        } else { ("phase", phase.clone()) };
+        // Authored current-control bytes are their own provenance, not an old
+        // vendor observation or a padded empty source-record population.
+        let control = format!("Authored Engine native {role} controlWord=65535\n").into_bytes();
+        let resource = vesta_model::PersistentResource {
+            id: format!("{:032x}", 1000+n).into(),
+            logical_key: format!("test/native-display/{role}"),
+            sha256: vesta_model::digest(&control),
+            byte_length: control.len().to_string(),
+            media_type: "application/octet-stream".into(),
+        };
+        let descriptor = vesta_model::digest(&vesta_model::source_audit::canonical(&json!({
+            "logicalKey":resource.logical_key,"sha256":resource.sha256,
+            "byteLength":resource.byte_length,"mediaType":resource.media_type})));
+        capture.resources.insert(resource.sha256.clone(), control);
+        capture.content.resources.push(resource.clone());
+        source["resources"].as_array_mut().unwrap().push(json!({"id":resource.id,
+            "sha256":resource.sha256,"byteLength":resource.byte_length,"storageKind":"owned",
+            "sourceDescriptorDigest":descriptor}));
+        // The full native tree remains a real independent source definition.
+        source["sourceEntities"].as_array_mut().unwrap().push(json!({"id":id,
+            "nativeKind":format!("vics-native-display/{role}"),
+            "sourceTree":{"kind":"Map","members":{
+                "owner":{"kind":"EntityRef","objectKind":kind,"objectId":owner},
+                "nativeState":{"kind":"Map","members":{"controlWord":{"kind":"U64","value":"65535"}}}}},
+            "sourceRecords":[{"sourceResourceId":resource.id,"byteOffset":"0",
+                "byteLength":resource.byte_length,"sha256":resource.sha256}],
+            "dependencyIds":[],"metadata":[],"scientificProjection":"not-qualified"}));
+        source["sourceEntryOrder"].as_array_mut().unwrap().push(json!({"kind":"source-entity","id":id}));
+        manifest["legacyDisplay"][field] = if role == "phase-boundary" { json!([b,value]) } else {json!([value])};
+    }
+    capture.source = Some(vesta_model::source7::SourceDocument::decode(source).unwrap());
+    capture.state_digest = Capture::digest_state(&capture.content, capture.source.as_ref()).unwrap();
+    (capture, manifest, raw)
+}
+
+#[test]
+fn vics_native_subobjects_use_distinct_source_entity_targets_and_fresh_owners() {
+    use serde_json::json;
+    use vesta_codecs::formats::live_state::{NativeStateInput, inspect_native_state, open_native_state};
+    let (base, manifest, raw) = vics_fallback_control();
+    let old_ids = base.source.as_ref().unwrap().to_value().unwrap()["sourceEntities"].as_array().unwrap()
+        .iter().map(|row| row["id"].clone()).collect::<Vec<_>>();
+    let input = NativeStateInput::parse(&serde_json::to_vec(&manifest).unwrap()).unwrap();
+    let capture = open_native_state(input, Some(base), |_| Ok(raw.clone()), Ids::new([184;16])).unwrap().capture;
+    let after = save_and_reopen(&capture, "vics-native-subobjects.vesta");
+    let source = after.source.as_ref().unwrap().to_value().unwrap();
+    let observed = inspect_native_state(&after).unwrap().unwrap();
+    let display = &observed["legacyDisplays"][0];
+    for (i, field) in ["atomTypes","phaseBoundaries","bondRules","shapeAlpha","polyhedronAlpha"].iter().enumerate() {
+        let row = display[field].as_array().unwrap().last().unwrap();
+        assert_eq!(row["target"]["objectKind"], "source-entity");
+        assert_eq!(row["target"]["objectId"], source["sourceEntities"][i]["id"]);
+        assert_ne!(row["target"]["objectId"], old_ids[i]);
+        if i != 0 { assert_eq!(row["owner"]["objectId"], source["phaseGraph"]["phases"][0]["id"]); }
+    }
+    // Independently read each actual retained control span after fresh remap.
+    for row in source["sourceEntities"].as_array().unwrap() {
+        let role = row["nativeKind"].as_str().unwrap().strip_prefix("vics-native-display/").unwrap();
+        let expected = format!("Authored Engine native {role} controlWord=65535\n").into_bytes();
+        let span = &row["sourceRecords"][0];
+        let resource = after.content.resources.iter().find(|r|
+            Some(r.id.as_str()) == span["sourceResourceId"].as_str()).unwrap();
+        assert_eq!(after.resources[&resource.sha256], expected);
+        assert_eq!(span["sha256"], vesta_model::digest(&expected));
+        assert_eq!(span["byteOffset"], "0");
+        assert_eq!(span["byteLength"], expected.len().to_string());
+    }
+    assert_eq!(display["bondRules"][0]["fullFlags"], 65535);
+    assert_eq!(display["bondRules"][0]["style"], 255);
+    assert_eq!(display["atomTypes"][0]["radius"], json!({"kind":"F32Bits","ieeeHexBE":"80000000"}));
+    assert_eq!(source["shapes"], json!([]));
+    assert_eq!(source["meshes"], json!([]));
+    assert_eq!(source["sourceEntities"][1]["sourceTree"]["members"]["owner"]["objectId"],
+        source["phaseGraph"]["phases"][0]["id"]);
+    let mut wrong = after;
+    let mut bad = source;
+    bad["scenes"][0]["render"]["members"]["nativeLegacyDisplayCurrent"]["payload"]["members"]
+        ["bondRules"]["items"][0]["members"]["target"]["objectId"] = bad["sourceEntities"][0]["id"].clone();
+    wrong.source = Some(vesta_model::source7::SourceDocument::decode(bad).unwrap());
+    wrong.state_digest = Capture::digest_state(&wrong.content, wrong.source.as_ref()).unwrap();
+    assert!(encode_verified(&wrong, "unrelated-native-target.vesta", Ids::new([186;16])).is_err());
+}
+
+#[test]
+fn vics_polyp_replay_keeps_reader_alpha_separate_from_current_styles() {
+    use serde_json::json;
+    use vesta_codecs::formats::live_state::{NativeStateInput, inspect_native_state, open_native_state};
+
+    let (base, mut manifest, raw) = vics_fallback_control();
+    let base_source = base.source.as_ref().unwrap().to_value().unwrap();
+    let owner = &base_source["phaseGraph"]["phases"][0]["id"];
+    let display = &mut manifest["legacyDisplay"];
+    display["currentValues"] = json!(false);
+    display["atomTypes"][0]["polyhedronColor"] = json!({"rgb":[7,8,9],"alpha":11});
+    let replay = |spec: &Value, seed| {
+        let input = NativeStateInput::parse(&serde_json::to_vec(spec).unwrap()).unwrap();
+        open_native_state(input, Some(base.clone()), |_| Ok(raw.clone()), Ids::new([seed;16]))
+            .unwrap().capture
+    };
+    let capture = replay(&manifest, 190);
+    let readback = save_and_reopen(&capture, "polyp-scene-style.vesta");
+    let seen = inspect_native_state(&readback).unwrap().unwrap();
+    let current = &seen["legacyDisplays"][0];
+    // The YBa reader multiplies 0.700 by 255 in f32 and stores 179.
+    // A later save can observe a different Element in the current Scene.
+    assert_eq!(current["sceneSlots"]["0x2b0:4"], json!([179,179,179,179]));
+    assert_eq!(current["captureRole"], "legacy-reader-replay");
+    assert_eq!(current["legacyReaderElementAlpha"], 179);
+    assert_eq!(current["atomTypes"][0]["polyhedronColor"], json!({"rgb":[7,8,9],"alpha":11}));
+    assert_eq!(current["atomTypes"][0]["rgba"], json!([1,2,3,4]));
+    assert_eq!(current["polyhedronAlpha"][0]["alpha"], 19);
+    let restored = readback.source.as_ref().unwrap().to_value().unwrap();
+    let restored_owner = &restored["phaseGraph"]["phases"][0]["id"];
+    assert_eq!(&current["polyhedronAlpha"][0]["owner"]["objectId"], restored_owner);
+    assert_ne!(restored_owner, owner);
+    assert_eq!(current["polyhedronAlphaOrigin"], "supplied-current");
+
+    manifest["legacyDisplay"]["currentValues"] = json!(true);
+    let capture = replay(&manifest, 191);
+    let seen = inspect_native_state(&capture).unwrap().unwrap();
+    assert_eq!(seen["legacyDisplays"][0]["captureRole"], "actual-current-native-display");
+    assert!(seen["legacyDisplays"][0].get("legacyReaderElementAlpha").is_none());
+    assert_eq!(seen["legacyDisplays"][0]["atomTypes"][0]["polyhedronColor"],
+        json!({"rgb":[7,8,9],"alpha":11}));
+
+    // The reader's write supplies no missing final Element channels.
+    manifest["legacyDisplay"]["currentValues"] = json!(false);
+    manifest["legacyDisplay"]["atomTypes"][0].as_object_mut().unwrap().remove("polyhedronColor");
+    let capture = replay(&manifest, 194);
+    let seen = inspect_native_state(&capture).unwrap().unwrap();
+    assert_eq!(seen["legacyDisplays"][0]["legacyReaderElementAlpha"], 179);
+    assert!(seen["legacyDisplays"][0]["atomTypes"][0].get("polyhedronColor").is_none());
+}
+
+#[test]
+fn vics_yba_preserves_the_four_saved_element_styles_and_separate_reader_alpha() {
+    use serde_json::json;
+    use vesta_codecs::formats::live_state::{
+        NativeStateInput, inspect_native_state, open_legacy_vics, open_native_state,
+    };
+    use vesta_model::{PersistentResource, digest, source7::SourceDocument};
+
+    const ELEMENT_BYTES: usize = 0x98;
+    let words = include_bytes!("fixtures/native-scenes/yba-native-element-words.bin");
+    let words_sha = "01352b575c53e2192aa7e5938521864888c8199b7178c96f8451dda7d9648fc9";
+    assert_eq!(digest(words), words_sha);
+    let (reader_elements, saved_elements) = words.split_at(4 * ELEMENT_BYTES);
+    assert!(reader_elements.chunks_exact(ELEMENT_BYTES).all(|row| row[0x8f] == 179));
+    assert!(saved_elements.chunks_exact(ELEMENT_BYTES).all(|row| row[0x8f] == 204));
+    let raw = fixtures("output/vesta-study/20261108-113622/reviews/20261110-104021-s05-completion/input-sources/VS-0080/YBa2Cu4O8.vcs");
+    let mut ids = Ids::new([211; 16]);
+    let mut base = open_legacy_vics(&raw, ids.fork()).unwrap().capture;
+    let mut source = base.source.as_ref().unwrap().to_value().unwrap();
+    let scene = &base.content.scene_id;
+    let resource = PersistentResource {
+        id: ids.next_id().into(),
+        logical_key: "yba/native-scene-element-memory".into(),
+        sha256: words_sha.into(),
+        byte_length: words.len().to_string(),
+        media_type: "application/octet-stream".into(),
+    };
+    let descriptor = digest(&vesta_model::source_audit::canonical(&json!({
+        "logicalKey":resource.logical_key, "sha256":resource.sha256,
+        "byteLength":resource.byte_length, "mediaType":resource.media_type,
+    })));
+    source["resources"].as_array_mut().unwrap().push(json!({
+        "id":resource.id, "sha256":resource.sha256, "byteLength":resource.byte_length,
+        "storageKind":"owned", "sourceDescriptorDigest":descriptor,
+    }));
+    let mut styles = Vec::new();
+    for (ordinal, bytes) in saved_elements.chunks_exact(ELEMENT_BYTES).enumerate() {
+        let id = ids.next_id();
+        let start = (4 + ordinal) * ELEMENT_BYTES;
+        let symbol = bytes[0x14..0x1c].split(|byte| *byte == 0).next().unwrap();
+        let species_hex = symbol.iter().map(|byte| format!("{byte:02x}")).collect::<Vec<_>>().join("");
+        let radius = u32::from_le_bytes(bytes[0x1c..0x20].try_into().unwrap());
+        let (rgba, pcolor) = (&bytes[0x88..0x8c], &bytes[0x8c..0x90]);
+        styles.push(json!({
+            "speciesHex":species_hex, "radius":{"kind":"F32Bits","ieeeHexBE":format!("{radius:08x}")},
+            "rgba":rgba, "polyhedronColor":{"rgb":&pcolor[..3],"alpha":pcolor[3]},
+        }));
+        source["sourceEntities"].as_array_mut().unwrap().push(json!({
+            "id":id, "nativeKind":"vics-native-display/atom-type",
+            "sourceTree":{"kind":"Map","members":{
+                "owner":{"kind":"EntityRef","objectKind":"scene","objectId":scene},
+                "nativeState":{"kind":"Map","members":{
+                    "ordinal":{"kind":"U64","value":ordinal.to_string()},
+                    "elementPColorAlpha":{"kind":"U64","value":pcolor[3].to_string()},
+                }}
+            }},
+            "sourceRecords":[{"sourceResourceId":resource.id,"byteOffset":start.to_string(),
+                "byteLength":ELEMENT_BYTES.to_string(),"sha256":digest(bytes)}],
+            "dependencyIds":[], "metadata":[], "scientificProjection":"not-qualified",
+        }));
+        source["sourceEntryOrder"].as_array_mut().unwrap()
+            .push(json!({"kind":"source-entity","id":id}));
+    }
+    base.content.resources.push(resource);
+    base.resources.insert(words_sha.into(), words.to_vec());
+    base.source = Some(SourceDocument::decode(source).unwrap());
+    base.state_digest = Capture::digest_state(&base.content, base.source.as_ref()).unwrap();
+
+    let witness: Value = serde_json::from_slice(include_bytes!("fixtures/native-scenes/yba-globals.json")).unwrap();
+    assert_eq!(witness["sourceSHA256"], digest(&raw));
+    let saved = &witness["snapshots"][1];
+    let mut manifest: Value = serde_json::from_slice(&fixtures(
+        "output/vesta-p2-03/20261121-c8-retained-formats/fixtures/legacy.vstate",
+    )).unwrap();
+    let display = &mut manifest["legacyDisplay"];
+    display["sceneSlots"] = saved["sceneSlots"].clone();
+    display["lights"] = saved["lights"].clone();
+    display["atomTypes"] = json!(styles);
+    let bounds = [0.0_f32, 2.0, 0.0, 1.0, -0.5, 1.0]
+        .map(|value| json!({"kind": "F32Bits", "ieeeHexBE": format!("{:08x}", value.to_bits())}));
+    display["phaseBoundaries"] = json!([{"bounds6": bounds}]);
+    let words_at = |field: &str| saved["view"][field].as_array().unwrap().iter()
+        .map(|value| value["ieeeHexBE"].clone()).collect::<Vec<_>>();
+    manifest["legacyView"] = json!({"matrixBits":words_at("matrix16"),"settingsBits":words_at("settings4")});
+
+    for current in [true, false] {
+        manifest["legacyDisplay"]["currentValues"] = json!(current);
+        let input = NativeStateInput::parse(&serde_json::to_vec(&manifest).unwrap()).unwrap();
+        let first = open_native_state(input, Some(base.clone()), |_| Ok(raw.clone()), ids.fork()).unwrap().capture;
+        let reopened = save_and_reopen(&first, if current { "yba-current.vesta" } else { "yba-reader.vesta" });
+        let doc = reopened.source.as_ref().unwrap().to_value().unwrap();
+        let seen = inspect_native_state(&reopened).unwrap().unwrap();
+        let display = &seen["legacyDisplays"][0];
+        assert_eq!(display["legacyReaderElementAlpha"].as_u64(), (!current).then_some(179));
+        assert_eq!(display["atomTypes"].as_array().unwrap().len(), 4);
+        let original_doc = first.source.as_ref().unwrap().to_value().unwrap();
+        for (index, expected) in styles.iter().enumerate() {
+            let row = &display["atomTypes"][index];
+            for field in ["speciesHex", "radius", "rgba", "polyhedronColor"] {
+                assert_eq!(row[field], expected[field]);
+            }
+            let definition = &doc["sourceEntities"][index];
+            assert_eq!(row["target"]["objectId"], definition["id"]);
+            assert_ne!(definition["id"], original_doc["sourceEntities"][index]["id"]);
+            assert_eq!(definition["sourceTree"]["members"]["owner"]["objectId"], display["scene"]["objectId"]);
+            let span = &definition["sourceRecords"][0];
+            let offset = (4 + index) * ELEMENT_BYTES;
+            assert_eq!(span["byteOffset"], offset.to_string());
+            assert_eq!(span["sha256"], digest(&words[offset..offset + ELEMENT_BYTES]));
+        }
+        assert_eq!(reopened.resources[words_sha].as_slice(), &words[..]);
+    }
+}
+
+#[test]
+fn vics_archived_full_migration_preserves_saved_display_words_without_replay() {
+    use serde_json::json;
+    use std::collections::BTreeMap;
+    use vesta_codecs::formats::live_state::inspect_native_state;
+
+    let root = "crates/codecs/tests/fixtures/native-scenes/legacy-full";
+    let primary = fixtures(&format!("{root}/first.vesta"));
+    let manifest = format!("first.vesta.resources/manifests/{}.json", vesta_model::digest(&primary));
+    let manifest_bytes = fixtures(&format!("{root}/{manifest}"));
+    let spec: Value = serde_json::from_slice(&manifest_bytes).unwrap();
+    let mut dependencies = BTreeMap::from([(manifest.clone(), manifest_bytes)]);
+    for name in spec["dependencies"].as_object().unwrap().keys() {
+        dependencies.insert(name.clone(), fixtures(&format!("{root}/{name}")));
+    }
+    let witness: Value = serde_json::from_slice(&fixtures(
+        "crates/codecs/tests/fixtures/native-scenes/yba-globals.json")).unwrap();
+    let snapshot = &witness["snapshots"][0];
+    let migrated = decode(&primary, &dependencies, Ids::new([192;16])).unwrap();
+    let again = save_and_reopen(&migrated.capture, "vics-migrated-full.vesta");
+    assert_ne!(again.document.document_id, migrated.document.document_id);
+    for capture in [&migrated.capture, &again] {
+        let readback = inspect_native_state(capture).unwrap().unwrap();
+        let display = &readback["legacyDisplays"][0];
+        assert_eq!(display["sceneSlots"], snapshot["sceneSlots"]);
+        assert_eq!(display["lights"], snapshot["lights"]);
+        assert_eq!(display["scene"]["objectId"], capture.content.scene_id.as_str());
+        assert_eq!(display["atomTypes"], json!([]));
+        assert_eq!(display["polyhedronAlpha"], json!([]));
+        assert_eq!(display["polyhedronAlphaOrigin"], "legacy-current-1");
+    }
+    let current = encode_verified(&again, "vics-current.vesta", Ids::new([195;16])).unwrap();
+    let new_manifest: Value = serde_json::from_slice(
+        &current.dependencies[&format!("vics-current.vesta.resources/manifests/{}.json",
+            vesta_model::digest(&current.primary))],
+    ).unwrap();
+    assert_ne!(spec["sourceRuleSetDigest"], new_manifest["sourceRuleSetDigest"]);
+    let mut bad_manifest = spec;
+    bad_manifest["sourceRuleSetDigest"] = new_manifest["sourceRuleSetDigest"].clone();
+    let mut mixed = dependencies.clone();
+    mixed.insert(manifest, serde_json::to_vec(&bad_manifest).unwrap());
+    assert!(decode(&primary, &mixed, Ids::new([196;16])).is_err());
+
+    let blob = dependencies.keys().find(|path| path.ends_with(".raw.bin")).unwrap().clone();
+    dependencies.get_mut(&blob).unwrap()[0] ^= 1;
+    assert!(decode(&primary, &dependencies, Ids::new([193;16])).is_err());
+}
+
+#[test]
+fn vics_native_subobjects_reject_missing_population_wrong_owner_and_reserved_role() {
+    use serde_json::json;
+    use vesta_codecs::formats::live_state::{NativeStateInput, open_native_state};
+    for variant in 0..4 {
+        let (mut base, mut manifest, raw) = vics_fallback_control();
+        let mut source = base.source.as_ref().unwrap().to_value().unwrap();
+        match variant {
+            0 => { manifest["legacyDisplay"]["polyhedronAlpha"] = json!([]); },
+            1 => { source["sourceEntities"][1]["sourceTree"]["members"]["owner"] = json!({"kind":"EntityRef",
+                "objectKind":"scene","objectId":source["scenes"][0]["id"]}); },
+            2 => { source["sourceEntities"][2]["nativeKind"] = json!("vics-native-display/unknown"); },
+            _ => { source["sourceEntities"][3]["sourceTree"]["members"]["nativeState"] = json!({"kind":"Null"}); },
+        }
+        base.source = Some(vesta_model::source7::SourceDocument::decode(source).unwrap());
+        base.state_digest = Capture::digest_state(&base.content, base.source.as_ref()).unwrap();
+        let input = NativeStateInput::parse(&serde_json::to_vec(&manifest).unwrap()).unwrap();
+        assert!(open_native_state(input, Some(base), |_| Ok(raw.clone()), Ids::new([185;16])).is_err(), "case {variant}");
+    }
+}
+
+#[test]
+fn vics_recorded_read_and_saved_scene_globals_remain_distinct_on_reopen() {
+    use serde_json::json;
+    use vesta_codecs::formats::live_state::{NativeStateInput, inspect_native_state, open_native_state};
+    let witness: Value = serde_json::from_slice(&fixtures(
+        "crates/codecs/tests/fixtures/native-scenes/yba-globals.json")).unwrap();
+    let raw = fixtures("output/vesta-study/20261108-113622/reviews/20261110-104021-s05-completion/input-sources/VS-0080/YBa2Cu4O8.vcs");
+    assert_eq!(vesta_model::digest(&raw), witness["sourceSHA256"]);
+    for (i, snapshot) in witness["snapshots"].as_array().unwrap().iter().enumerate() {
+        let memory = fixtures(&format!("crates/codecs/tests/fixtures/native-scenes/{}", snapshot["rawFile"].as_str().unwrap()));
+        assert_eq!(vesta_model::digest(&memory), snapshot["rawSHA256"]);
+        assert_eq!(snapshot["sceneSlots"]["0x230:3"], if i == 0 {json!([1,123,0])} else {json!([0,0,0])});
+        assert_eq!(snapshot["sceneSlots"]["0x5b0"], if i == 0 {json!(39850946)} else {json!(37753794)});
+        let mut manifest: Value = serde_json::from_slice(&fixtures(
+            "output/vesta-p2-03/20261121-c8-retained-formats/fixtures/legacy.vstate")).unwrap();
+        manifest["legacyDisplay"]["currentValues"] = json!(true);
+        manifest["legacyDisplay"]["sceneSlots"] = snapshot["sceneSlots"].clone();
+        manifest["legacyDisplay"]["lights"] = snapshot["lights"].clone();
+        manifest["legacyView"] = json!({
+            "matrixBits":snapshot["view"]["matrix16"].as_array().unwrap().iter().map(|w|w["ieeeHexBE"].clone()).collect::<Vec<_>>(),
+            "settingsBits":snapshot["view"]["settings4"].as_array().unwrap().iter().map(|w|w["ieeeHexBE"].clone()).collect::<Vec<_>>()});
+        // This engineering working state installs actual recorded global words.
+        // Empty Draft populations do not claim a complete historic native import.
+        let input = NativeStateInput::parse(&serde_json::to_vec(&manifest).unwrap()).unwrap();
+        let capture = open_native_state(input,None, |_| Ok(raw.clone()),Ids::new([187+i as u8;16])).unwrap().capture;
+        let after = save_and_reopen(&capture,&format!("native-global-{i}.vesta"));
+        let current = inspect_native_state(&after).unwrap().unwrap();
+        assert_eq!(current["legacyDisplays"][0]["sceneSlots"], snapshot["sceneSlots"]);
+        assert_eq!(current["legacyDisplays"][0]["lights"], snapshot["lights"]);
+        assert_eq!(current["legacyViews"][0]["matrix16"], snapshot["view"]["matrix16"]);
+        assert_eq!(current["legacyViews"][0]["settings4"], snapshot["view"]["settings4"]);
+        assert_eq!(after.resources[&after.content.resources[0].sha256],raw);
     }
 }

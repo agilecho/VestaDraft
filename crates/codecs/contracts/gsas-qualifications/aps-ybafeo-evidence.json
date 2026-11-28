@@ -1,0 +1,115 @@
+{
+  "sourceExpSha256": "a16f9edf3aec9f3eff4623cbd58afd9bff767d4bb856c69f56ed1f7ba3a933c3",
+  "sourcePhase": 2,
+  "workshopCifSha256": "3a849e6184974e39d36bdc108485300172552bb117f8fb0e5954b19169e6c6ad",
+  "closedDiskReadbackSHA256": {
+    "PMMMFM.EXP": "a16f9edf3aec9f3eff4623cbd58afd9bff767d4bb856c69f56ed1f7ba3a933c3",
+    "sequence.jsonl": "0c731cd4290ccfe286f215bca0b37349488d876842cf46372ae980400238fdfa",
+    "powpref-observer.jsonl": "9a51815c937eaffcca1545be4779f402eb6c68a76031c7fa34ab76fc45a3cd0b",
+    "geometry.log": "dd79e86759c348b10e635d66d89bb33e5c32f2ec345d2c180a59572839a136bd"
+  },
+  "recheckSHA256": "7d62583924385332ab2861e05223387c991d88aea50526b494dc3f1aa4ed0979",
+  "producerRelease": "GSAS r1253",
+  "operations": 32,
+  "verifiedGeometryImages": 24,
+  "sourceFlagF32Bits": [
+    "3f800000",
+    "bf800000",
+    "bf800000",
+    "3f800000",
+    "3f800000",
+    "3f800000",
+    "00000000",
+    "00000000",
+    "00000000",
+    "00000000",
+    "00000000",
+    "00000000"
+  ],
+  "siteAnchors": [
+    {
+      "sourceAtom": 1,
+      "label": "Fe1a",
+      "typeToken": "FE+3",
+      "operationOrdinal": 0,
+      "shift": [
+        0,
+        0,
+        0
+      ],
+      "imageMillionths": [
+        0,
+        0,
+        0
+      ],
+      "sourceMomentMuB": [
+        "7/2",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "sourceAtom": 2,
+      "label": "Fe1b",
+      "typeToken": "FE+3",
+      "operationOrdinal": 0,
+      "shift": [
+        0,
+        0,
+        0
+      ],
+      "imageMillionths": [
+        0,
+        0,
+        500000
+      ],
+      "sourceMomentMuB": [
+        "-7/2",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "sourceAtom": 3,
+      "label": "Fe2a",
+      "typeToken": "FE+3",
+      "operationOrdinal": 0,
+      "shift": [
+        0,
+        0,
+        0
+      ],
+      "imageMillionths": [
+        0,
+        0,
+        170000
+      ],
+      "sourceMomentMuB": [
+        "-7/2",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "sourceAtom": 4,
+      "label": "Fe2b",
+      "typeToken": "FE+3",
+      "operationOrdinal": 0,
+      "shift": [
+        0,
+        0,
+        0
+      ],
+      "imageMillionths": [
+        0,
+        0,
+        330000
+      ],
+      "sourceMomentMuB": [
+        "7/2",
+        "0",
+        "0"
+      ]
+    }
+  ]
+}

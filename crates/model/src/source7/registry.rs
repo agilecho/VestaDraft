@@ -83,6 +83,11 @@ const FROZEN: &[(&str, &str, &str)] = &[
         include_str!("frozen/vics-legacy-display-current.schema.json"),
     ),
     (
+        "NativeLegacyDisplayCurrent2",
+        "",
+        include_str!("frozen/vics-legacy-display-current-2.schema.json"),
+    ),
+    (
         "NativeLegacyViewCurrent1",
         "/$defs/NativeLegacyViewCurrent",
         include_str!("frozen/vics-legacy-display-current.schema.json"),

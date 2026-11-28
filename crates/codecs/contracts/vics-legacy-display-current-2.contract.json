@@ -1,0 +1,20 @@
+{
+  "schema": "VestaDraft-vics-legacy-display-rules-2",
+  "predecessor": "vics-legacy-display.contract.json",
+  "variantTag": "NativeLegacyDisplayCurrent2",
+  "sceneMember": "nativeLegacyDisplayCurrent",
+  "polyp": {
+    "sceneSlots": "Retain the scene-wide RGBA, mode and scale assignments in a display marked legacy-reader-replay. A supplied current scene carries its observed words.",
+    "readerObservation": "legacyReaderElementAlpha records the quantized assignment to a Scene Element PColor in the legacy reader. It is checked against the original POLYP record and the replayed scene slot. A subsequent scene may replace the element styles before save.",
+    "elementWords": "polyhedronColor stores the supplied Element PColor. Its alpha and any independently supplied RGB are distinct from regular Element rgba, XSite PColor and phase geometry. The reader replay leaves the supplied Element words intact. An absent value remains unknown.",
+    "geometry": "Preserve the separately supplied phase geometry alpha and its own phase/target binding."
+  },
+  "currentValues": "Carry supplied current scene and element words directly, including edited values distinct from original source.",
+  "migration": {
+    "sourceTypeDigest": "f8aed2eca193acdc3c2b40abafb3b04b316f42509481e9005a5c74dc8828f996",
+    "sourceRuleSetDigest": "0de0c6961d53d00843a92eb6cc3d2d172dc434c7f512501331db5846ac9c0150",
+    "sourceDTOSchemaDigest": "666ba0fa0135f6956bcbf2a4ca49650ce0a3de82c4d01cb1c07f86d7eb9f9bef",
+    "check": "Validate the full retired artifact, source projection, roles, descriptors and resource closure before applying the successor.",
+    "values": "Preserve all stored values. Omit absent Element PColor. Mark retained geometry alpha with polyhedronAlphaOrigin legacy-current-1 because legacy full artifacts did not retain the provenance of these words. Original VICS records remain archival."
+  }
+}
